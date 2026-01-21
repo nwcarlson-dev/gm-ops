@@ -1,301 +1,1137 @@
-# GM Ops - Project Requirements & Context Document
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GM Ops - Developer Guide</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --nfl-red: #D50A0A;
+            --nfl-blue: #013369;
+            --nfl-silver: #A5ACAF;
+            --dark-navy: #0A1628;
+            --white: #FFFFFF;
+            --bg-dark: #111827;
+            --bg-card: #1F2937;
+            --border-color: #374151;
+            --text-primary: #F9FAFB;
+            --text-secondary: #9CA3AF;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --danger: #EF4444;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            line-height: 1.6;
+            padding: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Teko', sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        h1 {
+            font-size: 3rem;
+            color: var(--white);
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        h1 .logo {
+            display: inline-flex;
+            transform: skewX(-12deg);
+        }
+        
+        h1 .logo .gm {
+            background: var(--nfl-red);
+            color: white;
+            padding: 0.2em 0.3em;
+            font-weight: 700;
+        }
+        
+        h1 .logo .ops {
+            background: var(--nfl-blue);
+            color: white;
+            padding: 0.2em 0.3em;
+            font-weight: 700;
+        }
+        
+        h1 .logo .ops .ps {
+            font-size: 0.8em;
+            vertical-align: baseline;
+        }
+        
+        .subtitle {
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        h2 {
+            font-size: 1.8rem;
+            color: var(--nfl-red);
+            margin: 2.5rem 0 1rem 0;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid var(--nfl-red);
+        }
+        
+        h3 {
+            font-size: 1.3rem;
+            color: var(--nfl-silver);
+            margin: 1.5rem 0 0.75rem 0;
+        }
+        
+        h4 {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin: 1rem 0 0.5rem 0;
+        }
+        
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+        
+        strong {
+            color: var(--text-primary);
+        }
+        
+        a {
+            color: var(--nfl-silver);
+            text-decoration: none;
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s;
+        }
+        
+        a:hover {
+            border-bottom-color: var(--nfl-silver);
+        }
+        
+        code {
+            background: var(--bg-card);
+            padding: 0.2em 0.5em;
+            border-radius: 4px;
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 0.9em;
+            color: var(--nfl-silver);
+        }
+        
+        pre {
+            background: var(--bg-card);
+            padding: 1.5rem;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 1rem 0;
+            border: 1px solid var(--border-color);
+        }
+        
+        pre code {
+            background: none;
+            padding: 0;
+            font-size: 0.85rem;
+            line-height: 1.5;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1rem 0;
+            background: var(--bg-card);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        th, td {
+            padding: 0.75rem 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--border-color);
+        }
+        
+        th {
+            background: var(--dark-navy);
+            color: var(--white);
+            font-family: 'Teko', sans-serif;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        td {
+            color: var(--text-secondary);
+        }
+        
+        tr:last-child td {
+            border-bottom: none;
+        }
+        
+        ul, ol {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+            color: var(--text-secondary);
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1rem 0;
+        }
+        
+        .badge {
+            display: inline-block;
+            padding: 0.25em 0.75em;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+        
+        .badge-success {
+            background: rgba(16, 185, 129, 0.2);
+            color: var(--success);
+        }
+        
+        .badge-warning {
+            background: rgba(245, 158, 11, 0.2);
+            color: var(--warning);
+        }
+        
+        .badge-danger {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--danger);
+        }
+        
+        .badge-info {
+            background: rgba(1, 51, 105, 0.3);
+            color: var(--nfl-silver);
+        }
+        
+        .color-swatch {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .color-swatch .swatch {
+            width: 24px;
+            height: 24px;
+            border-radius: 4px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .grid-2 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1rem;
+        }
+        
+        .check {
+            color: var(--success);
+        }
+        
+        .cross {
+            color: var(--danger);
+        }
+        
+        hr {
+            border: none;
+            border-top: 1px solid var(--border-color);
+            margin: 2rem 0;
+        }
+        
+        .toc {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .toc h3 {
+            margin-top: 0;
+        }
+        
+        .toc ul {
+            columns: 2;
+            column-gap: 2rem;
+        }
+        
+        .toc li {
+            break-inside: avoid;
+        }
+        
+        .meta-info {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+        }
+        
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        
+        .disclaimer {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid var(--danger);
+            border-radius: 8px;
+            padding: 1rem 1.5rem;
+            margin: 1rem 0;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 1rem;
+            }
+            
+            h1 {
+                font-size: 2rem;
+            }
+            
+            .toc ul {
+                columns: 1;
+            }
+            
+            .meta-info {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>
+            <span class="logo">
+                <span class="gm">GM</span><span class="ops">O<span class="ps">PS</span></span>
+            </span>
+            Developer Guide
+        </h1>
+        <div class="meta-info">
+            <span class="meta-item">📅 Last Updated: January 2026</span>
+            <span class="meta-item">📁 <a href="https://github.com/nwcarlson-dev/gm-ops">GitHub Repository</a></span>
+            <span class="meta-item">🌐 <a href="https://nwcarlson-dev.github.io/gm-ops/">Live Site</a></span>
+        </div>
+        <p class="subtitle">
+            Project requirements, context, and development guide for the GM Ops NFL simulation platform.
+            <br><span class="badge badge-warning">Status: Active Development - Mock Draft Simulator MVP</span>
+        </p>
+    </header>
 
-**Last Updated:** January 2026  
-**Repository:** https://github.com/nwcarlson-dev/gm-ops  
-**Status:** Active Development - Mock Draft Simulator MVP
+    <nav class="toc">
+        <h3>📑 Table of Contents</h3>
+        <ul>
+            <li><a href="#overview">Project Overview</a></li>
+            <li><a href="#branding">Branding & Identity</a></li>
+            <li><a href="#logo-specs">Logo Specifications</a></li>
+            <li><a href="#legal">Legal Considerations</a></li>
+            <li><a href="#tech">Technical Architecture</a></li>
+            <li><a href="#features">Current Features</a></li>
+            <li><a href="#todo">TODO & Roadmap</a></li>
+            <li><a href="#data">Data Model</a></li>
+            <li><a href="#future">Future Vision</a></li>
+            <li><a href="#workflow">Development Workflow</a></li>
+            <li><a href="#decisions">Key Decisions</a></li>
+        </ul>
+    </nav>
 
----
+    <section id="overview">
+        <h2>🎯 Project Overview</h2>
+        <p><strong>GM Ops</strong> is a web-based NFL simulation game starting with a Mock Draft Simulator and expanding to a full franchise simulation experience.</p>
+        
+        <h3>Product Roadmap</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Phase</th>
+                    <th>Product</th>
+                    <th>Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td><strong>GM Ops: Draft</strong></td>
+                    <td><span class="badge badge-warning">In Development</span></td>
+                </tr>
+                <tr>
+                    <td>2</td>
+                    <td><strong>GM Ops: Offseason</strong></td>
+                    <td><span class="badge badge-info">Planned</span></td>
+                </tr>
+                <tr>
+                    <td>3</td>
+                    <td><strong>GM Ops: Franchise</strong></td>
+                    <td><span class="badge badge-info">Planned</span></td>
+                </tr>
+            </tbody>
+        </table>
 
-## 🎯 Project Overview
+        <h3>Business Model</h3>
+        <ul>
+            <li>Web-based game (no app store needed)</li>
+            <li>Potential subscription model in the future</li>
+            <li>Google Sheets integration for data storage/export</li>
+            <li>Firebase as potential backend for subscription features</li>
+        </ul>
 
-**GM Ops** is a web-based NFL simulation game starting with a Mock Draft Simulator and expanding to a full franchise simulation.
+        <h3>Target Audience</h3>
+        <ul>
+            <li>Fantasy football enthusiasts in their 30s-40s</li>
+            <li>Serious football nerds who want realistic GM simulation</li>
+            <li>Users who appreciate deep roster-building mechanics over arcade gameplay</li>
+        </ul>
+    </section>
 
-### Product Roadmap
+    <section id="branding">
+        <h2>🏈 Branding & Identity</h2>
+        
+        <h3>Brand Name</h3>
+        <p><strong>GM Ops</strong> (General Manager Operations)</p>
+        <div class="card">
+            <h4>Why "GM Ops"?</h4>
+            <ul>
+                <li><strong>Instantly football?</strong> ✅ "GM" in sports context = General Manager building a roster</li>
+                <li><strong>Modern feel?</strong> ✅ "Ops" has that clean, tech/startup energy</li>
+                <li><strong>Implies the right scope?</strong> ✅ GM operations = drafting, signing, trading, cutting</li>
+                <li><strong>Doesn't imply stadium management?</strong> ✅ "GM Ops" feels player/roster focused</li>
+                <li><strong>Scales well?</strong> ✅ GM Ops: Draft, GM Ops: Offseason, GM Ops: Franchise</li>
+                <li><strong>Easy to say?</strong> ✅ Two syllables, punchy</li>
+                <li><strong>Memorable?</strong> ✅ Short, clean</li>
+            </ul>
+        </div>
 
-| Phase | Product | Status |
-|-------|---------|--------|
-| 1 | **GM Ops: Draft** | In Development |
-| 2 | **GM Ops: Offseason** | Planned |
-| 3 | **GM Ops: Franchise** | Planned |
+        <div class="card">
+            <h4>Name Evolution</h4>
+            <p>Originally considered "The League" (inspired by the FX TV show), but discovered trademark conflicts:</p>
+            <ul>
+                <li><strong>The League App, Inc.</strong> (Match Group) owns "THE LEAGUE" trademark in Class 9 (software/apps)</li>
+                <li>Match Group is a $3B company with significant legal resources</li>
+                <li>Both products would be in the same trademark class</li>
+            </ul>
+            <p><strong>Decision:</strong> Pivoted to "GM Ops" which is unique, ownable, and equally effective.</p>
+        </div>
 
-### Business Model
-- Web-based game (no app store needed)
-- Potential subscription model in the future
-- Google Sheets integration for data storage/export
-- Firebase as potential backend for subscription features
+        <h3>Typography</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Usage</th>
+                    <th>Font</th>
+                    <th>Weight</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Logo / GM OPS text</td>
+                    <td><strong>Teko</strong></td>
+                    <td>Bold (700)</td>
+                </tr>
+                <tr>
+                    <td>Sub-brand text (DRAFT, OFFSEASON, etc.)</td>
+                    <td><strong>Barlow Condensed</strong></td>
+                    <td>Bold (700)</td>
+                </tr>
+                <tr>
+                    <td>Body text / UI</td>
+                    <td><strong>Inter</strong> or system fonts</td>
+                    <td>Regular (400) / Medium (500)</td>
+                </tr>
+            </tbody>
+        </table>
 
----
+        <h3>Color Palette</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Color</th>
+                    <th>Hex</th>
+                    <th>Usage</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><span class="color-swatch"><span class="swatch" style="background: #D50A0A;"></span> NFL Red</span></td>
+                    <td><code>#D50A0A</code></td>
+                    <td>GM block background, primary accent</td>
+                </tr>
+                <tr>
+                    <td><span class="color-swatch"><span class="swatch" style="background: #013369;"></span> NFL Blue</span></td>
+                    <td><code>#013369</code></td>
+                    <td>OPS block background, secondary accent</td>
+                </tr>
+                <tr>
+                    <td><span class="color-swatch"><span class="swatch" style="background: #FFFFFF; border: 1px solid #374151;"></span> White</span></td>
+                    <td><code>#FFFFFF</code></td>
+                    <td>Text on dark, light backgrounds</td>
+                </tr>
+                <tr>
+                    <td><span class="color-swatch"><span class="swatch" style="background: #A5ACAF;"></span> NFL Silver</span></td>
+                    <td><code>#A5ACAF</code></td>
+                    <td>Secondary text, sub-brand text on dark</td>
+                </tr>
+                <tr>
+                    <td><span class="color-swatch"><span class="swatch" style="background: #0A1628;"></span> Dark Navy</span></td>
+                    <td><code>#0A1628</code></td>
+                    <td>Dark backgrounds, sub-brand text on light</td>
+                </tr>
+            </tbody>
+        </table>
 
-## 🏈 Branding
+        <h3>Potential Taglines</h3>
+        <ul>
+            <li>"GM Ops - Run Your Franchise"</li>
+            <li>"GM Ops - You Make The Calls"</li>
+            <li>"GM Ops - Build Your Dynasty"</li>
+        </ul>
+    </section>
 
-### Brand Name
-**GM Ops** (General Manager Operations)
+    <section id="logo-specs">
+        <h2>🎨 Logo Specifications</h2>
+        
+        <h3>Core Logo Structure</h3>
+        <div class="card">
+            <table>
+                <thead>
+                    <tr>
+                        <th>Element</th>
+                        <th>Specification</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Primary Font</td>
+                        <td><strong>Teko Bold</strong></td>
+                    </tr>
+                    <tr>
+                        <td>Skew Angle</td>
+                        <td><strong>-12 degrees</strong> (leaning right)</td>
+                    </tr>
+                    <tr>
+                        <td>GM Typography</td>
+                        <td>All caps, full size</td>
+                    </tr>
+                    <tr>
+                        <td>OPS Typography</td>
+                        <td>"O" full size, "PS" at <strong>80%</strong> of O height (indicates abbreviation, not acronym)</td>
+                    </tr>
+                    <tr>
+                        <td>Block Padding</td>
+                        <td>Consistent internal padding</td>
+                    </tr>
+                    <tr>
+                        <td>Block Gap</td>
+                        <td>Small gap between GM and OPS blocks</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
 
-- "GM" = Acronym (all caps)
-- "Ops" = Abbreviation (capital O, smaller PS at 80% size to indicate it's not an acronym)
+        <h3>Logo Variants Required</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Variant</th>
+                    <th>Sub-text</th>
+                    <th>Files Needed</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Parent</strong></td>
+                    <td>None</td>
+                    <td>gm-ops-parent-dark.svg, gm-ops-parent-light.svg</td>
+                </tr>
+                <tr>
+                    <td><strong>Draft</strong></td>
+                    <td>"DRAFT"</td>
+                    <td>gm-ops-draft-dark.svg, gm-ops-draft-light.svg</td>
+                </tr>
+                <tr>
+                    <td><strong>Offseason</strong></td>
+                    <td>"OFFSEASON"</td>
+                    <td>gm-ops-offseason-dark.svg, gm-ops-offseason-light.svg</td>
+                </tr>
+                <tr>
+                    <td><strong>Franchise</strong></td>
+                    <td>"FRANCHISE"</td>
+                    <td>gm-ops-franchise-dark.svg, gm-ops-franchise-light.svg</td>
+                </tr>
+            </tbody>
+        </table>
 
-### Logo Specifications
+        <h3>Sub-brand Text Specifications</h3>
+        <div class="card">
+            <ul>
+                <li><strong>Font:</strong> Barlow Condensed Bold</li>
+                <li><strong>Letter spacing:</strong> 4px</li>
+                <li><strong>Alignment:</strong> Right-aligned (right edge aligns with right edge of OPS block)</li>
+                <li><strong>Skew:</strong> Same -12deg as main logo</li>
+                <li><strong>Color (dark bg):</strong> Silver (#A5ACAF)</li>
+                <li><strong>Color (light bg):</strong> Dark Navy (#0A1628)</li>
+            </ul>
+        </div>
 
-| Element | Value |
-|---------|-------|
-| Primary Font | **Teko Bold** |
-| Sub-brand Font | **Barlow Condensed Bold** |
-| Skew Angle | **-12 degrees** (leaning right) |
-| PS Size | **80%** of O height |
+        <h3>Favicon Specifications</h3>
+        <div class="card">
+            <p>For favicons and small sizes, the full "GMOPS" text won't be readable. Use simplified versions:</p>
+            <ul>
+                <li><strong>favicon-gmops.svg</strong> - Simplified GM OPS blocks (for larger icon contexts)</li>
+                <li><strong>favicon-gm.svg</strong> - Just "GM" in the red block (for 16x16 and 32x32)</li>
+            </ul>
+            <p>Favicon sizes needed: 16x16, 32x32, 180x180 (Apple touch), 192x192, 512x512</p>
+        </div>
 
-### Color Palette
+        <h3>Brand Guidelines Document</h3>
+        <p>A comprehensive brand guidelines page is available at:</p>
+        <p><a href="https://nwcarlson-dev.github.io/gm-ops/brand-guidelines">https://nwcarlson-dev.github.io/gm-ops/brand-guidelines</a></p>
+    </section>
 
-| Color | Hex | Usage |
-|-------|-----|-------|
-| NFL Red | `#D50A0A` | GM block background |
-| NFL Blue | `#013369` | Ops block background |
-| White | `#FFFFFF` | Text, light backgrounds |
-| NFL Silver | `#A5ACAF` | Secondary elements |
-| Dark Navy | `#0A1628` | Dark backgrounds |
+    <section id="legal">
+        <h2>⚖️ Legal Considerations</h2>
+        
+        <h3>What's Allowed (Nominative Fair Use)</h3>
+        <ul>
+            <li><span class="check">✅</span> Real NFL team names (Cowboys, Patriots, etc.)</li>
+            <li><span class="check">✅</span> Real player/prospect names</li>
+            <li><span class="check">✅</span> "NFL Draft" terminology</li>
+            <li><span class="check">✅</span> Team colors</li>
+            <li><span class="check">✅</span> City names + team references</li>
+            <li><span class="check">✅</span> Commentary/analysis tools</li>
+        </ul>
 
-### Logo Variants Needed
-1. **Parent:** GM Ops (no sub-brand)
-2. **Draft:** GM Ops + "DRAFT" sub-text
-3. **Offseason:** GM Ops + "OFFSEASON" sub-text
-4. **Franchise:** GM Ops + "FRANCHISE" sub-text
+        <h3>What's NOT Allowed</h3>
+        <ul>
+            <li><span class="cross">❌</span> Official NFL shield logo</li>
+            <li><span class="cross">❌</span> Team logos (star, horseshoe, etc.)</li>
+            <li><span class="cross">❌</span> Anything implying official NFL endorsement</li>
+            <li><span class="cross">❌</span> Selling merchandise with NFL marks</li>
+            <li><span class="cross">❌</span> "NFL" in product/company name</li>
+        </ul>
 
-Each variant needs dark background and light background versions.
+        <h3>Required Disclaimer</h3>
+        <div class="disclaimer">
+            This application is not affiliated with, endorsed by, or connected to the National Football League (NFL), NFL Players Association (NFLPA), NCAA, or any professional or collegiate football team. All team and player names are used for commentary and analysis purposes.
+        </div>
 
-### Sub-brand Text Specifications
-- Font: Barlow Condensed Bold
-- Letter spacing: 4px
-- Right-aligned (right edge of text aligns with right edge of OPS block)
-- Same -12deg skew as main logo
-- Color: Silver (`#A5ACAF`) on dark backgrounds, Dark Navy (`#0A1628`) on light backgrounds
+        <h3>Safe Harbor Strategy</h3>
+        <ul>
+            <li>Ship with real team names (nominative fair use for commentary)</li>
+            <li>Use team colors but <strong>NO logos</strong></li>
+            <li>Allow user imports for custom data via Google Sheets</li>
+            <li>Clear "Not affiliated with NFL" disclaimer</li>
+            <li>Position as commentary/analysis tool</li>
+        </ul>
+    </section>
 
----
+    <section id="tech">
+        <h2>🛠️ Technical Architecture</h2>
+        
+        <h3>Tech Stack</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Layer</th>
+                    <th>Technology</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Frontend</td>
+                    <td>Vanilla HTML/CSS/JavaScript</td>
+                    <td>Single-file architecture for MVP</td>
+                </tr>
+                <tr>
+                    <td>Hosting</td>
+                    <td>GitHub Pages</td>
+                    <td>Free, reliable, CDN-backed</td>
+                </tr>
+                <tr>
+                    <td>Data Storage (MVP)</td>
+                    <td>Google Sheets</td>
+                    <td>User-importable data, export support</td>
+                </tr>
+                <tr>
+                    <td>Data Storage (Future)</td>
+                    <td>Firebase</td>
+                    <td>For subscription features, user accounts</td>
+                </tr>
+                <tr>
+                    <td>Version Control</td>
+                    <td>GitHub</td>
+                    <td>Public repository</td>
+                </tr>
+            </tbody>
+        </table>
 
-## ⚖️ Legal Considerations
-
-### What's Allowed (Nominative Fair Use)
-- ✅ Real NFL team names (Cowboys, Patriots, etc.)
-- ✅ Real player/prospect names
-- ✅ "NFL Draft" terminology
-- ✅ Team colors
-- ✅ City names + team references
-- ✅ Commentary/analysis tools
-
-### What's NOT Allowed
-- ❌ Official NFL shield logo
-- ❌ Team logos (star, horseshoe, etc.)
-- ❌ Anything implying official NFL endorsement
-- ❌ Selling merchandise with NFL marks
-- ❌ "NFL" in product/company name
-
-### Required Disclaimer
-```
-This application is not affiliated with, endorsed by, or connected to the 
-National Football League (NFL), NFL Players Association (NFLPA), NCAA, or 
-any professional or collegiate football team. All team and player names 
-are used for commentary and analysis purposes.
-```
-
-### Safe Harbor Strategy
-- Ship with real team names (nominative fair use for commentary)
-- Use team colors but NO logos
-- Allow user imports for custom data via Google Sheets
-- Clear "Not affiliated with NFL" disclaimer
-- Position as commentary/analysis tool
-
----
-
-## 🛠️ Technical Architecture
-
-### Tech Stack
-- **Frontend:** Vanilla HTML/CSS/JavaScript (single-file architecture for now)
-- **Hosting:** GitHub Pages (free)
-- **Data Storage:** Google Sheets (for MVP), Firebase (for subscription features)
-- **Version Control:** GitHub
-
-### Repository Structure
-```
-gm-ops/
-├── index.html              # Setup screen (main entry)
+        <h3>Repository Structure</h3>
+        <pre><code>gm-ops/
+├── index.html              # Setup screen (main entry point)
 ├── draft-room.html         # Draft simulator
 ├── brand-guidelines        # Brand guide HTML
-├── README.md
+├── dev-guide.html          # This document
+├── README.md               # Repository readme
 └── (future)
-    ├── css/
-    ├── js/
-    └── data/
-```
+    ├── css/                # Stylesheets
+    ├── js/                 # JavaScript modules
+    ├── data/               # Static data files
+    └── assets/
+        ├── logos/          # SVG logos
+        └── favicons/       # Favicon files</code></pre>
 
-### GitHub Pages
-- URL: `https://nwcarlson-dev.github.io/gm-ops/`
-- Deploy from: main branch, root folder
+        <h3>GitHub Pages Configuration</h3>
+        <ul>
+            <li><strong>URL:</strong> <a href="https://nwcarlson-dev.github.io/gm-ops/">https://nwcarlson-dev.github.io/gm-ops/</a></li>
+            <li><strong>Deploy from:</strong> main branch, root folder</li>
+            <li><strong>index.html</strong> loads automatically at root URL</li>
+            <li><strong>draft-room.html</strong> accessible at /draft-room.html</li>
+        </ul>
+    </section>
 
----
+    <section id="features">
+        <h2>📋 Current Features - Mock Draft Simulator</h2>
+        
+        <h3>Setup Screen (<code>index.html</code>)</h3>
+        <div class="grid-2">
+            <div class="card">
+                <h4>Team Selection</h4>
+                <ul>
+                    <li>All 32 NFL teams</li>
+                    <li>Sort by draft order or alphabetical</li>
+                    <li>Select all / deselect all</li>
+                    <li>Team cards showing:
+                        <ul>
+                            <li>Pick number</li>
+                            <li>Team name</li>
+                            <li>Record</li>
+                            <li>Team colors</li>
+                        </ul>
+                    </li>
+                    <li>Expandable details panel per team</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h4>Settings Panel</h4>
+                <ul>
+                    <li>Number of rounds (1-7)</li>
+                    <li>Positional value slider</li>
+                    <li>Draft for needs slider</li>
+                    <li>CPU-to-CPU trades toggle</li>
+                    <li>"Enter Draft" button</li>
+                </ul>
+            </div>
+        </div>
 
-## 📋 Mock Draft Simulator - Current Features
+        <h3>Draft Room (<code>draft-room.html</code>)</h3>
+        <div class="grid-2">
+            <div class="card">
+                <h4>Draft Board</h4>
+                <ul>
+                    <li>Full 7-round draft order (224 picks)</li>
+                    <li>Real 2026 draft order with traded picks</li>
+                    <li>CPU draft logic with BPA + team needs</li>
+                    <li>Round-by-round navigation</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h4>Big Board</h4>
+                <ul>
+                    <li>100+ players</li>
+                    <li>Player cards with scouting data</li>
+                    <li>Consensus ranges</li>
+                    <li>Strengths/weaknesses</li>
+                    <li>Fit analysis grades</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h4>User Features</h4>
+                <ul>
+                    <li>Team needs tracking (updates when positions filled)</li>
+                    <li>Starred players / watchlist</li>
+                    <li>Position filtering</li>
+                    <li>Search functionality</li>
+                </ul>
+            </div>
+            <div class="card">
+                <h4>Sim Controls</h4>
+                <ul>
+                    <li>Manual (pick by pick)</li>
+                    <li>Slow (animated)</li>
+                    <li>Fast</li>
+                    <li>Instant (sim to user pick)</li>
+                </ul>
+            </div>
+        </div>
 
-### Setup Screen (`index.html`)
-- Team selection (32 NFL teams)
-- Sort by draft order or alphabetical
-- Select all/deselect all
-- Team cards with:
-  - Pick number
-  - Team name
-  - Record
-  - Team colors
-  - Expandable details panel
-- Settings panel:
-  - Number of rounds (1-7)
-  - Positional value slider
-  - Draft for needs slider
-  - CPU-to-CPU trades toggle
-- "Enter Draft" button
+        <h3>Audio</h3>
+        <ul>
+            <li>Draft jingle plays on setup screen</li>
+        </ul>
+    </section>
 
-### Draft Room (`draft-room.html`)
-- Full 7-round draft order (224 picks)
-- Real 2026 draft order with traded picks
-- CPU draft logic with BPA + team needs
-- Big board with 100+ players
-- Player cards with:
-  - Scouting data
-  - Consensus ranges
-  - Strengths/weaknesses
-  - Fit analysis grades
-- User team needs tracking (updates when positions filled)
-- Starred players / watchlist
-- Position filtering
-- Search functionality
-- Sim controls (manual, slow, fast, instant)
-- Round-by-round navigation
+    <section id="todo">
+        <h2>🚧 TODO & Roadmap</h2>
+        
+        <h3>High Priority (10-20 hours total)</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Feature</th>
+                    <th>Est. Hours</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Connect setup → draft room</td>
+                    <td>2-3 hrs</td>
+                    <td>Pass settings between screens</td>
+                </tr>
+                <tr>
+                    <td>Trade system</td>
+                    <td>4-6 hrs</td>
+                    <td>Trade value chart, offer generation, user-initiated trades</td>
+                </tr>
+                <tr>
+                    <td>Draft results/summary</td>
+                    <td>2 hrs</td>
+                    <td>Grades, recap, Google Sheets export</td>
+                </tr>
+            </tbody>
+        </table>
 
----
+        <h3>Medium Priority</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Feature</th>
+                    <th>Est. Hours</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Roster context</td>
+                    <td>2-3 hrs</td>
+                    <td>Show existing starters</td>
+                </tr>
+                <tr>
+                    <td>Smarter CPU logic</td>
+                    <td>2-3 hrs</td>
+                    <td>Team tendencies, reach/value decisions</td>
+                </tr>
+                <tr>
+                    <td>Testing & bug fixes</td>
+                    <td>2-3 hrs</td>
+                    <td>Edge cases</td>
+                </tr>
+            </tbody>
+        </table>
 
-## 🚧 Mock Draft Simulator - TODO (10-20 hours)
+        <h3>Nice to Have</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Feature</th>
+                    <th>Est. Hours</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Mobile responsiveness</td>
+                    <td>2-3 hrs</td>
+                    <td>Optimize for tablets and phones</td>
+                </tr>
+                <tr>
+                    <td>Sound effects</td>
+                    <td>1 hr</td>
+                    <td>Pick announcements, trade alerts</td>
+                </tr>
+                <tr>
+                    <td>Logo SVG exports</td>
+                    <td>1-2 hrs</td>
+                    <td>Clean vector exports for all variants</td>
+                </tr>
+            </tbody>
+        </table>
 
-### High Priority
-| Feature | Est. Hours | Notes |
-|---------|------------|-------|
-| Connect setup → draft room | 2-3 hrs | Pass settings between screens |
-| Trade system | 4-6 hrs | Trade value chart, offer generation, user-initiated trades |
-| Draft results/summary | 2 hrs | Grades, recap, Google Sheets export |
+        <h3>Timeline</h3>
+        <p><strong>Target:</strong> Public launch of Mock Draft Simulator by <strong>early February 2026</strong></p>
+    </section>
 
-### Medium Priority
-| Feature | Est. Hours | Notes |
-|---------|------------|-------|
-| Roster context | 2-3 hrs | Show existing starters |
-| Smarter CPU logic | 2-3 hrs | Team tendencies, reach/value decisions |
-| Testing & bug fixes | 2-3 hrs | Edge cases |
-
-### Nice to Have
-| Feature | Est. Hours | Notes |
-|---------|------------|-------|
-| Mobile responsiveness | 2-3 hrs | |
-| Sound effects | 1 hr | Draft jingle plays on setup screen already |
-
----
-
-## 📊 Data Model
-
-### Team Data Structure
-```javascript
-{
-  n: "Raiders",           // Team name
-  p: 1,                   // Pick number
-  c: "#000000",           // Primary color
-  rec: "3-14",            // Record
-  oc: "OC Name",          // Offensive coordinator
-  dc: "DC Name",          // Defensive coordinator
-  offScheme: "...",       // Offensive scheme
-  defScheme: "...",       // Defensive scheme
-  offNeeds: [             // [isCritical, position, archetype]
+    <section id="data">
+        <h2>📊 Data Model</h2>
+        
+        <h3>Team Data Structure</h3>
+        <pre><code>{
+  n: "Raiders",                    // Team name
+  p: 1,                            // Pick number
+  c: "#000000",                    // Primary color
+  rec: "3-14",                     // Record
+  oc: "OC Name",                   // Offensive coordinator
+  dc: "DC Name",                   // Defensive coordinator
+  offScheme: "...",                // Offensive scheme
+  defScheme: "...",                // Defensive scheme
+  offNeeds: [                      // [isCritical, position, archetype]
     [true, "Quarterback", "Dual-Threat"],
     [false, "Wide Receiver", "Field Stretcher"]
   ],
   defNeeds: [...],
-  summary: "..."          // Key notes
-}
-```
+  summary: "..."                   // Key notes
+}</code></pre>
 
-### Prospect Data Structure
-```javascript
-{
+        <h3>Prospect Data Structure</h3>
+        <pre><code>{
   name: "Player Name",
   pos: "QB",
   school: "University",
   rank: 1,
+  consensusMin: 1,
+  consensusMax: 5,
+  strengths: ["Arm strength", "Mobility"],
+  weaknesses: ["Processing speed"],
   // Additional scouting data...
-}
-```
+}</code></pre>
+    </section>
 
----
+    <section id="future">
+        <h2>🎮 Future Vision - Full Franchise Sim</h2>
+        
+        <h3>Phase 2: GM Ops: Offseason</h3>
+        <ul>
+            <li>Free agency module</li>
+            <li>Trade system (expanded)</li>
+            <li>Salary cap logic</li>
+            <li>Contract negotiations</li>
+            <li>Persistent data via Google Sheets/Firebase</li>
+        </ul>
 
-## 🎮 Full Franchise Sim - Future Vision
+        <h3>Phase 3: GM Ops: Franchise</h3>
+        <ul>
+            <li>Season simulation</li>
+            <li>Game outcomes & stats</li>
+            <li>Player progression</li>
+            <li>Injuries</li>
+            <li>User accounts</li>
+            <li>Subscription system (Stripe)</li>
+        </ul>
 
-### Phase 2: Offseason Sim
-- Free agency module
-- Trade system (expanded)
-- Salary cap logic
-- Contract negotiations
-- Persistent data via Google Sheets/Firebase
+        <h3>Why This is Doable</h3>
+        <div class="grid-2">
+            <div class="card">
+                <h4>1. Turn-based</h4>
+                <p>No physics engine, no real-time rendering. Just decisions and outcomes.</p>
+            </div>
+            <div class="card">
+                <h4>2. Modular</h4>
+                <p>Each feature builds on the last. Draft → Offseason → Full Season.</p>
+            </div>
+            <div class="card">
+                <h4>3. Data Available</h4>
+                <p>Public NFL data is abundant. Users can import their own via Google Sheets.</p>
+            </div>
+            <div class="card">
+                <h4>4. Web Tech is Perfect</h4>
+                <p>HTML/CSS/JS handles forms, tables, and UI interactions beautifully.</p>
+            </div>
+        </div>
+    </section>
 
-### Phase 3: Franchise Mode
-- Season simulation
-- Game outcomes & stats
-- Player progression
-- Injuries
-- User accounts
-- Subscription system (Stripe)
+    <section id="workflow">
+        <h2>📝 Development Workflow</h2>
+        
+        <h3>For New Claude Chats</h3>
+        <ol>
+            <li>Upload this document (or link to live URL)</li>
+            <li>Reference the GitHub repo: <a href="https://github.com/nwcarlson-dev/gm-ops">https://github.com/nwcarlson-dev/gm-ops</a></li>
+            <li>Paste specific files if working on them</li>
+            <li>Be specific about what you need help with</li>
+        </ol>
 
-### Why This is Doable
-1. **Turn-based** - No physics, no real-time rendering
-2. **Modular** - Each feature builds on the last
-3. **Data available** - Public NFL data, user-importable
-4. **Web tech is perfect** - HTML/CSS/JS handles forms and UI well
+        <h3>Git Workflow</h3>
+        <ul>
+            <li>Work on <code>main</code> branch for now (simple project)</li>
+            <li>Commit frequently with descriptive messages</li>
+            <li>Use branches for experimental features if needed</li>
+        </ul>
 
----
+        <h3>File Naming Conventions</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>File</th>
+                    <th>Purpose</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>index.html</code></td>
+                    <td>Setup screen (entry point, loads at root URL)</td>
+                </tr>
+                <tr>
+                    <td><code>draft-room.html</code></td>
+                    <td>Draft simulator interface</td>
+                </tr>
+                <tr>
+                    <td><code>brand-guidelines</code></td>
+                    <td>Brand guide (no extension for clean URL)</td>
+                </tr>
+                <tr>
+                    <td><code>dev-guide.html</code></td>
+                    <td>This document - project requirements & context</td>
+                </tr>
+            </tbody>
+        </table>
 
-## 📝 Development Workflow
+        <h3>Testing</h3>
+        <ul>
+            <li>Test locally by opening HTML files directly in browser</li>
+            <li>Push to GitHub to test on live GitHub Pages</li>
+            <li>Check mobile responsiveness using browser dev tools</li>
+        </ul>
+    </section>
 
-### For New Claude Chats
-1. Upload this document
-2. Reference the GitHub repo: https://github.com/nwcarlson-dev/gm-ops
-3. Paste specific files if working on them
-4. Be specific about what you need help with
+    <section id="decisions">
+        <h2>💡 Key Decisions Made</h2>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Decision</th>
+                    <th>Choice</th>
+                    <th>Rationale</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Brand name</td>
+                    <td><strong>"GM Ops"</strong></td>
+                    <td>Not "The League" due to trademark conflicts with Match Group's dating app</td>
+                </tr>
+                <tr>
+                    <td>Legal approach</td>
+                    <td>Use real names, no logos</td>
+                    <td>Nominative fair use for commentary/analysis</td>
+                </tr>
+                <tr>
+                    <td>Tech stack</td>
+                    <td>Vanilla HTML/CSS/JS</td>
+                    <td>Simple, no build process, easy to deploy</td>
+                </tr>
+                <tr>
+                    <td>Hosting</td>
+                    <td>GitHub Pages</td>
+                    <td>Free, reliable, version controlled</td>
+                </tr>
+                <tr>
+                    <td>Data storage (MVP)</td>
+                    <td>Google Sheets</td>
+                    <td>User-importable, familiar interface</td>
+                </tr>
+                <tr>
+                    <td>Data storage (future)</td>
+                    <td>Firebase</td>
+                    <td>For user accounts and subscriptions</td>
+                </tr>
+                <tr>
+                    <td>Logo font</td>
+                    <td>Teko Bold</td>
+                    <td>Sports feel, condensed, works well skewed</td>
+                </tr>
+                <tr>
+                    <td>Logo style</td>
+                    <td>-12deg skew, colored blocks</td>
+                    <td>Dynamic, professional, NFL-inspired aesthetic</td>
+                </tr>
+                <tr>
+                    <td>Sub-brand font</td>
+                    <td>Barlow Condensed Bold</td>
+                    <td>Complements Teko, readable at small sizes</td>
+                </tr>
+                <tr>
+                    <td>Color palette</td>
+                    <td>NFL Red + Blue</td>
+                    <td>Instant football recognition, professional look</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
 
-### Git Workflow
-- Work on `main` branch for now (simple project)
-- Commit frequently
-- Use descriptive commit messages
+    <hr>
 
-### File Naming
-- `index.html` = Setup screen (entry point)
-- `draft-room.html` = Draft simulator
-- `brand-guidelines` = Brand guide
+    <footer>
+        <h2>🔗 Quick Links</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Resource</th>
+                    <th>URL</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>GitHub Repository</td>
+                    <td><a href="https://github.com/nwcarlson-dev/gm-ops">https://github.com/nwcarlson-dev/gm-ops</a></td>
+                </tr>
+                <tr>
+                    <td>Live Site</td>
+                    <td><a href="https://nwcarlson-dev.github.io/gm-ops/">https://nwcarlson-dev.github.io/gm-ops/</a></td>
+                </tr>
+                <tr>
+                    <td>Brand Guidelines</td>
+                    <td><a href="https://nwcarlson-dev.github.io/gm-ops/brand-guidelines">https://nwcarlson-dev.github.io/gm-ops/brand-guidelines</a></td>
+                </tr>
+                <tr>
+                    <td>Draft Room (direct)</td>
+                    <td><a href="https://nwcarlson-dev.github.io/gm-ops/draft-room.html">https://nwcarlson-dev.github.io/gm-ops/draft-room.html</a></td>
+                </tr>
+            </tbody>
+        </table>
 
----
+        <hr>
 
-## 🔗 Key Links
-
-| Resource | URL |
-|----------|-----|
-| GitHub Repo | https://github.com/nwcarlson-dev/gm-ops |
-| Live Site | https://nwcarlson-dev.github.io/gm-ops/ |
-
----
-
-## 📅 Timeline
-
-**Target:** Public launch of Mock Draft Simulator by early February 2026
-
----
-
-## 💡 Key Decisions Made
-
-1. **Brand name:** "GM Ops" (not "The League" due to trademark conflicts with dating app)
-2. **Legal approach:** Use real names under nominative fair use, no logos
-3. **Tech stack:** Vanilla HTML/CSS/JS, GitHub Pages hosting
-4. **Data storage:** Google Sheets for MVP, Firebase for subscriptions
-5. **Logo style:** Teko font, NFL colors, -12deg skew, colored blocks
-
----
-
-*This document serves as the single source of truth for the GM Ops project. Update it as decisions are made and features are completed.*
+        <p style="text-align: center; color: var(--text-secondary); margin-top: 2rem;">
+            <em>This document serves as the single source of truth for the GM Ops project.<br>
+            Update it as decisions are made and features are completed.</em>
+        </p>
+        
+        <p style="text-align: center; color: var(--text-secondary); margin-top: 1rem;">
+            Last updated: January 2026
+        </p>
+    </footer>
+</body>
+</html>
