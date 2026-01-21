@@ -1,0 +1,1334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NFL Mock Draft Simulator - Draft Room</title>
+  <style>
+    :root {
+      --bg-dark: #0a0a0f;
+      --bg-card: #12121a;
+      --bg-hover: #1a1a25;
+      --border: #2a2a3a;
+      --text-primary: #ffffff;
+      --text-secondary: #a0a0b0;
+      --text-muted: #606070;
+      --accent: #c9a227;
+      --success: #28a745;
+      --danger: #dc3545;
+      --warning: #ffc107;
+      --info: #17a2b8;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg-dark); color: var(--text-primary); min-height: 100vh; overflow: hidden; }
+
+    /* Header */
+    .draft-header { background: linear-gradient(135deg, #1a1a2e 0%, #0a0a15 100%); border-bottom: 1px solid var(--border); padding: 12px 24px; display: flex; align-items: center; justify-content: space-between; height: 60px; }
+    .header-left { display: flex; align-items: center; gap: 20px; }
+    .back-btn { background: var(--bg-hover); border: 1px solid var(--border); color: var(--text-secondary); padding: 8px 14px; border-radius: 6px; cursor: pointer; font-size: 13px; display: flex; align-items: center; gap: 6px; transition: all 0.2s; z-index: 100; position: relative; }
+    .back-btn:hover { border-color: var(--accent); color: var(--text-primary); background: var(--bg-card); }
+    .logo { font-size: 18px; font-weight: 700; color: var(--accent); }
+    .draft-info { display: flex; align-items: center; gap: 16px; }
+    .draft-info-item { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--text-secondary); }
+    .draft-info-item span { color: var(--text-primary); font-weight: 600; }
+    .on-the-clock { background: linear-gradient(135deg, var(--accent) 0%, #b8941f 100%); color: #000; padding: 8px 16px; border-radius: 6px; font-weight: 700; font-size: 14px; display: flex; align-items: center; gap: 8px; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.8; } }
+    .sim-controls { display: flex; align-items: center; gap: 6px; }
+    .speed-btn { padding: 6px 10px; background: var(--bg-hover); border: 1px solid var(--border); border-radius: 4px; color: var(--text-secondary); font-size: 11px; cursor: pointer; }
+    .speed-btn.active { background: var(--accent); border-color: var(--accent); color: #000; font-weight: 600; }
+
+    /* Main Layout: Draft Order | Big Board | Team Info */
+    .draft-container { display: grid; grid-template-columns: 300px 1fr 320px; height: calc(100vh - 60px); }
+
+    /* Left Panel - Draft Order */
+    .draft-order-panel { background: var(--bg-card); border-right: 1px solid var(--border); display: flex; flex-direction: column; overflow: hidden; }
+    .panel-header { padding: 14px 16px; border-bottom: 1px solid var(--border); background: var(--bg-dark); }
+    .panel-title { font-size: 15px; font-weight: 700; margin-bottom: 10px; }
+    .round-selector { display: flex; gap: 4px; flex-wrap: wrap; }
+    .round-btn { padding: 6px 10px; background: var(--bg-hover); border: 1px solid var(--border); border-radius: 4px; color: var(--text-secondary); font-size: 11px; font-weight: 600; cursor: pointer; transition: all 0.2s; }
+    .round-btn:hover { border-color: var(--accent); color: var(--text-primary); }
+    .round-btn.active { background: var(--accent); border-color: var(--accent); color: #000; }
+    .panel-title .count { font-size: 12px; color: var(--text-muted); font-weight: 400; }
+    .draft-results { flex: 1; overflow-y: auto; padding: 8px; }
+    .round-header { font-size: 12px; font-weight: 700; color: var(--text-muted); padding: 8px; border-bottom: 1px solid var(--border); margin-bottom: 6px; position: sticky; top: 0; background: var(--bg-card); z-index: 1; }
+    .draft-pick { display: flex; align-items: center; padding: 8px 10px; background: var(--bg-dark); border-radius: 6px; margin-bottom: 5px; border: 1px solid var(--border); transition: all 0.2s; }
+    .draft-pick:hover { border-color: var(--accent); }
+    .draft-pick.user-pick { border-color: var(--accent); background: rgba(201, 162, 39, 0.08); }
+    .draft-pick.current { border-color: var(--accent); animation: currentPick 1.5s infinite; }
+    @keyframes currentPick { 0%, 100% { box-shadow: 0 0 0 0 rgba(201, 162, 39, 0.4); } 50% { box-shadow: 0 0 0 4px rgba(201, 162, 39, 0); } }
+    .draft-pick.future { opacity: 0.5; }
+    .pick-num { width: 28px; height: 28px; background: var(--bg-hover); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 700; margin-right: 8px; flex-shrink: 0; }
+    .team-logo { width: 28px; height: 28px; border-radius: 50%; margin-right: 8px; flex-shrink: 0; background-size: contain; background-position: center; background-repeat: no-repeat; background-color: var(--bg-hover); }
+    .team-logo-wrap { margin-right: 8px; flex-shrink: 0; }
+    .pick-details { flex: 1; min-width: 0; }
+    .pick-team-name { font-size: 11px; font-weight: 600; color: var(--text-muted); }
+    .pick-player-name { font-size: 12px; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .pick-player-info { font-size: 10px; color: var(--text-secondary); }
+    .pick-empty { color: var(--text-muted); font-style: italic; font-size: 11px; }
+
+    /* Center Panel - Big Board */
+    .big-board-panel { display: flex; flex-direction: column; overflow: hidden; background: var(--bg-dark); }
+    .board-header { padding: 12px 20px; background: var(--bg-card); border-bottom: 1px solid var(--border); display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+    .current-pick-display { display: flex; align-items: center; gap: 12px; }
+    .current-team-logo { width: 44px; height: 44px; border-radius: 50%; background-size: contain; background-position: center; background-repeat: no-repeat; background-color: var(--bg-hover); display: flex; align-items: center; justify-content: center; }
+    .pick-number { font-size: 26px; font-weight: 700; color: var(--accent); }
+    .pick-team-info { display: flex; flex-direction: column; }
+    .pick-team-name-lg { font-size: 15px; font-weight: 600; }
+    .pick-team-record { font-size: 11px; color: var(--text-muted); }
+    .next-pick-info { background: var(--bg-dark); border: 1px solid var(--border); border-radius: 8px; padding: 10px 16px; display: flex; flex-direction: column; gap: 4px; }
+    .next-pick-info.on-clock { background: rgba(201, 162, 39, 0.15); border-color: var(--accent); }
+    .next-pick-label { font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+    .next-pick-info.on-clock .next-pick-label { color: var(--accent); }
+    .next-pick-details { display: flex; align-items: center; gap: 8px; }
+    .next-pick-round { font-size: 14px; font-weight: 700; color: var(--accent); }
+    .next-pick-overall { font-size: 14px; font-weight: 600; color: var(--text-primary); }
+    .next-pick-away { font-size: 12px; color: var(--text-secondary); padding-left: 8px; border-left: 1px solid var(--border); }
+    .next-pick-info.on-clock .next-pick-away { color: var(--accent); font-weight: 600; }
+    .draft-actions { display: flex; gap: 10px; }
+    .action-btn { padding: 10px 18px; border-radius: 6px; font-size: 13px; font-weight: 600; cursor: pointer; transition: all 0.2s; border: none; }
+    .action-btn.primary { background: linear-gradient(135deg, var(--accent) 0%, #b8941f 100%); color: #000; }
+    .action-btn.primary:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(201, 162, 39, 0.3); }
+    .action-btn.secondary { background: var(--bg-hover); border: 1px solid var(--border); color: var(--text-primary); }
+    .action-btn.secondary:hover { border-color: var(--accent); }
+    .action-btn.trade { background: var(--info); border: 1px solid var(--info); color: white; }
+    .action-btn.trade:hover { background: #1a8fa8; }
+
+    /* Filters */
+    .board-filters { padding: 10px 20px; background: var(--bg-card); border-bottom: 1px solid var(--border); display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+    .search-box { position: relative; width: 200px; }
+    .search-box input { width: 100%; padding: 8px 12px 8px 32px; background: var(--bg-hover); border: 1px solid var(--border); border-radius: 6px; color: var(--text-primary); font-size: 13px; }
+    .search-box input:focus { outline: none; border-color: var(--accent); }
+    .search-box::before { content: "🔍"; position: absolute; left: 10px; top: 50%; transform: translateY(-50%); font-size: 12px; opacity: 0.5; }
+    .filter-row { display: flex; gap: 5px; flex-wrap: wrap; }
+    .filter-btn { padding: 5px 10px; background: var(--bg-hover); border: 1px solid var(--border); border-radius: 4px; color: var(--text-secondary); font-size: 11px; cursor: pointer; transition: all 0.2s; }
+    .filter-btn:hover { border-color: var(--accent); color: var(--text-primary); }
+    .filter-btn.active { background: var(--accent); border-color: var(--accent); color: #000; font-weight: 600; }
+    .filter-btn.starred { border-color: var(--warning); color: var(--warning); }
+    .filter-btn.starred.active { background: var(--warning); color: #000; }
+
+    /* Player List */
+    .player-list { flex: 1; overflow-y: auto; padding: 16px 20px; display: flex; flex-direction: column; gap: 8px; }
+    .player-card { background: var(--bg-card); border: 1px solid var(--border); border-radius: 8px; overflow: hidden; cursor: pointer; transition: all 0.2s; position: relative; flex-shrink: 0; }
+    .player-card:hover { border-color: var(--accent); }
+    .player-card.drafted { opacity: 0.3; pointer-events: none; }
+    .player-card.starred { border-color: var(--warning); }
+    .player-card.selected { border-color: var(--accent); background: rgba(201, 162, 39, 0.1); }
+    .player-card-header { display: flex; align-items: center; padding: 10px 12px; gap: 10px; min-height: 60px; }
+    .player-rank-badge { position: absolute; top: 6px; left: 6px; font-size: 9px; font-weight: 700; color: var(--text-muted); background: var(--bg-dark); padding: 2px 5px; border-radius: 3px; }
+    .player-star { position: absolute; top: 6px; right: 6px; font-size: 14px; cursor: pointer; opacity: 0.3; transition: all 0.2s; z-index: 2; }
+    .player-star:hover { opacity: 1; transform: scale(1.2); }
+    .player-card.starred .player-star { opacity: 1; color: var(--warning); }
+    .college-logo { width: 40px; height: 40px; border-radius: 6px; background: var(--bg-hover); flex-shrink: 0; background-size: 75%; background-position: center; background-repeat: no-repeat; margin-left: 16px; }
+    .player-main-info { flex: 1; min-width: 0; }
+    .player-name { font-size: 13px; font-weight: 600; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .player-school { font-size: 11px; color: var(--text-secondary); margin-bottom: 4px; }
+    .player-tags { display: flex; gap: 5px; flex-wrap: nowrap; overflow: hidden; }
+    .player-tag { font-size: 9px; padding: 2px 5px; border-radius: 3px; background: var(--bg-hover); color: var(--text-secondary); white-space: nowrap; }
+    .player-tag.pos { background: var(--accent); color: #000; font-weight: 600; }
+    .consensus-range { font-size: 9px; padding: 2px 5px; border-radius: 3px; font-weight: 500; white-space: nowrap; }
+    .consensus-range.top-3 { background: rgba(220, 53, 69, 0.2); color: #ff6b6b; }
+    .consensus-range.top-10 { background: rgba(255, 193, 7, 0.2); color: #ffc107; }
+    .consensus-range.mid-1st { background: rgba(23, 162, 184, 0.2); color: #17a2b8; }
+    .consensus-range.late-1st { background: rgba(40, 167, 69, 0.2); color: #28a745; }
+    .consensus-range.rd-2 { background: rgba(111, 66, 193, 0.2); color: #9d7bea; }
+    .consensus-range.rd-3-4 { background: rgba(108, 117, 125, 0.2); color: #adb5bd; }
+    .consensus-range.rd-5-7 { background: rgba(73, 80, 87, 0.2); color: #868e96; }
+
+    /* Expandable Section */
+    .player-expand { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; background: var(--bg-dark); }
+    .player-card.expanded .player-expand { max-height: 200px; }
+    .player-expand-content { padding: 10px 12px; font-size: 11px; }
+    .expand-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 8px; }
+    .expand-label { font-size: 9px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 3px; }
+    .expand-value { font-size: 11px; color: var(--text-secondary); line-height: 1.4; }
+    .expand-toggle { width: 100%; padding: 6px; background: var(--bg-hover); border: none; color: var(--text-muted); font-size: 10px; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 4px; }
+    .expand-toggle:hover { background: var(--bg-card); color: var(--text-primary); }
+
+    /* Right Panel - Team Info */
+    .team-panel { background: var(--bg-card); border-left: 1px solid var(--border); display: flex; flex-direction: column; overflow: hidden; }
+    .team-header { padding: 16px; background: var(--bg-dark); border-bottom: 1px solid var(--border); text-align: center; }
+    .team-logo-large { width: 56px; height: 56px; border-radius: 50%; margin: 0 auto 10px; background-size: contain; background-position: center; background-repeat: no-repeat; }
+    .team-name-large { font-size: 16px; font-weight: 700; margin-bottom: 4px; }
+    .team-record-large { font-size: 11px; color: var(--text-muted); }
+    .team-tabs { display: flex; border-bottom: 1px solid var(--border); }
+    .team-tab { flex: 1; padding: 10px; text-align: center; font-size: 11px; font-weight: 600; color: var(--text-muted); cursor: pointer; border-bottom: 2px solid transparent; transition: all 0.2s; }
+    .team-tab:hover { color: var(--text-primary); }
+    .team-tab.active { color: var(--accent); border-bottom-color: var(--accent); }
+    .team-content { flex: 1; overflow-y: auto; padding: 14px; }
+    .needs-section { margin-bottom: 16px; }
+    .needs-title { font-size: 11px; font-weight: 700; color: var(--text-muted); margin-bottom: 8px; text-transform: uppercase; letter-spacing: 0.5px; }
+    .need-item { display: flex; align-items: center; padding: 8px 10px; background: var(--bg-dark); border-radius: 6px 6px 0 0; margin-bottom: 0; border: 1px solid var(--border); border-bottom: none; }
+    .need-item.filled { border-color: var(--success); background: rgba(40, 167, 69, 0.1); }
+    .need-priority { width: 6px; height: 6px; border-radius: 50%; margin-right: 8px; flex-shrink: 0; }
+    .need-priority.high { background: var(--danger); }
+    .need-priority.medium { background: var(--warning); }
+    .need-priority.low { background: var(--warning); opacity: 0.5; }
+    .need-info { flex: 1; }
+    .need-position { font-size: 12px; font-weight: 600; }
+    .need-archetype { font-size: 10px; color: var(--text-muted); }
+    .need-status { font-size: 14px; }
+    .need-expand { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; background: var(--bg-dark); border-left: 1px solid var(--border); border-right: 1px solid var(--border); }
+    .need-expand.show { max-height: 150px; }
+    .need-note { padding: 8px 10px; font-size: 11px; color: var(--text-secondary); line-height: 1.5; }
+    .need-toggle { width: 100%; padding: 5px; background: var(--bg-hover); border: 1px solid var(--border); border-radius: 0 0 6px 6px; color: var(--text-muted); font-size: 9px; cursor: pointer; margin-bottom: 8px; }
+    .need-toggle:hover { background: var(--bg-card); color: var(--text-primary); }
+    .my-pick { display: flex; align-items: center; padding: 8px 10px; background: var(--bg-dark); border-radius: 6px; margin-bottom: 5px; border: 1px solid var(--border); transition: all 0.2s; }
+    .my-pick.filled { border-color: var(--success); background: rgba(40, 167, 69, 0.1); }
+    .my-pick.empty { opacity: 0.7; }
+    .my-pick.empty.current { opacity: 1; border-color: var(--accent); background: rgba(201, 162, 39, 0.1); animation: currentPick 1.5s infinite; }
+    .my-pick.empty .empty-slot { color: var(--text-muted); font-style: italic; }
+    .my-pick.empty.current .empty-slot { color: var(--accent); font-style: normal; font-weight: 600; }
+    .my-pick-round { width: 24px; height: 24px; background: var(--accent); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 10px; font-weight: 700; color: #000; margin-right: 8px; flex-shrink: 0; }
+    .my-pick.empty .my-pick-round { background: var(--bg-hover); color: var(--text-muted); }
+    .my-pick.empty.current .my-pick-round { background: var(--accent); color: #000; }
+    .my-pick-info { flex: 1; }
+    .my-pick-name { font-size: 12px; font-weight: 600; }
+    .my-pick-details { font-size: 10px; color: var(--text-muted); }
+    .scheme-section { margin-bottom: 12px; }
+    .scheme-column-header { font-size: 11px; font-weight: 700; color: var(--accent); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; padding-bottom: 4px; border-bottom: 1px solid var(--border); }
+    .scheme-box { background: var(--bg-dark); border-radius: 6px; padding: 10px; border: 1px solid var(--border); margin-bottom: 6px; }
+    .scheme-label { font-size: 9px; color: var(--text-muted); text-transform: uppercase; margin-bottom: 3px; }
+    .scheme-value { font-size: 12px; font-weight: 600; }
+
+    /* Modal */
+    .modal-overlay { position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0, 0, 0, 0.85); display: none; align-items: center; justify-content: center; z-index: 1000; }
+    .modal-overlay.active { display: flex; }
+    .modal-content { background: var(--bg-card); border-radius: 12px; width: 90%; max-width: 550px; max-height: 80vh; overflow-y: auto; border: 1px solid var(--border); }
+    .modal-header { padding: 16px; border-bottom: 1px solid var(--border); display: flex; align-items: flex-start; justify-content: space-between; }
+    .modal-player-info { display: flex; gap: 12px; }
+    .modal-college-logo { width: 50px; height: 50px; border-radius: 8px; background: var(--bg-hover); background-size: 75%; background-position: center; background-repeat: no-repeat; }
+    .modal-player-details h2 { font-size: 18px; margin-bottom: 4px; }
+    .modal-player-details p { font-size: 13px; color: var(--text-secondary); }
+    .modal-close { background: none; border: none; font-size: 24px; color: var(--text-muted); cursor: pointer; }
+    .modal-close:hover { color: var(--text-primary); }
+    .modal-body { padding: 16px; }
+    .modal-section { margin-bottom: 14px; }
+    .modal-section-title { font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 6px; }
+    .modal-section p { font-size: 13px; line-height: 1.5; color: var(--text-secondary); }
+    .fit-analysis { background: var(--bg-dark); border-radius: 8px; padding: 14px; margin-top: 12px; }
+    .fit-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; }
+    .fit-score { font-size: 22px; font-weight: 700; }
+    .fit-score.great { color: var(--success); }
+    .fit-score.good { color: var(--accent); }
+    .fit-score.fair { color: var(--warning); }
+    .fit-score.poor { color: var(--danger); }
+    .fit-factors { display: flex; flex-direction: column; gap: 6px; }
+    .fit-factor { display: flex; align-items: center; gap: 6px; font-size: 12px; }
+    .modal-actions { padding: 16px; border-top: 1px solid var(--border); display: flex; gap: 10px; justify-content: flex-end; }
+
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: var(--bg-dark); }
+    ::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+  </style>
+</head>
+<body>
+  <header class="draft-header">
+    <div class="header-left">
+      <button class="back-btn" onclick="exitDraft()">← Exit Draft</button>
+      <div class="logo">🏈 NFL Mock Draft</div>
+      <div class="draft-info">
+        <div class="draft-info-item">Round <span id="currentRound">1</span></div>
+        <div class="draft-info-item">Pick <span id="currentPick">1</span></div>
+      </div>
+      <div class="sim-controls">
+        <button class="speed-btn active" data-speed="0">Manual</button>
+        <button class="speed-btn" data-speed="1500">Slow</button>
+        <button class="speed-btn" data-speed="500">Fast</button>
+        <button class="speed-btn" data-speed="50">Instant</button>
+      </div>
+    </div>
+    <div id="onClockBadge" class="on-the-clock" style="display: none;">⏰ YOU'RE ON THE CLOCK</div>
+  </header>
+
+  <div class="draft-container">
+    <!-- Left: Draft Order -->
+    <div class="draft-order-panel">
+      <div class="panel-header">
+        <div class="panel-title">Draft Order</div>
+        <div class="round-selector">
+          <button class="round-btn active" data-round="1">R1</button>
+          <button class="round-btn" data-round="2">R2</button>
+          <button class="round-btn" data-round="3">R3</button>
+          <button class="round-btn" data-round="4">R4</button>
+          <button class="round-btn" data-round="5">R5</button>
+          <button class="round-btn" data-round="6">R6</button>
+          <button class="round-btn" data-round="7">R7</button>
+        </div>
+      </div>
+      <div class="draft-results" id="draftResults"></div>
+    </div>
+
+    <!-- Center: Big Board -->
+    <div class="big-board-panel">
+      <div class="board-header">
+        <div class="current-pick-display">
+          <div class="current-team-logo" id="currentTeamLogo"></div>
+          <div class="pick-number">#<span id="pickNum">1</span></div>
+          <div class="pick-team-info">
+            <div class="pick-team-name-lg" id="pickTeamName">Las Vegas Raiders</div>
+            <div class="pick-team-record" id="pickTeamRecord">On the clock</div>
+          </div>
+        </div>
+        <div class="next-pick-info" id="nextPickInfo">
+          <div class="next-pick-label">Your Next Pick</div>
+          <div class="next-pick-details">
+            <span class="next-pick-round" id="nextPickRound">R1</span>
+            <span class="next-pick-overall" id="nextPickOverall">#25</span>
+            <span class="next-pick-away" id="nextPickAway">25 picks away</span>
+          </div>
+        </div>
+        <div class="draft-actions">
+          <button class="action-btn trade" id="tradeBtn" onclick="openTradeModal()">📞 Trade</button>
+          <button class="action-btn secondary" id="simPickBtn" onclick="simPick()">Sim Pick</button>
+          <button class="action-btn secondary" id="simToPickBtn" onclick="simToMyPick()">Sim to My Pick</button>
+          <button class="action-btn primary" id="draftBtn" style="display: none;" onclick="draftSelected()">Draft Selected</button>
+        </div>
+      </div>
+      <div class="board-filters">
+        <div class="search-box">
+          <input type="text" id="playerSearch" placeholder="Search players...">
+        </div>
+        <div class="filter-row">
+          <button class="filter-btn starred" id="starredFilter">⭐ Starred</button>
+          <button class="filter-btn active" data-pos="ALL">All</button>
+          <button class="filter-btn" data-pos="QB">QB</button>
+          <button class="filter-btn" data-pos="RB">RB</button>
+          <button class="filter-btn" data-pos="WR">WR</button>
+          <button class="filter-btn" data-pos="TE">TE</button>
+          <button class="filter-btn" data-pos="OL">OL</button>
+          <button class="filter-btn" data-pos="EDGE">EDGE</button>
+          <button class="filter-btn" data-pos="DL">DL</button>
+          <button class="filter-btn" data-pos="LB">LB</button>
+          <button class="filter-btn" data-pos="CB">CB</button>
+          <button class="filter-btn" data-pos="S">S</button>
+        </div>
+      </div>
+      <div class="player-list" id="playerList"></div>
+    </div>
+
+    <!-- Right: Team Info -->
+    <div class="team-panel">
+      <div class="team-header">
+        <div class="team-logo-large" id="myTeamLogo"></div>
+        <div class="team-name-large" id="myTeamName">Chicago Bears</div>
+        <div class="team-record-large" id="myTeamRecord">11-6 • Pick #25</div>
+      </div>
+      <div class="team-tabs">
+        <div class="team-tab active" data-tab="needs">Needs</div>
+        <div class="team-tab" data-tab="picks">My Picks</div>
+        <div class="team-tab" data-tab="scheme">Scheme</div>
+      </div>
+      <div class="team-content">
+        <div id="needsTab" class="tab-content">
+          <div class="needs-section">
+            <div class="needs-title">Offensive Needs</div>
+            <div id="offensiveNeeds"></div>
+          </div>
+          <div class="needs-section">
+            <div class="needs-title">Defensive Needs</div>
+            <div id="defensiveNeeds"></div>
+          </div>
+        </div>
+        <div id="picksTab" class="tab-content" style="display: none;">
+          <div class="needs-title">My Draft Picks</div>
+          <div id="myPicks"><p style="color: var(--text-muted); font-size: 12px; text-align: center; padding: 20px;">No picks yet.</p></div>
+        </div>
+        <div id="schemeTab" class="tab-content" style="display: none;">
+          <div class="scheme-section">
+            <div class="scheme-column-header">Offensive</div>
+            <div class="scheme-box"><div class="scheme-label">Scheme</div><div class="scheme-value" id="offScheme">Shanahan Wide Zone</div></div>
+            <div class="scheme-box"><div class="scheme-label">Play Caller</div><div class="scheme-value" id="ocName">Ben Johnson (HC)</div></div>
+          </div>
+          <div class="scheme-section">
+            <div class="scheme-column-header">Defensive</div>
+            <div class="scheme-box"><div class="scheme-label">Scheme</div><div class="scheme-value" id="defScheme">4-3 Under</div></div>
+            <div class="scheme-box"><div class="scheme-label">Play Caller</div><div class="scheme-value" id="dcName">Dennis Allen (DC)</div></div>
+          </div>
+          <div class="scheme-section" style="margin-top: 12px;">
+            <div class="scheme-column-header">Scheme Fit & Traits</div>
+            <div class="scheme-box" style="background: var(--bg-card);">
+              <p style="font-size: 11px; color: var(--text-secondary); line-height: 1.6; margin: 0;">
+                <strong>Offense:</strong> Values athletic OL who can move in space. RBs need vision, patience, and burst through the hole. WRs must win off play-action and create YAC.<br><br>
+                <strong>Defense:</strong> Allen's 4-3 Under needs a penetrating 3-tech, run-stuffing nose, and edge speed off the weak side. Corners must be physical in press. Safeties need range and versatility.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal-overlay" id="playerModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-player-info">
+          <div class="modal-college-logo" id="modalCollegeLogo"></div>
+          <div class="modal-player-details">
+            <h2 id="modalName">Player Name</h2>
+            <p id="modalSchool">School • Age • Archetype</p>
+          </div>
+        </div>
+        <button class="modal-close" onclick="closeModal()">×</button>
+      </div>
+      <div class="modal-body">
+        <div class="modal-section"><div class="modal-section-title">Strengths</div><p id="modalStrengths"></p></div>
+        <div class="modal-section"><div class="modal-section-title">Weaknesses</div><p id="modalWeaknesses"></p></div>
+        <div class="modal-section"><div class="modal-section-title">Best Fits</div><p id="modalFits"></p></div>
+        <div class="fit-analysis" id="fitAnalysis" style="display: none;">
+          <div class="fit-header">
+            <div class="modal-section-title" style="margin: 0;">Team Fit Analysis</div>
+            <div class="fit-score" id="fitScore">B+</div>
+          </div>
+          <div class="fit-factors" id="fitFactors"></div>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button class="action-btn secondary" onclick="closeModal()">Close</button>
+        <button class="action-btn secondary" id="modalStarBtn" onclick="toggleStarModal()">⭐ Watchlist</button>
+        <button class="action-btn primary" id="modalDraftBtn" onclick="draftFromModal()" style="display: none;">Draft Player</button>
+      </div>
+    </div>
+  </div>
+
+<script>
+// Team data with colors and abbreviations for logos
+const TEAM_DATA = {
+  "Raiders": {abbr: "LV", color: "#000000", color2: "#A5ACAF"},
+  "Jets": {abbr: "NYJ", color: "#125740", color2: "#000000"},
+  "Cardinals": {abbr: "ARI", color: "#97233F", color2: "#000000"},
+  "Titans": {abbr: "TEN", color: "#4B92DB", color2: "#0C2340"},
+  "Giants": {abbr: "NYG", color: "#0B2265", color2: "#A71930"},
+  "Browns": {abbr: "CLE", color: "#311D00", color2: "#FF3C00"},
+  "Commanders": {abbr: "WAS", color: "#5A1414", color2: "#FFB612"},
+  "Saints": {abbr: "NO", color: "#D3BC8D", color2: "#101820"},
+  "Chiefs": {abbr: "KC", color: "#E31837", color2: "#FFB81C"},
+  "Bengals": {abbr: "CIN", color: "#FB4F14", color2: "#000000"},
+  "Dolphins": {abbr: "MIA", color: "#008E97", color2: "#FC4C02"},
+  "Cowboys": {abbr: "DAL", color: "#003594", color2: "#869397"},
+  "Rams": {abbr: "LAR", color: "#003594", color2: "#FFA300"},
+  "Ravens": {abbr: "BAL", color: "#241773", color2: "#9E7C0C"},
+  "Buccaneers": {abbr: "TB", color: "#D50A0A", color2: "#34302B"},
+  "Falcons": {abbr: "ATL", color: "#A71930", color2: "#000000"},
+  "Lions": {abbr: "DET", color: "#0076B6", color2: "#B0B7BC"},
+  "Vikings": {abbr: "MIN", color: "#4F2683", color2: "#FFC62F"},
+  "Panthers": {abbr: "CAR", color: "#0085CA", color2: "#101820"},
+  "Jaguars": {abbr: "JAX", color: "#006778", color2: "#D7A22A"},
+  "Steelers": {abbr: "PIT", color: "#FFB612", color2: "#101820"},
+  "Chargers": {abbr: "LAC", color: "#0080C6", color2: "#FFC20E"},
+  "Eagles": {abbr: "PHI", color: "#004C54", color2: "#A5ACAF"},
+  "Colts": {abbr: "IND", color: "#002C5F", color2: "#A2AAAD"},
+  "Bears": {abbr: "CHI", color: "#0B162A", color2: "#C83803"},
+  "Bills": {abbr: "BUF", color: "#00338D", color2: "#C60C30"},
+  "49ers": {abbr: "SF", color: "#AA0000", color2: "#B3995D"},
+  "Texans": {abbr: "HOU", color: "#03202F", color2: "#A71930"},
+  "Packers": {abbr: "GB", color: "#203731", color2: "#FFB612"},
+  "Patriots": {abbr: "NE", color: "#002244", color2: "#C60C30"},
+  "Broncos": {abbr: "DEN", color: "#FB4F14", color2: "#002244"},
+  "Seahawks": {abbr: "SEA", color: "#002244", color2: "#69BE28"}
+};
+
+// College abbreviations and colors
+const COLLEGE_DATA = {
+  "Indiana": {abbr: "IU", color: "#990000"},
+  "Ohio State": {abbr: "OSU", color: "#BB0000"},
+  "Miami (FL)": {abbr: "MIA", color: "#F47321"},
+  "Clemson": {abbr: "CLEM", color: "#F56600"},
+  "Arizona State": {abbr: "ASU", color: "#8C1D40"},
+  "Notre Dame": {abbr: "ND", color: "#0C2340"},
+  "Tennessee": {abbr: "TENN", color: "#FF8200"},
+  "USC": {abbr: "USC", color: "#990000"},
+  "Auburn": {abbr: "AUB", color: "#0C2340"},
+  "Utah": {abbr: "UTAH", color: "#CC0000"},
+  "Penn State": {abbr: "PSU", color: "#041E42"},
+  "Alabama": {abbr: "BAMA", color: "#9E1B32"},
+  "Oregon": {abbr: "ORE", color: "#154733"},
+  "Texas A&M": {abbr: "A&M", color: "#500000"},
+  "Washington": {abbr: "UW", color: "#4B2E83"},
+  "Georgia": {abbr: "UGA", color: "#BA0C2F"},
+  "LSU": {abbr: "LSU", color: "#461D7C"},
+  "NC State": {abbr: "NCST", color: "#CC0000"},
+  "Florida": {abbr: "UF", color: "#0021A5"},
+  "South Carolina": {abbr: "SCAR", color: "#73000A"},
+  "Texas": {abbr: "TEX", color: "#BF5700"},
+  "Arizona": {abbr: "ARIZ", color: "#CC0033"},
+  "Missouri": {abbr: "MIZZ", color: "#F1B82D"},
+  "Iowa": {abbr: "IOWA", color: "#FFCD00"},
+  "Vanderbilt": {abbr: "VAND", color: "#866D4B"},
+  "Iowa State": {abbr: "ISU", color: "#C8102E"},
+  "Florida St": {abbr: "FSU", color: "#782F40"},
+  "Colorado": {abbr: "COLO", color: "#CFB87C"},
+  "Texas Tech": {abbr: "TTU", color: "#CC0000"},
+  "Purdue": {abbr: "PUR", color: "#CEB888"},
+  "Illinois": {abbr: "ILL", color: "#E84A27"},
+  "Ole Miss": {abbr: "MISS", color: "#14213D"},
+  "Louisville": {abbr: "LOU", color: "#AD0000"},
+  "Oklahoma": {abbr: "OU", color: "#841617"},
+  "Stanford": {abbr: "STAN", color: "#8C1515"},
+  "Virginia": {abbr: "UVA", color: "#232D4B"},
+  "Kentucky": {abbr: "UK", color: "#0033A0"},
+  "Georgia So.": {abbr: "GASO", color: "#041E42"},
+  "N. Dakota St": {abbr: "NDSU", color: "#006633"},
+  "San Diego St": {abbr: "SDSU", color: "#A6192E"},
+  "Cincinnati": {abbr: "CIN", color: "#E00122"},
+  "California": {abbr: "CAL", color: "#003262"},
+  "Houston": {abbr: "UH", color: "#C8102E"},
+  "UTEP": {abbr: "UTEP", color: "#FF8200"},
+  "UConn": {abbr: "CONN", color: "#000E2F"},
+  "UCLA": {abbr: "UCLA", color: "#2D68C4"},
+  "Colorado St": {abbr: "CSU", color: "#1E4D2B"}
+};
+
+// Helper to create team logo element
+function getTeamLogo(teamName, size = 28) {
+  const team = TEAM_DATA[teamName];
+  if (!team) return `<div style="width:${size}px;height:${size}px;background:#333;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:${size/3}px;font-weight:700;color:#fff;">?</div>`;
+  return `<div style="width:${size}px;height:${size}px;background:linear-gradient(135deg,${team.color} 60%,${team.color2} 100%);border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:${size/3.5}px;font-weight:700;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,0.5);">${team.abbr}</div>`;
+}
+
+// Helper to create college logo element
+function getCollegeLogo(school, size = 40) {
+  const college = COLLEGE_DATA[school];
+  if (!college) return `<div style="width:${size}px;height:${size}px;background:#333;border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:${size/4}px;font-weight:700;color:#fff;">${school.substring(0,3).toUpperCase()}</div>`;
+  return `<div style="width:${size}px;height:${size}px;background:${college.color};border-radius:6px;display:flex;align-items:center;justify-content:center;font-size:${size/4}px;font-weight:700;color:#fff;text-shadow:0 1px 2px rgba(0,0,0,0.5);">${college.abbr}</div>`;
+}
+
+// Big Board (top 50 for brevity, full 100 in production)
+const bigBoard = [
+  {rank:1,name:"Fernando Mendoza",pos:"QB",school:"Indiana",birthday:"Oct 1, 2004",height:"6-3",weight:218,rangeHigh:1,rangeLow:3,archetype:"Franchise Passer",strengths:"Heisman winner; elite processor; 73% completion.",weaknesses:"Thin frame; limited mobility.",fits:"Raiders, Giants, Browns"},
+  {rank:2,name:"Arvell Reese",pos:"LB",school:"Ohio State",birthday:"May 12, 2004",height:"6-3",weight:225,rangeHigh:2,rangeLow:10,archetype:"Hybrid Defender",strengths:"Elite speed; violent hitter; 6.5 sacks.",weaknesses:"One-year wonder; raw diagnosing.",fits:"Jets, Giants, Commanders"},
+  {rank:3,name:"Rueben Bain Jr.",pos:"EDGE",school:"Miami (FL)",birthday:"Mar 20, 2004",height:"6-4",weight:250,rangeHigh:3,rangeLow:15,archetype:"Power Rusher",strengths:"Pro-ready strength; violent hands.",weaknesses:"Lacks ideal length; calf injury.",fits:"Titans, Cardinals, Bears"},
+  {rank:4,name:"Caleb Downs",pos:"S",school:"Ohio State",birthday:"Dec 30, 2004",height:"6-0",weight:195,rangeHigh:3,rangeLow:12,archetype:"Ball-hawk",strengths:"Generational instincts; 107 tackles.",weaknesses:"Undersized; over-aggressive.",fits:"Commanders, Eagles, Rams"},
+  {rank:5,name:"Peter Woods",pos:"DL",school:"Clemson",birthday:"Mar 5, 2005",height:"6-3",weight:295,rangeHigh:4,rangeLow:18,archetype:"3-Tech Penetrator",strengths:"Exceptional agility; high-motor.",weaknesses:"Gap discipline; struggles vs doubles.",fits:"Chiefs, Chargers, Vikings"},
+  {rank:6,name:"Francis Mauigoa",pos:"OT",school:"Miami (FL)",birthday:"Jan 27, 2005",height:"6-6",weight:315,rangeHigh:5,rangeLow:15,archetype:"Brick Wall",strengths:"Massive frame; dominant run blocker.",weaknesses:"Heavy-footed vs speed rushers.",fits:"Cardinals, Patriots, Dolphins"},
+  {rank:7,name:"Jordyn Tyson",pos:"WR",school:"Arizona State",birthday:"Nov 2, 2004",height:"6-1",weight:195,rangeHigh:6,rangeLow:20,archetype:"Route Technician",strengths:"Elite YAC; suddenness at break.",weaknesses:"ACL history; small frame.",fits:"Giants, Bills, Panthers"},
+  {rank:8,name:"Jeremiyah Love",pos:"RB",school:"Notre Dame",birthday:"Nov 19, 2004",height:"5-11",weight:205,rangeHigh:8,rangeLow:25,archetype:"Workhorse",strengths:"Home-run speed; natural hands; 6.9 YPC.",weaknesses:"Pass-pro technique needs work.",fits:"Saints, Cowboys, Buccaneers"},
+  {rank:9,name:"Jermod McCoy",pos:"CB",school:"Tennessee",birthday:"Aug 11, 2005",height:"6-1",weight:190,rangeHigh:8,rangeLow:22,archetype:"Lockdown Corner",strengths:"Elite man coverage; sticky press.",weaknesses:"Patience vs inside releases.",fits:"Dolphins, Jaguars, Falcons"},
+  {rank:10,name:"Makai Lemon",pos:"WR",school:"USC",birthday:"May 18, 2005",height:"5-10",weight:185,rangeHigh:10,rangeLow:28,archetype:"Slot Playmaker",strengths:"Tough; wins with route nuance.",weaknesses:"Slot size; lacks vertical gear.",fits:"Ravens, Bills, Commanders"},
+  {rank:11,name:"Keldric Faulk",pos:"EDGE",school:"Auburn",birthday:"Jun 22, 2004",height:"6-6",weight:285,rangeHigh:8,rangeLow:24,archetype:"High-motor End",strengths:"Prototypical length; high upside.",weaknesses:"Raw rush plan; needs counters.",fits:"Cowboys, Dolphins, Steelers"},
+  {rank:12,name:"Carnell Tate",pos:"WR",school:"Ohio State",birthday:"Jan 15, 2005",height:"6-2",weight:190,rangeHigh:10,rangeLow:30,archetype:"X-Receiver",strengths:"Large catch radius; high-point.",weaknesses:"Lacks elite speed; needs bulk.",fits:"Browns, Ravens, Chiefs"},
+  {rank:13,name:"Spencer Fano",pos:"OT",school:"Utah",birthday:"Feb 14, 2005",height:"6-5",weight:305,rangeHigh:10,rangeLow:28,archetype:"Athletic LT",strengths:"Elite movement; technician.",weaknesses:"Short arms; may move to guard.",fits:"Rams, Cowboys, Browns"},
+  {rank:14,name:"Sonny Styles",pos:"LB",school:"Ohio State",birthday:"Nov 24, 2004",height:"6-4",weight:225,rangeHigh:12,rangeLow:32,archetype:"Hybrid Defender",strengths:"Size/speed; versatile LB/S.",weaknesses:"Bites on play-action.",fits:"Falcons, Steelers, Buccaneers"},
+  {rank:15,name:"Olaivavega Ioane",pos:"IOL",school:"Penn State",birthday:"Dec 5, 2003",height:"6-4",weight:320,rangeHigh:14,rangeLow:35,archetype:"Mobile Guard",strengths:"Dominant run blocker; athletic.",weaknesses:"Inconsistent pad level.",fits:"Chargers, 49ers, Bills"},
+  {rank:16,name:"Ty Simpson",pos:"QB",school:"Alabama",birthday:"Nov 20, 2004",height:"6-2",weight:210,rangeHigh:12,rangeLow:40,archetype:"Pocket Processor",strengths:"Quick processing; accurate.",weaknesses:"Limited reps; struggles OOS.",fits:"Steelers, Seahawks, Falcons"},
+  {rank:17,name:"Kenyon Sadiq",pos:"TE",school:"Oregon",birthday:"Sep 2, 2005",height:"6-5",weight:245,rangeHigh:15,rangeLow:38,archetype:"Move-TE",strengths:"Dynamic mismatch; WR moves.",weaknesses:"Undersized inline; raw blocker.",fits:"Eagles, Lions, Bengals"},
+  {rank:18,name:"Avieon Terrell",pos:"CB",school:"Clemson",birthday:"Dec 10, 2004",height:"5-11",weight:185,rangeHigh:16,rangeLow:36,archetype:"Boundary DB",strengths:"Sticky coverage; elite man traits.",weaknesses:"Smaller frame; physical WRs.",fits:"Vikings, Panthers, Packers"},
+  {rank:19,name:"Kadyn Proctor",pos:"OT",school:"Alabama",birthday:"Jun 15, 2005",height:"6-7",weight:369,rangeHigh:15,rangeLow:40,archetype:"Power Run Blocker",strengths:"Massive; light feet for size.",weaknesses:"Technical vs elite speed.",fits:"Lions, Commanders, Jets"},
+  {rank:20,name:"Kayden McDonald",pos:"DL",school:"Ohio State",birthday:"Oct 22, 2004",height:"6-3",weight:326,rangeHigh:18,rangeLow:38,archetype:"Interior Anchor",strengths:"Powerful; immovable at POA.",weaknesses:"Limited rush; lacks range.",fits:"Bears, Texans, Eagles"},
+  {rank:21,name:"Cashius Howell",pos:"EDGE",school:"Texas A&M",birthday:"Apr 18, 2004",height:"6-4",weight:245,rangeHigh:18,rangeLow:42,archetype:"Bendy Rusher",strengths:"Elite flexibility; dips under.",weaknesses:"Weight; displaced by power.",fits:"Panthers, Seahawks, Steelers"},
+  {rank:22,name:"Denzel Boston",pos:"WR",school:"Washington",birthday:"Oct 31, 2004",height:"6-4",weight:215,rangeHigh:20,rangeLow:45,archetype:"Redzone Threat",strengths:"Massive catch radius.",weaknesses:"Lacks separation speed.",fits:"Jets, Texans, Broncos"},
+  {rank:23,name:"Caleb Lomu",pos:"OT",school:"Utah",birthday:"Mar 14, 2005",archetype:"Developmental",strengths:"Exceptional frame; athletic.",weaknesses:"Needs mass; raw anchor.",fits:"Browns, Vikings, Raiders"},
+  {rank:24,name:"Kevin Concepcion",pos:"WR",school:"Texas A&M",birthday:"Sep 24, 2004",archetype:"Technician",strengths:"Polished routes; elite production.",weaknesses:"Small frame vs press.",fits:"Bills, Cowboys, Packers"},
+  {rank:25,name:"C.J. Allen",pos:"LB",school:"Georgia",birthday:"Feb 11, 2005",archetype:"Thumper",strengths:"High IQ; natural leader.",weaknesses:"Range in man coverage.",fits:"Patriots, Seahawks, Cowboys"},
+  {rank:26,name:"Garrett Nussmeier",pos:"QB",school:"LSU",birthday:"Oct 1, 2003",archetype:"Gun-slinger",strengths:"Strong arm; fearless.",weaknesses:"Turnover prone under pressure.",fits:"Saints, Steelers, Titans"},
+  {rank:27,name:"T.J. Parker",pos:"EDGE",school:"Clemson",birthday:"Apr 2, 2004",archetype:"Power Rusher",strengths:"Violent bull rush; motor.",weaknesses:"Average get-off speed.",fits:"Eagles, Jaguars, Falcons"},
+  {rank:28,name:"Brandon Cisse",pos:"CB",school:"NC State",birthday:"Nov 5, 2004",archetype:"Speed Corner",strengths:"Blazing recovery; athlete.",weaknesses:"Raw technique.",fits:"Seahawks, Rams, Commanders"},
+  {rank:29,name:"Caleb Banks",pos:"DL",school:"Florida",birthday:"Nov 12, 2004",archetype:"Interior Wall",strengths:"Massive (6-6, 325); immovable.",weaknesses:"Lacks lateral agility.",fits:"Bears, Patriots, Rams"},
+  {rank:30,name:"Colton Hood",pos:"CB",school:"Tennessee",birthday:"Jan 1, 2005",archetype:"Boundary DB",strengths:"Aggressive; high IQ; sticky.",weaknesses:"Average recovery speed.",fits:"Jaguars, Colts, Falcons"},
+  {rank:31,name:"Harold Perkins Jr.",pos:"LB",school:"LSU",birthday:"Sep 4, 2004",archetype:"Hybrid Speed",strengths:"Elite speed; violent blitzer.",weaknesses:"Position fit; raw in zone.",fits:"Seahawks, Broncos, Giants"},
+  {rank:32,name:"Deontae Lawson",pos:"LB",school:"Alabama",birthday:"Feb 14, 2003",archetype:"Thumper",strengths:"High IQ; tackle efficiency.",weaknesses:"Lacks recovery speed.",fits:"Cowboys, Bills, Ravens"},
+  {rank:33,name:"Drew Allar",pos:"QB",school:"Penn State",birthday:"Mar 8, 2004",archetype:"Pocket Processor",strengths:"Massive arm; prototype build.",weaknesses:"Inconsistent under pressure.",fits:"Browns, Jets, Steelers"},
+  {rank:34,name:"Cade Klubnik",pos:"QB",school:"Clemson",birthday:"Oct 10, 2003",archetype:"Playmaker",strengths:"Athletic; accurate; leader.",weaknesses:"Lacks deep arm strength.",fits:"Dolphins, Titans, Giants"},
+  {rank:35,name:"LaNorris Sellers",pos:"QB",school:"South Carolina",birthday:"Jan 1, 2005",archetype:"Dual-threat",strengths:"Cam Newton build; elite arm.",weaknesses:"Raw mechanics; reads.",fits:"Panthers, Falcons, Broncos"},
+  {rank:36,name:"Isaiah World",pos:"OT",school:"Oregon",birthday:"Jan 1, 2004",archetype:"Anchor LT",strengths:"Elite length (6-8); light feet.",weaknesses:"Needs mass for anchor.",fits:"Raiders, Commanders, Dolphins"},
+  {rank:37,name:"Antonio Williams",pos:"WR",school:"Clemson",birthday:"Jan 1, 2005",archetype:"Slot Playmaker",strengths:"Elite agility; reliable hands.",weaknesses:"Limited vertical; slot only.",fits:"Chiefs, Lions, Bills"},
+  {rank:38,name:"Zachariah Branch",pos:"WR",school:"USC",birthday:"Mar 29, 2004",archetype:"Speed Threat",strengths:"Olympic speed; elite return.",weaknesses:"Undersized for X role.",fits:"Eagles, Dolphins, Bengals"},
+  {rank:39,name:"Chris Bell",pos:"WR",school:"Louisville",birthday:"Jan 1, 2005",archetype:"Physical WR",strengths:"Physical hands; redzone.",weaknesses:"Lacks separation gear.",fits:"Steelers, Jaguars, Giants"},
+  {rank:40,name:"Tacario Davis",pos:"CB",school:"Arizona",birthday:"Jan 1, 2005",archetype:"Lockdown",strengths:"Elite length (6-4); press.",weaknesses:"Shifty WRs; penalty prone.",fits:"Colts, Vikings, Packers"},
+  {rank:41,name:"Jalon Kilgore",pos:"CB",school:"South Carolina",birthday:"Jan 1, 2005",archetype:"Boundary DB",strengths:"Aggressive; high IQ; sticky.",weaknesses:"Average recovery speed.",fits:"Jaguars, Falcons, Saints"},
+  {rank:42,name:"Trevor Goosby",pos:"OT",school:"Texas",birthday:"Jan 1, 2005",archetype:"Anchor LT",strengths:"Elite build (6-7); ceiling.",weaknesses:"Technical polish needed.",fits:"Dolphins, Patriots, Texans"},
+  {rank:43,name:"Eric Singleton Jr.",pos:"WR",school:"Auburn",birthday:"Jan 1, 2005",archetype:"Vertical Threat",strengths:"Blazing speed; field stretcher.",weaknesses:"Route tree refinement.",fits:"Lions, Cowboys, Bills"},
+  {rank:44,name:"Dillon Thieneman",pos:"S",school:"Oregon",birthday:"Jan 1, 2006",archetype:"Centerfield",strengths:"Elite ball production; range.",weaknesses:"Undersized for box duty.",fits:"Packers, Rams, Bengals"},
+  {rank:45,name:"Cayden Green",pos:"OT",school:"Missouri",birthday:"Jan 1, 2005",archetype:"Versatile",strengths:"G/T flexibility; size/power.",weaknesses:"Foot quickness vs speed.",fits:"Patriots, Texans, Bears"},
+  {rank:46,name:"Logan Jones",pos:"C",school:"Iowa",birthday:"Jan 1, 2004",archetype:"Anchor C",strengths:"Elite power; technically sound.",weaknesses:"Shorter arms; reach issues.",fits:"Cowboys, Bills, Bengals"},
+  {rank:47,name:"Kylan Rutledge",pos:"IOL",school:"Georgia So.",birthday:"Jan 1, 2004",archetype:"Pulling Guard",strengths:"Athletic mover; physical.",weaknesses:"Competition level jump.",fits:"Texans, Bears, Steelers"},
+  {rank:48,name:"Cole Wisniewski",pos:"IOL",school:"N. Dakota St",birthday:"Jan 1, 2004",archetype:"Interior Anchor",strengths:"PFF's highest graded IOL.",weaknesses:"Small school concerns.",fits:"Cowboys, Giants, Rams"},
+  {rank:49,name:"Eli Stowers",pos:"TE",school:"Vanderbilt",birthday:"Jan 1, 2004",archetype:"Move TE",strengths:"Elite athlete; mismatch.",weaknesses:"Raw blocker; gadget history.",fits:"Patriots, Chargers, Chiefs"},
+  {rank:50,name:"Domonique Orange",pos:"DL",school:"Iowa State",birthday:"Jan 1, 2005",archetype:"Interior Anchor",strengths:"Powerful; immovable; stopper.",weaknesses:"Limited rush utility.",fits:"Bears, Texans, Eagles"},
+  {rank:51,name:"Austin Barber",pos:"OT",school:"Florida",birthday:"Jan 1, 2004",archetype:"Anchor LT",strengths:"Elite length; powerful hands.",weaknesses:"Heavy feet; speed concerns.",fits:"Raiders, Patriots"},
+  {rank:52,name:"Darrell Jackson Jr.",pos:"DL",school:"Florida St",birthday:"Jan 1, 2003",archetype:"Interior Wall",strengths:"Massive height/length; 325 lbs.",weaknesses:"Limited pass-rush utility.",fits:"Bears, Rams"},
+  {rank:53,name:"DJ McKinney",pos:"CB",school:"Colorado",birthday:"Jan 1, 2005",archetype:"Speed Corner",strengths:"Fluid hips; elite recovery.",weaknesses:"Thin frame; over-aggressive.",fits:"Vikings, Colts"},
+  {rank:54,name:"Mansoor Delane",pos:"CB",school:"LSU",birthday:"Jan 1, 2004",archetype:"Lockdown",strengths:"Savvy in zone; ball production.",weaknesses:"Average top-end speed.",fits:"Saints, Packers"},
+  {rank:55,name:"Anthony Hill Jr.",pos:"LB",school:"Texas",birthday:"Jan 22, 2005",archetype:"Blitzing LB",strengths:"Elite blitzer; downhill power.",weaknesses:"Discipline in coverage.",fits:"Giants, Broncos"},
+  {rank:56,name:"Monroe Freeling",pos:"OT",school:"Georgia",birthday:"Jan 9, 2005",archetype:"Athletic LT",strengths:"High ceiling; great mobility.",weaknesses:"Raw technique; needs bulk.",fits:"Bills, 49ers"},
+  {rank:57,name:"Romello Height",pos:"EDGE",school:"Texas Tech",birthday:"Jan 1, 2002",archetype:"Technical",strengths:"Advanced hands; experience.",weaknesses:"Older; limited athletic growth.",fits:"Ravens, Commanders"},
+  {rank:58,name:"Gennings Dunker",pos:"OT",school:"Iowa",birthday:"Jan 1, 2004",archetype:"Power RT",strengths:"Elite run blocker; anchor.",weaknesses:"Movement in space concerns.",fits:"Seahawks, Saints"},
+  {rank:59,name:"Kamari Ramsey",pos:"S",school:"USC",birthday:"Jan 1, 2005",archetype:"Ball-hawk",strengths:"Elite IQ; versatile.",weaknesses:"Undersized for box duty.",fits:"Commanders, Rams"},
+  {rank:60,name:"Max Klare",pos:"TE",school:"Purdue",birthday:"Jan 1, 2005",archetype:"Move TE",strengths:"Reliable hands; vertical threat.",weaknesses:"Raw inline blocker.",fits:"Bengals, Lions"},
+  {rank:61,name:"Joshua Josephs",pos:"EDGE",school:"Tennessee",birthday:"Jan 1, 2004",archetype:"Speed Rusher",strengths:"Explosive athlete; long arms.",weaknesses:"Inconsistent run anchor.",fits:"Chiefs, Falcons"},
+  {rank:62,name:"Dani Dennis-Sutton",pos:"EDGE",school:"Penn State",birthday:"Jan 1, 2004",archetype:"Power End",strengths:"Prototypical size; bull rush.",weaknesses:"Finishing at the QB.",fits:"Eagles, Browns"},
+  {rank:63,name:"Gabe Jacas",pos:"EDGE",school:"Illinois",birthday:"Jan 1, 2004",archetype:"Technical",strengths:"Strong hands; high motor.",weaknesses:"Lacks elite twitch/speed.",fits:"Texans, Giants"},
+  {rank:64,name:"Christen Miller",pos:"DL",school:"Georgia",birthday:"Mar 17, 2004",archetype:"Gap Disrupter",strengths:"First-step burst; penetrator.",weaknesses:"Anchoring vs doubles.",fits:"Seahawks, Texans"},
+  {rank:65,name:"Colton Hood",pos:"CB",school:"Tennessee",birthday:"Jan 1, 2005",archetype:"Boundary DB",strengths:"Aggressive press; high IQ.",weaknesses:"Average recovery gear.",fits:"Jaguars, Falcons"},
+  {rank:66,name:"Akheem Mesidor",pos:"EDGE",school:"Miami (FL)",birthday:"Feb 17, 2002",archetype:"Technician",strengths:"Diverse rush moves; motor.",weaknesses:"Age; limited physical growth.",fits:"Lions, Steelers"},
+  {rank:67,name:"Emmanuel Pregnon",pos:"IOL",school:"Oregon",birthday:"Oct 15, 2003",archetype:"Road Grader",strengths:"Elite strength; run mauler.",weaknesses:"Second-level targeting.",fits:"Texans, Chargers"},
+  {rank:68,name:"R Mason Thomas",pos:"EDGE",school:"Oklahoma",birthday:"Jan 1, 2005",archetype:"Speed Rusher",strengths:"Elite get-off; bendy.",weaknesses:"Struggles vs power run.",fits:"Browns, Eagles"},
+  {rank:69,name:"Chris Johnson",pos:"CB",school:"San Diego St",birthday:"Aug 25, 2004",archetype:"Physical DB",strengths:"Sticky press-man; tackler.",weaknesses:"Penalty prone; over-grabby.",fits:"Jets, Steelers"},
+  {rank:70,name:"Michael Trigg",pos:"TE",school:"Ole Miss",birthday:"Jan 1, 2004",archetype:"Hybrid",strengths:"Elite catch radius; mismatch.",weaknesses:"Effort/consistency issues.",fits:"Chiefs, Patriots"},
+  {rank:71,name:"Justin Joly",pos:"TE",school:"NC State",birthday:"Jan 1, 2005",archetype:"Slot TE",strengths:"Dynamic routes; high point.",weaknesses:"Purely a move projection.",fits:"Lions, Cowboys"},
+  {rank:72,name:"Joe Royer",pos:"TE",school:"Cincinnati",birthday:"Jan 1, 2004",archetype:"Move TE",strengths:"Toughness; reliable hands.",weaknesses:"Lacks elite separation.",fits:"Bengals, Titans"},
+  {rank:73,name:"Jack Endries",pos:"TE",school:"California",birthday:"Jan 1, 2005",archetype:"Dependable",strengths:"High floor; effective blocker.",weaknesses:"Limited athletic ceiling.",fits:"Bills, Rams"},
+  {rank:74,name:"Oscar Delp",pos:"TE",school:"Georgia",birthday:"Jan 1, 2005",archetype:"Vertical",strengths:"High athletic score; mismatch.",weaknesses:"Needs reps as primary target.",fits:"Cowboys, Packers"},
+  {rank:75,name:"Eli Raridon",pos:"TE",school:"Notre Dame",birthday:"Jan 1, 2005",archetype:"Prototype",strengths:"6-7 build; light feet.",weaknesses:"Multi-ACL injury history.",fits:"Raiders, Commanders"},
+  {rank:76,name:"Tanner Koziol",pos:"TE",school:"Houston",birthday:"Jan 1, 2005",archetype:"Move TE",strengths:"Redzone specialist; wingspan.",weaknesses:"Inconsistent inline.",fits:"Vikings, Chargers"},
+  {rank:77,name:"Dallen Bentley",pos:"TE",school:"UTEP",birthday:"Jan 1, 2004",archetype:"Playmaker",strengths:"Elite speed for TE; dynamic.",weaknesses:"Competition level jump.",fits:"Seahawks, Saints"},
+  {rank:78,name:"Elijah Sarratt",pos:"WR",school:"Indiana",birthday:"Jan 1, 2005",archetype:"Technical",strengths:"Production; polished routes.",weaknesses:"Lacks top-end vertical speed.",fits:"Giants, Jaguars"},
+  {rank:79,name:"Germie Bernard",pos:"WR",school:"Alabama",birthday:"Jan 1, 2005",archetype:"Deep Threat",strengths:"Sudden speed; tracking.",weaknesses:"Struggles vs physical press.",fits:"Bills, Chiefs"},
+  {rank:80,name:"Chris Brazzell",pos:"WR",school:"Tennessee",birthday:"Jan 1, 2005",archetype:"X-Receiver",strengths:"Elite catch radius; win-rate.",weaknesses:"Needs route tree expansion.",fits:"Browns, Steelers"},
+  {rank:81,name:"Ja'Kobi Lane",pos:"WR",school:"USC",birthday:"Jan 1, 2006",archetype:"Tall X",strengths:"Mismatch at 6-4; body control.",weaknesses:"Needs more mass/strength.",fits:"Panthers, Jets"},
+  {rank:82,name:"Omar Cooper Jr.",pos:"WR",school:"Indiana",birthday:"Jan 1, 2005",archetype:"Vertical",strengths:"Explosive burst; YAC.",weaknesses:"Refinement on breaks.",fits:"Commanders, Falcons"},
+  {rank:83,name:"Malachi Fields",pos:"WR",school:"Virginia",birthday:"Jan 1, 2004",archetype:"Physical WR",strengths:"Jump ball specialist; stout.",weaknesses:"Limited separation speed.",fits:"Titans, Saints"},
+  {rank:84,name:"Skyler Bell",pos:"WR",school:"UConn",birthday:"Jan 1, 2004",archetype:"Slot",strengths:"Technical; reliable chain-mover.",weaknesses:"Size caps outside utility.",fits:"Cowboys, Bills"},
+  {rank:85,name:"C.J. Daniels",pos:"WR",school:"LSU",birthday:"Jan 1, 2004",archetype:"Deep Ball",strengths:"Track speed; vertical timing.",weaknesses:"Intermediate route polish.",fits:"Bengals, Cardinals"},
+  {rank:86,name:"Deion Burks",pos:"WR",school:"Oklahoma",birthday:"Jan 1, 2004",archetype:"Quick Slot",strengths:"Devastating quickness; sudden.",weaknesses:"Drops and size concerns.",fits:"Lions, Eagles"},
+  {rank:87,name:"Elic Ayomanor",pos:"WR",school:"Stanford",birthday:"Nov 15, 2004",archetype:"Physical X",strengths:"Elite hands; stout build.",weaknesses:"Injury history; lacks vertical.",fits:"Patriots, Raiders"},
+  {rank:88,name:"Tory Horton",pos:"WR",school:"Colorado St",birthday:"Jan 1, 2002",archetype:"Prolific",strengths:"High production; savvy routes.",weaknesses:"Older; G5 competition level.",fits:"Steelers, Rams"},
+  {rank:89,name:"Pat Bryant",pos:"WR",school:"Illinois",birthday:"Jan 1, 2003",archetype:"Redzone",strengths:"Jump-ball win rate; size.",weaknesses:"Route tree refinement.",fits:"Giants, Jaguars"},
+  {rank:90,name:"Xavier Restrepo",pos:"WR",school:"Miami (FL)",birthday:"Jan 1, 2002",archetype:"Slot",strengths:"Toughest WR in draft; reliable.",weaknesses:"Lacks NFL athletic measurables.",fits:"Dolphins, Bills"},
+  {rank:91,name:"Tez Johnson",pos:"WR",school:"Oregon",birthday:"Jan 1, 2002",archetype:"Satellite",strengths:"Blazing speed; suddenness.",weaknesses:"Major weight/size concerns.",fits:"Commanders, Seahawks"},
+  {rank:92,name:"J. Michael Sturdivant",pos:"WR",school:"UCLA",birthday:"Jan 1, 2003",archetype:"Vertical",strengths:"4.3 speed; elite length.",weaknesses:"Production inconsistency.",fits:"Colts, Packers"},
+  {rank:93,name:"Antwane Wells Jr.",pos:"WR",school:"Ole Miss",birthday:"Jan 1, 2002",archetype:"YAC Threat",strengths:"Strength after catch; physical.",weaknesses:"Foot injury history.",fits:"Buccaneers, Texans"},
+  {rank:94,name:"Konner Moore",pos:"WR",school:"Arizona",birthday:"Jan 1, 2005",archetype:"Slot",strengths:"Agility; reliable hands.",weaknesses:"Limited separation vs press.",fits:"Vikings, Bears"},
+  {rank:95,name:"KeAndre Lambert-Smith",pos:"WR",school:"Auburn",birthday:"Jan 1, 2002",archetype:"Speed",strengths:"Vertical threat; experience.",weaknesses:"Drop rate concerns.",fits:"Saints, Cardinals"},
+  {rank:96,name:"Silas Bolden",pos:"WR",school:"Texas",birthday:"Jan 1, 2005",archetype:"Speed",strengths:"Return ability; twitch.",weaknesses:"Purely gadget/special teams.",fits:"Raiders, Panthers"},
+  {rank:97,name:"Matthew Golden",pos:"WR",school:"Texas",birthday:"Jan 1, 2005",archetype:"Technical",strengths:"Strong routes; dependable.",weaknesses:"Limited athletic upside.",fits:"Bengals, Rams"},
+  {rank:98,name:"Isaiah Bond",pos:"WR",school:"Texas",birthday:"Mar 15, 2004",archetype:"Vertical",strengths:"Elite vertical gear; sudden.",weaknesses:"Size; production drop-off.",fits:"Commanders, Cowboys"},
+  {rank:99,name:"Barion Brown",pos:"WR",school:"Kentucky",birthday:"Jan 1, 2005",archetype:"World Class",strengths:"Olympic speed; return ace.",weaknesses:"Very raw; route tree polish.",fits:"Falcons, Dolphins"},
+  {rank:100,name:"Squirrel White",pos:"WR",school:"Tennessee",birthday:"Jan 1, 2005",archetype:"Speed",strengths:"Blazing slot; field stretcher.",weaknesses:"Size makes him slot-only.",fits:"Chiefs, Lions"}
+];
+
+// Add default height/weight/range for players missing them
+const defaultsByPos = {
+  QB: {height:"6-2",weight:215}, RB: {height:"5-10",weight:210}, WR: {height:"6-1",weight:195},
+  TE: {height:"6-4",weight:250}, OT: {height:"6-5",weight:310}, IOL: {height:"6-3",weight:315},
+  C: {height:"6-3",weight:305}, DL: {height:"6-3",weight:300}, EDGE: {height:"6-4",weight:255},
+  LB: {height:"6-2",weight:235}, CB: {height:"6-0",weight:190}, S: {height:"6-1",weight:205}
+};
+bigBoard.forEach(p => {
+  if (!p.height) p.height = defaultsByPos[p.pos]?.height || "6-2";
+  if (!p.weight) p.weight = defaultsByPos[p.pos]?.weight || 220;
+  if (!p.rangeHigh) p.rangeHigh = Math.max(1, p.rank - Math.floor(p.rank * 0.3));
+  if (!p.rangeLow) p.rangeLow = Math.min(224, p.rank + Math.floor(p.rank * 0.4));
+});
+
+// Team needs for CPU logic - 2026 offseason (after 2025 season)
+const TEAM_NEEDS = {
+  "Raiders": ["QB","CB","EDGE","OT"],  // Fired Pete Carroll, need franchise QB since 2007
+  "Jets": ["QB","EDGE","DL","CB"],  // Traded Sauce Gardner & Quinnen Williams, full rebuild, no INTs all season
+  "Cardinals": ["QB","EDGE","CB","OT"],  // Parted with Gannon, Kyler Murray's future murky
+  "Titans": ["WR","CB","EDGE","OT"],  // Need weapons for Will Levis
+  "Giants": ["DL","OT","CB","LB"],  // Worst run defense (5.3 YPC allowed), have Jaxson Dart at QB
+  "Browns": ["QB","LB","WR","CB"],  // 42 different QBs since 1999, Devin Bush FA
+  "Commanders": ["CB","S","EDGE","DL"],  // Kam Curl, Cobie Durant, Roger McCreary all FAs
+  "Saints": ["WR","OT","CB","S"],  // Need weapons for Derek Carr, lost Devaughn Vele
+  "Chiefs": ["RB","WR","CB","EDGE"],  // Pacheco & Hunt FAs, bottom-3 in 10+ yard runs
+  "Bengals": ["S","IOL","CB","EDGE"],  // Geno Stone struggling, worst deep coverage in NFL
+  "Dolphins": ["QB","OT","EDGE","LB"],  // Tua benched, Quinn Ewers unimpressive
+  "Cowboys": ["CB","DL","S","EDGE"],  // Two 1st round picks, defense at bottom of league
+  "Rams": ["CB","OT","DL","S"],  // Avonte Maddox, Amik Robertson FAs
+  "Ravens": ["EDGE","WR","CB","OT"],  // Fired John Harbaugh, 4th-lowest pressure rate, 3rd-fewest sacks
+  "Buccaneers": ["LB","EDGE","CB","S"],  // Missed playoffs, Lavonte David FA
+  "Falcons": ["EDGE","CB","DL","LB"],  // Fired Raheem Morris again, no 1st rounder (traded to Rams)
+  "Lions": ["CB","EDGE","S","LB"],  // Arnold & Rakestraw injured, Maddox/Robertson/Ya-Sin FAs
+  "Vikings": ["CB","IOL","S","EDGE"],  // Secondary depth needed
+  "Panthers": ["EDGE","WR","CB","OT"],  // Need pass rush help for Bryce Young
+  "Jaguars": ["CB","WR","OT","DL"],  // No 1st rounder (traded to Browns), Travis Hunter out most of season
+  "Steelers": ["QB","WR","CB","OT"],  // Aaron Rodgers on 1-year deal, need long-term answer
+  "Chargers": ["OT","IOL","CB","DL"],  // Slater & Alt injuries, one of worst O-lines
+  "Eagles": ["CB","LB","S","EDGE"],  // Secondary needs help
+  "Colts": ["CB","EDGE","WR","OT"],  // No 1st rounder (traded to Jets)
+  "Bears": ["EDGE","DL","S","RB"],  // 29th in pressure rate, worst yards before contact allowed, Brisker/Byard FAs, need dynamic playmaker
+  "Bills": ["WR","CB","OT","TE"],  // Need weapons for Josh Allen, WR a consistent struggle
+  "49ers": ["EDGE","WR","OT","CB"],  // Last in sacks (20), Jennings & Bourne FAs, Aiyuk split looming
+  "Texans": ["OT","IOL","RB","CB"],  // One of worst O-lines, Ed Ingram FA, Mixon injury
+  "Packers": ["CB","DL","EDGE","S"],  // No 1st rounder (traded to Cowboys for Parsons)
+  "Patriots": ["OT","CB","WR","EDGE"],  // Building around Drake Maye
+  "Broncos": ["QB","CB","WR","OT"],  // Bo Nix broke ankle in playoffs
+  "Seahawks": ["CB","EDGE","DL","OT"]  // Secondary and pass rush needs
+};
+
+// Full 7-round draft order (224 picks, 32 per round)
+// Based on 2026 NFL Draft order from nfldraftbuzz.com
+const FULL_DRAFT_ORDER = [
+  // Round 1 (picks 1-32)
+  {overall:1,round:1,roundPick:1,team:"Raiders"},{overall:2,round:1,roundPick:2,team:"Jets"},{overall:3,round:1,roundPick:3,team:"Cardinals"},{overall:4,round:1,roundPick:4,team:"Titans"},
+  {overall:5,round:1,roundPick:5,team:"Giants"},{overall:6,round:1,roundPick:6,team:"Browns"},{overall:7,round:1,roundPick:7,team:"Commanders"},{overall:8,round:1,roundPick:8,team:"Saints"},
+  {overall:9,round:1,roundPick:9,team:"Chiefs"},{overall:10,round:1,roundPick:10,team:"Bengals"},{overall:11,round:1,roundPick:11,team:"Dolphins"},{overall:12,round:1,roundPick:12,team:"Cowboys"},
+  {overall:13,round:1,roundPick:13,team:"Rams"},{overall:14,round:1,roundPick:14,team:"Ravens"},{overall:15,round:1,roundPick:15,team:"Buccaneers"},{overall:16,round:1,roundPick:16,team:"Jets"},
+  {overall:17,round:1,roundPick:17,team:"Lions"},{overall:18,round:1,roundPick:18,team:"Vikings"},{overall:19,round:1,roundPick:19,team:"Panthers"},{overall:20,round:1,roundPick:20,team:"Cowboys"},
+  {overall:21,round:1,roundPick:21,team:"Steelers"},{overall:22,round:1,roundPick:22,team:"Chargers"},{overall:23,round:1,roundPick:23,team:"Eagles"},{overall:24,round:1,roundPick:24,team:"Browns"},
+  {overall:25,round:1,roundPick:25,team:"Bears"},{overall:26,round:1,roundPick:26,team:"Bills"},{overall:27,round:1,roundPick:27,team:"49ers"},{overall:28,round:1,roundPick:28,team:"Texans"},
+  {overall:29,round:1,roundPick:29,team:"Packers"},{overall:30,round:1,roundPick:30,team:"Patriots"},{overall:31,round:1,roundPick:31,team:"Broncos"},{overall:32,round:1,roundPick:32,team:"Seahawks"},
+  // Round 2 (picks 33-64)
+  {overall:33,round:2,roundPick:1,team:"Jets"},{overall:34,round:2,roundPick:2,team:"Raiders"},{overall:35,round:2,roundPick:3,team:"Titans"},{overall:36,round:2,roundPick:4,team:"Raiders"},
+  {overall:37,round:2,roundPick:5,team:"Cardinals"},{overall:38,round:2,roundPick:6,team:"Giants"},{overall:39,round:2,roundPick:7,team:"Browns"},{overall:40,round:2,roundPick:8,team:"Commanders"},
+  {overall:41,round:2,roundPick:9,team:"Saints"},{overall:42,round:2,roundPick:10,team:"Chiefs"},{overall:43,round:2,roundPick:11,team:"Dolphins"},{overall:44,round:2,roundPick:12,team:"Jets"},
+  {overall:45,round:2,roundPick:13,team:"Cowboys"},{overall:46,round:2,roundPick:14,team:"Bengals"},{overall:47,round:2,roundPick:15,team:"Buccaneers"},{overall:48,round:2,roundPick:16,team:"Falcons"},
+  {overall:49,round:2,roundPick:17,team:"Vikings"},{overall:50,round:2,roundPick:18,team:"Lions"},{overall:51,round:2,roundPick:19,team:"Panthers"},{overall:52,round:2,roundPick:20,team:"Packers"},
+  {overall:53,round:2,roundPick:21,team:"Jaguars"},{overall:54,round:2,roundPick:22,team:"Steelers"},{overall:55,round:2,roundPick:23,team:"Chargers"},{overall:56,round:2,roundPick:24,team:"Colts"},
+  {overall:57,round:2,roundPick:25,team:"Bears"},{overall:58,round:2,roundPick:26,team:"Eagles"},{overall:59,round:2,roundPick:27,team:"Bills"},{overall:60,round:2,roundPick:28,team:"49ers"},
+  {overall:61,round:2,roundPick:29,team:"Texans"},{overall:62,round:2,roundPick:30,team:"Patriots"},{overall:63,round:2,roundPick:31,team:"Broncos"},{overall:64,round:2,roundPick:32,team:"Seahawks"},
+  // Round 3 (picks 65-96)
+  {overall:65,round:3,roundPick:1,team:"Cardinals"},{overall:66,round:3,roundPick:2,team:"Titans"},{overall:67,round:3,roundPick:3,team:"Raiders"},{overall:68,round:3,roundPick:4,team:"Jets"},
+  {overall:69,round:3,roundPick:5,team:"Giants"},{overall:70,round:3,roundPick:6,team:"Browns"},{overall:71,round:3,roundPick:7,team:"Commanders"},{overall:72,round:3,roundPick:8,team:"Saints"},
+  {overall:73,round:3,roundPick:9,team:"Chiefs"},{overall:74,round:3,roundPick:10,team:"Bengals"},{overall:75,round:3,roundPick:11,team:"Dolphins"},{overall:76,round:3,roundPick:12,team:"Cowboys"},
+  {overall:77,round:3,roundPick:13,team:"Rams"},{overall:78,round:3,roundPick:14,team:"Ravens"},{overall:79,round:3,roundPick:15,team:"Falcons"},{overall:80,round:3,roundPick:16,team:"Buccaneers"},
+  {overall:81,round:3,roundPick:17,team:"Lions"},{overall:82,round:3,roundPick:18,team:"Vikings"},{overall:83,round:3,roundPick:19,team:"Panthers"},{overall:84,round:3,roundPick:20,team:"Packers"},
+  {overall:85,round:3,roundPick:21,team:"Jaguars"},{overall:86,round:3,roundPick:22,team:"Steelers"},{overall:87,round:3,roundPick:23,team:"Dolphins"},{overall:88,round:3,roundPick:24,team:"Colts"},
+  {overall:89,round:3,roundPick:25,team:"Bears"},{overall:90,round:3,roundPick:26,team:"Dolphins"},{overall:91,round:3,roundPick:27,team:"Chargers"},{overall:92,round:3,roundPick:28,team:"Bills"},
+  {overall:93,round:3,roundPick:29,team:"49ers"},{overall:94,round:3,roundPick:30,team:"Patriots"},{overall:95,round:3,roundPick:31,team:"Texans"},{overall:96,round:3,roundPick:32,team:"Seahawks"},
+  // Round 4 (picks 97-128)
+  {overall:97,round:4,roundPick:1,team:"Titans"},{overall:98,round:4,roundPick:2,team:"Raiders"},{overall:99,round:4,roundPick:3,team:"Jets"},{overall:100,round:4,roundPick:4,team:"Cardinals"},
+  {overall:101,round:4,roundPick:5,team:"Giants"},{overall:102,round:4,roundPick:6,team:"Browns"},{overall:103,round:4,roundPick:7,team:"Browns"},{overall:104,round:4,roundPick:8,team:"Commanders"},
+  {overall:105,round:4,roundPick:9,team:"Saints"},{overall:106,round:4,roundPick:10,team:"Chiefs"},{overall:107,round:4,roundPick:11,team:"Dolphins"},{overall:108,round:4,roundPick:12,team:"Cowboys"},
+  {overall:109,round:4,roundPick:13,team:"Bengals"},{overall:110,round:4,roundPick:14,team:"Falcons"},{overall:111,round:4,roundPick:15,team:"Rams"},{overall:112,round:4,roundPick:16,team:"Ravens"},
+  {overall:113,round:4,roundPick:17,team:"Raiders"},{overall:114,round:4,roundPick:18,team:"Buccaneers"},{overall:115,round:4,roundPick:19,team:"Lions"},{overall:116,round:4,roundPick:20,team:"Packers"},
+  {overall:117,round:4,roundPick:21,team:"Panthers"},{overall:118,round:4,roundPick:22,team:"Jaguars"},{overall:119,round:4,roundPick:23,team:"Steelers"},{overall:120,round:4,roundPick:24,team:"Chargers"},
+  {overall:121,round:4,roundPick:25,team:"Patriots"},{overall:122,round:4,roundPick:26,team:"Colts"},{overall:123,round:4,roundPick:27,team:"Eagles"},{overall:124,round:4,roundPick:28,team:"Bills"},
+  {overall:125,round:4,roundPick:29,team:"Bears"},{overall:126,round:4,roundPick:30,team:"Patriots"},{overall:127,round:4,roundPick:31,team:"Texans"},{overall:128,round:4,roundPick:32,team:"Seahawks"},
+  // Round 5 (picks 129-160)
+  {overall:129,round:5,roundPick:1,team:"Browns"},{overall:130,round:5,roundPick:2,team:"Titans"},{overall:131,round:5,roundPick:3,team:"Cardinals"},{overall:132,round:5,roundPick:4,team:"Titans"},
+  {overall:133,round:5,roundPick:5,team:"Giants"},{overall:134,round:5,roundPick:6,team:"Browns"},{overall:135,round:5,roundPick:7,team:"Jets"},{overall:136,round:5,roundPick:8,team:"Commanders"},
+  {overall:137,round:5,roundPick:9,team:"Browns"},{overall:138,round:5,roundPick:10,team:"Saints"},{overall:139,round:5,roundPick:11,team:"Dolphins"},{overall:140,round:5,roundPick:12,team:"Chiefs"},
+  {overall:141,round:5,roundPick:13,team:"Cowboys"},{overall:142,round:5,roundPick:14,team:"Bengals"},{overall:143,round:5,roundPick:15,team:"Rams"},{overall:144,round:5,roundPick:16,team:"Ravens"},
+  {overall:145,round:5,roundPick:17,team:"Buccaneers"},{overall:146,round:5,roundPick:18,team:"Falcons"},{overall:147,round:5,roundPick:19,team:"Lions"},{overall:148,round:5,roundPick:20,team:"Packers"},
+  {overall:149,round:5,roundPick:21,team:"Panthers"},{overall:150,round:5,roundPick:22,team:"Vikings"},{overall:151,round:5,roundPick:23,team:"Jaguars"},{overall:152,round:5,roundPick:24,team:"Steelers"},
+  {overall:153,round:5,roundPick:25,team:"Bears"},{overall:154,round:5,roundPick:26,team:"Chargers"},{overall:155,round:5,roundPick:27,team:"Colts"},{overall:156,round:5,roundPick:28,team:"Eagles"},
+  {overall:157,round:5,roundPick:29,team:"Bills"},{overall:158,round:5,roundPick:30,team:"49ers"},{overall:159,round:5,roundPick:31,team:"Texans"},{overall:160,round:5,roundPick:32,team:"Seahawks"},
+  // Round 6 (picks 161-192)
+  {overall:161,round:6,roundPick:1,team:"Raiders"},{overall:162,round:6,roundPick:2,team:"Jets"},{overall:163,round:6,roundPick:3,team:"Titans"},{overall:164,round:6,roundPick:4,team:"Raiders"},
+  {overall:165,round:6,roundPick:5,team:"Cardinals"},{overall:166,round:6,roundPick:6,team:"Giants"},{overall:167,round:6,roundPick:7,team:"Browns"},{overall:168,round:6,roundPick:8,team:"Commanders"},
+  {overall:169,round:6,roundPick:9,team:"Saints"},{overall:170,round:6,roundPick:10,team:"Patriots"},{overall:171,round:6,roundPick:11,team:"Chiefs"},{overall:172,round:6,roundPick:12,team:"Dolphins"},
+  {overall:173,round:6,roundPick:13,team:"Jets"},{overall:174,round:6,roundPick:14,team:"Cowboys"},{overall:175,round:6,roundPick:15,team:"Vikings"},{overall:176,round:6,roundPick:16,team:"Falcons"},
+  {overall:177,round:6,roundPick:17,team:"Bengals"},{overall:178,round:6,roundPick:18,team:"Rams"},{overall:179,round:6,roundPick:19,team:"Ravens"},{overall:180,round:6,roundPick:20,team:"Packers"},
+  {overall:181,round:6,roundPick:21,team:"Patriots"},{overall:182,round:6,roundPick:22,team:"Buccaneers"},{overall:183,round:6,roundPick:23,team:"Lions"},{overall:184,round:6,roundPick:24,team:"Panthers"},
+  {overall:185,round:6,roundPick:25,team:"Browns"},{overall:186,round:6,roundPick:26,team:"Jaguars"},{overall:187,round:6,roundPick:27,team:"Jets"},{overall:188,round:6,roundPick:28,team:"Patriots"},
+  {overall:189,round:6,roundPick:29,team:"Steelers"},{overall:190,round:6,roundPick:30,team:"Patriots"},{overall:191,round:6,roundPick:31,team:"Chargers"},{overall:192,round:6,roundPick:32,team:"Seahawks"},
+  // Round 7 (picks 193-224)
+  {overall:193,round:7,roundPick:1,team:"Cardinals"},{overall:194,round:7,roundPick:2,team:"Jets"},{overall:195,round:7,roundPick:3,team:"Raiders"},{overall:196,round:7,roundPick:4,team:"Titans"},
+  {overall:197,round:7,roundPick:5,team:"Giants"},{overall:198,round:7,roundPick:6,team:"Commanders"},{overall:199,round:7,roundPick:7,team:"Browns"},{overall:200,round:7,roundPick:8,team:"Saints"},
+  {overall:201,round:7,roundPick:9,team:"Chiefs"},{overall:202,round:7,roundPick:10,team:"Dolphins"},{overall:203,round:7,roundPick:11,team:"Cowboys"},{overall:204,round:7,roundPick:12,team:"Bengals"},
+  {overall:205,round:7,roundPick:13,team:"Rams"},{overall:206,round:7,roundPick:14,team:"Falcons"},{overall:207,round:7,roundPick:15,team:"Ravens"},{overall:208,round:7,roundPick:16,team:"Buccaneers"},
+  {overall:209,round:7,roundPick:17,team:"Lions"},{overall:210,round:7,roundPick:18,team:"Vikings"},{overall:211,round:7,roundPick:19,team:"Panthers"},{overall:212,round:7,roundPick:20,team:"Packers"},
+  {overall:213,round:7,roundPick:21,team:"Jaguars"},{overall:214,round:7,roundPick:22,team:"Steelers"},{overall:215,round:7,roundPick:23,team:"Bears"},{overall:216,round:7,roundPick:24,team:"Vikings"},
+  {overall:217,round:7,roundPick:25,team:"Bears"},{overall:218,round:7,roundPick:26,team:"Chargers"},{overall:219,round:7,roundPick:27,team:"Colts"},{overall:220,round:7,roundPick:28,team:"Eagles"},
+  {overall:221,round:7,roundPick:29,team:"Bills"},{overall:222,round:7,roundPick:30,team:"Patriots"},{overall:223,round:7,roundPick:31,team:"Texans"},{overall:224,round:7,roundPick:32,team:"Seahawks"}
+];
+
+// Helper to get pick info by overall pick number
+function getPickByOverall(overall) {
+  return FULL_DRAFT_ORDER.find(p => p.overall === overall) || {overall, round: Math.ceil(overall/32), roundPick: ((overall-1)%32)+1, team: "TBD"};
+}
+
+// Helper to get team by pick (replaces old getTeamByPick)
+function getTeamByPick(pickNum) {
+  const pick = getPickByOverall(pickNum);
+  return {name: pick.team, needs: TEAM_NEEDS[pick.team] || []};
+}
+
+// User team config - Bears 2026 draft picks
+const userTeam = {
+  name: "Bears",
+  picks: [
+    {overall: 25, round: 1, roundPick: 25},
+    {overall: 57, round: 2, roundPick: 25},
+    {overall: 89, round: 3, roundPick: 25},
+    {overall: 125, round: 4, roundPick: 29},
+    {overall: 153, round: 5, roundPick: 25},
+    {overall: 215, round: 7, roundPick: 23},
+    {overall: 217, round: 7, roundPick: 25}
+  ],
+  offNeeds: [
+    {pos:"OT",archetype:"Pass Protector",priority:"high",filled:false,note:"Ozzy Trapilo out with patellar injury. Braxton Jones benched. LT is a glaring hole."},
+    {pos:"RB",archetype:"Dynamic Playmaker",priority:"medium",filled:false,note:"Need explosive home run threat to pair with Caleb Williams."},
+    {pos:"IOL",archetype:"Zone Blocker",priority:"low",filled:false,note:"Depth needed for Shanahan-style rushing attack."}
+  ],
+  defNeeds: [
+    {pos:"EDGE",archetype:"Speed Rusher",priority:"high",filled:false,note:"Need consistent pass rush opposite Montez Sweat. 29th in pressure rate."},
+    {pos:"DL",archetype:"Run Stuffer",priority:"high",filled:false,note:"Allowed most yards before contact in NFL. Interior run defense a major weakness."},
+    {pos:"S",archetype:"Versatile",priority:"high",filled:false,note:"Brisker and Byard both FAs. Could lose entire starting safety tandem."},
+    {pos:"CB",archetype:"Outside Corner",priority:"medium",filled:false,note:"Wright and CJGJ pending FAs. Need upgrade on the outside."}
+  ]
+};
+
+// Helper to check if current pick is user's
+function isUserPick(pickNum) {
+  return userTeam.picks.some(p => p.overall === pickNum);
+}
+
+// Get user's next pick
+function getNextUserPick() {
+  return userTeam.picks.find(p => p.overall >= currentPickNum);
+}
+
+// State
+let currentPickNum = 1;
+let selectedPlayer = null;
+let starredPlayers = new Set();
+let draftedPlayers = new Set();
+let draftPicks = [];
+let myPicks = [];
+let currentFilter = 'ALL';
+let showStarredOnly = false;
+let searchQuery = '';
+let expandedCards = new Set();
+let simSpeed = 0;
+
+// Consensus range - uses rangeHigh and rangeLow if available
+function getConsensusRange(player) {
+  const rank = typeof player === 'number' ? player : player.rank;
+  const rangeHigh = player.rangeHigh || rank;
+  const rangeLow = player.rangeLow || rank;
+  
+  // Determine range label based on high/low spread
+  function getRoundLabel(pick) {
+    if (pick <= 5) return "Top 5";
+    if (pick <= 10) return "Top 10";
+    if (pick <= 16) return "Early 1st";
+    if (pick <= 24) return "Mid 1st";
+    if (pick <= 32) return "Late 1st";
+    if (pick <= 48) return "Early 2nd";
+    if (pick <= 64) return "Late 2nd";
+    if (pick <= 100) return "Day 2";
+    return "Day 3";
+  }
+  
+  const highLabel = getRoundLabel(rangeHigh);
+  const lowLabel = getRoundLabel(rangeLow);
+  
+  let label, cls;
+  if (highLabel === lowLabel) {
+    label = highLabel;
+  } else {
+    // Shorten for display
+    const shortHigh = highLabel.replace("Early ", "E-").replace("Late ", "L-").replace("Mid ", "M-").replace("Top ", "T");
+    const shortLow = lowLabel.replace("Early ", "E-").replace("Late ", "L-").replace("Mid ", "M-").replace("Top ", "T");
+    label = `${shortHigh} to ${shortLow}`;
+  }
+  
+  // CSS class based on consensus rank
+  if (rank <= 5) cls = "top-5";
+  else if (rank <= 10) cls = "top-10";
+  else if (rank <= 20) cls = "mid-1st";
+  else if (rank <= 32) cls = "late-1st";
+  else if (rank <= 50) cls = "rd-2";
+  else if (rank <= 70) cls = "rd-3-4";
+  else cls = "rd-5-7";
+  
+  return {label, cls, rank};
+}
+
+// Age calculation
+function calcAge(birthday) {
+  const today = new Date('2026-04-24');
+  const parts = birthday.split(' ');
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  const m = months.indexOf(parts[0]);
+  const d = parseInt(parts[1]);
+  const y = parseInt(parts[2]);
+  const birth = new Date(y, m, d);
+  let years = today.getFullYear() - birth.getFullYear();
+  let mos = today.getMonth() - birth.getMonth();
+  if (mos < 0) { years--; mos += 12; }
+  return `${years}yr ${mos}mo`;
+}
+
+// Exit draft - show return screen
+function exitDraft() {
+  if (confirm("Exit draft and return to setup?")) {
+    // Hide draft UI, show exit message
+    document.querySelector('.draft-container').innerHTML = `
+      <div style="grid-column: 1 / -1; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; text-align: center; padding: 40px;">
+        <div style="font-size: 64px; margin-bottom: 20px;">🏈</div>
+        <h1 style="font-size: 28px; margin-bottom: 12px; color: var(--accent);">Draft Exited</h1>
+        <p style="color: var(--text-secondary); margin-bottom: 30px; max-width: 400px;">
+          Your draft progress has been saved. To start a new draft or change settings, 
+          open the setup page: <strong>nfl-mock-draft-simulator.html</strong>
+        </p>
+        <button onclick="location.reload()" style="
+          background: linear-gradient(135deg, var(--accent) 0%, #b8941f 100%);
+          color: #000;
+          border: none;
+          padding: 14px 28px;
+          border-radius: 8px;
+          font-size: 15px;
+          font-weight: 600;
+          cursor: pointer;
+        ">🔄 Start New Draft</button>
+      </div>
+    `;
+    document.querySelector('.draft-header').style.display = 'none';
+  }
+}
+
+// Open trade modal (placeholder for now)
+function openTradeModal() {
+  alert("Trade functionality coming soon!\n\nYou'll be able to:\n• Trade up to get a specific player\n• Trade down to accumulate picks\n• Trade with any team");
+}
+
+// Also allow closing with Escape key  
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape' && document.getElementById('playerModal').classList.contains('active')) {
+    closeModal();
+  }
+});
+
+// Render player list
+function renderPlayerList() {
+  const list = document.getElementById('playerList');
+  let filtered = bigBoard.filter(p => {
+    if (draftedPlayers.has(p.rank)) return false;
+    if (showStarredOnly && !starredPlayers.has(p.rank)) return false;
+    if (currentFilter !== 'ALL') {
+      if (currentFilter === 'OL' && !['OT','IOL','C','OL'].includes(p.pos)) return false;
+      else if (currentFilter !== 'OL' && p.pos !== currentFilter) return false;
+    }
+    if (searchQuery && !p.name.toLowerCase().includes(searchQuery.toLowerCase())) return false;
+    return true;
+  });
+
+  list.innerHTML = filtered.map(p => {
+    const cr = getConsensusRange(p);
+    const collegeLogo = getCollegeLogo(p.school, 40);
+    const expanded = expandedCards.has(p.rank);
+    const heightWeight = p.height && p.weight ? `${p.height} / ${p.weight} lbs` : '';
+    return `
+      <div class="player-card ${draftedPlayers.has(p.rank)?'drafted':''} ${starredPlayers.has(p.rank)?'starred':''} ${selectedPlayer?.rank===p.rank?'selected':''} ${expanded?'expanded':''}" data-rank="${p.rank}">
+        <div class="player-rank-badge">#${p.rank}</div>
+        <div class="player-star" onclick="event.stopPropagation();toggleStar(${p.rank})">⭐</div>
+        <div class="player-card-header" onclick="selectPlayer(${p.rank})">
+          <div class="college-logo-container" style="margin-left:16px;">${collegeLogo}</div>
+          <div class="player-main-info">
+            <div class="player-name">${p.name}</div>
+            <div class="player-school">${p.school}${heightWeight ? ` • ${heightWeight}` : ''}</div>
+            <div class="player-tags">
+              <span class="player-tag pos">${p.pos}</span>
+              <span class="consensus-range ${cr.cls}">#${p.rank} • ${cr.label}</span>
+              <span class="player-tag">${p.archetype}</span>
+            </div>
+          </div>
+        </div>
+        <div class="player-expand">
+          <div class="player-expand-content">
+            <div class="expand-row">
+              <div><div class="expand-label">Age</div><div class="expand-value">${calcAge(p.birthday)}</div></div>
+              <div><div class="expand-label">Best Fits</div><div class="expand-value">${p.fits}</div></div>
+            </div>
+            <div><div class="expand-label">Strengths</div><div class="expand-value">${p.strengths}</div></div>
+            <div style="margin-top:6px"><div class="expand-label">Weaknesses</div><div class="expand-value">${p.weaknesses}</div></div>
+          </div>
+        </div>
+        <button class="expand-toggle" onclick="event.stopPropagation();toggleExpand(${p.rank})">${expanded?'▲ Less':'▼ More'}</button>
+      </div>`;
+  }).join('');
+}
+
+// Toggle expand
+function toggleExpand(rank) {
+  if (expandedCards.has(rank)) expandedCards.delete(rank);
+  else expandedCards.add(rank);
+  renderPlayerList();
+}
+
+// Toggle star
+function toggleStar(rank) {
+  if (starredPlayers.has(rank)) starredPlayers.delete(rank);
+  else starredPlayers.add(rank);
+  renderPlayerList();
+}
+
+// Select player
+function selectPlayer(rank) {
+  selectedPlayer = bigBoard.find(p => p.rank === rank);
+  renderPlayerList();
+  showModal(selectedPlayer);
+  updateButtons();
+}
+
+// Show modal
+function showModal(p) {
+  const isUserPickNow = isUserPick(currentPickNum);
+  document.getElementById('modalCollegeLogo').innerHTML = getCollegeLogo(p.school, 50);
+  document.getElementById('modalName').textContent = p.name;
+  document.getElementById('modalSchool').textContent = `${p.school} • ${calcAge(p.birthday)} • ${p.archetype}`;
+  document.getElementById('modalStrengths').textContent = p.strengths;
+  document.getElementById('modalWeaknesses').textContent = p.weaknesses;
+  document.getElementById('modalFits').textContent = p.fits;
+  document.getElementById('modalStarBtn').textContent = starredPlayers.has(p.rank) ? '★ Starred' : '⭐ Watchlist';
+  document.getElementById('modalDraftBtn').style.display = isUserPickNow ? 'block' : 'none';
+  
+  // Fit analysis
+  if (isUserPickNow) {
+    showFitAnalysis(p);
+  } else {
+    document.getElementById('fitAnalysis').style.display = 'none';
+  }
+  
+  document.getElementById('playerModal').classList.add('active');
+}
+
+// Fit analysis
+function showFitAnalysis(p) {
+  let score = 50;
+  let factors = [];
+  const allNeeds = [...userTeam.offNeeds, ...userTeam.defNeeds];
+  const matchNeed = allNeeds.find(n => n.pos === p.pos && !n.filled);
+  
+  if (matchNeed) {
+    score += matchNeed.priority === 'high' ? 30 : matchNeed.priority === 'medium' ? 20 : 10;
+    factors.push({icon:'✅', text:`Fills ${matchNeed.priority} priority need at ${p.pos}`});
+  } else {
+    factors.push({icon:'⚠️', text:`${p.pos} is not a current need`});
+    score -= 15;
+  }
+  
+  if (myPicks.some(pk => pk.player.pos === p.pos)) {
+    factors.push({icon:'❌', text:`Already drafted a ${p.pos}`});
+    score -= 25;
+  }
+  
+  if (p.fits.toLowerCase().includes('bears')) {
+    factors.push({icon:'⭐', text:'Listed as best fit for Bears'});
+    score += 15;
+  }
+  
+  const valueDiff = p.rank - currentPickNum;
+  if (valueDiff < -8) {
+    factors.push({icon:'📈', text:`Great value (ranked #${p.rank})`});
+    score += 15;
+  } else if (valueDiff > 8) {
+    factors.push({icon:'📉', text:`Reach (ranked #${p.rank})`});
+    score -= 10;
+  }
+  
+  let grade, cls;
+  if (score >= 80) { grade = 'A'; cls = 'great'; }
+  else if (score >= 65) { grade = 'B+'; cls = 'good'; }
+  else if (score >= 50) { grade = 'C+'; cls = 'fair'; }
+  else { grade = 'D'; cls = 'poor'; }
+  
+  document.getElementById('fitScore').textContent = grade;
+  document.getElementById('fitScore').className = `fit-score ${cls}`;
+  document.getElementById('fitFactors').innerHTML = factors.map(f => `<div class="fit-factor"><span>${f.icon}</span><span>${f.text}</span></div>`).join('');
+  document.getElementById('fitAnalysis').style.display = 'block';
+}
+
+function closeModal() { document.getElementById('playerModal').classList.remove('active'); }
+function toggleStarModal() { if (selectedPlayer) { toggleStar(selectedPlayer.rank); document.getElementById('modalStarBtn').textContent = starredPlayers.has(selectedPlayer.rank) ? '★ Starred' : '⭐ Watchlist'; }}
+function draftFromModal() { if (selectedPlayer && isUserPick(currentPickNum)) { makePick(selectedPlayer); closeModal(); }}
+function draftSelected() { if (selectedPlayer && isUserPick(currentPickNum)) { makePick(selectedPlayer); }}
+
+// State for current viewing round
+let currentViewRound = 1;
+
+// Get picks for a specific round
+function getPicksForRound(round) {
+  const picksPerRound = 32; // Simplified - actual varies by comp picks
+  const start = (round - 1) * picksPerRound + 1;
+  const end = round * picksPerRound;
+  return {start, end};
+}
+
+// Render draft board for selected round
+function renderDraftBoard() {
+  const results = document.getElementById('draftResults');
+  const {start, end} = getPicksForRound(currentViewRound);
+  
+  let html = '';
+  
+  for (let i = start; i <= end; i++) {
+    const pick = draftPicks.find(p => p.pickNum === i);
+    const team = getTeamByPick(i);
+    const isUser = isUserPick(i);
+    const isCurrent = i === currentPickNum;
+    const isFuture = i > currentPickNum;
+    const teamLogo = getTeamLogo(team.name, 28);
+    
+    html += `
+      <div class="draft-pick ${isUser?'user-pick':''} ${isCurrent?'current':''} ${isFuture?'future':''}">
+        <div class="pick-num">${i}</div>
+        <div class="team-logo-wrap">${teamLogo}</div>
+        <div class="pick-details">
+          <div class="pick-team-name">${team.name}</div>
+          ${pick ? `<div class="pick-player-name">${pick.player.name}</div><div class="pick-player-info">${pick.player.pos} • ${pick.player.school}</div>` : `<div class="pick-empty">${isCurrent?'On the clock...':'—'}</div>`}
+        </div>
+      </div>`;
+  }
+  results.innerHTML = html;
+  
+  // Only scroll if current pick is in this round
+  if (currentPickNum >= start && currentPickNum <= end) {
+    const curr = results.querySelector('.current');
+    if (curr) curr.scrollIntoView({behavior:'smooth', block:'center'});
+  }
+}
+
+// State for expanded needs
+let expandedNeeds = new Set();
+
+// Toggle need expansion
+function toggleNeedExpand(pos) {
+  if (expandedNeeds.has(pos)) expandedNeeds.delete(pos);
+  else expandedNeeds.add(pos);
+  renderNeeds();
+}
+
+// Render needs
+function renderNeeds() {
+  document.getElementById('offensiveNeeds').innerHTML = userTeam.offNeeds.map(n => {
+    const expanded = expandedNeeds.has(n.pos);
+    return `
+    <div class="need-item ${n.filled?'filled':''} ${expanded?'expanded':''}">
+      <div class="need-priority ${n.priority}"></div>
+      <div class="need-info"><div class="need-position">${n.pos}</div><div class="need-archetype">${n.archetype}</div></div>
+      <div class="need-status">${n.filled?'✅':'⬜'}</div>
+    </div>
+    <div class="need-expand ${expanded?'show':''}">
+      <div class="need-note">${n.note || 'No additional context.'}</div>
+    </div>
+    <button class="need-toggle" onclick="toggleNeedExpand('${n.pos}')">${expanded?'▲ Less':'▼ More'}</button>`;
+  }).join('');
+  
+  document.getElementById('defensiveNeeds').innerHTML = userTeam.defNeeds.map(n => {
+    const expanded = expandedNeeds.has(n.pos);
+    return `
+    <div class="need-item ${n.filled?'filled':''} ${expanded?'expanded':''}">
+      <div class="need-priority ${n.priority}"></div>
+      <div class="need-info"><div class="need-position">${n.pos}</div><div class="need-archetype">${n.archetype}</div></div>
+      <div class="need-status">${n.filled?'✅':'⬜'}</div>
+    </div>
+    <div class="need-expand ${expanded?'show':''}">
+      <div class="need-note">${n.note || 'No additional context.'}</div>
+    </div>
+    <button class="need-toggle" onclick="toggleNeedExpand('${n.pos}')">${expanded?'▲ Less':'▼ More'}</button>`;
+  }).join('');
+}
+
+// Render my picks - shows all team's picks with filled/empty status
+function renderMyPicks() {
+  const container = document.getElementById('myPicks');
+  
+  container.innerHTML = userTeam.picks.map(pick => {
+    const draftedPick = myPicks.find(p => p.pickNum === pick.overall);
+    const isPast = pick.overall < currentPickNum;
+    const isCurrent = pick.overall === currentPickNum;
+    
+    if (draftedPick) {
+      // Filled pick
+      return `
+        <div class="my-pick filled">
+          <div class="my-pick-round">R${pick.round}</div>
+          <div class="my-pick-info">
+            <div class="my-pick-name">${draftedPick.player.name}</div>
+            <div class="my-pick-details">${draftedPick.player.pos} • ${draftedPick.player.school} • Pick #${pick.overall}</div>
+          </div>
+        </div>`;
+    } else {
+      // Empty pick slot
+      return `
+        <div class="my-pick empty ${isCurrent ? 'current' : ''} ${isPast ? 'missed' : ''}">
+          <div class="my-pick-round">R${pick.round}</div>
+          <div class="my-pick-info">
+            <div class="my-pick-name empty-slot">${isCurrent ? '⏰ On the Clock!' : 'TBD'}</div>
+            <div class="my-pick-details">Round ${pick.round}, Pick #${pick.overall}</div>
+          </div>
+        </div>`;
+    }
+  }).join('');
+}
+
+// Update current pick
+function updateCurrentPick() {
+  const team = getTeamByPick(currentPickNum);
+  const pickInfo = getPickByOverall(currentPickNum);
+  const isUser = isUserPick(currentPickNum);
+  
+  document.getElementById('pickNum').textContent = currentPickNum;
+  document.getElementById('currentPick').textContent = currentPickNum;
+  document.getElementById('pickTeamName').textContent = team.name;
+  document.getElementById('pickTeamRecord').textContent = `Round ${pickInfo.round}, Pick ${pickInfo.roundPick}`;
+  document.getElementById('currentTeamLogo').innerHTML = getTeamLogo(team.name, 44);
+  document.getElementById('onClockBadge').style.display = isUser ? 'flex' : 'none';
+  
+  // Update next pick info
+  const nextPick = getNextUserPick();
+  const nextPickInfo = document.getElementById('nextPickInfo');
+  if (nextPick) {
+    const picksAway = nextPick.overall - currentPickNum;
+    document.getElementById('nextPickRound').textContent = `R${nextPick.round}`;
+    document.getElementById('nextPickOverall').textContent = `#${nextPick.overall}`;
+    
+    if (picksAway === 0) {
+      document.getElementById('nextPickAway').textContent = "You're on the clock!";
+      nextPickInfo.classList.add('on-clock');
+      document.querySelector('.next-pick-label').textContent = "ON THE CLOCK";
+    } else {
+      document.getElementById('nextPickAway').textContent = `${picksAway} pick${picksAway === 1 ? '' : 's'} away`;
+      nextPickInfo.classList.remove('on-clock');
+      document.querySelector('.next-pick-label').textContent = "Your Next Pick";
+    }
+  } else {
+    document.getElementById('nextPickRound').textContent = "—";
+    document.getElementById('nextPickOverall').textContent = "Done";
+    document.getElementById('nextPickAway').textContent = "No more picks";
+    nextPickInfo.classList.remove('on-clock');
+    document.querySelector('.next-pick-label').textContent = "Draft Complete";
+  }
+  
+  // Update round selector to current round
+  const currentRound = Math.ceil(currentPickNum / 32);
+  if (currentRound !== currentViewRound) {
+    currentViewRound = currentRound;
+    document.querySelectorAll('.round-btn').forEach(b => b.classList.remove('active'));
+    const activeBtn = document.querySelector(`.round-btn[data-round="${currentRound}"]`);
+    if (activeBtn) activeBtn.classList.add('active');
+  }
+  
+  renderMyPicks();
+  updateButtons();
+}
+
+function updateButtons() {
+  const isUser = isUserPick(currentPickNum);
+  document.getElementById('simPickBtn').style.display = isUser ? 'none' : 'inline-block';
+  document.getElementById('simToPickBtn').style.display = isUser ? 'none' : 'inline-block';
+  document.getElementById('draftBtn').style.display = (isUser && selectedPlayer) ? 'inline-block' : 'none';
+}
+
+// Make pick
+function makePick(player) {
+  const isUser = isUserPick(currentPickNum);
+  draftPicks.push({pickNum: currentPickNum, player, team: getTeamByPick(currentPickNum).name});
+  draftedPlayers.add(player.rank);
+  
+  if (isUser) {
+    myPicks.push({pickNum: currentPickNum, player});
+    const need = [...userTeam.offNeeds, ...userTeam.defNeeds].find(n => n.pos === player.pos && !n.filled);
+    if (need) need.filled = true;
+    renderNeeds();
+    renderMyPicks();
+  }
+  
+  selectedPlayer = null;
+  currentPickNum++;
+  renderPlayerList();
+  renderDraftBoard();
+  updateCurrentPick();
+}
+
+// CPU pick logic
+function cpuSelectPlayer() {
+  const team = getTeamByPick(currentPickNum);
+  const available = bigBoard.filter(p => !draftedPlayers.has(p.rank));
+  
+  // Score each player
+  let best = null, bestScore = -999;
+  for (const p of available.slice(0, 20)) { // Consider top 20 available
+    let score = 100 - p.rank; // Base: BPA
+    
+    // Need bonus
+    const posMatch = team.needs.indexOf(p.pos);
+    if (posMatch === 0) score += 25;
+    else if (posMatch === 1) score += 15;
+    else if (posMatch >= 0) score += 8;
+    
+    // Value consideration
+    const valueDiff = p.rank - currentPickNum;
+    if (valueDiff < -5) score += 10; // Good value
+    if (valueDiff > 10) score -= 15; // Reach
+    
+    // Slight randomness
+    score += Math.random() * 10 - 5;
+    
+    if (score > bestScore) { bestScore = score; best = p; }
+  }
+  
+  return best || available[0];
+}
+
+// Sim pick
+function simPick() {
+  if (isUserPick(currentPickNum) || currentPickNum > 224) return;
+  const player = cpuSelectPlayer();
+  if (player) makePick(player);
+}
+
+// Sim to my pick
+function simToMyPick() {
+  const myNextPick = userTeam.picks.find(p => p.overall > currentPickNum);
+  if (!myNextPick) return;
+  const myNext = myNextPick.overall;
+  
+  const runSim = () => {
+    if (currentPickNum < myNext && currentPickNum <= 224) {
+      simPick();
+      if (simSpeed > 0) setTimeout(runSim, simSpeed);
+      else runSim();
+    }
+  };
+  runSim();
+}
+
+// Setup events
+function setupEvents() {
+  document.getElementById('playerSearch').addEventListener('input', e => { searchQuery = e.target.value; renderPlayerList(); });
+  
+  document.querySelectorAll('.filter-btn[data-pos]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn[data-pos]').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentFilter = btn.dataset.pos;
+      renderPlayerList();
+    });
+  });
+  
+  document.getElementById('starredFilter').addEventListener('click', e => {
+    e.target.classList.toggle('active');
+    showStarredOnly = e.target.classList.contains('active');
+    renderPlayerList();
+  });
+  
+  document.querySelectorAll('.team-tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.team-tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.tab-content').forEach(c => c.style.display = 'none');
+      tab.classList.add('active');
+      document.getElementById(tab.dataset.tab + 'Tab').style.display = 'block';
+    });
+  });
+  
+  document.querySelectorAll('.speed-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.speed-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      simSpeed = parseInt(btn.dataset.speed);
+    });
+  });
+  
+  // Round selector
+  document.querySelectorAll('.round-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.round-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentViewRound = parseInt(btn.dataset.round);
+      renderDraftBoard();
+    });
+  });
+}
+
+// Init
+function init() {
+  document.getElementById('myTeamLogo').innerHTML = getTeamLogo(userTeam.name, 56);
+  renderPlayerList();
+  renderDraftBoard();
+  renderNeeds();
+  renderMyPicks();
+  updateCurrentPick();
+  setupEvents();
+}
+
+init();
+</script>
+</body>
+</html>
