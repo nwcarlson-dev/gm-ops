@@ -1,0 +1,301 @@
+# GM Ops - Project Requirements & Context Document
+
+**Last Updated:** January 2026  
+**Repository:** https://github.com/nwcarlson-dev/gm-ops  
+**Status:** Active Development - Mock Draft Simulator MVP
+
+---
+
+## 🎯 Project Overview
+
+**GM Ops** is a web-based NFL simulation game starting with a Mock Draft Simulator and expanding to a full franchise simulation.
+
+### Product Roadmap
+
+| Phase | Product | Status |
+|-------|---------|--------|
+| 1 | **GM Ops: Draft** | In Development |
+| 2 | **GM Ops: Offseason** | Planned |
+| 3 | **GM Ops: Franchise** | Planned |
+
+### Business Model
+- Web-based game (no app store needed)
+- Potential subscription model in the future
+- Google Sheets integration for data storage/export
+- Firebase as potential backend for subscription features
+
+---
+
+## 🏈 Branding
+
+### Brand Name
+**GM Ops** (General Manager Operations)
+
+- "GM" = Acronym (all caps)
+- "Ops" = Abbreviation (capital O, smaller PS at 80% size to indicate it's not an acronym)
+
+### Logo Specifications
+
+| Element | Value |
+|---------|-------|
+| Primary Font | **Teko Bold** |
+| Sub-brand Font | **Barlow Condensed Bold** |
+| Skew Angle | **-12 degrees** (leaning right) |
+| PS Size | **80%** of O height |
+
+### Color Palette
+
+| Color | Hex | Usage |
+|-------|-----|-------|
+| NFL Red | `#D50A0A` | GM block background |
+| NFL Blue | `#013369` | Ops block background |
+| White | `#FFFFFF` | Text, light backgrounds |
+| NFL Silver | `#A5ACAF` | Secondary elements |
+| Dark Navy | `#0A1628` | Dark backgrounds |
+
+### Logo Variants Needed
+1. **Parent:** GM Ops (no sub-brand)
+2. **Draft:** GM Ops + "DRAFT" sub-text
+3. **Offseason:** GM Ops + "OFFSEASON" sub-text
+4. **Franchise:** GM Ops + "FRANCHISE" sub-text
+
+Each variant needs dark background and light background versions.
+
+### Sub-brand Text Specifications
+- Font: Barlow Condensed Bold
+- Letter spacing: 4px
+- Right-aligned (right edge of text aligns with right edge of OPS block)
+- Same -12deg skew as main logo
+- Color: Silver (`#A5ACAF`) on dark backgrounds, Dark Navy (`#0A1628`) on light backgrounds
+
+---
+
+## ⚖️ Legal Considerations
+
+### What's Allowed (Nominative Fair Use)
+- ✅ Real NFL team names (Cowboys, Patriots, etc.)
+- ✅ Real player/prospect names
+- ✅ "NFL Draft" terminology
+- ✅ Team colors
+- ✅ City names + team references
+- ✅ Commentary/analysis tools
+
+### What's NOT Allowed
+- ❌ Official NFL shield logo
+- ❌ Team logos (star, horseshoe, etc.)
+- ❌ Anything implying official NFL endorsement
+- ❌ Selling merchandise with NFL marks
+- ❌ "NFL" in product/company name
+
+### Required Disclaimer
+```
+This application is not affiliated with, endorsed by, or connected to the 
+National Football League (NFL), NFL Players Association (NFLPA), NCAA, or 
+any professional or collegiate football team. All team and player names 
+are used for commentary and analysis purposes.
+```
+
+### Safe Harbor Strategy
+- Ship with real team names (nominative fair use for commentary)
+- Use team colors but NO logos
+- Allow user imports for custom data via Google Sheets
+- Clear "Not affiliated with NFL" disclaimer
+- Position as commentary/analysis tool
+
+---
+
+## 🛠️ Technical Architecture
+
+### Tech Stack
+- **Frontend:** Vanilla HTML/CSS/JavaScript (single-file architecture for now)
+- **Hosting:** GitHub Pages (free)
+- **Data Storage:** Google Sheets (for MVP), Firebase (for subscription features)
+- **Version Control:** GitHub
+
+### Repository Structure
+```
+gm-ops/
+├── index.html              # Setup screen (main entry)
+├── draft-room.html         # Draft simulator
+├── brand-guidelines        # Brand guide HTML
+├── README.md
+└── (future)
+    ├── css/
+    ├── js/
+    └── data/
+```
+
+### GitHub Pages
+- URL: `https://nwcarlson-dev.github.io/gm-ops/`
+- Deploy from: main branch, root folder
+
+---
+
+## 📋 Mock Draft Simulator - Current Features
+
+### Setup Screen (`index.html`)
+- Team selection (32 NFL teams)
+- Sort by draft order or alphabetical
+- Select all/deselect all
+- Team cards with:
+  - Pick number
+  - Team name
+  - Record
+  - Team colors
+  - Expandable details panel
+- Settings panel:
+  - Number of rounds (1-7)
+  - Positional value slider
+  - Draft for needs slider
+  - CPU-to-CPU trades toggle
+- "Enter Draft" button
+
+### Draft Room (`draft-room.html`)
+- Full 7-round draft order (224 picks)
+- Real 2026 draft order with traded picks
+- CPU draft logic with BPA + team needs
+- Big board with 100+ players
+- Player cards with:
+  - Scouting data
+  - Consensus ranges
+  - Strengths/weaknesses
+  - Fit analysis grades
+- User team needs tracking (updates when positions filled)
+- Starred players / watchlist
+- Position filtering
+- Search functionality
+- Sim controls (manual, slow, fast, instant)
+- Round-by-round navigation
+
+---
+
+## 🚧 Mock Draft Simulator - TODO (10-20 hours)
+
+### High Priority
+| Feature | Est. Hours | Notes |
+|---------|------------|-------|
+| Connect setup → draft room | 2-3 hrs | Pass settings between screens |
+| Trade system | 4-6 hrs | Trade value chart, offer generation, user-initiated trades |
+| Draft results/summary | 2 hrs | Grades, recap, Google Sheets export |
+
+### Medium Priority
+| Feature | Est. Hours | Notes |
+|---------|------------|-------|
+| Roster context | 2-3 hrs | Show existing starters |
+| Smarter CPU logic | 2-3 hrs | Team tendencies, reach/value decisions |
+| Testing & bug fixes | 2-3 hrs | Edge cases |
+
+### Nice to Have
+| Feature | Est. Hours | Notes |
+|---------|------------|-------|
+| Mobile responsiveness | 2-3 hrs | |
+| Sound effects | 1 hr | Draft jingle plays on setup screen already |
+
+---
+
+## 📊 Data Model
+
+### Team Data Structure
+```javascript
+{
+  n: "Raiders",           // Team name
+  p: 1,                   // Pick number
+  c: "#000000",           // Primary color
+  rec: "3-14",            // Record
+  oc: "OC Name",          // Offensive coordinator
+  dc: "DC Name",          // Defensive coordinator
+  offScheme: "...",       // Offensive scheme
+  defScheme: "...",       // Defensive scheme
+  offNeeds: [             // [isCritical, position, archetype]
+    [true, "Quarterback", "Dual-Threat"],
+    [false, "Wide Receiver", "Field Stretcher"]
+  ],
+  defNeeds: [...],
+  summary: "..."          // Key notes
+}
+```
+
+### Prospect Data Structure
+```javascript
+{
+  name: "Player Name",
+  pos: "QB",
+  school: "University",
+  rank: 1,
+  // Additional scouting data...
+}
+```
+
+---
+
+## 🎮 Full Franchise Sim - Future Vision
+
+### Phase 2: Offseason Sim
+- Free agency module
+- Trade system (expanded)
+- Salary cap logic
+- Contract negotiations
+- Persistent data via Google Sheets/Firebase
+
+### Phase 3: Franchise Mode
+- Season simulation
+- Game outcomes & stats
+- Player progression
+- Injuries
+- User accounts
+- Subscription system (Stripe)
+
+### Why This is Doable
+1. **Turn-based** - No physics, no real-time rendering
+2. **Modular** - Each feature builds on the last
+3. **Data available** - Public NFL data, user-importable
+4. **Web tech is perfect** - HTML/CSS/JS handles forms and UI well
+
+---
+
+## 📝 Development Workflow
+
+### For New Claude Chats
+1. Upload this document
+2. Reference the GitHub repo: https://github.com/nwcarlson-dev/gm-ops
+3. Paste specific files if working on them
+4. Be specific about what you need help with
+
+### Git Workflow
+- Work on `main` branch for now (simple project)
+- Commit frequently
+- Use descriptive commit messages
+
+### File Naming
+- `index.html` = Setup screen (entry point)
+- `draft-room.html` = Draft simulator
+- `brand-guidelines` = Brand guide
+
+---
+
+## 🔗 Key Links
+
+| Resource | URL |
+|----------|-----|
+| GitHub Repo | https://github.com/nwcarlson-dev/gm-ops |
+| Live Site | https://nwcarlson-dev.github.io/gm-ops/ |
+
+---
+
+## 📅 Timeline
+
+**Target:** Public launch of Mock Draft Simulator by early February 2026
+
+---
+
+## 💡 Key Decisions Made
+
+1. **Brand name:** "GM Ops" (not "The League" due to trademark conflicts with dating app)
+2. **Legal approach:** Use real names under nominative fair use, no logos
+3. **Tech stack:** Vanilla HTML/CSS/JS, GitHub Pages hosting
+4. **Data storage:** Google Sheets for MVP, Firebase for subscriptions
+5. **Logo style:** Teko font, NFL colors, -12deg skew, colored blocks
+
+---
+
+*This document serves as the single source of truth for the GM Ops project. Update it as decisions are made and features are completed.*
