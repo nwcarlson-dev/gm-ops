@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GM Ops - All Logo Variations</title>
+    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@700&family=Barlow+Condensed:wght@700&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #333;
+            min-height: 100vh;
+            padding: 40px 20px;
+            font-family: system-ui, sans-serif;
+            color: white;
+        }
+
+        h2 {
+            text-align: center;
+            margin: 40px 0 20px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            letter-spacing: 0.35em;
+            color: #888;
+            text-transform: uppercase;
+        }
+
+        h2:first-of-type {
+            margin-top: 10px;
+        }
+
+        .logo-row {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .logo-card {
+            padding: 40px 60px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .logo-card.dark-bg {
+            background: #0a1628;
+        }
+
+        .logo-card.light-bg {
+            background: #e8eaed;
+        }
+
+        .logo-card small {
+            color: #888;
+            font-size: 0.6rem;
+            letter-spacing: 0.1em;
+        }
+
+        /* ============================================
+           PARENT LOGO
+           ============================================ */
+        
+        .logo-blocks {
+            display: inline-flex;
+            align-items: center;
+            transform: skewX(-12deg);
+            font-family: 'Teko', sans-serif;
+        }
+        
+        .logo-blocks .gm {
+            font-size: 72px;
+            font-weight: 700;
+            color: #FFFFFF;
+            background: #D50A0A;
+            padding: 12px 10px 0 18px;
+            letter-spacing: 0.02em;
+            line-height: 1;
+        }
+        
+        .logo-blocks .ops {
+            font-weight: 700;
+            color: #FFFFFF;
+            background: #013369;
+            padding: 12px 18px 0 10px;
+            line-height: 1;
+            display: flex;
+            align-items: baseline;
+        }
+
+        .logo-blocks .ops .o {
+            font-size: 72px;
+            letter-spacing: 0.02em;
+        }
+
+        .logo-blocks .ops .ps {
+            font-size: 58px;
+            letter-spacing: 0.02em;
+        }
+
+        /* ============================================
+           WITH SUB-BRAND
+           ============================================ */
+
+        .logo-with-sub {
+            display: inline-flex;
+            flex-direction: column;
+            align-items: flex-end;
+        }
+
+        .logo-with-sub .main-row {
+            display: inline-flex;
+            align-items: center;
+            transform: skewX(-12deg);
+            font-family: 'Teko', sans-serif;
+        }
+
+        .logo-with-sub .main-row .gm {
+            font-size: 72px;
+            font-weight: 700;
+            color: #FFFFFF;
+            background: #D50A0A;
+            padding: 12px 10px 0 18px;
+            letter-spacing: 0.02em;
+            line-height: 1;
+        }
+
+        .logo-with-sub .main-row .ops {
+            font-weight: 700;
+            color: #FFFFFF;
+            background: #013369;
+            padding: 12px 18px 0 10px;
+            line-height: 1;
+            display: flex;
+            align-items: baseline;
+        }
+
+        .logo-with-sub .main-row .ops .o {
+            font-size: 72px;
+            letter-spacing: 0.02em;
+        }
+
+        .logo-with-sub .main-row .ops .ps {
+            font-size: 58px;
+            letter-spacing: 0.02em;
+        }
+
+        .logo-with-sub .product {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            margin-top: 6px;
+            margin-right: 6px;
+            transform: skewX(-12deg);
+            transform-origin: right;
+        }
+
+        .dark-bg .logo-with-sub .product {
+            color: #A5ACAF;
+        }
+
+        .light-bg .logo-with-sub .product {
+            color: #666666;
+        }
+
+    </style>
+</head>
+<body>
+
+    <h2>Parent Logo</h2>
+    <div class="logo-row">
+        <div class="logo-card dark-bg">
+            <div class="logo-blocks">
+                <span class="gm">GM</span>
+                <span class="ops"><span class="o">O</span><span class="ps">PS</span></span>
+            </div>
+        </div>
+        <div class="logo-card light-bg">
+            <div class="logo-blocks">
+                <span class="gm">GM</span>
+                <span class="ops"><span class="o">O</span><span class="ps">PS</span></span>
+            </div>
+        </div>
+    </div>
+
+    <h2>Franchise</h2>
+    <div class="logo-row">
+        <div class="logo-card dark-bg">
+            <div class="logo-with-sub">
+                <div class="main-row">
+                    <span class="gm">GM</span>
+                    <span class="ops"><span class="o">O</span><span class="ps">PS</span></span>
+                </div>
+                <span class="product">Franchise</span>
+            </div>
+        </div>
+        <div class="logo-card light-bg">
+            <div class="logo-with-sub">
+                <div class="main-row">
+                    <span class="gm">GM</span>
+                    <span class="ops"><span class="o">O</span><span class="ps">PS</span></span>
+                </div>
+                <span class="product">Franchise</span>
+            </div>
+        </div>
+    </div>
+
+    <h2>Draft</h2>
+    <div class="logo-row">
+        <div class="logo-card dark-bg">
+            <div class="logo-with-sub">
+                <div class="main-row">
+                    <span class="gm">GM</span>
+                    <span class="ops"><span class="o">O</span><span class="ps">PS</span></span>
+                </div>
+                <span class="product">Draft</span>
+            </div>
+        </div>
+        <div class="logo-card light-bg">
+            <div class="logo-with-sub">
+                <div class="main-row">
+                    <span class="gm">GM</span>
+                    <span class="ops"><span class="o">O</span><span class="ps">PS</span></span>
+                </div>
+                <span class="product">Draft</span>
+            </div>
+        </div>
+    </div>
+
+    <h2>Offseason</h2>
+    <div class="logo-row">
+        <div class="logo-card dark-bg">
+            <div class="logo-with-sub">
+                <div class="main-row">
+                    <span class="gm">GM</span>
+                    <span class="ops"><span class="o">O</span><span class="ps">PS</span></span>
+                </div>
+                <span class="product">Offseason</span>
+            </div>
+        </div>
+        <div class="logo-card light-bg">
+            <div class="logo-with-sub">
+                <div class="main-row">
+                    <span class="gm">GM</span>
+                    <span class="ops"><span class="o">O</span><span class="ps">PS</span></span>
+                </div>
+                <span class="product">Offseason</span>
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>
