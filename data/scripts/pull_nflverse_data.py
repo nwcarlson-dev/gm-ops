@@ -25,7 +25,7 @@ def setup():
 def pull_draft_data():
     """Pull historical draft picks and values"""
     print("\nPulling draft picks...")
-    years = list(range(2015, 2026))
+    years = list(range(2015, 2025))
     draft_picks = nfl.import_draft_picks(years)
     draft_picks.to_csv(f'{OUTPUT_DIR}/draft_picks.csv', index=False)
     print(f"  Saved {len(draft_picks)} draft picks")
@@ -43,7 +43,7 @@ def pull_player_data():
     print(f"  Saved {len(rosters)} roster entries")
     
     print("Pulling combine data...")
-    combine = nfl.import_combine_data(list(range(2020, 2026)))
+    combine = nfl.import_combine_data(list(range(2020, 2025)))
     combine.to_csv(f'{OUTPUT_DIR}/combine.csv', index=False)
     print(f"  Saved {len(combine)} combine entries")
     
