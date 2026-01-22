@@ -74,7 +74,7 @@ def pull_team_data():
 def pull_stats_data():
     """Pull player statistics"""
     print("\nPulling seasonal stats...")
-    seasonal = nfl.import_seasonal_data([2023, 2024, 2025])
+    seasonal = nfl.import_seasonal_data([2023, 2024])
     seasonal.to_csv(f'{OUTPUT_DIR}/stats_seasonal.csv', index=False)
     print(f"  Saved {len(seasonal)} seasonal stat lines")
     
