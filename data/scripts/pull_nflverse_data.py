@@ -78,13 +78,13 @@ def pull_stats_data():
     seasonal.to_csv(f'{OUTPUT_DIR}/stats_seasonal.csv', index=False)
     print(f"  Saved {len(seasonal)} seasonal stat lines")
     
-try:
-    print("Pulling weekly stats (current season)...")
-    weekly = nfl.import_weekly_data([2025])
-    weekly.to_csv(f'{OUTPUT_DIR}/weekly_2025.csv', index=False)
-    print(f"  Saved {len(weekly)} weekly stat lines")
-except Exception as e:
-    print(f"  Skipped weekly stats: {e}")
+    try:
+        print("Pulling weekly stats (current season)...")
+        weekly = nfl.import_weekly_data([2025])
+        weekly.to_csv(f'{OUTPUT_DIR}/weekly_2025.csv', index=False)
+        print(f"  Saved {len(weekly)} weekly stat lines")
+    except Exception as e:
+        print(f"  Skipped weekly stats: {e}")
 
 def main():
     print("=" * 50)
