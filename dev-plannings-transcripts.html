@@ -7,8 +7,6 @@
     <style>
         :root {
             --nfl-red: #D50A0A;
-            --nfl-blue: #013369;
-            --dark-navy: #0A1628;
             --bg-dark: #111827;
             --bg-card: #1F2937;
             --border-color: #374151;
@@ -25,421 +23,327 @@
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background-color: var(--bg-dark);
             color: var(--text-primary);
-            line-height: 1.6;
-            min-height: 100vh;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
         }
-
-        .container { max-width: 1000px; margin: 0 auto; padding: 2rem; }
 
         header {
-            text-align: center;
-            margin-bottom: 2rem;
-            padding-bottom: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 2rem;
             border-bottom: 2px solid var(--nfl-red);
+            flex-shrink: 0;
         }
 
-        h1 { font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; }
-        .subtitle { color: var(--text-secondary); font-size: 0.95rem; }
+        h1 { font-size: 1.25rem; font-weight: 600; }
 
-        .card {
-            background: var(--bg-card);
+        .header-buttons { display: flex; gap: 0.5rem; }
+
+        .icon-btn {
+            background: transparent;
             border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .card h2 {
-            font-size: 1.25rem;
-            margin-bottom: 1rem;
+            color: var(--text-secondary);
+            width: 36px;
+            height: 36px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1.1rem;
             display: flex;
             align-items: center;
-            gap: 0.5rem;
+            justify-content: center;
         }
+        .icon-btn:hover { background: var(--bg-card); color: var(--text-primary); }
 
-        .setup-section { border-left: 4px solid var(--warning); }
-
-        label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: var(--text-secondary);
-            font-size: 0.9rem;
-        }
-
-        input[type="text"], input[type="password"] {
-            width: 100%;
-            padding: 0.75rem;
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
-            background: var(--bg-dark);
-            color: var(--text-primary);
-            font-size: 1rem;
-            margin-bottom: 1rem;
-        }
-
-        input:focus, textarea:focus {
-            outline: none;
-            border-color: var(--nfl-red);
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: 1rem 2rem;
+            overflow: hidden;
         }
 
         textarea {
+            flex: 1;
             width: 100%;
-            padding: 0.75rem;
+            padding: 1rem;
             border: 1px solid var(--border-color);
-            border-radius: 4px;
-            background: var(--bg-dark);
+            border-radius: 8px;
+            background: var(--bg-card);
             color: var(--text-primary);
             font-size: 0.9rem;
             font-family: 'Monaco', 'Menlo', monospace;
-            resize: vertical;
-            min-height: 200px;
+            resize: none;
+        }
+        textarea:focus { outline: none; border-color: var(--nfl-red); }
+        textarea::placeholder { color: var(--text-secondary); }
+
+        .action-bar {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem 0;
+            align-items: center;
+            flex-shrink: 0;
         }
 
         .btn {
             padding: 0.75rem 1.5rem;
             border: none;
-            border-radius: 4px;
+            border-radius: 6px;
             font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.2s;
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
         }
-
-        .btn-primary { background: var(--nfl-red); color: white; }
-        .btn-primary:hover { background: #b00808; }
-        .btn-secondary { background: var(--border-color); color: var(--text-primary); }
-        .btn-secondary:hover { background: #4b5563; }
-        .btn-process { background: var(--warning); color: var(--dark-navy); }
-        .btn-process:hover { background: #d97706; }
         .btn:disabled { opacity: 0.5; cursor: not-allowed; }
-
-        .btn-group { display: flex; gap: 1rem; margin-top: 1rem; flex-wrap: wrap; }
+        .btn-process { background: var(--warning); color: #000; }
+        .btn-process:hover:not(:disabled) { background: #d97706; }
+        .btn-push { background: var(--nfl-red); color: #fff; }
+        .btn-push:hover:not(:disabled) { background: #b00808; }
 
         .status {
-            padding: 0.75rem;
+            flex: 1;
+            padding: 0.5rem 1rem;
             border-radius: 4px;
-            margin-top: 1rem;
-            display: none;
+            font-size: 0.9rem;
         }
-
-        .status.success { background: rgba(16,185,129,0.2); border: 1px solid var(--success); color: var(--success); display: block; }
-        .status.error { background: rgba(239,68,68,0.2); border: 1px solid var(--danger); color: var(--danger); display: block; }
-        .status.info { background: rgba(59,130,246,0.2); border: 1px solid #3b82f6; color: #3b82f6; display: block; }
-
-        .row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
-        .row-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1rem; }
-        @media (max-width: 600px) { .row, .row-3 { grid-template-columns: 1fr; } }
-
-        .token-toggle { font-size: 0.85rem; color: var(--text-secondary); cursor: pointer; text-decoration: underline; }
-        .token-toggle:hover { color: var(--text-primary); }
-        .saved-indicator { font-size: 0.8rem; color: var(--success); margin-left: 0.5rem; }
-        .help-text { font-size: 0.85rem; color: var(--text-secondary); margin-top: 0.5rem; }
-
-        .tabs { display: flex; border-bottom: 1px solid var(--border-color); margin-bottom: 1rem; }
-        .tab {
-            padding: 0.75rem 1.5rem;
-            cursor: pointer;
-            color: var(--text-secondary);
-            border-bottom: 2px solid transparent;
-            transition: all 0.2s;
-        }
-        .tab:hover { color: var(--text-primary); }
-        .tab.active { color: var(--nfl-red); border-bottom-color: var(--nfl-red); }
-        .tab-content { display: none; }
-        .tab-content.active { display: block; }
-
-        .archive-list { max-height: 300px; overflow-y: auto; }
-        .archive-item {
-            padding: 0.75rem;
-            background: var(--bg-dark);
-            border-radius: 4px;
-            margin-bottom: 0.5rem;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .archive-item a { color: var(--nfl-red); text-decoration: none; }
-        .archive-item a:hover { text-decoration: underline; }
-        .archive-item .date { color: var(--text-secondary); font-size: 0.85rem; }
-
-        .generated-fields {
-            background: var(--bg-dark);
-            border: 1px solid var(--success);
-            border-radius: 4px;
-            padding: 1rem;
-            margin-top: 1rem;
-            display: none;
-        }
-        .generated-fields.show { display: block; }
-        .generated-fields h3 { color: var(--success); font-size: 1rem; margin-bottom: 1rem; }
+        .status.success { background: rgba(16,185,129,0.2); color: var(--success); }
+        .status.error { background: rgba(239,68,68,0.2); color: var(--danger); }
+        .status.info { background: rgba(59,130,246,0.2); color: #3b82f6; }
+        .status:empty { display: none; }
 
         .spinner {
             display: inline-block;
-            width: 16px;
-            height: 16px;
-            border: 2px solid var(--dark-navy);
+            width: 14px;
+            height: 14px;
+            border: 2px solid currentColor;
             border-top-color: transparent;
             border-radius: 50%;
             animation: spin 0.8s linear infinite;
         }
         @keyframes spin { to { transform: rotate(360deg); } }
 
-        .step-indicator { display: flex; justify-content: center; gap: 2rem; margin-bottom: 1.5rem; }
-        .step { display: flex; align-items: center; gap: 0.5rem; color: var(--text-secondary); }
-        .step.active { color: var(--nfl-red); }
-        .step.complete { color: var(--success); }
-        .step-num {
-            width: 28px; height: 28px;
-            border-radius: 50%;
-            background: var(--border-color);
-            display: flex; align-items: center; justify-content: center;
-            font-weight: 600; font-size: 0.9rem;
+        /* Modal */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: rgba(0,0,0,0.7);
+            z-index: 100;
+            align-items: center;
+            justify-content: center;
         }
-        .step.active .step-num { background: var(--nfl-red); color: white; }
-        .step.complete .step-num { background: var(--success); color: white; }
+        .modal-overlay.show { display: flex; }
 
-        .file-entry {
-            background: var(--bg-dark);
+        .modal {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            width: 90%;
+            max-width: 500px;
+        }
+        .modal h2 { margin-bottom: 1rem; font-size: 1.1rem; }
+        .modal label { display: block; margin-bottom: 0.25rem; color: var(--text-secondary); font-size: 0.85rem; }
+        .modal input {
+            width: 100%;
+            padding: 0.6rem;
+            margin-bottom: 1rem;
             border: 1px solid var(--border-color);
             border-radius: 4px;
-            padding: 1rem;
-            margin-bottom: 1rem;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            font-size: 0.9rem;
         }
-        .remove-file { color: var(--danger); cursor: pointer; font-size: 0.85rem; float: right; }
-        .remove-file:hover { text-decoration: underline; }
+        .modal input:focus { outline: none; border-color: var(--nfl-red); }
+        .modal-buttons { display: flex; gap: 0.5rem; justify-content: flex-end; margin-top: 1rem; }
+        .modal-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        .modal-btn-cancel { background: var(--border-color); color: var(--text-primary); }
+        .modal-btn-save { background: var(--success); color: #fff; }
+
+        /* Generated info bar */
+        .generated-bar {
+            display: none;
+            background: var(--bg-card);
+            border: 1px solid var(--success);
+            border-radius: 6px;
+            padding: 0.75rem 1rem;
+            margin-bottom: 0.5rem;
+            flex-shrink: 0;
+        }
+        .generated-bar.show { display: flex; gap: 1rem; align-items: center; }
+        .generated-bar input {
+            flex: 1;
+            padding: 0.4rem 0.6rem;
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            font-size: 0.85rem;
+        }
+        .generated-bar label { color: var(--success); font-size: 0.8rem; font-weight: 600; white-space: nowrap; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1>🏈 GM Ops - Dev Planning Transcripts</h1>
-            <p class="subtitle">Archive chat transcripts to GitHub for Claude to access in future sessions</p>
-        </header>
+    <header>
+        <h1>🏈 GM Ops - Dev Planning Transcripts</h1>
+        <div class="header-buttons">
+            <button class="icon-btn" onclick="loadArchives()" title="View Archives">📚</button>
+            <button class="icon-btn" onclick="openSettings()" title="Settings">⚙️</button>
+        </div>
+    </header>
 
-        <!-- Setup Section -->
-        <div class="card setup-section">
-            <h2>⚙️ Setup <span id="setup-saved" class="saved-indicator"></span></h2>
-            
-            <div class="row-3">
-                <div>
-                    <label for="repo-owner">Repo Owner</label>
-                    <input type="text" id="repo-owner" placeholder="nwcarlson-dev" value="nwcarlson-dev">
-                </div>
-                <div>
-                    <label for="repo-name">Repo Name</label>
-                    <input type="text" id="repo-name" placeholder="gm-ops" value="gm-ops">
-                </div>
-                <div>
-                    <label for="github-token">GitHub Token <span class="token-toggle" onclick="toggleVisibility('github-token')">(show)</span></label>
-                    <input type="password" id="github-token" placeholder="ghp_xxxx">
-                </div>
-            </div>
-
-            <div class="row">
-                <div>
-                    <label for="anthropic-key">Anthropic API Key <span class="token-toggle" onclick="toggleVisibility('anthropic-key')">(show)</span></label>
-                    <input type="password" id="anthropic-key" placeholder="sk-ant-xxxx">
-                </div>
-                <div style="display: flex; align-items: flex-end; padding-bottom: 1rem;">
-                    <button class="btn btn-secondary" onclick="saveSetup()">💾 Save Setup</button>
-                </div>
-            </div>
-            <p class="help-text">
-                GitHub: Settings → Developer settings → Personal access tokens (scope: repo)<br>
-                Anthropic: <a href="https://console.anthropic.com/settings/keys" target="_blank" style="color: var(--nfl-red);">console.anthropic.com/settings/keys</a>
-            </p>
-            <div id="setup-status" class="status"></div>
+    <div class="main-content">
+        <div class="generated-bar" id="generated-bar">
+            <label>✓ Title:</label>
+            <input type="text" id="chat-title">
+            <label>Date:</label>
+            <input type="text" id="chat-date" style="max-width:120px;" readonly>
         </div>
 
-        <!-- Main Tabs -->
-        <div class="card">
-            <div class="tabs">
-                <div class="tab active" onclick="switchTab('chat')">📝 Transcript</div>
-                <div class="tab" onclick="switchTab('files')">📁 Files</div>
-                <div class="tab" onclick="switchTab('archives')">📚 Archives</div>
-            </div>
+        <textarea id="chat-content" placeholder="Paste your chat transcript here..."></textarea>
 
-            <!-- Chat Transcript Tab -->
-            <div id="chat-tab" class="tab-content active">
-                <div class="step-indicator">
-                    <div class="step active" id="step-1"><span class="step-num">1</span><span>Paste</span></div>
-                    <div class="step" id="step-2"><span class="step-num">2</span><span>Process</span></div>
-                    <div class="step" id="step-3"><span class="step-num">3</span><span>Push</span></div>
-                </div>
+        <div class="action-bar">
+            <button class="btn btn-process" id="process-btn" onclick="processTranscript()">⚡ Process</button>
+            <button class="btn btn-push" id="push-btn" onclick="pushChat()" disabled>🚀 Push to GitHub</button>
+            <div class="status" id="status"></div>
+        </div>
+    </div>
 
-                <label for="chat-content">Paste your entire chat transcript here:</label>
-                <textarea id="chat-content" style="min-height: 350px;" placeholder="Paste your chat transcript here, then click Process..."></textarea>
-
-                <div class="btn-group">
-                    <button class="btn btn-process" onclick="processTranscript()" id="process-btn">⚡ Process</button>
-                    <button class="btn btn-primary" onclick="pushChat()" id="push-btn" disabled>🚀 Push to GitHub</button>
-                </div>
-
-                <div class="generated-fields" id="generated-fields">
-                    <h3>✓ Generated from transcript:</h3>
-                    <div class="row">
-                        <div>
-                            <label for="chat-title">Title</label>
-                            <input type="text" id="chat-title">
-                        </div>
-                        <div>
-                            <label for="chat-date">Date</label>
-                            <input type="text" id="chat-date" readonly>
-                        </div>
-                    </div>
-                    <label for="chat-summary">Summary</label>
-                    <textarea id="chat-summary" style="min-height: 100px;"></textarea>
-                </div>
-
-                <div id="chat-status" class="status"></div>
-            </div>
-
-            <!-- Files Tab -->
-            <div id="files-tab" class="tab-content">
-                <p class="help-text" style="margin-bottom: 1rem;">Add files generated during the chat (code, docs, etc.)</p>
-                <div id="files-container"></div>
-                <button class="btn btn-secondary" onclick="addFileEntry()">+ Add File</button>
-                <div class="btn-group" style="margin-top: 1.5rem; padding-top: 1rem; border-top: 1px solid var(--border-color);">
-                    <button class="btn btn-primary" onclick="pushFiles()">🚀 Push All Files to GitHub</button>
-                </div>
-                <div id="files-status" class="status"></div>
-            </div>
-
-            <!-- Archives Tab -->
-            <div id="archives-tab" class="tab-content">
-                <p class="help-text" style="margin-bottom: 1rem;">Previously archived transcripts in your GitHub repo.</p>
-                <button class="btn btn-secondary" onclick="loadArchives()" style="margin-bottom: 1rem;">🔄 Refresh List</button>
-                <div id="archives-list" class="archive-list">
-                    <p style="color: var(--text-secondary); text-align: center; padding: 2rem;">Click "Refresh List" to load archives</p>
-                </div>
+    <!-- Settings Modal -->
+    <div class="modal-overlay" id="settings-modal">
+        <div class="modal">
+            <h2>⚙️ Settings</h2>
+            <label>GitHub Repo Owner</label>
+            <input type="text" id="repo-owner" placeholder="nwcarlson-dev">
+            <label>GitHub Repo Name</label>
+            <input type="text" id="repo-name" placeholder="gm-ops">
+            <label>GitHub Token</label>
+            <input type="password" id="github-token" placeholder="ghp_xxxx">
+            <label>Anthropic API Key</label>
+            <input type="password" id="anthropic-key" placeholder="sk-ant-xxxx">
+            <div class="modal-buttons">
+                <button class="modal-btn modal-btn-cancel" onclick="closeSettings()">Cancel</button>
+                <button class="modal-btn modal-btn-save" onclick="saveSettings()">Save</button>
             </div>
         </div>
+    </div>
 
-        <!-- Quick Reference -->
-        <div class="card" style="border-left: 4px solid var(--success);">
-            <h2>💡 Quick Start</h2>
-            <ol style="margin-left: 1.5rem; color: var(--text-secondary);">
-                <li style="margin-bottom: 0.5rem;">Paste transcript → Click <strong>Process</strong> → Click <strong>Push to GitHub</strong></li>
-                <li>Next session: Tell Claude "read the transcript from [date]"</li>
-            </ol>
+    <!-- Archives Modal -->
+    <div class="modal-overlay" id="archives-modal">
+        <div class="modal">
+            <h2>📚 Archived Transcripts</h2>
+            <div id="archives-list" style="max-height:300px;overflow-y:auto;"></div>
+            <div class="modal-buttons">
+                <button class="modal-btn modal-btn-cancel" onclick="closeArchives()">Close</button>
+            </div>
         </div>
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        let generatedSummary = '';
+
+        document.addEventListener('DOMContentLoaded', () => {
             loadSetup();
             document.getElementById('chat-date').value = new Date().toISOString().split('T')[0];
         });
 
-        function toggleVisibility(id) {
-            const input = document.getElementById(id);
-            input.type = input.type === 'password' ? 'text' : 'password';
-        }
+        function openSettings() { document.getElementById('settings-modal').classList.add('show'); }
+        function closeSettings() { document.getElementById('settings-modal').classList.remove('show'); }
 
-        function saveSetup() {
-            const setup = {
+        function saveSettings() {
+            localStorage.setItem('gmops-setup', JSON.stringify({
                 owner: document.getElementById('repo-owner').value,
                 repo: document.getElementById('repo-name').value,
                 githubToken: document.getElementById('github-token').value,
                 anthropicKey: document.getElementById('anthropic-key').value
-            };
-            localStorage.setItem('gmops-transcript-setup', JSON.stringify(setup));
-            document.getElementById('setup-saved').textContent = '✓ Saved';
-            showStatus('setup-status', 'Setup saved', 'success');
+            }));
+            closeSettings();
+            showStatus('Settings saved', 'success');
         }
 
         function loadSetup() {
-            const saved = localStorage.getItem('gmops-transcript-setup');
+            const saved = localStorage.getItem('gmops-setup');
             if (saved) {
-                const setup = JSON.parse(saved);
-                document.getElementById('repo-owner').value = setup.owner || 'nwcarlson-dev';
-                document.getElementById('repo-name').value = setup.repo || 'gm-ops';
-                document.getElementById('github-token').value = setup.githubToken || '';
-                document.getElementById('anthropic-key').value = setup.anthropicKey || '';
-                if (setup.githubToken) document.getElementById('setup-saved').textContent = '✓ Loaded';
+                const s = JSON.parse(saved);
+                document.getElementById('repo-owner').value = s.owner || 'nwcarlson-dev';
+                document.getElementById('repo-name').value = s.repo || 'gm-ops';
+                document.getElementById('github-token').value = s.githubToken || '';
+                document.getElementById('anthropic-key').value = s.anthropicKey || '';
             }
         }
 
-        function switchTab(tabName) {
-            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
-            event.target.classList.add('active');
-            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
-            document.getElementById(`${tabName}-tab`).classList.add('active');
-        }
-
-        function updateSteps(current) {
-            for (let i = 1; i <= 3; i++) {
-                const step = document.getElementById(`step-${i}`);
-                step.classList.remove('active', 'complete');
-                if (i < current) step.classList.add('complete');
-                if (i === current) step.classList.add('active');
-            }
+        function showStatus(msg, type) {
+            const el = document.getElementById('status');
+            el.className = `status ${type}`;
+            el.innerHTML = msg;
         }
 
         async function processTranscript() {
             const content = document.getElementById('chat-content').value;
-            const anthropicKey = document.getElementById('anthropic-key').value;
+            const key = document.getElementById('anthropic-key').value;
 
-            if (!content.trim()) { showStatus('chat-status', 'Paste a transcript first', 'error'); return; }
-            if (!anthropicKey) { showStatus('chat-status', 'Add Anthropic API key in Setup', 'error'); return; }
+            if (!content.trim()) { showStatus('Paste a transcript first', 'error'); return; }
+            if (!key) { showStatus('Add Anthropic key in ⚙️ Settings', 'error'); return; }
 
             const btn = document.getElementById('process-btn');
             btn.disabled = true;
             btn.innerHTML = '<span class="spinner"></span> Processing...';
-            showStatus('chat-status', 'Analyzing transcript with Claude...', 'info');
+            showStatus('Analyzing with Claude...', 'info');
 
             try {
-                const cleanedTranscript = cleanTranscript(content);
-                document.getElementById('chat-content').value = cleanedTranscript;
+                const cleaned = cleanTranscript(content);
+                document.getElementById('chat-content').value = cleaned;
 
-                const response = await fetch('https://api.anthropic.com/v1/messages', {
+                const res = await fetch('https://api.anthropic.com/v1/messages', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        'x-api-key': anthropicKey,
+                        'x-api-key': key,
                         'anthropic-version': '2023-06-01',
                         'anthropic-dangerous-direct-browser-access': 'true'
                     },
                     body: JSON.stringify({
                         model: 'claude-sonnet-4-20250514',
                         max_tokens: 500,
-                        messages: [{
-                            role: 'user',
-                            content: `Analyze this chat transcript and provide:
-1. A short title (5-8 words max)
-2. A bullet-point summary of key decisions and topics
+                        messages: [{ role: 'user', content: `Analyze this transcript. Provide:
+1. Short title (5-8 words)
+2. Bullet summary of key decisions
 
-Format EXACTLY like this:
+Format:
 TITLE: [title]
 SUMMARY:
-- [point 1]
-- [point 2]
+- [point]
 
 Transcript:
-${cleanedTranscript.substring(0, 15000)}`
-                        }]
+${cleaned.substring(0, 15000)}` }]
                     })
                 });
 
-                if (!response.ok) throw new Error((await response.json()).error?.message || 'API failed');
+                if (!res.ok) throw new Error((await res.json()).error?.message || 'API failed');
 
-                const data = await response.json();
+                const data = await res.json();
                 const text = data.content[0].text;
-                const titleMatch = text.match(/TITLE:\s*(.+)/i);
-                const summaryMatch = text.match(/SUMMARY:\s*([\s\S]+)/i);
+                const title = text.match(/TITLE:\s*(.+)/i)?.[1]?.trim() || 'Planning Session';
+                const summary = text.match(/SUMMARY:\s*([\s\S]+)/i)?.[1]?.trim() || '';
 
-                document.getElementById('chat-title').value = titleMatch ? titleMatch[1].trim() : 'GM Ops Planning Session';
-                document.getElementById('chat-summary').value = summaryMatch ? summaryMatch[1].trim() : 'No summary';
-                document.getElementById('generated-fields').classList.add('show');
+                document.getElementById('chat-title').value = title;
+                generatedSummary = summary;
+                document.getElementById('generated-bar').classList.add('show');
                 document.getElementById('push-btn').disabled = false;
 
-                updateSteps(3);
-                showStatus('chat-status', '✓ Processed! Review, then Push.', 'success');
-            } catch (error) {
-                showStatus('chat-status', `Error: ${error.message}`, 'error');
+                showStatus('✓ Ready to push', 'success');
+            } catch (e) {
+                showStatus(`Error: ${e.message}`, 'error');
             } finally {
                 btn.disabled = false;
                 btn.innerHTML = '⚡ Process';
@@ -447,21 +351,21 @@ ${cleanedTranscript.substring(0, 15000)}`
         }
 
         function cleanTranscript(raw) {
-            let lines = raw.split('\n'), formatted = [], speaker = '';
+            let lines = raw.split('\n'), out = [], speaker = '';
             for (let line of lines) {
                 line = line.trim();
-                if (!formatted.length && !line) continue;
-                if (line.match(/^Human:|^You:|^User:/i)) {
-                    if (speaker !== 'human') { formatted.push('\n---\n### 👤 Human\n'); speaker = 'human'; }
+                if (!out.length && !line) continue;
+                if (/^Human:|^You:|^User:/i.test(line)) {
+                    if (speaker !== 'H') { out.push('\n---\n### 👤 Human\n'); speaker = 'H'; }
                     line = line.replace(/^Human:|^You:|^User:/i, '').trim();
-                } else if (line.match(/^Assistant:|^Claude:|^AI:/i)) {
-                    if (speaker !== 'assistant') { formatted.push('\n---\n### 🤖 Claude\n'); speaker = 'assistant'; }
+                } else if (/^Assistant:|^Claude:|^AI:/i.test(line)) {
+                    if (speaker !== 'A') { out.push('\n---\n### 🤖 Claude\n'); speaker = 'A'; }
                     line = line.replace(/^Assistant:|^Claude:|^AI:/i, '').trim();
                 }
-                if (line.match(/typing|thinking/i) && line.length < 30) continue;
-                if (line) formatted.push(line);
+                if (/typing|thinking/i.test(line) && line.length < 30) continue;
+                if (line) out.push(line);
             }
-            return formatted.join('\n');
+            return out.join('\n');
         }
 
         async function pushChat() {
@@ -470,112 +374,59 @@ ${cleanedTranscript.substring(0, 15000)}`
             const repo = document.getElementById('repo-name').value;
             const title = document.getElementById('chat-title').value;
             const date = document.getElementById('chat-date').value;
-            const summary = document.getElementById('chat-summary').value;
             const content = document.getElementById('chat-content').value;
 
-            if (!token) { showStatus('chat-status', 'Set up GitHub token', 'error'); return; }
+            if (!token) { showStatus('Add GitHub token in ⚙️ Settings', 'error'); return; }
 
-            const safeTitle = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').substring(0, 50);
-            const filename = `transcripts/${date}-${safeTitle}.md`;
-            const fileContent = `# GM Ops Dev Planning Transcript\n## ${title}\n**Date:** ${date}\n\n### Summary\n${summary}\n\n---\n\n## Transcript\n\n${content}\n\n---\n*Archived via GM Ops Dev Planning Transcripts*\n`;
+            const btn = document.getElementById('push-btn');
+            btn.disabled = true;
+            btn.innerHTML = '<span class="spinner"></span> Pushing...';
+
+            const filename = `transcripts/${date}-${title.toLowerCase().replace(/[^a-z0-9]+/g, '-').substring(0, 50)}.md`;
+            const fileContent = `# GM Ops Dev Planning Transcript\n## ${title}\n**Date:** ${date}\n\n### Summary\n${generatedSummary}\n\n---\n\n## Transcript\n\n${content}\n`;
 
             try {
-                const btn = document.getElementById('push-btn');
-                btn.disabled = true;
-                btn.innerHTML = '<span class="spinner"></span> Pushing...';
-
                 let sha = null;
                 try {
                     const check = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${filename}`,
-                        { headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json' } });
+                        { headers: { 'Authorization': `token ${token}` } });
                     if (check.ok) sha = (await check.json()).sha;
                 } catch (e) {}
 
-                const body = { message: `Add transcript: ${title} (${date})`, content: btoa(unescape(encodeURIComponent(fileContent))), branch: 'main' };
+                const body = { message: `Add transcript: ${title}`, content: btoa(unescape(encodeURIComponent(fileContent))), branch: 'main' };
                 if (sha) body.sha = sha;
 
-                const response = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${filename}`, {
+                const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${filename}`, {
                     method: 'PUT',
-                    headers: { 'Authorization': `token ${token}`, 'Accept': 'application/vnd.github.v3+json', 'Content-Type': 'application/json' },
+                    headers: { 'Authorization': `token ${token}`, 'Content-Type': 'application/json' },
                     body: JSON.stringify(body)
                 });
 
-                if (response.ok) {
-                    const data = await response.json();
-                    showStatus('chat-status', `✓ Pushed! <a href="${data.content.html_url}" target="_blank" style="color:var(--success);">View on GitHub</a>`, 'success');
-                    document.getElementById('step-3').classList.add('complete');
+                if (res.ok) {
+                    const data = await res.json();
+                    showStatus(`✓ Pushed! <a href="${data.content.html_url}" target="_blank" style="color:var(--success)">View</a>`, 'success');
                 } else {
-                    showStatus('chat-status', `Failed: ${(await response.json()).message}`, 'error');
+                    showStatus(`Failed: ${(await res.json()).message}`, 'error');
                 }
-            } catch (error) {
-                showStatus('chat-status', `Error: ${error.message}`, 'error');
+            } catch (e) {
+                showStatus(`Error: ${e.message}`, 'error');
             } finally {
-                document.getElementById('push-btn').disabled = false;
-                document.getElementById('push-btn').innerHTML = '🚀 Push to GitHub';
+                btn.disabled = false;
+                btn.innerHTML = '🚀 Push to GitHub';
             }
         }
 
-        let fileCount = 0;
-        function addFileEntry() {
-            fileCount++;
-            const container = document.getElementById('files-container');
-            const entry = document.createElement('div');
-            entry.className = 'file-entry';
-            entry.id = `file-entry-${fileCount}`;
-            entry.innerHTML = `<span class="remove-file" onclick="this.parentElement.remove()">✕ Remove</span>
-                <label>File Path (e.g., docs/simulation.html)</label>
-                <input type="text" id="file-path-${fileCount}" placeholder="docs/filename.html">
-                <label>File Content</label>
-                <textarea id="file-content-${fileCount}" style="min-height:150px;" placeholder="Paste content..."></textarea>`;
-            container.appendChild(entry);
-        }
-
-        async function pushFiles() {
-            const token = document.getElementById('github-token').value;
-            const owner = document.getElementById('repo-owner').value;
-            const repo = document.getElementById('repo-name').value;
-            if (!token) { showStatus('files-status', 'Set up GitHub token', 'error'); return; }
-
-            const entries = document.querySelectorAll('.file-entry');
-            if (!entries.length) { showStatus('files-status', 'Add files first', 'error'); return; }
-
-            let success = 0, fail = 0;
-            for (const entry of entries) {
-                const id = entry.id.replace('file-entry-', '');
-                const path = document.getElementById(`file-path-${id}`).value;
-                const content = document.getElementById(`file-content-${id}`).value;
-                if (!path || !content) continue;
-
-                try {
-                    let sha = null;
-                    try {
-                        const check = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`,
-                            { headers: { 'Authorization': `token ${token}` } });
-                        if (check.ok) sha = (await check.json()).sha;
-                    } catch (e) {}
-
-                    const body = { message: `Update ${path}`, content: btoa(unescape(encodeURIComponent(content))), branch: 'main' };
-                    if (sha) body.sha = sha;
-
-                    const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/${path}`, {
-                        method: 'PUT',
-                        headers: { 'Authorization': `token ${token}`, 'Content-Type': 'application/json' },
-                        body: JSON.stringify(body)
-                    });
-                    res.ok ? success++ : fail++;
-                } catch (e) { fail++; }
-            }
-            showStatus('files-status', fail ? `${success} pushed, ${fail} failed` : `✓ Pushed ${success} file(s)`, fail ? 'error' : 'success');
-        }
+        function closeArchives() { document.getElementById('archives-modal').classList.remove('show'); }
 
         async function loadArchives() {
+            document.getElementById('archives-modal').classList.add('show');
+            const list = document.getElementById('archives-list');
             const token = document.getElementById('github-token').value;
             const owner = document.getElementById('repo-owner').value;
             const repo = document.getElementById('repo-name').value;
-            const list = document.getElementById('archives-list');
 
-            if (!token) { list.innerHTML = '<p style="color:var(--danger)">Set up GitHub token</p>'; return; }
-            list.innerHTML = '<p style="color:var(--text-secondary);text-align:center;">Loading...</p>';
+            if (!token) { list.innerHTML = '<p style="color:var(--danger)">Add GitHub token in Settings</p>'; return; }
+            list.innerHTML = '<p style="color:var(--text-secondary)">Loading...</p>';
 
             try {
                 const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/transcripts`,
@@ -583,23 +434,18 @@ ${cleanedTranscript.substring(0, 15000)}`
 
                 if (res.ok) {
                     const files = await res.json();
-                    if (!files.length) { list.innerHTML = '<p style="text-align:center;color:var(--text-secondary)">No transcripts yet</p>'; return; }
                     files.sort((a, b) => b.name.localeCompare(a.name));
-                    list.innerHTML = files.map(f => `<div class="archive-item"><a href="${f.html_url}" target="_blank">${f.name.replace('.md','')}</a><span class="date">${(f.size/1024).toFixed(1)} KB</span></div>`).join('');
+                    list.innerHTML = files.length ? files.map(f => 
+                        `<div style="padding:0.5rem;background:var(--bg-dark);border-radius:4px;margin-bottom:0.5rem;display:flex;justify-content:space-between;">
+                            <a href="${f.html_url}" target="_blank" style="color:var(--nfl-red);text-decoration:none;">${f.name.replace('.md','')}</a>
+                            <span style="color:var(--text-secondary);font-size:0.8rem;">${(f.size/1024).toFixed(1)}KB</span>
+                        </div>`).join('') : '<p style="color:var(--text-secondary)">No transcripts yet</p>';
                 } else if (res.status === 404) {
-                    list.innerHTML = '<p style="text-align:center;color:var(--text-secondary)">No transcripts folder yet</p>';
-                } else {
-                    list.innerHTML = `<p style="color:var(--danger)">Error: ${res.statusText}</p>`;
+                    list.innerHTML = '<p style="color:var(--text-secondary)">No transcripts folder yet</p>';
                 }
             } catch (e) {
-                list.innerHTML = `<p style="color:var(--danger)">Error: ${e.message}</p>`;
+                list.innerHTML = `<p style="color:var(--danger)">${e.message}</p>`;
             }
-        }
-
-        function showStatus(id, msg, type) {
-            const el = document.getElementById(id);
-            el.className = `status ${type}`;
-            el.innerHTML = msg;
         }
     </script>
 </body>
