@@ -103,6 +103,7 @@
         .btn-process:hover:not(:disabled) { background: #d97706; }
         .btn-push { background: var(--nfl-red); color: #fff; }
         .btn-push:hover:not(:disabled) { background: #b00808; }
+        .btn-secondary { background: var(--border-color); color: var(--text-primary); }
 
         .status {
             flex: 1;
@@ -131,7 +132,7 @@
             display: none;
             position: fixed;
             top: 0; left: 0; right: 0; bottom: 0;
-            background: rgba(0,0,0,0.7);
+            background: rgba(0,0,0,0.8);
             z-index: 100;
             align-items: center;
             justify-content: center;
@@ -145,10 +146,12 @@
             padding: 1.5rem;
             width: 90%;
             max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
         }
-        .modal h2 { margin-bottom: 1rem; font-size: 1.1rem; }
+        .modal h2 { margin-bottom: 1rem; font-size: 1.1rem; display: flex; align-items: center; gap: 0.5rem; }
         .modal label { display: block; margin-bottom: 0.25rem; color: var(--text-secondary); font-size: 0.85rem; }
-        .modal input {
+        .modal input, .modal textarea {
             width: 100%;
             padding: 0.6rem;
             margin-bottom: 1rem;
@@ -158,39 +161,71 @@
             color: var(--text-primary);
             font-size: 0.9rem;
         }
-        .modal input:focus { outline: none; border-color: var(--nfl-red); }
+        .modal input:focus, .modal textarea:focus { outline: none; border-color: var(--nfl-red); }
         .modal-buttons { display: flex; gap: 0.5rem; justify-content: flex-end; margin-top: 1rem; }
         .modal-btn {
-            padding: 0.5rem 1rem;
+            padding: 0.6rem 1.25rem;
             border: none;
             border-radius: 4px;
             cursor: pointer;
-            font-weight: 500;
+            font-weight: 600;
+            font-size: 0.95rem;
         }
         .modal-btn-cancel { background: var(--border-color); color: var(--text-primary); }
-        .modal-btn-save { background: var(--success); color: #fff; }
+        .modal-btn-push { background: var(--nfl-red); color: #fff; font-size: 1rem; padding: 0.75rem 1.5rem; }
+        .modal-btn-push:hover { background: #b00808; }
 
-        /* Generated info bar */
-        .generated-bar {
-            display: none;
-            background: var(--bg-card);
-            border: 1px solid var(--success);
-            border-radius: 6px;
-            padding: 0.75rem 1rem;
-            margin-bottom: 0.5rem;
-            flex-shrink: 0;
-        }
-        .generated-bar.show { display: flex; gap: 1rem; align-items: center; }
-        .generated-bar input {
-            flex: 1;
-            padding: 0.4rem 0.6rem;
-            border: 1px solid var(--border-color);
-            border-radius: 4px;
+        /* Review Modal Specific */
+        .review-section {
             background: var(--bg-dark);
-            color: var(--text-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            padding: 1rem;
+            margin-bottom: 1rem;
+        }
+        .review-section h3 {
+            font-size: 0.85rem;
+            color: var(--success);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .review-section p, .review-section ul {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        .review-section ul {
+            margin-left: 1.25rem;
+            margin-top: 0.5rem;
+        }
+        .review-section li { margin-bottom: 0.25rem; }
+
+        .file-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            background: var(--bg-card);
+            border-radius: 4px;
+            margin-bottom: 0.5rem;
             font-size: 0.85rem;
         }
-        .generated-bar label { color: var(--success); font-size: 0.8rem; font-weight: 600; white-space: nowrap; }
+        .file-item input[type="checkbox"] {
+            width: auto;
+            margin: 0;
+        }
+        .file-item code {
+            flex: 1;
+            color: var(--warning);
+            font-family: 'Monaco', 'Menlo', monospace;
+        }
+        .no-files { color: var(--text-secondary); font-style: italic; font-size: 0.85rem; }
+
+        .title-input {
+            font-size: 1.1rem !important;
+            font-weight: 600;
+        }
     </style>
 </head>
 <body>
@@ -203,19 +238,37 @@
     </header>
 
     <div class="main-content">
-        <div class="generated-bar" id="generated-bar">
-            <label>✓ Title:</label>
-            <input type="text" id="chat-title">
-            <label>Date:</label>
-            <input type="text" id="chat-date" style="max-width:120px;" readonly>
-        </div>
-
-        <textarea id="chat-content" placeholder="Paste your chat transcript here..."></textarea>
-
+        <textarea id="chat-content" placeholder="Paste your chat transcript here, then click Process..."></textarea>
         <div class="action-bar">
             <button class="btn btn-process" id="process-btn" onclick="processTranscript()">⚡ Process</button>
-            <button class="btn btn-push" id="push-btn" onclick="pushChat()" disabled>🚀 Push to GitHub</button>
             <div class="status" id="status"></div>
+        </div>
+    </div>
+
+    <!-- Review Modal (after processing) -->
+    <div class="modal-overlay" id="review-modal">
+        <div class="modal" style="max-width: 600px;">
+            <h2>📋 Review Before Pushing</h2>
+            
+            <label>Title</label>
+            <input type="text" id="chat-title" class="title-input">
+
+            <div class="review-section">
+                <h3>📝 Summary</h3>
+                <div id="summary-content"></div>
+            </div>
+
+            <div class="review-section">
+                <h3>📁 Files Detected in Chat</h3>
+                <div id="files-list"></div>
+            </div>
+
+            <input type="hidden" id="chat-date">
+
+            <div class="modal-buttons">
+                <button class="modal-btn modal-btn-cancel" onclick="closeReview()">Cancel</button>
+                <button class="modal-btn modal-btn-push" onclick="pushToGithub()">🚀 Push to GitHub</button>
+            </div>
         </div>
     </div>
 
@@ -233,7 +286,7 @@
             <input type="password" id="anthropic-key" placeholder="sk-ant-xxxx">
             <div class="modal-buttons">
                 <button class="modal-btn modal-btn-cancel" onclick="closeSettings()">Cancel</button>
-                <button class="modal-btn modal-btn-save" onclick="saveSettings()">Save</button>
+                <button class="modal-btn" style="background:var(--success);color:#fff;" onclick="saveSettings()">Save</button>
             </div>
         </div>
     </div>
@@ -250,16 +303,18 @@
     </div>
 
     <script>
-        let generatedSummary = '';
+        let cleanedTranscript = '';
+        let summaryText = '';
+        let detectedFiles = [];
 
         document.addEventListener('DOMContentLoaded', () => {
             loadSetup();
             document.getElementById('chat-date').value = new Date().toISOString().split('T')[0];
         });
 
+        // Settings
         function openSettings() { document.getElementById('settings-modal').classList.add('show'); }
         function closeSettings() { document.getElementById('settings-modal').classList.remove('show'); }
-
         function saveSettings() {
             localStorage.setItem('gmops-setup', JSON.stringify({
                 owner: document.getElementById('repo-owner').value,
@@ -270,7 +325,6 @@
             closeSettings();
             showStatus('Settings saved', 'success');
         }
-
         function loadSetup() {
             const saved = localStorage.getItem('gmops-setup');
             if (saved) {
@@ -282,10 +336,73 @@
             }
         }
 
+        // Archives
+        function closeArchives() { document.getElementById('archives-modal').classList.remove('show'); }
+        async function loadArchives() {
+            document.getElementById('archives-modal').classList.add('show');
+            const list = document.getElementById('archives-list');
+            const token = document.getElementById('github-token').value;
+            const owner = document.getElementById('repo-owner').value;
+            const repo = document.getElementById('repo-name').value;
+
+            if (!token) { list.innerHTML = '<p style="color:var(--danger)">Add GitHub token in Settings</p>'; return; }
+            list.innerHTML = '<p style="color:var(--text-secondary)">Loading...</p>';
+
+            try {
+                const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/transcripts`,
+                    { headers: { 'Authorization': `token ${token}` } });
+                if (res.ok) {
+                    const files = await res.json();
+                    files.sort((a, b) => b.name.localeCompare(a.name));
+                    list.innerHTML = files.length ? files.map(f => 
+                        `<div style="padding:0.5rem;background:var(--bg-dark);border-radius:4px;margin-bottom:0.5rem;display:flex;justify-content:space-between;">
+                            <a href="${f.html_url}" target="_blank" style="color:var(--nfl-red);text-decoration:none;">${f.name.replace('.md','')}</a>
+                            <span style="color:var(--text-secondary);font-size:0.8rem;">${(f.size/1024).toFixed(1)}KB</span>
+                        </div>`).join('') : '<p style="color:var(--text-secondary)">No transcripts yet</p>';
+                } else if (res.status === 404) {
+                    list.innerHTML = '<p style="color:var(--text-secondary)">No transcripts folder yet</p>';
+                }
+            } catch (e) {
+                list.innerHTML = `<p style="color:var(--danger)">${e.message}</p>`;
+            }
+        }
+
+        // Review Modal
+        function closeReview() { document.getElementById('review-modal').classList.remove('show'); }
+        function openReview() { document.getElementById('review-modal').classList.add('show'); }
+
         function showStatus(msg, type) {
             const el = document.getElementById('status');
             el.className = `status ${type}`;
             el.innerHTML = msg;
+        }
+
+        // Detect files in transcript
+        function detectFiles(text) {
+            const files = [];
+            // Match common file patterns
+            const patterns = [
+                /```(\w+)?\s*\n[\s\S]*?```/g,  // Code blocks
+                /(?:created?|generated?|saved?|wrote|writing|file)[:\s]+[`"']?([a-zA-Z0-9_\-\/]+\.(html|js|css|py|md|json|ts|jsx|tsx))[`"']?/gi,
+                /([a-zA-Z0-9_\-]+\.(html|js|css|py|md|json|ts|jsx|tsx))/g
+            ];
+            
+            // Find file mentions
+            const fileMatches = text.match(/(?:created?|generated?|saved?|file|writing)[:\s]*[`"']?([a-zA-Z0-9_\-\/\.]+\.(html|js|css|py|md|json|ts|jsx|tsx))[`"']?/gi) || [];
+            const seen = new Set();
+            
+            fileMatches.forEach(match => {
+                const fileMatch = match.match(/([a-zA-Z0-9_\-\/]+\.(html|js|css|py|md|json|ts|jsx|tsx))/i);
+                if (fileMatch && !seen.has(fileMatch[1])) {
+                    seen.add(fileMatch[1]);
+                    files.push(fileMatch[1]);
+                }
+            });
+
+            // Count code blocks
+            const codeBlocks = (text.match(/```[\s\S]*?```/g) || []).length;
+            
+            return { files, codeBlocks };
         }
 
         async function processTranscript() {
@@ -301,8 +418,12 @@
             showStatus('Analyzing with Claude...', 'info');
 
             try {
-                const cleaned = cleanTranscript(content);
-                document.getElementById('chat-content').value = cleaned;
+                cleanedTranscript = cleanTranscript(content);
+                document.getElementById('chat-content').value = cleanedTranscript;
+
+                // Detect files
+                const detected = detectFiles(content);
+                detectedFiles = detected.files;
 
                 const res = await fetch('https://api.anthropic.com/v1/messages', {
                     method: 'POST',
@@ -314,18 +435,19 @@
                     },
                     body: JSON.stringify({
                         model: 'claude-sonnet-4-20250514',
-                        max_tokens: 500,
+                        max_tokens: 600,
                         messages: [{ role: 'user', content: `Analyze this transcript. Provide:
-1. Short title (5-8 words)
-2. Bullet summary of key decisions
+1. Short title (5-8 words, descriptive of main topic)
+2. Bullet summary of key decisions, features discussed, and outcomes
 
-Format:
+Format EXACTLY like:
 TITLE: [title]
 SUMMARY:
 - [point]
+- [point]
 
 Transcript:
-${cleaned.substring(0, 15000)}` }]
+${cleanedTranscript.substring(0, 15000)}` }]
                     })
                 });
 
@@ -334,20 +456,48 @@ ${cleaned.substring(0, 15000)}` }]
                 const data = await res.json();
                 const text = data.content[0].text;
                 const title = text.match(/TITLE:\s*(.+)/i)?.[1]?.trim() || 'Planning Session';
-                const summary = text.match(/SUMMARY:\s*([\s\S]+)/i)?.[1]?.trim() || '';
+                summaryText = text.match(/SUMMARY:\s*([\s\S]+)/i)?.[1]?.trim() || 'No summary generated';
 
+                // Populate review modal
                 document.getElementById('chat-title').value = title;
-                generatedSummary = summary;
-                document.getElementById('generated-bar').classList.add('show');
-                document.getElementById('push-btn').disabled = false;
+                document.getElementById('summary-content').innerHTML = formatSummary(summaryText);
+                
+                // Populate files list
+                const filesList = document.getElementById('files-list');
+                if (detectedFiles.length > 0 || detected.codeBlocks > 0) {
+                    let filesHtml = '';
+                    detectedFiles.forEach((file, i) => {
+                        filesHtml += `<div class="file-item"><input type="checkbox" id="file-${i}" checked><code>${file}</code></div>`;
+                    });
+                    if (detected.codeBlocks > 0) {
+                        filesHtml += `<p style="margin-top:0.5rem;color:var(--text-secondary);font-size:0.85rem;">📦 ${detected.codeBlocks} code block(s) detected in transcript</p>`;
+                    }
+                    filesList.innerHTML = filesHtml;
+                } else {
+                    filesList.innerHTML = '<p class="no-files">No files detected in this transcript</p>';
+                }
 
-                showStatus('✓ Ready to push', 'success');
+                showStatus('', '');
+                openReview();
+
             } catch (e) {
                 showStatus(`Error: ${e.message}`, 'error');
             } finally {
                 btn.disabled = false;
                 btn.innerHTML = '⚡ Process';
             }
+        }
+
+        function formatSummary(text) {
+            // Convert markdown bullets to HTML
+            const lines = text.split('\n').filter(l => l.trim());
+            let html = '<ul>';
+            lines.forEach(line => {
+                const content = line.replace(/^[\-\*]\s*/, '').trim();
+                if (content) html += `<li>${content}</li>`;
+            });
+            html += '</ul>';
+            return html;
         }
 
         function cleanTranscript(raw) {
@@ -368,22 +518,39 @@ ${cleaned.substring(0, 15000)}` }]
             return out.join('\n');
         }
 
-        async function pushChat() {
+        async function pushToGithub() {
             const token = document.getElementById('github-token').value;
             const owner = document.getElementById('repo-owner').value;
             const repo = document.getElementById('repo-name').value;
             const title = document.getElementById('chat-title').value;
             const date = document.getElementById('chat-date').value;
-            const content = document.getElementById('chat-content').value;
 
-            if (!token) { showStatus('Add GitHub token in ⚙️ Settings', 'error'); return; }
+            if (!token) { alert('Add GitHub token in Settings'); return; }
 
-            const btn = document.getElementById('push-btn');
-            btn.disabled = true;
-            btn.innerHTML = '<span class="spinner"></span> Pushing...';
+            const pushBtn = document.querySelector('.modal-btn-push');
+            pushBtn.disabled = true;
+            pushBtn.innerHTML = '<span class="spinner"></span> Pushing...';
 
             const filename = `transcripts/${date}-${title.toLowerCase().replace(/[^a-z0-9]+/g, '-').substring(0, 50)}.md`;
-            const fileContent = `# GM Ops Dev Planning Transcript\n## ${title}\n**Date:** ${date}\n\n### Summary\n${generatedSummary}\n\n---\n\n## Transcript\n\n${content}\n`;
+            const fileContent = `# GM Ops Dev Planning Transcript
+## ${title}
+**Date:** ${date}
+
+### Summary
+${summaryText}
+
+### Files Referenced
+${detectedFiles.length > 0 ? detectedFiles.map(f => `- \`${f}\``).join('\n') : '_No files detected_'}
+
+---
+
+## Transcript
+
+${cleanedTranscript}
+
+---
+*Archived via GM Ops Dev Planning Transcripts*
+`;
 
             try {
                 let sha = null;
@@ -404,47 +571,18 @@ ${cleaned.substring(0, 15000)}` }]
 
                 if (res.ok) {
                     const data = await res.json();
-                    showStatus(`✓ Pushed! <a href="${data.content.html_url}" target="_blank" style="color:var(--success)">View</a>`, 'success');
+                    closeReview();
+                    showStatus(`✓ Pushed! <a href="${data.content.html_url}" target="_blank" style="color:var(--success)">View on GitHub</a>`, 'success');
+                    // Clear textarea for next use
+                    document.getElementById('chat-content').value = '';
                 } else {
-                    showStatus(`Failed: ${(await res.json()).message}`, 'error');
+                    alert(`Failed: ${(await res.json()).message}`);
                 }
             } catch (e) {
-                showStatus(`Error: ${e.message}`, 'error');
+                alert(`Error: ${e.message}`);
             } finally {
-                btn.disabled = false;
-                btn.innerHTML = '🚀 Push to GitHub';
-            }
-        }
-
-        function closeArchives() { document.getElementById('archives-modal').classList.remove('show'); }
-
-        async function loadArchives() {
-            document.getElementById('archives-modal').classList.add('show');
-            const list = document.getElementById('archives-list');
-            const token = document.getElementById('github-token').value;
-            const owner = document.getElementById('repo-owner').value;
-            const repo = document.getElementById('repo-name').value;
-
-            if (!token) { list.innerHTML = '<p style="color:var(--danger)">Add GitHub token in Settings</p>'; return; }
-            list.innerHTML = '<p style="color:var(--text-secondary)">Loading...</p>';
-
-            try {
-                const res = await fetch(`https://api.github.com/repos/${owner}/${repo}/contents/transcripts`,
-                    { headers: { 'Authorization': `token ${token}` } });
-
-                if (res.ok) {
-                    const files = await res.json();
-                    files.sort((a, b) => b.name.localeCompare(a.name));
-                    list.innerHTML = files.length ? files.map(f => 
-                        `<div style="padding:0.5rem;background:var(--bg-dark);border-radius:4px;margin-bottom:0.5rem;display:flex;justify-content:space-between;">
-                            <a href="${f.html_url}" target="_blank" style="color:var(--nfl-red);text-decoration:none;">${f.name.replace('.md','')}</a>
-                            <span style="color:var(--text-secondary);font-size:0.8rem;">${(f.size/1024).toFixed(1)}KB</span>
-                        </div>`).join('') : '<p style="color:var(--text-secondary)">No transcripts yet</p>';
-                } else if (res.status === 404) {
-                    list.innerHTML = '<p style="color:var(--text-secondary)">No transcripts folder yet</p>';
-                }
-            } catch (e) {
-                list.innerHTML = `<p style="color:var(--danger)">${e.message}</p>`;
+                pushBtn.disabled = false;
+                pushBtn.innerHTML = '🚀 Push to GitHub';
             }
         }
     </script>
