@@ -23,13 +23,13 @@
             --warning: #F59E0B;
             --danger: #EF4444;
         }
-        
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
         }
-        
+
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             background: var(--bg-dark);
@@ -39,14 +39,14 @@
             max-width: 1200px;
             margin: 0 auto;
         }
-        
+
         h1, h2, h3, h4 {
             font-family: 'Teko', sans-serif;
             font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.05em;
         }
-        
+
         h1 {
             font-size: 3rem;
             color: var(--white);
@@ -55,31 +55,31 @@
             align-items: center;
             gap: 1rem;
         }
-        
+
         h1 .logo {
             display: inline-flex;
             transform: skewX(-12deg);
         }
-        
+
         h1 .logo .gm {
             background: var(--nfl-red);
             color: white;
             padding: 0.2em 0.3em;
             font-weight: 700;
         }
-        
+
         h1 .logo .ops {
             background: var(--nfl-blue);
             color: white;
             padding: 0.2em 0.3em;
             font-weight: 700;
         }
-        
+
         h1 .logo .ops .ps {
             font-size: 0.8em;
             vertical-align: baseline;
         }
-        
+
         .subtitle {
             color: var(--text-secondary);
             font-size: 1.1rem;
@@ -87,7 +87,7 @@
             padding-bottom: 2rem;
             border-bottom: 1px solid var(--border-color);
         }
-        
+
         h2 {
             font-size: 1.8rem;
             color: var(--nfl-red);
@@ -95,39 +95,39 @@
             padding-bottom: 0.5rem;
             border-bottom: 2px solid var(--nfl-red);
         }
-        
+
         h3 {
             font-size: 1.3rem;
             color: var(--nfl-silver);
             margin: 1.5rem 0 0.75rem 0;
         }
-        
+
         h4 {
             font-size: 1.1rem;
             color: var(--text-secondary);
             margin: 1rem 0 0.5rem 0;
         }
-        
+
         p {
             margin-bottom: 1rem;
             color: var(--text-secondary);
         }
-        
+
         strong {
             color: var(--text-primary);
         }
-        
+
         a {
             color: var(--nfl-silver);
             text-decoration: none;
             border-bottom: 1px solid transparent;
             transition: border-color 0.2s;
         }
-        
+
         a:hover {
             border-bottom-color: var(--nfl-silver);
         }
-        
+
         code {
             background: var(--bg-card);
             padding: 0.2em 0.5em;
@@ -136,7 +136,7 @@
             font-size: 0.9em;
             color: var(--nfl-silver);
         }
-        
+
         pre {
             background: var(--bg-card);
             padding: 1.5rem;
@@ -145,14 +145,14 @@
             margin: 1rem 0;
             border: 1px solid var(--border-color);
         }
-        
+
         pre code {
             background: none;
             padding: 0;
             font-size: 0.85rem;
             line-height: 1.5;
         }
-        
+
         table {
             width: 100%;
             border-collapse: collapse;
@@ -161,13 +161,13 @@
             border-radius: 8px;
             overflow: hidden;
         }
-        
+
         th, td {
             padding: 0.75rem 1rem;
             text-align: left;
             border-bottom: 1px solid var(--border-color);
         }
-        
+
         th {
             background: var(--dark-navy);
             color: var(--white);
@@ -176,25 +176,25 @@
             text-transform: uppercase;
             letter-spacing: 0.05em;
         }
-        
+
         td {
             color: var(--text-secondary);
         }
-        
+
         tr:last-child td {
             border-bottom: none;
         }
-        
+
         ul, ol {
             margin: 1rem 0;
             padding-left: 1.5rem;
             color: var(--text-secondary);
         }
-        
+
         li {
             margin-bottom: 0.5rem;
         }
-        
+
         .card {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
@@ -202,7 +202,7 @@
             padding: 1.5rem;
             margin: 1rem 0;
         }
-        
+
         .badge {
             display: inline-block;
             padding: 0.25em 0.75em;
@@ -212,60 +212,66 @@
             text-transform: uppercase;
             letter-spacing: 0.05em;
         }
-        
+
         .badge-success {
             background: rgba(16, 185, 129, 0.2);
             color: var(--success);
         }
-        
+
         .badge-warning {
             background: rgba(245, 158, 11, 0.2);
             color: var(--warning);
         }
-        
+
         .badge-danger {
             background: rgba(239, 68, 68, 0.2);
             color: var(--danger);
         }
-        
+
         .badge-info {
             background: rgba(1, 51, 105, 0.3);
             color: var(--nfl-silver);
         }
-        
+
         .color-swatch {
             display: inline-flex;
             align-items: center;
             gap: 0.5rem;
         }
-        
+
         .color-swatch .swatch {
             width: 24px;
             height: 24px;
             border-radius: 4px;
             border: 1px solid var(--border-color);
         }
-        
+
         .grid-2 {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 1rem;
         }
-        
+
+        .grid-3 {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+        }
+
         .check {
             color: var(--success);
         }
-        
+
         .cross {
             color: var(--danger);
         }
-        
+
         hr {
             border: none;
             border-top: 1px solid var(--border-color);
             margin: 2rem 0;
         }
-        
+
         .toc {
             background: var(--bg-card);
             border: 1px solid var(--border-color);
@@ -273,27 +279,27 @@
             padding: 1.5rem;
             margin: 2rem 0;
         }
-        
+
         .toc h3 {
             margin-top: 0;
         }
-        
+
         .toc ul {
             columns: 2;
             column-gap: 2rem;
         }
-        
+
         .toc li {
             break-inside: avoid;
         }
-        
+
         .meta-info {
             display: flex;
             gap: 2rem;
             flex-wrap: wrap;
             margin-bottom: 1rem;
         }
-        
+
         .meta-item {
             display: flex;
             align-items: center;
@@ -301,7 +307,7 @@
             color: var(--text-secondary);
             font-size: 0.9rem;
         }
-        
+
         .disclaimer {
             background: rgba(239, 68, 68, 0.1);
             border: 1px solid var(--danger);
@@ -310,20 +316,26 @@
             margin: 1rem 0;
             font-size: 0.9rem;
         }
-        
+
+        .new-section {
+            border-left: 4px solid var(--success);
+            padding-left: 1rem;
+            margin-left: -1rem;
+        }
+
         @media (max-width: 768px) {
             body {
                 padding: 1rem;
             }
-            
+
             h1 {
                 font-size: 2rem;
             }
-            
+
             .toc ul {
                 columns: 1;
             }
-            
+
             .meta-info {
                 flex-direction: column;
                 gap: 0.5rem;
@@ -332,806 +344,1353 @@
     </style>
 </head>
 <body>
-    <header>
-        <h1>
-            <span class="logo">
-                <span class="gm">GM</span><span class="ops">O<span class="ps">PS</span></span>
-            </span>
-            Developer Guide
-        </h1>
-        <div class="meta-info">
-            <span class="meta-item">📅 Last Updated: January 2026</span>
-            <span class="meta-item">📁 <a href="https://github.com/nwcarlson-dev/gm-ops">GitHub Repository</a></span>
-            <span class="meta-item">🌐 <a href="https://nwcarlson-dev.github.io/gm-ops/">Live Site</a></span>
-        </div>
-        <p class="subtitle">
-            Project requirements, context, and development guide for the GM Ops NFL simulation platform.
-            <br><span class="badge badge-warning">Status: Active Development - Mock Draft Simulator MVP</span>
-        </p>
-    </header>
 
-    <nav class="toc">
-        <h3>📑 Table of Contents</h3>
+<header>
+    <h1>
+        <span class="logo">
+            <span class="gm">GM</span><span class="ops">O<span class="ps">PS</span></span>
+        </span>
+        Developer Guide
+    </h1>
+    <div class="meta-info">
+        <span class="meta-item">📅 Last Updated: January 22, 2026</span>
+        <span class="meta-item">📁 <a href="https://github.com/nwcarlson-dev/gm-ops">GitHub Repository</a></span>
+        <span class="meta-item">🌐 <a href="https://nwcarlson-dev.github.io/gm-ops/">Live Site</a></span>
+    </div>
+    <p class="subtitle">
+        Project requirements, context, and development guide for the GM Ops NFL simulation platform.
+        <br><span class="badge badge-warning">Status: Active Development - Mock Draft Simulator MVP</span>
+    </p>
+</header>
+
+<nav class="toc">
+    <h3>📑 Table of Contents</h3>
+    <ul>
+        <li><a href="#overview">Project Overview</a></li>
+        <li><a href="#branding">Branding & Identity</a></li>
+        <li><a href="#logo-specs">Logo Specifications</a></li>
+        <li><a href="#legal">Legal Considerations</a></li>
+        <li><a href="#tech">Technical Architecture</a></li>
+        <li><a href="#features">Current Features</a></li>
+        <li><a href="#player-system">Player Rating System</a></li>
+        <li><a href="#scheme-system">Scheme System</a></li>
+        <li><a href="#combine-system">Combine & Pro Day</a></li>
+        <li><a href="#coaching-system">Coaching Staff System</a></li>
+        <li><a href="#front-office">Front Office System</a></li>
+        <li><a href="#owner-system">Owner System</a></li>
+        <li><a href="#career-progression">Career Progression</a></li>
+        <li><a href="#todo">TODO & Roadmap</a></li>
+        <li><a href="#data">Data Model</a></li>
+        <li><a href="#future">Future Vision</a></li>
+        <li><a href="#workflow">Development Workflow</a></li>
+        <li><a href="#decisions">Key Decisions</a></li>
+    </ul>
+</nav>
+
+<section id="overview">
+    <h2>🎯 Project Overview</h2>
+    <p><strong>GM Ops</strong> is a web-based NFL simulation game starting with a Mock Draft Simulator and expanding to a full GM career simulation experience. The goal is to build the deepest, most realistic roster-building simulation available - focused on scouting, drafting, and team construction rather than play-calling.</p>
+
+    <h3>Product Roadmap</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Phase</th>
+                <th>Product</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td><strong>GM Ops: Draft</strong></td>
+                <td><span class="badge badge-warning">In Development</span></td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td><strong>GM Ops: Offseason</strong></td>
+                <td><span class="badge badge-info">Planned</span></td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td><strong>GM Ops: Franchise</strong></td>
+                <td><span class="badge badge-info">Planned</span></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Core Philosophy</h3>
+    <div class="card">
+        <p><strong>This is a roster construction simulator, not a play-calling simulator.</strong></p>
         <ul>
-            <li><a href="#overview">Project Overview</a></li>
-            <li><a href="#branding">Branding & Identity</a></li>
-            <li><a href="#logo-specs">Logo Specifications</a></li>
-            <li><a href="#legal">Legal Considerations</a></li>
-            <li><a href="#tech">Technical Architecture</a></li>
-            <li><a href="#features">Current Features</a></li>
-            <li><a href="#todo">TODO & Roadmap</a></li>
-            <li><a href="#data">Data Model</a></li>
-            <li><a href="#future">Future Vision</a></li>
-            <li><a href="#workflow">Development Workflow</a></li>
-            <li><a href="#decisions">Key Decisions</a></li>
+            <li>Schemes define which skills matter - they're skill preference profiles for roster building</li>
+            <li>Coaches have ratings that affect simulation outcomes, not play-by-play decisions</li>
+            <li>Gameplan sliders allow tendency adjustments (run/pass ratio, aggressiveness, etc.)</li>
+            <li>The user's job is to build a roster that fits the scheme, not call plays</li>
         </ul>
-    </nav>
+    </div>
 
-    <section id="overview">
-        <h2>🎯 Project Overview</h2>
-        <p><strong>GM Ops</strong> is a web-based NFL simulation game starting with a Mock Draft Simulator and expanding to a full franchise simulation experience.</p>
-        
-        <h3>Product Roadmap</h3>
+    <h3>Business Model</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Tier</th>
+                <th>Price</th>
+                <th>Features</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Free</strong></td>
+                <td>$0</td>
+                <td>Mock Draft Simulator (the hook)</td>
+            </tr>
+            <tr>
+                <td><strong>Annual Subscription</strong></td>
+                <td>$50/year</td>
+                <td>Full GM Career, Free Agency, Multi-season</td>
+            </tr>
+            <tr>
+                <td><strong>Loyalty Discount</strong></td>
+                <td>-$10/year</td>
+                <td>Auto-renew subscribers get $10 off each year (min $20)</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Target Audience</h3>
+    <ul>
+        <li>Fantasy football enthusiasts in their 30s-40s</li>
+        <li>Hardcore Madden franchise players frustrated with EA's neglect of franchise mode</li>
+        <li>Mock draft addicts</li>
+        <li>NFL analytics/stats nerds</li>
+        <li>Content creators who do mock drafts, rebuild series, etc.</li>
+    </ul>
+</section>
+
+<section id="branding">
+    <h2>🏈 Branding & Identity</h2>
+    <h3>Brand Name</h3>
+    <p><strong>GM Ops</strong> (General Manager Operations)</p>
+
+    <div class="card">
+        <h4>Why "GM Ops"?</h4>
+        <ul>
+            <li><strong>Instantly football?</strong> ✅ "GM" in sports context = General Manager building a roster</li>
+            <li><strong>Modern feel?</strong> ✅ "Ops" has that clean, tech/startup energy</li>
+            <li><strong>Implies the right scope?</strong> ✅ GM operations = drafting, signing, trading, cutting</li>
+            <li><strong>Doesn't imply stadium management?</strong> ✅ "GM Ops" feels player/roster focused</li>
+            <li><strong>Scales well?</strong> ✅ GM Ops: Draft, GM Ops: Offseason, GM Ops: Franchise</li>
+            <li><strong>Easy to say?</strong> ✅ Two syllables, punchy</li>
+            <li><strong>Memorable?</strong> ✅ Short, clean</li>
+        </ul>
+    </div>
+
+    <h3>Typography</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Usage</th>
+                <th>Font</th>
+                <th>Weight</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Logo / GM OPS text</td>
+                <td><strong>Teko</strong></td>
+                <td>Bold (700)</td>
+            </tr>
+            <tr>
+                <td>Sub-brand text (DRAFT, OFFSEASON, etc.)</td>
+                <td><strong>Barlow Condensed</strong></td>
+                <td>Bold (700)</td>
+            </tr>
+            <tr>
+                <td>Body text / UI</td>
+                <td><strong>Inter</strong> or system fonts</td>
+                <td>Regular (400) / Medium (500)</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Color Palette</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Color</th>
+                <th>Hex</th>
+                <th>Usage</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><span class="color-swatch"><span class="swatch" style="background: #D50A0A;"></span> NFL Red</span></td>
+                <td><code>#D50A0A</code></td>
+                <td>GM block background, primary accent</td>
+            </tr>
+            <tr>
+                <td><span class="color-swatch"><span class="swatch" style="background: #013369;"></span> NFL Blue</span></td>
+                <td><code>#013369</code></td>
+                <td>OPS block background, secondary accent</td>
+            </tr>
+            <tr>
+                <td><span class="color-swatch"><span class="swatch" style="background: #FFFFFF; border: 1px solid #374151;"></span> White</span></td>
+                <td><code>#FFFFFF</code></td>
+                <td>Text on dark, light backgrounds</td>
+            </tr>
+            <tr>
+                <td><span class="color-swatch"><span class="swatch" style="background: #A5ACAF;"></span> NFL Silver</span></td>
+                <td><code>#A5ACAF</code></td>
+                <td>Secondary text, sub-brand text on dark</td>
+            </tr>
+            <tr>
+                <td><span class="color-swatch"><span class="swatch" style="background: #0A1628;"></span> Dark Navy</span></td>
+                <td><code>#0A1628</code></td>
+                <td>Dark backgrounds, sub-brand text on light</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+<section id="logo-specs">
+    <h2>🎨 Logo Specifications</h2>
+    <h3>Core Logo Structure</h3>
+    <div class="card">
         <table>
             <thead>
                 <tr>
-                    <th>Phase</th>
-                    <th>Product</th>
-                    <th>Status</th>
+                    <th>Element</th>
+                    <th>Specification</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td>1</td>
-                    <td><strong>GM Ops: Draft</strong></td>
-                    <td><span class="badge badge-warning">In Development</span></td>
+                    <td>Primary Font</td>
+                    <td><strong>Teko Bold</strong></td>
                 </tr>
                 <tr>
-                    <td>2</td>
-                    <td><strong>GM Ops: Offseason</strong></td>
-                    <td><span class="badge badge-info">Planned</span></td>
+                    <td>Skew Angle</td>
+                    <td><strong>-12 degrees</strong> (leaning right)</td>
                 </tr>
                 <tr>
-                    <td>3</td>
-                    <td><strong>GM Ops: Franchise</strong></td>
-                    <td><span class="badge badge-info">Planned</span></td>
+                    <td>GM Typography</td>
+                    <td>All caps, full size</td>
+                </tr>
+                <tr>
+                    <td>OPS Typography</td>
+                    <td>"O" full size, "PS" at <strong>80%</strong> of O height</td>
+                </tr>
+                <tr>
+                    <td>Block Padding</td>
+                    <td>Consistent internal padding</td>
+                </tr>
+                <tr>
+                    <td>Block Gap</td>
+                    <td>Small gap between GM and OPS blocks</td>
                 </tr>
             </tbody>
         </table>
+    </div>
 
-        <h3>Business Model</h3>
-        <ul>
-            <li>Web-based game (no app store needed)</li>
-            <li>Potential subscription model in the future</li>
-            <li>Google Sheets integration for data storage/export</li>
-            <li>Firebase as potential backend for subscription features</li>
-        </ul>
+    <h3>Logo Variants Required</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Variant</th>
+                <th>Sub-text</th>
+                <th>Files Needed</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>Parent</strong></td>
+                <td>None</td>
+                <td>gm-ops-parent-dark.svg, gm-ops-parent-light.svg</td>
+            </tr>
+            <tr>
+                <td><strong>Draft</strong></td>
+                <td>"DRAFT"</td>
+                <td>gm-ops-draft-dark.svg, gm-ops-draft-light.svg</td>
+            </tr>
+            <tr>
+                <td><strong>Offseason</strong></td>
+                <td>"OFFSEASON"</td>
+                <td>gm-ops-offseason-dark.svg, gm-ops-offseason-light.svg</td>
+            </tr>
+            <tr>
+                <td><strong>Franchise</strong></td>
+                <td>"FRANCHISE"</td>
+                <td>gm-ops-franchise-dark.svg, gm-ops-franchise-light.svg</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
 
-        <h3>Target Audience</h3>
-        <ul>
-            <li>Fantasy football enthusiasts in their 30s-40s</li>
-            <li>Serious football nerds who want realistic GM simulation</li>
-            <li>Users who appreciate deep roster-building mechanics over arcade gameplay</li>
-        </ul>
-    </section>
+<section id="legal">
+    <h2>⚖️ Legal Considerations</h2>
+    <h3>What's Allowed (Nominative Fair Use)</h3>
+    <ul>
+        <li><span class="check">✅</span> Real NFL team names (Cowboys, Patriots, etc.)</li>
+        <li><span class="check">✅</span> Real player/prospect names</li>
+        <li><span class="check">✅</span> "NFL Draft" terminology</li>
+        <li><span class="check">✅</span> Team colors</li>
+        <li><span class="check">✅</span> City names + team references</li>
+        <li><span class="check">✅</span> Commentary/analysis tools</li>
+    </ul>
 
-    <section id="branding">
-        <h2>🏈 Branding & Identity</h2>
-        
-        <h3>Brand Name</h3>
-        <p><strong>GM Ops</strong> (General Manager Operations)</p>
-        <div class="card">
-            <h4>Why "GM Ops"?</h4>
-            <ul>
-                <li><strong>Instantly football?</strong> ✅ "GM" in sports context = General Manager building a roster</li>
-                <li><strong>Modern feel?</strong> ✅ "Ops" has that clean, tech/startup energy</li>
-                <li><strong>Implies the right scope?</strong> ✅ GM operations = drafting, signing, trading, cutting</li>
-                <li><strong>Doesn't imply stadium management?</strong> ✅ "GM Ops" feels player/roster focused</li>
-                <li><strong>Scales well?</strong> ✅ GM Ops: Draft, GM Ops: Offseason, GM Ops: Franchise</li>
-                <li><strong>Easy to say?</strong> ✅ Two syllables, punchy</li>
-                <li><strong>Memorable?</strong> ✅ Short, clean</li>
-            </ul>
-        </div>
+    <h3>What's NOT Allowed</h3>
+    <ul>
+        <li><span class="cross">❌</span> Official NFL shield logo</li>
+        <li><span class="cross">❌</span> Team logos (star, horseshoe, etc.)</li>
+        <li><span class="cross">❌</span> Anything implying official NFL endorsement</li>
+        <li><span class="cross">❌</span> Selling merchandise with NFL marks</li>
+        <li><span class="cross">❌</span> "NFL" in product/company name</li>
+    </ul>
 
-        <div class="card">
-            <h4>Name Evolution</h4>
-            <p>Originally considered "The League" (inspired by the FX TV show), but discovered trademark conflicts:</p>
-            <ul>
-                <li><strong>The League App, Inc.</strong> (Match Group) owns "THE LEAGUE" trademark in Class 9 (software/apps)</li>
-                <li>Match Group is a $3B company with significant legal resources</li>
-                <li>Both products would be in the same trademark class</li>
-            </ul>
-            <p><strong>Decision:</strong> Pivoted to "GM Ops" which is unique, ownable, and equally effective.</p>
-        </div>
+    <div class="disclaimer">
+        This application is not affiliated with, endorsed by, or connected to the National Football League (NFL), NFL Players Association (NFLPA), NCAA, or any professional or collegiate football team. All team and player names are used for commentary and analysis purposes.
+    </div>
+</section>
 
-        <h3>Typography</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>Usage</th>
-                    <th>Font</th>
-                    <th>Weight</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Logo / GM OPS text</td>
-                    <td><strong>Teko</strong></td>
-                    <td>Bold (700)</td>
-                </tr>
-                <tr>
-                    <td>Sub-brand text (DRAFT, OFFSEASON, etc.)</td>
-                    <td><strong>Barlow Condensed</strong></td>
-                    <td>Bold (700)</td>
-                </tr>
-                <tr>
-                    <td>Body text / UI</td>
-                    <td><strong>Inter</strong> or system fonts</td>
-                    <td>Regular (400) / Medium (500)</td>
-                </tr>
-            </tbody>
-        </table>
+<section id="tech">
+    <h2>🛠️ Technical Architecture</h2>
+    <h3>Tech Stack</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Layer</th>
+                <th>Technology</th>
+                <th>Notes</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Frontend</td>
+                <td>Vanilla HTML/CSS/JavaScript</td>
+                <td>Single-file architecture for MVP</td>
+            </tr>
+            <tr>
+                <td>Hosting</td>
+                <td>GitHub Pages</td>
+                <td>Free, reliable, CDN-backed</td>
+            </tr>
+            <tr>
+                <td>Data Storage (MVP)</td>
+                <td>Google Sheets</td>
+                <td>User-importable data, export support</td>
+            </tr>
+            <tr>
+                <td>Data Storage (Future)</td>
+                <td>Firebase</td>
+                <td>For subscription features, user accounts</td>
+            </tr>
+            <tr>
+                <td>Data Source</td>
+                <td>nflverse (nfl_data_py)</td>
+                <td>Draft picks, combine, rosters, contracts</td>
+            </tr>
+            <tr>
+                <td>Version Control</td>
+                <td>GitHub</td>
+                <td>Public repository</td>
+            </tr>
+        </tbody>
+    </table>
 
-        <h3>Color Palette</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>Color</th>
-                    <th>Hex</th>
-                    <th>Usage</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><span class="color-swatch"><span class="swatch" style="background: #D50A0A;"></span> NFL Red</span></td>
-                    <td><code>#D50A0A</code></td>
-                    <td>GM block background, primary accent</td>
-                </tr>
-                <tr>
-                    <td><span class="color-swatch"><span class="swatch" style="background: #013369;"></span> NFL Blue</span></td>
-                    <td><code>#013369</code></td>
-                    <td>OPS block background, secondary accent</td>
-                </tr>
-                <tr>
-                    <td><span class="color-swatch"><span class="swatch" style="background: #FFFFFF; border: 1px solid #374151;"></span> White</span></td>
-                    <td><code>#FFFFFF</code></td>
-                    <td>Text on dark, light backgrounds</td>
-                </tr>
-                <tr>
-                    <td><span class="color-swatch"><span class="swatch" style="background: #A5ACAF;"></span> NFL Silver</span></td>
-                    <td><code>#A5ACAF</code></td>
-                    <td>Secondary text, sub-brand text on dark</td>
-                </tr>
-                <tr>
-                    <td><span class="color-swatch"><span class="swatch" style="background: #0A1628;"></span> Dark Navy</span></td>
-                    <td><code>#0A1628</code></td>
-                    <td>Dark backgrounds, sub-brand text on light</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <h3>Potential Taglines</h3>
-        <ul>
-            <li>"GM Ops - Run Your Franchise"</li>
-            <li>"GM Ops - You Make The Calls"</li>
-            <li>"GM Ops - Build Your Dynasty"</li>
-        </ul>
-    </section>
-
-    <section id="logo-specs">
-        <h2>🎨 Logo Specifications</h2>
-        
-        <h3>Core Logo Structure</h3>
-        <div class="card">
-            <table>
-                <thead>
-                    <tr>
-                        <th>Element</th>
-                        <th>Specification</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Primary Font</td>
-                        <td><strong>Teko Bold</strong></td>
-                    </tr>
-                    <tr>
-                        <td>Skew Angle</td>
-                        <td><strong>-12 degrees</strong> (leaning right)</td>
-                    </tr>
-                    <tr>
-                        <td>GM Typography</td>
-                        <td>All caps, full size</td>
-                    </tr>
-                    <tr>
-                        <td>OPS Typography</td>
-                        <td>"O" full size, "PS" at <strong>80%</strong> of O height (indicates abbreviation, not acronym)</td>
-                    </tr>
-                    <tr>
-                        <td>Block Padding</td>
-                        <td>Consistent internal padding</td>
-                    </tr>
-                    <tr>
-                        <td>Block Gap</td>
-                        <td>Small gap between GM and OPS blocks</td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-
-        <h3>Logo Variants Required</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>Variant</th>
-                    <th>Sub-text</th>
-                    <th>Files Needed</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><strong>Parent</strong></td>
-                    <td>None</td>
-                    <td>gm-ops-parent-dark.svg, gm-ops-parent-light.svg</td>
-                </tr>
-                <tr>
-                    <td><strong>Draft</strong></td>
-                    <td>"DRAFT"</td>
-                    <td>gm-ops-draft-dark.svg, gm-ops-draft-light.svg</td>
-                </tr>
-                <tr>
-                    <td><strong>Offseason</strong></td>
-                    <td>"OFFSEASON"</td>
-                    <td>gm-ops-offseason-dark.svg, gm-ops-offseason-light.svg</td>
-                </tr>
-                <tr>
-                    <td><strong>Franchise</strong></td>
-                    <td>"FRANCHISE"</td>
-                    <td>gm-ops-franchise-dark.svg, gm-ops-franchise-light.svg</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <h3>Sub-brand Text Specifications</h3>
-        <div class="card">
-            <ul>
-                <li><strong>Font:</strong> Barlow Condensed Bold</li>
-                <li><strong>Letter spacing:</strong> 4px</li>
-                <li><strong>Alignment:</strong> Right-aligned (right edge aligns with right edge of OPS block)</li>
-                <li><strong>Skew:</strong> Same -12deg as main logo</li>
-                <li><strong>Color (dark bg):</strong> Silver (#A5ACAF)</li>
-                <li><strong>Color (light bg):</strong> Dark Navy (#0A1628)</li>
-            </ul>
-        </div>
-
-        <h3>Favicon Specifications</h3>
-        <div class="card">
-            <p>For favicons and small sizes, the full "GMOPS" text won't be readable. Use simplified versions:</p>
-            <ul>
-                <li><strong>favicon-gmops.svg</strong> - Simplified GM OPS blocks (for larger icon contexts)</li>
-                <li><strong>favicon-gm.svg</strong> - Just "GM" in the red block (for 16x16 and 32x32)</li>
-            </ul>
-            <p>Favicon sizes needed: 16x16, 32x32, 180x180 (Apple touch), 192x192, 512x512</p>
-        </div>
-
-        <h3>Brand Guidelines Document</h3>
-        <p>A comprehensive brand guidelines page is available at:</p>
-        <p><a href="https://nwcarlson-dev.github.io/gm-ops/brand-guidelines">https://nwcarlson-dev.github.io/gm-ops/brand-guidelines</a></p>
-    </section>
-
-    <section id="legal">
-        <h2>⚖️ Legal Considerations</h2>
-        
-        <h3>What's Allowed (Nominative Fair Use)</h3>
-        <ul>
-            <li><span class="check">✅</span> Real NFL team names (Cowboys, Patriots, etc.)</li>
-            <li><span class="check">✅</span> Real player/prospect names</li>
-            <li><span class="check">✅</span> "NFL Draft" terminology</li>
-            <li><span class="check">✅</span> Team colors</li>
-            <li><span class="check">✅</span> City names + team references</li>
-            <li><span class="check">✅</span> Commentary/analysis tools</li>
-        </ul>
-
-        <h3>What's NOT Allowed</h3>
-        <ul>
-            <li><span class="cross">❌</span> Official NFL shield logo</li>
-            <li><span class="cross">❌</span> Team logos (star, horseshoe, etc.)</li>
-            <li><span class="cross">❌</span> Anything implying official NFL endorsement</li>
-            <li><span class="cross">❌</span> Selling merchandise with NFL marks</li>
-            <li><span class="cross">❌</span> "NFL" in product/company name</li>
-        </ul>
-
-        <h3>Required Disclaimer</h3>
-        <div class="disclaimer">
-            This application is not affiliated with, endorsed by, or connected to the National Football League (NFL), NFL Players Association (NFLPA), NCAA, or any professional or collegiate football team. All team and player names are used for commentary and analysis purposes.
-        </div>
-
-        <h3>Safe Harbor Strategy</h3>
-        <ul>
-            <li>Ship with real team names (nominative fair use for commentary)</li>
-            <li>Use team colors but <strong>NO logos</strong></li>
-            <li>Allow user imports for custom data via Google Sheets</li>
-            <li>Clear "Not affiliated with NFL" disclaimer</li>
-            <li>Position as commentary/analysis tool</li>
-        </ul>
-    </section>
-
-    <section id="tech">
-        <h2>🛠️ Technical Architecture</h2>
-        
-        <h3>Tech Stack</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>Layer</th>
-                    <th>Technology</th>
-                    <th>Notes</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Frontend</td>
-                    <td>Vanilla HTML/CSS/JavaScript</td>
-                    <td>Single-file architecture for MVP</td>
-                </tr>
-                <tr>
-                    <td>Hosting</td>
-                    <td>GitHub Pages</td>
-                    <td>Free, reliable, CDN-backed</td>
-                </tr>
-                <tr>
-                    <td>Data Storage (MVP)</td>
-                    <td>Google Sheets</td>
-                    <td>User-importable data, export support</td>
-                </tr>
-                <tr>
-                    <td>Data Storage (Future)</td>
-                    <td>Firebase</td>
-                    <td>For subscription features, user accounts</td>
-                </tr>
-                <tr>
-                    <td>Version Control</td>
-                    <td>GitHub</td>
-                    <td>Public repository</td>
-                </tr>
-            </tbody>
-        </table>
-
-        <h3>Repository Structure</h3>
-        <pre><code>gm-ops/
+    <h3>Repository Structure</h3>
+    <pre><code>gm-ops/
 ├── index.html              # Setup screen (main entry point)
 ├── draft-room.html         # Draft simulator
-├── brand-guidelines        # Brand guide HTML
+├── brand-guidelines.html   # Brand guide
 ├── dev-guide.html          # This document
+├── gm-ops-logos.html       # Logo variants display
 ├── README.md               # Repository readme
-└── (future)
-    ├── css/                # Stylesheets
-    ├── js/                 # JavaScript modules
-    ├── data/               # Static data files
-    └── assets/
-        ├── logos/          # SVG logos
-        └── favicons/       # Favicon files</code></pre>
+├── data/
+│   ├── scripts/
+│   │   └── pull_nflverse_data.py
+│   └── raw/
+│       └── nflverse/       # CSV data files
+└── .github/
+    └── workflows/
+        └── update_nflverse_data.yml</code></pre>
+</section>
 
-        <h3>GitHub Pages Configuration</h3>
-        <ul>
-            <li><strong>URL:</strong> <a href="https://nwcarlson-dev.github.io/gm-ops/">https://nwcarlson-dev.github.io/gm-ops/</a></li>
-            <li><strong>Deploy from:</strong> main branch, root folder</li>
-            <li><strong>index.html</strong> loads automatically at root URL</li>
-            <li><strong>draft-room.html</strong> accessible at /draft-room.html</li>
-        </ul>
-    </section>
-
-    <section id="features">
-        <h2>📋 Current Features - Mock Draft Simulator</h2>
-        
-        <h3>Setup Screen (<code>index.html</code>)</h3>
-        <div class="grid-2">
-            <div class="card">
-                <h4>Team Selection</h4>
-                <ul>
-                    <li>All 32 NFL teams</li>
-                    <li>Sort by draft order or alphabetical</li>
-                    <li>Select all / deselect all</li>
-                    <li>Team cards showing:
-                        <ul>
-                            <li>Pick number</li>
-                            <li>Team name</li>
-                            <li>Record</li>
-                            <li>Team colors</li>
-                        </ul>
-                    </li>
-                    <li>Expandable details panel per team</li>
-                </ul>
-            </div>
-            <div class="card">
-                <h4>Settings Panel</h4>
-                <ul>
-                    <li>Number of rounds (1-7)</li>
-                    <li>Positional value slider</li>
-                    <li>Draft for needs slider</li>
-                    <li>CPU-to-CPU trades toggle</li>
-                    <li>"Enter Draft" button</li>
-                </ul>
-            </div>
+<section id="features">
+    <h2>📋 Current Features - Mock Draft Simulator</h2>
+    <h3>Setup Screen (<code>index.html</code>)</h3>
+    <div class="grid-2">
+        <div class="card">
+            <h4>Team Selection</h4>
+            <ul>
+                <li>All 32 NFL teams</li>
+                <li>Sort by draft order or alphabetical</li>
+                <li>Select all / deselect all</li>
+                <li>Team cards with pick number, record, colors</li>
+                <li>Expandable details panel per team</li>
+            </ul>
         </div>
-
-        <h3>Draft Room (<code>draft-room.html</code>)</h3>
-        <div class="grid-2">
-            <div class="card">
-                <h4>Draft Board</h4>
-                <ul>
-                    <li>Full 7-round draft order (224 picks)</li>
-                    <li>Real 2026 draft order with traded picks</li>
-                    <li>CPU draft logic with BPA + team needs</li>
-                    <li>Round-by-round navigation</li>
-                </ul>
-            </div>
-            <div class="card">
-                <h4>Big Board</h4>
-                <ul>
-                    <li>100+ players</li>
-                    <li>Player cards with scouting data</li>
-                    <li>Consensus ranges</li>
-                    <li>Strengths/weaknesses</li>
-                    <li>Fit analysis grades</li>
-                </ul>
-            </div>
-            <div class="card">
-                <h4>User Features</h4>
-                <ul>
-                    <li>Team needs tracking (updates when positions filled)</li>
-                    <li>Starred players / watchlist</li>
-                    <li>Position filtering</li>
-                    <li>Search functionality</li>
-                </ul>
-            </div>
-            <div class="card">
-                <h4>Sim Controls</h4>
-                <ul>
-                    <li>Manual (pick by pick)</li>
-                    <li>Slow (animated)</li>
-                    <li>Fast</li>
-                    <li>Instant (sim to user pick)</li>
-                </ul>
-            </div>
+        <div class="card">
+            <h4>Settings Panel</h4>
+            <ul>
+                <li>Number of rounds (1-7)</li>
+                <li>Positional value slider</li>
+                <li>Draft for needs slider</li>
+                <li>CPU-to-CPU trades toggle</li>
+                <li>"Enter Draft" button</li>
+            </ul>
         </div>
+    </div>
 
-        <h3>Audio</h3>
+    <h3>Draft Room (<code>draft-room.html</code>)</h3>
+    <div class="grid-2">
+        <div class="card">
+            <h4>Draft Board</h4>
+            <ul>
+                <li>Full 7-round draft order (224 picks)</li>
+                <li>Real 2026 draft order with traded picks</li>
+                <li>CPU draft logic with BPA + team needs</li>
+                <li>Round-by-round navigation</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h4>Big Board</h4>
+            <ul>
+                <li>100+ players</li>
+                <li>Player cards with scouting data</li>
+                <li>Consensus ranges</li>
+                <li>Strengths/weaknesses</li>
+                <li>Fit analysis grades</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<section id="player-system" class="new-section">
+    <h2>🏃 Player Rating System</h2>
+    <p>Each player has Physical Attributes, Position Skills, and Universal Skills. Schemes define importance weights for each skill.</p>
+
+    <h3>Physical Attributes (All Players)</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Attribute</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>Height</td><td>In inches</td></tr>
+            <tr><td>Weight</td><td>In pounds</td></tr>
+            <tr><td>Arm Length</td><td>In inches (critical for OT, DL, Edge, CB)</td></tr>
+            <tr><td>Wingspan</td><td>Fingertip to fingertip</td></tr>
+            <tr><td>Hand Size</td><td>In inches</td></tr>
+            <tr><td>Speed</td><td>40-yard dash time</td></tr>
+            <tr><td>Agility</td><td>3-cone / shuttle times</td></tr>
+            <tr><td>Vertical</td><td>Vertical jump</td></tr>
+            <tr><td>Strength</td><td>Bench press / functional strength</td></tr>
+        </tbody>
+    </table>
+
+    <h3>Universal Skills (All Players)</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Skill</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>Motor</td><td>Consistent effort, playing hard every snap</td></tr>
+            <tr><td>Mentoring</td><td>Ability to develop younger players (translates to coaching)</td></tr>
+            <tr><td>Punt Return</td><td>Fielding, decision making, return ability</td></tr>
+            <tr><td>Kick Return</td><td>Fielding, decision making, return ability</td></tr>
+            <tr><td>Coverage Instincts</td><td>Pursuit angles, tackling on coverage units</td></tr>
+            <tr><td>Gunner</td><td>Speed and ability to beat blocks on punt coverage</td></tr>
+        </tbody>
+    </table>
+
+    <h3>Contact Aggression (Universal)</h3>
+    <div class="card">
+        <p>Every player has a <strong>Contact Aggression</strong> rating that means different things by position:</p>
         <ul>
-            <li>Draft jingle plays on setup screen</li>
+            <li><strong>Ball carriers (QB/RB/FB/WR/TE):</strong> Seeking contact vs. protecting self</li>
+            <li><strong>Defenders (DB/LB):</strong> Willingness to hit/tackle, seeking big hits</li>
+            <li><strong>Offensive line:</strong> Aggression, finishing blocks</li>
+            <li><strong>Defensive line:</strong> Violence at point of attack</li>
         </ul>
-    </section>
+    </div>
 
-    <section id="todo">
-        <h2>🚧 TODO & Roadmap</h2>
-        
-        <h3>High Priority (10-20 hours total)</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>Feature</th>
-                    <th>Est. Hours</th>
-                    <th>Notes</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Connect setup → draft room</td>
-                    <td>2-3 hrs</td>
-                    <td>Pass settings between screens</td>
-                </tr>
-                <tr>
-                    <td>Trade system</td>
-                    <td>4-6 hrs</td>
-                    <td>Trade value chart, offer generation, user-initiated trades</td>
-                </tr>
-                <tr>
-                    <td>Draft results/summary</td>
-                    <td>2 hrs</td>
-                    <td>Grades, recap, Google Sheets export</td>
-                </tr>
-            </tbody>
-        </table>
+    <h3>Position Skills</h3>
+    <div class="grid-2">
+        <div class="card">
+            <h4>Quarterback (QB) - 11 Skills</h4>
+            <ul>
+                <li>Arm Strength</li>
+                <li>Short Accuracy</li>
+                <li>Medium Accuracy</li>
+                <li>Deep Accuracy</li>
+                <li>Throw on Run</li>
+                <li>Pocket Presence</li>
+                <li>Decision Making</li>
+                <li>Release Speed</li>
+                <li>Mobility</li>
+                <li>Elusiveness</li>
+                <li>Contact Aggression</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h4>Running Back (RB) - 10 Skills</h4>
+            <ul>
+                <li>Speed</li>
+                <li>Acceleration</li>
+                <li>Agility</li>
+                <li>Vision</li>
+                <li>Contact Balance</li>
+                <li>Tackle Breaking</li>
+                <li>Contact Aggression</li>
+                <li>Ball Security</li>
+                <li>Pass Catching</li>
+                <li>Pass Protection</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h4>Wide Receiver (WR) - 11 Skills</h4>
+            <ul>
+                <li>Speed</li>
+                <li>Acceleration</li>
+                <li>Route Running</li>
+                <li>Separation</li>
+                <li>Hands</li>
+                <li>Contested Catch</li>
+                <li>YAC Ability</li>
+                <li>Release</li>
+                <li>Decision Making</li>
+                <li>Run Blocking</li>
+                <li>Contact Aggression</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h4>Tight End (TE) - 8 Skills</h4>
+            <ul>
+                <li>Run Blocking</li>
+                <li>Pass Catching</li>
+                <li>Route Running</li>
+                <li>YAC Ability</li>
+                <li>Speed</li>
+                <li>Release</li>
+                <li>Pass Protection</li>
+                <li>Contact Aggression</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h4>Offensive Tackle (OT) - 8 Skills</h4>
+            <ul>
+                <li>Pass Protection</li>
+                <li>Run Blocking</li>
+                <li>Awareness</li>
+                <li>Footwork</li>
+                <li>Anchor</li>
+                <li>Recovery</li>
+                <li>Pull Ability</li>
+                <li>Contact Aggression</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h4>Interior DL (IDL) - 9 Skills</h4>
+            <ul>
+                <li>Run Stuffing</li>
+                <li>Pass Rush</li>
+                <li>Bull Rush</li>
+                <li>Pass Rush Moves</li>
+                <li>Block Shedding</li>
+                <li>Anchor</li>
+                <li>Pursuit</li>
+                <li>Double Team Occupy</li>
+                <li>Contact Aggression</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h4>Edge - 9 Skills</h4>
+            <ul>
+                <li>Pass Rush</li>
+                <li>Speed Rush</li>
+                <li>Power Rush</li>
+                <li>Pass Rush Moves</li>
+                <li>Run Defense</li>
+                <li>Block Shedding</li>
+                <li>Pursuit</li>
+                <li>Coverage</li>
+                <li>Contact Aggression</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h4>Defensive Back (DB) - 10 Skills</h4>
+            <ul>
+                <li>Man Coverage</li>
+                <li>Zone Coverage</li>
+                <li>Press</li>
+                <li>Ball Skills</li>
+                <li>Tackling</li>
+                <li>Contact Aggression</li>
+                <li>Run Support</li>
+                <li>Range</li>
+                <li>Slot Coverage</li>
+                <li>Recovery</li>
+            </ul>
+        </div>
+    </div>
 
-        <h3>Medium Priority</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>Feature</th>
-                    <th>Est. Hours</th>
-                    <th>Notes</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Roster context</td>
-                    <td>2-3 hrs</td>
-                    <td>Show existing starters</td>
-                </tr>
-                <tr>
-                    <td>Smarter CPU logic</td>
-                    <td>2-3 hrs</td>
-                    <td>Team tendencies, reach/value decisions</td>
-                </tr>
-                <tr>
-                    <td>Testing & bug fixes</td>
-                    <td>2-3 hrs</td>
-                    <td>Edge cases</td>
-                </tr>
-            </tbody>
-        </table>
+    <h3>Archetypes (Cosmetic Only)</h3>
+    <p>Archetypes are labels determined by a player's highest skills. They do NOT affect scheme fit - only skills do.</p>
+    <table>
+        <thead>
+            <tr>
+                <th>Position</th>
+                <th>Archetypes</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>QB</td><td>Field General, Scrambler, Gunslinger, Game Manager</td></tr>
+            <tr><td>RB</td><td>Power Back, Speed Back, Receiving Back, All-Purpose</td></tr>
+            <tr><td>WR</td><td>Deep Threat, Possession, Slot Specialist, Contested Catch</td></tr>
+            <tr><td>TE</td><td>Receiving, Blocking, All-Around</td></tr>
+            <tr><td>OL</td><td>Pass Protector, Mauler, Technician</td></tr>
+            <tr><td>IDL</td><td>Nose Tackle, Pass Rusher, Run Stuffer</td></tr>
+            <tr><td>Edge</td><td>Speed Rusher, Power Rusher, Run Defender, Hybrid</td></tr>
+            <tr><td>LB</td><td>Run Stopper, Coverage, Blitzer, All-Around</td></tr>
+            <tr><td>DB</td><td>Shutdown, Ball Hawk, Run Support, Slot Specialist</td></tr>
+        </tbody>
+    </table>
+</section>
 
-        <h3>Nice to Have</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>Feature</th>
-                    <th>Est. Hours</th>
-                    <th>Notes</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Mobile responsiveness</td>
-                    <td>2-3 hrs</td>
-                    <td>Optimize for tablets and phones</td>
-                </tr>
-                <tr>
-                    <td>Sound effects</td>
-                    <td>1 hr</td>
-                    <td>Pick announcements, trade alerts</td>
-                </tr>
-                <tr>
-                    <td>Logo SVG exports</td>
-                    <td>1-2 hrs</td>
-                    <td>Clean vector exports for all variants</td>
-                </tr>
-            </tbody>
-        </table>
+<section id="scheme-system" class="new-section">
+    <h2>📋 Scheme System</h2>
+    <p>Schemes define skill importance weights (0-100) for each position. Weights must average to 50 across all skills for that position. Higher weight = more important for scheme fit.</p>
 
-        <h3>Timeline</h3>
-        <p><strong>Target:</strong> Public launch of Mock Draft Simulator by <strong>early February 2026</strong></p>
-    </section>
+    <div class="card">
+        <h4>Scheme Fit Calculation</h4>
+        <p><code>Player Scheme Fit = Σ(Skill Rating × Importance Weight) / Σ(Importance Weights)</code></p>
+        <p>A player can be "bad" for one team and perfect for another based on skill weights.</p>
+    </div>
 
-    <section id="data">
-        <h2>📊 Data Model</h2>
-        
-        <h3>Team Data Structure</h3>
-        <pre><code>{
-  n: "Raiders",                    // Team name
-  p: 1,                            // Pick number
-  c: "#000000",                    // Primary color
-  rec: "3-14",                     // Record
-  oc: "OC Name",                   // Offensive coordinator
-  dc: "DC Name",                   // Defensive coordinator
-  offScheme: "...",                // Offensive scheme
-  defScheme: "...",                // Defensive scheme
-  offNeeds: [                      // [isCritical, position, archetype]
-    [true, "Quarterback", "Dual-Threat"],
-    [false, "Wide Receiver", "Field Stretcher"]
-  ],
-  defNeeds: [...],
-  summary: "..."                   // Key notes
+    <h3>Offensive Schemes</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Scheme</th>
+                <th>Philosophy</th>
+                <th>Key Traits</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>West Coast</strong></td>
+                <td>Short, timing-based passing. YAC emphasis.</td>
+                <td>High: Short Accuracy, Release Speed, Route Running, YAC</td>
+            </tr>
+            <tr>
+                <td><strong>Air Raid</strong></td>
+                <td>Spread formations, 4-5 WR sets, mesh concepts.</td>
+                <td>High: Release Speed, Hands, Pass Catching (RB)</td>
+            </tr>
+            <tr>
+                <td><strong>Shanahan/McVay Outside Zone</strong></td>
+                <td>Wide zone running, heavy play-action, motion.</td>
+                <td>High: Vision, Agility, Throw on Run, Run Blocking (WR/TE)</td>
+            </tr>
+            <tr>
+                <td><strong>Power/Gap Scheme</strong></td>
+                <td>Downhill running, pulling guards, physical identity.</td>
+                <td>High: Contact Balance, Tackle Breaking, Pull Ability</td>
+            </tr>
+            <tr>
+                <td><strong>Spread Option / RPO</strong></td>
+                <td>Zone read, RPOs, mobile QB, numbers game.</td>
+                <td>High: Mobility, Decision Making, Acceleration</td>
+            </tr>
+            <tr>
+                <td><strong>Erhardt-Perkins</strong></td>
+                <td>Concept-based, multiple formations, option routes.</td>
+                <td>High: Decision Making, Pocket Presence, WR Decision Making</td>
+            </tr>
+            <tr>
+                <td><strong>Vertical/Deep Shot</strong></td>
+                <td>Take the top off, big plays, strong arm.</td>
+                <td>High: Arm Strength, Deep Accuracy, Speed (WR)</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Defensive Schemes</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Scheme</th>
+                <th>Philosophy</th>
+                <th>Key Traits</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td><strong>4-3 Under</strong></td>
+                <td>Strong side overload, good vs run.</td>
+                <td>High: Anchor (Nose), Pass Rush (3-tech), Run Defense (Edge)</td>
+            </tr>
+            <tr>
+                <td><strong>3-4 Base</strong></td>
+                <td>Two-gap DL, versatile OLBs, disguise.</td>
+                <td>High: Anchor, Double Team Occupy, Coverage (OLB)</td>
+            </tr>
+            <tr>
+                <td><strong>Tampa 2</strong></td>
+                <td>Two-deep safeties, MLB drops deep, bend don't break.</td>
+                <td>High: Zone Coverage (MLB), Range (S), Pass Rush (DL)</td>
+            </tr>
+            <tr>
+                <td><strong>Cover 3 / Seattle</strong></td>
+                <td>Single high safety, press corners, physical.</td>
+                <td>High: Press, Contact Aggression, Range (FS)</td>
+            </tr>
+            <tr>
+                <td><strong>Fangio System</strong></td>
+                <td>Multiple fronts, heavy disguise, quarters-based.</td>
+                <td>High: Zone Coverage, Instincts, Versatility</td>
+            </tr>
+            <tr>
+                <td><strong>Aggressive Man / Blitz Heavy</strong></td>
+                <td>Press man, heavy blitzing, take risks.</td>
+                <td>High: Man Coverage, Press, Blitzing, Pass Rush</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>2025 NFL Team Scheme Classifications</h3>
+    <p>Each team is assigned to an offensive and defensive scheme based on their play-caller's philosophy.</p>
+    <p><em>See supplementary document: <code>gm-ops-team-schemes-2025.md</code></em></p>
+</section>
+
+<section id="combine-system" class="new-section">
+    <h2>🏋️ Combine & Pro Day System</h2>
+    <p>Combine and Pro Day results project to player skill ratings for rookies.</p>
+
+    <h3>Measured Drills (Objective)</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Drill</th>
+                <th>Maps To</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>40-yard dash</td><td>Speed</td></tr>
+            <tr><td>10-yard split</td><td>Acceleration</td></tr>
+            <tr><td>Bench Press (225 reps)</td><td>Strength</td></tr>
+            <tr><td>Vertical Jump</td><td>Explosiveness, Vertical</td></tr>
+            <tr><td>Broad Jump</td><td>Explosiveness, Power</td></tr>
+            <tr><td>3-Cone Drill</td><td>Agility</td></tr>
+            <tr><td>20-Yard Shuttle</td><td>Agility, Change of Direction</td></tr>
+        </tbody>
+    </table>
+
+    <h3>Position Drills (Subjective 1-10 Ratings)</h3>
+    <p>Each position has 4-8 drill categories with multiple performance ratings that map to specific skills.</p>
+    <div class="card">
+        <h4>Example: QB Drills</h4>
+        <ul>
+            <li><strong>Passing Drills:</strong> Short Accuracy, Medium Accuracy, Deep Accuracy, Timing Routes, On-the-Move</li>
+            <li><strong>Footwork/Mechanics:</strong> Drop-Back, Pocket Movement, Rollout, Scramble</li>
+        </ul>
+        <h4>Example: OL Drills</h4>
+        <ul>
+            <li><strong>Pass Protection:</strong> Kick Slide, Mirror, Anchor, Stunt Pickup</li>
+            <li><strong>Run Blocking:</strong> Drive Block, Reach, Combo, Pull</li>
+        </ul>
+    </div>
+
+    <h3>Projection Formula (Conceptual)</h3>
+    <p><code>Player Skill Rating = f(Combine Measurables, Position Drill Ratings, College Production, Medical)</code></p>
+</section>
+
+<section id="coaching-system" class="new-section">
+    <h2>👔 Coaching Staff System</h2>
+    <p>All coaches have ALL coaching ratings for both sides of the ball. A coach might specialize, but they have ability across the board.</p>
+
+    <h3>Coaching Positions</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Position</th>
+                <th>Primary Role</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td><strong>Head Coach (HC)</strong></td><td>Sets culture, final decisions, may call plays</td></tr>
+            <tr><td><strong>Offensive Coordinator (OC)</strong></td><td>Offensive play design, may call plays</td></tr>
+            <tr><td><strong>Defensive Coordinator (DC)</strong></td><td>Defensive play design, may call plays</td></tr>
+            <tr><td><strong>Pass Game Coordinator (Off)</strong></td><td>Route concepts, protection schemes</td></tr>
+            <tr><td><strong>Run Game Coordinator (Off)</strong></td><td>Blocking schemes, RB/OL development</td></tr>
+            <tr><td><strong>Pass Game Coordinator (Def)</strong></td><td>Coverage schemes, DB development</td></tr>
+            <tr><td><strong>Run Game Coordinator (Def)</strong></td><td>Front alignment, LB/DL development</td></tr>
+            <tr><td><strong>QB Coach</strong></td><td>QB mechanics, film study, high impact on QB development</td></tr>
+        </tbody>
+    </table>
+
+    <h3>Coaching Ratings (All Coaches Have All)</h3>
+    <div class="grid-3">
+        <div class="card">
+            <h4>Leadership & Management</h4>
+            <ul>
+                <li>Leadership</li>
+                <li>Mentoring / Player Development</li>
+                <li>Game Management</li>
+                <li>Clock Management</li>
+                <li>Challenge Decisions</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h4>Offensive Scheme</h4>
+            <ul>
+                <li>Off Play Design</li>
+                <li>Off Play Calling</li>
+                <li>Off Adaptability</li>
+                <li>Pass Game Knowledge</li>
+                <li>Run Game Knowledge</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h4>Defensive Scheme</h4>
+            <ul>
+                <li>Def Play Design</li>
+                <li>Def Play Calling</li>
+                <li>Def Adaptability</li>
+                <li>Coverage Knowledge</li>
+                <li>Front/Pressure Knowledge</li>
+            </ul>
+        </div>
+    </div>
+
+    <h3>Position Development Ratings (All Coaches)</h3>
+    <p>Each coach has a development rating for every position group:</p>
+    <ul>
+        <li>QB Development, RB Development, WR Development, TE Development, OL Development</li>
+        <li>DL Development, LB Development, DB Development, ST Development</li>
+    </ul>
+
+    <h3>Gameplan Sliders</h3>
+    <p>Coaches have default values that can be adjusted by the GM:</p>
+    <table>
+        <thead>
+            <tr>
+                <th>Slider</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>Run-Pass Ratio</td><td>Tendency toward running vs passing</td></tr>
+            <tr><td>Play Aggressiveness</td><td>Conservative vs aggressive play calling</td></tr>
+            <tr><td>Gadget Tendency</td><td>Use of trick plays, unusual formations</td></tr>
+            <tr><td>Go-for-it Tendency</td><td>4th down decisions</td></tr>
+            <tr><td>Blitz Rate</td><td>Defensive pressure tendency</td></tr>
+        </tbody>
+    </table>
+
+    <h3>Scheme Changes</h3>
+    <div class="card">
+        <p>Scheme changes are rare and driven by:</p>
+        <ul>
+            <li>Hiring a new coach who runs a different scheme</li>
+            <li>HC randomly suggests switching to better fit roster (GM can accept/decline)</li>
+        </ul>
+        <p><strong>The GM does NOT tell a coach to switch schemes.</strong></p>
+    </div>
+</section>
+
+<section id="front-office" class="new-section">
+    <h2>🏢 Front Office System</h2>
+    <p>Front office staff under the GM. All FO personnel have ALL evaluation ratings - they specialize but have ability across positions.</p>
+
+    <h3>Front Office Positions</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Position</th>
+                <th>Primary Role</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td><strong>Assistant GM</strong></td><td>GM succession candidate, broad responsibilities</td></tr>
+            <tr><td><strong>Director of Player Personnel</strong></td><td>Overall talent evaluation</td></tr>
+            <tr><td><strong>Director of College Scouting</strong></td><td>Draft focus, prospect evaluation</td></tr>
+            <tr><td><strong>Director of Pro Scouting</strong></td><td>Trade/FA evaluation, roster management</td></tr>
+            <tr><td><strong>Cap Manager / Contract Negotiator</strong></td><td>Salary cap, contract structure</td></tr>
+        </tbody>
+    </table>
+
+    <h3>Front Office Ratings (All FO Have All)</h3>
+    <div class="grid-2">
+        <div class="card">
+            <h4>Position Evaluation</h4>
+            <ul>
+                <li>QB Evaluation</li>
+                <li>RB Evaluation</li>
+                <li>WR Evaluation</li>
+                <li>TE Evaluation</li>
+                <li>OL Evaluation</li>
+                <li>DL Evaluation</li>
+                <li>LB Evaluation</li>
+                <li>DB Evaluation</li>
+                <li>ST Evaluation</li>
+            </ul>
+        </div>
+        <div class="card">
+            <h4>Operations</h4>
+            <ul>
+                <li>Talent Evaluation (overall)</li>
+                <li>Scheme Fit Analysis</li>
+                <li>Character Evaluation</li>
+                <li>Cap Management</li>
+                <li>Negotiation</li>
+                <li>Trade Evaluation</li>
+                <li>College Scouting</li>
+                <li>Pro Scouting</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+<section id="owner-system" class="new-section">
+    <h2>👑 Owner System</h2>
+    <p>Owners have personality types that affect their involvement and the GM's autonomy.</p>
+
+    <h3>Owner Personality Types</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Type</th>
+                <th>Behavior</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td><strong>Hands-Off</strong></td><td>Approves most decisions, patient during rebuilds</td></tr>
+            <tr><td><strong>Win-Now</strong></td><td>Impatient, wants playoffs every year, meddles in FA</td></tr>
+            <tr><td><strong>Meddler</strong></td><td>Wants input on draft picks, coaching hires, play calling</td></tr>
+            <tr><td><strong>Budget-Conscious</strong></td><td>Reluctant on big contracts, wants cap space</td></tr>
+            <tr><td><strong>Big Spender</strong></td><td>Loves splashy FA signings, doesn't care about overpays</td></tr>
+            <tr><td><strong>Legacy/Family</strong></td><td>Cares about tradition, franchise history, loyalty</td></tr>
+            <tr><td><strong>New Money</strong></td><td>Wants to make a mark, rebrands, relocations possible</td></tr>
+        </tbody>
+    </table>
+
+    <h3>Owner Relationship Meter</h3>
+    <div class="card">
+        <p><strong>Goes UP:</strong> Wins, playoff runs, revenue, no controversies</p>
+        <p><strong>Goes DOWN:</strong> Losses, scandals, empty stadium, media criticism</p>
+    </div>
+
+    <h3>Approval Requirements by Trust Level</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Trust Level</th>
+                <th>What You Can Do Unilaterally</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td><strong>Low</strong></td><td>Minor trades, late-round picks, position coach hires</td></tr>
+            <tr><td><strong>Medium</strong></td><td>Mid-tier FA, coordinator hires, most trades</td></tr>
+            <tr><td><strong>High</strong></td><td>HC hire/fire, big FA deals, 1st round picks</td></tr>
+            <tr><td><strong>President</strong></td><td>Full autonomy, owner just signs checks</td></tr>
+        </tbody>
+    </table>
+
+    <h3>Owner Events</h3>
+    <ul>
+        <li>Owner demands you sign a specific FA (Meddler)</li>
+        <li>Owner vetoes a trade (Low trust)</li>
+        <li>Owner "suggests" a draft pick (Meddler + hometown kid)</li>
+        <li>Owner extends your contract after playoff run</li>
+        <li>Owner sells team → new owner, relationship resets</li>
+    </ul>
+</section>
+
+<section id="career-progression" class="new-section">
+    <h2>📈 Career Progression</h2>
+
+    <h3>Player-to-Staff Pipeline</h3>
+    <p>Player attributes translate to coaching/FO ratings when they retire:</p>
+    <table>
+        <thead>
+            <tr>
+                <th>Player Attribute</th>
+                <th>Coaching Translation</th>
+                <th>FO Translation</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>Football IQ / Instincts</td><td>Play Design, Adaptability</td><td>Talent Evaluation</td></tr>
+            <tr><td>Leadership</td><td>Leadership, Mentoring</td><td>-</td></tr>
+            <tr><td>Decision Making</td><td>Play Calling, Game Management</td><td>Negotiation</td></tr>
+            <tr><td>Position Skills</td><td>Position-specific Development</td><td>Position Evaluation</td></tr>
+            <tr><td>Mentoring</td><td>Player Development</td><td>Character Evaluation</td></tr>
+        </tbody>
+    </table>
+
+    <h3>President of Football Operations</h3>
+    <div class="card">
+        <p>The ultimate "prestige" level for a GM career. A badge of honor for sustained success.</p>
+        <h4>How to Earn It:</h4>
+        <ul>
+            <li>8-10+ years as GM</li>
+            <li>Multiple playoff appearances</li>
+            <li>Division titles</li>
+            <li>Conference championship appearance</li>
+            <li>Super Bowl appearance/win accelerates timeline</li>
+        </ul>
+        <h4>What Changes:</h4>
+        <ul>
+            <li><strong>Hire/Fire Authority:</strong> Can fire HC without owner approval</li>
+            <li><strong>Staff Autonomy:</strong> Full control over coaching hires</li>
+            <li><strong>Contract Authority:</strong> Higher spending flexibility</li>
+            <li><strong>Draft Control:</strong> No owner override on picks</li>
+            <li><strong>Job Security:</strong> Longer leash during rebuild</li>
+            <li><strong>Legacy Features:</strong> Hall of Fame tracking, coaching tree</li>
+        </ul>
+    </div>
+</section>
+
+<section id="todo">
+    <h2>🚧 TODO & Roadmap</h2>
+
+    <h3>High Priority - Draft Sim MVP</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Feature</th>
+                <th>Est. Hours</th>
+                <th>Notes</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Connect setup → draft room</td>
+                <td>2-3 hrs</td>
+                <td>Pass settings between screens</td>
+            </tr>
+            <tr>
+                <td>Trade system</td>
+                <td>4-6 hrs</td>
+                <td>Trade value chart, offer generation</td>
+            </tr>
+            <tr>
+                <td>Draft results/summary</td>
+                <td>2 hrs</td>
+                <td>Grades, recap, export</td>
+            </tr>
+            <tr>
+                <td>Fix nflverse data pull</td>
+                <td>1 hr</td>
+                <td>Weekly stats 404 error</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h3>Medium Priority - Systems</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Feature</th>
+                <th>Notes</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>Implement skill rating system</td><td>Position skills, physical attributes</td></tr>
+            <tr><td>Implement scheme weights</td><td>Scheme fit calculations</td></tr>
+            <tr><td>Combine/Pro Day data entry UI</td><td>For prospect evaluation</td></tr>
+            <tr><td>Coaching staff management</td><td>Hire/fire, ratings</td></tr>
+            <tr><td>Front office management</td><td>Staff under GM</td></tr>
+            <tr><td>Owner relationship system</td><td>Trust levels, events</td></tr>
+        </tbody>
+    </table>
+
+    <h3>Future - Full Franchise</h3>
+    <ul>
+        <li>Free agency module</li>
+        <li>Contract negotiations</li>
+        <li>Season simulation</li>
+        <li>Player progression/regression</li>
+        <li>Injuries</li>
+        <li>Career mode (multi-season)</li>
+        <li>President of Football Ops path</li>
+    </ul>
+</section>
+
+<section id="data">
+    <h2>📊 Data Model</h2>
+
+    <h3>Team Data Structure</h3>
+    <pre><code>{
+    n: "Raiders",              // Team name
+    p: 1,                      // Pick number
+    c: "#000000",              // Primary color
+    rec: "3-14",               // Record
+    oc: "OC Name",             // Offensive coordinator
+    dc: "DC Name",             // Defensive coordinator
+    offScheme: "West Coast",   // Offensive scheme
+    defScheme: "4-3 Under",    // Defensive scheme
+    ownerType: "Meddler",      // Owner personality
+    offNeeds: [...],           // Offensive needs
+    defNeeds: [...],           // Defensive needs
+    summary: "..."             // Key notes
 }</code></pre>
 
-        <h3>Prospect Data Structure</h3>
-        <pre><code>{
-  name: "Player Name",
-  pos: "QB",
-  school: "University",
-  rank: 1,
-  consensusMin: 1,
-  consensusMax: 5,
-  strengths: ["Arm strength", "Mobility"],
-  weaknesses: ["Processing speed"],
-  // Additional scouting data...
+    <h3>Player Data Structure</h3>
+    <pre><code>{
+    name: "Player Name",
+    pos: "QB",
+    school: "University",
+    
+    // Physical Attributes
+    height: 75,
+    weight: 220,
+    armLength: 32.5,
+    speed: 4.65,
+    
+    // Skills (0-99)
+    skills: {
+        armStrength: 85,
+        shortAccuracy: 78,
+        mediumAccuracy: 82,
+        // ... all position skills
+    },
+    
+    // Universal
+    motor: 75,
+    mentoring: 60,
+    contactAggression: 55,
+    
+    // Combine
+    combineResults: {...},
+    proDayResults: {...},
+    
+    // Scouting
+    rank: 1,
+    consensusMin: 1,
+    consensusMax: 5,
+    strengths: [...],
+    weaknesses: [...]
 }</code></pre>
-    </section>
 
-    <section id="future">
-        <h2>🎮 Future Vision - Full Franchise Sim</h2>
+    <h3>Coach Data Structure</h3>
+    <pre><code>{
+    name: "Coach Name",
+    position: "HC",
+    age: 52,
+    scheme: "Shanahan Outside Zone",
+    
+    // All coaches have all ratings
+    ratings: {
+        // Leadership
+        leadership: 85,
+        mentoring: 78,
+        gameManagement: 72,
+        clockManagement: 68,
+        challengeDecisions: 65,
         
-        <h3>Phase 2: GM Ops: Offseason</h3>
-        <ul>
-            <li>Free agency module</li>
-            <li>Trade system (expanded)</li>
-            <li>Salary cap logic</li>
-            <li>Contract negotiations</li>
-            <li>Persistent data via Google Sheets/Firebase</li>
-        </ul>
+        // Offensive
+        offPlayDesign: 88,
+        offPlayCalling: 85,
+        offAdaptability: 80,
+        passGameKnowledge: 82,
+        runGameKnowledge: 90,
+        
+        // Defensive
+        defPlayDesign: 55,
+        defPlayCalling: 50,
+        // ...
+        
+        // Position Development
+        qbDevelopment: 75,
+        rbDevelopment: 85,
+        // ...
+    },
+    
+    // Gameplan defaults
+    gameplan: {
+        runPassRatio: 55,
+        aggressiveness: 60,
+        gadgetTendency: 40,
+        goForItTendency: 65,
+        blitzRate: 35
+    }
+}</code></pre>
+</section>
 
-        <h3>Phase 3: GM Ops: Franchise</h3>
-        <ul>
-            <li>Season simulation</li>
-            <li>Game outcomes & stats</li>
-            <li>Player progression</li>
-            <li>Injuries</li>
-            <li>User accounts</li>
-            <li>Subscription system (Stripe)</li>
-        </ul>
+<section id="future">
+    <h2>🎮 Future Vision</h2>
 
-        <h3>Why This is Doable</h3>
-        <div class="grid-2">
-            <div class="card">
-                <h4>1. Turn-based</h4>
-                <p>No physics engine, no real-time rendering. Just decisions and outcomes.</p>
-            </div>
-            <div class="card">
-                <h4>2. Modular</h4>
-                <p>Each feature builds on the last. Draft → Offseason → Full Season.</p>
-            </div>
-            <div class="card">
-                <h4>3. Data Available</h4>
-                <p>Public NFL data is abundant. Users can import their own via Google Sheets.</p>
-            </div>
-            <div class="card">
-                <h4>4. Web Tech is Perfect</h4>
-                <p>HTML/CSS/JS handles forms, tables, and UI interactions beautifully.</p>
-            </div>
+    <h3>Why This Will Work</h3>
+    <div class="grid-2">
+        <div class="card">
+            <h4>1. Turn-based</h4>
+            <p>No physics engine, no real-time rendering. Just decisions and outcomes.</p>
         </div>
-    </section>
+        <div class="card">
+            <h4>2. Modular</h4>
+            <p>Each feature builds on the last. Draft → Offseason → Full Season.</p>
+        </div>
+        <div class="card">
+            <h4>3. Deep Foundation</h4>
+            <p>Skills, schemes, combine, coaching - all interconnected systems that create emergent gameplay.</p>
+        </div>
+        <div class="card">
+            <h4>4. Market Gap</h4>
+            <p>Madden franchise is neglected. Football Manager proves management sims sell. This fills the gap.</p>
+        </div>
+    </div>
 
-    <section id="workflow">
-        <h2>📝 Development Workflow</h2>
-        
-        <h3>For New Claude Chats</h3>
-        <ol>
-            <li>Upload this document (or link to live URL)</li>
-            <li>Reference the GitHub repo: <a href="https://github.com/nwcarlson-dev/gm-ops">https://github.com/nwcarlson-dev/gm-ops</a></li>
-            <li>Paste specific files if working on them</li>
-            <li>Be specific about what you need help with</li>
-        </ol>
+    <h3>Market Projections</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Tier</th>
+                <th>Estimated Users</th>
+                <th>Notes</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>Free (Mock Draft)</td><td>500K - 2M</td><td>Draft season spikes, casual users</td></tr>
+            <tr><td>Paid Subscription</td><td>50K - 150K</td><td>Hardcore GM sim players</td></tr>
+        </tbody>
+    </table>
+    <p>At 100K subscribers @ $50/year = <strong>$5M annual revenue</strong></p>
+</section>
 
-        <h3>Git Workflow</h3>
-        <ul>
-            <li>Work on <code>main</code> branch for now (simple project)</li>
-            <li>Commit frequently with descriptive messages</li>
-            <li>Use branches for experimental features if needed</li>
-        </ul>
+<section id="workflow">
+    <h2>📝 Development Workflow</h2>
 
-        <h3>File Naming Conventions</h3>
-        <table>
-            <thead>
-                <tr>
-                    <th>File</th>
-                    <th>Purpose</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><code>index.html</code></td>
-                    <td>Setup screen (entry point, loads at root URL)</td>
-                </tr>
-                <tr>
-                    <td><code>draft-room.html</code></td>
-                    <td>Draft simulator interface</td>
-                </tr>
-                <tr>
-                    <td><code>brand-guidelines</code></td>
-                    <td>Brand guide (no extension for clean URL)</td>
-                </tr>
-                <tr>
-                    <td><code>dev-guide.html</code></td>
-                    <td>This document - project requirements & context</td>
-                </tr>
-            </tbody>
-        </table>
+    <h3>For New Claude Chats</h3>
+    <ol>
+        <li>Reference this document (dev-guide.html)</li>
+        <li>Reference the GitHub repo: <a href="https://github.com/nwcarlson-dev/gm-ops">https://github.com/nwcarlson-dev/gm-ops</a></li>
+        <li>Check brand-guidelines.html for UI styling</li>
+        <li>Be specific about what you need help with</li>
+    </ol>
 
-        <h3>Testing</h3>
-        <ul>
-            <li>Test locally by opening HTML files directly in browser</li>
-            <li>Push to GitHub to test on live GitHub Pages</li>
-            <li>Check mobile responsiveness using browser dev tools</li>
-        </ul>
-    </section>
+    <h3>Key Documents</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Document</th>
+                <th>Purpose</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr><td>dev-guide.html</td><td>This document - master reference</td></tr>
+            <tr><td>brand-guidelines.html</td><td>UI styling, colors, fonts</td></tr>
+            <tr><td>gm-ops-skills-framework-v2.md</td><td>Position skills, attributes</td></tr>
+            <tr><td>gm-ops-schemes.md</td><td>Scheme skill weights</td></tr>
+            <tr><td>gm-ops-combine-drills.md</td><td>Combine/Pro Day drill mappings</td></tr>
+            <tr><td>gm-ops-team-schemes-2025.md</td><td>NFL team scheme classifications</td></tr>
+        </tbody>
+    </table>
+</section>
 
-    <section id="decisions">
-        <h2>💡 Key Decisions Made</h2>
-        
-        <table>
-            <thead>
-                <tr>
-                    <th>Decision</th>
-                    <th>Choice</th>
-                    <th>Rationale</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>Brand name</td>
-                    <td><strong>"GM Ops"</strong></td>
-                    <td>Not "The League" due to trademark conflicts with Match Group's dating app</td>
-                </tr>
-                <tr>
-                    <td>Legal approach</td>
-                    <td>Use real names, no logos</td>
-                    <td>Nominative fair use for commentary/analysis</td>
-                </tr>
-                <tr>
-                    <td>Tech stack</td>
-                    <td>Vanilla HTML/CSS/JS</td>
-                    <td>Simple, no build process, easy to deploy</td>
-                </tr>
-                <tr>
-                    <td>Hosting</td>
-                    <td>GitHub Pages</td>
-                    <td>Free, reliable, version controlled</td>
-                </tr>
-                <tr>
-                    <td>Data storage (MVP)</td>
-                    <td>Google Sheets</td>
-                    <td>User-importable, familiar interface</td>
-                </tr>
-                <tr>
-                    <td>Data storage (future)</td>
-                    <td>Firebase</td>
-                    <td>For user accounts and subscriptions</td>
-                </tr>
-                <tr>
-                    <td>Logo font</td>
-                    <td>Teko Bold</td>
-                    <td>Sports feel, condensed, works well skewed</td>
-                </tr>
-                <tr>
-                    <td>Logo style</td>
-                    <td>-12deg skew, colored blocks</td>
-                    <td>Dynamic, professional, NFL-inspired aesthetic</td>
-                </tr>
-                <tr>
-                    <td>Sub-brand font</td>
-                    <td>Barlow Condensed Bold</td>
-                    <td>Complements Teko, readable at small sizes</td>
-                </tr>
-                <tr>
-                    <td>Color palette</td>
-                    <td>NFL Red + Blue</td>
-                    <td>Instant football recognition, professional look</td>
-                </tr>
-            </tbody>
-        </table>
-    </section>
+<section id="decisions">
+    <h2>💡 Key Decisions Made</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Decision</th>
+                <th>Choice</th>
+                <th>Rationale</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Brand name</td>
+                <td><strong>"GM Ops"</strong></td>
+                <td>Not "The League" due to trademark conflicts</td>
+            </tr>
+            <tr>
+                <td>Scheme system</td>
+                <td><strong>Skill weights, not archetypes</strong></td>
+                <td>Archetypes are cosmetic only; skills determine fit</td>
+            </tr>
+            <tr>
+                <td>Center abbreviation</td>
+                <td><strong>"OC" not "C"</strong></td>
+                <td>Avoids confusion with cornerback</td>
+            </tr>
+            <tr>
+                <td>Coaching ratings</td>
+                <td><strong>All coaches have all ratings</strong></td>
+                <td>Coaches specialize but have ability across the board</td>
+            </tr>
+            <tr>
+                <td>FO ratings</td>
+                <td><strong>All FO have all position ratings</strong></td>
+                <td>Same principle as coaching</td>
+            </tr>
+            <tr>
+                <td>Scheme changes</td>
+                <td><strong>Coach-driven, not GM-driven</strong></td>
+                <td>GM hires coaches for their scheme; doesn't dictate scheme</td>
+            </tr>
+            <tr>
+                <td>Play calling</td>
+                <td><strong>Not simulated</strong></td>
+                <td>This is roster building, not play calling</td>
+            </tr>
+            <tr>
+                <td>Contact Aggression</td>
+                <td><strong>Universal skill</strong></td>
+                <td>Applies differently by position but every player has it</td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+<hr>
+
+<footer>
+    <h2>🔗 Quick Links</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Resource</th>
+                <th>URL</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>GitHub Repository</td>
+                <td><a href="https://github.com/nwcarlson-dev/gm-ops">https://github.com/nwcarlson-dev/gm-ops</a></td>
+            </tr>
+            <tr>
+                <td>Live Site</td>
+                <td><a href="https://nwcarlson-dev.github.io/gm-ops/">https://nwcarlson-dev.github.io/gm-ops/</a></td>
+            </tr>
+            <tr>
+                <td>Brand Guidelines</td>
+                <td><a href="https://nwcarlson-dev.github.io/gm-ops/brand-guidelines.html">https://nwcarlson-dev.github.io/gm-ops/brand-guidelines.html</a></td>
+            </tr>
+            <tr>
+                <td>Draft Room</td>
+                <td><a href="https://nwcarlson-dev.github.io/gm-ops/draft-room.html">https://nwcarlson-dev.github.io/gm-ops/draft-room.html</a></td>
+            </tr>
+        </tbody>
+    </table>
 
     <hr>
 
-    <footer>
-        <h2>🔗 Quick Links</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>Resource</th>
-                    <th>URL</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>GitHub Repository</td>
-                    <td><a href="https://github.com/nwcarlson-dev/gm-ops">https://github.com/nwcarlson-dev/gm-ops</a></td>
-                </tr>
-                <tr>
-                    <td>Live Site</td>
-                    <td><a href="https://nwcarlson-dev.github.io/gm-ops/">https://nwcarlson-dev.github.io/gm-ops/</a></td>
-                </tr>
-                <tr>
-                    <td>Brand Guidelines</td>
-                    <td><a href="https://nwcarlson-dev.github.io/gm-ops/brand-guidelines">https://nwcarlson-dev.github.io/gm-ops/brand-guidelines</a></td>
-                </tr>
-                <tr>
-                    <td>Draft Room (direct)</td>
-                    <td><a href="https://nwcarlson-dev.github.io/gm-ops/draft-room.html">https://nwcarlson-dev.github.io/gm-ops/draft-room.html</a></td>
-                </tr>
-            </tbody>
-        </table>
+    <p style="text-align: center; color: var(--text-secondary); margin-top: 2rem;">
+        <em>This document serves as the single source of truth for the GM Ops project.<br>
+        Update it as decisions are made and features are completed.</em>
+    </p>
+    <p style="text-align: center; color: var(--text-secondary); margin-top: 1rem;">
+        Last updated: January 22, 2026
+    </p>
+</footer>
 
-        <hr>
-
-        <p style="text-align: center; color: var(--text-secondary); margin-top: 2rem;">
-            <em>This document serves as the single source of truth for the GM Ops project.<br>
-            Update it as decisions are made and features are completed.</em>
-        </p>
-        
-        <p style="text-align: center; color: var(--text-secondary); margin-top: 1rem;">
-            Last updated: January 2026
-        </p>
-    </footer>
 </body>
 </html>
