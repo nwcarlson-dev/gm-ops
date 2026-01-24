@@ -96,6 +96,17 @@ The simulation engine runs identically regardless of setting. What changes is ho
 - **Same simulation**: Engine runs identically regardless of control level
 - **UI density scales**: Lower levels see summary views, higher levels see full tables
 - **Data always accessible**: Control level affects what's surfaced, not what exists - users can always dig deeper
+- **Saveable profiles**: Users can save custom control/slider configurations and load them for new franchises
+
+### Leaderboard Eligibility
+
+Public leaderboards require standardized settings to ensure fair competition:
+
+- **Control Level**: Total Control (no CPU assistance)
+- **Sliders**: Default values (no user modifications)
+- **Verification**: Franchise must be started with these settings; mid-save changes disqualify
+
+Users can still play however they want - custom settings just mark the save as "unranked" for leaderboard purposes.
 
 ---
 
