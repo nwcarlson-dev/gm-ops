@@ -106,7 +106,9 @@ Public leaderboards require standardized settings to ensure fair competition:
 - **Sliders**: Default values (no user modifications)
 - **Verification**: Franchise must be started with these settings; mid-save changes disqualify
 
-Users can still play however they want - custom settings just mark the save as "unranked" for leaderboard purposes.
+Users can still play however they want - custom settings just mark the save as "unranked" for public leaderboard purposes.
+
+**Community Settings**: Users can share custom slider/control configurations with others. These are valid for play and community challenges, just not public leaderboard rankings.
 
 ---
 
