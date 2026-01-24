@@ -2,16 +2,11 @@
   "version": 2,
   "buildCommand": "npm install",
   "functions": {
-    "server.js": {
-      "maxDuration": 60
-    },
-    "api/fix-untitled.js": {
+    "api/*.js": {
       "maxDuration": 60
     }
   },
   "rewrites": [
-    { "source": "/api/fix-untitled", "destination": "/api/fix-untitled" },
-    { "source": "/api/:path*", "destination": "/server.js" },
     { "source": "/", "destination": "/dev-feedback.html" }
   ]
 }
