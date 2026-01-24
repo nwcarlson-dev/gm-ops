@@ -293,6 +293,8 @@
                 <span class="status" id="status">Click to record</span>
                 <a id="downloadLink" style="display:none; margin-left: auto; font-size: 11px; color: #68a; text-decoration: underline; cursor: pointer;">Download Audio</a>
                 <button id="retryBtn" style="display:none; margin-left: 8px; padding: 4px 10px; background: #444; color: #ccc; border: none; border-radius: 4px; font-size: 11px; cursor: pointer;">Retry</button>
+                <input type="file" id="audioUpload" accept="audio/*,.webm,audio/webm" style="display:none;">
+                <button id="uploadBtn" style="margin-left: 8px; padding: 4px 10px; background: #4a6a8a; color: #fff; border: none; border-radius: 4px; font-size: 11px; cursor: pointer;">Upload Audio</button>
             </div>
             
             <div class="transcript placeholder" id="transcript">Transcript will appear here...</div>
@@ -341,6 +343,24 @@
         const techAlert = document.getElementById('techAlert');
         const downloadLink = document.getElementById('downloadLink');
         const retryBtn = document.getElementById('retryBtn');
+        const uploadBtn = document.getElementById('uploadBtn');
+        const audioUpload = document.getElementById('audioUpload');
+        
+        uploadBtn.addEventListener('click', () => audioUpload.click());
+        
+        audioUpload.addEventListener('change', async (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+            
+            log('Processing uploaded file...');
+            lastAudioBlob = file;
+            downloadLink.href = URL.createObjectURL(file);
+            downloadLink.download = `topic-${topicNumber.textContent}.${file.name.split('.').pop()}`;
+            downloadLink.style.display = 'inline';
+            
+            await transcribeAudio(file);
+            audioUpload.value = '';
+        });
         
         function log(msg, type = '') {
             status.textContent = msg;
