@@ -66,7 +66,7 @@ The simulation engine runs identically regardless of setting. What changes is ho
 | **Roster Cuts** | Automatic | Approve final 53 | Make all cuts, warnings shown | Make all cuts, no warnings |
 | **Cap Management** | Automatic restructures | Approve restructures over $X | Manual, suggestions shown | Manual, no suggestions |
 | **Scouting** | Auto-scout all prospects | Auto-scout, you deep-dive top targets | Manual, scheme fit highlighted | Manual, raw data only |
-| **Scheme Fit Badges** | Always shown prominently | Shown on hover | Shown in detail view only | Hidden (calculate yourself) |
+| **Scheme Fit Badges** | Always shown prominently | Shown on hover | Shown in detail view only | Off by default (can enable) |
 | **Decision Prompts** | Major moments only (1st round pick) | Key decisions (top FA, trades) | All decisions presented | All decisions, no guidance |
 
 ### Design Philosophy
