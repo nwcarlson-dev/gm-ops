@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dev Feedback - GM Ops</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="shared/styles.css">
+    <style>
+        body {
+            background: var(--bg-dark);
+            color: var(--white);
+            min-height: 100vh;
+            padding: 40px;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        
+        h1 {
+            font-family: 'Teko', sans-serif;
+            font-size: 48px;
+            color: var(--white);
+            margin-bottom: 8px;
+        }
+        
+        .subtitle {
+            color: var(--text-muted);
+            margin-bottom: 32px;
+        }
+        
+        .recorder-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+        }
+        
+        .recorder-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        
+        .recorder-header h2 {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--gold);
+            margin: 0;
+        }
+        
+        .topic-input {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        
+        .topic-input label {
+            font-size: 13px;
+            color: var(--silver);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .topic-input input {
+            flex: 1;
+            padding: 10px 14px;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid var(--border-subtle);
+            border-radius: 8px;
+            color: var(--white);
+            font-size: 14px;
+        }
+        
+        .topic-input input::placeholder {
+            color: var(--text-muted);
+        }
+        
+        .recorder-controls {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+        
+        .record-btn {
+            width: 64px;
+            height: 64px;
+            border-radius: 50%;
+            border: 3px solid var(--nfl-red);
+            background: transparent;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s;
+        }
+        
+        .record-btn:hover {
+            background: rgba(213, 10, 10, 0.1);
+        }
+        
+        .record-btn.recording {
+            background: var(--nfl-red);
+            animation: pulse 1.5s infinite;
+        }
+        
+        .record-btn .inner {
+            width: 24px;
+            height: 24px;
+            background: var(--nfl-red);
+            border-radius: 50%;
+            transition: all 0.2s;
+        }
+        
+        .record-btn.recording .inner {
+            background: var(--white);
+            border-radius: 4px;
+            width: 20px;
+            height: 20px;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 0 0 0 rgba(213, 10, 10, 0.4); }
+            50% { box-shadow: 0 0 0 12px rgba(213, 10, 10, 0); }
+        }
+        
+        .recording-status {
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+        
+        .recording-status.active {
+            color: var(--nfl-red);
+            font-weight: 600;
+        }
+        
+        .timer {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 24px;
+            font-weight: 600;
+            color: var(--white);
+            min-width: 60px;
+        }
+        
+        .transcription-area {
+            margin-top: 16px;
+            padding: 16px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 8px;
+            min-height: 100px;
+            display: none;
+        }
+        
+        .transcription-area.visible {
+            display: block;
+        }
+        
+        .transcription-area h3 {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--gold);
+            margin: 0 0 8px 0;
+        }
+        
+        .transcription-text {
+            font-size: 14px;
+            line-height: 1.6;
+            color: var(--silver);
+        }
+        
+        .transcription-text.processing {
+            color: var(--text-muted);
+            font-style: italic;
+        }
+        
+        .feedback-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+        
+        .feedback-item {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            padding: 16px;
+        }
+        
+        .feedback-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 8px;
+        }
+        
+        .feedback-topic {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--gold);
+        }
+        
+        .feedback-meta {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+        
+        .feedback-text {
+            font-size: 13px;
+            line-height: 1.5;
+            color: var(--silver);
+        }
+        
+        .feedback-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: 12px;
+        }
+        
+        .btn-small {
+            padding: 6px 12px;
+            font-size: 11px;
+            font-weight: 600;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .btn-copy {
+            background: rgba(255,255,255,0.1);
+            color: var(--silver);
+        }
+        
+        .btn-copy:hover {
+            background: rgba(255,255,255,0.15);
+        }
+        
+        .btn-delete {
+            background: transparent;
+            color: var(--text-muted);
+        }
+        
+        .btn-delete:hover {
+            color: var(--nfl-red);
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: var(--text-muted);
+        }
+        
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+        
+        .section-header h2 {
+            font-family: 'Teko', sans-serif;
+            font-size: 28px;
+            color: var(--white);
+            margin: 0;
+        }
+        
+        .btn-export {
+            padding: 8px 16px;
+            background: var(--nfl-blue);
+            color: var(--white);
+            border: none;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        .btn-export:hover {
+            background: #01255a;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Dev Feedback</h1>
+        <p class="subtitle">Record audio feedback on development work. Transcriptions are saved locally.</p>
+        
+        <div class="recorder-card">
+            <div class="recorder-header">
+                <h2>New Recording</h2>
+            </div>
+            <div class="topic-input">
+                <label>Topic/Reference:</label>
+                <input type="text" id="topicInput" placeholder="e.g., 1.023.5 - Sim controls feedback">
+            </div>
+            <div class="recorder-controls">
+                <button class="record-btn" id="recordBtn" onclick="toggleRecording()">
+                    <div class="inner"></div>
+                </button>
+                <div class="timer" id="timer">0:00</div>
+                <div class="recording-status" id="status">Click to record</div>
+            </div>
+            <div class="transcription-area" id="transcriptionArea">
+                <h3>Transcription</h3>
+                <div class="transcription-text" id="transcriptionText"></div>
+            </div>
+        </div>
+        
+        <div class="section-header">
+            <h2>Saved Feedback</h2>
+            <button class="btn-export" onclick="exportFeedback()">Export All</button>
+        </div>
+        
+        <div class="feedback-list" id="feedbackList">
+            <div class="empty-state">No feedback recorded yet</div>
+        </div>
+    </div>
+    
+    <script>
+        let mediaRecorder = null;
+        let audioChunks = [];
+        let isRecording = false;
+        let timerInterval = null;
+        let seconds = 0;
+        let feedbackItems = JSON.parse(localStorage.getItem('devFeedback') || '[]');
+        
+        renderFeedbackList();
+        
+        async function toggleRecording() {
+            if (isRecording) {
+                stopRecording();
+            } else {
+                startRecording();
+            }
+        }
+        
+        async function startRecording() {
+            try {
+                const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                mediaRecorder = new MediaRecorder(stream);
+                audioChunks = [];
+                
+                mediaRecorder.ondataavailable = (e) => {
+                    audioChunks.push(e.data);
+                };
+                
+                mediaRecorder.onstop = async () => {
+                    const audioBlob = new Blob(audioChunks, { type: 'audio/webm' });
+                    stream.getTracks().forEach(track => track.stop());
+                    await processRecording(audioBlob);
+                };
+                
+                mediaRecorder.start();
+                isRecording = true;
+                seconds = 0;
+                
+                document.getElementById('recordBtn').classList.add('recording');
+                document.getElementById('status').textContent = 'Recording...';
+                document.getElementById('status').classList.add('active');
+                
+                timerInterval = setInterval(() => {
+                    seconds++;
+                    const mins = Math.floor(seconds / 60);
+                    const secs = seconds % 60;
+                    document.getElementById('timer').textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
+                }, 1000);
+                
+            } catch (err) {
+                console.error('Error accessing microphone:', err);
+                document.getElementById('status').textContent = 'Microphone access denied';
+            }
+        }
+        
+        function stopRecording() {
+            if (mediaRecorder && isRecording) {
+                mediaRecorder.stop();
+                isRecording = false;
+                clearInterval(timerInterval);
+                
+                document.getElementById('recordBtn').classList.remove('recording');
+                document.getElementById('status').textContent = 'Processing...';
+                document.getElementById('status').classList.remove('active');
+            }
+        }
+        
+        async function processRecording(audioBlob) {
+            const transcriptionArea = document.getElementById('transcriptionArea');
+            const transcriptionText = document.getElementById('transcriptionText');
+            
+            transcriptionArea.classList.add('visible');
+            transcriptionText.textContent = 'Transcribing audio...';
+            transcriptionText.classList.add('processing');
+            
+            try {
+                const formData = new FormData();
+                formData.append('audio', audioBlob, 'recording.webm');
+                
+                const response = await fetch('/api/transcribe', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    transcriptionText.textContent = data.text;
+                    transcriptionText.classList.remove('processing');
+                    
+                    saveFeedback(data.text);
+                } else {
+                    transcriptionText.textContent = '[Transcription service unavailable - audio saved locally]';
+                    transcriptionText.classList.remove('processing');
+                    saveFeedback('[Audio recording - transcription pending]');
+                }
+            } catch (err) {
+                console.error('Transcription error:', err);
+                transcriptionText.textContent = '[Transcription service unavailable - saving as note]';
+                transcriptionText.classList.remove('processing');
+                saveFeedback('[Audio recording - transcription pending]');
+            }
+            
+            document.getElementById('status').textContent = 'Click to record';
+            document.getElementById('timer').textContent = '0:00';
+        }
+        
+        function saveFeedback(text) {
+            const topic = document.getElementById('topicInput').value || 'General Feedback';
+            const item = {
+                id: Date.now(),
+                topic: topic,
+                text: text,
+                timestamp: new Date().toISOString(),
+                duration: seconds
+            };
+            
+            feedbackItems.unshift(item);
+            localStorage.setItem('devFeedback', JSON.stringify(feedbackItems));
+            renderFeedbackList();
+            
+            document.getElementById('topicInput').value = '';
+        }
+        
+        function renderFeedbackList() {
+            const list = document.getElementById('feedbackList');
+            
+            if (feedbackItems.length === 0) {
+                list.innerHTML = '<div class="empty-state">No feedback recorded yet</div>';
+                return;
+            }
+            
+            list.innerHTML = feedbackItems.map(item => `
+                <div class="feedback-item" data-id="${item.id}">
+                    <div class="feedback-header">
+                        <div class="feedback-topic">${escapeHtml(item.topic)}</div>
+                        <div class="feedback-meta">${formatDate(item.timestamp)} &bull; ${formatDuration(item.duration)}</div>
+                    </div>
+                    <div class="feedback-text">${escapeHtml(item.text)}</div>
+                    <div class="feedback-actions">
+                        <button class="btn-small btn-copy" onclick="copyFeedback(${item.id})">Copy</button>
+                        <button class="btn-small btn-delete" onclick="deleteFeedback(${item.id})">Delete</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function copyFeedback(id) {
+            const item = feedbackItems.find(f => f.id === id);
+            if (item) {
+                const text = `[${item.topic}]\n${item.text}`;
+                navigator.clipboard.writeText(text);
+            }
+        }
+        
+        function deleteFeedback(id) {
+            feedbackItems = feedbackItems.filter(f => f.id !== id);
+            localStorage.setItem('devFeedback', JSON.stringify(feedbackItems));
+            renderFeedbackList();
+        }
+        
+        function exportFeedback() {
+            const markdown = feedbackItems.map(item => 
+                `## ${item.topic}\n*${formatDate(item.timestamp)}*\n\n${item.text}\n`
+            ).join('\n---\n\n');
+            
+            const blob = new Blob([`# Dev Feedback Export\n\n${markdown}`], { type: 'text/markdown' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `dev-feedback-${new Date().toISOString().split('T')[0]}.md`;
+            a.click();
+        }
+        
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+        
+        function formatDate(iso) {
+            return new Date(iso).toLocaleString();
+        }
+        
+        function formatDuration(secs) {
+            const mins = Math.floor(secs / 60);
+            const s = secs % 60;
+            return `${mins}:${s.toString().padStart(2, '0')}`;
+        }
+    </script>
+</body>
+</html>
