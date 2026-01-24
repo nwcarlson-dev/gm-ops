@@ -431,6 +431,12 @@
             color: var(--text-muted);
         }
         
+        .prospect-bio {
+            font-size: 11px;
+            color: var(--silver);
+            white-space: nowrap;
+        }
+        
         .prospect-actions {
             display: flex;
             align-items: center;
@@ -1337,18 +1343,18 @@
                 return `
                     <div class="prospect-row">
                         <div class="prospect-rank">${p.consensus_rank || '-'}</div>
-                        <div class="prospect-pos ${getPositionClass(p.position)}">${p.position}</div>
                         <div class="prospect-info">
                             ${getCollegeLogo(p.school, 32)}
                             <div class="prospect-details">
                                 <div class="prospect-name">${p.name}</div>
                                 <div class="prospect-meta">
                                     <span class="school">${p.school}</span>
-                                    <span class="bio">${ht} / ${wt} lbs</span>
                                     ${getConsensusTag(p.range_low, p.range_high)}
                                 </div>
                             </div>
                         </div>
+                        <div class="prospect-pos ${getPositionClass(p.position)}">${p.position}</div>
+                        <div class="prospect-bio">${ht} / ${wt}</div>
                         <div class="prospect-actions">
                             <button class="more-info-btn" onclick="showProspectModal('${p.id}')">
                                 <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
