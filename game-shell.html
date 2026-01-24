@@ -1568,7 +1568,7 @@
                                         <div class="accordion-stat-label">Consensus</div>
                                     </div>
                                     <div class="accordion-stat">
-                                        <div class="accordion-stat-value">${p.range_low || '-'}-${p.range_high || '-'}</div>
+                                        <div class="accordion-stat-value">${getRangeLabel(p.range_low) === getRangeLabel(p.range_high) ? getRangeLabel(p.range_low) : getRangeLabel(p.range_low) + ' / ' + getRangeLabel(p.range_high)}</div>
                                         <div class="accordion-stat-label">Range</div>
                                     </div>
                                     <div class="accordion-stat">
@@ -1581,9 +1581,7 @@
                                     </div>
                                 </div>
                                 <div class="accordion-section">
-                                    <div class="accordion-section-title">Projection</div>
                                     <div class="accordion-tags">
-                                        ${getConsensusTag(p.range_low, p.range_high, p.source_count)}
                                         <span class="accordion-tag">${archetype}</span>
                                         ${comparison ? `<span class="accordion-tag comparison">Comp: ${comparison}</span>` : ''}
                                     </div>
