@@ -278,6 +278,8 @@
                     <span class="inner"></span>
                 </button>
                 <span class="status" id="status">Click to record</span>
+                <a id="downloadLink" style="display:none; margin-left: auto; font-size: 11px; color: #68a; text-decoration: underline; cursor: pointer;">Download Audio</a>
+                <button id="retryBtn" style="display:none; margin-left: 8px; padding: 4px 10px; background: #444; color: #ccc; border: none; border-radius: 4px; font-size: 11px; cursor: pointer;">Retry</button>
             </div>
             
             <div class="transcript placeholder" id="transcript">Transcript will appear here...</div>
@@ -313,6 +315,7 @@
         let currentType = 'game';
         let dayNumber = 1;
         let topicCount = 0;
+        let lastAudioBlob = null;
         
         const recordBtn = document.getElementById('recordBtn');
         const status = document.getElementById('status');
@@ -323,12 +326,66 @@
         const gameFeed = document.getElementById('gameFeed');
         const techFeed = document.getElementById('techFeed');
         const techAlert = document.getElementById('techAlert');
+        const downloadLink = document.getElementById('downloadLink');
+        const retryBtn = document.getElementById('retryBtn');
         
         function log(msg, type = '') {
             status.textContent = msg;
             status.className = 'status ' + type;
             console.log('[DevFeedback]', msg);
         }
+        
+        async function transcribeAudio(blob) {
+            log('Transcribing...');
+            
+            const formData = new FormData();
+            formData.append('audio', blob);
+            
+            try {
+                const res = await fetch('/api/transcribe', {
+                    method: 'POST',
+                    body: formData
+                });
+                
+                console.log('[DevFeedback] Response status:', res.status);
+                const data = await res.json();
+                console.log('[DevFeedback] Response:', data);
+                
+                if (data.error) {
+                    log('Error - click Retry', 'error');
+                    transcript.textContent = 'Error: ' + (data.details || data.error);
+                    transcript.classList.remove('placeholder');
+                    retryBtn.style.display = 'inline';
+                } else if (data.text) {
+                    transcript.textContent = data.text;
+                    transcript.classList.remove('placeholder');
+                    saveBtn.disabled = false;
+                    retryBtn.style.display = 'none';
+                    log('Ready to save', 'success');
+                    
+                    if (currentType === 'game' && data.technicalDetected) {
+                        techAlert.classList.add('show');
+                    }
+                } else {
+                    log('No text - click Retry', 'error');
+                    transcript.textContent = 'No transcription returned';
+                    transcript.classList.remove('placeholder');
+                    retryBtn.style.display = 'inline';
+                }
+            } catch (e) {
+                console.error('[DevFeedback] Fetch error:', e);
+                log('Failed - click Retry', 'error');
+                transcript.textContent = 'Network error: ' + e.message;
+                transcript.classList.remove('placeholder');
+                retryBtn.style.display = 'inline';
+            }
+        }
+        
+        retryBtn.addEventListener('click', async () => {
+            if (lastAudioBlob) {
+                await transcribeAudio(lastAudioBlob);
+            }
+        });
         
         document.querySelectorAll('.type-btn').forEach(btn => {
             btn.addEventListener('click', () => {
@@ -403,47 +460,18 @@
                     };
                     
                     mediaRecorder.onstop = async () => {
-                        log('Transcribing...');
                         const blob = new Blob(audioChunks, { type: 'audio/webm' });
+                        lastAudioBlob = blob;
                         console.log('[DevFeedback] Audio blob size:', blob.size);
                         
-                        const formData = new FormData();
-                        formData.append('audio', blob);
+                        // Create download link for backup
+                        const url = URL.createObjectURL(blob);
+                        downloadLink.href = url;
+                        downloadLink.download = 'recording-' + Date.now() + '.webm';
+                        downloadLink.style.display = 'inline';
+                        retryBtn.style.display = 'none';
                         
-                        try {
-                            const res = await fetch('/api/transcribe', {
-                                method: 'POST',
-                                body: formData
-                            });
-                            
-                            console.log('[DevFeedback] Response status:', res.status);
-                            const data = await res.json();
-                            console.log('[DevFeedback] Response:', data);
-                            
-                            if (data.error) {
-                                log('Error: ' + data.error, 'error');
-                                transcript.textContent = 'Error: ' + (data.details || data.error);
-                                transcript.classList.remove('placeholder');
-                            } else if (data.text) {
-                                transcript.textContent = data.text;
-                                transcript.classList.remove('placeholder');
-                                saveBtn.disabled = false;
-                                log('Ready to save', 'success');
-                                
-                                if (currentType === 'game' && data.technicalDetected) {
-                                    techAlert.classList.add('show');
-                                }
-                            } else {
-                                log('No text returned', 'error');
-                                transcript.textContent = 'No transcription returned';
-                                transcript.classList.remove('placeholder');
-                            }
-                        } catch (e) {
-                            console.error('[DevFeedback] Fetch error:', e);
-                            log('Request failed: ' + e.message, 'error');
-                            transcript.textContent = 'Network error: ' + e.message;
-                            transcript.classList.remove('placeholder');
-                        }
+                        await transcribeAudio(blob);
                     };
                     
                     mediaRecorder.start();
