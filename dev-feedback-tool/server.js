@@ -41,20 +41,61 @@ function getOpenAIClient() {
     return new OpenAI({ apiKey });
 }
 
+// Ensure recordings folder exists
+const RECORDINGS_DIR = path.join(__dirname, 'recordings');
+if (!fs.existsSync(RECORDINGS_DIR)) {
+    fs.mkdirSync(RECORDINGS_DIR, { recursive: true });
+}
+
 app.post('/api/transcribe', upload.single('audio'), async (req, res) => {
     if (!req.file) {
         return res.status(400).json({ error: 'No audio file provided' });
     }
 
-    const tempPath = path.join(os.tmpdir(), 'audio-' + Date.now() + '.webm');
+    // Save recording to local folder (persists for retry)
+    const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
+    const audioPath = path.join(RECORDINGS_DIR, 'recording-' + timestamp + '.webm');
+    fs.writeFileSync(audioPath, req.file.buffer);
+    console.log('Saved recording:', audioPath);
     
     try {
-        // Write buffer to temp file (OpenAI SDK needs a file path)
-        fs.writeFileSync(tempPath, req.file.buffer);
-        
         const openai = getOpenAIClient();
         const transcription = await openai.audio.transcriptions.create({
-            file: fs.createReadStream(tempPath),
+            file: fs.createReadStream(audioPath),
+            model: 'whisper-1'
+        });
+
+        const text = transcription.text;
+        const detection = detectTechnical(text);
+        
+        res.json({ 
+            text,
+            technicalDetected: detection.isTechnical,
+            technicalMatches: detection.matches,
+            audioFile: audioPath
+        });
+    } catch (error) {
+        console.error('Transcription error:', error);
+        res.status(500).json({ 
+            error: 'Transcription failed', 
+            details: error.message,
+            audioFile: audioPath  // Return path so user knows where to find it
+        });
+    }
+});
+
+// Endpoint to retry transcription from saved file
+app.post('/api/transcribe-file', express.json(), async (req, res) => {
+    const { filePath } = req.body;
+    
+    if (!filePath || !fs.existsSync(filePath)) {
+        return res.status(400).json({ error: 'Audio file not found' });
+    }
+    
+    try {
+        const openai = getOpenAIClient();
+        const transcription = await openai.audio.transcriptions.create({
+            file: fs.createReadStream(filePath),
             model: 'whisper-1'
         });
 
@@ -69,9 +110,20 @@ app.post('/api/transcribe', upload.single('audio'), async (req, res) => {
     } catch (error) {
         console.error('Transcription error:', error);
         res.status(500).json({ error: 'Transcription failed', details: error.message });
-    } finally {
-        // Clean up temp file
-        try { fs.unlinkSync(tempPath); } catch (e) {}
+    }
+});
+
+// List saved recordings
+app.get('/api/recordings', (req, res) => {
+    try {
+        const files = fs.readdirSync(RECORDINGS_DIR)
+            .filter(f => f.endsWith('.webm'))
+            .sort()
+            .reverse()
+            .slice(0, 20);
+        res.json({ recordings: files });
+    } catch (e) {
+        res.json({ recordings: [] });
     }
 });
 
