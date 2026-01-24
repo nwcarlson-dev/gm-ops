@@ -22,6 +22,38 @@
             margin-top: auto;
         }
         
+        .sidebar-toggle {
+            position: absolute;
+            right: 8px;
+            top: 8px;
+            width: 28px;
+            height: 28px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border-subtle);
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            color: var(--text-muted);
+            transition: var(--transition-fast);
+            z-index: 10;
+        }
+        
+        .sidebar-toggle:hover {
+            color: var(--white);
+            background: rgba(255,255,255,0.1);
+        }
+        
+        .sidebar-collapsed .sidebar-toggle {
+            right: 50%;
+            transform: translateX(50%);
+        }
+        
+        .sidebar-collapsed .sidebar-toggle svg polyline {
+            points: 9 18 15 12 9 6;
+        }
+        
         .team-logo-gradient {
             border-radius: 50%;
             display: flex;
@@ -287,6 +319,98 @@
             color: var(--gold);
         }
         
+        .prospect-list {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        
+        .prospect-row {
+            display: grid;
+            grid-template-columns: 32px 40px 1fr 60px 55px 50px 40px 32px;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 12px;
+            background: rgba(0,0,0,0.15);
+            border-radius: 6px;
+            border-left: 3px solid transparent;
+            transition: all 0.15s;
+        }
+        
+        .prospect-row:hover {
+            background: rgba(255,255,255,0.05);
+        }
+        
+        .prospect-rank {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--text-muted);
+            text-align: center;
+        }
+        
+        .prospect-pos {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 3px 6px;
+            border-radius: 3px;
+            text-align: center;
+            background: rgba(255,255,255,0.1);
+            color: var(--white);
+        }
+        
+        .prospect-pos.offense { background: rgba(30, 144, 255, 0.2); color: #5dade2; }
+        .prospect-pos.defense { background: rgba(231, 76, 60, 0.2); color: #ec7063; }
+        .prospect-pos.special { background: rgba(155, 89, 182, 0.2); color: #bb8fce; }
+        
+        .prospect-name {
+            font-weight: 600;
+            color: var(--white);
+            font-size: 13px;
+        }
+        
+        .prospect-school {
+            font-size: 11px;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+        
+        .prospect-stat {
+            font-size: 12px;
+            color: var(--silver);
+            text-align: center;
+        }
+        
+        .prospect-stat-label {
+            font-size: 9px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+        
+        .prospect-star {
+            width: 28px;
+            height: 28px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            transition: all 0.15s;
+        }
+        
+        .prospect-star:hover {
+            color: var(--gold);
+            background: rgba(212, 175, 55, 0.1);
+        }
+        
+        .prospect-star.watched {
+            color: var(--gold);
+        }
+        
         .pick-list { display: flex; flex-direction: column; gap: 6px; }
         
         .pick-row {
@@ -400,6 +524,11 @@
         </header>
         
         <aside class="app-sidebar">
+            <button class="sidebar-toggle" id="sidebarToggle" onclick="toggleSidebar()" title="Toggle Sidebar">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="15 18 9 12 15 6"></polyline>
+                </svg>
+            </button>
             <div class="sidebar-content">
                 <div class="sidebar-team-info">
                     <div style="display: flex; align-items: center; gap: 12px;">
@@ -408,11 +537,6 @@
                             <div class="sidebar-team-name" id="sidebarTeamName">Chicago Bears</div>
                             <div class="sidebar-team-meta" id="sidebarTeamMeta">Next: R1 P25</div>
                         </div>
-                        <button class="sidebar-toggle" onclick="toggleSidebar()" title="Toggle Sidebar" style="position: static; transform: none; width: 28px; height: 28px;">
-                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <polyline points="15 18 9 12 15 6"></polyline>
-                            </svg>
-                        </button>
                     </div>
                     <div class="next-pick-info" id="nextPickInfo">
                         <span class="picks-away">12 picks away</span>
@@ -555,10 +679,7 @@
                             </button>
                         </div>
                     </div>
-                    <div style="color: var(--text-muted); text-align: center; padding: 60px 20px;">
-                        Draft board content will go here.<br>
-                        This is a shell demonstration.
-                    </div>
+                    <div class="prospect-list" id="prospectList"></div>
                     <div class="watchlist-hint">
                         <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
                         <span>Click the star on any prospect to add them to your watchlist</span>
@@ -709,6 +830,88 @@
             return `<div class="team-logo-gradient" style="width:${size}px;height:${size}px;background:linear-gradient(135deg,${team.color} 60%,${team.color2} 100%);font-size:${size/3.5}px;">${team.abbr}</div>`;
         }
         
+        const PROSPECTS = [
+            {rank: 1, name: "Cam Ward", pos: "QB", school: "Miami", ht: "6-2", wt: 223, age: 23},
+            {rank: 2, name: "Shedeur Sanders", pos: "QB", school: "Colorado", ht: "6-2", wt: 215, age: 22},
+            {rank: 3, name: "Travis Hunter", pos: "WR", school: "Colorado", ht: "6-1", wt: 185, age: 21},
+            {rank: 4, name: "Abdul Carter", pos: "EDGE", school: "Penn State", ht: "6-3", wt: 252, age: 21},
+            {rank: 5, name: "Will Campbell", pos: "OT", school: "LSU", ht: "6-6", wt: 323, age: 21},
+            {rank: 6, name: "Tetairoa McMillan", pos: "WR", school: "Arizona", ht: "6-5", wt: 212, age: 21},
+            {rank: 7, name: "Mason Graham", pos: "IDL", school: "Michigan", ht: "6-3", wt: 320, age: 21},
+            {rank: 8, name: "Malaki Starks", pos: "S", school: "Georgia", ht: "6-1", wt: 205, age: 21},
+            {rank: 9, name: "Kelvin Banks Jr.", pos: "OT", school: "Texas", ht: "6-4", wt: 320, age: 21},
+            {rank: 10, name: "Will Johnson", pos: "CB", school: "Michigan", ht: "6-2", wt: 202, age: 21},
+            {rank: 11, name: "Jalen Milroe", pos: "QB", school: "Alabama", ht: "6-2", wt: 225, age: 22},
+            {rank: 12, name: "Ashton Jeanty", pos: "RB", school: "Boise State", ht: "5-9", wt: 215, age: 21},
+            {rank: 13, name: "James Pearce Jr.", pos: "EDGE", school: "Tennessee", ht: "6-5", wt: 243, age: 21},
+            {rank: 14, name: "Kenneth Grant", pos: "IDL", school: "Michigan", ht: "6-3", wt: 339, age: 21},
+            {rank: 15, name: "Mykel Williams", pos: "EDGE", school: "Georgia", ht: "6-5", wt: 265, age: 21},
+            {rank: 16, name: "Tyler Warren", pos: "TE", school: "Penn State", ht: "6-6", wt: 260, age: 22},
+            {rank: 17, name: "Nic Scourton", pos: "EDGE", school: "Texas A&M", ht: "6-4", wt: 280, age: 21},
+            {rank: 18, name: "Benjamin Morrison", pos: "CB", school: "Notre Dame", ht: "6-0", wt: 190, age: 21},
+            {rank: 19, name: "Jalon Walker", pos: "LB", school: "Georgia", ht: "6-2", wt: 245, age: 21},
+            {rank: 20, name: "Luther Burden III", pos: "WR", school: "Missouri", ht: "5-11", wt: 208, age: 21},
+            {rank: 21, name: "Derrick Harmon", pos: "IDL", school: "Oregon", ht: "6-5", wt: 310, age: 22},
+            {rank: 22, name: "Colston Loveland", pos: "TE", school: "Michigan", ht: "6-5", wt: 245, age: 21},
+            {rank: 23, name: "Emeka Egbuka", pos: "WR", school: "Ohio State", ht: "6-1", wt: 205, age: 22},
+            {rank: 24, name: "Shemar Stewart", pos: "EDGE", school: "Texas A&M", ht: "6-6", wt: 290, age: 21},
+            {rank: 25, name: "Jonah Savaiinaea", pos: "OG", school: "Arizona", ht: "6-5", wt: 330, age: 22},
+            {rank: 26, name: "Tyleik Williams", pos: "IDL", school: "Ohio State", ht: "6-3", wt: 290, age: 22},
+            {rank: 27, name: "Shavon Revel Jr.", pos: "CB", school: "East Carolina", ht: "6-3", wt: 193, age: 22},
+            {rank: 28, name: "Grey Zabel", pos: "OG", school: "North Dakota St", ht: "6-5", wt: 305, age: 23},
+            {rank: 29, name: "Donovan Jackson", pos: "OG", school: "Ohio State", ht: "6-4", wt: 320, age: 22},
+            {rank: 30, name: "Xavier Watts", pos: "S", school: "Notre Dame", ht: "6-0", wt: 203, age: 23},
+            {rank: 31, name: "Matthew Golden", pos: "WR", school: "Texas", ht: "6-0", wt: 195, age: 21},
+            {rank: 32, name: "Quinshon Judkins", pos: "RB", school: "Ohio State", ht: "6-0", wt: 218, age: 21}
+        ];
+        
+        let watchlist = new Set();
+        
+        function getPositionClass(pos) {
+            const offense = ['QB', 'RB', 'WR', 'TE', 'OT', 'OG', 'C', 'OL'];
+            const defense = ['EDGE', 'IDL', 'DL', 'LB', 'CB', 'S'];
+            if (offense.includes(pos)) return 'offense';
+            if (defense.includes(pos)) return 'defense';
+            return 'special';
+        }
+        
+        function toggleWatch(rank) {
+            if (watchlist.has(rank)) {
+                watchlist.delete(rank);
+            } else {
+                watchlist.add(rank);
+            }
+            watchlistCount = watchlist.size;
+            updateWatchlistButton();
+            renderProspects();
+        }
+        
+        function renderProspects() {
+            const container = document.getElementById('prospectList');
+            container.innerHTML = PROSPECTS.map(p => {
+                const isWatched = watchlist.has(p.rank);
+                return `
+                    <div class="prospect-row">
+                        <div class="prospect-rank">${p.rank}</div>
+                        <div class="prospect-pos ${getPositionClass(p.pos)}">${p.pos}</div>
+                        <div>
+                            <div class="prospect-name">${p.name}</div>
+                            <div class="prospect-school">${p.school}</div>
+                        </div>
+                        <div class="prospect-stat">${p.ht}</div>
+                        <div class="prospect-stat">${p.wt} lbs</div>
+                        <div class="prospect-stat">Age ${p.age}</div>
+                        <div></div>
+                        <button class="prospect-star ${isWatched ? 'watched' : ''}" onclick="toggleWatch(${p.rank})">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="${isWatched ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2">
+                                <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                            </svg>
+                        </button>
+                    </div>
+                `;
+            }).join('');
+        }
+        
         function renderNeeds() {
             const renderNeed = (n) => {
                 const skillTags = (n.skills || []).map(s => `<span class="skill-tag">${s}</span>`).join('');
@@ -804,6 +1007,7 @@
             document.getElementById('sidebarTeamName').textContent = `Chicago ${userTeam.name}`;
             renderNeeds();
             renderPickList();
+            renderProspects();
         }
         
         init();
