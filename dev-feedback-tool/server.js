@@ -60,18 +60,19 @@ if (!process.env.VERCEL && !fs.existsSync(RECORDINGS_DIR)) {
     fs.mkdirSync(RECORDINGS_DIR, { recursive: true });
 }
 
-async function transcribeWithRetry(audioBuffer, filename, maxRetries = 3) {
+async function transcribeWithRetry(audioBuffer, filename, contentType = 'audio/webm', maxRetries = 3) {
     const apiKey = process.env.OPENAI_API_KEY;
     if (!apiKey) throw new Error('OPENAI_API_KEY not set');
     
     for (let attempt = 1; attempt <= maxRetries; attempt++) {
         try {
             console.log(`Transcription attempt ${attempt}/${maxRetries}...`);
+            console.log(`File: ${filename}, ContentType: ${contentType}`);
             
             // Use FormData with fetch instead of SDK
             const FormData = require('form-data');
             const formData = new FormData();
-            formData.append('file', audioBuffer, { filename, contentType: 'audio/webm' });
+            formData.append('file', audioBuffer, { filename, contentType });
             formData.append('model', 'whisper-1');
             
             const response = await fetch('https://api.openai.com/v1/audio/transcriptions', {
@@ -109,12 +110,30 @@ app.post('/api/transcribe', upload.single('audio'), async (req, res) => {
     }
 
     const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-    const filename = 'recording-' + timestamp + '.webm';
+    
+    // Get original filename and extension, or default to webm
+    const origName = req.file.originalname || '';
+    const ext = origName.includes('.') ? origName.split('.').pop().toLowerCase() : 'webm';
+    const filename = 'recording-' + timestamp + '.' + ext;
+    
+    // Map extension to proper MIME type (browsers can report weird types)
+    const mimeMap = {
+        'webm': 'audio/webm',
+        'mp3': 'audio/mpeg',
+        'mp4': 'audio/mp4',
+        'm4a': 'audio/mp4',
+        'wav': 'audio/wav',
+        'ogg': 'audio/ogg',
+        'flac': 'audio/flac'
+    };
+    const contentType = mimeMap[ext] || req.file.mimetype || 'audio/webm';
+    
     console.log('Processing:', filename);
+    console.log('Original name:', origName, 'MIME:', req.file.mimetype, '-> Using:', contentType);
     console.log('File size:', (req.file.buffer.length / 1024).toFixed(1), 'KB');
     
     try {
-        const transcription = await transcribeWithRetry(req.file.buffer, filename);
+        const transcription = await transcribeWithRetry(req.file.buffer, filename, contentType);
 
         const text = transcription.text;
         const detection = detectTechnical(text);
