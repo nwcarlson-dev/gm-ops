@@ -240,8 +240,14 @@ app.post('/api/save-transcript', async (req, res) => {
     }
 });
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, '0.0.0.0', () => {
-    console.log('Server running on port ' + PORT);
-    console.log('Dev Feedback tool available at /dev-feedback.html');
-});
+// For local development
+if (require.main === module) {
+    const PORT = process.env.PORT || 5000;
+    app.listen(PORT, '0.0.0.0', () => {
+        console.log('Server running on port ' + PORT);
+        console.log('Dev Feedback tool available at /dev-feedback.html');
+    });
+}
+
+// Export for Vercel
+module.exports = app;
