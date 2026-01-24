@@ -116,6 +116,33 @@
             line-height: 1.3;
         }
         
+        .need-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin-top: 6px;
+        }
+        
+        .skill-tag {
+            font-size: 9px;
+            font-weight: 600;
+            padding: 2px 6px;
+            border-radius: 3px;
+            background: rgba(212, 175, 55, 0.15);
+            color: var(--gold);
+            letter-spacing: 0.02em;
+        }
+        
+        .trait-tag {
+            font-size: 9px;
+            font-weight: 600;
+            padding: 2px 6px;
+            border-radius: 3px;
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--silver);
+            letter-spacing: 0.02em;
+        }
+        
         .scheme-section { margin-bottom: 12px; }
         .scheme-header {
             font-family: 'Barlow Condensed', sans-serif;
@@ -465,15 +492,15 @@
             record: "11-6",
             pick: 25,
             offNeeds: [
-                {pos: "OT", archetype: "Pass Protector", priority: "high", skills: ["Pass Protection", "Footwork", "Anchor"], note: "Ozzy Trapilo out with patellar injury. Braxton Jones benched. LT is a glaring hole."},
+                {pos: "OT", archetype: "Pass Protector", priority: "high", skills: ["Pass Protection", "Footwork", "Anchor"], traits: ["Arm Length", "Height"], note: "Ozzy Trapilo out with patellar injury. Braxton Jones benched. LT is a glaring hole."},
                 {pos: "RB", archetype: "Dynamic Playmaker", priority: "medium", skills: ["Acceleration", "Vision", "Elusiveness"], note: "Need explosive home run threat to pair with Caleb Williams."},
                 {pos: "IOL", archetype: "Zone Blocker", priority: "low", skills: ["Run Blocking", "Pull Ability", "Awareness"], note: "Depth needed for Shanahan-style rushing attack."}
             ],
             defNeeds: [
-                {pos: "EDGE", archetype: "Speed Rusher", priority: "high", skills: ["Pass Rush Moves", "Bend/Flexibility", "Speed to Power"], note: "Need consistent pass rush opposite Montez Sweat. 29th in pressure rate."},
-                {pos: "DL", archetype: "Run Stuffer", priority: "high", skills: ["Run Stuffing", "Anchor", "Double Team Resistance"], note: "Allowed most yards before contact in NFL. Interior run defense a major weakness."},
+                {pos: "EDGE", archetype: "Speed Rusher", priority: "high", skills: ["Pass Rush Moves", "Bend/Flexibility", "Speed to Power"], traits: ["Arm Length"], note: "Need consistent pass rush opposite Montez Sweat. 29th in pressure rate."},
+                {pos: "DL", archetype: "Run Stuffer", priority: "high", skills: ["Run Stuffing", "Anchor", "Double Team Resistance"], traits: ["Weight", "Strength"], note: "Allowed most yards before contact in NFL. Interior run defense a major weakness."},
                 {pos: "S", archetype: "Versatile", priority: "high", skills: ["Range", "Man Coverage", "Tackling"], note: "Brisker and Byard both FAs. Could lose entire starting safety tandem."},
-                {pos: "CB", archetype: "Outside Corner", priority: "medium", skills: ["Press Technique", "Man Coverage", "Ball Skills"], note: "Wright and CJGJ pending FAs. Need upgrade on the outside."}
+                {pos: "CB", archetype: "Outside Corner", priority: "medium", skills: ["Press Technique", "Man Coverage", "Ball Skills"], traits: ["Height", "Arm Length"], note: "Wright and CJGJ pending FAs. Need upgrade on the outside."}
             ],
             scheme: {
                 offense: "Shanahan Wide Zone",
@@ -490,25 +517,23 @@
         }
         
         function renderNeeds() {
-            document.getElementById('offensiveNeeds').innerHTML = userTeam.offNeeds.map(n => `
-                <div class="need-item ${n.priority}">
-                    <div class="need-pos">${n.pos}</div>
-                    <div>
-                        <div class="need-archetype">${n.archetype}</div>
-                        <div class="need-note">${n.note}</div>
+            const renderNeed = (n) => {
+                const skillTags = (n.skills || []).map(s => `<span class="skill-tag">${s}</span>`).join('');
+                const traitTags = (n.traits || []).map(t => `<span class="trait-tag">${t}</span>`).join('');
+                return `
+                    <div class="need-item ${n.priority}">
+                        <div class="need-pos">${n.pos}</div>
+                        <div style="flex: 1;">
+                            <div class="need-archetype">${n.archetype}</div>
+                            <div class="need-skills">${skillTags}${traitTags}</div>
+                            <div class="need-note">${n.note}</div>
+                        </div>
                     </div>
-                </div>
-            `).join('');
+                `;
+            };
             
-            document.getElementById('defensiveNeeds').innerHTML = userTeam.defNeeds.map(n => `
-                <div class="need-item ${n.priority}">
-                    <div class="need-pos">${n.pos}</div>
-                    <div>
-                        <div class="need-archetype">${n.archetype}</div>
-                        <div class="need-note">${n.note}</div>
-                    </div>
-                </div>
-            `).join('');
+            document.getElementById('offensiveNeeds').innerHTML = userTeam.offNeeds.map(renderNeed).join('');
+            document.getElementById('defensiveNeeds').innerHTML = userTeam.defNeeds.map(renderNeed).join('');
         }
         
         function showTab(tabName) {
