@@ -61,20 +61,34 @@ if (!process.env.VERCEL && !fs.existsSync(RECORDINGS_DIR)) {
 }
 
 async function transcribeWithRetry(audioBuffer, filename, maxRetries = 3) {
-    const openai = getOpenAIClient();
+    const apiKey = process.env.OPENAI_API_KEY;
+    if (!apiKey) throw new Error('OPENAI_API_KEY not set');
     
     for (let attempt = 1; attempt <= maxRetries; attempt++) {
         try {
             console.log(`Transcription attempt ${attempt}/${maxRetries}...`);
             
-            // Create a File object from buffer for OpenAI
-            const file = new File([audioBuffer], filename, { type: 'audio/webm' });
+            // Use FormData with fetch instead of SDK
+            const FormData = require('form-data');
+            const formData = new FormData();
+            formData.append('file', audioBuffer, { filename, contentType: 'audio/webm' });
+            formData.append('model', 'whisper-1');
             
-            const transcription = await openai.audio.transcriptions.create({
-                file: file,
-                model: 'whisper-1'
+            const response = await fetch('https://api.openai.com/v1/audio/transcriptions', {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${apiKey}`,
+                    ...formData.getHeaders()
+                },
+                body: formData
             });
-            return transcription;
+            
+            if (!response.ok) {
+                const err = await response.text();
+                throw new Error(`OpenAI API error: ${response.status} - ${err}`);
+            }
+            
+            return await response.json();
         } catch (error) {
             console.error(`Attempt ${attempt} failed:`, error.message);
             
@@ -82,7 +96,6 @@ async function transcribeWithRetry(audioBuffer, filename, maxRetries = 3) {
                 throw error;
             }
             
-            // Wait before retry (exponential backoff: 2s, 4s, 8s)
             const waitTime = Math.pow(2, attempt) * 1000;
             console.log(`Waiting ${waitTime/1000}s before retry...`);
             await new Promise(resolve => setTimeout(resolve, waitTime));
