@@ -1283,7 +1283,7 @@
             abbr: "CHI",
             record: "11-6",
             division: "Divisional Round",
-            picks: [25, 57, 89, 121, 153, 185, 217],
+            picks: [],
             offNeeds: [
                 {pos: "OT", archetype: "Pass Protector", priority: "high", skills: ["Pass Protection", "Footwork", "Anchor"], traits: ["Arm Length", "Height"], note: "Ozzy Trapilo out with patellar injury. Braxton Jones benched. LT is a glaring hole."},
                 {pos: "RB", archetype: "Dynamic Playmaker", priority: "medium", skills: ["Acceleration", "Vision", "Elusiveness"], note: "Need explosive home run threat to pair with Caleb Williams."},
@@ -1538,7 +1538,9 @@
             const nextUserPick = userTeam.picks.find(p => p >= currentPick) || userTeam.picks[0];
             const picksAway = nextUserPick - currentPick;
             
-            document.getElementById('sidebarTeamMeta').textContent = `Next: R1 P${nextUserPick}`;
+            const nextPickData = draftOrder.find(d => d.overall === nextUserPick);
+            const nextRound = nextPickData ? nextPickData.round : 1;
+            document.getElementById('sidebarTeamMeta').textContent = `Next: R${nextRound} P${nextPickData?.pick || nextUserPick}`;
             document.getElementById('nextPickInfo').innerHTML = picksAway > 0 
                 ? `<span class="picks-away">${picksAway} pick${picksAway !== 1 ? 's' : ''} away</span>`
                 : `<span class="picks-away" style="color: var(--nfl-red);">On the clock!</span>`;
@@ -1555,31 +1557,35 @@
                 if (isMine) classes += ' user-pick';
                 if (isOnClock) classes += ' current';
                 if (isPast) classes += ' past';
-                const tradeInfo = d.original_team && d.original_team !== d.team ? `<span style="font-size:9px;color:var(--text-muted);margin-left:4px;">via ${d.original_team}</span>` : '';
+                const tradeInfo = d.via ? `<span style="font-size:9px;color:var(--text-muted);margin-left:4px;">via ${d.via}</span>` : '';
                 return `
                     <div class="${classes}">
                         <div class="draft-pick-num">${d.pick}</div>
                         ${getTeamLogo(d.team, 24)}
                         <div class="draft-pick-team">${d.team}${tradeInfo}</div>
-                        ${d.trade_value ? `<div class="pick-value">${d.trade_value}</div>` : ''}
+                        ${d.value ? `<div class="pick-value">${d.value}</div>` : ''}
                     </div>
                 `;
             }).join('');
             
             const roundNames = ['1st', '2nd', '3rd', '4th', '5th', '6th', '7th'];
-            document.getElementById('myPicksList').innerHTML = userTeam.picks.map((pick, i) => {
-                const isNext = pick === nextUserPick;
-                const picksUntil = pick - currentPick;
+            document.getElementById('myPicksList').innerHTML = userTeam.picks.map((overallPick) => {
+                const pickData = draftOrder.find(d => d.overall === overallPick);
+                const round = pickData?.round || 1;
+                const pickNum = pickData?.pick || overallPick;
+                const viaText = pickData?.via ? ` (via ${pickData.via})` : '';
+                const isNext = overallPick === nextUserPick;
+                const picksUntil = overallPick - currentPick;
                 let statusText = '';
-                if (pick < currentPick) statusText = 'Completed';
+                if (overallPick < currentPick) statusText = 'Completed';
                 else if (isNext) statusText = picksUntil === 0 ? 'On the clock!' : `${picksUntil} picks away`;
                 else statusText = 'Upcoming';
                 return `
                     <div class="my-pick ${isNext ? 'next' : ''}">
-                        <div class="my-pick-round">${i + 1}</div>
+                        <div class="my-pick-round">${round}</div>
                         <div class="my-pick-info">
-                            <div class="my-pick-label">Round ${roundNames[i]} Pick</div>
-                            <div class="my-pick-overall">Overall #${pick}</div>
+                            <div class="my-pick-label">Round ${roundNames[round - 1]} Pick #${pickNum}${viaText}</div>
+                            <div class="my-pick-overall">Overall #${overallPick}</div>
                         </div>
                         <div class="my-pick-status">${statusText}</div>
                     </div>
@@ -1647,6 +1653,12 @@
                 
                 prospects = prospectsData.prospects || [];
                 draftOrder = draftData.picks || [];
+                
+                // Load user team picks from draft order
+                userTeam.picks = draftOrder
+                    .filter(d => d.team === userTeam.name)
+                    .map(d => d.overall)
+                    .sort((a, b) => a - b);
                 
                 prospects.forEach(p => {
                     if (p.name && typeof p.name === 'object') {
