@@ -80,3 +80,20 @@ What are your thoughts or changes on any of these? I'll refine the definitions b
 **User:** Approved.
 
 **Status:** ✅ Committed to DESIGN.md
+
+---
+
+### 1.1.5 - Implementation
+
+**User:** We should close a topic before rapidly jumping ahead. Nothing frustrated me more than people that jump ahead before topics are concluded. We discussed how I will record feedback I have no idea how to actually do it or if the functionality exists.
+
+**User:** I specifically said I want audio recording.
+
+**Agent:** Built the audio recording tool:
+- Server created with Express + OpenAI Whisper transcription
+- Tool available at `/dev-feedback.html`
+- Records audio → transcribes → saves locally
+- Export to markdown available
+- Cost: ~$0.006/minute
+
+**Status:** ✅ Tool built and running
