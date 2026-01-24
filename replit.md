@@ -87,7 +87,25 @@ See `data/prospects/SCHEMA.md` for full documentation. Key fields:
 - **Vet features** before implementing - present options first
 - Update DESIGN.md before coding
 
-## Pending: GitHub Integration
-- User wants dev-feedback tool pushed to GitHub so other AI engines can access transcripts
-- GitHub email verification codes not arriving - user needs to set up 2FA or alternate auth method on their end
-- Topic 1.1 is BLOCKED until GitHub is authorized - do NOT suggest moving on
+## Dev Feedback Tool
+Standalone local tool for recording planning dialogue. Runs on Mac, independent of Replit.
+
+**Location**: `dev-feedback-tool/` (also on GitHub)
+
+**Features**:
+- Audio recording with OpenAI Whisper transcription
+- Two topic types: Game Dev (default) and Technical
+- Auto-detects technical keywords and prompts to switch folders
+- Saves to GitHub: `dev-planning-transcripts/` or `dev-technical-transcripts/`
+- Topic numbering: `1.1, 1.2...` (game) or `T1.1, T1.2...` (technical)
+
+**Running locally**:
+```bash
+cd dev-feedback-tool
+OPENAI_API_KEY=xxx GITHUB_TOKEN=xxx node server.js
+# Open http://localhost:5000/dev-feedback.html
+```
+
+**Day 1 Topics Logged** (Jan 24, 2026):
+- 1.1-1.11: Game features (prospect loading, draft board, trade center, sim-to-pick, etc.)
+- T1.1-T1.2: Technical (planning workflow, standalone tool setup)
