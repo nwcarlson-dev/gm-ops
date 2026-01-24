@@ -67,13 +67,13 @@ async function transcribeWithRetry(audioBuffer, filename, contentType = 'audio/w
     for (let attempt = 1; attempt <= maxRetries; attempt++) {
         try {
             console.log(`Transcription attempt ${attempt}/${maxRetries}...`);
-            console.log(`File: ${filename}, ContentType: ${contentType}`);
+            console.log(`File: ${filename}, ContentType: ${contentType}, Size: ${(audioBuffer.length / 1024).toFixed(1)}KB`);
             
-            // Use OpenAI SDK which handles multipart properly
-            const openai = new OpenAI({ apiKey, timeout: 30000, maxRetries: 0 });
+            // Use OpenAI SDK with toFile helper for Node.js compatibility
+            const openai = new OpenAI({ apiKey, timeout: 55000, maxRetries: 0 });
             
-            // Create a File-like object from the buffer
-            const file = new File([audioBuffer], filename, { type: contentType });
+            // Use OpenAI's toFile helper which works in Node.js
+            const file = await OpenAI.toFile(audioBuffer, filename, { type: contentType });
             
             const transcription = await openai.audio.transcriptions.create({
                 file: file,
