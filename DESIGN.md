@@ -69,23 +69,33 @@ The simulation engine runs identically regardless of setting. What changes is ho
 | **Scheme Fit Badges** | Always shown prominently | Shown on hover | Shown in detail view only | Hidden (calculate yourself) |
 | **Decision Prompts** | Major moments only (1st round pick) | Key decisions (top FA, trades) | All decisions presented | All decisions, no guidance |
 
+### Design Philosophy
+
+**Target audience already wants control over picks, trades, and signings** - that's why they're playing a GM sim. The control levels are about:
+
+1. **Admin work** - Roster cuts (90→53), practice squad churn, IR moves, waiver claims
+2. **Guidance level** - Scheme fit badges, value alerts, trade recommendations
+3. **Organizational depth** - Scout assignments, coaching staff management, front office hires
+4. **Information density** - Summary cards vs. detailed spreadsheets
+
 ### User Experience Goals
 
-1. **Casual**: New users, time-limited players, or those who want narrative over spreadsheets. "I want to feel like a GM without learning cap accounting."
+1. **Casual**: Minimize tedious admin, maximize big moments. "I'll draft and sign stars, but handle the roster bubble for me."
 
-2. **Balanced**: Most users land here. Strategic decisions are yours, tedious admin is automated. "I'll pick my draft, but don't make me cut down from 90 to 53 manually."
+2. **Balanced**: Strategic control with smart automation for grunt work. "I'll make every pick, but auto-cut to 53 based on my depth chart."
 
-3. **Involved**: Engaged users who want control but appreciate efficiency tools. "Show me everything, highlight what matters, but I'll decide."
+3. **Involved**: Full control with efficiency tools. "Show me everything, highlight what matters, I'll decide."
 
-4. **Total Control**: Hardcore sim players who want maximum agency and minimal hand-holding. "Don't tell me who to draft - I have my own board."
+4. **Total Control**: Maximum agency, minimal hand-holding. "No recommendations - I have my own evaluations."
 
 ### Implementation Notes
 
-- Users can change control level at any point during a franchise
-- Users can override individual settings (e.g., "Balanced but I always want to control the draft")
-- Same underlying simulation engine regardless of level
-- Progressive disclosure: lower levels see summary views, higher levels see detailed tables
-- Control level affects UI density, not data availability (users can always dig deeper if they want)
+- **Presets, not locks**: Control levels are starting templates, not restrictions
+- **Per-feature override**: User can select "Balanced" but toggle individual settings (e.g., "I always control roster cuts manually")
+- **Changeable anytime**: Adjust mid-franchise, mid-offseason, whenever
+- **Same simulation**: Engine runs identically regardless of control level
+- **UI density scales**: Lower levels see summary views, higher levels see full tables
+- **Data always accessible**: Control level affects what's surfaced, not what exists - users can always dig deeper
 
 ---
 
