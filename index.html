@@ -239,8 +239,8 @@
         }
 
         .live-ticker {
-            background: rgba(0, 0, 0, 0.4);
-            padding: 14px 0;
+            background: rgba(1, 51, 105, 0.5);
+            padding: 12px 0 16px 0;
             overflow: hidden;
             border-bottom: 1px solid var(--card-border);
         }
@@ -390,19 +390,18 @@
             transform: translateY(-4px);
         }
 
-        .mode-card.disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
+        .mode-card.coming-soon {
+            opacity: 1;
+            cursor: pointer;
         }
 
-        .mode-card.disabled:hover {
-            transform: none;
-            background: var(--card-bg);
-            border-color: var(--card-border);
+        .mode-card.coming-soon:hover {
+            transform: translateY(-4px);
+            border-color: var(--nfl-red);
         }
 
-        .mode-card.disabled::before {
-            display: none;
+        .mode-card.coming-soon::before {
+            content: '';
         }
 
         .mode-popularity {
@@ -569,14 +568,17 @@
             transform: translateY(-2px);
         }
 
-        .mode-card.disabled .mode-cta {
-            background: var(--silver);
-            color: var(--dark-navy);
-            cursor: not-allowed;
+        .mode-card.coming-soon .mode-cta {
+            background: transparent;
+            border: 1px solid var(--silver);
+            color: var(--silver);
         }
 
-        .mode-card.disabled .mode-cta:hover {
-            transform: none;
+        .mode-card.coming-soon .mode-cta:hover {
+            background: rgba(165, 172, 175, 0.1);
+            border-color: var(--white);
+            color: var(--white);
+            transform: scale(1.02);
         }
 
         .bottom-section {
@@ -914,7 +916,7 @@
                 <button class="mode-cta">Coming Soon</button>
             </div>
 
-            <div class="mode-card disabled">
+            <div class="mode-card coming-soon">
                 <div class="mode-logo">
                     <div class="logo-with-sub">
                         <div class="main-row">
@@ -931,7 +933,7 @@
                     <li>Owner relationships</li>
                     <li>Dynasty legacy tracking</li>
                 </ul>
-                <span class="mode-badge coming-soon">Coming 2027</span>
+                <span class="mode-badge coming-soon">Coming Soon</span>
                 <br>
                 <button class="mode-cta">Learn More</button>
             </div>
