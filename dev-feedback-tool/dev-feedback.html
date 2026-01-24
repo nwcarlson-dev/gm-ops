@@ -466,28 +466,40 @@
             console.log('[DevFeedback]', msg);
         }
         
-        async function fetchWithRetry(url, options, maxRetries = 3) {
+        async function fetchWithRetry(url, options, maxRetries = 6) {
             for (let attempt = 1; attempt <= maxRetries; attempt++) {
                 try {
                     const res = await fetch(url, options);
                     const text = await res.text();
+                    
+                    // Check for Vercel deployment/unavailable errors
+                    const isDeploymentError = text.includes('deploy') || 
+                        text.includes('building') || 
+                        text.includes('SERVICE_UNAVAILABLE') ||
+                        text.includes('UNAVAILABLE') ||
+                        res.status === 503 ||
+                        res.status === 502;
+                    
+                    if (isDeploymentError && attempt < maxRetries) {
+                        const waitTime = Math.min(attempt * 5, 15); // 5s, 10s, 15s, 15s...
+                        log(`Service updating, retry in ${waitTime}s (${attempt}/${maxRetries})...`);
+                        await new Promise(r => setTimeout(r, waitTime * 1000));
+                        continue;
+                    }
+                    
                     try {
                         return { ok: res.ok, status: res.status, data: JSON.parse(text) };
                     } catch (e) {
-                        if (text.includes('deploy') || text.includes('building')) {
-                            console.log(`[DevFeedback] Deployment in progress, retry ${attempt}/${maxRetries}...`);
-                            if (attempt < maxRetries) {
-                                log(`Deployment in progress, retrying (${attempt}/${maxRetries})...`);
-                                await new Promise(r => setTimeout(r, 3000));
-                                continue;
-                            }
+                        if (isDeploymentError) {
+                            throw new Error('Service temporarily unavailable');
                         }
                         throw new Error('Invalid response: ' + text.slice(0, 100));
                     }
                 } catch (e) {
                     if (attempt === maxRetries) throw e;
-                    log(`Network error, retrying (${attempt}/${maxRetries})...`);
-                    await new Promise(r => setTimeout(r, 2000));
+                    const waitTime = Math.min(attempt * 3, 10);
+                    log(`Connection issue, retry in ${waitTime}s (${attempt}/${maxRetries})...`);
+                    await new Promise(r => setTimeout(r, waitTime * 1000));
                 }
             }
         }
