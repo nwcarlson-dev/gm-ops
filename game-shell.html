@@ -30,37 +30,62 @@
                 background: var(--dark-navy);
             }
 
-            .sidebar-toggle {
-                position: absolute;
-                right: -16px;
-                top: 20px;
-                width: 32px;
-                height: 32px;
-                background: var(--nfl-blue);
-                border: 2px solid var(--border-subtle);
-                border-radius: 50%;
+            /* Sidebar as slide-out overlay */
+            .app-sidebar {
+                position: fixed;
+                left: 0;
+                top: 56px;
+                bottom: 0;
+                width: 240px;
+                transform: translateX(-100%);
+                transition: transform 0.25s ease;
+                z-index: 200;
+                box-shadow: 4px 0 20px rgba(0,0,0,0.4);
+            }
+
+            .sidebar-open .app-sidebar {
+                transform: translateX(0);
+            }
+
+            .sidebar-overlay {
+                position: fixed;
+                inset: 0;
+                top: 56px;
+                background: rgba(0,0,0,0.5);
+                opacity: 0;
+                visibility: hidden;
+                transition: opacity 0.25s ease;
+                z-index: 199;
+            }
+
+            .sidebar-open .sidebar-overlay {
+                opacity: 1;
+                visibility: visible;
+            }
+
+            /* Hamburger menu button */
+            .menu-btn {
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                width: 36px;
+                height: 36px;
+                background: transparent;
+                border: none;
                 cursor: pointer;
-                color: var(--white);
+                color: var(--text-muted);
+                border-radius: 6px;
                 transition: var(--transition-fast);
-                z-index: 100;
-                box-shadow: 0 2px 8px rgba(0,0,0,0.3);
             }
 
-            .sidebar-toggle:hover {
+            .menu-btn:hover {
+                background: rgba(255,255,255,0.1);
                 color: var(--white);
-                background: var(--nfl-red);
-                transform: scale(1.1);
             }
 
-            .sidebar-collapsed .sidebar-toggle {
-                right: -16px;
-            }
-
-            .sidebar-collapsed .sidebar-toggle svg polyline {
-                points: 9 18 15 12 9 6;
+            /* No sidebar layout adjustment needed - it's an overlay now */
+            .app-layout.with-sidebar {
+                grid-template-columns: 1fr;
             }
 
             .team-logo-gradient {
@@ -1401,7 +1426,14 @@
     <body>
         <div class="app-layout with-sidebar" id="appLayout">
             <header class="app-header">
-                <div style="display: flex; align-items: center; gap: 20px">
+                <div style="display: flex; align-items: center; gap: 12px">
+                    <button class="menu-btn" onclick="toggleSidebar()" title="Menu">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <line x1="3" y1="12" x2="21" y2="12"></line>
+                            <line x1="3" y1="18" x2="21" y2="18"></line>
+                        </svg>
+                    </button>
                     <a href="index.html" class="logo-blocks">
                         <span class="gm">GM</span>
                         <span class="ops"
@@ -1425,24 +1457,8 @@
                 </div>
             </header>
 
+            <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
             <aside class="app-sidebar">
-                <button
-                    class="sidebar-toggle"
-                    id="sidebarToggle"
-                    onclick="toggleSidebar()"
-                    title="Toggle Sidebar"
-                >
-                    <svg
-                        width="14"
-                        height="14"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        stroke-width="2"
-                    >
-                        <polyline points="15 18 9 12 15 6"></polyline>
-                    </svg>
-                </button>
                 <div class="sidebar-content">
                     <div class="sidebar-section">
                         <div class="sidebar-section-title">Draft</div>
@@ -3270,15 +3286,7 @@
 
             function toggleSidebar() {
                 const layout = document.getElementById("appLayout");
-                layout.classList.toggle("sidebar-collapsed");
-                const icon = document.querySelector(".sidebar-toggle svg");
-                if (layout.classList.contains("sidebar-collapsed")) {
-                    icon.innerHTML =
-                        '<polyline points="9 18 15 12 9 6"></polyline>';
-                } else {
-                    icon.innerHTML =
-                        '<polyline points="15 18 9 12 15 6"></polyline>';
-                }
+                layout.classList.toggle("sidebar-open");
             }
 
             function toggleWatchlistFilter() {
