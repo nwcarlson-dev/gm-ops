@@ -128,6 +128,27 @@
         .need-item.medium { border-left-color: var(--warning); }
         .need-item.low { border-left-color: var(--silver); }
         
+        .need-item .need-content { cursor: pointer; }
+        .need-item .need-expand {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.25s ease;
+        }
+        .need-item.expanded .need-expand {
+            max-height: 120px;
+        }
+        .need-toggle {
+            font-size: 9px;
+            color: var(--text-muted);
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .need-item.expanded .need-toggle svg {
+            transform: rotate(180deg);
+        }
+        
         .need-pos {
             font-family: 'Barlow Condensed', sans-serif;
             font-size: 13px;
@@ -971,38 +992,38 @@
         }
         
         const PROSPECTS = [
-            {rank: 1, name: "Cam Ward", pos: "QB", school: "Miami", ht: "6-2", wt: 223, age: 23},
-            {rank: 2, name: "Shedeur Sanders", pos: "QB", school: "Colorado", ht: "6-2", wt: 215, age: 22},
-            {rank: 3, name: "Travis Hunter", pos: "WR", school: "Colorado", ht: "6-1", wt: 185, age: 21},
-            {rank: 4, name: "Abdul Carter", pos: "EDGE", school: "Penn State", ht: "6-3", wt: 252, age: 21},
-            {rank: 5, name: "Will Campbell", pos: "OT", school: "LSU", ht: "6-6", wt: 323, age: 21},
-            {rank: 6, name: "Tetairoa McMillan", pos: "WR", school: "Arizona", ht: "6-5", wt: 212, age: 21},
-            {rank: 7, name: "Mason Graham", pos: "IDL", school: "Michigan", ht: "6-3", wt: 320, age: 21},
-            {rank: 8, name: "Malaki Starks", pos: "S", school: "Georgia", ht: "6-1", wt: 205, age: 21},
-            {rank: 9, name: "Kelvin Banks Jr.", pos: "OT", school: "Texas", ht: "6-4", wt: 320, age: 21},
-            {rank: 10, name: "Will Johnson", pos: "CB", school: "Michigan", ht: "6-2", wt: 202, age: 21},
-            {rank: 11, name: "Jalen Milroe", pos: "QB", school: "Alabama", ht: "6-2", wt: 225, age: 22},
-            {rank: 12, name: "Ashton Jeanty", pos: "RB", school: "Boise State", ht: "5-9", wt: 215, age: 21},
-            {rank: 13, name: "James Pearce Jr.", pos: "EDGE", school: "Tennessee", ht: "6-5", wt: 243, age: 21},
-            {rank: 14, name: "Kenneth Grant", pos: "IDL", school: "Michigan", ht: "6-3", wt: 339, age: 21},
-            {rank: 15, name: "Mykel Williams", pos: "EDGE", school: "Georgia", ht: "6-5", wt: 265, age: 21},
-            {rank: 16, name: "Tyler Warren", pos: "TE", school: "Penn State", ht: "6-6", wt: 260, age: 22},
-            {rank: 17, name: "Nic Scourton", pos: "EDGE", school: "Texas A&M", ht: "6-4", wt: 280, age: 21},
-            {rank: 18, name: "Benjamin Morrison", pos: "CB", school: "Notre Dame", ht: "6-0", wt: 190, age: 21},
-            {rank: 19, name: "Jalon Walker", pos: "LB", school: "Georgia", ht: "6-2", wt: 245, age: 21},
-            {rank: 20, name: "Luther Burden III", pos: "WR", school: "Missouri", ht: "5-11", wt: 208, age: 21},
-            {rank: 21, name: "Derrick Harmon", pos: "IDL", school: "Oregon", ht: "6-5", wt: 310, age: 22},
-            {rank: 22, name: "Colston Loveland", pos: "TE", school: "Michigan", ht: "6-5", wt: 245, age: 21},
-            {rank: 23, name: "Emeka Egbuka", pos: "WR", school: "Ohio State", ht: "6-1", wt: 205, age: 22},
-            {rank: 24, name: "Shemar Stewart", pos: "EDGE", school: "Texas A&M", ht: "6-6", wt: 290, age: 21},
-            {rank: 25, name: "Jonah Savaiinaea", pos: "OG", school: "Arizona", ht: "6-5", wt: 330, age: 22},
-            {rank: 26, name: "Tyleik Williams", pos: "IDL", school: "Ohio State", ht: "6-3", wt: 290, age: 22},
-            {rank: 27, name: "Shavon Revel Jr.", pos: "CB", school: "East Carolina", ht: "6-3", wt: 193, age: 22},
-            {rank: 28, name: "Grey Zabel", pos: "OG", school: "North Dakota St", ht: "6-5", wt: 305, age: 23},
-            {rank: 29, name: "Donovan Jackson", pos: "OG", school: "Ohio State", ht: "6-4", wt: 320, age: 22},
-            {rank: 30, name: "Xavier Watts", pos: "S", school: "Notre Dame", ht: "6-0", wt: 203, age: 23},
-            {rank: 31, name: "Matthew Golden", pos: "WR", school: "Texas", ht: "6-0", wt: 195, age: 21},
-            {rank: 32, name: "Quinshon Judkins", pos: "RB", school: "Ohio State", ht: "6-0", wt: 218, age: 21}
+            {rank: 1, name: "Cam Ward", pos: "QB", school: "Miami", ht: "6-2", wt: 223, age: 23, mo: 4},
+            {rank: 2, name: "Shedeur Sanders", pos: "QB", school: "Colorado", ht: "6-2", wt: 215, age: 22, mo: 2},
+            {rank: 3, name: "Travis Hunter", pos: "WR", school: "Colorado", ht: "6-1", wt: 185, age: 21, mo: 8},
+            {rank: 4, name: "Abdul Carter", pos: "EDGE", school: "Penn State", ht: "6-3", wt: 252, age: 21, mo: 11},
+            {rank: 5, name: "Will Campbell", pos: "OT", school: "LSU", ht: "6-6", wt: 323, age: 21, mo: 5},
+            {rank: 6, name: "Tetairoa McMillan", pos: "WR", school: "Arizona", ht: "6-5", wt: 212, age: 21, mo: 9},
+            {rank: 7, name: "Mason Graham", pos: "IDL", school: "Michigan", ht: "6-3", wt: 320, age: 21, mo: 6},
+            {rank: 8, name: "Malaki Starks", pos: "S", school: "Georgia", ht: "6-1", wt: 205, age: 21, mo: 3},
+            {rank: 9, name: "Kelvin Banks Jr.", pos: "OT", school: "Texas", ht: "6-4", wt: 320, age: 21, mo: 7},
+            {rank: 10, name: "Will Johnson", pos: "CB", school: "Michigan", ht: "6-2", wt: 202, age: 21, mo: 10},
+            {rank: 11, name: "Jalen Milroe", pos: "QB", school: "Alabama", ht: "6-2", wt: 225, age: 22, mo: 9},
+            {rank: 12, name: "Ashton Jeanty", pos: "RB", school: "Boise State", ht: "5-9", wt: 215, age: 21, mo: 1},
+            {rank: 13, name: "James Pearce Jr.", pos: "EDGE", school: "Tennessee", ht: "6-5", wt: 243, age: 21, mo: 4},
+            {rank: 14, name: "Kenneth Grant", pos: "IDL", school: "Michigan", ht: "6-3", wt: 339, age: 21, mo: 8},
+            {rank: 15, name: "Mykel Williams", pos: "EDGE", school: "Georgia", ht: "6-5", wt: 265, age: 21, mo: 2},
+            {rank: 16, name: "Tyler Warren", pos: "TE", school: "Penn State", ht: "6-6", wt: 260, age: 22, mo: 11},
+            {rank: 17, name: "Nic Scourton", pos: "EDGE", school: "Texas A&M", ht: "6-4", wt: 280, age: 21, mo: 6},
+            {rank: 18, name: "Benjamin Morrison", pos: "CB", school: "Notre Dame", ht: "6-0", wt: 190, age: 21, mo: 3},
+            {rank: 19, name: "Jalon Walker", pos: "LB", school: "Georgia", ht: "6-2", wt: 245, age: 21, mo: 7},
+            {rank: 20, name: "Luther Burden III", pos: "WR", school: "Missouri", ht: "5-11", wt: 208, age: 21, mo: 5},
+            {rank: 21, name: "Derrick Harmon", pos: "IDL", school: "Oregon", ht: "6-5", wt: 310, age: 22, mo: 0},
+            {rank: 22, name: "Colston Loveland", pos: "TE", school: "Michigan", ht: "6-5", wt: 245, age: 21, mo: 4},
+            {rank: 23, name: "Emeka Egbuka", pos: "WR", school: "Ohio State", ht: "6-1", wt: 205, age: 22, mo: 8},
+            {rank: 24, name: "Shemar Stewart", pos: "EDGE", school: "Texas A&M", ht: "6-6", wt: 290, age: 21, mo: 1},
+            {rank: 25, name: "Jonah Savaiinaea", pos: "OG", school: "Arizona", ht: "6-5", wt: 330, age: 22, mo: 10},
+            {rank: 26, name: "Tyleik Williams", pos: "IDL", school: "Ohio State", ht: "6-3", wt: 290, age: 22, mo: 3},
+            {rank: 27, name: "Shavon Revel Jr.", pos: "CB", school: "East Carolina", ht: "6-3", wt: 193, age: 22, mo: 6},
+            {rank: 28, name: "Grey Zabel", pos: "OG", school: "North Dakota St", ht: "6-5", wt: 305, age: 23, mo: 2},
+            {rank: 29, name: "Donovan Jackson", pos: "OG", school: "Ohio State", ht: "6-4", wt: 320, age: 22, mo: 9},
+            {rank: 30, name: "Xavier Watts", pos: "S", school: "Notre Dame", ht: "6-0", wt: 203, age: 23, mo: 5},
+            {rank: 31, name: "Matthew Golden", pos: "WR", school: "Texas", ht: "6-0", wt: 195, age: 21, mo: 11},
+            {rank: 32, name: "Quinshon Judkins", pos: "RB", school: "Ohio State", ht: "6-0", wt: 218, age: 21, mo: 7}
         ];
         
         let watchlist = new Set();
@@ -1040,7 +1061,7 @@
                         </div>
                         <div class="prospect-stat">${p.ht}</div>
                         <div class="prospect-stat">${p.wt} lbs</div>
-                        <div class="prospect-stat">Age ${p.age}</div>
+                        <div class="prospect-stat">${p.age} yr<span style="font-size: 10px; color: var(--text-muted);"> | ${p.mo} mo</span></div>
                         <div></div>
                         <button class="prospect-star ${isWatched ? 'watched' : ''}" onclick="toggleWatch(${p.rank})">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="${isWatched ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2">
@@ -1053,23 +1074,43 @@
         }
         
         function renderNeeds() {
-            const renderNeed = (n) => {
+            let firstOffNeed = true;
+            let firstDefNeed = true;
+            
+            const renderNeed = (n, isFirst) => {
                 const skillTags = (n.skills || []).map(s => `<span class="skill-tag">${s}</span>`).join('');
                 const traitTags = (n.traits || []).map(t => `<span class="trait-tag">${t}</span>`).join('');
+                const expanded = isFirst ? 'expanded' : '';
                 return `
-                    <div class="need-item ${n.priority}">
+                    <div class="need-item ${n.priority} ${expanded}" data-pos="${n.pos}">
                         <div class="need-pos">${n.pos}</div>
                         <div style="flex: 1;">
-                            <div class="need-archetype">${n.archetype}</div>
-                            <div class="need-skills">${skillTags}${traitTags}</div>
-                            <div class="need-note">${n.note}</div>
+                            <div class="need-content" onclick="toggleNeed('${n.pos}')">
+                                <div style="display: flex; align-items: center; justify-content: space-between;">
+                                    <div class="need-archetype">${n.archetype}</div>
+                                    <span class="need-toggle">
+                                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="6 9 12 15 18 9"></polyline>
+                                        </svg>
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="need-expand">
+                                <div class="need-skills">${skillTags}${traitTags}</div>
+                                <div class="need-note">${n.note}</div>
+                            </div>
                         </div>
                     </div>
                 `;
             };
             
-            document.getElementById('offensiveNeeds').innerHTML = userTeam.offNeeds.map(renderNeed).join('');
-            document.getElementById('defensiveNeeds').innerHTML = userTeam.defNeeds.map(renderNeed).join('');
+            document.getElementById('offensiveNeeds').innerHTML = userTeam.offNeeds.map((n, i) => renderNeed(n, i === 0)).join('');
+            document.getElementById('defensiveNeeds').innerHTML = userTeam.defNeeds.map((n, i) => renderNeed(n, i === 0)).join('');
+        }
+        
+        function toggleNeed(pos) {
+            const item = document.querySelector(`.need-item[data-pos="${pos}"]`);
+            if (item) item.classList.toggle('expanded');
         }
         
         function showTab(tabName) {
