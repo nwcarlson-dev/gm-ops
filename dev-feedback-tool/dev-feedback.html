@@ -24,16 +24,9 @@
             border-bottom: 1px solid #333;
         }
         
-        .header h1 {
-            font-size: 18px;
-            margin: 0;
-            font-weight: 600;
-        }
+        .header h1 { font-size: 18px; margin: 0; font-weight: 600; }
         
-        .type-toggle {
-            display: flex;
-            gap: 4px;
-        }
+        .type-toggle { display: flex; gap: 4px; }
         
         .type-btn {
             padding: 4px 10px;
@@ -45,23 +38,14 @@
             font-size: 12px;
         }
         
-        .type-btn.active {
-            background: #2a5a2a;
-            color: #fff;
-            border-color: #3a7a3a;
-        }
-        
-        .container {
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
-        }
+        .type-btn.active { background: #2a5a2a; color: #fff; border-color: #3a7a3a; }
         
         .recorder {
             background: #252525;
             border: 1px solid #333;
             border-radius: 8px;
             padding: 16px;
+            margin-bottom: 16px;
         }
         
         .topic-row {
@@ -71,12 +55,7 @@
             margin-bottom: 12px;
         }
         
-        .topic-number {
-            font-size: 20px;
-            font-weight: 600;
-            color: #6a6;
-        }
-        
+        .topic-number { font-size: 20px; font-weight: 600; color: #6a6; }
         .date { font-size: 12px; color: #666; }
         
         .controls {
@@ -113,11 +92,7 @@
             height: 16px;
         }
         
-        .status {
-            font-size: 13px;
-            color: #888;
-        }
-        
+        .status { font-size: 13px; color: #888; }
         .status.recording { color: #c44; }
         .status.error { color: #c44; }
         .status.success { color: #6a6; }
@@ -161,27 +136,48 @@
         }
         
         .tech-alert.show { display: block; }
-        
         .tech-alert p { margin: 0 0 8px 0; color: #ca8; }
-        
         .tech-alert-btns { display: flex; gap: 8px; }
-        
-        .tech-alert-btns button {
-            padding: 4px 10px;
-            border-radius: 4px;
-            border: none;
-            font-size: 11px;
-            cursor: pointer;
-        }
-        
+        .tech-alert-btns button { padding: 4px 10px; border-radius: 4px; border: none; font-size: 11px; cursor: pointer; }
         .switch-btn { background: #a85; color: #000; }
         .keep-btn { background: #444; color: #ccc; }
         
-        .feeds-row {
-            display: flex;
-            gap: 12px;
-            margin-top: 16px;
+        .pending-section {
+            display: none;
+            margin-bottom: 16px;
+            background: #2a2020;
+            border: 1px solid #633;
+            border-radius: 8px;
+            padding: 12px;
         }
+        
+        .pending-section.show { display: block; }
+        .pending-section h3 { margin: 0 0 8px 0; font-size: 14px; color: #c66; }
+        
+        .pending-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 6px 0;
+            border-bottom: 1px solid #422;
+            font-size: 12px;
+        }
+        
+        .pending-item:last-child { border-bottom: none; }
+        
+        .pending-item button {
+            padding: 3px 8px;
+            border: none;
+            border-radius: 3px;
+            cursor: pointer;
+            font-size: 11px;
+            margin-left: 4px;
+        }
+        
+        .retry-btn { background: #4a6a8a; color: #fff; }
+        .delete-btn { background: #633; color: #ccc; }
+        
+        .feeds-row { display: flex; gap: 12px; margin-top: 16px; }
         
         .feed {
             flex: 1;
@@ -204,51 +200,17 @@
             gap: 6px;
         }
         
-        .feed h3 .dot {
-            width: 6px;
-            height: 6px;
-            border-radius: 50%;
-        }
-        
+        .feed h3 .dot { width: 6px; height: 6px; border-radius: 50%; }
         .feed.game h3 .dot { background: #6a6; }
         .feed.technical h3 .dot { background: #68a; }
         
-        .feed-item {
-            border-bottom: 1px solid #333;
-            font-size: 12px;
-        }
-        
+        .feed-item { border-bottom: 1px solid #333; font-size: 12px; }
         .feed-item:last-child { border-bottom: none; }
-        
-        .feed-item summary {
-            padding: 6px 0;
-            cursor: pointer;
-            color: #aaa;
-            list-style: none;
-        }
-        
+        .feed-item summary { padding: 6px 0; cursor: pointer; color: #aaa; list-style: none; }
         .feed-item summary::-webkit-details-marker { display: none; }
-        
-        .feed-item summary::before {
-            content: '▸';
-            display: inline-block;
-            margin-right: 6px;
-            font-size: 10px;
-            color: #555;
-            transition: transform 0.15s;
-        }
-        
-        .feed-item[open] summary::before {
-            transform: rotate(90deg);
-        }
-        
-        .feed-item .content {
-            padding: 8px 0 8px 16px;
-            color: #888;
-            font-size: 11px;
-            line-height: 1.5;
-            white-space: pre-wrap;
-        }
+        .feed-item summary::before { content: '▸'; display: inline-block; margin-right: 6px; font-size: 10px; color: #555; transition: transform 0.15s; }
+        .feed-item[open] summary::before { transform: rotate(90deg); }
+        .feed-item .content { padding: 8px 0 8px 16px; color: #888; font-size: 11px; line-height: 1.5; white-space: pre-wrap; }
         
         .move-btn {
             margin-top: 8px;
@@ -264,9 +226,7 @@
         .move-btn:hover { background: #4a4a4a; color: #ccc; }
         
         @media (max-width: 500px) {
-            .feeds-row {
-                flex-direction: column;
-            }
+            .feeds-row { flex-direction: column; }
         }
     </style>
 </head>
@@ -279,42 +239,36 @@
         </div>
     </div>
     
-    <div class="container">
-        <div class="recorder">
-            <div class="topic-row">
-                <span class="topic-number" id="topicNumber">1.1</span>
-                <span class="date" id="dateDisplay"></span>
-            </div>
-            
-            <div class="controls">
-                <button class="record-btn" id="recordBtn">
-                    <span class="inner"></span>
-                </button>
-                <span class="status" id="status">Click to record</span>
-                <a id="downloadLink" style="display:none; margin-left: auto; font-size: 11px; color: #68a; text-decoration: underline; cursor: pointer;">Download Audio</a>
-                <button id="retryBtn" style="display:none; margin-left: 8px; padding: 4px 10px; background: #444; color: #ccc; border: none; border-radius: 4px; font-size: 11px; cursor: pointer;">Retry</button>
-                <input type="file" id="audioUpload" accept="audio/*,.webm,audio/webm" style="display:none;">
-                <button id="uploadBtn" style="margin-left: 8px; padding: 4px 10px; background: #4a6a8a; color: #fff; border: none; border-radius: 4px; font-size: 11px; cursor: pointer;">Upload Audio</button>
-            </div>
-            
-            <div class="transcript placeholder" id="transcript">Transcript will appear here...</div>
-            
-            <div class="tech-alert" id="techAlert">
-                <p>Sounds like a technical topic. Switch folder?</p>
-                <div class="tech-alert-btns">
-                    <button class="switch-btn" id="switchBtn">Switch</button>
-                    <button class="keep-btn" id="keepBtn">Keep</button>
-                </div>
-            </div>
-            
-            <button class="save-btn" id="saveBtn" disabled>Save Topic</button>
+    <div class="recorder">
+        <div class="topic-row">
+            <span class="topic-number" id="topicNumber">1.1</span>
+            <span class="date" id="dateDisplay"></span>
         </div>
         
+        <div class="controls">
+            <button class="record-btn" id="recordBtn">
+                <span class="inner"></span>
+            </button>
+            <span class="status" id="status">Click to record</span>
+            <a id="downloadLink" style="display:none; margin-left: auto; font-size: 11px; color: #68a; text-decoration: underline; cursor: pointer;">Download Audio</a>
+        </div>
+        
+        <div class="transcript placeholder" id="transcript">Transcript will appear here...</div>
+        
+        <div class="tech-alert" id="techAlert">
+            <p>Sounds like a technical topic. Switch folder?</p>
+            <div class="tech-alert-btns">
+                <button class="switch-btn" id="switchBtn">Switch</button>
+                <button class="keep-btn" id="keepBtn">Keep</button>
+            </div>
+        </div>
+        
+        <button class="save-btn" id="saveBtn" disabled>Save Topic</button>
     </div>
     
-    <div id="pendingSection" style="display:none; margin-bottom: 16px; background: #2a2020; border: 1px solid #633; border-radius: 8px; padding: 12px;">
-        <h3 style="margin: 0 0 8px 0; font-size: 14px; color: #c66;">Pending Recordings</h3>
-        <div id="pendingList" style="font-size: 12px;"></div>
+    <div class="pending-section" id="pendingSection">
+        <h3>Pending Uploads <button onclick="retryAllPending()" style="margin-left:8px; padding:3px 8px; background:#4a6a8a; color:#fff; border:none; border-radius:3px; cursor:pointer; font-size:11px;">Retry All</button></h3>
+        <div id="pendingList"></div>
     </div>
     
     <div class="feeds-row">
@@ -329,6 +283,9 @@
     </div>
 
     <script>
+        // ============================================
+        // SIMPLE STATE
+        // ============================================
         let mediaRecorder = null;
         let audioChunks = [];
         let isRecording = false;
@@ -336,100 +293,141 @@
         let dayNumber = 1;
         let topicCount = 0;
         let lastAudioBlob = null;
-        let db = null;
         
-        // IndexedDB for pending recordings
-        const dbName = 'DevFeedbackDB';
-        const storeName = 'pendingRecordings';
-        
-        async function initDB() {
-            return new Promise((resolve, reject) => {
-                const request = indexedDB.open(dbName, 1);
-                request.onerror = () => reject(request.error);
-                request.onsuccess = () => { db = request.result; resolve(db); };
-                request.onupgradeneeded = (e) => {
-                    const database = e.target.result;
-                    if (!database.objectStoreNames.contains(storeName)) {
-                        database.createObjectStore(storeName, { keyPath: 'id', autoIncrement: true });
-                    }
-                };
-            });
+        // ============================================
+        // SIMPLE PENDING QUEUE (localStorage)
+        // ============================================
+        function getPendingQueue() {
+            try {
+                return JSON.parse(localStorage.getItem('pendingAudio') || '[]');
+            } catch { return []; }
         }
         
-        async function savePendingRecording(blob, topicNum) {
-            if (!db) await initDB();
-            return new Promise((resolve, reject) => {
-                const tx = db.transaction(storeName, 'readwrite');
-                const store = tx.objectStore(storeName);
-                const record = { blob, topicNum, timestamp: Date.now(), type: currentType };
-                const req = store.add(record);
-                req.onsuccess = () => { resolve(req.result); refreshPendingList(); };
-                req.onerror = () => reject(req.error);
-            });
+        function savePendingQueue(queue) {
+            localStorage.setItem('pendingAudio', JSON.stringify(queue));
         }
         
-        async function getPendingRecordings() {
-            if (!db) await initDB();
-            return new Promise((resolve, reject) => {
-                const tx = db.transaction(storeName, 'readonly');
-                const store = tx.objectStore(storeName);
-                const req = store.getAll();
-                req.onsuccess = () => resolve(req.result);
-                req.onerror = () => reject(req.error);
+        function addToPending(base64Audio, topicNum, type) {
+            const queue = getPendingQueue();
+            queue.push({ 
+                id: Date.now(), 
+                audio: base64Audio, 
+                topicNum, 
+                type, 
+                timestamp: Date.now() 
             });
+            savePendingQueue(queue);
+            renderPending();
         }
         
-        async function deletePendingRecording(id) {
-            if (!db) await initDB();
-            return new Promise((resolve, reject) => {
-                const tx = db.transaction(storeName, 'readwrite');
-                const store = tx.objectStore(storeName);
-                const req = store.delete(id);
-                req.onsuccess = () => { resolve(); refreshPendingList(); };
-                req.onerror = () => reject(req.error);
-            });
+        function removeFromPending(id) {
+            const queue = getPendingQueue().filter(p => p.id !== id);
+            savePendingQueue(queue);
+            renderPending();
         }
         
-        async function refreshPendingList() {
-            const pending = await getPendingRecordings();
+        function renderPending() {
+            const queue = getPendingQueue();
             const section = document.getElementById('pendingSection');
             const list = document.getElementById('pendingList');
             
-            if (pending.length === 0) {
-                section.style.display = 'none';
+            if (queue.length === 0) {
+                section.classList.remove('show');
                 return;
             }
             
-            section.style.display = 'block';
-            list.innerHTML = pending.map(r => {
-                const time = new Date(r.timestamp).toLocaleTimeString();
-                const size = (r.blob.size / 1024).toFixed(0) + 'KB';
-                return `<div style="display:flex; justify-content:space-between; align-items:center; padding:6px 0; border-bottom:1px solid #422;">
-                    <span>${r.topicNum} - ${time} (${size})</span>
+            section.classList.add('show');
+            list.innerHTML = queue.map(p => {
+                const time = new Date(p.timestamp).toLocaleTimeString();
+                const size = Math.round(p.audio.length * 0.75 / 1024) + 'KB';
+                return `<div class="pending-item">
+                    <span>${p.topicNum} - ${time} (${size})</span>
                     <div>
-                        <button onclick="retryPending(${r.id})" style="padding:3px 8px; background:#4a6a8a; color:#fff; border:none; border-radius:3px; cursor:pointer; font-size:11px; margin-right:4px;">Retry</button>
-                        <button onclick="deletePendingRecording(${r.id})" style="padding:3px 8px; background:#633; color:#ccc; border:none; border-radius:3px; cursor:pointer; font-size:11px;">Delete</button>
+                        <button class="retry-btn" onclick="retryOne(${p.id})">Retry</button>
+                        <button class="delete-btn" onclick="removeFromPending(${p.id})">Delete</button>
                     </div>
                 </div>`;
             }).join('');
         }
         
-        async function retryPending(id) {
-            const pending = await getPendingRecordings();
-            const record = pending.find(r => r.id === id);
-            if (!record) return;
+        // Convert blob to base64 for localStorage
+        async function blobToBase64(blob) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onloadend = () => resolve(reader.result.split(',')[1]);
+                reader.onerror = reject;
+                reader.readAsDataURL(blob);
+            });
+        }
+        
+        // Convert base64 back to blob
+        function base64ToBlob(base64, type = 'audio/webm') {
+            const binary = atob(base64);
+            const bytes = new Uint8Array(binary.length);
+            for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+            return new Blob([bytes], { type });
+        }
+        
+        // ============================================
+        // TRANSCRIPTION (one simple function)
+        // ============================================
+        async function transcribe(blob) {
+            const formData = new FormData();
+            formData.append('audio', blob);
             
-            lastAudioBlob = record.blob;
-            currentType = record.type || 'game';
-            document.querySelectorAll('.type-btn').forEach(b => b.classList.toggle('active', b.dataset.type === currentType));
+            const controller = new AbortController();
+            const timeout = setTimeout(() => controller.abort(), 90000); // 90s timeout
             
-            log('Retrying pending recording...');
-            const success = await transcribeAudio(record.blob, true);
-            if (success) {
-                await deletePendingRecording(id);
+            try {
+                const res = await fetch('/api/transcribe', {
+                    method: 'POST',
+                    body: formData,
+                    signal: controller.signal
+                });
+                clearTimeout(timeout);
+                
+                const text = await res.text();
+                
+                // Check for server errors
+                if (res.status >= 500 || text.includes('UNAVAILABLE') || text.includes('deploy')) {
+                    return { error: 'Service temporarily unavailable', retry: true };
+                }
+                
+                try {
+                    const data = JSON.parse(text);
+                    if (data.error) return { error: data.error, retry: false };
+                    if (data.text) return { text: data.text, technical: data.technicalDetected };
+                    return { error: 'No transcription returned', retry: false };
+                } catch {
+                    return { error: 'Invalid response', retry: true };
+                }
+            } catch (e) {
+                clearTimeout(timeout);
+                if (e.name === 'AbortError') {
+                    return { error: 'Request timed out', retry: true };
+                }
+                return { error: e.message, retry: true };
             }
         }
         
+        // Clean up transcript via AI
+        async function cleanupTranscript(text, topicNum) {
+            try {
+                const res = await fetch('/api/cleanup-transcript', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ text, topicNumber: topicNum })
+                });
+                const data = await res.json();
+                return data.cleaned || text;
+            } catch {
+                return text;
+            }
+        }
+        
+        // ============================================
+        // UI ELEMENTS
+        // ============================================
         const recordBtn = document.getElementById('recordBtn');
         const status = document.getElementById('status');
         const transcript = document.getElementById('transcript');
@@ -440,25 +438,6 @@
         const techFeed = document.getElementById('techFeed');
         const techAlert = document.getElementById('techAlert');
         const downloadLink = document.getElementById('downloadLink');
-        const retryBtn = document.getElementById('retryBtn');
-        const uploadBtn = document.getElementById('uploadBtn');
-        const audioUpload = document.getElementById('audioUpload');
-        
-        uploadBtn.addEventListener('click', () => audioUpload.click());
-        
-        audioUpload.addEventListener('change', async (e) => {
-            const file = e.target.files[0];
-            if (!file) return;
-            
-            log('Processing uploaded file...');
-            lastAudioBlob = file;
-            downloadLink.href = URL.createObjectURL(file);
-            downloadLink.download = `topic-${topicNumber.textContent}.${file.name.split('.').pop()}`;
-            downloadLink.style.display = 'inline';
-            
-            await transcribeAudio(file);
-            audioUpload.value = '';
-        });
         
         function log(msg, type = '') {
             status.textContent = msg;
@@ -466,125 +445,222 @@
             console.log('[DevFeedback]', msg);
         }
         
-        async function fetchWithRetry(url, options, maxRetries = 6) {
-            for (let attempt = 1; attempt <= maxRetries; attempt++) {
-                try {
-                    const res = await fetch(url, options);
-                    const text = await res.text();
-                    
-                    // Check for Vercel deployment/unavailable errors
-                    const isDeploymentError = text.includes('deploy') || 
-                        text.includes('building') || 
-                        text.includes('SERVICE_UNAVAILABLE') ||
-                        text.includes('UNAVAILABLE') ||
-                        res.status === 503 ||
-                        res.status === 502;
-                    
-                    if (isDeploymentError && attempt < maxRetries) {
-                        const waitTime = Math.min(attempt * 5, 15); // 5s, 10s, 15s, 15s...
-                        log(`Service updating, retry in ${waitTime}s (${attempt}/${maxRetries})...`);
-                        await new Promise(r => setTimeout(r, waitTime * 1000));
-                        continue;
-                    }
-                    
-                    try {
-                        return { ok: res.ok, status: res.status, data: JSON.parse(text) };
-                    } catch (e) {
-                        if (isDeploymentError) {
-                            throw new Error('Service temporarily unavailable');
-                        }
-                        throw new Error('Invalid response: ' + text.slice(0, 100));
-                    }
-                } catch (e) {
-                    if (attempt === maxRetries) throw e;
-                    const waitTime = Math.min(attempt * 3, 10);
-                    log(`Connection issue, retry in ${waitTime}s (${attempt}/${maxRetries})...`);
-                    await new Promise(r => setTimeout(r, waitTime * 1000));
-                }
-            }
+        function updateTopicNumber() {
+            const prefix = currentType === 'technical' ? 'T' : '';
+            topicNumber.textContent = prefix + dayNumber + '.' + (topicCount + 1);
         }
         
-        async function transcribeAudio(blob, isRetry = false) {
+        function updateDate() {
+            const now = new Date();
+            dateDisplay.textContent = now.toLocaleDateString('en-US', { 
+                month: 'short', day: 'numeric', year: 'numeric' 
+            });
+        }
+        
+        // ============================================
+        // RECORDING
+        // ============================================
+        recordBtn.addEventListener('click', async () => {
+            if (!isRecording) {
+                try {
+                    log('Requesting mic...');
+                    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+                    mediaRecorder = new MediaRecorder(stream);
+                    audioChunks = [];
+                    
+                    mediaRecorder.ondataavailable = e => audioChunks.push(e.data);
+                    
+                    mediaRecorder.onstop = async () => {
+                        const blob = new Blob(audioChunks, { type: 'audio/webm' });
+                        lastAudioBlob = blob;
+                        
+                        // Create download link backup
+                        downloadLink.href = URL.createObjectURL(blob);
+                        downloadLink.download = 'recording-' + Date.now() + '.webm';
+                        downloadLink.style.display = 'inline';
+                        
+                        await processRecording(blob);
+                    };
+                    
+                    mediaRecorder.start();
+                    isRecording = true;
+                    recordBtn.classList.add('recording');
+                    log('Recording...', 'recording');
+                } catch (e) {
+                    log('Mic denied: ' + e.message, 'error');
+                }
+            } else {
+                mediaRecorder.stop();
+                mediaRecorder.stream.getTracks().forEach(t => t.stop());
+                isRecording = false;
+                recordBtn.classList.remove('recording');
+            }
+        });
+        
+        // ============================================
+        // PROCESS RECORDING (with auto-retry)
+        // ============================================
+        async function processRecording(blob, maxRetries = 3) {
             log('Transcribing...');
             
-            const formData = new FormData();
-            formData.append('audio', blob);
-            
-            try {
-                const { ok, status, data } = await fetchWithRetry('/api/transcribe', {
-                    method: 'POST',
-                    body: formData
-                });
+            for (let attempt = 1; attempt <= maxRetries; attempt++) {
+                const result = await transcribe(blob);
                 
-                console.log('[DevFeedback] Response status:', status);
-                console.log('[DevFeedback] Response:', data);
-                
-                if (data.error) {
-                    const errorMsg = data.details || data.error;
-                    const elapsed = data.elapsed || '';
-                    log('Error - saved to pending', 'error');
-                    transcript.textContent = `Error: ${errorMsg}${elapsed ? ' (' + elapsed + ')' : ''}`;
-                    transcript.classList.remove('placeholder');
-                    if (!isRetry) await savePendingRecording(blob, topicNumber.textContent);
-                    return false;
-                } else if (data.text) {
-                    // Show raw transcript first
-                    transcript.textContent = data.text;
+                if (result.text) {
+                    // Success! Clean it up
+                    transcript.textContent = result.text;
                     transcript.classList.remove('placeholder');
                     
-                    // Clean up the transcript
                     log('Cleaning up...');
-                    try {
-                        const cleanupRes = await fetch('/api/cleanup-transcript', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ 
-                                text: data.text, 
-                                topicNumber: topicNumber.textContent 
-                            })
-                        });
-                        const cleanupData = await cleanupRes.json();
-                        if (cleanupData.cleaned) {
-                            transcript.textContent = cleanupData.cleaned;
-                        }
-                    } catch (cleanupErr) {
-                        console.log('[DevFeedback] Cleanup skipped:', cleanupErr.message);
-                    }
+                    const cleaned = await cleanupTranscript(result.text, topicNumber.textContent);
+                    transcript.textContent = cleaned;
                     
                     saveBtn.disabled = false;
-                    retryBtn.style.display = 'none';
                     log('Ready to save', 'success');
                     
-                    if (currentType === 'game' && data.technicalDetected) {
+                    if (currentType === 'game' && result.technical) {
                         techAlert.classList.add('show');
                     }
                     return true;
-                } else {
-                    log('No text - saved to pending', 'error');
-                    transcript.textContent = 'No transcription returned';
-                    transcript.classList.remove('placeholder');
-                    if (!isRetry) await savePendingRecording(blob, topicNumber.textContent);
-                    return false;
                 }
-            } catch (e) {
-                console.error('[DevFeedback] Fetch error:', e);
+                
+                if (result.retry && attempt < maxRetries) {
+                    const wait = attempt * 5;
+                    log(`${result.error}, retry in ${wait}s (${attempt}/${maxRetries})...`);
+                    await new Promise(r => setTimeout(r, wait * 1000));
+                    continue;
+                }
+                
+                // Final failure - save to pending
                 log('Failed - saved to pending', 'error');
-                // Show more detail for debugging
-                const errorDetail = e.message || 'Unknown error';
-                const errorType = e.name || 'Error';
-                transcript.textContent = `${errorType}: ${errorDetail}\n\nCheck browser console (F12) and Vercel logs for details.`;
+                transcript.textContent = 'Error: ' + result.error;
                 transcript.classList.remove('placeholder');
-                if (!isRetry) await savePendingRecording(blob, topicNumber.textContent);
+                
+                const base64 = await blobToBase64(blob);
+                addToPending(base64, topicNumber.textContent, currentType);
                 return false;
             }
         }
         
-        retryBtn.addEventListener('click', async () => {
-            if (lastAudioBlob) {
-                await transcribeAudio(lastAudioBlob);
+        // ============================================
+        // RETRY PENDING
+        // ============================================
+        async function retryOne(id) {
+            const queue = getPendingQueue();
+            const item = queue.find(p => p.id === id);
+            if (!item) return;
+            
+            log('Retrying...');
+            const blob = base64ToBlob(item.audio);
+            
+            const result = await transcribe(blob);
+            if (result.text) {
+                log('Success!', 'success');
+                transcript.textContent = result.text;
+                transcript.classList.remove('placeholder');
+                
+                const cleaned = await cleanupTranscript(result.text, item.topicNum);
+                transcript.textContent = cleaned;
+                
+                currentType = item.type;
+                document.querySelectorAll('.type-btn').forEach(b => 
+                    b.classList.toggle('active', b.dataset.type === currentType));
+                
+                saveBtn.disabled = false;
+                removeFromPending(id);
+            } else {
+                log('Still failing: ' + result.error, 'error');
             }
+        }
+        
+        async function retryAllPending() {
+            const queue = getPendingQueue();
+            if (queue.length === 0) return;
+            
+            log(`Retrying ${queue.length} pending...`);
+            
+            for (const item of queue) {
+                const blob = base64ToBlob(item.audio);
+                const result = await transcribe(blob);
+                
+                if (result.text) {
+                    // Auto-save successful retries
+                    const cleaned = await cleanupTranscript(result.text, item.topicNum);
+                    await saveToGitHub(item.topicNum, cleaned, item.type);
+                    removeFromPending(item.id);
+                }
+            }
+            
+            loadAllFeeds();
+            log('Retry complete', 'success');
+        }
+        
+        // ============================================
+        // SAVE TO GITHUB
+        // ============================================
+        async function saveToGitHub(topicNum, text, type) {
+            // Generate title
+            let title = '[Untitled]';
+            try {
+                const res = await fetch('/api/generate-title', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ text })
+                });
+                const data = await res.json();
+                if (data.title && data.title !== 'Untitled Topic') {
+                    title = data.title;
+                }
+            } catch {}
+            
+            const dateStr = new Date().toISOString().split('T')[0];
+            const prefix = type === 'technical' ? 'dev-technical' : 'dev-planning';
+            const filename = prefix + '_' + dateStr + '_0001.md';
+            const content = '## ' + topicNum + ' - ' + title + '\n*' + dateStr + '*\n\n' + text;
+            
+            const res = await fetch('/api/save-transcript', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ filename, content, type })
+            });
+            
+            return res.ok;
+        }
+        
+        saveBtn.addEventListener('click', async () => {
+            const text = transcript.textContent;
+            if (!text || transcript.classList.contains('placeholder')) {
+                log('Nothing to save', 'error');
+                return;
+            }
+            
+            saveBtn.textContent = 'Saving...';
+            saveBtn.disabled = true;
+            log('Saving...');
+            
+            try {
+                const success = await saveToGitHub(topicNumber.textContent, text, currentType);
+                
+                if (success) {
+                    log('Saved!', 'success');
+                    transcript.textContent = 'Transcript will appear here...';
+                    transcript.classList.add('placeholder');
+                    techAlert.classList.remove('show');
+                    loadAllFeeds();
+                } else {
+                    log('Save failed', 'error');
+                }
+            } catch (e) {
+                log('Save failed: ' + e.message, 'error');
+            }
+            
+            saveBtn.textContent = 'Save Topic';
+            saveBtn.disabled = true;
         });
         
+        // ============================================
+        // TYPE TOGGLE
+        // ============================================
         document.querySelectorAll('.type-btn').forEach(btn => {
             btn.addEventListener('click', () => {
                 document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active'));
@@ -606,18 +682,9 @@
             techAlert.classList.remove('show');
         });
         
-        function updateTopicNumber() {
-            const prefix = currentType === 'technical' ? 'T' : '';
-            topicNumber.textContent = prefix + dayNumber + '.' + (topicCount + 1);
-        }
-        
-        function updateDate() {
-            const now = new Date();
-            dateDisplay.textContent = now.toLocaleDateString('en-US', { 
-                month: 'short', day: 'numeric', year: 'numeric' 
-            });
-        }
-        
+        // ============================================
+        // LOAD FEEDS
+        // ============================================
         async function loadFeed(type, container) {
             try {
                 const res = await fetch('/api/topics?type=' + type + '&full=1');
@@ -626,46 +693,43 @@
                 if (data.topics.length === 0) {
                     container.innerHTML = '<div class="feed-item"><summary>No topics yet</summary></div>';
                     return 0;
-                } else {
-                    const targetType = type === 'game' ? 'technical' : 'game';
-                    const targetLabel = type === 'game' ? 'Move to Technical' : 'Move to Game';
-                    container.innerHTML = data.topics.map(t => 
-                        '<details class="feed-item"><summary>' + t.title + '</summary><div class="content">' + (t.content || '') + '<button class="move-btn" data-topic="' + t.title + '" data-from="' + type + '" data-to="' + targetType + '">' + targetLabel + '</button></div></details>'
-                    ).join('');
-                    
-                    // Add move handlers
-                    container.querySelectorAll('.move-btn').forEach(btn => {
-                        btn.addEventListener('click', async (e) => {
-                            e.stopPropagation();
-                            const topic = btn.dataset.topic;
-                            const from = btn.dataset.from;
-                            const to = btn.dataset.to;
-                            btn.textContent = 'Moving...';
-                            btn.disabled = true;
-                            
-                            try {
-                                const res = await fetch('/api/move-topic', {
-                                    method: 'POST',
-                                    headers: { 'Content-Type': 'application/json' },
-                                    body: JSON.stringify({ topic, fromType: from, toType: to })
-                                });
-                                const data = await res.json();
-                                if (data.success) {
-                                    loadAllFeeds();
-                                } else {
-                                    btn.textContent = 'Failed';
-                                    setTimeout(() => { btn.textContent = targetLabel; btn.disabled = false; }, 2000);
-                                }
-                            } catch (e) {
-                                btn.textContent = 'Error';
-                                setTimeout(() => { btn.textContent = targetLabel; btn.disabled = false; }, 2000);
-                            }
-                        });
-                    });
-                    
-                    return data.topics.length;
                 }
-            } catch (e) {
+                
+                const targetType = type === 'game' ? 'technical' : 'game';
+                const targetLabel = type === 'game' ? 'Move to Technical' : 'Move to Game';
+                
+                container.innerHTML = data.topics.map(t => 
+                    `<details class="feed-item">
+                        <summary>${t.title}</summary>
+                        <div class="content">${t.content || ''}
+                            <button class="move-btn" data-topic="${t.title}" data-from="${type}" data-to="${targetType}">${targetLabel}</button>
+                        </div>
+                    </details>`
+                ).join('');
+                
+                container.querySelectorAll('.move-btn').forEach(btn => {
+                    btn.addEventListener('click', async (e) => {
+                        e.stopPropagation();
+                        btn.textContent = 'Moving...';
+                        btn.disabled = true;
+                        
+                        try {
+                            const res = await fetch('/api/move-topic', {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify({ 
+                                    topic: btn.dataset.topic, 
+                                    fromType: btn.dataset.from, 
+                                    toType: btn.dataset.to 
+                                })
+                            });
+                            if (res.ok) loadAllFeeds();
+                        } catch {}
+                    });
+                });
+                
+                return data.topics.length;
+            } catch {
                 container.innerHTML = '<div class="feed-item"><summary>Failed to load</summary></div>';
                 return 0;
             }
@@ -678,175 +742,24 @@
             updateTopicNumber();
         }
         
-        recordBtn.addEventListener('click', async () => {
-            if (!isRecording) {
-                try {
-                    log('Requesting mic...');
-                    const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-                    mediaRecorder = new MediaRecorder(stream);
-                    audioChunks = [];
-                    
-                    mediaRecorder.ondataavailable = e => {
-                        audioChunks.push(e.data);
-                    };
-                    
-                    mediaRecorder.onstop = async () => {
-                        const blob = new Blob(audioChunks, { type: 'audio/webm' });
-                        lastAudioBlob = blob;
-                        console.log('[DevFeedback] Audio blob size:', blob.size);
-                        
-                        // Create download link for backup
-                        const url = URL.createObjectURL(blob);
-                        downloadLink.href = url;
-                        downloadLink.download = 'recording-' + Date.now() + '.webm';
-                        downloadLink.style.display = 'inline';
-                        retryBtn.style.display = 'none';
-                        
-                        await transcribeAudio(blob);
-                    };
-                    
-                    mediaRecorder.start();
-                    isRecording = true;
-                    recordBtn.classList.add('recording');
-                    log('Recording...', 'recording');
-                } catch (e) {
-                    log('Mic denied: ' + e.message, 'error');
-                }
-            } else {
-                mediaRecorder.stop();
-                mediaRecorder.stream.getTracks().forEach(t => t.stop());
-                isRecording = false;
-                recordBtn.classList.remove('recording');
-            }
-        });
-        
-        saveBtn.addEventListener('click', async () => {
-            const text = transcript.textContent;
-            if (!text || transcript.classList.contains('placeholder')) {
-                log('Nothing to save', 'error');
-                return;
-            }
-            
-            saveBtn.textContent = 'Generating title...';
-            saveBtn.disabled = true;
-            
-            let topicTitle = '[Untitled]';
-            try {
-                log('Generating title...');
-                const titleRes = await fetch('/api/generate-title', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ text })
-                });
-                const titleData = await titleRes.json();
-                if (titleData.title && titleData.title !== 'Untitled Topic') {
-                    topicTitle = titleData.title;
-                }
-            } catch (e) {
-                console.error('Title generation failed, saving with placeholder:', e);
-            }
-            
-            const now = new Date();
-            const dateStr = now.toISOString().split('T')[0];
-            const prefix = currentType === 'technical' ? 'dev-technical' : 'dev-planning';
-            const filename = prefix + '_' + dateStr + '_0001.md';
-            const topicNum = (currentType === 'technical' ? 'T' : '') + dayNumber + '.' + (topicCount + 1);
-            
-            const content = '## ' + topicNum + ' - ' + topicTitle + '\n*' + dateStr + '*\n\n' + text;
-            
-            saveBtn.textContent = 'Saving...';
-            saveBtn.disabled = true;
-            log('Saving to GitHub...');
-            
-            try {
-                const res = await fetch('/api/save-transcript', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ filename, content, type: currentType })
-                });
-                
-                const data = await res.json();
-                console.log('[DevFeedback] Save response:', data);
-                
-                if (res.ok && data.success) {
-                    log('Saved!', 'success');
-                    transcript.textContent = 'Transcript will appear here...';
-                    transcript.classList.add('placeholder');
-                    techAlert.classList.remove('show');
-                    
-                    // If saved with placeholder title, trigger background fix
-                    if (topicTitle === '[Untitled]') {
-                        setTimeout(async () => {
-                            try {
-                                await fetch('/api/fix-untitled');
-                                loadAllFeeds();
-                            } catch (e) {}
-                        }, 2000);
-                    }
-                    
-                    loadAllFeeds();
-                    saveBtn.textContent = 'Save Topic';
-                } else {
-                    log('Save failed: ' + (data.error || 'Unknown'), 'error');
-                    saveBtn.textContent = 'Save Topic';
-                    saveBtn.disabled = false;
-                }
-            } catch (e) {
-                console.error('[DevFeedback] Save error:', e);
-                log('Save failed: ' + e.message, 'error');
-                saveBtn.textContent = 'Save Topic';
-                saveBtn.disabled = false;
-            }
-        });
-        
+        // ============================================
+        // INIT
+        // ============================================
         updateDate();
+        renderPending();
         loadAllFeeds();
+        
+        // Auto-refresh feeds
         setInterval(loadAllFeeds, 5000);
         
-        // Initialize pending recordings storage
-        initDB().then(() => refreshPendingList()).catch(e => console.log('IndexedDB init:', e));
-        
-        // Auto-retry pending recordings every 10 minutes
-        async function autoRetryPending() {
-            const pending = await getPendingRecordings();
-            if (pending.length === 0) return;
-            
-            console.log(`[DevFeedback] Auto-retrying ${pending.length} pending recordings...`);
-            for (const record of pending) {
-                try {
-                    const formData = new FormData();
-                    formData.append('audio', record.blob);
-                    
-                    const { ok, data } = await fetchWithRetry('/api/transcribe', {
-                        method: 'POST',
-                        body: formData
-                    });
-                    
-                    if (data.text) {
-                        console.log(`[DevFeedback] Auto-retry success for ${record.topicNum}`);
-                        // Auto-save the transcript
-                        const dateStr = new Date().toISOString().split('T')[0];
-                        const filename = (record.type === 'technical' ? 'dev-technical' : 'dev-planning') + '_' + dateStr + '_0001.md';
-                        const content = `## ${record.topicNum} - [Untitled]\n*${dateStr}*\n\n${data.text}`;
-                        
-                        await fetch('/api/save-transcript', {
-                            method: 'POST',
-                            headers: { 'Content-Type': 'application/json' },
-                            body: JSON.stringify({ filename, content, type: record.type || 'game', topicNumber: record.topicNum })
-                        });
-                        
-                        await deletePendingRecording(record.id);
-                        // Trigger fix-untitled in background
-                        fetch('/api/fix-untitled').catch(() => {});
-                    }
-                } catch (e) {
-                    console.log(`[DevFeedback] Auto-retry failed for ${record.topicNum}:`, e.message);
-                }
+        // Auto-retry pending on load (once, after 3 seconds)
+        setTimeout(() => {
+            const queue = getPendingQueue();
+            if (queue.length > 0) {
+                console.log('[DevFeedback] Auto-retrying pending on load...');
+                retryAllPending();
             }
-            refreshPendingList();
-        }
-        
-        setInterval(autoRetryPending, 10 * 60 * 1000); // Every 10 minutes
+        }, 3000);
     </script>
 </body>
 </html>
