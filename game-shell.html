@@ -11,15 +11,20 @@
             position: relative;
             display: flex;
             flex-direction: column;
+            height: 100%;
+            max-height: calc(100vh - 56px);
         }
         
         .sidebar-content {
             flex: 1;
             overflow-y: auto;
+            min-height: 0;
         }
         
         .sidebar-footer {
-            margin-top: auto;
+            flex-shrink: 0;
+            border-top: 1px solid var(--card-border);
+            background: var(--dark-navy);
         }
         
         .sidebar-toggle {
