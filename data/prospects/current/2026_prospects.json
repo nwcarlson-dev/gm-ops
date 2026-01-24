@@ -203,15 +203,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Anchor Guard",
       "projection": {
         "round": 1,
         "range_low": 4,
         "range_high": 4,
         "label": "Top 10"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Powerful guard with elite anchor. Pass protection is his strength - rarely gets moved. Hand placement is consistent. Footwork is adequate. Run blocking shows drive and finish. Pull ability is developing. Awareness of stunts is advanced.",
+      "comparison": "Zack Martin",
       "source_raw": {
         "pff": {
           "rank": 4,
@@ -266,15 +266,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Centerfield Safety",
       "projection": {
         "round": 1,
         "range_low": 5,
         "range_high": 5,
         "label": "Top 10"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Rangy safety with excellent instincts in zone coverage. Reads quarterback eyes and breaks on throws. Man coverage is developing - can match tight ends. Ball skills show potential. Tackling is sound with good technique. Range allows him to play centerfield effectively. Physical in run support.",
+      "comparison": "Jessie Bates III",
       "source_raw": {
         "pff": {
           "rank": 5,
@@ -340,7 +340,7 @@
         "label": "Top 10"
       },
       "scouting_report": "Fluid hips and smooth transitions in coverage. Press technique is refined with good jam timing at the line. Recovers quickly when beaten off the line - closing speed is a weapon. Zone awareness needs refinement but shows the instincts to jump routes. Ball skills are developing; tends to play the receiver more than the ball. Willing tackler in run support.",
-      "comparison": "Sauce Gardner (style)",
+      "comparison": "Sauce Gardner",
       "source_raw": {
         "pff": {
           "rank": 3,
@@ -403,15 +403,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Press Corner",
       "projection": {
         "round": 1,
         "range_low": 6,
         "range_high": 6,
         "label": "Top 10"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Physical corner who excels in press coverage. Jam at the line disrupts timing. Man coverage is sound - stays in phase with good technique. Zone coverage awareness needs work. Recovery speed is adequate. Ball skills are developing. Tackling in run support is a strength - not afraid of contact.",
+      "comparison": "Marshon Lattimore",
       "source_raw": {
         "pff": {
           "rank": 6,
@@ -466,15 +466,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Workhorse Back",
       "projection": {
         "round": 1,
         "range_low": 7,
         "range_high": 7,
         "label": "Top 10"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Patient runner with good vision. Finds cutback lanes naturally. Elusiveness is adequate. Power between the tackles shows improvement. Pass blocking is willing but technique needs work. Receiving skills are polished. Ball security is solid. Lateral agility is good. Workhorse back profile.",
+      "comparison": "Josh Jacobs",
       "source_raw": {
         "pff": {
           "rank": 7,
@@ -529,15 +529,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Length Corner",
       "projection": {
         "round": 1,
         "range_low": 8,
         "range_high": 8,
         "label": "Top 10"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Long corner with good length. Press technique uses his frame well. Man coverage shows fluid hips. Zone coverage instincts are developing. Recovery speed is adequate for his size. Ball skills need refinement - doesn't always locate the ball. Tackling is sound.",
+      "comparison": "Jaylon Johnson",
       "source_raw": {
         "pff": {
           "rank": 8,
@@ -592,15 +592,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Technical Corner",
       "projection": {
         "round": 1,
         "range_low": 9,
         "range_high": 9,
         "label": "Top 10"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Technical corner with refined footwork. Press technique is sound with good hand timing. Man coverage shows the ability to mirror routes. Zone coverage reads are developing. Recovery speed is a concern against deep threats. Ball skills are average. Tackling is willing in run support.",
+      "comparison": "Donte Jackson",
       "source_raw": {
         "pff": {
           "rank": 9,
@@ -655,15 +655,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Balanced TE",
       "projection": {
         "round": 1,
         "range_low": 10,
         "range_high": 10,
         "label": "Top 10"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Athletic tight end with receiving potential. Route running is developing. Separation against linebackers is adequate. Catch radius is good. Hands are reliable. Blocking technique is developing. YAC ability shows potential. Well-rounded skill set.",
+      "comparison": "Pat Freiermuth",
       "source_raw": {
         "pff": {
           "rank": 10,
@@ -718,15 +718,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Ball-Hawk Corner",
       "projection": {
         "round": 1,
         "range_low": 11,
         "range_high": 11,
         "label": "Mid 1st"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Smooth corner with fluid transitions. Man coverage technique is refined. Press technique shows good jam timing. Zone coverage awareness is solid. Ball skills are a strength - attacks throws at the catch point. Recovery speed is adequate. Tackling needs work.",
+      "comparison": "Trevon Diggs (ball skills)",
       "source_raw": {
         "pff": {
           "rank": 11,
@@ -781,15 +781,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Athletic Guard",
       "projection": {
         "round": 1,
         "range_low": 12,
         "range_high": 12,
         "label": "Mid 1st"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Athletic guard with good movement skills. Pass protection shows quick feet. Anchor is developing against power rushers. Run blocking is physical. Pull technique is smooth. Hand placement is consistent. Awareness of stunts is adequate.",
+      "comparison": "Chris Lindstrom",
       "source_raw": {
         "pff": {
           "rank": 12,
@@ -844,15 +844,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Box Safety",
       "projection": {
         "round": 1,
         "range_low": 13,
         "range_high": 13,
         "label": "Mid 1st"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Athletic safety with versatility to play multiple spots. Range is adequate for single-high responsibilities. Man coverage skills are developing. Zone instincts are solid - reads route combinations well. Tackling is aggressive but technique can break down. Ball skills are average. Run support is willing.",
+      "comparison": "Jordan Poyer",
       "source_raw": {
         "pff": {
           "rank": 13,
@@ -907,15 +907,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Space Eater",
       "projection": {
         "round": 1,
         "range_low": 14,
         "range_high": 14,
         "label": "Mid 1st"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Powerful nose tackle who occupies blockers. Anchor is elite - two-gapping strength. First step is adequate. Hand usage is developing. Pass rush ability is limited. Run stuffing is his calling card - eats space. Motor is consistent.",
+      "comparison": "Daron Payne",
       "source_raw": {
         "pff": {
           "rank": 14,
@@ -970,15 +970,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Power Tackle",
       "projection": {
         "round": 1,
         "range_low": 15,
         "range_high": 15,
         "label": "Mid 1st"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Powerful tackle with good anchor. Pass protection shows adequate footwork. Anchors against bull rushers. Run blocking is physical - looks to finish. Hand placement needs refinement. Awareness of stunts is developing. Pad level can rise. Athleticism is limited.",
+      "comparison": "La'el Collins",
       "source_raw": {
         "pff": {
           "rank": 15,
@@ -1033,15 +1033,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Speed Receiver",
       "projection": {
         "round": 1,
         "range_low": 16,
         "range_high": 16,
         "label": "Mid 1st"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Explosive receiver with good speed. Route running is developing. Release against press needs work. Separation comes from athleticism. Hands are reliable. YAC ability shows burst. Contested catches are hit or miss. Raw but has upside.",
+      "comparison": "Jaylen Waddle",
       "source_raw": {
         "pff": {
           "rank": 16,
@@ -1096,15 +1096,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Possession Receiver",
       "projection": {
         "round": 1,
         "range_low": 17,
         "range_high": 17,
         "label": "Mid 1st"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Big slot receiver with reliable hands. Route running is refined in the short and intermediate game. Release against press is adequate. Separation comes from size and timing. Hands are excellent. YAC ability is limited. Contested catches are a strength. Solid blocker.",
+      "comparison": "Michael Pittman Jr.",
       "source_raw": {
         "pff": {
           "rank": 17,
@@ -1159,15 +1159,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Athletic DT",
       "projection": {
         "round": 1,
         "range_low": 18,
         "range_high": 18,
         "label": "Mid 1st"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Athletic interior lineman with upside. First step is quick. Hand usage is developing. Anchor is adequate. Pass rush shows flashes. Run stuffing is inconsistent. Double team resistance needs work. Motor runs hot. Upside if he adds strength.",
+      "comparison": "Dexter Lawrence (projection)",
       "source_raw": {
         "pff": {
           "rank": 18,
@@ -1222,15 +1222,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Contested Catch WR",
       "projection": {
         "round": 1,
         "range_low": 19,
         "range_high": 19,
         "label": "Mid 1st"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Long receiver with good catch radius. Route running is developing. Release against press needs refinement. Separation is created with length. Hands are reliable. YAC ability is limited. Contested catches are his calling card. Deep ball tracking is natural.",
+      "comparison": "Courtland Sutton",
       "source_raw": {
         "pff": {
           "rank": 19,
@@ -1285,15 +1285,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Versatile Edge",
       "projection": {
         "round": 1,
         "range_low": 20,
         "range_high": 20,
         "label": "Mid 1st"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Athletic edge defender with length. First step is quick but not elite. Pass rush moves are limited - wins with effort and motor. Bend around the corner is developing. Hand usage needs work - gets locked up by stronger tackles. Run defense shows good effort and gap discipline. Versatile enough to stand up or put his hand in the dirt.",
+      "comparison": "Uchenna Nwosu",
       "source_raw": {
         "pff": {
           "rank": 20,
@@ -1348,15 +1348,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Mauler Guard",
       "projection": {
         "round": 1,
         "range_low": 21,
         "range_high": 21,
         "label": "Late 1st"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Powerful guard with a mean streak. Pass protection anchor is solid. Hand placement shows violence. Run blocking is physical and nasty. Footwork is adequate. Pull ability is developing. Plays with an edge.",
+      "comparison": "Kevin Zeitler",
       "source_raw": {
         "pff": {
           "rank": 21,
@@ -1411,15 +1411,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Pocket Passer",
       "projection": {
         "round": 1,
         "range_low": 23,
         "range_high": 23,
         "label": "Late 1st"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Pocket passer with good arm strength. Accuracy is his calling card, particularly on short and intermediate throws. Deep ball accuracy is developing. Decision-making is sound - takes what the defense gives. Pocket presence is refined - slides and steps up well. Mobility is limited - won't create with his legs. Release is quick and compact. Anticipation shows on timing routes.",
+      "comparison": "Kirk Cousins",
       "source_raw": {
         "pff": {
           "rank": 23,
@@ -1474,15 +1474,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Route Technician",
       "projection": {
         "round": 1,
         "range_low": 24,
         "range_high": 24,
         "label": "Late 1st"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Route runner with good technique. Separation comes from precision and timing. Release against press is solid. Hands are reliable. YAC ability is developing. Contested catches are adequate. Well-rounded skill set.",
+      "comparison": "Keenan Allen",
       "source_raw": {
         "pff": {
           "rank": 24,
@@ -1537,15 +1537,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Blocking TE",
       "projection": {
         "round": 1,
         "range_low": 26,
         "range_high": 26,
         "label": "Late 1st"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Physical tight end who excels as a blocker. Run blocking is his calling card - moves defenders off the ball. Pass protection is solid. Route running is developing. Hands are adequate. Catch radius is limited. YAC ability is minimal. Inline tight end who adds value in the run game.",
+      "comparison": "Dalton Schultz",
       "source_raw": {
         "pff": {
           "rank": 26,
@@ -1600,15 +1600,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Developmental OT",
       "projection": {
         "round": 1,
         "range_low": 27,
         "range_high": 27,
         "label": "Late 1st"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Long tackle with developing technique. Pass protection shows potential with his reach. Anchor is adequate. Footwork needs refinement - gets overextended. Run blocking shows effort but lacks finish. Hand placement is inconsistent. Upside is there with proper coaching.",
+      "comparison": "Andre Dillard",
       "source_raw": {
         "pff": {
           "rank": 27,
@@ -1663,15 +1663,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Speed Corner",
       "projection": {
         "round": 1,
         "range_low": 28,
         "range_high": 28,
         "label": "Late 1st"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Quick corner with good change of direction. Man coverage is his strength - mirrors well. Press technique is developing. Zone coverage shows adequate instincts. Recovery speed is excellent. Ball skills need refinement. Tackling in run support is a weakness.",
+      "comparison": "Eli Apple",
       "source_raw": {
         "pff": {
           "rank": 28,
@@ -1726,15 +1726,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Physical Corner",
       "projection": {
         "round": 1,
         "range_low": 29,
         "range_high": 29,
         "label": "Late 1st"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Physical corner who plays with an edge. Press technique is refined and physical. Man coverage shows good mirroring ability. Zone coverage instincts are solid. Ball skills are developing. Recovery speed is adequate. Tackling is a strength - plays with violence.",
+      "comparison": "J.C. Jackson",
       "source_raw": {
         "pff": {
           "rank": 29,
@@ -1789,15 +1789,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Power Back",
       "projection": {
         "round": 1,
         "range_low": 31,
         "range_high": 31,
         "label": "Late 1st"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Powerful runner who finishes runs. Vision is adequate. Elusiveness is limited - prefers to run through tacklers. Power is his calling card. Pass blocking shows willingness. Receiving is developing. Ball security is solid. North-south runner who moves the pile.",
+      "comparison": "Derrick Henry (style)",
       "source_raw": {
         "pff": {
           "rank": 31,
@@ -1854,15 +1854,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Two-Gap DT",
       "projection": {
         "round": 1,
         "range_low": 31,
         "range_high": 31,
         "label": "Late 1st"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Physical interior player who occupies blockers. Anchor is solid. Run stuffing is his calling card. First step is adequate. Hand usage shows violence. Pass rush is limited. Motor is consistent. Two-gap defender.",
+      "comparison": "Jeffery Simmons",
       "source_raw": {
         "cbs": {
           "rank": 31,
@@ -1918,15 +1918,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Technician Guard",
       "projection": {
         "round": 2,
         "range_low": 33,
         "range_high": 33,
         "label": "Early 2nd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Technical guard with good fundamentals. Pass protection footwork is refined. Anchor is adequate. Run blocking shows technique over power. Hand placement is consistent. Pull ability is solid. Awareness of games is advanced.",
+      "comparison": "Joel Bitonio",
       "source_raw": {
         "pff": {
           "rank": 33,
@@ -1981,15 +1981,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Athletic Corner",
       "projection": {
         "round": 2,
         "range_low": 34,
         "range_high": 34,
         "label": "Early 2nd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Athletic corner with good length. Press technique uses his frame effectively. Man coverage shows fluid hips and quick feet. Zone coverage awareness is developing. Ball skills show potential. Recovery speed is good. Tackling is adequate in run support.",
+      "comparison": "Denzel Ward",
       "source_raw": {
         "pff": {
           "rank": 34,
@@ -2044,15 +2044,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Run Guard",
       "projection": {
         "round": 2,
         "range_low": 35,
         "range_high": 35,
         "label": "Early 2nd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Powerful guard who excels in the run game. Run blocking is his calling card. Pass protection anchor is solid. Hand placement is adequate. Footwork is developing. Pull ability is good. Plays with physicality.",
+      "comparison": "Andrew Norwell",
       "source_raw": {
         "pff": {
           "rank": 35,
@@ -2109,15 +2109,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Versatile DB",
       "projection": {
         "round": 2,
         "range_low": 35,
         "range_high": 35,
         "label": "Early 2nd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Versatile defensive back who can play safety or corner. Range is good for his size. Man coverage technique is developing. Zone instincts are solid. Ball skills show potential - attacks the ball well. Tackling is aggressive and physical. Run support is willing. Versatility adds value.",
+      "comparison": "Budda Baker",
       "source_raw": {
         "cbs": {
           "rank": 35,
@@ -2173,15 +2173,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Developmental WR",
       "projection": {
         "round": 2,
         "range_low": 36,
         "range_high": 36,
         "label": "Early 2nd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Athletic receiver with good speed. Route running is developing. Release against press needs work. Separation comes from athleticism. Hands are adequate. YAC ability shows burst. Raw but has tools to develop.",
+      "comparison": "Rashod Bateman",
       "source_raw": {
         "pff": {
           "rank": 36,
@@ -2236,15 +2236,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Route Runner",
       "projection": {
         "round": 2,
         "range_low": 37,
         "range_high": 37,
         "label": "Early 2nd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Smooth route runner with good technique. Separation is created through precision. Release against press is solid. Hands are reliable. YAC ability is adequate. Contested catches are developing. Well-rounded receiver.",
+      "comparison": "Diontae Johnson",
       "source_raw": {
         "pff": {
           "rank": 37,
@@ -2299,15 +2299,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Move TE",
       "projection": {
         "round": 2,
         "range_low": 39,
         "range_high": 39,
         "label": "Early 2nd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Athletic tight end with receiving skills. Route running is refined. Separation against linebackers is good. Hands are reliable. Catch radius is adequate. Blocking needs development. YAC ability shows burst. Versatile weapon in the passing game.",
+      "comparison": "Kyle Pitts (style)",
       "source_raw": {
         "pff": {
           "rank": 39,
@@ -2362,15 +2362,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Developmental Corner",
       "projection": {
         "round": 2,
         "range_low": 41,
         "range_high": 41,
         "label": "Early 2nd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Long corner with developing technique. Press technique uses his length. Man coverage shows potential but footwork needs refinement. Zone coverage awareness is adequate. Ball skills are raw. Recovery speed is good for his size. Tackling is willing.",
+      "comparison": "Jeff Okudah (developmental)",
       "source_raw": {
         "pff": {
           "rank": 41,
@@ -2425,15 +2425,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Cerebral Center",
       "projection": {
         "round": 2,
         "range_low": 42,
         "range_high": 42,
         "label": "Early 2nd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Smart center with good football IQ. Pass protection anchor is solid. Line calls are his strength. Run blocking shows technique. Hand placement is consistent. Footwork is adequate. Leadership is evident on tape.",
+      "comparison": "Jason Kelce (smarts)",
       "source_raw": {
         "pff": {
           "rank": 42,
@@ -2488,15 +2488,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Balanced TE",
       "projection": {
         "round": 2,
         "range_low": 43,
         "range_high": 43,
         "label": "Early 2nd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Balanced tight end with solid fundamentals. Route running is adequate. Separation is created with size. Hands are reliable. Blocking technique is developing. YAC ability is limited. Inline tight end with receiving upside.",
+      "comparison": "Evan Engram",
       "source_raw": {
         "pff": {
           "rank": 43,
@@ -2551,15 +2551,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Inline TE",
       "projection": {
         "round": 2,
         "range_low": 44,
         "range_high": 44,
         "label": "Early 2nd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Physical tight end with blocking ability. Run blocking shows good technique. Pass protection is solid. Route running is developing. Hands are adequate. Catch radius is good for his size. YAC ability is limited. Traditional Y tight end.",
+      "comparison": "Austin Hooper",
       "source_raw": {
         "pff": {
           "rank": 44,
@@ -2616,15 +2616,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Instinctive LB",
       "projection": {
         "round": 2,
         "range_low": 44,
         "range_high": 44,
         "label": "Early 2nd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Instinctive linebacker with football bloodlines. Run defense reads are advanced for his age. Tackling is sound. Pass coverage is developing. Blitzing is adequate. Sideline-to-sideline pursuit shows potential. Young player with upside.",
+      "comparison": "Jeremiah Trotter (style)",
       "source_raw": {
         "cbs": {
           "rank": 44,
@@ -2680,15 +2680,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Seam Threat",
       "projection": {
         "round": 2,
         "range_low": 45,
         "range_high": 45,
         "label": "Early 2nd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Athletic tight end with receiving potential. Route running shows promise. Separation against linebackers is adequate. Hands are developing. Blocking is a work in progress. YAC ability shows athleticism. Upside in the passing game.",
+      "comparison": "Noah Fant",
       "source_raw": {
         "pff": {
           "rank": 45,
@@ -2745,15 +2745,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Zone Corner",
       "projection": {
         "round": 2,
         "range_low": 45,
         "range_high": 45,
         "label": "Early 2nd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Smooth corner with good instincts. Man coverage technique is solid - mirrors well. Press technique is adequate. Zone coverage reads are a strength. Ball skills are developing. Recovery speed is average. Tackling is willing in run support.",
+      "comparison": "Kendall Fuller",
       "source_raw": {
         "cbs": {
           "rank": 45,
@@ -2809,15 +2809,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Power Tackle",
       "projection": {
         "round": 2,
         "range_low": 46,
         "range_high": 46,
         "label": "Early 2nd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Massive tackle with good feet for his size. Pass protection anchor is elite. Footwork is developing. Run blocking shows power and drive. Hand placement is adequate. Awareness of games is solid. Can play either tackle spot.",
+      "comparison": "Tyron Smith",
       "source_raw": {
         "pff": {
           "rank": 46,
@@ -2872,15 +2872,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Speed Corner",
       "projection": {
         "round": 2,
         "range_low": 47,
         "range_high": 47,
         "label": "Early 2nd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Quick-twitch corner with excellent recovery speed. Man coverage is refined - stays in phase. Press technique needs work at the line. Zone coverage instincts are adequate. Ball skills are developing. Tackling is a weakness. Speed is his primary asset.",
+      "comparison": "Jaycee Horn",
       "source_raw": {
         "pff": {
           "rank": 47,
@@ -2935,15 +2935,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Dual-Threat",
       "projection": {
         "round": 2,
         "range_low": 48,
         "range_high": 48,
         "label": "Early 2nd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Athletic quarterback with mobility. Arm strength is adequate. Accuracy is inconsistent - mechanics break down when pressured. Decision-making needs refinement - forces throws into coverage. Release is quick. Pocket presence is developing. Can create plays outside the pocket with his legs. Anticipation is raw.",
+      "comparison": "Jalen Hurts (early career)",
       "source_raw": {
         "pff": {
           "rank": 48,
@@ -2998,15 +2998,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Technician",
       "projection": {
         "round": 2,
         "range_low": 49,
         "range_high": 49,
         "label": "Mid 2nd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Technically sound tackle with good fundamentals. Pass protection footwork is refined. Anchor is adequate. Run blocking shows good technique. Hand placement is consistent. Awareness of stunts is solid. Athleticism is limited but compensates with technique.",
+      "comparison": "Taylor Decker",
       "source_raw": {
         "pff": {
           "rank": 49,
@@ -3061,15 +3061,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Run-Stuffer",
       "projection": {
         "round": 2,
         "range_low": 50,
         "range_high": 50,
         "label": "Mid 2nd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Powerful interior player with good anchor. Run stuffing is his strength. First step is adequate. Hand usage is developing. Pass rush is limited. Double team resistance is solid. Motor is consistent. Traditional nose tackle profile.",
+      "comparison": "Jonathan Allen",
       "source_raw": {
         "pff": {
           "rank": 50,
@@ -3124,15 +3124,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Athletic OT",
       "projection": {
         "round": 2,
         "range_low": 51,
         "range_high": 51,
         "label": "Mid 2nd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Athletic tackle with good feet. Pass protection shows quick feet and balance. Anchor needs development against power. Footwork is refined. Run blocking shows effort. Hand placement is developing. Awareness of games is adequate.",
+      "comparison": "Andrew Thomas",
       "source_raw": {
         "pff": {
           "rank": 51,
@@ -3189,15 +3189,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Rangy Safety",
       "projection": {
         "round": 2,
         "range_low": 51,
         "range_high": 51,
         "label": "Mid 2nd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Athletic safety with range and ball skills. Covers ground quickly sideline to sideline. Zone coverage instincts are developing. Man coverage shows potential against tight ends. Tackling technique is solid. Ball skills are a weapon. Run support is adequate.",
+      "comparison": "Antoine Winfield Jr.",
       "source_raw": {
         "cbs": {
           "rank": 51,
@@ -3253,15 +3253,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Penetrating 3T",
       "projection": {
         "round": 2,
         "range_low": 52,
         "range_high": 52,
         "label": "Mid 2nd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Penetrating three-technique with a quick first step. Pass rush shows potential. Hand usage is developing. Anchor needs work against power. Run stuffing is inconsistent. Motor is hot. Upside as a pass rusher.",
+      "comparison": "Grady Jarrett",
       "source_raw": {
         "pff": {
           "rank": 52,
@@ -3316,15 +3316,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Move TE",
       "projection": {
         "round": 2,
         "range_low": 53,
         "range_high": 53,
         "label": "Mid 2nd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Versatile tight end with good athleticism. Route running is developing. Separation is created with movement. Hands are reliable. Blocking technique is adequate. YAC ability shows burst. Can line up multiple spots.",
+      "comparison": "Mark Andrews (style)",
       "source_raw": {
         "pff": {
           "rank": 53,
@@ -3390,7 +3390,7 @@
         "label": "Late 1st - Early 3rd"
       },
       "scouting_report": "Young tackle with rare physical tools. Pass protection shows balance and quick feet for his size. Anchors well against speed-to-power. Footwork is still being refined - can get overextended. Run blocking is physical with good drive. Hand placement is consistent. Awareness of games is developing with experience. Upside is significant given his age.",
-      "comparison": "Penei Sewell (developmental)",
+      "comparison": "Penei Sewell",
       "source_raw": {
         "pff": {
           "rank": 79,
@@ -3455,15 +3455,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Versatile DE",
       "projection": {
         "round": 2,
         "range_low": 53,
         "range_high": 53,
         "label": "Mid 2nd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Versatile defensive end who can kick inside on passing downs. First step is quick. Pass rush moves show good hand usage and timing. Bend is adequate. Run defense is sound - holds his gap. Motor is relentless. Can line up at multiple spots along the defensive line.",
+      "comparison": "Carl Lawson",
       "source_raw": {
         "cbs": {
           "rank": 53,
@@ -3519,15 +3519,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Zone Safety",
       "projection": {
         "round": 2,
         "range_low": 54,
         "range_high": 54,
         "label": "Mid 2nd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Instinctive safety with good ball skills. Range is adequate for single-high duties. Zone coverage reads are his strength - anticipates routes. Man coverage is limited against athletic tight ends. Tackling is sound. Run support shows good angles. Ball skills allow him to create turnovers.",
+      "comparison": "Kevin Byard",
       "source_raw": {
         "pff": {
           "rank": 54,
@@ -3582,15 +3582,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Running QB",
       "projection": {
         "round": 2,
         "range_low": 55,
         "range_high": 55,
         "label": "Mid 2nd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Dual-threat quarterback with excellent mobility. Arm strength is adequate for most throws. Accuracy is developing - better on the move than from the pocket. Decision-making improves in RPO situations. Release is adequate. Pocket presence needs work. Running ability is a weapon. Anticipation is limited.",
+      "comparison": "Lamar Jackson (runner)",
       "source_raw": {
         "pff": {
           "rank": 55,
@@ -3645,15 +3645,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "YAC Monster",
       "projection": {
         "round": 2,
         "range_low": 56,
         "range_high": 56,
         "label": "Mid 2nd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Explosive playmaker who can line up anywhere. Route running is developing. Separation comes from athleticism. Hands are reliable. YAC ability is elite - makes defenders miss. Contested catches are limited by size. Versatile weapon in the right scheme.",
+      "comparison": "Deebo Samuel",
       "source_raw": {
         "pff": {
           "rank": 56,
@@ -3708,15 +3708,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Slot Receiver",
       "projection": {
         "round": 2,
         "range_low": 58,
         "range_high": 58,
         "label": "Late 2nd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Quick receiver with good feet. Route running is polished. Release against press uses quickness. Separation is created with footwork. Hands are soft. YAC ability is good. Contested catches are difficult given his size.",
+      "comparison": "Christian Kirk",
       "source_raw": {
         "pff": {
           "rank": 58,
@@ -3771,15 +3771,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Athletic OT",
       "projection": {
         "round": 2,
         "range_low": 61,
         "range_high": 61,
         "label": "Late 2nd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Athletic tackle with good feet. Pass protection shows potential. Anchor is developing against power. Run blocking shows effort. Hand placement needs refinement. Upside is there with technique work.",
+      "comparison": "Garrett Bolles",
       "source_raw": {
         "pff": {
           "rank": 61,
@@ -3834,15 +3834,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "High-Ceiling Edge",
       "projection": {
         "round": 2,
         "range_low": 62,
         "range_high": 62,
         "label": "Late 2nd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Long edge rusher still growing into his frame. First step is explosive when he gets low. Pass rush moves are limited but shows flashes. Bend around the corner is natural. Run defense needs refinement - too easily moved off his spot. Motor is steady. Upside is significant if he adds strength.",
+      "comparison": "Travon Walker (developmental)",
       "source_raw": {
         "pff": {
           "rank": 62,
@@ -3900,15 +3900,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Physical Center",
       "projection": {
         "round": 2,
         "range_low": 50,
         "range_high": 76,
         "label": "Mid 2nd - Early 3rd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Physical center with good anchor. Pass protection is sound. Run blocking is powerful. Hand placement is adequate. Footwork is developing. Line calls show intelligence. Can also play guard.",
+      "comparison": "Frank Ragnow",
       "source_raw": {
         "pff": {
           "rank": 76,
@@ -4047,15 +4047,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Run-Stuffer",
       "projection": {
         "round": 2,
         "range_low": 63,
         "range_high": 63,
         "label": "Late 2nd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Powerful interior lineman with good anchor. Run stuffing is his calling card. First step is adequate. Pass rush is limited. Hand usage is developing. Double team resistance is solid.",
+      "comparison": "Leonard Williams",
       "source_raw": {
         "cbs": {
           "rank": 63,
@@ -4111,15 +4111,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Speed Receiver",
       "projection": {
         "round": 2,
         "range_low": 64,
         "range_high": 64,
         "label": "Late 2nd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Athletic receiver with good speed. Route running is raw. Separation comes from athleticism. Hands need refinement. YAC ability is explosive. Contested catches are developing. Tools are there for development.",
+      "comparison": "Marquise Brown",
       "source_raw": {
         "pff": {
           "rank": 64,
@@ -4174,15 +4174,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Speed Back",
       "projection": {
         "round": 3,
         "range_low": 65,
         "range_high": 65,
         "label": "Early 3rd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Athletic runner with speed. Vision is developing. Elusiveness shows burst. Power is limited. Pass blocking needs work. Receiving skills are adequate. Ball security is solid. Speed is his primary weapon. Big-play threat on the perimeter.",
+      "comparison": "Raheem Mostert",
       "source_raw": {
         "pff": {
           "rank": 65,
@@ -4240,15 +4240,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Athletic Guard",
       "projection": {
         "round": 3,
         "range_low": 38,
         "range_high": 95,
         "label": "Early 2nd - Late 3rd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Athletic guard with good feet. Pass protection shows quick movement. Anchor is developing. Run blocking shows potential. Hand placement is adequate. Pull ability is a strength. Awareness of stunts needs work.",
+      "comparison": "Tyler Smith",
       "source_raw": {
         "pff": {
           "rank": 38,
@@ -4311,15 +4311,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Downhill LB",
       "projection": {
         "round": 3,
         "range_low": 67,
         "range_high": 67,
         "label": "Early 3rd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Physical linebacker who fills gaps aggressively. Run defense is his calling card. Tackling is sound. Pass coverage is limited. Blitzing shows timing. Sideline-to-sideline pursuit is adequate.",
+      "comparison": "Jordyn Brooks",
       "source_raw": {
         "pff": {
           "rank": 67,
@@ -4522,15 +4522,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Physical Corner",
       "projection": {
         "round": 3,
         "range_low": 68,
         "range_high": 68,
         "label": "Early 3rd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Physical corner with good size. Press technique uses his frame. Man coverage is developing. Zone coverage instincts are adequate. Ball skills need work. Tackling is a strength.",
+      "comparison": "Tre'Davious White",
       "source_raw": {
         "pff": {
           "rank": 68,
@@ -4661,15 +4661,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Run Guard",
       "projection": {
         "round": 3,
         "range_low": 68,
         "range_high": 68,
         "label": "Early 3rd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Powerful guard who excels in run blocking. Drive blocking shows finish. Pass protection anchor is solid. Hand placement is adequate. Pull ability is good.",
+      "comparison": "Elgton Jenkins",
       "source_raw": {
         "cbs": {
           "rank": 68,
@@ -4728,15 +4728,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Size Projection",
       "projection": {
         "round": 3,
         "range_low": 60,
         "range_high": 79,
         "label": "Late 2nd - Early 3rd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Massive tackle with rare size. Pass protection anchor is elite due to his frame. Footwork is developing. Run blocking shows power. Hand placement is inconsistent. Awareness of games is raw. Project with upside.",
+      "comparison": "D.J. Humphries",
       "source_raw": {
         "pff": {
           "rank": 60,
@@ -4799,15 +4799,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Dual-Threat",
       "projection": {
         "round": 3,
         "range_low": 69,
         "range_high": 69,
         "label": "Early 3rd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Athletic quarterback with good mobility. Arm strength is adequate. Accuracy is developing - better on the move. Decision-making needs refinement. Release is quick. Pocket presence is raw. Running ability is a plus.",
+      "comparison": "Jalen Hurts (developmental)",
       "source_raw": {
         "pff": {
           "rank": 69,
@@ -4862,15 +4862,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Receiving TE",
       "projection": {
         "round": 3,
         "range_low": 70,
         "range_high": 70,
         "label": "Early 3rd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Athletic tight end with receiving upside. Route running is developing. Separation shows potential. Hands are soft. Blocking is a weakness. YAC ability is good.",
+      "comparison": "Gerald Everett",
       "source_raw": {
         "pff": {
           "rank": 70,
@@ -5075,15 +5075,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Possession WR",
       "projection": {
         "round": 3,
         "range_low": 71,
         "range_high": 71,
         "label": "Early 3rd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Big receiver with good catch radius. Route running is developing. Separation comes from size. Hands are reliable. YAC is limited. Contested catches are a strength.",
+      "comparison": "Allen Robinson",
       "source_raw": {
         "cbs": {
           "rank": 71,
@@ -5139,15 +5139,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Man Corner",
       "projection": {
         "round": 3,
         "range_low": 72,
         "range_high": 72,
         "label": "Early 3rd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Quick corner with good feet. Man coverage is his strength. Press technique is developing. Zone coverage shows solid instincts. Ball skills are adequate. Recovery speed is good.",
+      "comparison": "Marlon Humphrey",
       "source_raw": {
         "pff": {
           "rank": 72,
@@ -5278,15 +5278,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Blocking TE",
       "projection": {
         "round": 3,
         "range_low": 72,
         "range_high": 72,
         "label": "Early 3rd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Physical tight end who excels as a blocker. Run blocking is his calling card. Pass protection is solid. Route running is limited. Hands are adequate. Inline tight end.",
+      "comparison": "Tyler Higbee",
       "source_raw": {
         "cbs": {
           "rank": 72,
@@ -5342,15 +5342,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Length OT",
       "projection": {
         "round": 3,
         "range_low": 73,
         "range_high": 73,
         "label": "Early 3rd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Long tackle with good reach. Pass protection uses his length well. Anchor needs development. Footwork is raw. Run blocking shows effort. Project with physical tools.",
+      "comparison": "Charles Cross",
       "source_raw": {
         "pff": {
           "rank": 73,
@@ -5416,7 +5416,7 @@
         "label": "Top 10 - Early 5th"
       },
       "scouting_report": "Polarizing prospect with elite physical tools. Arm strength is special - can make every throw on the field. Accuracy fluctuates, particularly on deep balls under pressure. Quick release gets the ball out before pressure arrives. Decision-making has improved but still forces throws into coverage. Mobile in the pocket and can extend plays with his legs. Anticipation is ahead of schedule for his experience level.",
-      "comparison": "Josh Allen (projection)",
+      "comparison": "Josh Allen",
       "source_raw": {
         "pff": {
           "rank": 145,
@@ -5479,15 +5479,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Instinctive LB",
       "projection": {
         "round": 3,
         "range_low": 74,
         "range_high": 74,
         "label": "Early 3rd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Instinctive linebacker with good football IQ. Run defense reads are solid. Tackling is reliable. Pass coverage is developing. Blitzing is adequate. Well-rounded skill set.",
+      "comparison": "Nick Bolton",
       "source_raw": {
         "pff": {
           "rank": 74,
@@ -5545,15 +5545,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Power Rusher",
       "projection": {
         "round": 3,
         "range_low": 13,
         "range_high": 135,
         "label": "Mid 1st - Mid-Late 4th"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Power rusher with a strong anchor against the run. First step is adequate but wins with leverage and power. Speed-to-power is his primary move. Bend is limited - struggles to flatten around the corner. Hand usage is physical and violent. Motor is consistent. Sets the edge well in run defense.",
+      "comparison": "Josh Allen (JAX)",
       "source_raw": {
         "pff": {
           "rank": 135,
@@ -5616,15 +5616,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Length Corner",
       "projection": {
         "round": 3,
         "range_low": 75,
         "range_high": 75,
         "label": "Early 3rd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Long corner with developing technique. Press uses his length. Man coverage is raw. Zone coverage shows potential. Ball skills are developing. Upside is there.",
+      "comparison": "James Bradberry",
       "source_raw": {
         "pff": {
           "rank": 75,
@@ -5682,15 +5682,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Receiving TE",
       "projection": {
         "round": 3,
         "range_low": 55,
         "range_high": 96,
         "label": "Mid 2nd - Late 3rd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Receiving tight end with good hands. Route running shows potential. Separation against linebackers is developing. Catch radius is excellent. Blocking is a weakness. YAC ability is limited. Red zone target due to his size.",
+      "comparison": "Cole Kmet",
       "source_raw": {
         "pff": {
           "rank": 96,
@@ -5756,15 +5756,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Balanced OT",
       "projection": {
         "round": 3,
         "range_low": 23,
         "range_high": 127,
         "label": "Late 1st - Mid-Late 4th"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Long tackle with excellent length. Pass protection uses his reach effectively. Anchor is solid against power. Footwork is refined. Run blocking shows good technique. Hand placement is consistent. Awareness of games is advanced. Can slide to guard if needed.",
+      "comparison": "Jedrick Wills Jr.",
       "source_raw": {
         "pff": {
           "rank": 127,
@@ -5838,7 +5838,7 @@
         "label": "Mid 1st - Mid-Late 4th"
       },
       "scouting_report": "Smaller frame but plays bigger than his size. Route running is polished at every level. Release against press is savvy - uses hands well. Separation is created through quickness and technique. Hands are reliable. YAC ability is elite - makes defenders miss in space. Contested catch situations are difficult given his frame. Versatile enough to play inside and outside.",
-      "comparison": "Tyreek Hill (movement skills)",
+      "comparison": "Tyreek Hill",
       "source_raw": {
         "pff": {
           "rank": 133,
@@ -5912,7 +5912,7 @@
         "label": "Mid 1st - Mid-Late 4th"
       },
       "scouting_report": "Long and athletic with room to add mass. First step threatens tackles immediately. Developing a variety of pass rush moves - shows a good inside counter. Bend around the edge is natural. Hand usage and timing are works in progress. Run defense is inconsistent - can get washed by double teams. Motor runs hot.",
-      "comparison": "Will Anderson Jr. (upside)",
+      "comparison": "Will Anderson Jr.",
       "source_raw": {
         "pff": {
           "rank": 134,
@@ -5977,15 +5977,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Athletic Corner",
       "projection": {
         "round": 3,
         "range_low": 75,
         "range_high": 75,
         "label": "Early 3rd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Athletic corner with good length. Press technique shows potential. Man coverage is developing. Zone instincts are adequate. Ball skills need work. Physical player.",
+      "comparison": "Carlton Davis",
       "source_raw": {
         "cbs": {
           "rank": 75,
@@ -6052,7 +6052,7 @@
         "label": "Mid 1st - Mid-Late 4th"
       },
       "scouting_report": "Relentless motor and non-stop effort. First step is explosive off the edge. Pass rush moves are still limited but wins with speed and effort. Bend is adequate but not elite. Speed-to-power conversion is a work in progress. Run stuffing is better than expected - sets the edge well. Hand usage needs development against longer tackles.",
-      "comparison": "Rashan Gary (development path)",
+      "comparison": "Rashan Gary",
       "source_raw": {
         "pff": {
           "rank": 137,
@@ -6189,15 +6189,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Free Safety",
       "projection": {
         "round": 3,
         "range_low": 77,
         "range_high": 77,
         "label": "Early 3rd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Rangy safety with good ball skills. Range for centerfield duties is adequate. Zone coverage instincts are solid. Man coverage is developing. Tackling is reliable. Run support is willing.",
+      "comparison": "Quandre Diggs",
       "source_raw": {
         "pff": {
           "rank": 77,
@@ -6255,15 +6255,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Run-First OT",
       "projection": {
         "round": 3,
         "range_low": 66,
         "range_high": 91,
         "label": "Early 3rd - Late 3rd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Physical tackle who excels in run blocking. Drive blocking is powerful. Pass protection footwork is developing. Anchor is solid against power. Hand placement is adequate. Technique is improving.",
+      "comparison": "Jack Conklin",
       "source_raw": {
         "pff": {
           "rank": 66,
@@ -6326,15 +6326,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Speed Corner",
       "projection": {
         "round": 3,
         "range_low": 78,
         "range_high": 78,
         "label": "Early 3rd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Quick corner with good recovery speed. Man coverage is solid. Press technique is adequate. Zone coverage is developing. Ball skills show potential. Tackling needs work.",
+      "comparison": "Byron Murphy Jr.",
       "source_raw": {
         "pff": {
           "rank": 78,
@@ -6392,15 +6392,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Balanced TE",
       "projection": {
         "round": 3,
         "range_low": 22,
         "range_high": 136,
         "label": "Late 1st - Mid-Late 4th"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Balanced tight end with solid receiving skills. Route running is adequate. Separation against linebackers is developing. Hands are reliable. Blocking is functional. YAC is limited.",
+      "comparison": "T.J. Hockenson",
       "source_raw": {
         "pff": {
           "rank": 22,
@@ -6540,15 +6540,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Thumper",
       "projection": {
         "round": 3,
         "range_low": 30,
         "range_high": 133,
         "label": "Late 1st - Mid-Late 4th"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Physical linebacker who excels against the run. Run defense instincts are solid. Tackling is violent and sure. Pass coverage is limited - struggles against athletic tight ends. Blitzing shows timing. Sideline-to-sideline range is adequate. Takes on blocks well. Traditional inside linebacker.",
+      "comparison": "Bobby Wagner",
       "source_raw": {
         "pff": {
           "rank": 30,
@@ -6614,15 +6614,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Cerebral Center",
       "projection": {
         "round": 3,
         "range_low": 63,
         "range_high": 99,
         "label": "Late 2nd - Late 3rd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Smart center with good line calls. Pass protection anchor is solid. Run blocking shows technique. Hand placement is consistent. Leadership is evident.",
+      "comparison": "Tyler Linderbaum",
       "source_raw": {
         "pff": {
           "rank": 63,
@@ -6685,15 +6685,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Penetrating DT",
       "projection": {
         "round": 3,
         "range_low": 81,
         "range_high": 81,
         "label": "Mid 3rd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Quick interior lineman with penetrating ability. First step is good. Pass rush shows potential. Run stuffing is developing. Hand usage is adequate. Anchor needs work.",
+      "comparison": "Kenny Clark",
       "source_raw": {
         "pff": {
           "rank": 81,
@@ -6759,7 +6759,7 @@
         "label": "Late 1st - Mid-Late 4th"
       },
       "scouting_report": "Long corner with excellent ball skills. Plays the ball in the air like a receiver. Man coverage technique is refined - mirrors well with fluid hips. Press technique can be defeated by quick releases. Zone coverage awareness is solid. Recovery speed is average - relies on positioning rather than closing burst. Tackling is adequate.",
-      "comparison": "Patrick Surtain II (style)",
+      "comparison": "Patrick Surtain II",
       "source_raw": {
         "pff": {
           "rank": 138,
@@ -6825,15 +6825,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Length Tackle",
       "projection": {
         "round": 3,
         "range_low": 49,
         "range_high": 115,
         "label": "Mid 2nd - Early 4th"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Long tackle with good length. Pass protection uses his reach. Anchor is developing. Footwork is adequate. Run blocking shows effort. Hand placement needs work. Upside is there with technique refinement.",
+      "comparison": "Isaiah Wynn",
       "source_raw": {
         "pff": {
           "rank": 115,
@@ -7046,15 +7046,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Athletic Guard",
       "projection": {
         "round": 3,
         "range_low": 82,
         "range_high": 82,
         "label": "Mid 3rd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Athletic guard with good movement. Pass protection shows quick feet. Run blocking is developing. Hand placement is adequate. Pull ability is a strength.",
+      "comparison": "Kenyon Green",
       "source_raw": {
         "cbs": {
           "rank": 82,
@@ -7113,15 +7113,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Power Edge",
       "projection": {
         "round": 3,
         "range_low": 57,
         "range_high": 109,
         "label": "Late 2nd - Early 4th"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Powerful edge rusher with developing technique. First step is adequate. Pass rush is more power than speed. Bend is limited. Run stuffing is a strength. Hand usage is developing. Motor is consistent.",
+      "comparison": "Azeez Ojulari",
       "source_raw": {
         "pff": {
           "rank": 57,
@@ -7184,15 +7184,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Zone Corner",
       "projection": {
         "round": 3,
         "range_low": 83,
         "range_high": 83,
         "label": "Mid 3rd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Fluid corner with good hips. Man coverage shows technique. Press is developing. Zone coverage instincts are solid. Ball skills are adequate. Reliable performer.",
+      "comparison": "Bryce Hall",
       "source_raw": {
         "pff": {
           "rank": 83,
@@ -7249,15 +7249,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Versatile IOL",
       "projection": {
         "round": 3,
         "range_low": 83,
         "range_high": 83,
         "label": "Mid 3rd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Versatile interior lineman who can play multiple spots. Pass protection is solid. Run blocking shows effort. Hand placement is developing. Football IQ is high.",
+      "comparison": "Connor Williams",
       "source_raw": {
         "cbs": {
           "rank": 83,
@@ -7316,15 +7316,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Box Safety",
       "projection": {
         "round": 3,
         "range_low": 25,
         "range_high": 143,
         "label": "Late 1st - Early 5th"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Physical safety who plays in the box. Run support is his calling card. Tackling is sure and violent. Man coverage is limited. Zone instincts are adequate. Range is limited for centerfield.",
+      "comparison": "Jimmie Ward",
       "source_raw": {
         "pff": {
           "rank": 25,
@@ -7390,15 +7390,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Nose Tackle",
       "projection": {
         "round": 3,
         "range_low": 80,
         "range_high": 88,
         "label": "Early 3rd - Mid 3rd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Powerful nose tackle who occupies blockers. Anchor is elite. Run stuffing is his calling card. First step is limited. Pass rush is raw. Demands double teams.",
+      "comparison": "Vita Vea",
       "source_raw": {
         "pff": {
           "rank": 80,
@@ -7461,15 +7461,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Athletic WR",
       "projection": {
         "round": 3,
         "range_low": 84,
         "range_high": 84,
         "label": "Mid 3rd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Athletic receiver with good size. Route running is developing. Separation comes from athleticism. Hands are adequate. YAC shows potential. Contested catches are improving.",
+      "comparison": "Chase Claypool",
       "source_raw": {
         "pff": {
           "rank": 84,
@@ -7527,15 +7527,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Hybrid LB",
       "projection": {
         "round": 3,
         "range_low": 32,
         "range_high": 138,
         "label": "Late 1st - Mid-Late 4th"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Explosive linebacker with pass rush ability. Blitzing is his calling card - times the snap well. Run defense instincts are developing. Tackling is aggressive but technique can break down. Pass coverage is limited. Sideline-to-sideline pursuit shows burst. High-upside player.",
+      "comparison": "Micah Parsons (style)",
       "source_raw": {
         "pff": {
           "rank": 32,
@@ -7601,15 +7601,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Playmaker Corner",
       "projection": {
         "round": 3,
         "range_low": 71,
         "range_high": 100,
         "label": "Early 3rd - Late 3rd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Athletic corner with good ball skills. Man coverage is solid. Press technique is developing. Zone coverage shows instincts. Tackling is adequate. Playmaker ability.",
+      "comparison": "Greg Newsome II",
       "source_raw": {
         "pff": {
           "rank": 71,
@@ -7674,15 +7674,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Quick Corner",
       "projection": {
         "round": 3,
         "range_low": 85,
         "range_high": 85,
         "label": "Mid 3rd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Quick corner with good feet. Man coverage technique is solid. Press is developing. Zone instincts are adequate. Ball skills need refinement. Tackling is willing.",
+      "comparison": "Cam Taylor-Britt",
       "source_raw": {
         "cbs": {
           "rank": 85,
@@ -7741,15 +7741,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Speed Rusher",
       "projection": {
         "round": 3,
         "range_low": 32,
         "range_high": 140,
         "label": "Late 1st - Mid-Late 4th"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Undersized but plays with tremendous effort. First step is explosive and gets him into the backfield quickly. Pass rush moves are developing - relies on speed currently. Bend is excellent for his frame. Run defense is a concern - gets washed against bigger tackles. Motor never stops. Hand usage is improving.",
+      "comparison": "Haason Reddick",
       "source_raw": {
         "pff": {
           "rank": 140,
@@ -7815,15 +7815,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Massive IOL",
       "projection": {
         "round": 3,
         "range_low": 20,
         "range_high": 153,
         "label": "Mid 1st - Early 5th"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Massive interior lineman with elite size. Anchor is exceptional - impossible to move. Pass protection is solid. Run blocking shows power. Footwork is limited by his size. Hand placement is adequate. Can play guard or tackle.",
+      "comparison": "Trent Brown",
       "source_raw": {
         "pff": {
           "rank": 153,
@@ -7888,15 +7888,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Physical WR",
       "projection": {
         "round": 3,
         "range_low": 86,
         "range_high": 86,
         "label": "Mid 3rd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Physical receiver with good size. Route running is developing. Separation comes from physicality. Hands are reliable. YAC is limited. Contested catches are his calling card.",
+      "comparison": "Darnell Mooney",
       "source_raw": {
         "cbs": {
           "rank": 86,
@@ -7952,15 +7952,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Technician OT",
       "projection": {
         "round": 3,
         "range_low": 87,
         "range_high": 87,
         "label": "Mid 3rd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Technical tackle with solid fundamentals. Pass protection footwork is sound. Anchor is adequate. Run blocking shows technique. Hand placement is consistent. Steady performer.",
+      "comparison": "Garett Bolles",
       "source_raw": {
         "pff": {
           "rank": 87,
@@ -8026,7 +8026,7 @@
         "label": "Early 2nd - Early 5th"
       },
       "scouting_report": "Athletic quarterback with mobility to extend plays. Arm strength is adequate for all throws. Accuracy is inconsistent - mechanics break down under pressure. Decision-making has improved but still holds the ball too long. Release is quick when he trusts his read. Pocket presence needs work - doesn't feel pressure from the backside. Anticipation shows flashes but isn't consistent.",
-      "comparison": "Trey Lance (developmental)",
+      "comparison": "Trey Lance",
       "source_raw": {
         "pff": {
           "rank": 142,
@@ -8092,15 +8092,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Possession TE",
       "projection": {
         "round": 3,
         "range_low": 85,
         "range_high": 92,
         "label": "Mid 3rd - Late 3rd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Reliable tight end with good hands. Route running is solid in the short game. Separation is adequate. Blocking is developing. YAC is limited. Red zone target.",
+      "comparison": "Robert Tonyan",
       "source_raw": {
         "pff": {
           "rank": 85,
@@ -8163,15 +8163,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Pocket Passer",
       "projection": {
         "round": 3,
         "range_low": 88,
         "range_high": 88,
         "label": "Mid 3rd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Pocket passer with adequate arm strength. Accuracy is his calling card. Deep ball touch is developing. Decision-making is sound. Release is quick. Mobility is limited. Anticipation on timing routes is good.",
+      "comparison": "Jimmy Garoppolo",
       "source_raw": {
         "pff": {
           "rank": 88,
@@ -8229,15 +8229,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Slot Receiver",
       "projection": {
         "round": 3,
         "range_low": 21,
         "range_high": 155,
         "label": "Late 1st - Early 5th"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Quick receiver who works well from the slot. Route running is polished. Release against press uses quickness. Separation is created with footwork. Hands are soft. YAC ability is good. Contested catches are difficult given his size. Versatile weapon.",
+      "comparison": "Brandin Cooks",
       "source_raw": {
         "pff": {
           "rank": 155,
@@ -8300,15 +8300,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Athletic DT",
       "projection": {
         "round": 3,
         "range_low": 89,
         "range_high": 89,
         "label": "Mid 3rd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Athletic interior lineman with upside. First step is quick. Pass rush is developing. Run stuffing is inconsistent. Hand usage is raw. Motor is good. Upside player.",
+      "comparison": "Christian Wilkins",
       "source_raw": {
         "pff": {
           "rank": 89,
@@ -8366,15 +8366,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Versatile Edge",
       "projection": {
         "round": 3,
         "range_low": 59,
         "range_high": 121,
         "label": "Late 2nd - Mid-Late 4th"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Versatile edge defender who can stand up or put his hand down. First step is quick. Pass rush moves are developing. Run defense is solid. Motor runs hot. Scheme versatility adds value.",
+      "comparison": "Jadeveon Clowney",
       "source_raw": {
         "pff": {
           "rank": 59,
@@ -8437,15 +8437,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Move TE",
       "projection": {
         "round": 3,
         "range_low": 90,
         "range_high": 90,
         "label": "Mid 3rd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Athletic tight end with receiving potential. Route running shows promise. Separation is developing. Hands are soft. Blocking is a work in progress. Upside player.",
+      "comparison": "Mike Gesicki",
       "source_raw": {
         "pff": {
           "rank": 90,
@@ -8502,15 +8502,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Thumper LB",
       "projection": {
         "round": 3,
         "range_low": 90,
         "range_high": 90,
         "label": "Mid 3rd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Physical linebacker with good size. Run defense is solid. Tackling is sure. Pass coverage is developing. Blitzing is adequate. Takes on blocks well.",
+      "comparison": "Shaquille Leonard",
       "source_raw": {
         "cbs": {
           "rank": 90,
@@ -8566,15 +8566,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Physical Center",
       "projection": {
         "round": 3,
         "range_low": 91,
         "range_high": 91,
         "label": "Late 3rd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Physical center with good anchor. Pass protection is sound. Run blocking shows power. Hand placement is adequate. Line calls are improving.",
+      "comparison": "Lloyd Cushenberry",
       "source_raw": {
         "pff": {
           "rank": 91,
@@ -8706,15 +8706,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Red Zone Threat",
       "projection": {
         "round": 3,
         "range_low": 37,
         "range_high": 146,
         "label": "Early 2nd - Early 5th"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Big receiver with excellent catch radius. Route running is developing. Release against press needs work. Separation is created with size. Hands are reliable. YAC ability is limited. Contested catches are a major strength. Red zone threat.",
+      "comparison": "Mike Williams",
       "source_raw": {
         "pff": {
           "rank": 146,
@@ -8777,15 +8777,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Instinctive Safety",
       "projection": {
         "round": 3,
         "range_low": 92,
         "range_high": 92,
         "label": "Late 3rd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Instinctive safety with good ball skills. Zone coverage reads are solid. Man coverage is developing. Range is adequate. Tackling is reliable. Run support is willing.",
+      "comparison": "Julian Love",
       "source_raw": {
         "pff": {
           "rank": 92,
@@ -8843,15 +8843,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Possession TE",
       "projection": {
         "round": 3,
         "range_low": 40,
         "range_high": 147,
         "label": "Early 2nd - Early 5th"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Reliable tight end with good hands. Route running is solid in the short game. Separation is limited against athletic linebackers. Catch radius is good. Blocking is developing. YAC ability is minimal. Possession tight end.",
+      "comparison": "Hunter Henry",
       "source_raw": {
         "pff": {
           "rank": 40,
@@ -8914,15 +8914,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Athletic Center",
       "projection": {
         "round": 3,
         "range_low": 94,
         "range_high": 94,
         "label": "Late 3rd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Athletic center with good movement skills. Pass protection shows quick feet. Run blocking is developing. Hand placement is adequate. Versatile player.",
+      "comparison": "Cesar Ruiz",
       "source_raw": {
         "pff": {
           "rank": 94,
@@ -8980,15 +8980,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Slot WR",
       "projection": {
         "round": 3,
         "range_low": 67,
         "range_high": 121,
         "label": "Early 3rd - Mid-Late 4th"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Quick receiver who works well from the slot. Route running is polished. Separation is created with footwork. Hands are soft. YAC ability is good. Versatile player.",
+      "comparison": "Slot weapon",
       "source_raw": {
         "pff": {
           "rank": 121,
@@ -9062,7 +9062,7 @@
         "label": "Late 1st - Mid-Late 5th"
       },
       "scouting_report": "Disruptive interior presence with a quick first step. Pass rush ability from the interior is rare. Hand usage is advanced - club-rip is effective. Double team resistance is developing. Run stuffing can be inconsistent - pad level rises. Anchor is adequate against bigger guards. Motor is steady throughout games.",
-      "comparison": "Chris Jones (upside)",
+      "comparison": "Chris Jones",
       "source_raw": {
         "pff": {
           "rank": 164,
@@ -9386,15 +9386,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Hybrid Edge",
       "projection": {
         "round": 3,
         "range_low": 46,
         "range_high": 148,
         "label": "Early 2nd - Early 5th"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Hybrid edge/linebacker with coverage ability. First step is adequate from a two-point stance. Pass rush moves are limited but shows timing on stunts. More comfortable dropping into coverage than rushing the passer. Run defense instincts are solid. Motor is consistent. Versatility adds value.",
+      "comparison": "Kyle Van Noy",
       "source_raw": {
         "pff": {
           "rank": 148,
@@ -9457,15 +9457,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Run-Stuffer",
       "projection": {
         "round": 3,
         "range_low": 98,
         "range_high": 98,
         "label": "Late 3rd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Powerful interior player with good anchor. Run stuffing is solid. First step is adequate. Pass rush is limited. Hand usage is developing. Consistent effort.",
+      "comparison": "D.J. Reader",
       "source_raw": {
         "pff": {
           "rank": 98,
@@ -9523,15 +9523,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Downfield Threat",
       "projection": {
         "round": 3,
         "range_low": 38,
         "range_high": 159,
         "label": "Early 2nd - Early 5th"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Long receiver with developing technique. Route running shows potential. Release against press is raw. Separation comes from length and speed. Hands need refinement. YAC ability is limited. Contested catches show his size advantage. Project with upside.",
+      "comparison": "D.K. Metcalf (physical)",
       "source_raw": {
         "pff": {
           "rank": 159,
@@ -9594,15 +9594,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Run Safety",
       "projection": {
         "round": 3,
         "range_low": 100,
         "range_high": 100,
         "label": "Late 3rd"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Physical safety with good tackling. Run support is solid. Zone coverage is developing. Man coverage is limited. Range is adequate. Instincts are improving.",
+      "comparison": "Jordan Fuller",
       "source_raw": {
         "pff": {
           "rank": 100,
@@ -9660,15 +9660,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Explosive Back",
       "projection": {
         "round": 4,
         "range_low": 86,
         "range_high": 117,
         "label": "Mid 3rd - Early 4th"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Elusive runner with good vision. Finds creases and explodes through them. Elusiveness is his calling card. Power is developing. Pass blocking is a weakness. Receiving skills are solid. Ball security needs attention. Lateral agility creates big plays. Home run threat.",
+      "comparison": "Jamaal Charles",
       "source_raw": {
         "pff": {
           "rank": 86,
@@ -9731,15 +9731,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Speed Edge",
       "projection": {
         "round": 4,
         "range_low": 101,
         "range_high": 101,
         "label": "Early 4th"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Quick edge rusher with good first step. Pass rush shows burst. Bend is natural. Run defense is developing. Hand usage needs work. Motor is consistent. Speed rusher profile.",
+      "comparison": "Preston Smith",
       "source_raw": {
         "pff": {
           "rank": 101,
@@ -9860,15 +9860,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Traditional QB",
       "projection": {
         "round": 4,
         "range_low": 103,
         "range_high": 103,
         "label": "Early 4th"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Physical quarterback with good arm strength. Accuracy is developing. Decision-making shows maturity. Pocket presence is adequate. Mobility is limited. Can push the ball downfield.",
+      "comparison": "Andy Dalton",
       "source_raw": {
         "pff": {
           "rank": 103,
@@ -9926,15 +9926,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Length DE",
       "projection": {
         "round": 4,
         "range_low": 87,
         "range_high": 119,
         "label": "Mid 3rd - Early 4th"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Long edge defender with good length. First step is adequate. Pass rush uses his reach. Bend is limited by his frame. Run defense is solid. Hand usage is developing.",
+      "comparison": "Jordan Phillips",
       "source_raw": {
         "pff": {
           "rank": 119,
@@ -10000,15 +10000,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Developing WR",
       "projection": {
         "round": 4,
         "range_low": 80,
         "range_high": 126,
         "label": "Early 3rd - Mid-Late 4th"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Smooth receiver with developing route running. Separation comes from technique. Release against press is adequate. Hands are reliable. YAC ability shows potential. Contested catches are developing. Upside receiver.",
+      "comparison": "George Pickens",
       "source_raw": {
         "pff": {
           "rank": 126,
@@ -10071,15 +10071,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Explosive Back",
       "projection": {
         "round": 4,
         "range_low": 104,
         "range_high": 104,
         "label": "Early 4th"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Quick runner with good burst. Vision is developing. Elusiveness shows potential. Power is limited. Pass blocking needs work. Receiving skills are adequate. Ball security is solid.",
+      "comparison": "Tony Pollard",
       "source_raw": {
         "pff": {
           "rank": 104,
@@ -10137,15 +10137,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Upside Corner",
       "projection": {
         "round": 4,
         "range_low": 56,
         "range_high": 154,
         "label": "Mid 2nd - Early 5th"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Young corner with physical tools. Press technique is developing. Man coverage shows fluid hips. Zone coverage awareness is raw. Ball skills show potential. Recovery speed is good. Tackling is aggressive. Upside is significant given his age.",
+      "comparison": "Derek Stingley Jr. (projection)",
       "source_raw": {
         "pff": {
           "rank": 154,
@@ -10211,15 +10211,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Athletic LB",
       "projection": {
         "round": 4,
         "range_low": 41,
         "range_high": 169,
         "label": "Early 2nd - Mid-Late 5th"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Athletic linebacker with coverage potential. Pass coverage shows ability to match tight ends. Run defense instincts are developing. Tackling is adequate. Blitzing shows burst. Sideline-to-sideline range is good. Upside in the right system.",
+      "comparison": "Devin Lloyd",
       "source_raw": {
         "pff": {
           "rank": 169,
@@ -10356,15 +10356,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Thumper LB",
       "projection": {
         "round": 4,
         "range_low": 106,
         "range_high": 106,
         "label": "Early 4th"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Physical linebacker who takes on blocks. Run defense is his strength. Tackling is sure. Pass coverage is limited. Blitzing is developing. Traditional inside linebacker.",
+      "comparison": "Demario Davis",
       "source_raw": {
         "pff": {
           "rank": 106,
@@ -10419,15 +10419,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Dual-Threat",
       "projection": {
         "round": 4,
         "range_low": 107,
         "range_high": 107,
         "label": "Early 4th"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Dual-threat quarterback with excellent mobility. Arm strength is good. Accuracy is inconsistent from the pocket. Decision-making improves outside structure. Running ability is elite. Pocket presence needs work.",
+      "comparison": "Marcus Mariota",
       "source_raw": {
         "pff": {
           "rank": 107,
@@ -10485,15 +10485,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Downhill LB",
       "projection": {
         "round": 4,
         "range_low": 34,
         "range_high": 180,
         "label": "Early 2nd - Mid-Late 5th"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Physical linebacker who fills gaps. Run defense is his calling card. Tackling is sure and violent. Pass coverage is limited. Blitzing is developing. Sideline-to-sideline pursuit is adequate. Takes on blocks with violence. Downhill linebacker.",
+      "comparison": "Zack Baun",
       "source_raw": {
         "pff": {
           "rank": 180,
@@ -10556,15 +10556,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Versatile Safety",
       "projection": {
         "round": 4,
         "range_low": 108,
         "range_high": 108,
         "label": "Early 4th"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Athletic safety with versatility. Range is good for centerfield. Zone coverage shows instincts. Man coverage is developing. Tackling is adequate. Ball skills show potential.",
+      "comparison": "Kyle Hamilton (developmental)",
       "source_raw": {
         "pff": {
           "rank": 108,
@@ -10622,15 +10622,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Man Corner",
       "projection": {
         "round": 4,
         "range_low": 108,
         "range_high": 109,
         "label": "Early 4th"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Quick corner with good technique. Man coverage is his calling card. Press shows timing. Zone coverage instincts are solid. Ball skills are developing. Competitive nature.",
+      "comparison": "Trayvon Mullen",
       "source_raw": {
         "pff": {
           "rank": 109,
@@ -10696,15 +10696,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Physical Corner",
       "projection": {
         "round": 4,
         "range_low": 54,
         "range_high": 162,
         "label": "Mid 2nd - Mid-Late 5th"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Physical corner with refined technique. Press technique is his calling card. Man coverage is sound. Zone coverage shows good instincts. Ball skills are developing. Recovery speed is adequate. Tackling is a strength in run support.",
+      "comparison": "Darius Slay",
       "source_raw": {
         "pff": {
           "rank": 162,
@@ -10770,15 +10770,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Complete Receiver",
       "projection": {
         "round": 4,
         "range_low": 30,
         "range_high": 188,
         "label": "Late 1st - Day 3"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Quick receiver with good route running. Separation is created through technique. Release against press is developing. Hands are reliable. YAC ability is a strength. Contested catches are limited by size. Versatile player who can work inside and outside.",
+      "comparison": "Terry McLaurin",
       "source_raw": {
         "pff": {
           "rank": 188,
@@ -10844,15 +10844,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Box Safety",
       "projection": {
         "round": 4,
         "range_low": 64,
         "range_high": 156,
         "label": "Late 2nd - Early 5th"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Physical safety who excels in run support. Fills the alley aggressively and is a sure tackler. Man coverage is limited - struggles against athletic tight ends. Zone instincts are adequate. Ball skills need development. Range is limited for centerfield responsibilities. Best as a box safety in the modern game.",
+      "comparison": "Jamal Adams",
       "source_raw": {
         "pff": {
           "rank": 156,
@@ -10926,7 +10926,7 @@
         "label": "Late 1st - Day 3"
       },
       "scouting_report": "Powerful guard who mauls in the run game. Drive blocking shows nasty finish. Pass protection technique is sound - anchors against power. Hand placement can get wide when fatigued. Pull ability is adequate. Footwork in space needs refinement. Awareness of stunts is solid.",
-      "comparison": "Quenton Nelson (run game)",
+      "comparison": "Quenton Nelson",
       "source_raw": {
         "pff": {
           "rank": 193,
@@ -10989,15 +10989,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Athletic LB",
       "projection": {
         "round": 4,
         "range_low": 111,
         "range_high": 111,
         "label": "Early 4th"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Athletic linebacker with coverage potential. Pass coverage is developing. Run defense instincts are adequate. Tackling needs work. Blitzing shows burst. Sideline-to-sideline range is good.",
+      "comparison": "Patrick Queen",
       "source_raw": {
         "pff": {
           "rank": 111,
@@ -11118,15 +11118,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Speed Corner",
       "projection": {
         "round": 4,
         "range_low": 47,
         "range_high": 177,
         "label": "Early 2nd - Mid-Late 5th"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Quick corner with excellent feet. Man coverage is his strength - mirrors routes well. Press technique is adequate. Zone coverage instincts are developing. Ball skills show potential. Recovery speed is elite. Tackling needs work.",
+      "comparison": "Trae Waynes",
       "source_raw": {
         "pff": {
           "rank": 177,
@@ -11387,15 +11387,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Power OT",
       "projection": {
         "round": 4,
         "range_low": 102,
         "range_high": 126,
         "label": "Early 4th - Mid-Late 4th"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Physical tackle with good anchor. Pass protection is solid. Run blocking shows power. Footwork is adequate. Hand placement is developing. Consistent performer.",
+      "comparison": "Jawaan Taylor",
       "source_raw": {
         "pff": {
           "rank": 102,
@@ -11458,15 +11458,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Length Corner",
       "projection": {
         "round": 4,
         "range_low": 114,
         "range_high": 114,
         "label": "Early 4th"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Long corner with developing technique. Press uses his reach. Man coverage is raw. Zone coverage shows potential. Ball skills need work. Upside with coaching.",
+      "comparison": "Caleb Farley",
       "source_raw": {
         "pff": {
           "rank": 114,
@@ -11598,15 +11598,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Run-First Edge",
       "projection": {
         "round": 4,
         "range_low": 77,
         "range_high": 151,
         "label": "Early 3rd - Early 5th"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Compact edge rusher with good leverage. First step is quick for his frame. Pass rush moves include a solid club-rip. Speed-to-power is his bread and butter. Bend is limited by his build. Run stuffing is a strength - plays with good pad level. Hand usage is active and violent.",
+      "comparison": "Sam Hubbard",
       "source_raw": {
         "pff": {
           "rank": 151,
@@ -11672,15 +11672,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Downfield WR",
       "projection": {
         "round": 4,
         "range_low": 60,
         "range_high": 168,
         "label": "Late 2nd - Mid-Late 5th"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Big receiver with long frame. Route running is developing. Separation is created with size. Hands are reliable. YAC is limited. Contested catches are a strength.",
+      "comparison": "D.K. Metcalf (style)",
       "source_raw": {
         "pff": {
           "rank": 168,
@@ -11746,15 +11746,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Complete LB",
       "projection": {
         "round": 4,
         "range_low": 26,
         "range_high": 202,
         "label": "Late 1st - Late Rounds"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Instinctive linebacker with good football IQ. Run defense reads are advanced. Tackling is sound. Pass coverage is adequate against tight ends. Blitzing shows timing. Sideline-to-sideline range is good. Takes on blocks well. Well-rounded linebacker.",
+      "comparison": "Lavonte David",
       "source_raw": {
         "pff": {
           "rank": 202,
@@ -11883,15 +11883,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Balanced RB",
       "projection": {
         "round": 4,
         "range_low": 116,
         "range_high": 116,
         "label": "Early 4th"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Balanced runner with solid fundamentals. Vision is good. Elusiveness is adequate. Power is developing. Pass blocking is willing. Receiving skills are solid. Well-rounded back.",
+      "comparison": "Javonte Williams",
       "source_raw": {
         "pff": {
           "rank": 116,
@@ -12023,15 +12023,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Power DT",
       "projection": {
         "round": 4,
         "range_low": 117,
         "range_high": 118,
         "label": "Early 4th"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Powerful interior player with good size. Anchor is solid. Run stuffing is his calling card. First step is adequate. Pass rush is developing. Hand usage shows violence.",
+      "comparison": "Derrick Brown",
       "source_raw": {
         "pff": {
           "rank": 117,
@@ -12097,15 +12097,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Developmental Edge",
       "projection": {
         "round": 4,
         "range_low": 78,
         "range_high": 157,
         "label": "Early 3rd - Early 5th"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Quick-twitch athlete off the edge. First step wins the rep early. Pass rush moves are still developing but has a nice inside counter. Bend is adequate - not a natural ankle bender. Speed-to-power needs work. Run defense is a weakness - gets washed too easily. Motor runs hot and cold.",
+      "comparison": "Jermaine Johnson",
       "source_raw": {
         "pff": {
           "rank": 157,
@@ -12168,15 +12168,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Long LB",
       "projection": {
         "round": 4,
         "range_low": 118,
         "range_high": 118,
         "label": "Early 4th"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Rangy linebacker with unique length. Pass coverage uses his size. Run defense is developing. Tackling is adequate. Blitzing shows timing. Sideline-to-sideline pursuit is good. Unique body type.",
+      "comparison": "Jamin Davis",
       "source_raw": {
         "pff": {
           "rank": 118,
@@ -12234,15 +12234,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Scatback",
       "projection": {
         "round": 4,
         "range_low": 59,
         "range_high": 178,
         "label": "Late 2nd - Mid-Late 5th"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Quick runner with good burst. Vision shows potential. Elusiveness in space is a strength. Power is limited. Pass blocking needs development. Receiving skills are excellent. Ball security is solid. Lateral agility is elite. Change-of-pace back with upside.",
+      "comparison": "Austin Ekeler",
       "source_raw": {
         "pff": {
           "rank": 178,
@@ -12308,15 +12308,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Slot Corner",
       "projection": {
         "round": 4,
         "range_low": 48,
         "range_high": 189,
         "label": "Early 2nd - Day 3"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Undersized but competitive corner. Press technique is limited by his frame. Man coverage shows quick feet and good mirroring. Zone coverage instincts are solid. Ball skills are excellent despite his size. Recovery speed is a weapon. Tackling is a concern against bigger receivers.",
+      "comparison": "Asante Samuel Jr.",
       "source_raw": {
         "pff": {
           "rank": 189,
@@ -12382,15 +12382,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Smooth Corner",
       "projection": {
         "round": 4,
         "range_low": 99,
         "range_high": 139,
         "label": "Late 3rd - Mid-Late 4th"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Fluid corner with good transitions. Man coverage technique is solid. Press is adequate. Zone coverage instincts are developing. Ball skills show potential. Reliable performer.",
+      "comparison": "Paulson Adebo",
       "source_raw": {
         "pff": {
           "rank": 99,
@@ -12456,15 +12456,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Two-Gap NT",
       "projection": {
         "round": 4,
         "range_low": 110,
         "range_high": 129,
         "label": "Early 4th - Mid-Late 4th"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Space-eating nose tackle who demands attention. Anchor is elite. Run stuffing is his strength. First step is limited. Pass rush is raw. Two-gap ability is plus.",
+      "comparison": "Poona Ford",
       "source_raw": {
         "pff": {
           "rank": 110,
@@ -12593,15 +12593,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Red Zone WR",
       "projection": {
         "round": 4,
         "range_low": 70,
         "range_high": 170,
         "label": "Early 3rd - Mid-Late 5th"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Big receiver with strong hands. Route running is developing. Separation is created with size. Catch radius is excellent. YAC is limited. Contested catches are a strength. Red zone target.",
+      "comparison": "Tee Higgins",
       "source_raw": {
         "pff": {
           "rank": 170,
@@ -12730,15 +12730,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Downhill LB",
       "projection": {
         "round": 4,
         "range_low": 122,
         "range_high": 122,
         "label": "Mid-Late 4th"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Physical linebacker who attacks downhill. Run defense is solid. Tackling is sure and violent. Pass coverage is limited. Blitzing shows aggression. Takes on blocks well.",
+      "comparison": "Tremaine Edmunds",
       "source_raw": {
         "pff": {
           "rank": 122,
@@ -12796,15 +12796,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Receiving TE",
       "projection": {
         "round": 4,
         "range_low": 62,
         "range_high": 182,
         "label": "Late 2nd - Day 3"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Athletic tight end with receiving skills. Route running shows potential. Separation against linebackers is adequate. Hands are soft. Blocking needs development. YAC ability shows athleticism. Upside as a move tight end.",
+      "comparison": "Hayden Hurst",
       "source_raw": {
         "pff": {
           "rank": 182,
@@ -12933,15 +12933,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Technique Edge",
       "projection": {
         "round": 4,
         "range_low": 123,
         "range_high": 123,
         "label": "Mid-Late 4th"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Technical edge rusher with good fundamentals. First step is adequate. Pass rush moves show technique. Bend is limited. Run stuffing is solid. Hand usage is refined. Consistent effort.",
+      "comparison": "Alex Highsmith",
       "source_raw": {
         "pff": {
           "rank": 123,
@@ -13199,15 +13199,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Upside Edge",
       "projection": {
         "round": 4,
         "range_low": 125,
         "range_high": 125,
         "label": "Mid-Late 4th"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Athletic edge with upside. First step shows burst. Pass rush moves are raw. Bend is developing. Run defense needs work. Motor is inconsistent. Tools are there for development.",
+      "comparison": "Yannick Ngakoue",
       "source_raw": {
         "pff": {
           "rank": 125,
@@ -13265,15 +13265,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Versatile DL",
       "projection": {
         "round": 4,
         "range_low": 42,
         "range_high": 211,
         "label": "Early 2nd - Late Rounds"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Versatile interior player with pass rush ability. First step is quick. Hand usage shows timing. Anchor is adequate. Run stuffing is developing. Motor runs hot. Can kick outside in sub packages.",
+      "comparison": "Cameron Heyward",
       "source_raw": {
         "pff": {
           "rank": 211,
@@ -13413,15 +13413,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Physical Corner",
       "projection": {
         "round": 4,
         "range_low": 57,
         "range_high": 198,
         "label": "Late 2nd - Day 3"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Physical corner with good length. Press technique is refined. Man coverage is solid. Zone coverage instincts are developing. Ball skills are adequate. Tackling is a strength.",
+      "comparison": "Duke Riley",
       "source_raw": {
         "pff": {
           "rank": 198,
@@ -13484,15 +13484,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Athletic QB",
       "projection": {
         "round": 4,
         "range_low": 128,
         "range_high": 128,
         "label": "Mid-Late 4th"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Athletic quarterback with good arm talent. Accuracy is developing. Decision-making is raw. Mobility is a weapon. Release is quick. Anticipation needs work. High-ceiling prospect.",
+      "comparison": "Justin Fields",
       "source_raw": {
         "pff": {
           "rank": 128,
@@ -13624,15 +13624,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Run-First OT",
       "projection": {
         "round": 4,
         "range_low": 43,
         "range_high": 218,
         "label": "Early 2nd - Late Rounds"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Physical tackle who excels in the run game. Run blocking is his calling card - finishes blocks with violence. Pass protection anchor is solid. Footwork needs refinement against speed. Hand placement is adequate. Awareness of stunts is developing.",
+      "comparison": "Mekhi Becton",
       "source_raw": {
         "pff": {
           "rank": 218,
@@ -13698,15 +13698,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Route Runner",
       "projection": {
         "round": 4,
         "range_low": 101,
         "range_high": 161,
         "label": "Early 4th - Mid-Late 5th"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Smooth route runner with good technique. Separation is created through precision. Hands are reliable. YAC ability is developing. Contested catches are adequate. Well-rounded receiver.",
+      "comparison": "Adam Thielen",
       "source_raw": {
         "pff": {
           "rank": 161,
@@ -14052,15 +14052,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Box Safety",
       "projection": {
         "round": 4,
         "range_low": 98,
         "range_high": 174,
         "label": "Late 3rd - Mid-Late 5th"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Physical safety who plays in the box. Run support is his calling card - fills gaps aggressively. Tackling is sound and violent. Man coverage is limited. Zone coverage shows adequate instincts. Range is limited for centerfield duties. Ball skills are developing.",
+      "comparison": "Jamal Adams",
       "source_raw": {
         "pff": {
           "rank": 174,
@@ -14126,15 +14126,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Slot WR",
       "projection": {
         "round": 4,
         "range_low": 84,
         "range_high": 190,
         "label": "Mid 3rd - Day 3"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Quick receiver with good feet. Route running is polished. Separation is created with quickness. Hands are reliable. YAC shows burst. Contested catches are limited by size.",
+      "comparison": "Hunter Renfrow",
       "source_raw": {
         "pff": {
           "rank": 190,
@@ -14200,15 +14200,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Road Grader",
       "projection": {
         "round": 4,
         "range_low": 19,
         "range_high": 260,
         "label": "Mid 1st - UDFA"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Big tackle with developing technique. Pass protection shows adequate anchor. Footwork needs work against speed rushers. Run blocking is powerful. Hand placement is inconsistent. Awareness of stunts is developing. Upside is there with the right coaching.",
+      "comparison": "Orlando Brown Jr.",
       "source_raw": {
         "pff": {
           "rank": 260,
@@ -14274,15 +14274,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Rangy LB",
       "projection": {
         "round": 4,
         "range_low": 40,
         "range_high": 240,
         "label": "Early 2nd - UDFA"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Rangy linebacker with good pursuit angles. Run defense is solid. Tackling shows improvement. Pass coverage is developing. Blitzing shows burst. Sideline-to-sideline range is good.",
+      "comparison": "Frankie Luvu",
       "source_raw": {
         "pff": {
           "rank": 240,
@@ -14414,15 +14414,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Move TE",
       "projection": {
         "round": 5,
         "range_low": 65,
         "range_high": 222,
         "label": "Early 3rd - Late Rounds"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Athletic tight end with good movement skills. Route running is developing. Separation is created with athleticism. Hands are reliable. Blocking is a weakness. YAC ability is good. Versatile weapon who can stress defenses.",
+      "comparison": "Darren Waller (upside)",
       "source_raw": {
         "pff": {
           "rank": 222,
@@ -14554,15 +14554,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Balanced Back",
       "projection": {
         "round": 5,
         "range_low": 119,
         "range_high": 171,
         "label": "Early 4th - Mid-Late 5th"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Compact runner with good pad level. Vision is developing. Elusiveness is adequate. Power is surprising for his size. Pass blocking is willing. Receiving skills are solid. Ball security is good. Lateral agility is a strength. Well-rounded skill set.",
+      "comparison": "Aaron Jones",
       "source_raw": {
         "pff": {
           "rank": 171,
@@ -14702,15 +14702,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Massive NT",
       "projection": {
         "round": 5,
         "range_low": 104,
         "range_high": 187,
         "label": "Early 4th - Day 3"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Massive interior presence with elite size. Anchor is exceptional. Run stuffing is a strength. First step is limited. Pass rush is raw. Occupies blockers.",
+      "comparison": "Danny Shelton",
       "source_raw": {
         "pff": {
           "rank": 187,
@@ -14776,15 +14776,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Physical Guard",
       "projection": {
         "round": 5,
         "range_low": 66,
         "range_high": 225,
         "label": "Early 3rd - Late Rounds"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Physical guard with good anchor. Run blocking is his strength. Pass protection is solid. Hand placement shows violence. Pull technique is developing.",
+      "comparison": "Dalton Risner",
       "source_raw": {
         "pff": {
           "rank": 225,
@@ -14916,15 +14916,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Centerfield Safety",
       "projection": {
         "round": 5,
         "range_low": 97,
         "range_high": 196,
         "label": "Late 3rd - Day 3"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Rangy safety with good ball skills. Covers ground well in zone coverage. Instincts allow him to jump routes. Man coverage is adequate against tight ends. Tackling is reliable. Run support is physical. Range makes him a candidate for single-high duties.",
+      "comparison": "Marcus Williams",
       "source_raw": {
         "pff": {
           "rank": 196,
@@ -15056,15 +15056,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Explosive Edge",
       "projection": {
         "round": 5,
         "range_low": 110,
         "range_high": 184,
         "label": "Early 4th - Day 3"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Explosive edge rusher with quick first step. Pass rush shows burst. Bend around the corner is developing. Run defense is inconsistent. Hand usage is raw. Motor runs hot.",
+      "comparison": "Marcus Davenport",
       "source_raw": {
         "pff": {
           "rank": 184,
@@ -15130,15 +15130,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Massive DT",
       "projection": {
         "round": 5,
         "range_low": 36,
         "range_high": 258,
         "label": "Early 2nd - UDFA"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Massive interior presence with elite size. Anchor is exceptional due to his frame. Run stuffing is a strength. First step is limited. Hand usage is developing. Pass rush is raw. Demands double teams. Space eater.",
+      "comparison": "Calais Campbell",
       "source_raw": {
         "pff": {
           "rank": 258,
@@ -15201,15 +15201,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Developing QB",
       "projection": {
         "round": 5,
         "range_low": 149,
         "range_high": 149,
         "label": "Early 5th"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Talented passer with good arm strength. Accuracy shows flashes. Decision-making is developing. Pocket presence is improving. Mobility is adequate. High school pedigree. Development needed.",
+      "comparison": "Sam Howell",
       "source_raw": {
         "pff": {
           "rank": 149,
@@ -15267,15 +15267,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Athletic OT",
       "projection": {
         "round": 5,
         "range_low": 106,
         "range_high": 192,
         "label": "Early 4th - Day 3"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Athletic tackle with good movement skills. Pass protection shows potential. Anchor is developing. Run blocking is physical. Hand placement is adequate. Upside player.",
+      "comparison": "Teven Jenkins",
       "source_raw": {
         "pff": {
           "rank": 192,
@@ -15481,15 +15481,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Ball-Hawk Safety",
       "projection": {
         "round": 5,
         "range_low": 29,
         "range_high": 273,
         "label": "Late 1st - UDFA"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Ball-hawking safety with excellent instincts. Ball skills are elite - creates turnovers. Range is good for centerfield duties. Zone coverage reads are advanced. Man coverage is developing but shows potential. Tackling can be hit or miss. Run support is adequate but not his calling card.",
+      "comparison": "Minkah Fitzpatrick",
       "source_raw": {
         "pff": {
           "rank": 273,
@@ -15555,15 +15555,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Speed Demon",
       "projection": {
         "round": 5,
         "range_low": 89,
         "range_high": 216,
         "label": "Mid 3rd - Late Rounds"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Electric playmaker with speed. Route running is developing. Separation comes from explosiveness. Hands are reliable. YAC ability is elite. Versatile weapon. Return game value.",
+      "comparison": "Tyreek Hill (speed)",
       "source_raw": {
         "pff": {
           "rank": 216,
@@ -15692,15 +15692,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Speedster",
       "projection": {
         "round": 5,
         "range_low": 61,
         "range_high": 256,
         "label": "Late 2nd - UDFA"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Small but explosive receiver. Speed is his primary weapon. Route running is developing. Separation comes from quickness. Hands are adequate. YAC shows burst. Deep threat.",
+      "comparison": "Kadarius Toney",
       "source_raw": {
         "pff": {
           "rank": 256,
@@ -15766,15 +15766,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Run-First Edge",
       "projection": {
         "round": 5,
         "range_low": 135,
         "range_high": 183,
         "label": "Mid-Late 4th - Day 3"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Powerful edge defender with good anchor. Run defense is his calling card. Pass rush is developing. First step is adequate. Bend is limited. Sets the edge well.",
+      "comparison": "Emmanuel Ogbah",
       "source_raw": {
         "pff": {
           "rank": 183,
@@ -16037,15 +16037,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Power Edge",
       "projection": {
         "round": 5,
         "range_low": 165,
         "range_high": 165,
         "label": "Mid-Late 5th"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Powerful edge with good size. First step is adequate. Pass rush is more power oriented. Bend is limited. Run defense is a strength. Hand usage shows violence. Physical player.",
+      "comparison": "Montez Sweat",
       "source_raw": {
         "pff": {
           "rank": 165,
@@ -16166,15 +16166,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Massive OT",
       "projection": {
         "round": 5,
         "range_low": 124,
         "range_high": 208,
         "label": "Mid-Late 4th - Late Rounds"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Massive tackle with elite size. Pass protection anchor is elite. Footwork is limited. Run blocking shows power. Hand placement is developing. Size is his calling card.",
+      "comparison": "Orlando Brown Jr.",
       "source_raw": {
         "pff": {
           "rank": 208,
@@ -16314,15 +16314,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Run LB",
       "projection": {
         "round": 5,
         "range_low": 125,
         "range_high": 212,
         "label": "Mid-Late 4th - Late Rounds"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Instinctive linebacker with good reads. Run defense is his strength. Tackling is reliable. Pass coverage is adequate. Blitzing shows timing. Consistent performer.",
+      "comparison": "Alex Anzalone",
       "source_raw": {
         "pff": {
           "rank": 212,
@@ -16462,15 +16462,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Quick Release",
       "projection": {
         "round": 5,
         "range_low": 150,
         "range_high": 194,
         "label": "Early 5th - Day 3"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Quick-release passer with good accuracy. Arm strength is adequate for the intermediate game. Deep ball needs work. Decision-making shows maturity. Pocket presence is developing. Mobility is limited. Anticipation on short routes is a strength. Mechanics are sound.",
+      "comparison": "Baker Mayfield",
       "source_raw": {
         "pff": {
           "rank": 194,
@@ -16536,15 +16536,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Pocket Passer",
       "projection": {
         "round": 5,
         "range_low": 127,
         "range_high": 217,
         "label": "Mid-Late 4th - Late Rounds"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Pocket passer with adequate arm strength. Accuracy is his strength, particularly in the short game. Deep ball touch is developing. Decision-making is sound. Release is quick and efficient. Pocket presence is refined. Limited mobility but moves well enough to avoid pressure. Anticipation on timing routes is a strength.",
+      "comparison": "Derek Carr",
       "source_raw": {
         "pff": {
           "rank": 217,
@@ -16673,15 +16673,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Balanced WR",
       "projection": {
         "round": 5,
         "range_low": 73,
         "range_high": 278,
         "label": "Early 3rd - UDFA"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Athletic receiver with good body control. Route running is developing. Separation shows potential. Hands are reliable. YAC ability is adequate. Contested catches are improving.",
+      "comparison": "JuJu Smith-Schuster",
       "source_raw": {
         "pff": {
           "rank": 278,
@@ -16884,15 +16884,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Dual-Threat",
       "projection": {
         "round": 5,
         "range_low": 116,
         "range_high": 237,
         "label": "Early 4th - UDFA"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Athletic quarterback with good mobility. Arm strength is adequate. Accuracy shows flashes but is inconsistent. Decision-making is developing. Release is quick. Pocket presence needs refinement. Can extend plays with his legs. Anticipation is raw but shows potential.",
+      "comparison": "Marcus Mariota",
       "source_raw": {
         "pff": {
           "rank": 237,
@@ -16958,15 +16958,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Power Back",
       "projection": {
         "round": 5,
         "range_low": 137,
         "range_high": 221,
         "label": "Mid-Late 4th - Late Rounds"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Physical runner who runs through contact. Vision is solid. Elusiveness is limited. Power is his calling card. Pass blocking is developing. Receiving skills are adequate. Ball security is good. Between the tackles runner.",
+      "comparison": "Najee Harris",
       "source_raw": {
         "pff": {
           "rank": 221,
@@ -17095,15 +17095,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Physical Corner",
       "projection": {
         "round": 6,
         "range_low": 128,
         "range_high": 238,
         "label": "Mid-Late 4th - UDFA"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Physical corner with good size. Press technique is developing. Man coverage shows potential. Zone instincts are adequate. Ball skills are raw. Tackling is solid.",
+      "comparison": "Adoree' Jackson",
       "source_raw": {
         "pff": {
           "rank": 238,
@@ -17232,15 +17232,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Speed WR",
       "projection": {
         "round": 6,
         "range_low": 105,
         "range_high": 270,
         "label": "Early 4th - UDFA"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Quick receiver with explosive speed. Route running is developing. Separation comes from speed. Hands are adequate. YAC ability is elite. Versatile weapon who can take the top off.",
+      "comparison": "Marquise Brown",
       "source_raw": {
         "pff": {
           "rank": 270,
@@ -17818,15 +17818,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Developmental WR",
       "projection": {
         "round": 6,
         "range_low": 205,
         "range_high": 205,
         "label": "Late Rounds"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Athletic receiver with good size. Route running is developing. Separation comes from athleticism. Hands are adequate. YAC shows potential. Upside receiver.",
+      "comparison": "N'Keal Harry",
       "source_raw": {
         "pff": {
           "rank": 205,
@@ -18270,15 +18270,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Zone Safety",
       "projection": {
         "round": 6,
         "range_low": 219,
         "range_high": 219,
         "label": "Late Rounds"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Instinctive safety with good reads. Zone coverage is his strength. Man coverage is adequate. Range is solid. Tackling is reliable. Ball skills are developing.",
+      "comparison": "Harrison Smith",
       "source_raw": {
         "pff": {
           "rank": 219,
@@ -18963,15 +18963,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Versatile Edge",
       "projection": {
         "round": 7,
         "range_low": 233,
         "range_high": 233,
         "label": "UDFA"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Athletic edge with versatility. First step is quick. Pass rush moves are developing. Bend is adequate. Run defense shows effort. Can line up at multiple spots.",
+      "comparison": "Shaq Barrett",
       "source_raw": {
         "pff": {
           "rank": 233,
@@ -19026,15 +19026,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Power Back",
       "projection": {
         "round": 7,
         "range_low": 235,
         "range_high": 235,
         "label": "UDFA"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Physical runner with good pad level. Vision is adequate. Elusiveness is limited. Power between the tackles is solid. Pass blocking is developing. Reliable runner.",
+      "comparison": "Zach Moss",
       "source_raw": {
         "pff": {
           "rank": 235,
@@ -19215,15 +19215,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Speed Back",
       "projection": {
         "round": 7,
         "range_low": 241,
         "range_high": 241,
         "label": "UDFA"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Explosive runner with speed. Vision is developing. Elusiveness shows burst. Power is limited. Pass blocking needs work. Receiving is raw. Home run ability is his calling card.",
+      "comparison": "Raheem Mostert",
       "source_raw": {
         "pff": {
           "rank": 241,
@@ -19656,15 +19656,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Rangy Safety",
       "projection": {
         "round": 7,
         "range_low": 249,
         "range_high": 249,
         "label": "UDFA"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Athletic safety with good range. Zone coverage shows potential. Man coverage is developing. Tackling is adequate. Ball skills are solid. Versatile defender.",
+      "comparison": "Eddie Jackson",
       "source_raw": {
         "pff": {
           "rank": 249,
@@ -19719,15 +19719,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Box Safety",
       "projection": {
         "round": 7,
         "range_low": 250,
         "range_high": 250,
         "label": "UDFA"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Physical safety who excels in run support. Tackling is violent and sure. Zone coverage is developing. Man coverage is limited. Range is adequate for box duties.",
+      "comparison": "Landon Collins",
       "source_raw": {
         "pff": {
           "rank": 250,
@@ -19971,15 +19971,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Elusive Back",
       "projection": {
         "round": 7,
         "range_low": 255,
         "range_high": 255,
         "label": "UDFA"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Quick runner with good lateral agility. Vision is solid. Elusiveness is a strength. Power is developing. Pass blocking is adequate. Receiving skills are good.",
+      "comparison": "Rico Dowdle",
       "source_raw": {
         "pff": {
           "rank": 255,
@@ -20097,15 +20097,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Centerfield Safety",
       "projection": {
         "round": 7,
         "range_low": 261,
         "range_high": 261,
         "label": "UDFA"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Rangy safety with good ball skills. Zone coverage instincts are solid. Range is good. Man coverage is developing. Tackling is adequate. Playmaker potential.",
+      "comparison": "Marcus Williams",
       "source_raw": {
         "pff": {
           "rank": 261,
@@ -20727,15 +20727,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Speed Back",
       "projection": {
         "round": 7,
         "range_low": 274,
         "range_high": 274,
         "label": "UDFA"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Quick runner with good speed. Vision is developing. Elusiveness shows burst. Power is limited. Pass blocking is raw. Receiving skills show potential. Big play threat.",
+      "comparison": "Jaylen Warren",
       "source_raw": {
         "pff": {
           "rank": 274,
@@ -21231,15 +21231,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Zone Safety",
       "projection": {
         "round": 7,
         "range_low": 283,
         "range_high": 283,
         "label": "UDFA"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Instinctive safety with good football IQ. Zone coverage reads are advanced. Man coverage is adequate. Tackling is sure. Range is limited. Ball skills are solid.",
+      "comparison": "Micah Hyde",
       "source_raw": {
         "pff": {
           "rank": 283,
@@ -21861,15 +21861,15 @@
       "combine": {},
       "skills": {},
       "traits": [],
-      "archetype": null,
+      "archetype": "Receiving Back",
       "projection": {
         "round": 7,
         "range_low": 293,
         "range_high": 293,
         "label": "UDFA"
       },
-      "scouting_report": null,
-      "comparison": null,
+      "scouting_report": "Explosive playmaker with receiving skills. Vision is adequate. Elusiveness is elite in space. Power is limited. Pass blocking needs development. Receiving is a strength. Versatile weapon.",
+      "comparison": "Austin Ekeler",
       "source_raw": {
         "pff": {
           "rank": 293,
