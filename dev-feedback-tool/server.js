@@ -60,14 +60,18 @@ if (!process.env.VERCEL && !fs.existsSync(RECORDINGS_DIR)) {
     fs.mkdirSync(RECORDINGS_DIR, { recursive: true });
 }
 
-async function transcribeWithRetry(audioPath, maxRetries = 3) {
+async function transcribeWithRetry(audioBuffer, filename, maxRetries = 3) {
     const openai = getOpenAIClient();
     
     for (let attempt = 1; attempt <= maxRetries; attempt++) {
         try {
             console.log(`Transcription attempt ${attempt}/${maxRetries}...`);
+            
+            // Create a File object from buffer for OpenAI
+            const file = new File([audioBuffer], filename, { type: 'audio/webm' });
+            
             const transcription = await openai.audio.transcriptions.create({
-                file: fs.createReadStream(audioPath),
+                file: file,
                 model: 'whisper-1'
             });
             return transcription;
@@ -91,15 +95,13 @@ app.post('/api/transcribe', upload.single('audio'), async (req, res) => {
         return res.status(400).json({ error: 'No audio file provided' });
     }
 
-    // Save recording to local folder (persists for retry)
     const timestamp = new Date().toISOString().replace(/[:.]/g, '-');
-    const audioPath = path.join(RECORDINGS_DIR, 'recording-' + timestamp + '.webm');
-    fs.writeFileSync(audioPath, req.file.buffer);
-    console.log('Saved recording:', audioPath);
+    const filename = 'recording-' + timestamp + '.webm';
+    console.log('Processing:', filename);
     console.log('File size:', (req.file.buffer.length / 1024).toFixed(1), 'KB');
     
     try {
-        const transcription = await transcribeWithRetry(audioPath);
+        const transcription = await transcribeWithRetry(req.file.buffer, filename);
 
         const text = transcription.text;
         const detection = detectTechnical(text);
@@ -107,15 +109,13 @@ app.post('/api/transcribe', upload.single('audio'), async (req, res) => {
         res.json({ 
             text,
             technicalDetected: detection.isTechnical,
-            technicalMatches: detection.matches,
-            audioFile: audioPath
+            technicalMatches: detection.matches
         });
     } catch (error) {
         console.error('Transcription failed after all retries:', error.message);
         res.status(500).json({ 
             error: 'Transcription failed after 3 attempts', 
-            details: error.message,
-            audioFile: audioPath
+            details: error.message
         });
     }
 });
