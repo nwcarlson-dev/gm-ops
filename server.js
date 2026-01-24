@@ -154,6 +154,63 @@ app.get('/api/transcripts', async (req, res) => {
     }
 });
 
+// Endpoint to list all transcripts from GitHub (both planning and technical)
+app.get('/api/all-transcripts', async (req, res) => {
+    try {
+        const octokit = await getGitHubClient();
+        const result = { planning: [], technical: [] };
+        
+        for (const folder of ['dev-planning-transcripts', 'dev-technical-transcripts']) {
+            try {
+                const { data } = await octokit.repos.getContent({
+                    owner: GITHUB_OWNER,
+                    repo: GITHUB_REPO,
+                    path: folder
+                });
+                
+                for (const file of data.filter(f => f.name.endsWith('.md'))) {
+                    const { data: fileData } = await octokit.repos.getContent({
+                        owner: GITHUB_OWNER,
+                        repo: GITHUB_REPO,
+                        path: file.path
+                    });
+                    const content = Buffer.from(fileData.content, 'base64').toString('utf8');
+                    
+                    // Extract topic titles
+                    const topics = [];
+                    const sections = content.split(/(?=## [T]?[0-9]+\.[0-9]+ - )/);
+                    for (const section of sections) {
+                        const match = section.match(/## ([T]?[0-9]+\.[0-9]+ - .+)/);
+                        if (match) topics.push(match[1]);
+                    }
+                    
+                    const key = folder.includes('technical') ? 'technical' : 'planning';
+                    result[key].push({ file: file.name, topics });
+                }
+            } catch (e) {
+                // Folder doesn't exist
+            }
+        }
+        
+        res.json(result);
+    } catch (error) {
+        console.error('Error fetching transcripts:', error);
+        res.status(500).json({ error: 'Failed to fetch transcripts', details: error.message });
+    }
+});
+
+// Webhook endpoint for new transcript notifications
+app.post('/api/transcript-notification', (req, res) => {
+    const { topic, type, title } = req.body;
+    console.log('\n========================================');
+    console.log('NEW TRANSCRIPT SAVED');
+    console.log(`Type: ${type || 'game'}`);
+    console.log(`Topic: ${topic}`);
+    console.log(`Title: ${title}`);
+    console.log('========================================\n');
+    res.json({ received: true });
+});
+
 const PORT = 5000;
 app.listen(PORT, '0.0.0.0', () => {
     console.log(`Server running on http://0.0.0.0:${PORT}`);

@@ -299,6 +299,24 @@ app.post('/api/save-transcript', async (req, res) => {
             sha: sha
         });
 
+        // Notify Replit server about the new transcript
+        const replitUrl = process.env.REPLIT_NOTIFY_URL;
+        if (replitUrl) {
+            try {
+                await fetch(replitUrl + '/api/transcript-notification', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ 
+                        topic: req.body.topicNumber,
+                        type: type || 'game',
+                        title: req.body.title || filename
+                    })
+                });
+            } catch (e) {
+                console.log('Replit notification skipped:', e.message);
+            }
+        }
+
         res.json({ success: true, path: filePath });
     } catch (error) {
         console.error('GitHub save error:', error);
