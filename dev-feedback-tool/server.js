@@ -69,27 +69,18 @@ async function transcribeWithRetry(audioBuffer, filename, contentType = 'audio/w
             console.log(`Transcription attempt ${attempt}/${maxRetries}...`);
             console.log(`File: ${filename}, ContentType: ${contentType}`);
             
-            // Use FormData with fetch instead of SDK
-            const FormData = require('form-data');
-            const formData = new FormData();
-            formData.append('file', audioBuffer, { filename, contentType });
-            formData.append('model', 'whisper-1');
+            // Use OpenAI SDK which handles multipart properly
+            const openai = new OpenAI({ apiKey, timeout: 30000, maxRetries: 0 });
             
-            const response = await fetch('https://api.openai.com/v1/audio/transcriptions', {
-                method: 'POST',
-                headers: {
-                    'Authorization': `Bearer ${apiKey}`,
-                    ...formData.getHeaders()
-                },
-                body: formData
+            // Create a File-like object from the buffer
+            const file = new File([audioBuffer], filename, { type: contentType });
+            
+            const transcription = await openai.audio.transcriptions.create({
+                file: file,
+                model: 'whisper-1'
             });
             
-            if (!response.ok) {
-                const err = await response.text();
-                throw new Error(`OpenAI API error: ${response.status} - ${err}`);
-            }
-            
-            return await response.json();
+            return transcription;
         } catch (error) {
             console.error(`Attempt ${attempt} failed:`, error.message);
             
