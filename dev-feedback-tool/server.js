@@ -238,10 +238,10 @@ app.get('/api/topics', async (req, res) => {
             });
             const content = Buffer.from(data.content, 'base64').toString('utf8');
             
-            // Split by topic headers
-            const sections = content.split(/(?=## [T]?[0-9]+\.[0-9]+ - )/);
+            // Split by topic headers (handles any title including [Untitled])
+            const sections = content.split(/(?=## [T]?\d+\.\d+ - )/);
             for (const section of sections) {
-                const titleMatch = section.match(/## ([T]?[0-9]+\.[0-9]+ - .+)/);
+                const titleMatch = section.match(/## ([T]?\d+\.\d+ - [^\n]+)/);
                 if (titleMatch) {
                     const title = titleMatch[1];
                     const bodyStart = section.indexOf('\n');
@@ -457,6 +457,103 @@ app.post('/api/save-transcript', async (req, res) => {
         console.error('GitHub save error:', error);
         res.status(500).json({ error: 'Failed to save to GitHub', details: error.message });
     }
+});
+
+// Background job to fix untitled topics
+async function fixUntitledTopics() {
+    try {
+        const octokit = getGitHubClient();
+        const apiKey = process.env.OPENAI_API_KEY;
+        if (!apiKey) return;
+        
+        for (const folder of ['dev-planning-transcripts', 'dev-technical-transcripts']) {
+            let files = [];
+            try {
+                const { data } = await octokit.repos.getContent({
+                    owner: GITHUB_OWNER,
+                    repo: GITHUB_REPO,
+                    path: folder
+                });
+                files = data.filter(f => f.name.endsWith('.md'));
+            } catch (e) { continue; }
+            
+            for (const file of files) {
+                const { data } = await octokit.repos.getContent({
+                    owner: GITHUB_OWNER,
+                    repo: GITHUB_REPO,
+                    path: file.path
+                });
+                let content = Buffer.from(data.content, 'base64').toString('utf8');
+                
+                // Find untitled topics
+                const untitledMatches = content.match(/## ([T]?\d+\.\d+) - \[Untitled\]\n\*[^*]+\*\n\n([^#]+)/g);
+                if (!untitledMatches) continue;
+                
+                let updated = false;
+                for (const match of untitledMatches) {
+                    const numMatch = match.match(/## ([T]?\d+\.\d+) - \[Untitled\]/);
+                    const bodyMatch = match.match(/\n\n(.+)/s);
+                    if (!numMatch || !bodyMatch) continue;
+                    
+                    const topicNum = numMatch[1];
+                    const body = bodyMatch[1].trim();
+                    
+                    // Generate title
+                    try {
+                        const response = await fetch('https://api.openai.com/v1/chat/completions', {
+                            method: 'POST',
+                            headers: {
+                                'Authorization': 'Bearer ' + apiKey,
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                model: 'gpt-4o-mini',
+                                messages: [{
+                                    role: 'user',
+                                    content: 'Generate a short 2-5 word title for this dev planning note. Return ONLY the title, no quotes or punctuation:\n\n' + body.slice(0, 500)
+                                }],
+                                max_tokens: 20
+                            })
+                        });
+                        
+                        if (response.ok) {
+                            const titleData = await response.json();
+                            const newTitle = titleData.choices[0]?.message?.content?.trim();
+                            if (newTitle && newTitle !== 'Untitled Topic') {
+                                content = content.replace(
+                                    '## ' + topicNum + ' - [Untitled]',
+                                    '## ' + topicNum + ' - ' + newTitle
+                                );
+                                updated = true;
+                                console.log('Fixed title:', topicNum, '->', newTitle);
+                            }
+                        }
+                    } catch (e) {
+                        console.error('Title fix failed for', topicNum, e.message);
+                    }
+                }
+                
+                if (updated) {
+                    await octokit.repos.createOrUpdateFileContents({
+                        owner: GITHUB_OWNER,
+                        repo: GITHUB_REPO,
+                        path: file.path,
+                        message: 'Auto-fix untitled topics',
+                        content: Buffer.from(content).toString('base64'),
+                        sha: data.sha
+                    });
+                }
+            }
+        }
+    } catch (e) {
+        console.error('fixUntitledTopics error:', e.message);
+    }
+}
+
+// API endpoint to fix untitled topics (can be called manually or via cron)
+app.get('/api/fix-untitled', async (req, res) => {
+    await fixUntitledTopics();
+    res.json({ success: true, message: 'Checked and fixed untitled topics' });
 });
 
 // For local development

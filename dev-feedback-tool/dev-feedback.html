@@ -588,6 +588,17 @@
                     transcript.textContent = 'Transcript will appear here...';
                     transcript.classList.add('placeholder');
                     techAlert.classList.remove('show');
+                    
+                    // If saved with placeholder title, trigger background fix
+                    if (topicTitle === '[Untitled]') {
+                        setTimeout(async () => {
+                            try {
+                                await fetch('/api/fix-untitled');
+                                loadAllFeeds();
+                            } catch (e) {}
+                        }, 2000);
+                    }
+                    
                     loadAllFeeds();
                     saveBtn.textContent = 'Save Topic';
                 } else {
