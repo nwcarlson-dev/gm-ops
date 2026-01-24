@@ -89,5 +89,5 @@ See `data/prospects/SCHEMA.md` for full documentation. Key fields:
 
 ## Pending: GitHub Integration
 - User wants dev-feedback tool pushed to GitHub so other AI engines can access transcripts
-- GitHub connector authorization codes are delayed/not arriving
-- Revisit when authorization flow works
+- GitHub email verification codes not arriving - user needs to set up 2FA or alternate auth method on their end
+- Topic 1.1 is BLOCKED until GitHub is authorized - do NOT suggest moving on
