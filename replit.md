@@ -29,9 +29,14 @@ Python HTTP server on port 5000 (static site).
 - Added live activity ticker and draft countdown
 - Established consistent GM Ops branding across all pages
 - Wired draft-setup → draft-room navigation with localStorage data passing
+- Built game-shell.html with collapsible sidebar, team needs panel, scheme tab
+- Implemented gradient team logos using TEAM_DATA with team colors
+- Added scheme-fit matching system: team needs show position skills (gold tags) + physical traits (silver tags)
+- Synced DESIGN.md from GitHub with full skill definitions per position
 
 ## Future Work
-- **Prospect Data**: Need to source real consensus rankings, scouting reports for 100+ players (current data is placeholder)
+- **Prospect List (Foundation)**: Build prospect cards with scouting reports using DESIGN.md skill verbiage - this is the core of draft room
+- **Scouting Reports**: Source real consensus rankings, composite scouting data for 100+ players
 - **Full Styling Pass**: Refactor draft-setup and draft-room body content to use brand tokens
 - **Trade System**: Implement trade value chart and CPU trade offers
 - **Draft Results Page**: Grades, recap, export functionality
