@@ -83,7 +83,7 @@ module.exports = async function handler(req, res) {
                 const content = fileData.content;
                 const titleMatch = content.match(/^# (.+)$/m);
                 
-                if (titleMatch && titleMatch[1].includes('[Untitled]')) {
+                if (titleMatch && (titleMatch[1].includes('[Untitled]') || titleMatch[1].includes('[Topic Title]'))) {
                     const newTitle = await generateTitle(content);
                     if (newTitle) {
                         const updatedContent = content.replace(/^# .+$/m, `# ${newTitle}`);
