@@ -32,30 +32,31 @@
 
             .sidebar-toggle {
                 position: absolute;
-                right: -14px;
-                top: 50%;
-                transform: translateY(-50%);
-                width: 28px;
-                height: 28px;
-                background: var(--card-bg);
-                border: 1px solid var(--border-subtle);
+                right: -16px;
+                top: 20px;
+                width: 32px;
+                height: 32px;
+                background: var(--nfl-blue);
+                border: 2px solid var(--border-subtle);
                 border-radius: 50%;
                 display: flex;
                 align-items: center;
                 justify-content: center;
                 cursor: pointer;
-                color: var(--text-muted);
+                color: var(--white);
                 transition: var(--transition-fast);
-                z-index: 10;
+                z-index: 100;
+                box-shadow: 0 2px 8px rgba(0,0,0,0.3);
             }
 
             .sidebar-toggle:hover {
                 color: var(--white);
-                background: rgba(255, 255, 255, 0.1);
+                background: var(--nfl-red);
+                transform: scale(1.1);
             }
 
             .sidebar-collapsed .sidebar-toggle {
-                right: -14px;
+                right: -16px;
             }
 
             .sidebar-collapsed .sidebar-toggle svg polyline {
