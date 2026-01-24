@@ -301,7 +301,7 @@
 <body>
     <div class="container">
         <h1>Dev Feedback</h1>
-        <p class="subtitle">Record audio feedback on development work. Transcriptions are saved locally.</p>
+        <p class="subtitle">Record audio feedback on development work. Transcriptions are saved to GitHub.</p>
         
         <div class="recorder-card">
             <div class="recorder-header">
@@ -327,7 +327,7 @@
         
         <div class="section-header">
             <h2>Saved Feedback</h2>
-            <button class="btn-export" onclick="exportFeedback()">Export All</button>
+            <button class="btn-export" onclick="exportFeedback()">Save to GitHub</button>
         </div>
         
         <div class="feedback-list" id="feedbackList">
@@ -464,7 +464,7 @@
             document.getElementById('timer').textContent = '0:00';
         }
         
-        function saveFeedback(text) {
+        async function saveFeedback(text) {
             const topicNum = getNextTopicNumber();
             const label = document.getElementById('topicLabel').value.trim();
             const topic = label ? `${topicNum} - ${label}` : topicNum;
@@ -484,6 +484,38 @@
             updateNextTopicDisplay();
             
             document.getElementById('topicLabel').value = '';
+            
+            // Auto-save to GitHub
+            await saveToGitHub();
+        }
+        
+        async function saveToGitHub() {
+            const day = getProjectDay();
+            const dayPadded = String(day).padStart(4, '0');
+            const dateStr = new Date().toISOString().split('T')[0];
+            const filename = `dev-planning_${dateStr}_${dayPadded}.md`;
+            
+            const markdown = feedbackItems.map(item => 
+                `## ${item.topic}\n*${formatDate(item.timestamp)}*\n\n${item.text}\n`
+            ).join('\n---\n\n');
+            
+            const content = `# Dev Planning - Day ${day}\n\n${markdown}`;
+            
+            try {
+                const response = await fetch('/api/save-transcript', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ filename, content })
+                });
+                
+                if (response.ok) {
+                    console.log('Saved to GitHub:', filename);
+                } else {
+                    console.error('GitHub save failed:', await response.text());
+                }
+            } catch (err) {
+                console.error('GitHub save error:', err);
+            }
         }
         
         function renderFeedbackList() {
@@ -523,21 +555,18 @@
             renderFeedbackList();
         }
         
-        function exportFeedback() {
-            const day = getProjectDay();
-            const dayPadded = String(day).padStart(4, '0');
-            const dateStr = new Date().toISOString().split('T')[0];
+        async function exportFeedback() {
+            const btn = document.querySelector('.btn-export');
+            btn.textContent = 'Saving...';
+            btn.disabled = true;
             
-            const markdown = feedbackItems.map(item => 
-                `## ${item.topic}\n*${formatDate(item.timestamp)}*\n\n${item.text}\n`
-            ).join('\n---\n\n');
+            await saveToGitHub();
             
-            const blob = new Blob([`# Dev Planning - Day ${day}\n\n${markdown}`], { type: 'text/markdown' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `dev-planning_${dateStr}_${dayPadded}.md`;
-            a.click();
+            btn.textContent = 'Saved to GitHub';
+            setTimeout(() => {
+                btn.textContent = 'Save to GitHub';
+                btn.disabled = false;
+            }, 2000);
         }
         
         function escapeHtml(text) {
