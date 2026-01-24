@@ -516,8 +516,29 @@
                     if (!isRetry) await savePendingRecording(blob, topicNumber.textContent);
                     return false;
                 } else if (data.text) {
+                    // Show raw transcript first
                     transcript.textContent = data.text;
                     transcript.classList.remove('placeholder');
+                    
+                    // Clean up the transcript
+                    log('Cleaning up...');
+                    try {
+                        const cleanupRes = await fetch('/api/cleanup-transcript', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ 
+                                text: data.text, 
+                                topicNumber: topicNumber.textContent 
+                            })
+                        });
+                        const cleanupData = await cleanupRes.json();
+                        if (cleanupData.cleaned) {
+                            transcript.textContent = cleanupData.cleaned;
+                        }
+                    } catch (cleanupErr) {
+                        console.log('[DevFeedback] Cleanup skipped:', cleanupErr.message);
+                    }
+                    
                     saveBtn.disabled = false;
                     retryBtn.style.display = 'none';
                     log('Ready to save', 'success');

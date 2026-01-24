@@ -152,6 +152,58 @@ app.post('/api/transcribe', upload.single('audio'), async (req, res) => {
     }
 });
 
+// Clean up rambling transcripts into structured points
+app.post('/api/cleanup-transcript', express.json(), async (req, res) => {
+    const { text, topicNumber } = req.body;
+    if (!text) {
+        return res.status(400).json({ error: 'No text provided' });
+    }
+    
+    try {
+        const apiKey = process.env.OPENAI_API_KEY;
+        if (!apiKey) throw new Error('OPENAI_API_KEY not set');
+        
+        const response = await fetch('https://api.openai.com/v1/chat/completions', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${apiKey}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                model: 'gpt-4o-mini',
+                messages: [{
+                    role: 'system',
+                    content: `You clean up rambling voice transcripts into clear, structured notes. 
+Rules:
+- Fix grammar and remove filler words (um, uh, like, you know, I mean, etc.)
+- Remove repetition and rambling
+- Extract distinct points and number them as sub-points (e.g., if topic is "1.18", points become "1.18.1", "1.18.2", etc.)
+- Keep the speaker's intent and key details
+- Be concise but don't lose important information
+- Return ONLY the cleaned text, no explanations`
+                }, {
+                    role: 'user',
+                    content: `Topic ${topicNumber || '1.X'}:\n\n${text}`
+                }],
+                max_tokens: 1000
+            })
+        });
+        
+        if (!response.ok) {
+            const errText = await response.text();
+            throw new Error('OpenAI API error: ' + errText);
+        }
+        
+        const data = await response.json();
+        const cleaned = data.choices[0]?.message?.content?.trim() || text;
+        console.log('[cleanup] Original length:', text.length, '-> Cleaned:', cleaned.length);
+        res.json({ cleaned });
+    } catch (error) {
+        console.error('Cleanup error:', error.message);
+        res.json({ cleaned: text, error: error.message });
+    }
+});
+
 // Generate a short title from transcript
 app.post('/api/generate-title', express.json(), async (req, res) => {
     const { text } = req.body;
