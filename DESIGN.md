@@ -483,3 +483,22 @@ defNeeds: [
 | S | Centerfield, Box Safety, Hybrid, Playmaker, Range |
 
 ---
+
+## Development Workflow
+
+### Planning Dialogue Process (Approved: Jan 24, 2026)
+
+1. **Capture**: All planning dialogue (full context, not summaries) saved to `dev-planning-transcripts/` folder
+
+2. **File structure**: New file per day, named like `2026-01-24_brief-summary.md`
+
+3. **Numbering**: Format `[day].[topic].[subtopic]` for all discussions
+
+4. **Approval flow**: 
+   - Iterate on topics until user says "approve topic X"
+   - Approved topics get committed to `DESIGN.md`
+   - Skip `dev-guide.html` (requires styling work)
+
+5. **Before coding**: DESIGN.md must be updated with approved topic before any implementation starts
+
+---
