@@ -460,28 +460,35 @@
             color: var(--gold);
         }
         
-        .more-info-btn {
-            font-family: 'Barlow Condensed', sans-serif;
-            font-size: 10px;
-            font-weight: 500;
-            letter-spacing: 0.02em;
-            padding: 3px 8px;
-            background: rgba(165, 172, 175, 0.1);
+        .prospect-toggle {
+            width: 24px;
+            height: 24px;
+            background: none;
             border: none;
-            border-radius: 10px;
-            color: var(--silver);
             cursor: pointer;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
             transition: all 0.15s;
         }
         
-        .more-info-btn:hover {
-            background: rgba(165, 172, 175, 0.2);
-            color: var(--white);
+        .prospect-toggle:hover {
+            color: var(--silver);
+            background: rgba(165, 172, 175, 0.1);
         }
         
-        .more-info-btn.active {
-            background: rgba(212, 175, 55, 0.2);
+        .prospect-toggle.active {
             color: var(--gold);
+        }
+        
+        .prospect-toggle svg {
+            transition: transform 0.2s ease;
+        }
+        
+        .prospect-toggle.active svg {
+            transform: rotate(180deg);
         }
         
         .prospect-card {
@@ -1554,12 +1561,14 @@
                             </div>
                             <div class="prospect-pos ${getPositionClass(p.position)}">${p.position}</div>
                             <div class="prospect-bio">${ht} / ${wt}</div>
-                            <div class="prospect-actions">
-                                <button class="more-info-btn" id="btn-${p.id}" onclick="toggleAccordion('${p.id}')">Info</button>
-                            </div>
                             <button class="prospect-star ${isWatched ? 'watched' : ''}" onclick="toggleWatch('${p.id}')">
                                 <svg width="14" height="14" viewBox="0 0 24 24" fill="${isWatched ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2">
                                     <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                </svg>
+                            </button>
+                            <button class="prospect-toggle" id="btn-${p.id}" onclick="toggleAccordion('${p.id}')">
+                                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="6 9 12 15 18 9"></polyline>
                                 </svg>
                             </button>
                         </div>
