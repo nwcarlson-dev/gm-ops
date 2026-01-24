@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GM Ops - Game Shell</title>
+    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="shared/styles.css">
+    <style>
+        .app-sidebar {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .sidebar-content {
+            flex: 1;
+            overflow-y: auto;
+        }
+        
+        .sidebar-footer {
+            margin-top: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="app-layout with-sidebar" id="appLayout">
+        <header class="app-header">
+            <div style="display: flex; align-items: center; gap: 20px;">
+                <a href="index.html" class="logo-blocks">
+                    <span class="gm">GM</span>
+                    <span class="ops"><span class="o">O</span><span class="ps">PS</span></span>
+                </a>
+                <div class="mode-indicator draft">
+                    <span class="mode-dot"></span>
+                    <span>Draft Mode</span>
+                </div>
+            </div>
+            
+            <div class="header-nav">
+                <a href="index.html">Home</a>
+                <a href="brand-guidelines.html">Brand</a>
+                <div class="user-menu">
+                    <span class="user-avatar">G</span>
+                    <span>Guest</span>
+                </div>
+            </div>
+        </header>
+        
+        <aside class="app-sidebar">
+            <div class="sidebar-content">
+                <div class="sidebar-team-info">
+                    <div style="display: flex; align-items: center; gap: 12px;">
+                        <div style="width: 40px; height: 40px; background: #C83803; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-weight: bold; font-size: 14px;">CHI</div>
+                        <div>
+                            <div class="sidebar-team-name">Chicago Bears</div>
+                            <div class="sidebar-team-meta">11-6 | Pick #25</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="sidebar-divider"></div>
+                
+                <div class="sidebar-section">
+                    <div class="sidebar-section-title">Draft</div>
+                    <ul class="sidebar-nav">
+                        <li class="sidebar-nav-item active">
+                            <a href="#">
+                                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><line x1="3" y1="9" x2="21" y2="9"/><line x1="9" y1="21" x2="9" y2="9"/></svg>
+                                <span>Draft Board</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-nav-item">
+                            <a href="#">
+                                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                                <span>My Team</span>
+                                <span class="badge">7</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-nav-item">
+                            <a href="#">
+                                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 3h5v5"/><path d="M8 21H3v-5"/><path d="M21 3l-9 9"/><path d="M3 21l9-9"/></svg>
+                                <span>Trade Center</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-nav-item">
+                            <a href="#">
+                                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+                                <span>Results</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="sidebar-divider"></div>
+                
+                <div class="sidebar-section">
+                    <div class="sidebar-section-title">Offseason</div>
+                    <ul class="sidebar-nav">
+                        <li class="sidebar-nav-item teaser">
+                            <a href="#">
+                                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                                <span>Free Agency</span>
+                                <span class="upgrade-badge">PRO</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-nav-item teaser">
+                            <a href="#">
+                                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg>
+                                <span>Salary Cap</span>
+                                <span class="upgrade-badge">PRO</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-nav-item teaser">
+                            <a href="#">
+                                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
+                                <span>Roster Cuts</span>
+                                <span class="upgrade-badge">PRO</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                
+                <div class="sidebar-divider"></div>
+                
+                <div class="sidebar-section">
+                    <div class="sidebar-section-title">Franchise</div>
+                    <ul class="sidebar-nav">
+                        <li class="sidebar-nav-item teaser">
+                            <a href="#">
+                                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                                <span>Season</span>
+                                <span class="upgrade-badge">FULL</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-nav-item teaser">
+                            <a href="#">
+                                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg>
+                                <span>Standings</span>
+                                <span class="upgrade-badge">FULL</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-nav-item teaser">
+                            <a href="#">
+                                <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>
+                                <span>Dynasty</span>
+                                <span class="upgrade-badge">FULL</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="sidebar-footer">
+                <div class="sidebar-cta">
+                    <div class="sidebar-cta-title">Unlock Full Access</div>
+                    <div class="sidebar-cta-text">Get Offseason & Franchise modes with annual or lifetime license.</div>
+                    <button class="btn btn-primary">View Plans</button>
+                </div>
+                
+                <button class="sidebar-toggle" onclick="toggleSidebar()" title="Toggle Sidebar">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </button>
+            </div>
+        </aside>
+        
+        <main class="app-main">
+            <div class="page-header">
+                <div>
+                    <h1 class="page-title">Draft Board</h1>
+                    <p class="page-subtitle">Round 1, Pick 25 - Chicago Bears on the clock</p>
+                </div>
+                <div style="display: flex; gap: 12px;">
+                    <button class="btn btn-secondary">Sim to Pick</button>
+                    <button class="btn btn-primary">Make Selection</button>
+                </div>
+            </div>
+            
+            <div style="display: grid; grid-template-columns: 1fr 350px; gap: 20px;">
+                <div class="card">
+                    <div class="card-header">
+                        <h3 class="card-title">Available Prospects</h3>
+                        <div class="tabs">
+                            <button class="tab active">All</button>
+                            <button class="tab">QB</button>
+                            <button class="tab">RB</button>
+                            <button class="tab">WR</button>
+                            <button class="tab">OL</button>
+                            <button class="tab">DEF</button>
+                        </div>
+                    </div>
+                    <div style="color: var(--text-muted); text-align: center; padding: 60px 20px;">
+                        Draft board content will go here.<br>
+                        This is a shell demonstration.
+                    </div>
+                </div>
+                
+                <div style="display: flex; flex-direction: column; gap: 20px;">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">Team Needs</h3>
+                        </div>
+                        <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                            <span class="badge badge-danger">EDGE</span>
+                            <span class="badge badge-danger">OT</span>
+                            <span class="badge badge-warning">RB</span>
+                            <span class="badge badge-warning">S</span>
+                            <span class="badge badge-info">IOL</span>
+                        </div>
+                    </div>
+                    
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">My Picks</h3>
+                        </div>
+                        <div style="color: var(--text-muted); font-size: 13px;">
+                            No picks made yet.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <script>
+        function toggleSidebar() {
+            const layout = document.getElementById('appLayout');
+            layout.classList.toggle('sidebar-collapsed');
+            
+            const icon = document.querySelector('.sidebar-toggle svg');
+            if (layout.classList.contains('sidebar-collapsed')) {
+                icon.innerHTML = '<polyline points="9 18 15 12 9 6"></polyline>';
+            } else {
+                icon.innerHTML = '<polyline points="15 18 9 12 15 6"></polyline>';
+            }
+        }
+    </script>
+</body>
+</html>
