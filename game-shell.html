@@ -484,6 +484,31 @@
             color: var(--white);
         }
         
+        .load-more-row {
+            padding: 12px;
+            text-align: center;
+        }
+        
+        .load-more-btn {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 8px 24px;
+            background: rgba(213, 10, 10, 0.15);
+            border: 1px solid var(--nfl-red);
+            border-radius: 4px;
+            color: var(--nfl-red);
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        
+        .load-more-btn:hover {
+            background: var(--nfl-red);
+            color: var(--white);
+        }
+        
         .prospect-star {
             width: 26px;
             height: 26px;
@@ -1136,6 +1161,7 @@
         let watchlist = new Set();
         let watchlistActive = false;
         let watchlistCount = 0;
+        let prospectsToShow = 50;
         let filledNeeds = {};
         
         const TEAM_DATA = {
@@ -1336,7 +1362,10 @@
                 filtered = filtered.filter(p => watchlist.has(p.id));
             }
             
-            container.innerHTML = filtered.slice(0, 50).map(p => {
+            const showing = filtered.slice(0, prospectsToShow);
+            const hasMore = filtered.length > prospectsToShow;
+            
+            container.innerHTML = showing.map(p => {
                 const isWatched = watchlist.has(p.id);
                 const ht = p.bio?.height || "6-0";
                 const wt = p.bio?.weight || 200;
@@ -1366,6 +1395,21 @@
                     </div>
                 `;
             }).join('');
+            
+            if (hasMore) {
+                container.innerHTML += `
+                    <div class="load-more-row">
+                        <button class="load-more-btn" onclick="loadMoreProspects()">
+                            Load More (${filtered.length - prospectsToShow} remaining)
+                        </button>
+                    </div>
+                `;
+            }
+        }
+        
+        function loadMoreProspects() {
+            prospectsToShow += 50;
+            renderProspects();
         }
         
         function showProspectModal(id) {
@@ -1572,6 +1616,7 @@
         
         function setPositionFilter(pos) {
             currentFilter = pos;
+            prospectsToShow = 50;
             document.querySelectorAll('.pos-filter').forEach(btn => {
                 btn.classList.toggle('active', btn.textContent.trim() === pos || (pos === 'All' && btn.textContent.trim() === 'All'));
             });
