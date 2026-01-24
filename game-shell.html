@@ -279,6 +279,58 @@
             font-size: 11px;
             color: var(--silver);
         }
+        
+        .watchlist-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px;
+            background: rgba(0,0,0,0.15);
+            border-radius: 6px;
+            margin-bottom: 6px;
+            border-left: 3px solid var(--gold);
+        }
+        
+        .watchlist-item .prospect-rank {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--text-muted);
+            min-width: 24px;
+        }
+        
+        .watchlist-item .prospect-info {
+            flex: 1;
+        }
+        
+        .watchlist-item .prospect-name {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--white);
+        }
+        
+        .watchlist-item .prospect-meta {
+            font-size: 11px;
+            color: var(--text-muted);
+        }
+        
+        .watchlist-item .remove-btn {
+            width: 20px;
+            height: 20px;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+        }
+        
+        .watchlist-item .remove-btn:hover {
+            background: rgba(239, 68, 68, 0.2);
+            color: var(--danger);
+        }
     </style>
 </head>
 <body>
@@ -467,7 +519,8 @@
                     <div class="card">
                         <div class="panel-tabs">
                             <button class="panel-tab active" onclick="showTab('needs')">Needs</button>
-                            <button class="panel-tab" onclick="showTab('picks')">My Picks</button>
+                            <button class="panel-tab" onclick="showTab('watchlist')">Watchlist</button>
+                            <button class="panel-tab" onclick="showTab('picks')">Picks</button>
                             <button class="panel-tab" onclick="showTab('scheme')">Scheme</button>
                         </div>
                         
@@ -479,6 +532,15 @@
                             <div class="needs-section">
                                 <div class="needs-header">Defensive Needs</div>
                                 <div id="defensiveNeeds"></div>
+                            </div>
+                        </div>
+                        
+                        <div id="watchlistTab" class="tab-content">
+                            <div class="needs-header">Prospects You're Targeting</div>
+                            <div class="watchlist" id="watchlist">
+                                <div style="color: var(--text-muted); font-size: 12px; text-align: center; padding: 20px; line-height: 1.5;">
+                                    Click the <span style="color: var(--gold);">+</span> icon on any prospect to add them to your watchlist for future picks.
+                                </div>
                             </div>
                         </div>
                         
