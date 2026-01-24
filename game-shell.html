@@ -1357,14 +1357,18 @@
             return 'special';
         }
         
-        function getConsensusTag(low, high) {
+        function getConsensusTag(low, high, sourceCount) {
             if (!low && !high) return '';
-            const range = low === high ? `${low}` : `${low}-${high}`;
+            // Show range if different, otherwise show single value with indicator
+            let range;
+            if (low === high) {
+                range = sourceCount === 1 ? `#${low}*` : `#${low}`;
+            } else {
+                range = `${low}-${high}`;
+            }
             const avg = (low + high) / 2;
-            if (avg <= 5) return `<span class="consensus-range top-5">${range}</span>`;
             if (avg <= 10) return `<span class="consensus-range top-10">${range}</span>`;
-            if (avg <= 20) return `<span class="consensus-range mid-1st">${range}</span>`;
-            if (avg <= 32) return `<span class="consensus-range late-1st">${range}</span>`;
+            if (avg <= 32) return `<span class="consensus-range rd-1">${range}</span>`;
             if (avg <= 64) return `<span class="consensus-range rd-2">${range}</span>`;
             if (avg <= 128) return `<span class="consensus-range rd-3-4">${range}</span>`;
             return `<span class="consensus-range rd-5-7">${range}</span>`;
@@ -1416,7 +1420,7 @@
                                 <div class="prospect-name">${p.name}</div>
                                 <div class="prospect-meta">
                                     <span class="school">${p.school}</span>
-                                    ${getConsensusTag(p.range_low, p.range_high)}
+                                    ${getConsensusTag(p.range_low, p.range_high, p.source_count)}
                                 </div>
                             </div>
                         </div>
@@ -1708,6 +1712,13 @@
                         p.range_low = p.consensus.range_low;
                         p.range_high = p.consensus.range_high;
                     }
+                    // Count ranking sources
+                    if (p.rankings) {
+                        const sources = ['pff', 'cbs', 'espn', 'nfl', 'the_athletic'];
+                        p.source_count = sources.filter(s => p.rankings[s] != null).length;
+                    } else {
+                        p.source_count = 0;
+                    }
                     if (p.bio && p.bio.height_in) {
                         const feet = Math.floor(p.bio.height_in / 12);
                         const inches = p.bio.height_in % 12;
@@ -1718,7 +1729,13 @@
                     }
                 });
                 
-                prospects.sort((a, b) => (a.consensus_rank || 999) - (b.consensus_rank || 999));
+                // Sort: multi-source prospects first, then by consensus rank
+                prospects.sort((a, b) => {
+                    const aMulti = a.source_count > 1 ? 0 : 1;
+                    const bMulti = b.source_count > 1 ? 0 : 1;
+                    if (aMulti !== bMulti) return aMulti - bMulti;
+                    return (a.consensus_rank || 999) - (b.consensus_rank || 999);
+                });
                 
                 init();
             } catch (err) {
