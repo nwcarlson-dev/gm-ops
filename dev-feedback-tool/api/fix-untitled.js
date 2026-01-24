@@ -13,10 +13,10 @@ async function generateTitle(transcript) {
         const response = await openai.chat.completions.create({
             model: 'gpt-4o-mini',
             messages: [
-                { role: 'system', content: 'Generate a short, descriptive title (5-8 words max) for this dev planning transcript. Return ONLY the title, no quotes or extra text.' },
-                { role: 'user', content: transcript.substring(0, 2000) }
+                { role: 'system', content: 'Generate a short, descriptive title (3-5 words max) for this dev planning note. Return ONLY the title, no quotes or extra text.' },
+                { role: 'user', content: transcript.substring(0, 1500) }
             ],
-            max_tokens: 50
+            max_tokens: 30
         });
         return response.choices[0].message.content.trim();
     } catch (error) {
@@ -80,21 +80,36 @@ module.exports = async function handler(req, res) {
                 const fileData = await getFileFromGitHub(file.path);
                 if (!fileData) continue;
                 
-                const content = fileData.content;
-                const titleMatch = content.match(/^# (.+)$/m);
+                let content = fileData.content;
+                let modified = false;
                 
-                if (titleMatch && (titleMatch[1].includes('[Untitled]') || titleMatch[1].includes('[Topic Title]'))) {
-                    const newTitle = await generateTitle(content);
-                    if (newTitle) {
-                        const updatedContent = content.replace(/^# .+$/m, `# ${newTitle}`);
-                        const success = await updateFileOnGitHub(
-                            file.path,
-                            updatedContent,
-                            fileData.sha,
-                            `Fix title: ${newTitle}`
-                        );
-                        results.push({ file: file.name, newTitle, success });
+                // Find all topic headers with placeholder titles
+                const topicPattern = /## ([T]?\d+\.\d+) - \[(Topic Title|Untitled)\]\n\*[^*]+\*\n\n([\s\S]*?)(?=\n---|\n## |$)/g;
+                let match;
+                
+                while ((match = topicPattern.exec(content)) !== null) {
+                    const topicNum = match[1];
+                    const topicContent = match[3].trim();
+                    
+                    if (topicContent.length > 10) {
+                        const newTitle = await generateTitle(topicContent);
+                        if (newTitle) {
+                            const oldHeader = `## ${topicNum} - [${match[2]}]`;
+                            const newHeader = `## ${topicNum} - ${newTitle}`;
+                            content = content.replace(oldHeader, newHeader);
+                            modified = true;
+                            results.push({ topic: topicNum, newTitle });
+                        }
                     }
+                }
+                
+                if (modified) {
+                    await updateFileOnGitHub(
+                        file.path,
+                        content,
+                        fileData.sha,
+                        `Fix placeholder titles: ${results.map(r => r.topic).join(', ')}`
+                    );
                 }
             }
         }
