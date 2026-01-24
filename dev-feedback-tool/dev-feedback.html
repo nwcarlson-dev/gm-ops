@@ -312,6 +312,11 @@
         
     </div>
     
+    <div id="pendingSection" style="display:none; margin-bottom: 16px; background: #2a2020; border: 1px solid #633; border-radius: 8px; padding: 12px;">
+        <h3 style="margin: 0 0 8px 0; font-size: 14px; color: #c66;">Pending Recordings</h3>
+        <div id="pendingList" style="font-size: 12px;"></div>
+    </div>
+    
     <div class="feeds-row">
         <div class="feed game">
             <h3><span class="dot"></span>Game Dev</h3>
@@ -331,6 +336,99 @@
         let dayNumber = 1;
         let topicCount = 0;
         let lastAudioBlob = null;
+        let db = null;
+        
+        // IndexedDB for pending recordings
+        const dbName = 'DevFeedbackDB';
+        const storeName = 'pendingRecordings';
+        
+        async function initDB() {
+            return new Promise((resolve, reject) => {
+                const request = indexedDB.open(dbName, 1);
+                request.onerror = () => reject(request.error);
+                request.onsuccess = () => { db = request.result; resolve(db); };
+                request.onupgradeneeded = (e) => {
+                    const database = e.target.result;
+                    if (!database.objectStoreNames.contains(storeName)) {
+                        database.createObjectStore(storeName, { keyPath: 'id', autoIncrement: true });
+                    }
+                };
+            });
+        }
+        
+        async function savePendingRecording(blob, topicNum) {
+            if (!db) await initDB();
+            return new Promise((resolve, reject) => {
+                const tx = db.transaction(storeName, 'readwrite');
+                const store = tx.objectStore(storeName);
+                const record = { blob, topicNum, timestamp: Date.now(), type: currentType };
+                const req = store.add(record);
+                req.onsuccess = () => { resolve(req.result); refreshPendingList(); };
+                req.onerror = () => reject(req.error);
+            });
+        }
+        
+        async function getPendingRecordings() {
+            if (!db) await initDB();
+            return new Promise((resolve, reject) => {
+                const tx = db.transaction(storeName, 'readonly');
+                const store = tx.objectStore(storeName);
+                const req = store.getAll();
+                req.onsuccess = () => resolve(req.result);
+                req.onerror = () => reject(req.error);
+            });
+        }
+        
+        async function deletePendingRecording(id) {
+            if (!db) await initDB();
+            return new Promise((resolve, reject) => {
+                const tx = db.transaction(storeName, 'readwrite');
+                const store = tx.objectStore(storeName);
+                const req = store.delete(id);
+                req.onsuccess = () => { resolve(); refreshPendingList(); };
+                req.onerror = () => reject(req.error);
+            });
+        }
+        
+        async function refreshPendingList() {
+            const pending = await getPendingRecordings();
+            const section = document.getElementById('pendingSection');
+            const list = document.getElementById('pendingList');
+            
+            if (pending.length === 0) {
+                section.style.display = 'none';
+                return;
+            }
+            
+            section.style.display = 'block';
+            list.innerHTML = pending.map(r => {
+                const time = new Date(r.timestamp).toLocaleTimeString();
+                const size = (r.blob.size / 1024).toFixed(0) + 'KB';
+                return `<div style="display:flex; justify-content:space-between; align-items:center; padding:6px 0; border-bottom:1px solid #422;">
+                    <span>${r.topicNum} - ${time} (${size})</span>
+                    <div>
+                        <button onclick="retryPending(${r.id})" style="padding:3px 8px; background:#4a6a8a; color:#fff; border:none; border-radius:3px; cursor:pointer; font-size:11px; margin-right:4px;">Retry</button>
+                        <button onclick="deletePendingRecording(${r.id})" style="padding:3px 8px; background:#633; color:#ccc; border:none; border-radius:3px; cursor:pointer; font-size:11px;">Delete</button>
+                    </div>
+                </div>`;
+            }).join('');
+        }
+        
+        async function retryPending(id) {
+            const pending = await getPendingRecordings();
+            const record = pending.find(r => r.id === id);
+            if (!record) return;
+            
+            lastAudioBlob = record.blob;
+            currentType = record.type || 'game';
+            document.querySelectorAll('.type-btn').forEach(b => b.classList.toggle('active', b.dataset.type === currentType));
+            
+            log('Retrying pending recording...');
+            const success = await transcribeAudio(record.blob, true);
+            if (success) {
+                await deletePendingRecording(id);
+            }
+        }
         
         const recordBtn = document.getElementById('recordBtn');
         const status = document.getElementById('status');
@@ -394,7 +492,7 @@
             }
         }
         
-        async function transcribeAudio(blob) {
+        async function transcribeAudio(blob, isRetry = false) {
             log('Transcribing...');
             
             const formData = new FormData();
@@ -410,10 +508,11 @@
                 console.log('[DevFeedback] Response:', data);
                 
                 if (data.error) {
-                    log('Error - click Retry', 'error');
+                    log('Error - saved to pending', 'error');
                     transcript.textContent = 'Error: ' + (data.details || data.error);
                     transcript.classList.remove('placeholder');
-                    retryBtn.style.display = 'inline';
+                    if (!isRetry) await savePendingRecording(blob, topicNumber.textContent);
+                    return false;
                 } else if (data.text) {
                     transcript.textContent = data.text;
                     transcript.classList.remove('placeholder');
@@ -424,18 +523,21 @@
                     if (currentType === 'game' && data.technicalDetected) {
                         techAlert.classList.add('show');
                     }
+                    return true;
                 } else {
-                    log('No text - click Retry', 'error');
+                    log('No text - saved to pending', 'error');
                     transcript.textContent = 'No transcription returned';
                     transcript.classList.remove('placeholder');
-                    retryBtn.style.display = 'inline';
+                    if (!isRetry) await savePendingRecording(blob, topicNumber.textContent);
+                    return false;
                 }
             } catch (e) {
                 console.error('[DevFeedback] Fetch error:', e);
-                log('Failed - click Retry', 'error');
+                log('Failed - saved to pending', 'error');
                 transcript.textContent = 'Network error: ' + e.message;
                 transcript.classList.remove('placeholder');
-                retryBtn.style.display = 'inline';
+                if (!isRetry) await savePendingRecording(blob, topicNumber.textContent);
+                return false;
             }
         }
         
@@ -662,6 +764,9 @@
         updateDate();
         loadAllFeeds();
         setInterval(loadAllFeeds, 5000);
+        
+        // Initialize pending recordings storage
+        initDB().then(() => refreshPendingList()).catch(e => console.log('IndexedDB init:', e));
     </script>
 </body>
 </html>
