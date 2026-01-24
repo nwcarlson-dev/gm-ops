@@ -2,6 +2,7 @@ const express = require('express');
 const multer = require('multer');
 const path = require('path');
 const { Octokit } = require('@octokit/rest');
+const FormData = require('form-data');
 
 const app = express();
 const upload = multer({ storage: multer.memoryStorage() });
@@ -39,12 +40,18 @@ app.post('/api/transcribe', upload.single('audio'), async (req, res) => {
 
     try {
         const formData = new FormData();
-        formData.append('file', new Blob([req.file.buffer]), 'audio.webm');
+        formData.append('file', req.file.buffer, {
+            filename: 'audio.webm',
+            contentType: 'audio/webm'
+        });
         formData.append('model', 'whisper-1');
 
         const response = await fetch('https://api.openai.com/v1/audio/transcriptions', {
             method: 'POST',
-            headers: { 'Authorization': 'Bearer ' + process.env.OPENAI_API_KEY },
+            headers: { 
+                'Authorization': 'Bearer ' + process.env.OPENAI_API_KEY,
+                ...formData.getHeaders()
+            },
             body: formData
         });
 

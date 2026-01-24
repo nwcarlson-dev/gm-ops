@@ -448,6 +448,9 @@
         
         updateDate();
         loadTopics();
+        
+        // Poll for new topics every 5 seconds
+        setInterval(loadTopics, 5000);
     </script>
 </body>
 </html>
