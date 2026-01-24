@@ -1,8 +1,10 @@
 const express = require('express');
 const multer = require('multer');
 const path = require('path');
+const fs = require('fs');
+const os = require('os');
 const { Octokit } = require('@octokit/rest');
-const FormData = require('form-data');
+const OpenAI = require('openai');
 
 const app = express();
 const upload = multer({ storage: multer.memoryStorage() });
@@ -33,35 +35,30 @@ function getGitHubClient() {
     return new Octokit({ auth: token });
 }
 
+function getOpenAIClient() {
+    const apiKey = process.env.OPENAI_API_KEY;
+    if (!apiKey) throw new Error('OPENAI_API_KEY not set');
+    return new OpenAI({ apiKey });
+}
+
 app.post('/api/transcribe', upload.single('audio'), async (req, res) => {
     if (!req.file) {
         return res.status(400).json({ error: 'No audio file provided' });
     }
 
+    const tempPath = path.join(os.tmpdir(), 'audio-' + Date.now() + '.webm');
+    
     try {
-        const formData = new FormData();
-        formData.append('file', req.file.buffer, {
-            filename: 'audio.webm',
-            contentType: 'audio/webm'
-        });
-        formData.append('model', 'whisper-1');
-
-        const response = await fetch('https://api.openai.com/v1/audio/transcriptions', {
-            method: 'POST',
-            headers: { 
-                'Authorization': 'Bearer ' + process.env.OPENAI_API_KEY,
-                ...formData.getHeaders()
-            },
-            body: formData
+        // Write buffer to temp file (OpenAI SDK needs a file path)
+        fs.writeFileSync(tempPath, req.file.buffer);
+        
+        const openai = getOpenAIClient();
+        const transcription = await openai.audio.transcriptions.create({
+            file: fs.createReadStream(tempPath),
+            model: 'whisper-1'
         });
 
-        if (!response.ok) {
-            const error = await response.text();
-            throw new Error('OpenAI API error: ' + error);
-        }
-
-        const data = await response.json();
-        const text = data.text;
+        const text = transcription.text;
         const detection = detectTechnical(text);
         
         res.json({ 
@@ -72,6 +69,9 @@ app.post('/api/transcribe', upload.single('audio'), async (req, res) => {
     } catch (error) {
         console.error('Transcription error:', error);
         res.status(500).json({ error: 'Transcription failed', details: error.message });
+    } finally {
+        // Clean up temp file
+        try { fs.unlinkSync(tempPath); } catch (e) {}
     }
 });
 
