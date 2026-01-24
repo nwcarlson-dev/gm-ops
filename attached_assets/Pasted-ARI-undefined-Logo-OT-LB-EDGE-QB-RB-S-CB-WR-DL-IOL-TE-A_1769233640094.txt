@@ -1,0 +1,128 @@
+ARI
+undefined Logo
+OT, LB, EDGE, QB
+RB, S, CB, WR, DL, IOL, TE
+ATL
+undefined Logo
+CB, WR, DL, EDGE
+IOL, TE, OT, QB, RB, LB, S
+BAL
+undefined Logo
+DL, EDGE, WR, OT
+IOL, CB, LB, TE, RB, S, QB
+BUF
+undefined Logo
+WR, EDGE, LB, CB
+DL, S, IOL, OT, RB, QB, TE
+CAR
+undefined Logo
+EDGE, DL, TE, WR
+LB, OT, IOL, QB, S, CB, RB
+CHI
+undefined Logo
+DL, EDGE, S, OT
+CB, LB, RB, WR, QB, TE, IOL
+CIN
+undefined Logo
+EDGE, S, DL, CB
+LB, OT, WR, IOL, RB, TE, QB
+CLE
+undefined Logo
+OT, WR, IOL, QB
+CB, S, LB, EDGE, DL, TE, RB
+DAL
+undefined Logo
+EDGE, CB, LB, RB
+OT, S, WR, DL, TE, QB, IOL
+DEN
+undefined Logo
+LB, DL, TE, WR
+OT, IOL, RB, S, EDGE, CB, QB
+DET
+undefined Logo
+OT, EDGE, CB, IOL
+DL, LB, TE, S, WR, RB, QB
+GB
+undefined Logo
+CB, DL, OT, TE
+IOL, RB, LB, EDGE, QB, WR, S
+HOU
+undefined Logo
+OT, DL, IOL, RB
+LB, EDGE, TE, WR, S, QB, CB
+IND
+undefined Logo
+EDGE, LB, OT, QB
+RB, DL, CB, IOL, S, WR, TE
+JAC
+undefined Logo
+OT, IOL, DL, S
+EDGE, CB, RB, TE, LB, WR, QB
+KC
+undefined Logo
+RB, EDGE, DL, CB
+TE, S, OT, WR, LB, QB, IOL
+LV
+undefined Logo
+QB, WR, CB, OT
+IOL, EDGE, LB, S, DL, RB, TE
+LAC
+undefined Logo
+IOL, DL, OT, EDGE
+LB, CB, TE, S, WR, QB, RB
+LAR
+undefined Logo
+CB, OT, WR, QB
+S, LB, DL, TE, IOL, EDGE, RB
+MIA
+undefined Logo
+CB, OT, WR, QB
+EDGE, TE, S, DL, RB, LB, IOL
+MIN
+undefined Logo
+CB, RB, DL, S
+TE, LB, WR, IOL, EDGE, OT, QB
+NE
+undefined Logo
+EDGE, OT, LB, WR
+DL, TE, IOL, S, CB, RB, QB
+NO
+undefined Logo
+WR, EDGE, RB, DL
+CB, LB, S, TE, OT, IOL, QB
+NYG
+undefined Logo
+WR, OT, S, LB
+CB, EDGE, IOL, DL, QB, RB, TE
+NYJ
+undefined Logo
+QB, WR, LB, CB
+DL, EDGE, S, OT, RB, IOL, TE
+PHI
+undefined Logo
+OT, EDGE, WR, TE
+CB, IOL, S, QB, DL, LB, RB
+PIT
+undefined Logo
+WR, QB, OT, CB
+DL, S, RB, TE, IOL, EDGE, LB
+SF
+undefined Logo
+OT, WR, EDGE, CB
+S, IOL, DL, TE, LB, QB, RB
+SEA
+undefined Logo
+CB, WR, EDGE, IOL
+OT, DL, RB, LB, S, QB, TE
+TB
+undefined Logo
+LB, EDGE, TE, CB
+DL, IOL, OT, S, RB, QB, WR
+TEN
+undefined Logo
+EDGE, WR, LB, RB
+CB, S, OT, QB, TE, IOL, DL
+WAS
+undefined Logo
+EDGE, S, LB, WR
+CB, RB, DL, TE, OT, IOL, QB

@@ -1,0 +1,169 @@
+{
+  "meta": {
+    "source": "NFL Mock Draft Database",
+    "updated": "2026-01-24",
+    "notes": "First 4 positions are primary needs, rest are secondary"
+  },
+  "teams": {
+    "ARI": {
+      "name": "Cardinals",
+      "primary": ["OT", "LB", "EDGE", "QB"],
+      "secondary": ["RB", "S", "CB", "WR", "DL", "IOL", "TE"]
+    },
+    "ATL": {
+      "name": "Falcons",
+      "primary": ["CB", "WR", "DL", "EDGE"],
+      "secondary": ["IOL", "TE", "OT", "QB", "RB", "LB", "S"]
+    },
+    "BAL": {
+      "name": "Ravens",
+      "primary": ["DL", "EDGE", "WR", "OT"],
+      "secondary": ["IOL", "CB", "LB", "TE", "RB", "S", "QB"]
+    },
+    "BUF": {
+      "name": "Bills",
+      "primary": ["WR", "EDGE", "LB", "CB"],
+      "secondary": ["DL", "S", "IOL", "OT", "RB", "QB", "TE"]
+    },
+    "CAR": {
+      "name": "Panthers",
+      "primary": ["EDGE", "DL", "TE", "WR"],
+      "secondary": ["LB", "OT", "IOL", "QB", "S", "CB", "RB"]
+    },
+    "CHI": {
+      "name": "Bears",
+      "primary": ["DL", "EDGE", "S", "OT"],
+      "secondary": ["CB", "LB", "RB", "WR", "QB", "TE", "IOL"]
+    },
+    "CIN": {
+      "name": "Bengals",
+      "primary": ["EDGE", "S", "DL", "CB"],
+      "secondary": ["LB", "OT", "WR", "IOL", "RB", "TE", "QB"]
+    },
+    "CLE": {
+      "name": "Browns",
+      "primary": ["OT", "WR", "IOL", "QB"],
+      "secondary": ["CB", "S", "LB", "EDGE", "DL", "TE", "RB"]
+    },
+    "DAL": {
+      "name": "Cowboys",
+      "primary": ["EDGE", "CB", "LB", "RB"],
+      "secondary": ["OT", "S", "WR", "DL", "TE", "QB", "IOL"]
+    },
+    "DEN": {
+      "name": "Broncos",
+      "primary": ["LB", "DL", "TE", "WR"],
+      "secondary": ["OT", "IOL", "RB", "S", "EDGE", "CB", "QB"]
+    },
+    "DET": {
+      "name": "Lions",
+      "primary": ["OT", "EDGE", "CB", "IOL"],
+      "secondary": ["DL", "LB", "TE", "S", "WR", "RB", "QB"]
+    },
+    "GB": {
+      "name": "Packers",
+      "primary": ["CB", "DL", "OT", "TE"],
+      "secondary": ["IOL", "RB", "LB", "EDGE", "QB", "WR", "S"]
+    },
+    "HOU": {
+      "name": "Texans",
+      "primary": ["OT", "DL", "IOL", "RB"],
+      "secondary": ["LB", "EDGE", "TE", "WR", "S", "QB", "CB"]
+    },
+    "IND": {
+      "name": "Colts",
+      "primary": ["EDGE", "LB", "OT", "QB"],
+      "secondary": ["RB", "DL", "CB", "IOL", "S", "WR", "TE"]
+    },
+    "JAX": {
+      "name": "Jaguars",
+      "primary": ["OT", "IOL", "DL", "S"],
+      "secondary": ["EDGE", "CB", "RB", "TE", "LB", "WR", "QB"]
+    },
+    "KC": {
+      "name": "Chiefs",
+      "primary": ["RB", "EDGE", "DL", "CB"],
+      "secondary": ["TE", "S", "OT", "WR", "LB", "QB", "IOL"]
+    },
+    "LV": {
+      "name": "Raiders",
+      "primary": ["QB", "WR", "CB", "OT"],
+      "secondary": ["IOL", "EDGE", "LB", "S", "DL", "RB", "TE"]
+    },
+    "LAC": {
+      "name": "Chargers",
+      "primary": ["IOL", "DL", "OT", "EDGE"],
+      "secondary": ["LB", "CB", "TE", "S", "WR", "QB", "RB"]
+    },
+    "LAR": {
+      "name": "Rams",
+      "primary": ["CB", "OT", "WR", "QB"],
+      "secondary": ["S", "LB", "DL", "TE", "IOL", "EDGE", "RB"]
+    },
+    "MIA": {
+      "name": "Dolphins",
+      "primary": ["CB", "OT", "WR", "QB"],
+      "secondary": ["EDGE", "TE", "S", "DL", "RB", "LB", "IOL"]
+    },
+    "MIN": {
+      "name": "Vikings",
+      "primary": ["CB", "RB", "DL", "S"],
+      "secondary": ["TE", "LB", "WR", "IOL", "EDGE", "OT", "QB"]
+    },
+    "NE": {
+      "name": "Patriots",
+      "primary": ["EDGE", "OT", "LB", "WR"],
+      "secondary": ["DL", "TE", "IOL", "S", "CB", "RB", "QB"]
+    },
+    "NO": {
+      "name": "Saints",
+      "primary": ["WR", "EDGE", "RB", "DL"],
+      "secondary": ["CB", "LB", "S", "TE", "OT", "IOL", "QB"]
+    },
+    "NYG": {
+      "name": "Giants",
+      "primary": ["WR", "OT", "S", "LB"],
+      "secondary": ["CB", "EDGE", "IOL", "DL", "QB", "RB", "TE"]
+    },
+    "NYJ": {
+      "name": "Jets",
+      "primary": ["QB", "WR", "LB", "CB"],
+      "secondary": ["DL", "EDGE", "S", "OT", "RB", "IOL", "TE"]
+    },
+    "PHI": {
+      "name": "Eagles",
+      "primary": ["OT", "EDGE", "WR", "TE"],
+      "secondary": ["CB", "IOL", "S", "QB", "DL", "LB", "RB"]
+    },
+    "PIT": {
+      "name": "Steelers",
+      "primary": ["WR", "QB", "OT", "CB"],
+      "secondary": ["DL", "S", "RB", "TE", "IOL", "EDGE", "LB"]
+    },
+    "SF": {
+      "name": "49ers",
+      "primary": ["OT", "WR", "EDGE", "CB"],
+      "secondary": ["S", "IOL", "DL", "TE", "LB", "QB", "RB"]
+    },
+    "SEA": {
+      "name": "Seahawks",
+      "primary": ["CB", "WR", "EDGE", "IOL"],
+      "secondary": ["OT", "DL", "RB", "LB", "S", "QB", "TE"]
+    },
+    "TB": {
+      "name": "Buccaneers",
+      "primary": ["LB", "EDGE", "TE", "CB"],
+      "secondary": ["DL", "IOL", "OT", "S", "RB", "QB", "WR"]
+    },
+    "TEN": {
+      "name": "Titans",
+      "primary": ["EDGE", "WR", "LB", "RB"],
+      "secondary": ["CB", "S", "OT", "QB", "TE", "IOL", "DL"]
+    },
+    "WAS": {
+      "name": "Commanders",
+      "primary": ["EDGE", "S", "LB", "WR"],
+      "secondary": ["CB", "RB", "DL", "TE", "OT", "IOL", "QB"]
+    }
+  }
+}
