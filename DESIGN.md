@@ -110,6 +110,8 @@ Users can still play however they want - custom settings just mark the save as "
 
 **Community Settings**: Users can share custom slider/control configurations with others. These are valid for play and community challenges, just not public leaderboard rankings.
 
+**Private/Online Franchises**: Friends playing together can use whatever settings they want - no restrictions. Total Control + default sliders only applies to public leaderboard eligibility, not private leagues.
+
 ---
 
 ## Player Rating System
