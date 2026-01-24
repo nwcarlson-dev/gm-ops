@@ -177,36 +177,83 @@
         .switch-btn { background: #a85; color: #000; }
         .keep-btn { background: #444; color: #ccc; }
         
+        .feeds-row {
+            display: flex;
+            gap: 12px;
+            margin-top: 16px;
+        }
+        
         .feed {
+            flex: 1;
             background: #252525;
             border: 1px solid #333;
             border-radius: 8px;
             padding: 12px;
+            max-height: 300px;
+            overflow-y: auto;
         }
         
         .feed h3 {
-            font-size: 12px;
+            font-size: 11px;
             text-transform: uppercase;
             color: #666;
             margin: 0 0 8px 0;
             font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
         
+        .feed h3 .dot {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+        }
+        
+        .feed.game h3 .dot { background: #6a6; }
+        .feed.technical h3 .dot { background: #68a; }
+        
         .feed-item {
-            padding: 6px 0;
             border-bottom: 1px solid #333;
             font-size: 12px;
-            color: #aaa;
         }
         
         .feed-item:last-child { border-bottom: none; }
         
-        @media (min-width: 600px) {
-            .container {
-                flex-direction: row;
+        .feed-item summary {
+            padding: 6px 0;
+            cursor: pointer;
+            color: #aaa;
+            list-style: none;
+        }
+        
+        .feed-item summary::-webkit-details-marker { display: none; }
+        
+        .feed-item summary::before {
+            content: '▸';
+            display: inline-block;
+            margin-right: 6px;
+            font-size: 10px;
+            color: #555;
+            transition: transform 0.15s;
+        }
+        
+        .feed-item[open] summary::before {
+            transform: rotate(90deg);
+        }
+        
+        .feed-item .content {
+            padding: 8px 0 8px 16px;
+            color: #888;
+            font-size: 11px;
+            line-height: 1.5;
+            white-space: pre-wrap;
+        }
+        
+        @media (max-width: 500px) {
+            .feeds-row {
+                flex-direction: column;
             }
-            .recorder { flex: 1; }
-            .feed { width: 280px; max-height: 400px; overflow-y: auto; }
         }
     </style>
 </head>
@@ -246,9 +293,16 @@
             <button class="save-btn" id="saveBtn" disabled>Save Topic</button>
         </div>
         
-        <div class="feed">
-            <h3>Recent Topics</h3>
-            <div id="topicsFeed">Loading...</div>
+    </div>
+    
+    <div class="feeds-row">
+        <div class="feed game">
+            <h3><span class="dot"></span>Game Dev</h3>
+            <div id="gameFeed">Loading...</div>
+        </div>
+        <div class="feed technical">
+            <h3><span class="dot"></span>Technical</h3>
+            <div id="techFeed">Loading...</div>
         </div>
     </div>
 
@@ -266,7 +320,8 @@
         const saveBtn = document.getElementById('saveBtn');
         const topicNumber = document.getElementById('topicNumber');
         const dateDisplay = document.getElementById('dateDisplay');
-        const topicsFeed = document.getElementById('topicsFeed');
+        const gameFeed = document.getElementById('gameFeed');
+        const techFeed = document.getElementById('techFeed');
         const techAlert = document.getElementById('techAlert');
         
         function log(msg, type = '') {
@@ -280,7 +335,6 @@
                 document.querySelectorAll('.type-btn').forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
                 currentType = btn.dataset.type;
-                loadTopics();
                 updateTopicNumber();
             });
         });
@@ -309,24 +363,31 @@
             });
         }
         
-        async function loadTopics() {
+        async function loadFeed(type, container) {
             try {
-                const res = await fetch('/api/topics?type=' + currentType);
+                const res = await fetch('/api/topics?type=' + type + '&full=1');
                 const data = await res.json();
                 
                 if (data.topics.length === 0) {
-                    topicsFeed.innerHTML = '<div class="feed-item">No topics yet</div>';
-                    topicCount = 0;
+                    container.innerHTML = '<div class="feed-item"><summary>No topics yet</summary></div>';
+                    return 0;
                 } else {
-                    topicsFeed.innerHTML = data.topics.map(t => 
-                        '<div class="feed-item">' + t + '</div>'
+                    container.innerHTML = data.topics.map(t => 
+                        '<details class="feed-item"><summary>' + t.title + '</summary><div class="content">' + (t.content || '') + '</div></details>'
                     ).join('');
-                    topicCount = data.topics.length;
+                    return data.topics.length;
                 }
-                updateTopicNumber();
             } catch (e) {
-                topicsFeed.innerHTML = '<div class="feed-item">Failed to load</div>';
+                container.innerHTML = '<div class="feed-item"><summary>Failed to load</summary></div>';
+                return 0;
             }
+        }
+        
+        async function loadAllFeeds() {
+            const gameCount = await loadFeed('game', gameFeed);
+            await loadFeed('technical', techFeed);
+            topicCount = currentType === 'game' ? gameCount : 0;
+            updateTopicNumber();
         }
         
         recordBtn.addEventListener('click', async () => {
@@ -434,7 +495,7 @@
                     transcript.textContent = 'Transcript will appear here...';
                     transcript.classList.add('placeholder');
                     techAlert.classList.remove('show');
-                    loadTopics();
+                    loadAllFeeds();
                     saveBtn.textContent = 'Save Topic';
                 } else {
                     log('Save failed: ' + (data.error || 'Unknown'), 'error');
@@ -450,8 +511,8 @@
         });
         
         updateDate();
-        loadTopics();
-        setInterval(loadTopics, 5000);
+        loadAllFeeds();
+        setInterval(loadAllFeeds, 5000);
     </script>
 </body>
 </html>

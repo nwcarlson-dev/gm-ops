@@ -79,6 +79,7 @@ app.get('/api/topics', async (req, res) => {
     try {
         const octokit = getGitHubClient();
         const type = req.query.type || 'game';
+        const full = req.query.full === '1';
         const folder = type === 'technical' ? 'dev-technical-transcripts' : 'dev-planning-transcripts';
         
         let files = [];
@@ -99,9 +100,25 @@ app.get('/api/topics', async (req, res) => {
                 path: file.path
             });
             const content = Buffer.from(data.content, 'base64').toString('utf8');
-            const regex = /## [T]?[0-9]+\.[0-9]+ - .+/g;
-            const matches = content.match(regex) || [];
-            topics.push(...matches.map(m => m.replace('## ', '')));
+            
+            // Split by topic headers
+            const sections = content.split(/(?=## [T]?[0-9]+\.[0-9]+ - )/);
+            for (const section of sections) {
+                const titleMatch = section.match(/## ([T]?[0-9]+\.[0-9]+ - .+)/);
+                if (titleMatch) {
+                    const title = titleMatch[1];
+                    const bodyStart = section.indexOf('\n');
+                    const body = bodyStart > -1 ? section.slice(bodyStart).trim() : '';
+                    // Remove date line
+                    const cleanBody = body.replace(/^\*[0-9-]+\*\n*/, '').trim();
+                    
+                    if (full) {
+                        topics.push({ title, content: cleanBody });
+                    } else {
+                        topics.push(title);
+                    }
+                }
+            }
         }
 
         res.json({ topics: topics.reverse() });
