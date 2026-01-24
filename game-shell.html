@@ -1463,45 +1463,34 @@
             return 'special';
         }
         
+        function getRangeLabel(pick) {
+            if (pick <= 10) return 'Top 10';
+            if (pick <= 20) return 'Mid 1st';
+            if (pick <= 32) return 'Late 1st';
+            if (pick <= 48) return 'Early 2nd';
+            if (pick <= 64) return 'Late 2nd';
+            if (pick <= 100) return 'Rd 3';
+            if (pick <= 135) return 'Rd 4';
+            if (pick <= 176) return 'Rd 5';
+            if (pick <= 220) return 'Rd 6';
+            return 'Rd 7';
+        }
+        
         function getConsensusTag(low, high, sourceCount) {
             if (!low && !high) return '';
-            const avg = (low + high) / 2;
-            let label, cssClass;
             
-            if (avg <= 5) {
-                label = 'Top 5';
-                cssClass = 'top-5';
-            } else if (avg <= 10) {
-                label = 'Top 10';
-                cssClass = 'top-10';
-            } else if (avg <= 16) {
-                label = 'Early 1st';
-                cssClass = 'rd-1';
-            } else if (avg <= 24) {
-                label = 'Mid 1st';
-                cssClass = 'rd-1';
-            } else if (avg <= 32) {
-                label = 'Late 1st';
-                cssClass = 'rd-1';
-            } else if (avg <= 48) {
-                label = 'Early 2nd';
-                cssClass = 'rd-2';
-            } else if (avg <= 64) {
-                label = 'Late 2nd';
-                cssClass = 'rd-2';
-            } else if (avg <= 100) {
-                label = 'Day 2';
-                cssClass = 'rd-3-4';
-            } else if (avg <= 175) {
-                label = 'Day 3';
-                cssClass = 'rd-5-7';
+            const lowLabel = getRangeLabel(low);
+            const highLabel = getRangeLabel(high);
+            
+            let label;
+            if (lowLabel === highLabel) {
+                label = lowLabel;
             } else {
-                label = 'Late Rds';
-                cssClass = 'rd-5-7';
+                label = `${lowLabel} / ${highLabel}`;
             }
             
             if (sourceCount === 1) label += '*';
-            return `<span class="consensus-range ${cssClass}">${label}</span>`;
+            return `<span class="consensus-range">${label}</span>`;
         }
         
         function toggleWatch(id) {
