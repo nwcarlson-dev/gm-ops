@@ -900,6 +900,13 @@
             margin-left: 4px;
         }
         
+        .draft-pick-needs {
+            font-size: 9px;
+            color: var(--text-muted);
+            margin-top: 2px;
+            opacity: 0.7;
+        }
+        
         .pick-value {
             font-size: 9px;
             color: var(--text-muted);
@@ -1317,6 +1324,8 @@
     <script>
         let prospects = [];
         let draftOrder = [];
+        let allTeamNeeds = {};
+        let teamFilledNeeds = {};
         let currentPick = 1;
         let currentFilter = 'All';
         let currentRound = 1;
@@ -1766,8 +1775,18 @@
             event.target.classList.add('active');
         }
         
+        function getTeamNeeds(teamName) {
+            const teamData = TEAM_DATA[teamName];
+            if (!teamData) return '';
+            const abbr = teamData.abbr;
+            const needs = allTeamNeeds[abbr];
+            if (!needs) return '';
+            const filled = teamFilledNeeds[teamName] || [];
+            const remaining = needs.primary.filter(n => !filled.includes(n));
+            return remaining.slice(0, 4).join(', ');
+        }
+        
         function renderPickList() {
-            const roundPicks = draftOrder.filter(d => d.round === currentRound);
             const nextUserPick = userTeam.picks.find(p => p >= currentPick) || userTeam.picks[0];
             const picksAway = nextUserPick - currentPick;
             
@@ -1782,7 +1801,7 @@
             document.getElementById('draftStatus').textContent = 
                 `Round ${currentRound}, Pick ${currentPick} - ${currentPickData?.team || 'TBD'} on the clock`;
             
-            document.getElementById('draftOrderList').innerHTML = roundPicks.map(d => {
+            document.getElementById('draftOrderList').innerHTML = draftOrder.map(d => {
                 const isMine = d.team === userTeam.name;
                 const isOnClock = d.overall === currentPick;
                 const isPast = d.overall < currentPick;
@@ -1791,11 +1810,15 @@
                 if (isOnClock) classes += ' current';
                 if (isPast) classes += ' past';
                 const tradeInfo = d.via ? `<span class="via-info">via ${d.via}</span>` : '';
-                const draftedPlayer = d.drafted ? `<div class="drafted-player">${d.drafted.name} <span class="drafted-pos">${d.drafted.position}</span></div>` : '';
+                const teamNeeds = getTeamNeeds(d.team);
+                const needsDisplay = teamNeeds ? `<div class="draft-pick-needs">${teamNeeds}</div>` : '';
+                const draftedPlayer = d.drafted 
+                    ? `<div class="drafted-player">${d.drafted.name} <span class="drafted-pos">${d.drafted.position}</span></div>` 
+                    : needsDisplay;
                 return `
-                    <div class="${classes}">
+                    <div class="${classes}" data-overall="${d.overall}" data-round="${d.round}">
                         <div class="draft-pick-num-container">
-                            <div class="draft-pick-num">${d.pick}</div>
+                            <div class="draft-pick-num">${d.overall}</div>
                             ${d.value ? `<div class="trade-value-small">${d.value}</div>` : ''}
                         </div>
                         ${getTeamLogo(d.team, 24)}
@@ -1877,21 +1900,53 @@
             document.querySelectorAll('.round-btn').forEach((btn, i) => {
                 btn.classList.toggle('active', i + 1 === round);
             });
-            renderPickList();
+            const firstPickOfRound = document.querySelector(`.draft-pick[data-round="${round}"]`);
+            if (firstPickOfRound) {
+                firstPickOfRound.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+        
+        function setupDraftListScroll() {
+            const draftList = document.getElementById('draftOrderList');
+            if (!draftList) return;
+            
+            draftList.addEventListener('scroll', function() {
+                const picks = draftList.querySelectorAll('.draft-pick');
+                const listTop = draftList.getBoundingClientRect().top;
+                let visibleRound = 1;
+                
+                for (const pick of picks) {
+                    const rect = pick.getBoundingClientRect();
+                    if (rect.top >= listTop && rect.top < listTop + 50) {
+                        visibleRound = parseInt(pick.dataset.round) || 1;
+                        break;
+                    }
+                }
+                
+                if (visibleRound !== currentRound) {
+                    currentRound = visibleRound;
+                    document.querySelectorAll('.round-btn').forEach((btn, i) => {
+                        btn.classList.toggle('active', i + 1 === visibleRound);
+                    });
+                }
+            });
         }
         
         async function loadData() {
             try {
-                const [prospectsRes, draftRes] = await Promise.all([
+                const [prospectsRes, draftRes, needsRes] = await Promise.all([
                     fetch('data/prospects/current/2026_prospects.json'),
-                    fetch('data/draft/2026_draft_order.json')
+                    fetch('data/draft/2026_draft_order.json'),
+                    fetch('data/teams/nflmdd_team_needs_2026.json')
                 ]);
                 
                 const prospectsData = await prospectsRes.json();
                 const draftData = await draftRes.json();
+                const needsData = await needsRes.json();
                 
                 prospects = prospectsData.prospects || [];
                 draftOrder = draftData.picks || [];
+                allTeamNeeds = needsData.teams || {};
                 
                 // Load user team picks from draft order
                 userTeam.picks = draftOrder
@@ -1962,6 +2017,7 @@
             renderNeeds();
             renderPickList();
             renderProspects();
+            setupDraftListScroll();
         }
         
         loadData();

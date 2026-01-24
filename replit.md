@@ -47,6 +47,13 @@ Python HTTP server on port 5000 (static site).
 - **Jan 2026**: Draft pick list shows trade values and traded picks (via team)
 - **Jan 2026**: 257 picks with NFLMDD trade values, Bears at #25
 - **Jan 24**: game-shell.html now loads 338 prospects from JSON with college colors, position filters, watchlist
+- **Jan 24**: Accordion expansion for prospect details (replaced modal popup)
+- **Jan 24**: Consensus range uses descriptive labels (Top 10, Late 1st, etc.) in Range stat card
+- **Jan 24**: Draft Board shows ALL 257 picks with team needs as placeholders (PFF-style)
+- **Jan 24**: Team needs drop off as positions are filled during draft
+- **Jan 24**: Trade values displayed subtly under pick numbers
+- **Jan 24**: Round buttons scroll to round start; auto-highlight on scroll
+- **Jan 24**: 3-column layout ratio adjusted: Draft Board (2fr) | Prospects (3fr) | Team Info (240-280px)
 
 ## Future Work
 - **Trade System**: Trade ticker, incoming calls, CPU-to-CPU trades, trade value chart
