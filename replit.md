@@ -83,3 +83,11 @@ See `data/prospects/SCHEMA.md` for full documentation. Key fields:
 - Build UI framework first before features
 - Premium, cohesive design (not "patched together ERP")
 - No cross-navigation between modes (stay in Draft when in Draft, etc.)
+- **Slow down** - don't jump ahead before topics are concluded
+- **Vet features** before implementing - present options first
+- Update DESIGN.md before coding
+
+## Pending: GitHub Integration
+- User wants dev-feedback tool pushed to GitHub so other AI engines can access transcripts
+- GitHub connector authorization codes are delayed/not arriving
+- Revisit when authorization flow works
