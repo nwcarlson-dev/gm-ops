@@ -680,20 +680,24 @@
         
         .draft-order-panel .card-header {
             flex-shrink: 0;
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 8px;
         }
         
         .round-tabs {
             display: flex;
-            gap: 4px;
+            gap: 3px;
+            flex-wrap: wrap;
         }
         
         .round-btn {
-            padding: 4px 10px;
+            padding: 3px 8px;
             background: rgba(255,255,255,0.05);
             border: 1px solid var(--border-subtle);
             border-radius: 4px;
             color: var(--text-muted);
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.15s;
