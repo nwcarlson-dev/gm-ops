@@ -2935,11 +2935,16 @@
                     const pickEl = document.querySelector(
                         `.draft-pick[data-overall="${currentPick}"]`,
                     );
-                    if (pickEl)
-                        pickEl.scrollIntoView({
-                            behavior: "smooth",
-                            block: "center",
-                        });
+                    if (pickEl) {
+                        // Scroll within draft list container only, not the whole page
+                        const draftList = document.getElementById("draftList");
+                        if (draftList) {
+                            const listRect = draftList.getBoundingClientRect();
+                            const pickRect = pickEl.getBoundingClientRect();
+                            const scrollTop = draftList.scrollTop + (pickRect.top - listRect.top) - (listRect.height / 2);
+                            draftList.scrollTo({ top: scrollTop, behavior: "smooth" });
+                        }
+                    }
 
                     if (speed > 0) {
                         await new Promise((r) => setTimeout(r, speed));
