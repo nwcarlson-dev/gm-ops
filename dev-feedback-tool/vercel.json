@@ -1,36 +1,12 @@
 {
   "version": 2,
   "functions": {
-    "server.js": {
+    "api/*.js": {
       "maxDuration": 60
     }
   },
-  "builds": [
-    {
-      "src": "server.js",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "dev-feedback.html",
-      "use": "@vercel/static"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/",
-      "dest": "/dev-feedback.html"
-    },
-    {
-      "src": "/dev-feedback.html",
-      "dest": "/dev-feedback.html"
-    },
-    {
-      "src": "/api/(.*)",
-      "dest": "/server.js"
-    },
-    {
-      "src": "/(.*)",
-      "dest": "/server.js"
-    }
+  "rewrites": [
+    { "source": "/", "destination": "/dev-feedback.html" },
+    { "source": "/dev-feedback.html", "destination": "/dev-feedback.html" }
   ]
 }
