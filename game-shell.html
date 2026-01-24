@@ -209,6 +209,76 @@
         
         .tab-content { display: none; }
         .tab-content.active { display: block; }
+        
+        .next-pick-info {
+            margin-top: 8px;
+            padding-top: 8px;
+            border-top: 1px solid var(--card-border);
+        }
+        
+        .picks-away {
+            font-size: 11px;
+            color: var(--gold);
+            font-weight: 500;
+        }
+        
+        .position-filters {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+        }
+        
+        .pos-filter {
+            padding: 6px 10px;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 0.03em;
+            color: var(--silver);
+            background: rgba(0,0,0,0.2);
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        
+        .pos-filter:hover { color: var(--white); background: rgba(255,255,255,0.1); }
+        .pos-filter.active { background: var(--nfl-red); color: var(--white); }
+        
+        .pick-list { display: flex; flex-direction: column; gap: 6px; }
+        
+        .pick-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 10px;
+            background: rgba(0,0,0,0.15);
+            border-radius: 6px;
+            font-size: 12px;
+        }
+        
+        .pick-row.mine { border-left: 3px solid var(--gold); }
+        .pick-row.on-clock { background: rgba(212, 175, 55, 0.15); }
+        
+        .pick-num {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-weight: 700;
+            color: var(--text-muted);
+            min-width: 24px;
+        }
+        
+        .pick-team-logo { flex-shrink: 0; }
+        
+        .pick-team-name {
+            font-weight: 500;
+            color: var(--white);
+            flex: 1;
+        }
+        
+        .pick-result {
+            font-size: 11px;
+            color: var(--silver);
+        }
     </style>
 </head>
 <body>
@@ -242,8 +312,11 @@
                         <div id="sidebarTeamLogo"></div>
                         <div>
                             <div class="sidebar-team-name" id="sidebarTeamName">Chicago Bears</div>
-                            <div class="sidebar-team-meta">11-6 | Pick #25</div>
+                            <div class="sidebar-team-meta" id="sidebarTeamMeta">Next: R1 P25</div>
                         </div>
+                    </div>
+                    <div class="next-pick-info" id="nextPickInfo">
+                        <span class="picks-away">12 picks away</span>
                     </div>
                 </div>
                 
@@ -358,7 +431,7 @@
             <div class="page-header">
                 <div>
                     <h1 class="page-title">Draft Board</h1>
-                    <p class="page-subtitle">Round 1, Pick 25 - Chicago Bears on the clock</p>
+                    <p class="page-subtitle" id="draftStatus">Round 1, Pick 13 - Raiders on the clock</p>
                 </div>
                 <div style="display: flex; gap: 12px;">
                     <button class="btn btn-secondary">Sim to Pick</button>
@@ -368,15 +441,20 @@
             
             <div style="display: grid; grid-template-columns: 1fr 340px; gap: 20px;">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header" style="flex-direction: column; align-items: flex-start; gap: 12px;">
                         <h3 class="card-title">Available Prospects</h3>
-                        <div class="tabs">
-                            <button class="tab active">All</button>
-                            <button class="tab">QB</button>
-                            <button class="tab">RB</button>
-                            <button class="tab">WR</button>
-                            <button class="tab">OL</button>
-                            <button class="tab">DEF</button>
+                        <div class="position-filters">
+                            <button class="pos-filter active">All</button>
+                            <button class="pos-filter">QB</button>
+                            <button class="pos-filter">RB</button>
+                            <button class="pos-filter">WR</button>
+                            <button class="pos-filter">TE</button>
+                            <button class="pos-filter">OL</button>
+                            <button class="pos-filter">IDL</button>
+                            <button class="pos-filter">EDGE</button>
+                            <button class="pos-filter">LB</button>
+                            <button class="pos-filter">CB</button>
+                            <button class="pos-filter">S</button>
                         </div>
                     </div>
                     <div style="color: var(--text-muted); text-align: center; padding: 60px 20px;">
@@ -405,11 +483,8 @@
                         </div>
                         
                         <div id="picksTab" class="tab-content">
-                            <div class="my-picks-list" id="myPicksList">
-                                <div style="color: var(--text-muted); font-size: 13px; text-align: center; padding: 20px;">
-                                    No picks made yet.
-                                </div>
-                            </div>
+                            <div class="needs-header">Round 1 Draft Order</div>
+                            <div class="pick-list" id="pickList"></div>
                         </div>
                         
                         <div id="schemeTab" class="tab-content">
@@ -487,10 +562,26 @@
             "Seahawks": {abbr: "SEA", color: "#002244", color2: "#69BE28"}
         };
         
+        const draftOrder = [
+            {pick: 1, team: "Raiders"}, {pick: 2, team: "Jets"}, {pick: 3, team: "Cardinals"},
+            {pick: 4, team: "Titans"}, {pick: 5, team: "Giants"}, {pick: 6, team: "Browns"},
+            {pick: 7, team: "Commanders"}, {pick: 8, team: "Saints"}, {pick: 9, team: "Chiefs"},
+            {pick: 10, team: "Bengals"}, {pick: 11, team: "Dolphins"}, {pick: 12, team: "Cowboys"},
+            {pick: 13, team: "Rams"}, {pick: 14, team: "Ravens"}, {pick: 15, team: "Buccaneers"},
+            {pick: 16, team: "Falcons"}, {pick: 17, team: "Lions"}, {pick: 18, team: "Vikings"},
+            {pick: 19, team: "Panthers"}, {pick: 20, team: "Jaguars"}, {pick: 21, team: "Steelers"},
+            {pick: 22, team: "Chargers"}, {pick: 23, team: "Eagles"}, {pick: 24, team: "Colts"},
+            {pick: 25, team: "Bears"}, {pick: 26, team: "Bills"}, {pick: 27, team: "49ers"},
+            {pick: 28, team: "Texans"}, {pick: 29, team: "Packers"}, {pick: 30, team: "Patriots"},
+            {pick: 31, team: "Broncos"}, {pick: 32, team: "Seahawks"}
+        ];
+        
+        let currentPick = 13;
+        
         const userTeam = {
             name: "Bears",
             record: "11-6",
-            pick: 25,
+            picks: [25, 57, 89, 121, 153, 185, 217],
             offNeeds: [
                 {pos: "OT", archetype: "Pass Protector", priority: "high", skills: ["Pass Protection", "Footwork", "Anchor"], traits: ["Arm Length", "Height"], note: "Ozzy Trapilo out with patellar injury. Braxton Jones benched. LT is a glaring hole."},
                 {pos: "RB", archetype: "Dynamic Playmaker", priority: "medium", skills: ["Acceleration", "Vision", "Elusiveness"], note: "Need explosive home run threat to pair with Caleb Williams."},
@@ -543,6 +634,34 @@
             event.target.classList.add('active');
         }
         
+        function renderPickList() {
+            const nextUserPick = userTeam.picks.find(p => p >= currentPick) || userTeam.picks[0];
+            const picksAway = nextUserPick - currentPick;
+            
+            document.getElementById('sidebarTeamMeta').textContent = `Next: R1 P${nextUserPick}`;
+            document.getElementById('nextPickInfo').innerHTML = picksAway > 0 
+                ? `<span class="picks-away">${picksAway} pick${picksAway !== 1 ? 's' : ''} away</span>`
+                : `<span class="picks-away" style="color: var(--nfl-red);">On the clock!</span>`;
+            
+            const currentTeam = draftOrder.find(d => d.pick === currentPick);
+            document.getElementById('draftStatus').textContent = 
+                `Round 1, Pick ${currentPick} - ${currentTeam?.team || 'TBD'} on the clock`;
+            
+            document.getElementById('pickList').innerHTML = draftOrder.map(d => {
+                const isMine = d.team === userTeam.name;
+                const isOnClock = d.pick === currentPick;
+                const isPast = d.pick < currentPick;
+                return `
+                    <div class="pick-row ${isMine ? 'mine' : ''} ${isOnClock ? 'on-clock' : ''}">
+                        <div class="pick-num">${d.pick}</div>
+                        <div class="pick-team-logo">${getTeamLogo(d.team, 22)}</div>
+                        <div class="pick-team-name" style="${isPast ? 'opacity: 0.5;' : ''}">${d.team}</div>
+                        ${isPast ? '<div class="pick-result">-</div>' : ''}
+                    </div>
+                `;
+            }).join('');
+        }
+        
         function toggleSidebar() {
             const layout = document.getElementById('appLayout');
             layout.classList.toggle('sidebar-collapsed');
@@ -559,6 +678,7 @@
             document.getElementById('sidebarTeamLogo').innerHTML = getTeamLogo(userTeam.name, 40);
             document.getElementById('sidebarTeamName').textContent = `Chicago ${userTeam.name}`;
             renderNeeds();
+            renderPickList();
         }
         
         init();
