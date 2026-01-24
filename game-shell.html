@@ -911,6 +911,15 @@
     </div>
     
     <script>
+        let prospects = [];
+        let draftOrder = [];
+        let teamNeeds = {};
+        let currentPick = 1;
+        let currentFilter = 'All';
+        let watchlist = new Set();
+        let watchlistActive = false;
+        let draftedPlayers = new Set();
+        
         const TEAM_DATA = {
             "Raiders": {abbr: "LV", color: "#000000", color2: "#A5ACAF"},
             "Jets": {abbr: "NYJ", color: "#125740", color2: "#000000"},
