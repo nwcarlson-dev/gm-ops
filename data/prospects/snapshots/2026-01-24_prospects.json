@@ -1,0 +1,371 @@
+{
+  "meta": {
+    "draft_year": 2026,
+    "last_updated": "2026-01-24",
+    "sources": ["PFF", "ESPN", "NFL.com", "consensus"],
+    "version": "1.0"
+  },
+  "prospects": [
+    {
+      "id": "cam-ward-2026",
+      "name": {"first": "Cam", "last": "Ward", "display": "Cam Ward"},
+      "position": "QB",
+      "school": "Miami",
+      "conference": "ACC",
+      "class": "SR",
+      "bio": {
+        "height_in": 74,
+        "weight_lbs": 223,
+        "birth_date": "2002-09-15",
+        "age_years": 23,
+        "age_months": 4,
+        "hometown": "West Columbia, TX",
+        "arm_length_in": 32.5,
+        "hand_size_in": 9.75
+      },
+      "rankings": {
+        "consensus": 1,
+        "pff": 1,
+        "espn": 1,
+        "nfl": 2
+      },
+      "grades": {
+        "pff_overall": 92.1,
+        "pff_pass": 91.8,
+        "pff_run": null
+      },
+      "combine": {
+        "forty": null,
+        "vertical": null,
+        "broad_jump": null,
+        "three_cone": null,
+        "shuttle": null,
+        "bench": null
+      },
+      "skills": {
+        "arm_strength": 85,
+        "accuracy_short": 88,
+        "accuracy_deep": 82,
+        "decision_making": 84,
+        "pocket_presence": 86,
+        "mobility": 78,
+        "release_speed": 85,
+        "anticipation": 83
+      },
+      "traits": ["Quick Release", "Arm Talent", "Playmaker"],
+      "archetype": "Field General",
+      "projection": {"round": 1, "range_low": 1, "range_high": 3},
+      "scouting_report": "Elite arm talent with quick release. Showed dramatic improvement at Miami after transferring. Can make all the throws, excellent anticipation. Some concerns about decision-making under pressure.",
+      "comparison": "Patrick Mahomes"
+    },
+    {
+      "id": "shedeur-sanders-2026",
+      "name": {"first": "Shedeur", "last": "Sanders", "display": "Shedeur Sanders"},
+      "position": "QB",
+      "school": "Colorado",
+      "conference": "Big 12",
+      "class": "SR",
+      "bio": {
+        "height_in": 74,
+        "weight_lbs": 215,
+        "birth_date": "2002-11-10",
+        "age_years": 22,
+        "age_months": 2,
+        "hometown": "Canton, TX",
+        "arm_length_in": 31.5,
+        "hand_size_in": 9.25
+      },
+      "rankings": {
+        "consensus": 2,
+        "pff": 3,
+        "espn": 2,
+        "nfl": 1
+      },
+      "grades": {
+        "pff_overall": 90.5,
+        "pff_pass": 90.2,
+        "pff_run": null
+      },
+      "combine": {},
+      "skills": {
+        "arm_strength": 80,
+        "accuracy_short": 90,
+        "accuracy_deep": 78,
+        "decision_making": 88,
+        "pocket_presence": 85,
+        "mobility": 72,
+        "release_speed": 88,
+        "anticipation": 86
+      },
+      "traits": ["Accuracy", "Poise", "Quick Release"],
+      "archetype": "Pocket Passer",
+      "projection": {"round": 1, "range_low": 1, "range_high": 5},
+      "scouting_report": "Highly accurate passer with excellent poise and leadership. Quick release, decisive. Limited mobility and arm strength compared to top QBs.",
+      "comparison": "Jared Goff"
+    },
+    {
+      "id": "travis-hunter-2026",
+      "name": {"first": "Travis", "last": "Hunter", "display": "Travis Hunter"},
+      "position": "WR",
+      "school": "Colorado",
+      "conference": "Big 12",
+      "class": "JR",
+      "bio": {
+        "height_in": 73,
+        "weight_lbs": 185,
+        "birth_date": "2003-05-20",
+        "age_years": 21,
+        "age_months": 8,
+        "hometown": "Suwanee, GA",
+        "arm_length_in": 32.0,
+        "hand_size_in": 9.5
+      },
+      "rankings": {
+        "consensus": 3,
+        "pff": 2,
+        "espn": 3,
+        "nfl": 3
+      },
+      "grades": {
+        "pff_overall": 93.2,
+        "pff_recv": 91.5,
+        "pff_coverage": 92.8
+      },
+      "combine": {},
+      "skills": {
+        "route_running": 90,
+        "separation": 88,
+        "catch_radius": 85,
+        "yac": 86,
+        "release": 89,
+        "man_coverage": 91,
+        "zone_coverage": 88,
+        "ball_skills": 92
+      },
+      "traits": ["Two-Way Player", "Ball Hawk", "Elite Athlete"],
+      "archetype": "Unicorn",
+      "projection": {"round": 1, "range_low": 1, "range_high": 5},
+      "scouting_report": "Generational two-way talent. Heisman winner who dominated as both WR and CB. Elite ball skills, smooth route runner. Concerns about workload and which position he plays in the NFL.",
+      "comparison": "Deion Sanders / Julio Jones"
+    },
+    {
+      "id": "abdul-carter-2026",
+      "name": {"first": "Abdul", "last": "Carter", "display": "Abdul Carter"},
+      "position": "EDGE",
+      "school": "Penn State",
+      "conference": "Big Ten",
+      "class": "JR",
+      "bio": {
+        "height_in": 75,
+        "weight_lbs": 252,
+        "birth_date": "2003-02-05",
+        "age_years": 21,
+        "age_months": 11,
+        "hometown": "Philadelphia, PA",
+        "arm_length_in": 33.5,
+        "hand_size_in": 10.25
+      },
+      "rankings": {
+        "consensus": 4,
+        "pff": 4,
+        "espn": 5,
+        "nfl": 4
+      },
+      "grades": {
+        "pff_overall": 92.8,
+        "pff_pass_rush": 93.5,
+        "pff_run_def": 88.2
+      },
+      "combine": {},
+      "skills": {
+        "pass_rush_moves": 92,
+        "bend_flexibility": 90,
+        "speed_to_power": 85,
+        "first_step": 91,
+        "hand_usage": 88,
+        "run_stuffing": 82,
+        "motor": 90
+      },
+      "traits": ["Explosive", "Bend", "Versatile"],
+      "archetype": "Speed Rusher",
+      "projection": {"round": 1, "range_low": 3, "range_high": 8},
+      "scouting_report": "Elite bend and explosion off the edge. Converted from LB, still developing pass rush moves. Relentless motor, versatile enough to drop into coverage.",
+      "comparison": "Micah Parsons"
+    },
+    {
+      "id": "will-campbell-2026",
+      "name": {"first": "Will", "last": "Campbell", "display": "Will Campbell"},
+      "position": "OT",
+      "school": "LSU",
+      "conference": "SEC",
+      "class": "JR",
+      "bio": {
+        "height_in": 78,
+        "weight_lbs": 323,
+        "birth_date": "2003-08-12",
+        "age_years": 21,
+        "age_months": 5,
+        "hometown": "Monroe, LA",
+        "arm_length_in": 34.5,
+        "hand_size_in": 10.75
+      },
+      "rankings": {
+        "consensus": 5,
+        "pff": 5,
+        "espn": 4,
+        "nfl": 6
+      },
+      "grades": {
+        "pff_overall": 91.2,
+        "pff_pass_block": 92.5,
+        "pff_run_block": 89.8
+      },
+      "combine": {},
+      "skills": {
+        "pass_protection": 92,
+        "footwork": 90,
+        "anchor": 88,
+        "run_blocking": 85,
+        "pull_ability": 82,
+        "awareness": 86,
+        "hand_placement": 89
+      },
+      "traits": ["Elite Pass Pro", "Long Arms", "Athletic"],
+      "archetype": "Pass Protector",
+      "projection": {"round": 1, "range_low": 4, "range_high": 10},
+      "scouting_report": "Premium left tackle prospect with elite pass protection skills. Exceptional length, quick feet, mirrors rushers effortlessly. Needs to improve run blocking power.",
+      "comparison": "Tyron Smith"
+    },
+    {
+      "id": "tetairoa-mcmillan-2026",
+      "name": {"first": "Tetairoa", "last": "McMillan", "display": "Tetairoa McMillan"},
+      "position": "WR",
+      "school": "Arizona",
+      "conference": "Big 12",
+      "class": "JR",
+      "bio": {
+        "height_in": 77,
+        "weight_lbs": 212,
+        "birth_date": "2003-04-08",
+        "age_years": 21,
+        "age_months": 9,
+        "hometown": "Anaheim, CA",
+        "arm_length_in": 33.0,
+        "hand_size_in": 10.0
+      },
+      "rankings": {
+        "consensus": 6,
+        "pff": 6,
+        "espn": 7,
+        "nfl": 5
+      },
+      "grades": {
+        "pff_overall": 90.8,
+        "pff_recv": 91.2
+      },
+      "combine": {},
+      "skills": {
+        "route_running": 85,
+        "separation": 82,
+        "catch_radius": 95,
+        "yac": 80,
+        "contested_catch": 94,
+        "release": 83,
+        "hands": 90
+      },
+      "traits": ["Size", "Contested Catch", "Red Zone Threat"],
+      "archetype": "X Receiver",
+      "projection": {"round": 1, "range_low": 5, "range_high": 12},
+      "scouting_report": "Massive catch radius with exceptional body control. Dominates 50/50 balls. Elite red zone weapon. Could improve route crispness and separation vs. press.",
+      "comparison": "Mike Evans"
+    },
+    {
+      "id": "mason-graham-2026",
+      "name": {"first": "Mason", "last": "Graham", "display": "Mason Graham"},
+      "position": "IDL",
+      "school": "Michigan",
+      "conference": "Big Ten",
+      "class": "JR",
+      "bio": {
+        "height_in": 75,
+        "weight_lbs": 320,
+        "birth_date": "2003-07-18",
+        "age_years": 21,
+        "age_months": 6,
+        "hometown": "Anaheim, CA",
+        "arm_length_in": 33.25,
+        "hand_size_in": 10.5
+      },
+      "rankings": {
+        "consensus": 7,
+        "pff": 7,
+        "espn": 6,
+        "nfl": 8
+      },
+      "grades": {
+        "pff_overall": 92.5,
+        "pff_pass_rush": 88.5,
+        "pff_run_def": 94.2
+      },
+      "combine": {},
+      "skills": {
+        "run_stuffing": 94,
+        "anchor": 92,
+        "double_team_resistance": 90,
+        "pass_rush_moves": 82,
+        "first_step": 80,
+        "hand_usage": 88,
+        "motor": 85
+      },
+      "traits": ["Anchor", "Run Stuffer", "Powerful"],
+      "archetype": "Nose Tackle",
+      "projection": {"round": 1, "range_low": 6, "range_high": 15},
+      "scouting_report": "Elite run defender who commands double teams. Dominant anchor, impossible to move. Interior pass rush is developing but not a strength.",
+      "comparison": "Vita Vea"
+    },
+    {
+      "id": "malaki-starks-2026",
+      "name": {"first": "Malaki", "last": "Starks", "display": "Malaki Starks"},
+      "position": "S",
+      "school": "Georgia",
+      "conference": "SEC",
+      "class": "JR",
+      "bio": {
+        "height_in": 73,
+        "weight_lbs": 205,
+        "birth_date": "2003-10-25",
+        "age_years": 21,
+        "age_months": 3,
+        "hometown": "Jefferson, GA",
+        "arm_length_in": 31.5,
+        "hand_size_in": 9.25
+      },
+      "rankings": {
+        "consensus": 8,
+        "pff": 8,
+        "espn": 8,
+        "nfl": 7
+      },
+      "grades": {
+        "pff_overall": 91.5,
+        "pff_coverage": 92.0,
+        "pff_run_def": 88.5
+      },
+      "combine": {},
+      "skills": {
+        "range": 92,
+        "man_coverage": 85,
+        "zone_coverage": 90,
+        "tackling": 88,
+        "ball_skills": 86,
+        "instincts": 90,
+        "versatility": 88
+      },
+      "traits": ["Range", "Ball Hawk", "Versatile"],
+      "archetype": "Free Safety",
+      "projection": {"round": 1, "range_low": 7, "range_high": 15},
+      "scouting_report": "Elite range and instincts. Centerfield safety who makes plays all over the field. Physical tackler, versatile enough to cover slot.",
+      "comparison": "Jessie Bates"
+    }
+  ]
+}
