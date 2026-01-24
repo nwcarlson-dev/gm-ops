@@ -1,6 +1,6 @@
 # GM Ops - Technical Design Document
 
-> **Last Updated:** January 22, 2026  
+> **Last Updated:** January 24, 2026  
 > **Purpose:** Single source of truth for all game systems, mechanics, and technical decisions.  
 > **Update Policy:** This document must be updated whenever design decisions are made in Claude chats.
 
@@ -23,9 +23,10 @@
 12. [Offseason Structure](#offseason-structure)
 13. [Career Progression](#career-progression)
 14. [UI Sliders & Configurable Settings](#ui-sliders--configurable-settings)
-15. [Implementation Status](#implementation-status)
-16. [Current Data Models](#current-data-models)
-17. [Session Log](#session-log)
+15. [Culture System](#culture-system)
+16. [Implementation Status](#implementation-status)
+17. [Current Data Models](#current-data-models)
+18. [Session Log](#session-log)
 
 ---
 
@@ -481,6 +482,53 @@ defNeeds: [
 | LB | Thumper, Coverage, Sideline-to-Sideline, Versatile, Blitzer |
 | CB | Press-Man, Zone, Ballhawk, Technical, Physical |
 | S | Centerfield, Box Safety, Hybrid, Playmaker, Range |
+
+---
+
+## Culture System
+
+**Approved: January 24, 2026**
+
+Culture in GM Ops is primarily driven by the **head coach**. The GM's main lever for culture is hiring the right coach, though ongoing decisions can build or erode it.
+
+### Culture Factors (Total = 100)
+
+| Factor | Weight | Description | Primary Drivers |
+|--------|--------|-------------|-----------------|
+| **Leadership** | 30 | Locker room authority and direction | Coach's leadership skill, veteran presence on roster |
+| **Trust** | 25 | Belief that organization keeps its word | Consistent decision-making, keeping promises |
+| **Chemistry** | 20 | How well personalities mesh | Roster stability, compatible player personalities |
+| **Morale** | 15 | Current emotional state of the team | Recent win/loss performance |
+| **Stability** | 10 | Organizational continuity | Coaching and front office tenure |
+
+### How Culture Changes
+
+**Positive Events:**
+- Hiring a coach with high leadership skill → Leadership boost
+- Winning streak → Morale rises
+- Keeping same core players together → Chemistry improves
+- Long coaching tenure → Stability maxes out
+- Honoring player-friendly promises → Trust builds
+
+**Negative Events:**
+- Losing streak → Morale drops
+- Cutting a team captain → Trust drops significantly
+- High roster turnover → Chemistry suffers
+- Firing coaches frequently → Stability tanks
+- Breaking trust (bad trades, letting favorites walk) → Trust erodes
+
+### Honeymoon Effect
+
+New head coach hires start with elevated culture scores (benefit of the doubt), which then adjust based on actual performance. "When somebody gets hired new, the culture's good and that's all they talk about. But then once they start losing, the culture's out the door."
+
+### Culture Impact on Gameplay
+
+*(To be determined - potential effects:)*
+- Player performance bonuses/penalties
+- Free agent attractiveness
+- Willingness to take team-friendly deals
+- Injury recovery speed
+- Player development rates
 
 ---
 
