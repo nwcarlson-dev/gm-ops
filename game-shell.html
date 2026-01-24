@@ -913,12 +913,13 @@
     <script>
         let prospects = [];
         let draftOrder = [];
-        let teamNeeds = {};
         let currentPick = 1;
         let currentFilter = 'All';
+        let currentRound = 1;
         let watchlist = new Set();
         let watchlistActive = false;
-        let draftedPlayers = new Set();
+        let watchlistCount = 0;
+        let filledNeeds = {};
         
         const TEAM_DATA = {
             "Raiders": {abbr: "LV", color: "#000000", color2: "#A5ACAF"},
@@ -955,25 +956,86 @@
             "Seahawks": {abbr: "SEA", color: "#002244", color2: "#69BE28"}
         };
         
-        const draftOrder = [
-            {pick: 1, team: "Raiders"}, {pick: 2, team: "Jets"}, {pick: 3, team: "Cardinals"},
-            {pick: 4, team: "Titans"}, {pick: 5, team: "Giants"}, {pick: 6, team: "Browns"},
-            {pick: 7, team: "Commanders"}, {pick: 8, team: "Saints"}, {pick: 9, team: "Chiefs"},
-            {pick: 10, team: "Bengals"}, {pick: 11, team: "Dolphins"}, {pick: 12, team: "Cowboys"},
-            {pick: 13, team: "Rams"}, {pick: 14, team: "Ravens"}, {pick: 15, team: "Buccaneers"},
-            {pick: 16, team: "Falcons"}, {pick: 17, team: "Lions"}, {pick: 18, team: "Vikings"},
-            {pick: 19, team: "Panthers"}, {pick: 20, team: "Jaguars"}, {pick: 21, team: "Steelers"},
-            {pick: 22, team: "Chargers"}, {pick: 23, team: "Eagles"}, {pick: 24, team: "Colts"},
-            {pick: 25, team: "Bears"}, {pick: 26, team: "Bills"}, {pick: 27, team: "49ers"},
-            {pick: 28, team: "Texans"}, {pick: 29, team: "Packers"}, {pick: 30, team: "Patriots"},
-            {pick: 31, team: "Broncos"}, {pick: 32, team: "Seahawks"}
-        ];
-        
-        let currentPick = 1;
+        const COLLEGE_DATA = {
+            "Alabama": {abbr: "ALA", color: "#9E1B32", color2: "#828A8F"},
+            "Arizona": {abbr: "ARIZ", color: "#CC0033", color2: "#003366"},
+            "Arizona State": {abbr: "ASU", color: "#8C1D40", color2: "#FFC627"},
+            "Arkansas": {abbr: "ARK", color: "#9D2235", color2: "#000000"},
+            "Auburn": {abbr: "AUB", color: "#0C2340", color2: "#E87722"},
+            "Baylor": {abbr: "BAY", color: "#154734", color2: "#FFB81C"},
+            "Boise State": {abbr: "BSU", color: "#0033A0", color2: "#D64309"},
+            "Boston College": {abbr: "BC", color: "#8C2633", color2: "#B29D6C"},
+            "BYU": {abbr: "BYU", color: "#002E5D", color2: "#FFFFFF"},
+            "California": {abbr: "CAL", color: "#003262", color2: "#FDB515"},
+            "Cincinnati": {abbr: "CIN", color: "#E00122", color2: "#000000"},
+            "Clemson": {abbr: "CLEM", color: "#F56600", color2: "#522D80"},
+            "Colorado": {abbr: "COLO", color: "#CFB87C", color2: "#000000"},
+            "Duke": {abbr: "DUKE", color: "#003087", color2: "#FFFFFF"},
+            "East Carolina": {abbr: "ECU", color: "#592A8A", color2: "#FFC72C"},
+            "Florida": {abbr: "UF", color: "#0021A5", color2: "#FA4616"},
+            "Florida State": {abbr: "FSU", color: "#782F40", color2: "#CEB888"},
+            "Georgia": {abbr: "UGA", color: "#BA0C2F", color2: "#000000"},
+            "Houston": {abbr: "HOU", color: "#C8102E", color2: "#FFFFFF"},
+            "Illinois": {abbr: "ILL", color: "#E84A27", color2: "#13294B"},
+            "Indiana": {abbr: "IU", color: "#990000", color2: "#EEEDEB"},
+            "Iowa": {abbr: "IOWA", color: "#FFCD00", color2: "#000000"},
+            "Iowa State": {abbr: "ISU", color: "#C8102E", color2: "#F1BE48"},
+            "Kansas": {abbr: "KU", color: "#0051BA", color2: "#E8000D"},
+            "Kansas State": {abbr: "KSU", color: "#512888", color2: "#FFFFFF"},
+            "Kentucky": {abbr: "UK", color: "#0033A0", color2: "#FFFFFF"},
+            "Louisville": {abbr: "LOU", color: "#AD0000", color2: "#000000"},
+            "LSU": {abbr: "LSU", color: "#461D7C", color2: "#FDD023"},
+            "Maryland": {abbr: "MD", color: "#E03A3E", color2: "#FFD520"},
+            "Miami": {abbr: "MIA", color: "#F47321", color2: "#005030"},
+            "Miami (FL)": {abbr: "MIA", color: "#F47321", color2: "#005030"},
+            "Michigan": {abbr: "MICH", color: "#00274C", color2: "#FFCB05"},
+            "Michigan State": {abbr: "MSU", color: "#18453B", color2: "#FFFFFF"},
+            "Minnesota": {abbr: "MINN", color: "#7A0019", color2: "#FFCC33"},
+            "Mississippi State": {abbr: "MSST", color: "#660000", color2: "#FFFFFF"},
+            "Missouri": {abbr: "MIZ", color: "#F1B82D", color2: "#000000"},
+            "Nebraska": {abbr: "NEB", color: "#E41C38", color2: "#F5F1E7"},
+            "North Carolina": {abbr: "UNC", color: "#7BAFD4", color2: "#13294B"},
+            "North Dakota State": {abbr: "NDSU", color: "#0A5640", color2: "#FFC72C"},
+            "Northwestern": {abbr: "NW", color: "#4E2A84", color2: "#FFFFFF"},
+            "Notre Dame": {abbr: "ND", color: "#0C2340", color2: "#C99700"},
+            "Ohio State": {abbr: "OSU", color: "#BB0000", color2: "#666666"},
+            "Oklahoma": {abbr: "OU", color: "#841617", color2: "#FDF9D8"},
+            "Oklahoma State": {abbr: "OKST", color: "#FF7300", color2: "#000000"},
+            "Ole Miss": {abbr: "MISS", color: "#CE1126", color2: "#14213D"},
+            "Oregon": {abbr: "ORE", color: "#154733", color2: "#FEE123"},
+            "Oregon State": {abbr: "ORST", color: "#DC4405", color2: "#000000"},
+            "Penn State": {abbr: "PSU", color: "#041E42", color2: "#FFFFFF"},
+            "Pittsburgh": {abbr: "PITT", color: "#003594", color2: "#FFB81C"},
+            "Purdue": {abbr: "PUR", color: "#CEB888", color2: "#000000"},
+            "Rutgers": {abbr: "RUT", color: "#CC0033", color2: "#5F6A72"},
+            "SMU": {abbr: "SMU", color: "#0033A0", color2: "#C8102E"},
+            "South Carolina": {abbr: "SC", color: "#73000A", color2: "#000000"},
+            "Stanford": {abbr: "STAN", color: "#8C1515", color2: "#FFFFFF"},
+            "Syracuse": {abbr: "SYR", color: "#F76900", color2: "#002D72"},
+            "TCU": {abbr: "TCU", color: "#4D1979", color2: "#A3A9AC"},
+            "Tennessee": {abbr: "TENN", color: "#FF8200", color2: "#FFFFFF"},
+            "Texas": {abbr: "TEX", color: "#BF5700", color2: "#FFFFFF"},
+            "Texas A&M": {abbr: "TAMU", color: "#500000", color2: "#FFFFFF"},
+            "Texas Tech": {abbr: "TTU", color: "#CC0000", color2: "#000000"},
+            "Tulane": {abbr: "TUL", color: "#006747", color2: "#87CEEB"},
+            "UCF": {abbr: "UCF", color: "#BA9B37", color2: "#000000"},
+            "UCLA": {abbr: "UCLA", color: "#2D68C4", color2: "#F2A900"},
+            "USC": {abbr: "USC", color: "#990000", color2: "#FFC72C"},
+            "Utah": {abbr: "UTAH", color: "#CC0000", color2: "#FFFFFF"},
+            "Vanderbilt": {abbr: "VAN", color: "#866D4B", color2: "#000000"},
+            "Virginia": {abbr: "UVA", color: "#232D4B", color2: "#F84C1E"},
+            "Virginia Tech": {abbr: "VT", color: "#630031", color2: "#CF4420"},
+            "Wake Forest": {abbr: "WAKE", color: "#9E7E38", color2: "#000000"},
+            "Washington": {abbr: "WASH", color: "#4B2E83", color2: "#B7A57A"},
+            "West Virginia": {abbr: "WVU", color: "#002855", color2: "#EAAA00"},
+            "Wisconsin": {abbr: "WIS", color: "#C5050C", color2: "#FFFFFF"}
+        };
         
         const userTeam = {
             name: "Bears",
+            abbr: "CHI",
             record: "11-6",
+            division: "Divisional Round",
             picks: [25, 57, 89, 121, 153, 185, 217],
             offNeeds: [
                 {pos: "OT", archetype: "Pass Protector", priority: "high", skills: ["Pass Protection", "Footwork", "Anchor"], traits: ["Arm Length", "Height"], note: "Ozzy Trapilo out with patellar injury. Braxton Jones benched. LT is a glaring hole."},
@@ -1000,56 +1062,35 @@
             return `<div class="team-logo-gradient" style="width:${size}px;height:${size}px;background:linear-gradient(135deg,${team.color} 60%,${team.color2} 100%);font-size:${size/3.5}px;">${team.abbr}</div>`;
         }
         
-        const PROSPECTS = [
-            {rank: 1, name: "Cam Ward", pos: "QB", school: "Miami", ht: "6-2", wt: 223, age: 23, mo: 4},
-            {rank: 2, name: "Shedeur Sanders", pos: "QB", school: "Colorado", ht: "6-2", wt: 215, age: 22, mo: 2},
-            {rank: 3, name: "Travis Hunter", pos: "WR", school: "Colorado", ht: "6-1", wt: 185, age: 21, mo: 8},
-            {rank: 4, name: "Abdul Carter", pos: "EDGE", school: "Penn State", ht: "6-3", wt: 252, age: 21, mo: 11},
-            {rank: 5, name: "Will Campbell", pos: "OT", school: "LSU", ht: "6-6", wt: 323, age: 21, mo: 5},
-            {rank: 6, name: "Tetairoa McMillan", pos: "WR", school: "Arizona", ht: "6-5", wt: 212, age: 21, mo: 9},
-            {rank: 7, name: "Mason Graham", pos: "IDL", school: "Michigan", ht: "6-3", wt: 320, age: 21, mo: 6},
-            {rank: 8, name: "Malaki Starks", pos: "S", school: "Georgia", ht: "6-1", wt: 205, age: 21, mo: 3},
-            {rank: 9, name: "Kelvin Banks Jr.", pos: "OT", school: "Texas", ht: "6-4", wt: 320, age: 21, mo: 7},
-            {rank: 10, name: "Will Johnson", pos: "CB", school: "Michigan", ht: "6-2", wt: 202, age: 21, mo: 10},
-            {rank: 11, name: "Jalen Milroe", pos: "QB", school: "Alabama", ht: "6-2", wt: 225, age: 22, mo: 9},
-            {rank: 12, name: "Ashton Jeanty", pos: "RB", school: "Boise State", ht: "5-9", wt: 215, age: 21, mo: 1},
-            {rank: 13, name: "James Pearce Jr.", pos: "EDGE", school: "Tennessee", ht: "6-5", wt: 243, age: 21, mo: 4},
-            {rank: 14, name: "Kenneth Grant", pos: "IDL", school: "Michigan", ht: "6-3", wt: 339, age: 21, mo: 8},
-            {rank: 15, name: "Mykel Williams", pos: "EDGE", school: "Georgia", ht: "6-5", wt: 265, age: 21, mo: 2},
-            {rank: 16, name: "Tyler Warren", pos: "TE", school: "Penn State", ht: "6-6", wt: 260, age: 22, mo: 11},
-            {rank: 17, name: "Nic Scourton", pos: "EDGE", school: "Texas A&M", ht: "6-4", wt: 280, age: 21, mo: 6},
-            {rank: 18, name: "Benjamin Morrison", pos: "CB", school: "Notre Dame", ht: "6-0", wt: 190, age: 21, mo: 3},
-            {rank: 19, name: "Jalon Walker", pos: "LB", school: "Georgia", ht: "6-2", wt: 245, age: 21, mo: 7},
-            {rank: 20, name: "Luther Burden III", pos: "WR", school: "Missouri", ht: "5-11", wt: 208, age: 21, mo: 5},
-            {rank: 21, name: "Derrick Harmon", pos: "IDL", school: "Oregon", ht: "6-5", wt: 310, age: 22, mo: 0},
-            {rank: 22, name: "Colston Loveland", pos: "TE", school: "Michigan", ht: "6-5", wt: 245, age: 21, mo: 4},
-            {rank: 23, name: "Emeka Egbuka", pos: "WR", school: "Ohio State", ht: "6-1", wt: 205, age: 22, mo: 8},
-            {rank: 24, name: "Shemar Stewart", pos: "EDGE", school: "Texas A&M", ht: "6-6", wt: 290, age: 21, mo: 1},
-            {rank: 25, name: "Jonah Savaiinaea", pos: "OG", school: "Arizona", ht: "6-5", wt: 330, age: 22, mo: 10},
-            {rank: 26, name: "Tyleik Williams", pos: "IDL", school: "Ohio State", ht: "6-3", wt: 290, age: 22, mo: 3},
-            {rank: 27, name: "Shavon Revel Jr.", pos: "CB", school: "East Carolina", ht: "6-3", wt: 193, age: 22, mo: 6},
-            {rank: 28, name: "Grey Zabel", pos: "OG", school: "North Dakota St", ht: "6-5", wt: 305, age: 23, mo: 2},
-            {rank: 29, name: "Donovan Jackson", pos: "OG", school: "Ohio State", ht: "6-4", wt: 320, age: 22, mo: 9},
-            {rank: 30, name: "Xavier Watts", pos: "S", school: "Notre Dame", ht: "6-0", wt: 203, age: 23, mo: 5},
-            {rank: 31, name: "Matthew Golden", pos: "WR", school: "Texas", ht: "6-0", wt: 195, age: 21, mo: 11},
-            {rank: 32, name: "Quinshon Judkins", pos: "RB", school: "Ohio State", ht: "6-0", wt: 218, age: 21, mo: 7}
-        ];
-        
-        let watchlist = new Set();
+        function getCollegeLogo(school, size = 40) {
+            const college = COLLEGE_DATA[school];
+            if (!college) return `<div class="team-logo-gradient" style="width:${size}px;height:${size}px;background:#333;font-size:${size/4}px;border-radius:6px;">${school.substring(0,3).toUpperCase()}</div>`;
+            return `<div class="team-logo-gradient" style="width:${size}px;height:${size}px;background:linear-gradient(135deg,${college.color} 60%,${college.color2} 100%);font-size:${size/4}px;border-radius:6px;">${college.abbr}</div>`;
+        }
         
         function getPositionClass(pos) {
-            const offense = ['QB', 'RB', 'WR', 'TE', 'OT', 'OG', 'C', 'OL'];
-            const defense = ['EDGE', 'IDL', 'DL', 'LB', 'CB', 'S'];
+            const offense = ['QB', 'RB', 'WR', 'TE', 'OT', 'OG', 'C', 'OL', 'IOL', 'FB'];
+            const defense = ['EDGE', 'IDL', 'DL', 'LB', 'ILB', 'OLB', 'CB', 'S', 'FS', 'SS'];
             if (offense.includes(pos)) return 'offense';
             if (defense.includes(pos)) return 'defense';
             return 'special';
         }
         
-        function toggleWatch(rank) {
-            if (watchlist.has(rank)) {
-                watchlist.delete(rank);
+        function getConsensusTag(rank) {
+            if (rank <= 5) return '<span class="consensus-range top-5">Top 5</span>';
+            if (rank <= 10) return '<span class="consensus-range top-10">Top 10</span>';
+            if (rank <= 20) return '<span class="consensus-range mid-1st">Mid 1st</span>';
+            if (rank <= 32) return '<span class="consensus-range late-1st">Late 1st</span>';
+            if (rank <= 64) return '<span class="consensus-range rd-2">Rd 2</span>';
+            if (rank <= 128) return '<span class="consensus-range rd-3-4">Rd 3-4</span>';
+            return '<span class="consensus-range rd-5-7">Rd 5-7</span>';
+        }
+        
+        function toggleWatch(id) {
+            if (watchlist.has(id)) {
+                watchlist.delete(id);
             } else {
-                watchlist.add(rank);
+                watchlist.add(id);
             }
             watchlistCount = watchlist.size;
             updateWatchlistButton();
@@ -1058,21 +1099,45 @@
         
         function renderProspects() {
             const container = document.getElementById('prospectList');
-            container.innerHTML = PROSPECTS.map(p => {
-                const isWatched = watchlist.has(p.rank);
+            let filtered = prospects.filter(p => !p.drafted);
+            
+            if (currentFilter !== 'All') {
+                const posMap = {
+                    'QB': ['QB'], 'RB': ['RB', 'FB'], 'WR': ['WR'], 'TE': ['TE'],
+                    'OL': ['OT', 'OG', 'C', 'IOL', 'OL'], 'IDL': ['IDL', 'DL', 'DT', 'NT'],
+                    'EDGE': ['EDGE', 'DE', 'OLB'], 'LB': ['LB', 'ILB', 'MLB'],
+                    'CB': ['CB'], 'S': ['S', 'FS', 'SS'], 'K/P': ['K', 'P', 'LS']
+                };
+                const positions = posMap[currentFilter] || [currentFilter];
+                filtered = filtered.filter(p => positions.includes(p.position));
+            }
+            
+            if (watchlistActive && watchlistCount > 0) {
+                filtered = filtered.filter(p => watchlist.has(p.id));
+            }
+            
+            container.innerHTML = filtered.slice(0, 50).map(p => {
+                const isWatched = watchlist.has(p.id);
+                const age = p.bio?.age_years || 21;
+                const mo = p.bio?.age_months || 0;
+                const ht = p.bio?.height || "6-0";
+                const wt = p.bio?.weight || 200;
                 return `
                     <div class="prospect-row">
-                        <div class="prospect-rank">${p.rank}</div>
-                        <div class="prospect-pos ${getPositionClass(p.pos)}">${p.pos}</div>
-                        <div>
-                            <div class="prospect-name">${p.name}</div>
-                            <div class="prospect-school">${p.school}</div>
+                        <div class="prospect-rank">${p.consensus_rank || '-'}</div>
+                        <div class="prospect-pos ${getPositionClass(p.position)}">${p.position}</div>
+                        <div style="display: flex; align-items: center; gap: 10px;">
+                            ${getCollegeLogo(p.school, 32)}
+                            <div>
+                                <div class="prospect-name">${p.name}</div>
+                                <div class="prospect-school">${p.school}</div>
+                            </div>
                         </div>
-                        <div class="prospect-stat">${p.ht}</div>
-                        <div class="prospect-stat">${p.wt} lbs</div>
-                        <div class="prospect-stat">${p.age} yr<span style="font-size: 10px; color: var(--text-muted);"> | ${p.mo} mo</span></div>
-                        <div></div>
-                        <button class="prospect-star ${isWatched ? 'watched' : ''}" onclick="toggleWatch(${p.rank})">
+                        <div class="prospect-stat">${ht}</div>
+                        <div class="prospect-stat">${wt} lbs</div>
+                        <div class="prospect-stat">${age} yr<span style="font-size: 10px; color: var(--text-muted);"> | ${mo} mo</span></div>
+                        <div>${getConsensusTag(p.consensus_rank || 999)}</div>
+                        <button class="prospect-star ${isWatched ? 'watched' : ''}" onclick="toggleWatch('${p.id}')">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="${isWatched ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2">
                                 <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
                             </svg>
@@ -1083,20 +1148,22 @@
         }
         
         function renderNeeds() {
-            let firstOffNeed = true;
-            let firstDefNeed = true;
-            
             const renderNeed = (n, isFirst) => {
+                const filled = filledNeeds[n.pos];
                 const skillTags = (n.skills || []).map(s => `<span class="skill-tag">${s}</span>`).join('');
                 const traitTags = (n.traits || []).map(t => `<span class="trait-tag">${t}</span>`).join('');
                 const expanded = isFirst ? 'expanded' : '';
+                const filledClass = filled ? 'filled' : '';
+                const filledIndicator = filled ? `<div class="need-filled-player">Drafted: ${filled}</div>` : '';
+                const checkmark = filled ? '<span style="color: var(--success); margin-left: auto;">&#10003;</span>' : '';
                 return `
-                    <div class="need-item ${n.priority} ${expanded}" data-pos="${n.pos}">
+                    <div class="need-item ${n.priority} ${expanded} ${filledClass}" data-pos="${n.pos}">
                         <div class="need-pos">${n.pos}</div>
                         <div style="flex: 1;">
                             <div class="need-content" onclick="toggleNeed('${n.pos}')">
                                 <div style="display: flex; align-items: center; justify-content: space-between;">
                                     <div class="need-archetype">${n.archetype}</div>
+                                    ${checkmark}
                                     <span class="need-toggle">
                                         <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                             <polyline points="6 9 12 15 18 9"></polyline>
@@ -1107,6 +1174,7 @@
                             <div class="need-expand">
                                 <div class="need-skills">${skillTags}${traitTags}</div>
                                 <div class="need-note">${n.note}</div>
+                                ${filledIndicator}
                             </div>
                         </div>
                     </div>
@@ -1130,6 +1198,7 @@
         }
         
         function renderPickList() {
+            const roundPicks = draftOrder.filter(d => d.round === currentRound);
             const nextUserPick = userTeam.picks.find(p => p >= currentPick) || userTeam.picks[0];
             const picksAway = nextUserPick - currentPick;
             
@@ -1138,42 +1207,37 @@
                 ? `<span class="picks-away">${picksAway} pick${picksAway !== 1 ? 's' : ''} away</span>`
                 : `<span class="picks-away" style="color: var(--nfl-red);">On the clock!</span>`;
             
-            const currentTeam = draftOrder.find(d => d.pick === currentPick);
+            const currentPickData = draftOrder.find(d => d.overall === currentPick);
             document.getElementById('draftStatus').textContent = 
-                `Round 1, Pick ${currentPick} - ${currentTeam?.team || 'TBD'} on the clock`;
+                `Round ${currentRound}, Pick ${currentPick} - ${currentPickData?.team || 'TBD'} on the clock`;
             
-            // Left panel: Draft Order
-            document.getElementById('draftOrderList').innerHTML = draftOrder.map(d => {
+            document.getElementById('draftOrderList').innerHTML = roundPicks.map(d => {
                 const isMine = d.team === userTeam.name;
-                const isOnClock = d.pick === currentPick;
-                const isPast = d.pick < currentPick;
+                const isOnClock = d.overall === currentPick;
+                const isPast = d.overall < currentPick;
                 let classes = 'draft-pick';
                 if (isMine) classes += ' user-pick';
                 if (isOnClock) classes += ' current';
                 if (isPast) classes += ' past';
+                const tradeInfo = d.original_team && d.original_team !== d.team ? `<span style="font-size:9px;color:var(--text-muted);margin-left:4px;">via ${d.original_team}</span>` : '';
                 return `
                     <div class="${classes}">
                         <div class="draft-pick-num">${d.pick}</div>
                         ${getTeamLogo(d.team, 24)}
-                        <div class="draft-pick-team">${d.team}</div>
-                        ${isPast ? '<div class="draft-pick-result">—</div>' : ''}
+                        <div class="draft-pick-team">${d.team}${tradeInfo}</div>
+                        ${d.trade_value ? `<div class="pick-value">${d.trade_value}</div>` : ''}
                     </div>
                 `;
             }).join('');
             
-            // Right panel: My Picks
             const roundNames = ['1st', '2nd', '3rd', '4th', '5th', '6th', '7th'];
             document.getElementById('myPicksList').innerHTML = userTeam.picks.map((pick, i) => {
                 const isNext = pick === nextUserPick;
                 const picksUntil = pick - currentPick;
                 let statusText = '';
-                if (pick < currentPick) {
-                    statusText = 'Completed';
-                } else if (isNext) {
-                    statusText = picksUntil === 0 ? 'On the clock!' : `${picksUntil} picks away`;
-                } else {
-                    statusText = 'Upcoming';
-                }
+                if (pick < currentPick) statusText = 'Completed';
+                else if (isNext) statusText = picksUntil === 0 ? 'On the clock!' : `${picksUntil} picks away`;
+                else statusText = 'Upcoming';
                 return `
                     <div class="my-pick ${isNext ? 'next' : ''}">
                         <div class="my-pick-round">${i + 1}</div>
@@ -1190,7 +1254,6 @@
         function toggleSidebar() {
             const layout = document.getElementById('appLayout');
             layout.classList.toggle('sidebar-collapsed');
-            
             const icon = document.querySelector('.sidebar-toggle svg');
             if (layout.classList.contains('sidebar-collapsed')) {
                 icon.innerHTML = '<polyline points="9 18 15 12 9 6"></polyline>';
@@ -1199,14 +1262,11 @@
             }
         }
         
-        let watchlistActive = false;
-        let watchlistCount = 0;
-        
         function toggleWatchlistFilter() {
             if (watchlistCount === 0) return;
             watchlistActive = !watchlistActive;
-            const btn = document.getElementById('watchlistToggle');
-            btn.classList.toggle('active', watchlistActive);
+            document.getElementById('watchlistToggle').classList.toggle('active', watchlistActive);
+            renderProspects();
         }
         
         function updateWatchlistButton() {
@@ -1222,15 +1282,86 @@
             }
         }
         
+        function setPositionFilter(pos) {
+            currentFilter = pos;
+            document.querySelectorAll('.pos-filter').forEach(btn => {
+                btn.classList.toggle('active', btn.textContent.trim() === pos || (pos === 'All' && btn.textContent.trim() === 'All'));
+            });
+            renderProspects();
+        }
+        
+        function setRound(round) {
+            currentRound = round;
+            document.querySelectorAll('.round-btn').forEach((btn, i) => {
+                btn.classList.toggle('active', i + 1 === round);
+            });
+            renderPickList();
+        }
+        
+        async function loadData() {
+            try {
+                const [prospectsRes, draftRes] = await Promise.all([
+                    fetch('data/prospects/current/2026_prospects.json'),
+                    fetch('data/draft/2026_draft_order.json')
+                ]);
+                
+                const prospectsData = await prospectsRes.json();
+                const draftData = await draftRes.json();
+                
+                prospects = prospectsData.prospects || [];
+                draftOrder = draftData.picks || [];
+                
+                prospects.forEach(p => {
+                    if (p.name && typeof p.name === 'object') {
+                        p.name = p.name.display || p.name.first + ' ' + p.name.last;
+                    }
+                    if (!p.school && p.college) p.school = p.college;
+                    if (p.consensus && p.consensus.rank) {
+                        p.consensus_rank = p.consensus.rank;
+                    }
+                    if (p.bio && p.bio.height_in) {
+                        const feet = Math.floor(p.bio.height_in / 12);
+                        const inches = p.bio.height_in % 12;
+                        p.bio.height = `${feet}-${inches}`;
+                    }
+                    if (p.bio && p.bio.weight_lbs) {
+                        p.bio.weight = p.bio.weight_lbs;
+                    }
+                });
+                
+                prospects.sort((a, b) => (a.consensus_rank || 999) - (b.consensus_rank || 999));
+                
+                init();
+            } catch (err) {
+                console.error('Error loading data:', err);
+                document.getElementById('prospectList').innerHTML = '<div style="padding: 20px; color: var(--text-muted);">Error loading prospects data</div>';
+            }
+        }
+        
         function init() {
             document.getElementById('sidebarTeamLogo').innerHTML = getTeamLogo(userTeam.name, 40);
             document.getElementById('sidebarTeamName').textContent = `Chicago ${userTeam.name}`;
+            
+            document.querySelectorAll('.pos-filter').forEach(function(btn) {
+                if (!btn.id) {
+                    btn.addEventListener('click', function() {
+                        setPositionFilter(this.textContent.trim());
+                    });
+                }
+            });
+            
+            document.querySelectorAll('.round-btn').forEach(function(btn, i) {
+                btn.addEventListener('click', function() {
+                    setRound(i + 1);
+                });
+            });
+            
             renderNeeds();
             renderPickList();
             renderProspects();
         }
         
-        init();
+        loadData();
     </script>
 </body>
 </html>

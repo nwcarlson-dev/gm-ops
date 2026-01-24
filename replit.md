@@ -9,8 +9,8 @@ GM Ops is a comprehensive NFL franchise simulation game aiming to be "the best f
 ## Project Structure
 - `index.html` - Main menu with game mode selection
 - `draft-setup.html` - Draft configuration (team selection, settings)
-- `draft-room.html` - Draft room interface with dynamic JSON data loading
-- `game-shell.html` - New unified game shell with 3-column layout
+- `draft-room.html` - Legacy draft room (simpler UI)
+- `game-shell.html` - **Primary draft UI** with 3-column layout, JSON data loading
 - `shared/styles.css` - Shared brand-compliant styles
 - `brand-guidelines.html` - Brand/style guidelines
 - `DESIGN.md` - Game design documentation
@@ -46,6 +46,7 @@ Python HTTP server on port 5000 (static site).
 - **Jan 2026**: Filled-need indicators track when user drafts at need positions
 - **Jan 2026**: Draft pick list shows trade values and traded picks (via team)
 - **Jan 2026**: 257 picks with NFLMDD trade values, Bears at #25
+- **Jan 24**: game-shell.html now loads 338 prospects from JSON with college colors, position filters, watchlist
 
 ## Future Work
 - **Trade System**: Trade ticker, incoming calls, CPU-to-CPU trades, trade value chart
