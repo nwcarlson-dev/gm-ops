@@ -234,6 +234,10 @@
     <div class="header">
         <h1>Dev Feedback</h1>
         <div style="display:flex; gap:8px; align-items:center;">
+            <div id="apiStatus" style="display:flex; align-items:center; gap:4px; font-size:11px; color:#888;">
+                <span id="statusDot" style="width:8px; height:8px; border-radius:50%; background:#888;"></span>
+                <span id="statusText">Checking...</span>
+            </div>
             <div class="type-toggle">
                 <button class="type-btn active" data-type="game">Game</button>
                 <button class="type-btn" data-type="technical">Technical</button>
@@ -794,6 +798,44 @@
                 retryAllPending();
             }
         }, 3000);
+        
+        // ============================================
+        // API STATUS CHECK
+        // ============================================
+        const statusDot = document.getElementById('statusDot');
+        const statusText = document.getElementById('statusText');
+        
+        async function checkApiStatus() {
+            try {
+                const controller = new AbortController();
+                const timeout = setTimeout(() => controller.abort(), 5000);
+                
+                const res = await fetch('/api/health', { 
+                    method: 'GET',
+                    signal: controller.signal 
+                });
+                clearTimeout(timeout);
+                
+                const text = await res.text();
+                
+                if (res.ok && !text.includes('UNAVAILABLE') && !text.includes('deploy')) {
+                    statusDot.style.background = '#4a4';
+                    statusText.textContent = 'Ready';
+                    statusText.style.color = '#4a4';
+                } else {
+                    statusDot.style.background = '#c44';
+                    statusText.textContent = 'Deploying...';
+                    statusText.style.color = '#c44';
+                }
+            } catch (e) {
+                statusDot.style.background = '#c44';
+                statusText.textContent = 'Deploying...';
+                statusText.style.color = '#c44';
+            }
+        }
+        
+        checkApiStatus();
+        setInterval(checkApiStatus, 10000); // Check every 10 seconds
     </script>
 </body>
 </html>
