@@ -9,11 +9,12 @@
 ## Table of Contents
 
 1. [Core Philosophy](#core-philosophy)
-2. [Player Rating System](#player-rating-system)
-3. [Position Flexibility System](#position-flexibility-system)
-4. [Scheme System](#scheme-system)
-5. [Combine & Pro Day System](#combine--pro-day-system)
-6. [Coaching Staff System](#coaching-staff-system)
+2. [Control Level System](#control-level-system)
+3. [Player Rating System](#player-rating-system)
+4. [Position Flexibility System](#position-flexibility-system)
+5. [Scheme System](#scheme-system)
+6. [Combine & Pro Day System](#combine--pro-day-system)
+7. [Coaching Staff System](#coaching-staff-system)
 7. [Front Office System](#front-office-system)
 8. [Owner System](#owner-system)
 9. [Free Agency System](#free-agency-system)
@@ -37,6 +38,54 @@
 - Gameplan sliders provide adjustable tendencies (run/pass ratio, aggressiveness)
 - Archetypes are cosmetic labels only - no gameplay impact
 - The user's job: Draft/sign players who fit scheme weights, hire coaches who run schemes that fit the roster
+
+---
+
+## Control Level System
+
+**"Difficulty" in GM Ops is not about simulation difficulty - it's about management responsibility.**
+
+The simulation engine runs identically regardless of setting. What changes is how much the user controls vs. delegates to the CPU, and how much guidance the game provides.
+
+### Control Levels
+
+| Level | Name | Philosophy |
+|-------|------|------------|
+| 1 | **Casual** | Enjoy the experience, CPU handles details |
+| 2 | **Balanced** | Strategic oversight with smart assistance |
+| 3 | **Involved** | Full control with helpful recommendations |
+| 4 | **Total Control** | You're on your own - minimal hand-holding |
+
+### What Changes Per Level
+
+| Aspect | Casual | Balanced | Involved | Total Control |
+|--------|--------|----------|----------|---------------|
+| **Draft** | CPU drafts based on your priorities | You pick Round 1, CPU handles rest | You pick all, see recommendations | You pick all, no suggestions |
+| **Free Agency** | CPU signs based on needs/budget | Approve/veto major signings | Full control, value alerts shown | Full control, no alerts |
+| **Trades** | CPU proposes, you approve/veto | CPU proposes, you can counter | You initiate, CPU shows fair value | You initiate, no value guidance |
+| **Roster Cuts** | Automatic | Approve final 53 | Make all cuts, warnings shown | Make all cuts, no warnings |
+| **Cap Management** | Automatic restructures | Approve restructures over $X | Manual, suggestions shown | Manual, no suggestions |
+| **Scouting** | Auto-scout all prospects | Auto-scout, you deep-dive top targets | Manual, scheme fit highlighted | Manual, raw data only |
+| **Scheme Fit Badges** | Always shown prominently | Shown on hover | Shown in detail view only | Hidden (calculate yourself) |
+| **Decision Prompts** | Major moments only (1st round pick) | Key decisions (top FA, trades) | All decisions presented | All decisions, no guidance |
+
+### User Experience Goals
+
+1. **Casual**: New users, time-limited players, or those who want narrative over spreadsheets. "I want to feel like a GM without learning cap accounting."
+
+2. **Balanced**: Most users land here. Strategic decisions are yours, tedious admin is automated. "I'll pick my draft, but don't make me cut down from 90 to 53 manually."
+
+3. **Involved**: Engaged users who want control but appreciate efficiency tools. "Show me everything, highlight what matters, but I'll decide."
+
+4. **Total Control**: Hardcore sim players who want maximum agency and minimal hand-holding. "Don't tell me who to draft - I have my own board."
+
+### Implementation Notes
+
+- Users can change control level at any point during a franchise
+- Users can override individual settings (e.g., "Balanced but I always want to control the draft")
+- Same underlying simulation engine regardless of level
+- Progressive disclosure: lower levels see summary views, higher levels see detailed tables
+- Control level affects UI density, not data availability (users can always dig deeper if they want)
 
 ---
 
