@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>2026 NFL Mock Draft Simulator</title>
-  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <title>GM Ops Draft - Team Selection</title>
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Source+Sans+3:wght@400;500;600;700&family=Teko:wght@400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="shared/styles.css">
   <style>
     :root {
       --primary: #0a1628;
@@ -19,6 +20,117 @@
       --card-border: rgba(138, 155, 174, 0.2);
       --glow: rgba(201, 36, 63, 0.3);
       --critical: #ff6b6b;
+      --nfl-red: #D50A0A;
+      --nfl-blue: #013369;
+    }
+
+    .app-header {
+      background: var(--nfl-blue);
+      padding: 12px 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 3px solid var(--nfl-red);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .header-left {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .back-link {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600;
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--silver);
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: 4px;
+      transition: all 0.2s;
+    }
+
+    .back-link:hover {
+      background: rgba(255,255,255,0.1);
+      color: white;
+    }
+
+    .logo-blocks {
+      display: inline-flex;
+      align-items: center;
+      transform: skewX(-12deg);
+      font-family: 'Teko', sans-serif;
+      text-decoration: none;
+    }
+
+    .logo-blocks .gm {
+      font-size: 32px;
+      font-weight: 700;
+      color: white;
+      background: var(--nfl-red);
+      padding: 4px 4px 0 8px;
+      letter-spacing: 0.02em;
+      line-height: 1;
+    }
+
+    .logo-blocks .ops {
+      font-weight: 700;
+      color: white;
+      background: var(--nfl-blue);
+      padding: 4px 8px 0 4px;
+      line-height: 1;
+      display: flex;
+      align-items: baseline;
+      border: 2px solid white;
+      border-left: none;
+    }
+
+    .logo-blocks .ops .o {
+      font-size: 32px;
+      letter-spacing: 0.02em;
+    }
+
+    .logo-blocks .ops .ps {
+      font-size: 26px;
+      letter-spacing: 0.02em;
+    }
+
+    .logo-product {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.4em;
+      text-transform: uppercase;
+      color: var(--silver);
+      margin-left: 12px;
+      transform: skewX(-12deg);
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .header-step {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--silver);
+    }
+
+    .header-step span {
+      color: white;
     }
 
     * {
@@ -768,13 +880,24 @@
   </style>
 </head>
 <body>
+  <header class="app-header">
+    <div class="header-left">
+      <a href="index.html" class="back-link">← Menu</a>
+      <a href="index.html" class="logo-blocks">
+        <span class="gm">GM</span>
+        <span class="ops"><span class="o">O</span><span class="ps">PS</span></span>
+      </a>
+      <span class="logo-product">Draft</span>
+    </div>
+    <div class="header-right">
+      <span class="header-step">Step <span>1</span> of 3</span>
+    </div>
+  </header>
+
   <div class="container">
     <header class="header">
-      <div class="logo-badge">
-        <div class="shield">NFL</div>
-      </div>
-      <h1>Mock Draft Simulator</h1>
-      <p>Select your team/s | Configure draft settings | Enter the draft</p>
+      <h1>Select Your Team</h1>
+      <p>Choose which team(s) you'll control in the draft</p>
     </header>
 
     <div class="controls">

@@ -3,10 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>NFL Mock Draft Simulator - Draft Room</title>
+  <title>GM Ops Draft - Draft Room</title>
+  <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="shared/styles.css">
   <style>
     :root {
-      --bg-dark: #0a0a0f;
+      --bg-dark: #0a1628;
       --bg-card: #12121a;
       --bg-hover: #1a1a25;
       --border: #2a2a3a;
@@ -18,16 +20,25 @@
       --danger: #dc3545;
       --warning: #ffc107;
       --info: #17a2b8;
+      --nfl-red: #D50A0A;
+      --nfl-blue: #013369;
+      --silver: #A5ACAF;
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; background: var(--bg-dark); color: var(--text-primary); min-height: 100vh; overflow: hidden; }
 
     /* Header */
-    .draft-header { background: linear-gradient(135deg, #1a1a2e 0%, #0a0a15 100%); border-bottom: 1px solid var(--border); padding: 12px 24px; display: flex; align-items: center; justify-content: space-between; height: 60px; }
-    .header-left { display: flex; align-items: center; gap: 20px; }
-    .back-btn { background: var(--bg-hover); border: 1px solid var(--border); color: var(--text-secondary); padding: 8px 14px; border-radius: 6px; cursor: pointer; font-size: 13px; display: flex; align-items: center; gap: 6px; transition: all 0.2s; z-index: 100; position: relative; }
-    .back-btn:hover { border-color: var(--accent); color: var(--text-primary); background: var(--bg-card); }
-    .logo { font-size: 18px; font-weight: 700; color: var(--accent); }
+    .draft-header { background: var(--nfl-blue); border-bottom: 3px solid var(--nfl-red); padding: 0 24px; display: flex; align-items: center; justify-content: space-between; height: 60px; }
+    .header-left { display: flex; align-items: center; gap: 16px; }
+    .back-btn { background: rgba(255,255,255,0.1); border: none; color: var(--silver); padding: 6px 12px; border-radius: 4px; cursor: pointer; font-family: 'Barlow Condensed', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; display: flex; align-items: center; gap: 6px; transition: all 0.2s; z-index: 100; position: relative; text-decoration: none; }
+    .back-btn:hover { background: rgba(255,255,255,0.15); color: white; }
+    .logo-blocks { display: inline-flex; align-items: center; transform: skewX(-12deg); font-family: 'Teko', sans-serif; text-decoration: none; }
+    .logo-blocks .gm { font-size: 28px; font-weight: 700; color: white; background: var(--nfl-red); padding: 3px 3px 0 6px; letter-spacing: 0.02em; line-height: 1; }
+    .logo-blocks .ops { font-weight: 700; color: white; background: var(--nfl-blue); padding: 3px 6px 0 3px; line-height: 1; display: flex; align-items: baseline; border: 2px solid white; border-left: none; }
+    .logo-blocks .ops .o { font-size: 28px; letter-spacing: 0.02em; }
+    .logo-blocks .ops .ps { font-size: 22px; letter-spacing: 0.02em; }
+    .logo-product { font-family: 'Barlow Condensed', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 0.4em; text-transform: uppercase; color: var(--silver); margin-left: 10px; transform: skewX(-12deg); }
+    .logo { font-size: 18px; font-weight: 700; color: var(--accent); display: none; }
     .draft-info { display: flex; align-items: center; gap: 16px; }
     .draft-info-item { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--text-secondary); }
     .draft-info-item span { color: var(--text-primary); font-weight: 600; }
@@ -225,8 +236,12 @@
 <body>
   <header class="draft-header">
     <div class="header-left">
-      <button class="back-btn" onclick="exitDraft()">← Exit Draft</button>
-      <div class="logo">🏈 NFL Mock Draft</div>
+      <a href="draft-setup.html" class="back-btn">← Setup</a>
+      <a href="index.html" class="logo-blocks">
+        <span class="gm">GM</span>
+        <span class="ops"><span class="o">O</span><span class="ps">PS</span></span>
+      </a>
+      <span class="logo-product">Draft</span>
       <div class="draft-info">
         <div class="draft-info-item">Round <span id="currentRound">1</span></div>
         <div class="draft-info-item">Pick <span id="currentPick">1</span></div>
