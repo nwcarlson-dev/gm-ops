@@ -748,11 +748,41 @@
         .draft-pick.current .draft-pick-num { background: var(--nfl-red); color: var(--white); }
         .draft-pick.user-pick .draft-pick-num { background: var(--gold); color: var(--dark-navy); }
         
+        .draft-pick-info {
+            flex: 1;
+            min-width: 0;
+        }
+        
         .draft-pick-team {
             font-size: 12px;
             font-weight: 500;
             color: var(--silver);
-            flex: 1;
+        }
+        
+        .via-info {
+            font-size: 9px;
+            color: var(--text-muted);
+            margin-left: 4px;
+        }
+        
+        .drafted-player {
+            font-size: 11px;
+            color: var(--white);
+            font-weight: 600;
+            margin-top: 2px;
+        }
+        
+        .drafted-pos {
+            font-size: 9px;
+            color: var(--gold);
+            font-weight: 500;
+            margin-left: 4px;
+        }
+        
+        .pick-value {
+            font-size: 9px;
+            color: var(--text-muted);
+            opacity: 0.5;
         }
         
         .draft-pick-result {
@@ -1561,13 +1591,17 @@
                 if (isMine) classes += ' user-pick';
                 if (isOnClock) classes += ' current';
                 if (isPast) classes += ' past';
-                const tradeInfo = d.via ? `<span style="font-size:9px;color:var(--text-muted);margin-left:4px;">via ${d.via}</span>` : '';
+                const tradeInfo = d.via ? `<span class="via-info">via ${d.via}</span>` : '';
+                const draftedPlayer = d.drafted ? `<div class="drafted-player">${d.drafted.name} <span class="drafted-pos">${d.drafted.position}</span></div>` : '';
                 return `
                     <div class="${classes}">
                         <div class="draft-pick-num">${d.pick}</div>
                         ${getTeamLogo(d.team, 24)}
-                        <div class="draft-pick-team">${d.team}${tradeInfo}</div>
-                        ${d.value ? `<div class="pick-value">${d.value}</div>` : ''}
+                        <div class="draft-pick-info">
+                            <div class="draft-pick-team">${d.team}${tradeInfo}</div>
+                            ${draftedPlayer}
+                        </div>
+                        ${!isPast && d.value ? `<div class="pick-value">${d.value}</div>` : ''}
                     </div>
                 `;
             }).join('');
