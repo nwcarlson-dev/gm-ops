@@ -60,6 +60,7 @@ Python HTTP server on port 5000 (static site).
 - **Jan 24**: Sim to Pick - auto-draft AI picks until user's next pick
 - **Jan 24**: Trade Center - modal to propose trades with value-based fairness check
 - **Jan 24**: Position-to-need mapping for accurate needs tracking (OG->IOL, DE->EDGE, etc.)
+- **Jan 24**: Sim controls with speed settings (Instant/Fast/Normal/Slow), target pick input, and stop button
 
 ## Future Work
 - **Trade System**: Trade ticker, incoming calls, CPU-to-CPU trades, trade value chart

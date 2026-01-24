@@ -99,6 +99,60 @@
             color: var(--text-muted);
         }
         
+        .sim-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .sim-speed-select {
+            padding: 6px 8px;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid var(--border-subtle);
+            border-radius: 6px;
+            color: var(--white);
+            font-size: 12px;
+            cursor: pointer;
+        }
+        
+        .sim-target {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 12px;
+            color: var(--silver);
+        }
+        
+        .sim-target input {
+            width: 50px;
+            padding: 6px 8px;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid var(--border-subtle);
+            border-radius: 6px;
+            color: var(--white);
+            font-size: 12px;
+            text-align: center;
+        }
+        
+        .sim-target input::placeholder {
+            color: var(--text-muted);
+        }
+        
+        .btn-danger {
+            background: var(--nfl-red);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        
+        .btn-danger:hover {
+            background: #b00808;
+        }
+        
         .select-player-btn {
             padding: 4px 10px;
             font-size: 10px;
@@ -1384,7 +1438,20 @@
                         <div class="header-team-name" id="headerTeamName">Chicago Bears</div>
                         <div class="header-team-meta" id="headerTeamMeta">Next: R1 P25 &bull; 24 picks away</div>
                     </div>
-                    <button class="btn btn-secondary" id="simToPickBtn" onclick="simToPick()">Sim to Pick</button>
+                    <div class="sim-controls">
+                        <select id="simSpeed" class="sim-speed-select">
+                            <option value="0">Instant</option>
+                            <option value="500" selected>Fast</option>
+                            <option value="1500">Normal</option>
+                            <option value="3000">Slow</option>
+                        </select>
+                        <div class="sim-target">
+                            <span>Sim to #</span>
+                            <input type="number" id="simTargetPick" min="1" max="257" value="" placeholder="Pick">
+                        </div>
+                        <button class="btn btn-secondary" id="simToPickBtn" onclick="startSim()">Sim</button>
+                        <button class="btn btn-danger" id="stopSimBtn" onclick="stopSim()" style="display:none;">Stop</button>
+                    </div>
                 </div>
             </div>
             
@@ -2045,13 +2112,45 @@
             renderNeeds();
         }
         
-        function simToPick() {
-            const nextUserPick = userTeam.picks.find(p => p >= currentPick);
-            if (!nextUserPick) return;
+        let simRunning = false;
+        let simAbortController = null;
+        
+        function startSim() {
+            const targetInput = document.getElementById('simTargetPick').value;
+            let targetPick;
             
-            while (currentPick < nextUserPick && currentPick <= 257) {
+            if (targetInput && !isNaN(parseInt(targetInput))) {
+                targetPick = parseInt(targetInput);
+            } else {
+                targetPick = userTeam.picks.find(p => p >= currentPick);
+            }
+            
+            if (!targetPick || targetPick <= currentPick) return;
+            
+            simRunning = true;
+            document.getElementById('simToPickBtn').style.display = 'none';
+            document.getElementById('stopSimBtn').style.display = 'inline-block';
+            
+            runSimulation(targetPick);
+        }
+        
+        function stopSim() {
+            simRunning = false;
+            document.getElementById('simToPickBtn').style.display = 'inline-block';
+            document.getElementById('stopSimBtn').style.display = 'none';
+        }
+        
+        async function runSimulation(targetPick) {
+            const speed = parseInt(document.getElementById('simSpeed').value);
+            
+            while (simRunning && currentPick < targetPick && currentPick <= 257) {
                 const pickData = draftOrder.find(d => d.overall === currentPick);
                 if (!pickData) break;
+                
+                if (pickData.team === userTeam.name) {
+                    stopSim();
+                    break;
+                }
                 
                 const teamNeeds = getTeamNeedsArray(pickData.team);
                 const available = prospects.filter(p => !p.drafted);
@@ -2079,17 +2178,22 @@
                 }
                 
                 currentPick++;
+                currentRound = Math.ceil(currentPick / 32) || 1;
+                if (currentRound > 7) currentRound = 7;
+                
+                renderPickList();
+                renderProspects();
+                renderNeeds();
+                
+                const pickEl = document.querySelector(`.draft-pick[data-overall="${currentPick}"]`);
+                if (pickEl) pickEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                
+                if (speed > 0) {
+                    await new Promise(r => setTimeout(r, speed));
+                }
             }
             
-            currentRound = Math.ceil(currentPick / 32) || 1;
-            if (currentRound > 7) currentRound = 7;
-            
-            renderPickList();
-            renderProspects();
-            renderNeeds();
-            
-            const pickEl = document.querySelector(`.draft-pick[data-overall="${currentPick}"]`);
-            if (pickEl) pickEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            stopSim();
         }
         
         function getTeamNeedsArray(teamName) {
@@ -2269,9 +2373,9 @@
             const metaText = onClock ? 'On the clock!' : `Next: R${nextRound} P${nextPickData?.pick || nextUserPick} \u2022 ${picksAway} picks away`;
             document.getElementById('headerTeamMeta').textContent = metaText;
             
-            const simBtn = document.getElementById('simToPickBtn');
-            if (simBtn) {
-                simBtn.style.display = onClock ? 'none' : 'block';
+            const simControls = document.querySelector('.sim-controls');
+            if (simControls) {
+                simControls.style.display = onClock ? 'none' : 'flex';
             }
             
             const currentPickData = draftOrder.find(d => d.overall === currentPick);
