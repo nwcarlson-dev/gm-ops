@@ -54,6 +54,12 @@ Python HTTP server on port 5000 (static site).
 - **Jan 24**: Trade values displayed subtly under pick numbers
 - **Jan 24**: Round buttons scroll to round start; auto-highlight on scroll
 - **Jan 24**: 3-column layout ratio adjusted: Draft Board (2fr) | Prospects (3fr) | Team Info (240-280px)
+- **Jan 24**: User team panel moved to header area (shows team logo, name, pick status)
+- **Jan 24**: Select button appears on prospect rows when user is on the clock
+- **Jan 24**: Player selection functionality - draft a player and update draft board/needs
+- **Jan 24**: Sim to Pick - auto-draft AI picks until user's next pick
+- **Jan 24**: Trade Center - modal to propose trades with value-based fairness check
+- **Jan 24**: Position-to-need mapping for accurate needs tracking (OG->IOL, DE->EDGE, etc.)
 
 ## Future Work
 - **Trade System**: Trade ticker, incoming calls, CPU-to-CPU trades, trade value chart
