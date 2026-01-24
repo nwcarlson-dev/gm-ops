@@ -508,8 +508,10 @@
                 console.log('[DevFeedback] Response:', data);
                 
                 if (data.error) {
+                    const errorMsg = data.details || data.error;
+                    const elapsed = data.elapsed || '';
                     log('Error - saved to pending', 'error');
-                    transcript.textContent = 'Error: ' + (data.details || data.error);
+                    transcript.textContent = `Error: ${errorMsg}${elapsed ? ' (' + elapsed + ')' : ''}`;
                     transcript.classList.remove('placeholder');
                     if (!isRetry) await savePendingRecording(blob, topicNumber.textContent);
                     return false;
@@ -534,7 +536,10 @@
             } catch (e) {
                 console.error('[DevFeedback] Fetch error:', e);
                 log('Failed - saved to pending', 'error');
-                transcript.textContent = 'Network error: ' + e.message;
+                // Show more detail for debugging
+                const errorDetail = e.message || 'Unknown error';
+                const errorType = e.name || 'Error';
+                transcript.textContent = `${errorType}: ${errorDetail}\n\nCheck browser console (F12) and Vercel logs for details.`;
                 transcript.classList.remove('placeholder');
                 if (!isRetry) await savePendingRecording(blob, topicNumber.textContent);
                 return false;

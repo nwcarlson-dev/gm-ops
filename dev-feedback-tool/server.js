@@ -96,7 +96,11 @@ async function transcribeWithRetry(audioBuffer, filename, contentType = 'audio/w
 }
 
 app.post('/api/transcribe', upload.single('audio'), async (req, res) => {
+    const startTime = Date.now();
+    console.log('[transcribe] Request received at', new Date().toISOString());
+    
     if (!req.file) {
+        console.log('[transcribe] ERROR: No audio file in request');
         return res.status(400).json({ error: 'No audio file provided' });
     }
 
@@ -119,12 +123,14 @@ app.post('/api/transcribe', upload.single('audio'), async (req, res) => {
     };
     const contentType = mimeMap[ext] || req.file.mimetype || 'audio/webm';
     
-    console.log('Processing:', filename);
-    console.log('Original name:', origName, 'MIME:', req.file.mimetype, '-> Using:', contentType);
-    console.log('File size:', (req.file.buffer.length / 1024).toFixed(1), 'KB');
+    console.log('[transcribe] File:', filename);
+    console.log('[transcribe] Original:', origName, '| Reported MIME:', req.file.mimetype, '| Using:', contentType);
+    console.log('[transcribe] Size:', (req.file.buffer.length / 1024).toFixed(1), 'KB');
     
     try {
         const transcription = await transcribeWithRetry(req.file.buffer, filename, contentType);
+        const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
+        console.log('[transcribe] SUCCESS in', elapsed, 's | Text length:', transcription.text.length);
 
         const text = transcription.text;
         const detection = detectTechnical(text);
@@ -135,10 +141,13 @@ app.post('/api/transcribe', upload.single('audio'), async (req, res) => {
             technicalMatches: detection.matches
         });
     } catch (error) {
-        console.error('Transcription failed after all retries:', error.message);
+        const elapsed = ((Date.now() - startTime) / 1000).toFixed(1);
+        console.error('[transcribe] FAILED after', elapsed, 's:', error.message);
+        console.error('[transcribe] Error stack:', error.stack);
         res.status(500).json({ 
-            error: 'Transcription failed after 3 attempts', 
-            details: error.message
+            error: 'Transcription failed', 
+            details: error.message,
+            elapsed: elapsed + 's'
         });
     }
 });
