@@ -1407,13 +1407,14 @@
             const showing = filtered.slice(0, prospectsToShow);
             const hasMore = filtered.length > prospectsToShow;
             
-            container.innerHTML = showing.map(p => {
+            container.innerHTML = showing.map((p, idx) => {
                 const isWatched = watchlist.has(p.id);
                 const ht = p.bio?.height || "6-0";
                 const wt = p.bio?.weight || 200;
+                const boardRank = filtered.indexOf(p) + 1;
                 return `
                     <div class="prospect-row">
-                        <div class="prospect-rank">${p.consensus_rank || '-'}</div>
+                        <div class="prospect-rank">${boardRank}</div>
                         <div class="prospect-info">
                             ${getCollegeLogo(p.school, 32)}
                             <div class="prospect-details">
