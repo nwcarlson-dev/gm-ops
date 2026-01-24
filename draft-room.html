@@ -1016,10 +1016,10 @@ function setupEvents() {
   });
 
   document.querySelectorAll('.filter-btn[data-pos]').forEach(btn => {
-    btn.addEventListener('click', () => {
+    btn.addEventListener('click', function() {
       document.querySelectorAll('.filter-btn[data-pos]').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      currentFilter = btn.dataset.pos;
+      this.classList.add('active');
+      currentFilter = this.dataset.pos;
       renderPlayerList();
     });
   });
