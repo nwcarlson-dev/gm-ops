@@ -1,43 +1,17 @@
 {
   "version": 2,
+  "buildCommand": "npm install",
   "functions": {
     "server.js": {
       "maxDuration": 60
     },
-    "api/*.js": {
+    "api/fix-untitled.js": {
       "maxDuration": 60
     }
   },
-  "builds": [
-    {
-      "src": "server.js",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "api/*.js",
-      "use": "@vercel/node"
-    },
-    {
-      "src": "dev-feedback.html",
-      "use": "@vercel/static"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/",
-      "dest": "/dev-feedback.html"
-    },
-    {
-      "src": "/dev-feedback.html",
-      "dest": "/dev-feedback.html"
-    },
-    {
-      "src": "/api/fix-untitled",
-      "dest": "/api/fix-untitled.js"
-    },
-    {
-      "src": "/api/(.*)",
-      "dest": "/server.js"
-    }
+  "rewrites": [
+    { "source": "/api/fix-untitled", "destination": "/api/fix-untitled" },
+    { "source": "/api/:path*", "destination": "/server.js" },
+    { "source": "/", "destination": "/dev-feedback.html" }
   ]
 }
