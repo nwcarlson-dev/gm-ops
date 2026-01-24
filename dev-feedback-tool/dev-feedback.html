@@ -545,34 +545,20 @@
             saveBtn.textContent = 'Generating title...';
             saveBtn.disabled = true;
             
-            let topicTitle = null;
-            let attempts = 0;
-            while (!topicTitle && attempts < 3) {
-                attempts++;
-                try {
-                    log('Generating title (attempt ' + attempts + ')...');
-                    const titleRes = await fetch('/api/generate-title', {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ text })
-                    });
-                    const titleData = await titleRes.json();
-                    if (titleData.title && titleData.title !== 'Untitled Topic') {
-                        topicTitle = titleData.title;
-                    }
-                } catch (e) {
-                    console.error('Title generation attempt ' + attempts + ' failed:', e);
+            let topicTitle = '[Untitled]';
+            try {
+                log('Generating title...');
+                const titleRes = await fetch('/api/generate-title', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ text })
+                });
+                const titleData = await titleRes.json();
+                if (titleData.title && titleData.title !== 'Untitled Topic') {
+                    topicTitle = titleData.title;
                 }
-                if (!topicTitle && attempts < 3) {
-                    await new Promise(r => setTimeout(r, 1000));
-                }
-            }
-            
-            if (!topicTitle) {
-                log('Failed to generate title - retry?', 'error');
-                saveBtn.textContent = 'Retry Save';
-                saveBtn.disabled = false;
-                return;
+            } catch (e) {
+                console.error('Title generation failed, saving with placeholder:', e);
             }
             
             const now = new Date();
