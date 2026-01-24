@@ -3,288 +3,252 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dev Feedback - GM Ops</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Dev Feedback</title>
     <style>
-        :root {
-            --bg-dark: #0a0a0f;
-            --card-bg: #1a1a2e;
-            --card-border: #2a2a4a;
-            --white: #fff;
-            --gold: #d4af37;
-            --silver: #a5acaf;
-            --text-muted: #6b7280;
-            --nfl-red: #d50a0a;
-            --nfl-blue: #013369;
-            --warning: #f59e0b;
-        }
-        
+        * { box-sizing: border-box; }
         body {
-            background: var(--bg-dark);
-            color: var(--white);
-            min-height: 100vh;
-            padding: 40px;
-            font-family: 'Inter', sans-serif;
+            background: #1a1a1a;
+            color: #e0e0e0;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             margin: 0;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 400px;
-            gap: 24px;
-        }
-        
-        h1 {
-            font-family: 'Teko', sans-serif;
-            font-size: 48px;
-            color: var(--white);
-            margin: 0 0 8px 0;
-        }
-        
-        .subtitle { color: var(--text-muted); margin-bottom: 32px; }
-        
-        .recorder-card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 12px;
-            padding: 24px;
-            margin-bottom: 24px;
-        }
-        
-        .type-toggle {
-            display: flex;
-            gap: 8px;
-            margin-bottom: 16px;
-        }
-        
-        .type-btn {
-            padding: 8px 16px;
-            border: 1px solid var(--card-border);
-            background: transparent;
-            color: var(--silver);
-            border-radius: 6px;
-            cursor: pointer;
-            font-family: 'Barlow Condensed', sans-serif;
+            padding: 16px;
             font-size: 14px;
-            text-transform: uppercase;
-            transition: all 0.2s;
         }
         
-        .type-btn.active {
-            background: var(--gold);
-            color: var(--bg-dark);
-            border-color: var(--gold);
-        }
-        
-        .type-btn:hover:not(.active) {
-            border-color: var(--silver);
-        }
-        
-        .recorder-header {
+        .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 16px;
+            padding-bottom: 12px;
+            border-bottom: 1px solid #333;
         }
         
-        .recorder-header h2 {
-            font-family: 'Barlow Condensed', sans-serif;
+        .header h1 {
             font-size: 18px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--gold);
             margin: 0;
-        }
-        
-        .topic-info {
-            display: flex;
-            gap: 24px;
-            margin-bottom: 16px;
-            align-items: center;
-        }
-        
-        .topic-number {
-            font-family: 'Barlow Condensed', sans-serif;
-            font-size: 32px;
             font-weight: 600;
-            color: var(--gold);
         }
         
-        .date-display { font-size: 14px; color: var(--silver); }
-        
-        .recorder-controls {
+        .type-toggle {
             display: flex;
-            align-items: center;
+            gap: 4px;
+        }
+        
+        .type-btn {
+            padding: 4px 10px;
+            border: 1px solid #444;
+            background: transparent;
+            color: #888;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        
+        .type-btn.active {
+            background: #2a5a2a;
+            color: #fff;
+            border-color: #3a7a3a;
+        }
+        
+        .container {
+            display: flex;
+            flex-direction: column;
             gap: 16px;
         }
         
+        .recorder {
+            background: #252525;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 16px;
+        }
+        
+        .topic-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        
+        .topic-number {
+            font-size: 20px;
+            font-weight: 600;
+            color: #6a6;
+        }
+        
+        .date { font-size: 12px; color: #666; }
+        
+        .controls {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+        
         .record-btn {
-            width: 64px;
-            height: 64px;
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
-            border: 3px solid var(--nfl-red);
+            border: 2px solid #c44;
             background: transparent;
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            transition: all 0.2s;
+            flex-shrink: 0;
         }
         
-        .record-btn:hover { background: rgba(213, 10, 10, 0.2); }
-        
         .record-btn .inner {
-            width: 28px;
-            height: 28px;
-            background: var(--nfl-red);
+            width: 20px;
+            height: 20px;
+            background: #c44;
             border-radius: 50%;
-            transition: all 0.2s;
+            transition: all 0.15s;
         }
         
         .record-btn.recording .inner {
-            border-radius: 4px;
-            width: 24px;
-            height: 24px;
+            border-radius: 3px;
+            width: 16px;
+            height: 16px;
         }
         
-        .status { font-size: 14px; color: var(--text-muted); }
-        .status.recording { color: var(--nfl-red); }
+        .status {
+            font-size: 13px;
+            color: #888;
+        }
         
-        .transcript-box {
-            background: rgba(0,0,0,0.3);
-            border: 1px solid var(--card-border);
-            border-radius: 8px;
-            padding: 16px;
-            min-height: 100px;
-            margin-top: 16px;
-            font-size: 14px;
-            line-height: 1.6;
+        .status.recording { color: #c44; }
+        .status.error { color: #c44; }
+        .status.success { color: #6a6; }
+        
+        .transcript {
+            background: #1a1a1a;
+            border: 1px solid #333;
+            border-radius: 6px;
+            padding: 12px;
+            min-height: 80px;
+            font-size: 13px;
+            line-height: 1.5;
             white-space: pre-wrap;
+            margin-bottom: 12px;
         }
+        
+        .transcript.placeholder { color: #555; }
         
         .save-btn {
             width: 100%;
-            padding: 12px;
-            background: var(--nfl-blue);
-            color: var(--white);
+            padding: 10px;
+            background: #2a4a6a;
+            color: #fff;
             border: none;
-            border-radius: 8px;
-            font-family: 'Barlow Condensed', sans-serif;
-            font-size: 16px;
-            text-transform: uppercase;
-            cursor: pointer;
-            margin-top: 16px;
-        }
-        
-        .save-btn:hover { background: #014a99; }
-        .save-btn:disabled { opacity: 0.5; cursor: not-allowed; }
-        
-        .feed-column { position: sticky; top: 40px; height: fit-content; }
-        
-        .feed-card {
-            background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 12px;
-            padding: 16px;
-            max-height: 500px;
-            overflow-y: auto;
-        }
-        
-        .feed-card h3 {
-            font-family: 'Barlow Condensed', sans-serif;
-            font-size: 14px;
-            text-transform: uppercase;
-            color: var(--silver);
-            margin: 0 0 12px 0;
-        }
-        
-        .feed-item {
-            padding: 8px 0;
-            border-bottom: 1px solid var(--card-border);
+            border-radius: 6px;
             font-size: 13px;
+            cursor: pointer;
         }
         
-        .feed-item:last-child { border-bottom: none; }
+        .save-btn:hover { background: #3a5a7a; }
+        .save-btn:disabled { opacity: 0.4; cursor: not-allowed; }
         
         .tech-alert {
-            background: rgba(245, 158, 11, 0.15);
-            border: 1px solid var(--warning);
-            border-radius: 8px;
-            padding: 12px;
-            margin-top: 12px;
+            background: rgba(200, 150, 50, 0.15);
+            border: 1px solid #a85;
+            border-radius: 6px;
+            padding: 10px;
+            margin-bottom: 12px;
             display: none;
+            font-size: 12px;
         }
         
         .tech-alert.show { display: block; }
         
-        .tech-alert p { margin: 0 0 8px 0; font-size: 13px; color: var(--warning); }
+        .tech-alert p { margin: 0 0 8px 0; color: #ca8; }
         
         .tech-alert-btns { display: flex; gap: 8px; }
         
         .tech-alert-btns button {
-            padding: 6px 12px;
+            padding: 4px 10px;
             border-radius: 4px;
             border: none;
-            font-size: 12px;
+            font-size: 11px;
             cursor: pointer;
         }
         
-        .switch-btn { background: var(--warning); color: #000; }
-        .keep-btn { background: var(--card-border); color: var(--white); }
+        .switch-btn { background: #a85; color: #000; }
+        .keep-btn { background: #444; color: #ccc; }
+        
+        .feed {
+            background: #252525;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 12px;
+        }
+        
+        .feed h3 {
+            font-size: 12px;
+            text-transform: uppercase;
+            color: #666;
+            margin: 0 0 8px 0;
+            font-weight: 500;
+        }
+        
+        .feed-item {
+            padding: 6px 0;
+            border-bottom: 1px solid #333;
+            font-size: 12px;
+            color: #aaa;
+        }
+        
+        .feed-item:last-child { border-bottom: none; }
+        
+        @media (min-width: 600px) {
+            .container {
+                flex-direction: row;
+            }
+            .recorder { flex: 1; }
+            .feed { width: 280px; max-height: 400px; overflow-y: auto; }
+        }
     </style>
 </head>
 <body>
+    <div class="header">
+        <h1>Dev Feedback</h1>
+        <div class="type-toggle">
+            <button class="type-btn active" data-type="game">Game</button>
+            <button class="type-btn" data-type="technical">Technical</button>
+        </div>
+    </div>
+    
     <div class="container">
-        <div class="main-column">
-            <h1>Dev Feedback</h1>
-            <p class="subtitle">Record planning dialogue for GM Ops development</p>
-            
-            <div class="recorder-card">
-                <div class="type-toggle">
-                    <button class="type-btn active" data-type="game">Game Dev</button>
-                    <button class="type-btn" data-type="technical">Technical</button>
-                </div>
-                
-                <div class="recorder-header">
-                    <h2>New Topic</h2>
-                </div>
-                
-                <div class="topic-info">
-                    <span class="topic-number" id="topicNumber">1.1</span>
-                    <span class="date-display" id="dateDisplay"></span>
-                </div>
-                
-                <div class="recorder-controls">
-                    <button class="record-btn" id="recordBtn">
-                        <span class="inner"></span>
-                    </button>
-                    <span class="status" id="status">Click to record</span>
-                </div>
-                
-                <div class="transcript-box" id="transcript">Transcript will appear here...</div>
-                <div class="status-log" id="statusLog" style="font-size: 11px; color: #f59e0b; margin-top: 8px;"></div>
-                
-                <div class="tech-alert" id="techAlert">
-                    <p>This sounds like a technical/tooling topic. Switch to Technical folder?</p>
-                    <div class="tech-alert-btns">
-                        <button class="switch-btn" id="switchBtn">Switch to Technical</button>
-                        <button class="keep-btn" id="keepBtn">Keep as Game Dev</button>
-                    </div>
-                </div>
-                
-                <button class="save-btn" id="saveBtn" disabled>Save Topic</button>
+        <div class="recorder">
+            <div class="topic-row">
+                <span class="topic-number" id="topicNumber">1.1</span>
+                <span class="date" id="dateDisplay"></span>
             </div>
+            
+            <div class="controls">
+                <button class="record-btn" id="recordBtn">
+                    <span class="inner"></span>
+                </button>
+                <span class="status" id="status">Click to record</span>
+            </div>
+            
+            <div class="transcript placeholder" id="transcript">Transcript will appear here...</div>
+            
+            <div class="tech-alert" id="techAlert">
+                <p>Sounds like a technical topic. Switch folder?</p>
+                <div class="tech-alert-btns">
+                    <button class="switch-btn" id="switchBtn">Switch</button>
+                    <button class="keep-btn" id="keepBtn">Keep</button>
+                </div>
+            </div>
+            
+            <button class="save-btn" id="saveBtn" disabled>Save Topic</button>
         </div>
         
-        <div class="feed-column">
-            <div class="feed-card">
-                <h3>Recent Topics</h3>
-                <div id="topicsFeed">Loading...</div>
-            </div>
+        <div class="feed">
+            <h3>Recent Topics</h3>
+            <div id="topicsFeed">Loading...</div>
         </div>
     </div>
 
@@ -304,6 +268,12 @@
         const dateDisplay = document.getElementById('dateDisplay');
         const topicsFeed = document.getElementById('topicsFeed');
         const techAlert = document.getElementById('techAlert');
+        
+        function log(msg, type = '') {
+            status.textContent = msg;
+            status.className = 'status ' + type;
+            console.log('[DevFeedback]', msg);
+        }
         
         document.querySelectorAll('.type-btn').forEach(btn => {
             btn.addEventListener('click', () => {
@@ -335,7 +305,7 @@
         function updateDate() {
             const now = new Date();
             dateDisplay.textContent = now.toLocaleDateString('en-US', { 
-                weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' 
+                month: 'short', day: 'numeric', year: 'numeric' 
             });
         }
         
@@ -362,15 +332,20 @@
         recordBtn.addEventListener('click', async () => {
             if (!isRecording) {
                 try {
+                    log('Requesting mic...');
                     const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
                     mediaRecorder = new MediaRecorder(stream);
                     audioChunks = [];
                     
-                    mediaRecorder.ondataavailable = e => audioChunks.push(e.data);
+                    mediaRecorder.ondataavailable = e => {
+                        audioChunks.push(e.data);
+                    };
                     
                     mediaRecorder.onstop = async () => {
-                        status.textContent = 'Transcribing...';
+                        log('Transcribing...');
                         const blob = new Blob(audioChunks, { type: 'audio/webm' });
+                        console.log('[DevFeedback] Audio blob size:', blob.size);
+                        
                         const formData = new FormData();
                         formData.append('audio', blob);
                         
@@ -379,28 +354,43 @@
                                 method: 'POST',
                                 body: formData
                             });
-                            const data = await res.json();
-                            transcript.textContent = data.text;
-                            saveBtn.disabled = false;
-                            status.textContent = 'Transcription complete';
-                            status.classList.remove('recording');
                             
-                            if (currentType === 'game' && data.technicalDetected) {
-                                techAlert.classList.add('show');
+                            console.log('[DevFeedback] Response status:', res.status);
+                            const data = await res.json();
+                            console.log('[DevFeedback] Response:', data);
+                            
+                            if (data.error) {
+                                log('Error: ' + data.error, 'error');
+                                transcript.textContent = 'Error: ' + (data.details || data.error);
+                                transcript.classList.remove('placeholder');
+                            } else if (data.text) {
+                                transcript.textContent = data.text;
+                                transcript.classList.remove('placeholder');
+                                saveBtn.disabled = false;
+                                log('Ready to save', 'success');
+                                
+                                if (currentType === 'game' && data.technicalDetected) {
+                                    techAlert.classList.add('show');
+                                }
+                            } else {
+                                log('No text returned', 'error');
+                                transcript.textContent = 'No transcription returned';
+                                transcript.classList.remove('placeholder');
                             }
                         } catch (e) {
-                            status.textContent = 'Transcription failed';
-                            transcript.textContent = 'Error: ' + e.message;
+                            console.error('[DevFeedback] Fetch error:', e);
+                            log('Request failed: ' + e.message, 'error');
+                            transcript.textContent = 'Network error: ' + e.message;
+                            transcript.classList.remove('placeholder');
                         }
                     };
                     
                     mediaRecorder.start();
                     isRecording = true;
                     recordBtn.classList.add('recording');
-                    status.textContent = 'Recording...';
-                    status.classList.add('recording');
+                    log('Recording...', 'recording');
                 } catch (e) {
-                    status.textContent = 'Mic access denied';
+                    log('Mic denied: ' + e.message, 'error');
                 }
             } else {
                 mediaRecorder.stop();
@@ -412,7 +402,10 @@
         
         saveBtn.addEventListener('click', async () => {
             const text = transcript.textContent;
-            if (!text || text === 'Transcript will appear here...') return;
+            if (!text || transcript.classList.contains('placeholder')) {
+                log('Nothing to save', 'error');
+                return;
+            }
             
             const now = new Date();
             const dateStr = now.toISOString().split('T')[0];
@@ -424,6 +417,7 @@
             
             saveBtn.textContent = 'Saving...';
             saveBtn.disabled = true;
+            log('Saving to GitHub...');
             
             try {
                 const res = await fetch('/api/save-transcript', {
@@ -432,25 +426,31 @@
                     body: JSON.stringify({ filename, content, type: currentType })
                 });
                 
-                if (res.ok) {
-                    saveBtn.textContent = 'Saved!';
+                const data = await res.json();
+                console.log('[DevFeedback] Save response:', data);
+                
+                if (res.ok && data.success) {
+                    log('Saved!', 'success');
                     transcript.textContent = 'Transcript will appear here...';
+                    transcript.classList.add('placeholder');
                     techAlert.classList.remove('show');
                     loadTopics();
-                    setTimeout(() => { saveBtn.textContent = 'Save Topic'; }, 2000);
+                    saveBtn.textContent = 'Save Topic';
                 } else {
-                    throw new Error('Save failed');
+                    log('Save failed: ' + (data.error || 'Unknown'), 'error');
+                    saveBtn.textContent = 'Save Topic';
+                    saveBtn.disabled = false;
                 }
             } catch (e) {
-                saveBtn.textContent = 'Save Failed';
+                console.error('[DevFeedback] Save error:', e);
+                log('Save failed: ' + e.message, 'error');
+                saveBtn.textContent = 'Save Topic';
                 saveBtn.disabled = false;
             }
         });
         
         updateDate();
         loadTopics();
-        
-        // Poll for new topics every 5 seconds
         setInterval(loadTopics, 5000);
     </script>
 </body>
