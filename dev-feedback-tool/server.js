@@ -41,9 +41,9 @@ function getOpenAIClient() {
     return new OpenAI({ apiKey });
 }
 
-// Ensure recordings folder exists
-const RECORDINGS_DIR = path.join(__dirname, 'recordings');
-if (!fs.existsSync(RECORDINGS_DIR)) {
+// Use /tmp for serverless (Vercel), local folder for development
+const RECORDINGS_DIR = process.env.VERCEL ? '/tmp' : path.join(__dirname, 'recordings');
+if (!process.env.VERCEL && !fs.existsSync(RECORDINGS_DIR)) {
     fs.mkdirSync(RECORDINGS_DIR, { recursive: true });
 }
 
