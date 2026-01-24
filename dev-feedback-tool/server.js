@@ -47,7 +47,11 @@ function getGitHubClient() {
 function getOpenAIClient() {
     const apiKey = process.env.OPENAI_API_KEY;
     if (!apiKey) throw new Error('OPENAI_API_KEY not set');
-    return new OpenAI({ apiKey });
+    return new OpenAI({ 
+        apiKey,
+        timeout: 30000,
+        maxRetries: 0
+    });
 }
 
 // Use /tmp for serverless (Vercel), local folder for development
