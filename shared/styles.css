@@ -316,9 +316,11 @@ body::before {
 }
 
 .sidebar-team-name {
-    font-family: 'Teko', sans-serif;
-    font-size: 1.4rem;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.25rem;
     font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
     color: var(--white);
     line-height: 1;
     margin-bottom: 4px;
@@ -343,9 +345,11 @@ body::before {
 }
 
 .page-title {
-    font-family: 'Teko', sans-serif;
-    font-size: 2rem;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.75rem;
     font-weight: 700;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
     color: var(--white);
     line-height: 1;
 }
@@ -420,9 +424,11 @@ body::before {
 }
 
 .card-title {
-    font-family: 'Teko', sans-serif;
-    font-size: 1.25rem;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1.1rem;
     font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
     color: var(--white);
 }
 
@@ -591,9 +597,11 @@ body::before {
 }
 
 .sidebar-cta-title {
-    font-family: 'Teko', sans-serif;
-    font-size: 1.1rem;
+    font-family: 'Barlow Condensed', sans-serif;
+    font-size: 1rem;
     font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
     color: var(--white);
     margin-bottom: 4px;
 }
