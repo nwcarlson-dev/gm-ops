@@ -496,13 +496,29 @@
                 return;
             }
             
+            saveBtn.textContent = 'Generating title...';
+            saveBtn.disabled = true;
+            
+            let topicTitle = 'Untitled Topic';
+            try {
+                const titleRes = await fetch('/api/generate-title', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ text })
+                });
+                const titleData = await titleRes.json();
+                topicTitle = titleData.title || 'Untitled Topic';
+            } catch (e) {
+                console.error('Title generation failed:', e);
+            }
+            
             const now = new Date();
             const dateStr = now.toISOString().split('T')[0];
             const prefix = currentType === 'technical' ? 'dev-technical' : 'dev-planning';
             const filename = prefix + '_' + dateStr + '_0001.md';
             const topicNum = (currentType === 'technical' ? 'T' : '') + dayNumber + '.' + (topicCount + 1);
             
-            const content = '## ' + topicNum + ' - [Topic Title]\n*' + dateStr + '*\n\n' + text;
+            const content = '## ' + topicNum + ' - ' + topicTitle + '\n*' + dateStr + '*\n\n' + text;
             
             saveBtn.textContent = 'Saving...';
             saveBtn.disabled = true;

@@ -133,6 +133,46 @@ app.post('/api/transcribe', upload.single('audio'), async (req, res) => {
     }
 });
 
+// Generate a short title from transcript
+app.post('/api/generate-title', express.json(), async (req, res) => {
+    const { text } = req.body;
+    if (!text) {
+        return res.status(400).json({ error: 'No text provided' });
+    }
+    
+    try {
+        const apiKey = process.env.OPENAI_API_KEY;
+        if (!apiKey) throw new Error('OPENAI_API_KEY not set');
+        
+        const response = await fetch('https://api.openai.com/v1/chat/completions', {
+            method: 'POST',
+            headers: {
+                'Authorization': `Bearer ${apiKey}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                model: 'gpt-4o-mini',
+                messages: [{
+                    role: 'user',
+                    content: `Generate a short 2-5 word title for this dev planning note. Return ONLY the title, no quotes or punctuation:\n\n${text.slice(0, 500)}`
+                }],
+                max_tokens: 20
+            })
+        });
+        
+        if (!response.ok) {
+            throw new Error('OpenAI API error');
+        }
+        
+        const data = await response.json();
+        const title = data.choices[0]?.message?.content?.trim() || 'Untitled Topic';
+        res.json({ title });
+    } catch (error) {
+        console.error('Title generation error:', error.message);
+        res.json({ title: 'Untitled Topic' });
+    }
+});
+
 // Endpoint to retry transcription from saved file
 app.post('/api/transcribe-file', express.json(), async (req, res) => {
     const { filePath } = req.body;
