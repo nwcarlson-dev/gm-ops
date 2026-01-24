@@ -12,6 +12,15 @@ const upload = multer({ storage: multer.memoryStorage() });
 app.use(express.json());
 app.use(express.static(__dirname));
 
+// Explicit route for the HTML file (Vercel compatibility)
+app.get('/dev-feedback.html', (req, res) => {
+    res.sendFile(path.join(__dirname, 'dev-feedback.html'));
+});
+
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'dev-feedback.html'));
+});
+
 const GITHUB_OWNER = process.env.GITHUB_OWNER || 'nwcarlson-dev';
 const GITHUB_REPO = process.env.GITHUB_REPO || 'gm-ops';
 
