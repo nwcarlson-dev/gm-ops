@@ -1024,9 +1024,9 @@ function setupEvents() {
     });
   });
 
-  document.getElementById('starredFilter').addEventListener('click', e => {
-    e.target.classList.toggle('active');
-    showStarredOnly = e.target.classList.contains('active');
+  document.getElementById('starredFilter').addEventListener('click', function() {
+    this.classList.toggle('active');
+    showStarredOnly = this.classList.contains('active');
     renderPlayerList();
   });
 
