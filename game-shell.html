@@ -411,6 +411,134 @@
             color: var(--gold);
         }
         
+        .draft-order-panel {
+            display: flex;
+            flex-direction: column;
+            max-height: calc(100vh - 200px);
+        }
+        
+        .draft-order-panel .card-header {
+            flex-shrink: 0;
+        }
+        
+        .round-tabs {
+            display: flex;
+            gap: 4px;
+        }
+        
+        .round-btn {
+            padding: 4px 10px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border-subtle);
+            border-radius: 4px;
+            color: var(--text-muted);
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+        
+        .round-btn:hover { color: var(--white); border-color: var(--gold); }
+        .round-btn.active { background: var(--gold); color: var(--dark-navy); border-color: var(--gold); }
+        
+        .draft-order-list {
+            flex: 1;
+            overflow-y: auto;
+            padding: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+        
+        .draft-pick {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 10px;
+            background: rgba(0,0,0,0.2);
+            border-radius: 6px;
+            border: 1px solid transparent;
+            transition: all 0.15s;
+        }
+        
+        .draft-pick:hover { background: rgba(255,255,255,0.03); }
+        .draft-pick.user-pick { border-color: var(--gold); background: rgba(212, 175, 55, 0.08); }
+        .draft-pick.current { border-color: var(--nfl-red); background: rgba(213, 10, 10, 0.1); }
+        .draft-pick.past { opacity: 0.5; }
+        
+        .draft-pick-num {
+            width: 24px;
+            height: 24px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-muted);
+            flex-shrink: 0;
+        }
+        
+        .draft-pick.current .draft-pick-num { background: var(--nfl-red); color: var(--white); }
+        .draft-pick.user-pick .draft-pick-num { background: var(--gold); color: var(--dark-navy); }
+        
+        .draft-pick-team {
+            font-size: 12px;
+            font-weight: 500;
+            color: var(--silver);
+            flex: 1;
+        }
+        
+        .draft-pick-result {
+            font-size: 11px;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+        
+        .my-picks-list { display: flex; flex-direction: column; gap: 6px; }
+        
+        .my-pick {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            background: rgba(0,0,0,0.15);
+            border-radius: 6px;
+            border: 1px solid var(--border-subtle);
+        }
+        
+        .my-pick.next { border-color: var(--gold); background: rgba(212, 175, 55, 0.08); }
+        .my-pick.filled { border-color: var(--success); background: rgba(40, 167, 69, 0.08); }
+        
+        .my-pick-round {
+            width: 28px;
+            height: 28px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-muted);
+            flex-shrink: 0;
+        }
+        
+        .my-pick.next .my-pick-round { background: var(--gold); color: var(--dark-navy); }
+        
+        .my-pick-info { flex: 1; }
+        .my-pick-label { font-size: 12px; font-weight: 600; color: var(--white); }
+        .my-pick-overall { font-size: 11px; color: var(--text-muted); }
+        
+        .my-pick-status {
+            font-size: 10px;
+            color: var(--text-muted);
+            font-style: italic;
+        }
+        
+        .my-pick.next .my-pick-status { color: var(--gold); font-style: normal; font-weight: 600; }
+        
         .pick-list { display: flex; flex-direction: column; gap: 6px; }
         
         .pick-row {
@@ -656,7 +784,19 @@
                 </div>
             </div>
             
-            <div style="display: grid; grid-template-columns: 1fr 340px; gap: 20px;">
+            <div style="display: grid; grid-template-columns: 280px 1fr 340px; gap: 16px;">
+                <div class="card draft-order-panel">
+                    <div class="card-header">
+                        <h3 class="card-title">Draft Order</h3>
+                        <div class="round-tabs">
+                            <button class="round-btn active">R1</button>
+                            <button class="round-btn">R2</button>
+                            <button class="round-btn">R3</button>
+                        </div>
+                    </div>
+                    <div class="draft-order-list" id="draftOrderList"></div>
+                </div>
+                
                 <div class="card">
                     <div class="card-header" style="flex-direction: column; align-items: flex-start; gap: 12px;">
                         <h3 class="card-title">Available Prospects</h3>
@@ -706,8 +846,8 @@
                         </div>
                         
                         <div id="picksTab" class="tab-content">
-                            <div class="needs-header">Round 1 Draft Order</div>
-                            <div class="pick-list" id="pickList"></div>
+                            <div class="needs-header">My Draft Picks</div>
+                            <div class="my-picks-list" id="myPicksList"></div>
                         </div>
                         
                         <div id="schemeTab" class="tab-content">
@@ -952,16 +1092,46 @@
             document.getElementById('draftStatus').textContent = 
                 `Round 1, Pick ${currentPick} - ${currentTeam?.team || 'TBD'} on the clock`;
             
-            document.getElementById('pickList').innerHTML = draftOrder.map(d => {
+            // Left panel: Draft Order
+            document.getElementById('draftOrderList').innerHTML = draftOrder.map(d => {
                 const isMine = d.team === userTeam.name;
                 const isOnClock = d.pick === currentPick;
                 const isPast = d.pick < currentPick;
+                let classes = 'draft-pick';
+                if (isMine) classes += ' user-pick';
+                if (isOnClock) classes += ' current';
+                if (isPast) classes += ' past';
                 return `
-                    <div class="pick-row ${isMine ? 'mine' : ''} ${isOnClock ? 'on-clock' : ''}">
-                        <div class="pick-num">${d.pick}</div>
-                        <div class="pick-team-logo">${getTeamLogo(d.team, 22)}</div>
-                        <div class="pick-team-name" style="${isPast ? 'opacity: 0.5;' : ''}">${d.team}</div>
-                        ${isPast ? '<div class="pick-result">-</div>' : ''}
+                    <div class="${classes}">
+                        <div class="draft-pick-num">${d.pick}</div>
+                        ${getTeamLogo(d.team, 24)}
+                        <div class="draft-pick-team">${d.team}</div>
+                        ${isPast ? '<div class="draft-pick-result">—</div>' : ''}
+                    </div>
+                `;
+            }).join('');
+            
+            // Right panel: My Picks
+            const roundNames = ['1st', '2nd', '3rd', '4th', '5th', '6th', '7th'];
+            document.getElementById('myPicksList').innerHTML = userTeam.picks.map((pick, i) => {
+                const isNext = pick === nextUserPick;
+                const picksUntil = pick - currentPick;
+                let statusText = '';
+                if (pick < currentPick) {
+                    statusText = 'Completed';
+                } else if (isNext) {
+                    statusText = picksUntil === 0 ? 'On the clock!' : `${picksUntil} picks away`;
+                } else {
+                    statusText = 'Upcoming';
+                }
+                return `
+                    <div class="my-pick ${isNext ? 'next' : ''}">
+                        <div class="my-pick-round">${i + 1}</div>
+                        <div class="my-pick-info">
+                            <div class="my-pick-label">Round ${roundNames[i]} Pick</div>
+                            <div class="my-pick-overall">Overall #${pick}</div>
+                        </div>
+                        <div class="my-pick-status">${statusText}</div>
                     </div>
                 `;
             }).join('');
