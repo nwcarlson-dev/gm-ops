@@ -1433,20 +1433,18 @@
       playJingle();
 
       const settings = {
+        selectedTeams: selected,
         posVal: document.getElementById('posVal').innerText,
         needVal: document.getElementById('needVal').innerText,
         rounds: selectedRounds,
         prospects: prospects
       };
 
-      if (typeof google !== 'undefined' && google.script) {
-        google.script.run
-          .withSuccessHandler(m => alert(m))
-          .processDraft(selected, settings);
-      } else {
-        console.log('Draft Settings:', { selectedTeams: selected, ...settings });
-        alert(`Draft initiated!\n\nTeams: ${selected.join(', ')}\nRounds: ${selectedRounds}\nPositional Value: ${settings.posVal}\nDraft for Needs: ${settings.needVal}`);
-      }
+      // Store draft settings for draft-room to read
+      localStorage.setItem('gmops_draft_settings', JSON.stringify(settings));
+      
+      // Navigate to draft room
+      window.location.href = 'draft-room.html';
     }
 
     window.onload = renderTeams;
