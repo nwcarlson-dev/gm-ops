@@ -1,0 +1,152 @@
+const express = require('express');
+const multer = require('multer');
+const path = require('path');
+const { Octokit } = require('@octokit/rest');
+
+const app = express();
+const upload = multer({ storage: multer.memoryStorage() });
+
+app.use(express.json());
+app.use(express.static(__dirname));
+
+const GITHUB_OWNER = process.env.GITHUB_OWNER || 'nwcarlson-dev';
+const GITHUB_REPO = process.env.GITHUB_REPO || 'gm-ops';
+
+const TECHNICAL_KEYWORDS = [
+    'replit', 'github', 'git', 'deploy', 'server', 'api', 'endpoint',
+    'bug', 'debug', 'error', 'fix', 'node', 'npm', 'package',
+    'cursor', 'chatgpt', 'claude', 'ai tool', 'workflow', 'tooling',
+    'environment', 'variable', 'token', 'auth', 'whisper', 'transcri',
+    'feedback tool', 'recorder', 'localhost', 'vercel', 'hosting'
+];
+
+function detectTechnical(text) {
+    const lower = text.toLowerCase();
+    const matches = TECHNICAL_KEYWORDS.filter(kw => lower.includes(kw));
+    return { isTechnical: matches.length >= 2, matches };
+}
+
+function getGitHubClient() {
+    const token = process.env.GITHUB_TOKEN;
+    if (!token) throw new Error('GITHUB_TOKEN not set');
+    return new Octokit({ auth: token });
+}
+
+app.post('/api/transcribe', upload.single('audio'), async (req, res) => {
+    if (!req.file) {
+        return res.status(400).json({ error: 'No audio file provided' });
+    }
+
+    try {
+        const formData = new FormData();
+        formData.append('file', new Blob([req.file.buffer]), 'audio.webm');
+        formData.append('model', 'whisper-1');
+
+        const response = await fetch('https://api.openai.com/v1/audio/transcriptions', {
+            method: 'POST',
+            headers: { 'Authorization': 'Bearer ' + process.env.OPENAI_API_KEY },
+            body: formData
+        });
+
+        if (!response.ok) {
+            const error = await response.text();
+            throw new Error('OpenAI API error: ' + error);
+        }
+
+        const data = await response.json();
+        const text = data.text;
+        const detection = detectTechnical(text);
+        
+        res.json({ 
+            text,
+            technicalDetected: detection.isTechnical,
+            technicalMatches: detection.matches
+        });
+    } catch (error) {
+        console.error('Transcription error:', error);
+        res.status(500).json({ error: 'Transcription failed', details: error.message });
+    }
+});
+
+app.get('/api/topics', async (req, res) => {
+    try {
+        const octokit = getGitHubClient();
+        const type = req.query.type || 'game';
+        const folder = type === 'technical' ? 'dev-technical-transcripts' : 'dev-planning-transcripts';
+        
+        let files = [];
+        try {
+            const { data } = await octokit.repos.getContent({
+                owner: GITHUB_OWNER,
+                repo: GITHUB_REPO,
+                path: folder
+            });
+            files = data.filter(f => f.name.endsWith('.md'));
+        } catch (e) {}
+
+        const topics = [];
+        for (const file of files.slice(-5)) {
+            const { data } = await octokit.repos.getContent({
+                owner: GITHUB_OWNER,
+                repo: GITHUB_REPO,
+                path: file.path
+            });
+            const content = Buffer.from(data.content, 'base64').toString('utf8');
+            const regex = /## [T]?[0-9]+\.[0-9]+ - .+/g;
+            const matches = content.match(regex) || [];
+            topics.push(...matches.map(m => m.replace('## ', '')));
+        }
+
+        res.json({ topics: topics.reverse() });
+    } catch (error) {
+        res.json({ topics: [] });
+    }
+});
+
+app.post('/api/save-transcript', async (req, res) => {
+    const { filename, content, type } = req.body;
+
+    if (!filename || !content) {
+        return res.status(400).json({ error: 'Missing filename or content' });
+    }
+
+    try {
+        const octokit = getGitHubClient();
+        const folder = type === 'technical' ? 'dev-technical-transcripts' : 'dev-planning-transcripts';
+        const filePath = folder + '/' + filename;
+
+        let sha = null;
+        let existingContent = '';
+        try {
+            const { data } = await octokit.repos.getContent({
+                owner: GITHUB_OWNER,
+                repo: GITHUB_REPO,
+                path: filePath
+            });
+            sha = data.sha;
+            existingContent = Buffer.from(data.content, 'base64').toString('utf8');
+        } catch (e) {}
+
+        const finalContent = existingContent ? existingContent + '\n---\n\n' + content : content;
+
+        await octokit.repos.createOrUpdateFileContents({
+            owner: GITHUB_OWNER,
+            repo: GITHUB_REPO,
+            path: filePath,
+            message: 'Add transcript: ' + filename,
+            content: Buffer.from(finalContent).toString('base64'),
+            sha: sha
+        });
+
+        res.json({ success: true, path: filePath });
+    } catch (error) {
+        console.error('GitHub save error:', error);
+        res.status(500).json({ error: 'Failed to save to GitHub', details: error.message });
+    }
+});
+
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, '0.0.0.0', () => {
+    console.log('Server running on port ' + PORT);
+    console.log('Dev Feedback tool available at /dev-feedback.html');
+});
