@@ -767,6 +767,48 @@
         
         // Initialize pending recordings storage
         initDB().then(() => refreshPendingList()).catch(e => console.log('IndexedDB init:', e));
+        
+        // Auto-retry pending recordings every 10 minutes
+        async function autoRetryPending() {
+            const pending = await getPendingRecordings();
+            if (pending.length === 0) return;
+            
+            console.log(`[DevFeedback] Auto-retrying ${pending.length} pending recordings...`);
+            for (const record of pending) {
+                try {
+                    const formData = new FormData();
+                    formData.append('audio', record.blob);
+                    
+                    const { ok, data } = await fetchWithRetry('/api/transcribe', {
+                        method: 'POST',
+                        body: formData
+                    });
+                    
+                    if (data.text) {
+                        console.log(`[DevFeedback] Auto-retry success for ${record.topicNum}`);
+                        // Auto-save the transcript
+                        const dateStr = new Date().toISOString().split('T')[0];
+                        const filename = (record.type === 'technical' ? 'dev-technical' : 'dev-planning') + '_' + dateStr + '_0001.md';
+                        const content = `## ${record.topicNum} - [Untitled]\n*${dateStr}*\n\n${data.text}`;
+                        
+                        await fetch('/api/save-transcript', {
+                            method: 'POST',
+                            headers: { 'Content-Type': 'application/json' },
+                            body: JSON.stringify({ filename, content, type: record.type || 'game', topicNumber: record.topicNum })
+                        });
+                        
+                        await deletePendingRecording(record.id);
+                        // Trigger fix-untitled in background
+                        fetch('/api/fix-untitled').catch(() => {});
+                    }
+                } catch (e) {
+                    console.log(`[DevFeedback] Auto-retry failed for ${record.topicNum}:`, e.message);
+                }
+            }
+            refreshPendingList();
+        }
+        
+        setInterval(autoRetryPending, 10 * 60 * 1000); // Every 10 minutes
     </script>
 </body>
 </html>
