@@ -310,10 +310,15 @@
                 <div class="sidebar-team-info">
                     <div style="display: flex; align-items: center; gap: 12px;">
                         <div id="sidebarTeamLogo"></div>
-                        <div>
+                        <div style="flex: 1;">
                             <div class="sidebar-team-name" id="sidebarTeamName">Chicago Bears</div>
                             <div class="sidebar-team-meta" id="sidebarTeamMeta">Next: R1 P25</div>
                         </div>
+                        <button class="sidebar-toggle" onclick="toggleSidebar()" title="Toggle Sidebar" style="position: static; transform: none; width: 28px; height: 28px;">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="15 18 9 12 15 6"></polyline>
+                            </svg>
+                        </button>
                     </div>
                     <div class="next-pick-info" id="nextPickInfo">
                         <span class="picks-away">12 picks away</span>
@@ -418,12 +423,6 @@
                     <div class="sidebar-cta-text">Get Offseason & Franchise modes with annual or lifetime license.</div>
                     <button class="btn btn-primary">View Plans</button>
                 </div>
-                
-                <button class="sidebar-toggle" onclick="toggleSidebar()" title="Toggle Sidebar">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <polyline points="15 18 9 12 15 6"></polyline>
-                    </svg>
-                </button>
             </div>
         </aside>
         
@@ -455,6 +454,7 @@
                             <button class="pos-filter">LB</button>
                             <button class="pos-filter">CB</button>
                             <button class="pos-filter">S</button>
+                            <button class="pos-filter">K/P</button>
                         </div>
                     </div>
                     <div style="color: var(--text-muted); text-align: center; padding: 60px 20px;">
