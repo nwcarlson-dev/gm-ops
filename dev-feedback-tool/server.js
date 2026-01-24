@@ -47,6 +47,32 @@ if (!fs.existsSync(RECORDINGS_DIR)) {
     fs.mkdirSync(RECORDINGS_DIR, { recursive: true });
 }
 
+async function transcribeWithRetry(audioPath, maxRetries = 3) {
+    const openai = getOpenAIClient();
+    
+    for (let attempt = 1; attempt <= maxRetries; attempt++) {
+        try {
+            console.log(`Transcription attempt ${attempt}/${maxRetries}...`);
+            const transcription = await openai.audio.transcriptions.create({
+                file: fs.createReadStream(audioPath),
+                model: 'whisper-1'
+            });
+            return transcription;
+        } catch (error) {
+            console.error(`Attempt ${attempt} failed:`, error.message);
+            
+            if (attempt === maxRetries) {
+                throw error;
+            }
+            
+            // Wait before retry (exponential backoff: 2s, 4s, 8s)
+            const waitTime = Math.pow(2, attempt) * 1000;
+            console.log(`Waiting ${waitTime/1000}s before retry...`);
+            await new Promise(resolve => setTimeout(resolve, waitTime));
+        }
+    }
+}
+
 app.post('/api/transcribe', upload.single('audio'), async (req, res) => {
     if (!req.file) {
         return res.status(400).json({ error: 'No audio file provided' });
@@ -57,13 +83,10 @@ app.post('/api/transcribe', upload.single('audio'), async (req, res) => {
     const audioPath = path.join(RECORDINGS_DIR, 'recording-' + timestamp + '.webm');
     fs.writeFileSync(audioPath, req.file.buffer);
     console.log('Saved recording:', audioPath);
+    console.log('File size:', (req.file.buffer.length / 1024).toFixed(1), 'KB');
     
     try {
-        const openai = getOpenAIClient();
-        const transcription = await openai.audio.transcriptions.create({
-            file: fs.createReadStream(audioPath),
-            model: 'whisper-1'
-        });
+        const transcription = await transcribeWithRetry(audioPath);
 
         const text = transcription.text;
         const detection = detectTechnical(text);
@@ -75,11 +98,11 @@ app.post('/api/transcribe', upload.single('audio'), async (req, res) => {
             audioFile: audioPath
         });
     } catch (error) {
-        console.error('Transcription error:', error);
+        console.error('Transcription failed after all retries:', error.message);
         res.status(500).json({ 
-            error: 'Transcription failed', 
+            error: 'Transcription failed after 3 attempts', 
             details: error.message,
-            audioFile: audioPath  // Return path so user knows where to find it
+            audioFile: audioPath
         });
     }
 });
@@ -93,11 +116,7 @@ app.post('/api/transcribe-file', express.json(), async (req, res) => {
     }
     
     try {
-        const openai = getOpenAIClient();
-        const transcription = await openai.audio.transcriptions.create({
-            file: fs.createReadStream(filePath),
-            model: 'whisper-1'
-        });
+        const transcription = await transcribeWithRetry(filePath);
 
         const text = transcription.text;
         const detection = detectTechnical(text);
@@ -108,8 +127,8 @@ app.post('/api/transcribe-file', express.json(), async (req, res) => {
             technicalMatches: detection.matches
         });
     } catch (error) {
-        console.error('Transcription error:', error);
-        res.status(500).json({ error: 'Transcription failed', details: error.message });
+        console.error('Transcription failed after all retries:', error.message);
+        res.status(500).json({ error: 'Transcription failed after 3 attempts', details: error.message });
     }
 });
 
