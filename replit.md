@@ -9,14 +9,16 @@ GM Ops is a comprehensive NFL franchise simulation game aiming to be "the best f
 ## Project Structure
 - `index.html` - Main menu with game mode selection
 - `draft-setup.html` - Draft configuration (team selection, settings)
-- `draft-room.html` - Draft room interface (original)
+- `draft-room.html` - Draft room interface with dynamic JSON data loading
 - `game-shell.html` - New unified game shell with 3-column layout
 - `shared/styles.css` - Shared brand-compliant styles
 - `brand-guidelines.html` - Brand/style guidelines
 - `DESIGN.md` - Game design documentation
 - `dev-guide.html` - Developer guide
 - `data/` - Data files and scripts
-  - `data/prospects/2026_prospects.json` - Prospect database with full schema
+  - `data/prospects/current/2026_prospects.json` - 338 prospects with full schema
+  - `data/draft/2026_draft_order.json` - 257 picks with trade values (NFLMDD source)
+  - `data/teams/nflmdd_team_needs_2026.json` - Team needs by position
   - `data/prospects/SCHEMA.md` - Documentation for prospect data structure
   - `data/raw/nflverse/` - Raw data from NFLverse
 
@@ -38,17 +40,19 @@ Python HTTP server on port 5000 (static site).
 - Added scheme-fit matching system: team needs show position skills (gold tags) + physical traits (silver tags)
 - Synced DESIGN.md from GitHub with full skill definitions per position
 - **Jan 2026**: 3-column draft layout (Draft Order | Big Board | Team Panel)
-- **Jan 2026**: Collapsible need cards with expand/collapse toggle
-- **Jan 2026**: Age display with months (e.g., "21 yr | 8 mo")
-- **Jan 2026**: Created `data/prospects/2026_prospects.json` with extensible schema for all prospect data
+- **Jan 2026**: Created `data/prospects/2026_prospects.json` with 338 prospects
+- **Jan 2026**: Draft room now loads all data from JSON files (prospects, draft order, team needs)
+- **Jan 2026**: "More Info" button on player cards opens scouting report modal with rankings & comparisons
+- **Jan 2026**: Filled-need indicators track when user drafts at need positions
+- **Jan 2026**: Draft pick list shows trade values and traded picks (via team)
+- **Jan 2026**: 257 picks with NFLMDD trade values, Bears at #25
 
 ## Future Work
-- **Prospect Data Import**: Populate 100+ prospects from PFF/consensus sources into JSON
-- **Draft Order with Selections**: Show drafted players in left panel
 - **Trade System**: Trade ticker, incoming calls, CPU-to-CPU trades, trade value chart
-- **Prospect Scouting Modal**: Click prospect → full report with scheme fit score
-- **Full Styling Pass**: Refactor draft-setup and draft-room body content to use brand tokens
+- **Full Styling Pass**: Refactor draft-setup body content to use brand tokens
 - **Draft Results Page**: Grades, recap, export functionality
+- **Team Selection**: Let user pick any team (currently hardcoded to Bears)
+- **Draft Timer**: Add clock/timer for user picks
 
 ## Prospect Data Schema
 See `data/prospects/SCHEMA.md` for full documentation. Key fields:
