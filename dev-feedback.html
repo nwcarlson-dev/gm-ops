@@ -81,6 +81,14 @@
             font-size: 14px;
         }
         
+        .topic-number {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--gold);
+            min-width: 80px;
+        }
+        
         .topic-input input::placeholder {
             color: var(--text-muted);
         }
@@ -300,8 +308,9 @@
                 <h2>New Recording</h2>
             </div>
             <div class="topic-input">
-                <label>Topic/Reference:</label>
-                <input type="text" id="topicInput" placeholder="e.g., 1.023.5 - Sim controls feedback">
+                <label>Topic #:</label>
+                <span class="topic-number" id="nextTopicNum"></span>
+                <input type="text" id="topicLabel" placeholder="Brief label (optional)">
             </div>
             <div class="recorder-controls">
                 <button class="record-btn" id="recordBtn" onclick="toggleRecording()">
@@ -334,6 +343,29 @@
         let seconds = 0;
         let feedbackItems = JSON.parse(localStorage.getItem('devFeedback') || '[]');
         
+        const PROJECT_START = new Date('2026-01-01');
+        
+        function getProjectDay() {
+            const now = new Date();
+            const diffTime = now - PROJECT_START;
+            return Math.floor(diffTime / (1000 * 60 * 60 * 24)) + 1;
+        }
+        
+        function getNextTopicNumber() {
+            const day = getProjectDay();
+            const todayItems = feedbackItems.filter(item => {
+                const itemDay = parseInt(item.topicNum?.split('.')[0] || '0');
+                return itemDay === day;
+            });
+            const nextTopic = todayItems.length + 1;
+            return `${day}.${nextTopic}`;
+        }
+        
+        function updateNextTopicDisplay() {
+            document.getElementById('nextTopicNum').textContent = getNextTopicNumber();
+        }
+        
+        updateNextTopicDisplay();
         renderFeedbackList();
         
         async function toggleRecording() {
@@ -433,9 +465,13 @@
         }
         
         function saveFeedback(text) {
-            const topic = document.getElementById('topicInput').value || 'General Feedback';
+            const topicNum = getNextTopicNumber();
+            const label = document.getElementById('topicLabel').value.trim();
+            const topic = label ? `${topicNum} - ${label}` : topicNum;
+            
             const item = {
                 id: Date.now(),
+                topicNum: topicNum,
                 topic: topic,
                 text: text,
                 timestamp: new Date().toISOString(),
@@ -445,8 +481,9 @@
             feedbackItems.unshift(item);
             localStorage.setItem('devFeedback', JSON.stringify(feedbackItems));
             renderFeedbackList();
+            updateNextTopicDisplay();
             
-            document.getElementById('topicInput').value = '';
+            document.getElementById('topicLabel').value = '';
         }
         
         function renderFeedbackList() {
