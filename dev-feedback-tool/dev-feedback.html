@@ -233,9 +233,12 @@
 <body>
     <div class="header">
         <h1>Dev Feedback</h1>
-        <div class="type-toggle">
-            <button class="type-btn active" data-type="game">Game</button>
-            <button class="type-btn" data-type="technical">Technical</button>
+        <div style="display:flex; gap:8px; align-items:center;">
+            <div class="type-toggle">
+                <button class="type-btn active" data-type="game">Game</button>
+                <button class="type-btn" data-type="technical">Technical</button>
+            </div>
+            <button onclick="clearAllData()" style="padding:4px 8px; background:#633; color:#ccc; border:none; border-radius:4px; cursor:pointer; font-size:10px;">Clear Old Data</button>
         </div>
     </div>
     
@@ -269,7 +272,10 @@
     </div>
     
     <div class="pending-section" id="pendingSection">
-        <h3>Pending Uploads <button onclick="retryAllPending()" style="margin-left:8px; padding:3px 8px; background:#4a6a8a; color:#fff; border:none; border-radius:3px; cursor:pointer; font-size:11px;">Retry All</button></h3>
+        <h3>Pending Uploads 
+            <button onclick="retryAllPending()" style="margin-left:8px; padding:3px 8px; background:#4a6a8a; color:#fff; border:none; border-radius:3px; cursor:pointer; font-size:11px;">Retry All</button>
+            <button onclick="clearAllData()" style="margin-left:4px; padding:3px 8px; background:#633; color:#fff; border:none; border-radius:3px; cursor:pointer; font-size:11px;">Clear All</button>
+        </h3>
         <div id="pendingList"></div>
     </div>
     
@@ -326,6 +332,14 @@
             const queue = getPendingQueue().filter(p => p.id !== id);
             savePendingQueue(queue);
             renderPending();
+        }
+        
+        function clearAllData() {
+            if (!confirm('Clear all pending recordings? This cannot be undone.')) return;
+            localStorage.removeItem('pendingAudio');
+            try { indexedDB.deleteDatabase('DevFeedbackDB'); } catch {}
+            renderPending();
+            log('All pending data cleared', 'success');
         }
         
         function renderPending() {
