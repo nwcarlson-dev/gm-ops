@@ -347,71 +347,140 @@
         }
         
         .prospect-row {
-            display: grid;
-            grid-template-columns: 32px 40px 1fr 60px 55px 50px 40px 32px;
+            display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 12px;
             padding: 10px 12px;
-            background: rgba(0,0,0,0.15);
-            border-radius: 6px;
-            border-left: 3px solid transparent;
+            background: var(--card-bg);
+            border-radius: 8px;
+            border: 1px solid var(--card-border);
             transition: all 0.15s;
         }
         
         .prospect-row:hover {
-            background: rgba(255,255,255,0.05);
+            background: rgba(255,255,255,0.03);
+            border-color: rgba(255,255,255,0.15);
         }
         
         .prospect-rank {
             font-family: 'Barlow Condensed', sans-serif;
-            font-size: 14px;
-            font-weight: 700;
+            font-size: 13px;
+            font-weight: 600;
             color: var(--text-muted);
             text-align: center;
         }
         
         .prospect-pos {
             font-family: 'Barlow Condensed', sans-serif;
-            font-size: 12px;
-            font-weight: 600;
-            padding: 3px 6px;
-            border-radius: 3px;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 4px 6px;
+            border-radius: 4px;
             text-align: center;
             background: rgba(255,255,255,0.1);
             color: var(--white);
+            letter-spacing: 0.03em;
         }
         
-        .prospect-pos.offense { background: rgba(30, 144, 255, 0.2); color: #5dade2; }
-        .prospect-pos.defense { background: rgba(231, 76, 60, 0.2); color: #ec7063; }
-        .prospect-pos.special { background: rgba(155, 89, 182, 0.2); color: #bb8fce; }
+        .prospect-pos.offense { background: rgba(30, 144, 255, 0.15); color: #5dade2; }
+        .prospect-pos.defense { background: rgba(231, 76, 60, 0.15); color: #ec7063; }
+        .prospect-pos.special { background: rgba(155, 89, 182, 0.15); color: #bb8fce; }
+        
+        .prospect-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            min-width: 0;
+            flex: 1;
+        }
+        
+        .prospect-college-logo {
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            flex-shrink: 0;
+        }
+        
+        .prospect-details {
+            min-width: 0;
+        }
         
         .prospect-name {
             font-weight: 600;
             color: var(--white);
             font-size: 13px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         
-        .prospect-school {
-            font-size: 11px;
+        .prospect-meta {
+            font-size: 10px;
             color: var(--text-muted);
-            margin-top: 2px;
+            margin-top: 1px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
         }
         
-        .prospect-stat {
-            font-size: 12px;
+        .prospect-meta .school {
             color: var(--silver);
-            text-align: center;
         }
         
-        .prospect-stat-label {
-            font-size: 9px;
+        .prospect-meta .bio {
             color: var(--text-muted);
+        }
+        
+        .prospect-actions {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .consensus-range {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 10px;
+            font-weight: 600;
+            padding: 3px 6px;
+            border-radius: 3px;
+            letter-spacing: 0.02em;
+        }
+        
+        .consensus-range.top-5 { background: rgba(220, 53, 69, 0.15); color: #ff6b6b; }
+        .consensus-range.top-10 { background: rgba(255, 193, 7, 0.15); color: #ffc107; }
+        .consensus-range.mid-1st { background: rgba(23, 162, 184, 0.15); color: #17a2b8; }
+        .consensus-range.late-1st { background: rgba(40, 167, 69, 0.15); color: #28a745; }
+        .consensus-range.rd-2 { background: rgba(111, 66, 193, 0.15); color: #9d7bea; }
+        .consensus-range.rd-3-4 { background: rgba(108, 117, 125, 0.15); color: #868e96; }
+        .consensus-range.rd-5-7 { background: rgba(73, 80, 87, 0.15); color: #6c757d; }
+        
+        .more-info-btn {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 9px;
+            font-weight: 600;
+            letter-spacing: 0.05em;
             text-transform: uppercase;
+            padding: 4px 8px;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 4px;
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.15s;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .more-info-btn:hover {
+            background: rgba(255,255,255,0.1);
+            border-color: rgba(255,255,255,0.2);
+            color: var(--white);
         }
         
         .prospect-star {
-            width: 28px;
-            height: 28px;
+            width: 26px;
+            height: 26px;
             background: none;
             border: none;
             cursor: pointer;
@@ -430,6 +499,146 @@
         
         .prospect-star.watched {
             color: var(--gold);
+        }
+        
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.85);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+        }
+        
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        
+        .modal {
+            background: var(--card-bg);
+            border-radius: 12px;
+            max-width: 560px;
+            width: 90%;
+            max-height: 80vh;
+            overflow: hidden;
+            border: 1px solid var(--card-border);
+        }
+        
+        .modal-header {
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--card-border);
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            background: var(--dark-navy);
+        }
+        
+        .modal-header .college-logo {
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+        }
+        
+        .modal-header-info {
+            flex: 1;
+        }
+        
+        .modal-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--white);
+        }
+        
+        .modal-meta {
+            font-size: 12px;
+            color: var(--silver);
+            margin-top: 2px;
+        }
+        
+        .modal-close {
+            width: 32px;
+            height: 32px;
+            background: rgba(255,255,255,0.05);
+            border: none;
+            border-radius: 6px;
+            color: var(--text-muted);
+            cursor: pointer;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-close:hover {
+            background: rgba(255,255,255,0.1);
+            color: var(--white);
+        }
+        
+        .modal-body {
+            padding: 20px;
+            overflow-y: auto;
+            max-height: calc(80vh - 120px);
+        }
+        
+        .modal-section {
+            margin-bottom: 16px;
+        }
+        
+        .modal-section-title {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 10px;
+            font-weight: 700;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+        }
+        
+        .modal-section-content {
+            font-size: 13px;
+            color: var(--silver);
+            line-height: 1.6;
+        }
+        
+        .modal-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+        
+        .modal-stat {
+            background: rgba(0,0,0,0.2);
+            padding: 10px;
+            border-radius: 6px;
+            text-align: center;
+        }
+        
+        .modal-stat-value {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--white);
+        }
+        
+        .modal-stat-label {
+            font-size: 9px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            margin-top: 2px;
+        }
+        
+        .comparison-tag {
+            display: inline-block;
+            background: rgba(212, 175, 55, 0.15);
+            color: var(--gold);
+            padding: 4px 10px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
         }
         
         .draft-order-panel {
@@ -910,6 +1119,8 @@
         </main>
     </div>
     
+    <div class="modal-overlay" id="prospectModal" onclick="if(event.target === this) closeModal()"></div>
+    
     <script>
         let prospects = [];
         let draftOrder = [];
@@ -1121,33 +1332,104 @@
             
             container.innerHTML = filtered.slice(0, 50).map(p => {
                 const isWatched = watchlist.has(p.id);
-                const age = p.bio?.age_years || 21;
-                const mo = p.bio?.age_months || 0;
                 const ht = p.bio?.height || "6-0";
                 const wt = p.bio?.weight || 200;
                 return `
                     <div class="prospect-row">
                         <div class="prospect-rank">${p.consensus_rank || '-'}</div>
                         <div class="prospect-pos ${getPositionClass(p.position)}">${p.position}</div>
-                        <div style="display: flex; align-items: center; gap: 10px;">
+                        <div class="prospect-info">
                             ${getCollegeLogo(p.school, 32)}
-                            <div>
+                            <div class="prospect-details">
                                 <div class="prospect-name">${p.name}</div>
-                                <div class="prospect-school">${p.school}</div>
+                                <div class="prospect-meta">
+                                    <span class="school">${p.school}</span>
+                                    <span class="bio">${ht} / ${wt} lbs</span>
+                                    ${getConsensusTag(p.range_low, p.range_high)}
+                                </div>
                             </div>
                         </div>
-                        <div class="prospect-stat">${ht}</div>
-                        <div class="prospect-stat">${wt} lbs</div>
-                        <div class="prospect-stat">${age} yr<span style="font-size: 10px; color: var(--text-muted);"> | ${mo} mo</span></div>
-                        <div>${getConsensusTag(p.range_low, p.range_high)}</div>
+                        <div class="prospect-actions">
+                            <button class="more-info-btn" onclick="showProspectModal('${p.id}')">
+                                <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4"/><path d="M12 8h.01"/></svg>
+                                Info
+                            </button>
+                        </div>
                         <button class="prospect-star ${isWatched ? 'watched' : ''}" onclick="toggleWatch('${p.id}')">
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="${isWatched ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2">
+                            <svg width="14" height="14" viewBox="0 0 24 24" fill="${isWatched ? 'currentColor' : 'none'}" stroke="currentColor" stroke-width="2">
                                 <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
                             </svg>
                         </button>
                     </div>
                 `;
             }).join('');
+        }
+        
+        function showProspectModal(id) {
+            const p = prospects.find(x => x.id === id);
+            if (!p) return;
+            
+            const ht = p.bio?.height || "6-0";
+            const wt = p.bio?.weight || 200;
+            const report = p.scouting_report || 'Scouting report not available.';
+            const comparison = p.comparison || null;
+            const archetype = p.archetype || 'Unknown';
+            
+            const modal = document.getElementById('prospectModal');
+            modal.innerHTML = `
+                <div class="modal">
+                    <div class="modal-header">
+                        ${getCollegeLogo(p.school, 48)}
+                        <div class="modal-header-info">
+                            <div class="modal-name">${p.name}</div>
+                            <div class="modal-meta">${p.position} | ${p.school} | ${ht} / ${wt} lbs</div>
+                        </div>
+                        <button class="modal-close" onclick="closeModal()">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="modal-section">
+                            <div class="modal-section-title">Consensus Ranking</div>
+                            <div class="modal-grid">
+                                <div class="modal-stat">
+                                    <div class="modal-stat-value">${p.consensus_rank || '-'}</div>
+                                    <div class="modal-stat-label">Overall</div>
+                                </div>
+                                <div class="modal-stat">
+                                    <div class="modal-stat-value">${p.range_low || '-'}-${p.range_high || '-'}</div>
+                                    <div class="modal-stat-label">Range</div>
+                                </div>
+                                <div class="modal-stat">
+                                    <div class="modal-stat-value">${p.rankings?.pff || '-'}</div>
+                                    <div class="modal-stat-label">PFF</div>
+                                </div>
+                                <div class="modal-stat">
+                                    <div class="modal-stat-value">${p.rankings?.cbs || '-'}</div>
+                                    <div class="modal-stat-label">CBS</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-section">
+                            <div class="modal-section-title">Archetype</div>
+                            <div class="modal-section-content">${archetype}</div>
+                        </div>
+                        ${comparison ? `
+                        <div class="modal-section">
+                            <div class="modal-section-title">Comparison</div>
+                            <div class="modal-section-content"><span class="comparison-tag">${comparison}</span></div>
+                        </div>
+                        ` : ''}
+                        <div class="modal-section">
+                            <div class="modal-section-title">Scouting Report</div>
+                            <div class="modal-section-content">${report}</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            modal.classList.add('active');
+        }
+        
+        function closeModal() {
+            document.getElementById('prospectModal').classList.remove('active');
         }
         
         function renderNeeds() {
