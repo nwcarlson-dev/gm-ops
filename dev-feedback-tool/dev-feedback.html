@@ -368,6 +368,32 @@
             console.log('[DevFeedback]', msg);
         }
         
+        async function fetchWithRetry(url, options, maxRetries = 3) {
+            for (let attempt = 1; attempt <= maxRetries; attempt++) {
+                try {
+                    const res = await fetch(url, options);
+                    const text = await res.text();
+                    try {
+                        return { ok: res.ok, status: res.status, data: JSON.parse(text) };
+                    } catch (e) {
+                        if (text.includes('deploy') || text.includes('building')) {
+                            console.log(`[DevFeedback] Deployment in progress, retry ${attempt}/${maxRetries}...`);
+                            if (attempt < maxRetries) {
+                                log(`Deployment in progress, retrying (${attempt}/${maxRetries})...`);
+                                await new Promise(r => setTimeout(r, 3000));
+                                continue;
+                            }
+                        }
+                        throw new Error('Invalid response: ' + text.slice(0, 100));
+                    }
+                } catch (e) {
+                    if (attempt === maxRetries) throw e;
+                    log(`Network error, retrying (${attempt}/${maxRetries})...`);
+                    await new Promise(r => setTimeout(r, 2000));
+                }
+            }
+        }
+        
         async function transcribeAudio(blob) {
             log('Transcribing...');
             
@@ -375,13 +401,12 @@
             formData.append('audio', blob);
             
             try {
-                const res = await fetch('/api/transcribe', {
+                const { ok, status, data } = await fetchWithRetry('/api/transcribe', {
                     method: 'POST',
                     body: formData
                 });
                 
-                console.log('[DevFeedback] Response status:', res.status);
-                const data = await res.json();
+                console.log('[DevFeedback] Response status:', status);
                 console.log('[DevFeedback] Response:', data);
                 
                 if (data.error) {
