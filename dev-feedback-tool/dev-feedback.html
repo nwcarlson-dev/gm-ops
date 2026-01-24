@@ -250,6 +250,19 @@
             white-space: pre-wrap;
         }
         
+        .move-btn {
+            margin-top: 8px;
+            padding: 3px 8px;
+            background: #3a3a3a;
+            color: #999;
+            border: 1px solid #555;
+            border-radius: 3px;
+            font-size: 10px;
+            cursor: pointer;
+        }
+        
+        .move-btn:hover { background: #4a4a4a; color: #ccc; }
+        
         @media (max-width: 500px) {
             .feeds-row {
                 flex-direction: column;
@@ -429,9 +442,42 @@
                     container.innerHTML = '<div class="feed-item"><summary>No topics yet</summary></div>';
                     return 0;
                 } else {
+                    const targetType = type === 'game' ? 'technical' : 'game';
+                    const targetLabel = type === 'game' ? 'Move to Technical' : 'Move to Game';
                     container.innerHTML = data.topics.map(t => 
-                        '<details class="feed-item"><summary>' + t.title + '</summary><div class="content">' + (t.content || '') + '</div></details>'
+                        '<details class="feed-item"><summary>' + t.title + '</summary><div class="content">' + (t.content || '') + '<button class="move-btn" data-topic="' + t.title + '" data-from="' + type + '" data-to="' + targetType + '">' + targetLabel + '</button></div></details>'
                     ).join('');
+                    
+                    // Add move handlers
+                    container.querySelectorAll('.move-btn').forEach(btn => {
+                        btn.addEventListener('click', async (e) => {
+                            e.stopPropagation();
+                            const topic = btn.dataset.topic;
+                            const from = btn.dataset.from;
+                            const to = btn.dataset.to;
+                            btn.textContent = 'Moving...';
+                            btn.disabled = true;
+                            
+                            try {
+                                const res = await fetch('/api/move-topic', {
+                                    method: 'POST',
+                                    headers: { 'Content-Type': 'application/json' },
+                                    body: JSON.stringify({ topic, fromType: from, toType: to })
+                                });
+                                const data = await res.json();
+                                if (data.success) {
+                                    loadAllFeeds();
+                                } else {
+                                    btn.textContent = 'Failed';
+                                    setTimeout(() => { btn.textContent = targetLabel; btn.disabled = false; }, 2000);
+                                }
+                            } catch (e) {
+                                btn.textContent = 'Error';
+                                setTimeout(() => { btn.textContent = targetLabel; btn.disabled = false; }, 2000);
+                            }
+                        });
+                    });
+                    
                     return data.topics.length;
                 }
             } catch (e) {
@@ -499,17 +545,34 @@
             saveBtn.textContent = 'Generating title...';
             saveBtn.disabled = true;
             
-            let topicTitle = 'Untitled Topic';
-            try {
-                const titleRes = await fetch('/api/generate-title', {
-                    method: 'POST',
-                    headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ text })
-                });
-                const titleData = await titleRes.json();
-                topicTitle = titleData.title || 'Untitled Topic';
-            } catch (e) {
-                console.error('Title generation failed:', e);
+            let topicTitle = null;
+            let attempts = 0;
+            while (!topicTitle && attempts < 3) {
+                attempts++;
+                try {
+                    log('Generating title (attempt ' + attempts + ')...');
+                    const titleRes = await fetch('/api/generate-title', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ text })
+                    });
+                    const titleData = await titleRes.json();
+                    if (titleData.title && titleData.title !== 'Untitled Topic') {
+                        topicTitle = titleData.title;
+                    }
+                } catch (e) {
+                    console.error('Title generation attempt ' + attempts + ' failed:', e);
+                }
+                if (!topicTitle && attempts < 3) {
+                    await new Promise(r => setTimeout(r, 1000));
+                }
+            }
+            
+            if (!topicTitle) {
+                log('Failed to generate title - retry?', 'error');
+                saveBtn.textContent = 'Retry Save';
+                saveBtn.disabled = false;
+                return;
             }
             
             const now = new Date();

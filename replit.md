@@ -106,6 +106,17 @@ OPENAI_API_KEY=xxx GITHUB_TOKEN=xxx node server.js
 # Open http://localhost:5000/dev-feedback.html
 ```
 
+**Vercel Deployment**: gm-ops.vercel.app
+
+**Features**:
+- AI-generated titles (required before saving - retries 3x)
+- Move topics between Game/Technical categories
+- Notification to Replit when transcripts are saved (requires REPLIT_NOTIFY_URL env var)
+
+**Replit Integration**:
+- `/api/all-transcripts` - View all transcripts from GitHub
+- `/api/transcript-notification` - Receives notifications when new topics are saved
+
 **Day 1 Topics Logged** (Jan 24, 2026):
-- 1.1-1.11: Game features (prospect loading, draft board, trade center, sim-to-pick, etc.)
+- 1.1-1.12+: Game features (prospect loading, draft board, trade center, sim-to-pick, culture system, etc.)
 - T1.1-T1.2: Technical (planning workflow, standalone tool setup)

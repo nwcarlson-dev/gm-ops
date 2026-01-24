@@ -264,6 +264,141 @@ app.get('/api/topics', async (req, res) => {
     }
 });
 
+// Move a topic from one category to another
+app.post('/api/move-topic', async (req, res) => {
+    const { topic, fromType, toType } = req.body;
+    
+    if (!topic || !fromType || !toType) {
+        return res.status(400).json({ error: 'Missing topic, fromType, or toType' });
+    }
+    
+    try {
+        const octokit = getGitHubClient();
+        const fromFolder = fromType === 'technical' ? 'dev-technical-transcripts' : 'dev-planning-transcripts';
+        const toFolder = toType === 'technical' ? 'dev-technical-transcripts' : 'dev-planning-transcripts';
+        
+        // Find the file containing this topic
+        const { data: files } = await octokit.repos.getContent({
+            owner: GITHUB_OWNER,
+            repo: GITHUB_REPO,
+            path: fromFolder
+        });
+        
+        let sourceFile = null;
+        let sourceContent = '';
+        let sourceSha = '';
+        let topicContent = '';
+        
+        for (const file of files.filter(f => f.name.endsWith('.md'))) {
+            const { data } = await octokit.repos.getContent({
+                owner: GITHUB_OWNER,
+                repo: GITHUB_REPO,
+                path: file.path
+            });
+            const content = Buffer.from(data.content, 'base64').toString('utf8');
+            
+            // Find the topic section
+            const regex = new RegExp('## ' + topic.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + '\\n[\\s\\S]*?(?=\\n---\\n|\\n## |$)');
+            const match = content.match(regex);
+            
+            if (match) {
+                sourceFile = file;
+                sourceContent = content;
+                sourceSha = data.sha;
+                topicContent = match[0];
+                break;
+            }
+        }
+        
+        if (!topicContent) {
+            return res.status(404).json({ error: 'Topic not found' });
+        }
+        
+        // Rename topic number for destination (T prefix swap)
+        const topicMatch = topic.match(/^(T?)(\d+)\.(\d+) - (.+)$/);
+        if (!topicMatch) {
+            return res.status(400).json({ error: 'Invalid topic format' });
+        }
+        
+        // Get count of topics in destination to determine new number
+        let destTopicCount = 0;
+        try {
+            const { data: destFiles } = await octokit.repos.getContent({
+                owner: GITHUB_OWNER,
+                repo: GITHUB_REPO,
+                path: toFolder
+            });
+            
+            for (const file of destFiles.filter(f => f.name.endsWith('.md'))) {
+                const { data } = await octokit.repos.getContent({
+                    owner: GITHUB_OWNER,
+                    repo: GITHUB_REPO,
+                    path: file.path
+                });
+                const content = Buffer.from(data.content, 'base64').toString('utf8');
+                const matches = content.match(/## [T]?\d+\.\d+ - /g);
+                if (matches) destTopicCount += matches.length;
+            }
+        } catch (e) {
+            // Destination folder might not exist yet
+        }
+        
+        const newPrefix = toType === 'technical' ? 'T' : '';
+        const dayNum = topicMatch[2];
+        const newTopicNum = newPrefix + dayNum + '.' + (destTopicCount + 1);
+        const newTopic = newTopicNum + ' - ' + topicMatch[4];
+        
+        // Update topic content with new number
+        const newTopicContent = topicContent.replace(/## [T]?\d+\.\d+ - /, '## ' + newTopicNum + ' - ');
+        
+        // Remove from source file
+        const newSourceContent = sourceContent.replace(topicContent, '').replace(/\n---\n\n---\n/g, '\n---\n').replace(/^\n---\n/gm, '').trim();
+        
+        // Update source file
+        await octokit.repos.createOrUpdateFileContents({
+            owner: GITHUB_OWNER,
+            repo: GITHUB_REPO,
+            path: sourceFile.path,
+            message: 'Move topic: ' + topic + ' to ' + toType,
+            content: Buffer.from(newSourceContent || '# Empty\n').toString('base64'),
+            sha: sourceSha
+        });
+        
+        // Add to destination file
+        const dateStr = new Date().toISOString().split('T')[0];
+        const destFilename = (toType === 'technical' ? 'dev-technical' : 'dev-planning') + '_' + dateStr + '_0001.md';
+        const destPath = toFolder + '/' + destFilename;
+        
+        let destSha = null;
+        let destContent = '';
+        try {
+            const { data } = await octokit.repos.getContent({
+                owner: GITHUB_OWNER,
+                repo: GITHUB_REPO,
+                path: destPath
+            });
+            destSha = data.sha;
+            destContent = Buffer.from(data.content, 'base64').toString('utf8');
+        } catch (e) {}
+        
+        const finalDestContent = destContent ? destContent + '\n---\n\n' + newTopicContent : newTopicContent;
+        
+        await octokit.repos.createOrUpdateFileContents({
+            owner: GITHUB_OWNER,
+            repo: GITHUB_REPO,
+            path: destPath,
+            message: 'Add moved topic: ' + newTopic,
+            content: Buffer.from(finalDestContent).toString('base64'),
+            sha: destSha
+        });
+        
+        res.json({ success: true, newTopic });
+    } catch (error) {
+        console.error('Move topic error:', error);
+        res.status(500).json({ error: 'Failed to move topic', details: error.message });
+    }
+});
+
 app.post('/api/save-transcript', async (req, res) => {
     const { filename, content, type } = req.body;
 
