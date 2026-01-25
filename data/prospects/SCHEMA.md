@@ -104,6 +104,16 @@ Skills vary by position. All rated 0-100.
 - range, man_coverage, zone_coverage
 - tackling, ball_skills, instincts, versatility
 
+### Development Certainty Object
+| Field | Type | Description |
+|-------|------|-------------|
+| `score` | number | 0.0 (project) to 1.0 (sure fire) |
+| `label` | string | Human-readable: "Sure Fire", "High Floor", "Standard", "Developmental", "Project" |
+
+Derived from scouting report keywords. Used to determine variance in team draft boards.
+- **Sure Fire (1.0)**: Keywords like "ready", "day one", "polished" - less board variance
+- **Project (0.0)**: Keywords like "raw", "upside", "potential" - more board variance
+
 ### Other Fields
 | Field | Type | Description |
 |-------|------|-------------|
@@ -129,4 +139,6 @@ With a PFF subscription, you can export:
 4. Leave unknown fields as `null`
 
 ## Version History
+- v1.4 (2026-01-25): Added developmentCertainty field derived from scouting report keywords
+- v1.3 (2026-01-24): Expanded to 338 prospects with PFF/CBS data
 - v1.0 (2026-01-24): Initial schema with top 8 prospects

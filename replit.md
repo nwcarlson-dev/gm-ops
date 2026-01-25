@@ -63,10 +63,12 @@ Python HTTP server on port 5000 (static site).
 - **Jan 24**: Position-to-need mapping for accurate needs tracking (OG->IOL, DE->EDGE, etc.)
 - **Jan 24**: Sim controls with speed settings (Instant/Fast/Normal/Slow), target pick input, and stop button
 - **Jan 25**: Created scheme skill weights JSON (`data/schemes/scheme_skill_weights.json`) with 7 offensive and 6 defensive schemes
+- **Jan 25**: Added `developmentCertainty` field to all 338 prospects (Sure Fire, High Floor, Standard, Developmental, Project)
+- **Jan 25**: Documented full AI Draft Logic System in DESIGN.md (board generation, variance tiers, scheme fit, trade triggers)
 
 ## Future Work
-- **AI Draft Logic**: Team-specific draft boards with scheme fit, need boost, and variance (design documented)
-- **Trade Triggers**: AI trade-up logic when high-value prospect falls (design documented)
+- **AI Draft Logic Implementation**: Implement the documented draft board generation and pick selection in game-shell.html
+- **Trade Triggers**: AI trade-up logic when high-value prospect falls (design documented in DESIGN.md)
 - **Trade System**: Trade ticker, incoming calls, CPU-to-CPU trades, trade value chart
 - **Full Styling Pass**: Refactor draft-setup body content to use brand tokens
 - **Draft Results Page**: Grades, recap, export functionality

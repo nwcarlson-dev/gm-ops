@@ -15,18 +15,18 @@
 5. [Scheme System](#scheme-system)
 6. [Combine & Pro Day System](#combine--pro-day-system)
 7. [Coaching Staff System](#coaching-staff-system)
-7. [Front Office System](#front-office-system)
-8. [Owner System](#owner-system)
-9. [Free Agency System](#free-agency-system)
-10. [Trade System](#trade-system)
-11. [Draft System](#draft-system)
-12. [Offseason Structure](#offseason-structure)
-13. [Career Progression](#career-progression)
-14. [UI Sliders & Configurable Settings](#ui-sliders--configurable-settings)
-15. [Culture System](#culture-system)
-16. [Implementation Status](#implementation-status)
-17. [Current Data Models](#current-data-models)
-18. [Session Log](#session-log)
+8. [Front Office System](#front-office-system)
+9. [Owner System](#owner-system)
+10. [Free Agency System](#free-agency-system)
+11. [Trade System](#trade-system)
+12. [AI Draft Logic System](#ai-draft-logic-system)
+13. [Offseason Structure](#offseason-structure)
+14. [Career Progression](#career-progression)
+15. [UI Sliders & Configurable Settings](#ui-sliders--configurable-settings)
+16. [Culture System](#culture-system)
+17. [Implementation Status](#implementation-status)
+18. [Current Data Models](#current-data-models)
+19. [Session Log](#session-log)
 
 ---
 
@@ -482,6 +482,91 @@ defNeeds: [
 | LB | Thumper, Coverage, Sideline-to-Sideline, Versatile, Blitzer |
 | CB | Press-Man, Zone, Ballhawk, Technical, Physical |
 | S | Centerfield, Box Safety, Hybrid, Playmaker, Range |
+
+---
+
+## AI Draft Logic System
+
+**Approved: January 25, 2026**
+
+### Overview
+
+Each AI team generates a hidden draft board at the start of each draft. This board varies from consensus rankings based on scheme fit, team needs, and random variance. The board drives both pick selection AND trade-up decisions.
+
+### Team Draft Board Generation
+
+Each team's draft board applies these modifiers to the consensus ranking:
+
+1. **Base**: Start with prospect's `consensus.rank`
+2. **Scheme Fit Modifier**: Adjust based on player's skill match to team's offensive/defensive scheme (from `data/schemes/scheme_skill_weights.json`)
+3. **Need Boost**: Positions the team needs get bumped up on the board
+4. **Development Certainty Modifier**: "Sure fire" prospects have less variance; "projects" have more
+5. **Random Variance**: Per-team, per-prospect randomization for replayability
+
+**Teams without a Head Coach**: Skip scheme modifier entirely, use pure BPA + needs + variance.
+
+### Variance Tiers
+
+The higher a player's consensus rank, the less variance in team boards:
+
+| Consensus Range | Max Variance | Notes |
+|-----------------|--------------|-------|
+| Top 5 | ±5 picks | Elite prospects, universal agreement |
+| 6-15 | ±10 picks | First-round locks |
+| 16-50 | ±20 picks | Significant team disagreement possible |
+| 51+ | ±30+ picks | Wide variance; one team's 4th rounder is another's undrafted |
+
+### Development Certainty
+
+Derived from scouting report keywords and projection data:
+
+| Certainty Level | Variance Multiplier | Indicators |
+|-----------------|---------------------|------------|
+| **Sure Fire** (1.0) | 0.5x | "ready", "day one", "starter", "polish" |
+| **Standard** (0.5) | 1.0x | Default / no strong indicators |
+| **Project** (0.0) | 1.5x | "raw", "project", "development", "upside" |
+
+Formula: `finalVariance = baseVariance * (0.5 + certaintyMultiplier)`
+
+### Scheme Fit Calculation
+
+```
+schemeFit = Σ(playerSkill × schemeWeight) / Σ(schemeWeights)
+```
+
+Players who fit the scheme well get boosted on that team's board. Players who don't fit may fall significantly for scheme-heavy teams.
+
+### Pick Selection Logic
+
+When an AI team is on the clock:
+
+1. Filter available prospects
+2. Look up team's hidden draft board ranking for each prospect
+3. Select the highest-ranked available prospect on their board
+
+This replaces the current "first available at need position" logic.
+
+### Trade-Up Triggers (Future Implementation)
+
+When a prospect on a team's board is ranked significantly higher than the current pick slot:
+
+- **Trigger threshold**: Prospect ranked 15+ spots higher than current pick on team's board
+- **Value check**: Would the trade be fair based on trade value chart?
+- **Capital check**: Does the team have enough picks to trade up?
+
+If all conditions met, team may initiate a trade offer.
+
+### Data Files
+
+| File | Purpose |
+|------|---------|
+| `data/schemes/scheme_skill_weights.json` | Skill importance weights by offensive/defensive scheme |
+| `draft-setup.html` (TEAM_DATA) | Team scheme assignments (`offScheme`, `defScheme`) |
+| `data/prospects/current/2026_prospects.json` | Prospect data with `developmentCertainty` field |
+
+### Testing / Debug Mode
+
+A hidden "Show AI Boards" toggle can display each team's hidden rankings for testing purposes. This should not affect production UI.
 
 ---
 

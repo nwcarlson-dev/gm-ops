@@ -1,12 +1,12 @@
 {
   "meta": {
     "draft_year": 2026,
-    "last_updated": "2026-01-24",
+    "last_updated": "2026-01-25",
     "sources": [
       "PFF",
       "CBS"
     ],
-    "version": "1.3",
+    "version": "1.4",
     "total_prospects": 338,
     "consensus_method": "median_of_sources"
   },
@@ -83,6 +83,10 @@
           "weight": 270,
           "year": "JR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.75,
+        "label": "High Floor"
       }
     },
     {
@@ -157,6 +161,10 @@
           "weight": 205,
           "year": "JR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -220,6 +228,10 @@
           "school_full": "Notre Dame Fighting Irish",
           "position": "G"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -283,6 +295,10 @@
           "school_full": "Duke Blue Devils",
           "position": "S"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.25,
+        "label": "Developmental"
       }
     },
     {
@@ -357,6 +373,10 @@
           "weight": 193,
           "year": "JR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -420,6 +440,10 @@
           "school_full": "Marshall Thundering Herd",
           "position": "CB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -483,6 +507,10 @@
           "school_full": "Oklahoma Sooners",
           "position": "HB"
         }
+      },
+      "developmentCertainty": {
+        "score": 1.0,
+        "label": "Sure Fire"
       }
     },
     {
@@ -546,6 +574,10 @@
           "school_full": "Clemson Tigers",
           "position": "CB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -609,6 +641,10 @@
           "school_full": "Notre Dame Fighting Irish",
           "position": "CB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -672,6 +708,10 @@
           "school_full": "Wyoming Cowboys",
           "position": "TE"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.25,
+        "label": "Developmental"
       }
     },
     {
@@ -735,6 +775,10 @@
           "school_full": "USC Trojans",
           "position": "CB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -798,6 +842,10 @@
           "school_full": "Florida Gators",
           "position": "G"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -861,6 +909,10 @@
           "school_full": "Florida Gators",
           "position": "S"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -924,6 +976,10 @@
           "school_full": "Alabama Crimson Tide",
           "position": "DI"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -987,6 +1043,10 @@
           "school_full": "Auburn Tigers",
           "position": "T"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -1050,6 +1110,10 @@
           "school_full": "Florida Gators",
           "position": "WR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.0,
+        "label": "Project"
       }
     },
     {
@@ -1113,6 +1177,10 @@
           "school_full": "Notre Dame Fighting Irish",
           "position": "WR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -1176,6 +1244,10 @@
           "school_full": "USC Trojans",
           "position": "DI"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.0,
+        "label": "Project"
       }
     },
     {
@@ -1239,6 +1311,10 @@
           "school_full": "LSU Tigers",
           "position": "WR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -1302,6 +1378,10 @@
           "school_full": "Duke Blue Devils",
           "position": "ED"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -1365,6 +1445,10 @@
           "school_full": "Ohio State Buckeyes",
           "position": "G"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -1428,6 +1512,10 @@
           "school_full": "Pittsburgh Panthers",
           "position": "QB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -1491,6 +1579,10 @@
           "school_full": "Georgia Bulldogs",
           "position": "WR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -1554,6 +1646,10 @@
           "school_full": "Georgia Bulldogs",
           "position": "TE"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -1617,6 +1713,10 @@
           "school_full": "South Carolina Gamecocks",
           "position": "T"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.0,
+        "label": "Project"
       }
     },
     {
@@ -1680,6 +1780,10 @@
           "school_full": "Alabama Crimson Tide",
           "position": "CB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -1743,6 +1847,10 @@
           "school_full": "Penn State Nittany Lions",
           "position": "CB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -1806,6 +1914,10 @@
           "school_full": "Texas Longhorns",
           "position": "HB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -1872,6 +1984,10 @@
           "weight": 300,
           "year": "JR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -1935,6 +2051,10 @@
           "school_full": "Virginia Tech Hokies",
           "position": "G"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -1998,6 +2118,10 @@
           "school_full": "Ohio State Buckeyes",
           "position": "CB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.25,
+        "label": "Developmental"
       }
     },
     {
@@ -2061,6 +2185,10 @@
           "school_full": "Kentucky Wildcats",
           "position": "G"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -2127,6 +2255,10 @@
           "weight": 195,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.25,
+        "label": "Developmental"
       }
     },
     {
@@ -2190,6 +2322,10 @@
           "school_full": "Syracuse Orange",
           "position": "WR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.25,
+        "label": "Developmental"
       }
     },
     {
@@ -2253,6 +2389,10 @@
           "school_full": "Florida Gators",
           "position": "WR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -2316,6 +2456,10 @@
           "school_full": "SMU Mustangs",
           "position": "TE"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.25,
+        "label": "Developmental"
       }
     },
     {
@@ -2379,6 +2523,10 @@
           "school_full": "Auburn Tigers",
           "position": "CB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.0,
+        "label": "Project"
       }
     },
     {
@@ -2442,6 +2590,10 @@
           "school_full": "Missouri Tigers",
           "position": "C"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -2505,6 +2657,10 @@
           "school_full": "Michigan Wolverines",
           "position": "TE"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.25,
+        "label": "Developmental"
       }
     },
     {
@@ -2568,6 +2724,10 @@
           "school_full": "Michigan State Spartans",
           "position": "TE"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -2634,6 +2794,10 @@
           "weight": 237,
           "year": "SO"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.0,
+        "label": "Project"
       }
     },
     {
@@ -2697,6 +2861,10 @@
           "school_full": "Tennessee Volunteers",
           "position": "TE"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.0,
+        "label": "Project"
       }
     },
     {
@@ -2763,6 +2931,10 @@
           "weight": 190,
           "year": "JR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -2826,6 +2998,10 @@
           "school_full": "Georgia Bulldogs",
           "position": "T"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -2889,6 +3065,10 @@
           "school_full": "Texas A&M Aggies",
           "position": "CB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -2952,6 +3132,10 @@
           "school_full": "Michigan State Spartans",
           "position": "QB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.0,
+        "label": "Project"
       }
     },
     {
@@ -3015,6 +3199,10 @@
           "school_full": "Wisconsin Badgers",
           "position": "T"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -3078,6 +3266,10 @@
           "school_full": "BYU Cougars",
           "position": "DI"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -3141,6 +3333,10 @@
           "school_full": "Stanford Cardinal",
           "position": "T"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.25,
+        "label": "Developmental"
       }
     },
     {
@@ -3207,6 +3403,10 @@
           "weight": 204,
           "year": "JR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.25,
+        "label": "Developmental"
       }
     },
     {
@@ -3270,6 +3470,10 @@
           "school_full": "Penn State Nittany Lions",
           "position": "DI"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.0,
+        "label": "Project"
       }
     },
     {
@@ -3333,6 +3537,10 @@
           "school_full": "Oklahoma Sooners",
           "position": "TE"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -3407,6 +3615,10 @@
           "weight": 308,
           "year": "SO"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.25,
+        "label": "Developmental"
       }
     },
     {
@@ -3473,6 +3685,10 @@
           "weight": 260,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -3536,6 +3752,10 @@
           "school_full": "Michigan Wolverines",
           "position": "S"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -3599,6 +3819,10 @@
           "school_full": "Oklahoma Sooners",
           "position": "QB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -3662,6 +3886,10 @@
           "school_full": "Oklahoma Sooners",
           "position": "WR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -3725,6 +3953,10 @@
           "school_full": "Auburn Tigers",
           "position": "WR"
         }
+      },
+      "developmentCertainty": {
+        "score": 1.0,
+        "label": "Sure Fire"
       }
     },
     {
@@ -3788,6 +4020,10 @@
           "school_full": "Texas A&M Aggies",
           "position": "T"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.0,
+        "label": "Project"
       }
     },
     {
@@ -3851,6 +4087,10 @@
           "school_full": "Michigan Wolverines",
           "position": "ED"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.25,
+        "label": "Developmental"
       }
     },
     {
@@ -3925,6 +4165,10 @@
           "weight": 303,
           "year": "JR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -3999,6 +4243,10 @@
           "weight": 245,
           "year": "JR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -4065,6 +4313,10 @@
           "weight": 323,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -4128,6 +4380,10 @@
           "school_full": "Nebraska Cornhuskers",
           "position": "WR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.0,
+        "label": "Project"
       }
     },
     {
@@ -4191,6 +4447,10 @@
           "school_full": "Georgia Tech Yellow Jackets",
           "position": "HB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -4265,6 +4525,10 @@
           "weight": 315,
           "year": "JR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.25,
+        "label": "Developmental"
       }
     },
     {
@@ -4328,6 +4592,10 @@
           "school_full": "Texas Longhorns",
           "position": "LB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -4402,6 +4670,10 @@
           "weight": 243,
           "year": "JR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -4476,6 +4748,10 @@
           "weight": 200,
           "year": "JR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -4539,6 +4815,10 @@
           "school_full": "North Carolina Tar Heels",
           "position": "CB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -4613,6 +4893,10 @@
           "weight": 310,
           "year": "JR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -4679,6 +4963,10 @@
           "weight": 327,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -4753,6 +5041,10 @@
           "weight": 318,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.0,
+        "label": "Project"
       }
     },
     {
@@ -4816,6 +5108,10 @@
           "school_full": "Auburn Tigers",
           "position": "QB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.25,
+        "label": "Developmental"
       }
     },
     {
@@ -4879,6 +5175,10 @@
           "school_full": "Mississippi Rebels",
           "position": "TE"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.0,
+        "label": "Project"
       }
     },
     {
@@ -4953,6 +5253,10 @@
           "weight": 195,
           "year": "JR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -5027,6 +5331,10 @@
           "weight": 214,
           "year": "JR"
         }
+      },
+      "developmentCertainty": {
+        "score": 1.0,
+        "label": "Sure Fire"
       }
     },
     {
@@ -5093,6 +5401,10 @@
           "weight": 215,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -5156,6 +5468,10 @@
           "school_full": "Colorado Buffaloes",
           "position": "CB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -5230,6 +5546,10 @@
           "weight": 308,
           "year": "JR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -5296,6 +5616,10 @@
           "weight": 250,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -5359,6 +5683,10 @@
           "school_full": "Wake Forest Demon Deacons",
           "position": "T"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.0,
+        "label": "Project"
       }
     },
     {
@@ -5433,6 +5761,10 @@
           "weight": 225,
           "year": "JR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -5496,6 +5828,10 @@
           "school_full": "LSU Tigers",
           "position": "LB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -5570,6 +5906,10 @@
           "weight": 285,
           "year": "JR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -5633,6 +5973,10 @@
           "school_full": "Washington Huskies",
           "position": "CB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.0,
+        "label": "Project"
       }
     },
     {
@@ -5707,6 +6051,10 @@
           "weight": 243,
           "year": "JR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.25,
+        "label": "Developmental"
       }
     },
     {
@@ -5781,6 +6129,10 @@
           "weight": 315,
           "year": "JR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -5855,6 +6207,10 @@
           "weight": 195,
           "year": "JR"
         }
+      },
+      "developmentCertainty": {
+        "score": 1.0,
+        "label": "Sure Fire"
       }
     },
     {
@@ -5929,6 +6285,10 @@
           "weight": 260,
           "year": "JR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.25,
+        "label": "Developmental"
       }
     },
     {
@@ -5995,6 +6355,10 @@
           "weight": 200,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.25,
+        "label": "Developmental"
       }
     },
     {
@@ -6069,6 +6433,10 @@
           "weight": 250,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.25,
+        "label": "Developmental"
       }
     },
     {
@@ -6143,6 +6511,10 @@
           "weight": 243,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.25,
+        "label": "Developmental"
       }
     },
     {
@@ -6206,6 +6578,10 @@
           "school_full": "Utah Utes",
           "position": "S"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -6280,6 +6656,10 @@
           "weight": 311,
           "year": "JR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -6343,6 +6723,10 @@
           "school_full": "South Carolina Gamecocks",
           "position": "CB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.25,
+        "label": "Developmental"
       }
     },
     {
@@ -6417,6 +6801,10 @@
           "weight": 250,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -6491,6 +6879,10 @@
           "weight": 335,
           "year": "JR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -6565,6 +6957,10 @@
           "weight": 240,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -6639,6 +7035,10 @@
           "weight": 290,
           "year": "JR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -6702,6 +7102,10 @@
           "school_full": "Arizona State Sun Devils",
           "position": "DI"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.25,
+        "label": "Developmental"
       }
     },
     {
@@ -6776,6 +7180,10 @@
           "weight": 190,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -6850,6 +7258,10 @@
           "weight": 325,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.25,
+        "label": "Developmental"
       }
     },
     {
@@ -6924,6 +7336,10 @@
           "weight": 323,
           "year": "JR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -6998,6 +7414,10 @@
           "weight": 180,
           "year": "JR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -7064,6 +7484,10 @@
           "weight": 312,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -7138,6 +7562,10 @@
           "weight": 278,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -7201,6 +7629,10 @@
           "school_full": "Utah Utes",
           "position": "CB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -7267,6 +7699,10 @@
           "weight": 277,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -7341,6 +7777,10 @@
           "weight": 213,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -7415,6 +7855,10 @@
           "weight": 325,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.25,
+        "label": "Developmental"
       }
     },
     {
@@ -7478,6 +7922,10 @@
           "school_full": "South Carolina Gamecocks",
           "position": "WR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.25,
+        "label": "Developmental"
       }
     },
     {
@@ -7552,6 +8000,10 @@
           "weight": 222,
           "year": "JR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.25,
+        "label": "Developmental"
       }
     },
     {
@@ -7626,6 +8078,10 @@
           "weight": 189,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -7692,6 +8148,10 @@
           "weight": 180,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -7766,6 +8226,10 @@
           "weight": 248,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -7840,6 +8304,10 @@
           "weight": 366,
           "year": "JR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -7906,6 +8374,10 @@
           "weight": 224,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -7969,6 +8441,10 @@
           "school_full": "Notre Dame Fighting Irish",
           "position": "T"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -8043,6 +8519,10 @@
           "weight": 208,
           "year": "JR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.25,
+        "label": "Developmental"
       }
     },
     {
@@ -8117,6 +8597,10 @@
           "weight": 236,
           "year": "JR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -8180,6 +8664,10 @@
           "school_full": "Louisville Cardinals",
           "position": "QB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -8254,6 +8742,10 @@
           "weight": 190,
           "year": "JR"
         }
+      },
+      "developmentCertainty": {
+        "score": 1.0,
+        "label": "Sure Fire"
       }
     },
     {
@@ -8317,6 +8809,10 @@
           "school_full": "Florida Gators",
           "position": "DI"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.0,
+        "label": "Project"
       }
     },
     {
@@ -8391,6 +8887,10 @@
           "weight": 274,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -8454,6 +8954,10 @@
           "school_full": "Alabama Crimson Tide",
           "position": "TE"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.0,
+        "label": "Project"
       }
     },
     {
@@ -8520,6 +9024,10 @@
           "weight": 255,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -8583,6 +9091,10 @@
           "school_full": "Kansas Jayhawks",
           "position": "C"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -8657,6 +9169,10 @@
           "weight": 310,
           "year": "JR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.25,
+        "label": "Developmental"
       }
     },
     {
@@ -8731,6 +9247,10 @@
           "weight": 210,
           "year": "JR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -8794,6 +9314,10 @@
           "school_full": "Florida State Seminoles",
           "position": "S"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -8868,6 +9392,10 @@
           "weight": 245,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -8931,6 +9459,10 @@
           "school_full": "Oregon Ducks",
           "position": "C"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -9005,6 +9537,10 @@
           "weight": 180,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 1.0,
+        "label": "Sure Fire"
       }
     },
     {
@@ -9079,6 +9615,10 @@
           "weight": 326,
           "year": "JR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.25,
+        "label": "Developmental"
       }
     },
     {
@@ -9145,6 +9685,10 @@
           "weight": 259,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -9208,6 +9752,10 @@
           "school_full": "Virginia Tech Hokies",
           "position": "ED"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -9274,6 +9822,10 @@
           "weight": 322,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -9337,6 +9889,10 @@
           "school_full": "Alabama Crimson Tide",
           "position": "G"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -9411,6 +9967,10 @@
           "weight": 240,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -9474,6 +10034,10 @@
           "school_full": "Arkansas Razorbacks",
           "position": "DI"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -9548,6 +10112,10 @@
           "weight": 200,
           "year": "JR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.0,
+        "label": "Project"
       }
     },
     {
@@ -9611,6 +10179,10 @@
           "school_full": "SMU Mustangs",
           "position": "S"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -9685,6 +10257,10 @@
           "weight": 195,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -9748,6 +10324,10 @@
           "school_full": "LSU Tigers",
           "position": "ED"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -9814,6 +10394,10 @@
           "weight": 235,
           "year": "JR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -9877,6 +10461,10 @@
           "school_full": "Baylor Bears",
           "position": "QB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -9951,6 +10539,10 @@
           "weight": 285,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -10025,6 +10617,10 @@
           "weight": 204,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.0,
+        "label": "Project"
       }
     },
     {
@@ -10088,6 +10684,10 @@
           "school_full": "Baylor Bears",
           "position": "HB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.25,
+        "label": "Developmental"
       }
     },
     {
@@ -10162,6 +10762,10 @@
           "weight": 195,
           "year": "SO"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.0,
+        "label": "Project"
       }
     },
     {
@@ -10236,6 +10840,10 @@
           "weight": 238,
           "year": "JR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.0,
+        "label": "Project"
       }
     },
     {
@@ -10310,6 +10918,10 @@
           "weight": 195,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -10373,6 +10985,10 @@
           "school_full": "Indiana Hoosiers",
           "position": "LB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -10436,6 +11052,10 @@
           "school_full": "Virginia Tech Hokies",
           "position": "QB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.25,
+        "label": "Developmental"
       }
     },
     {
@@ -10510,6 +11130,10 @@
           "weight": 235,
           "year": "JR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -10573,6 +11197,10 @@
           "school_full": "Iowa Hawkeyes",
           "position": "S"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.25,
+        "label": "Developmental"
       }
     },
     {
@@ -10647,6 +11275,10 @@
           "weight": 188,
           "year": "JR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -10721,6 +11353,10 @@
           "weight": 195,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -10795,6 +11431,10 @@
           "weight": 204,
           "year": "JR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -10869,6 +11509,10 @@
           "weight": 222,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.25,
+        "label": "Developmental"
       }
     },
     {
@@ -10943,6 +11587,10 @@
           "weight": 318,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -11006,6 +11654,10 @@
           "school_full": "Penn State Nittany Lions",
           "position": "LB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.25,
+        "label": "Developmental"
       }
     },
     {
@@ -11069,6 +11721,10 @@
           "school_full": "Texas Tech Red Raiders",
           "position": "G"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -11143,6 +11799,10 @@
           "weight": 190,
           "year": "JR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.25,
+        "label": "Developmental"
       }
     },
     {
@@ -11209,6 +11869,10 @@
           "weight": 280,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -11272,6 +11936,10 @@
           "school_full": "Texas Longhorns",
           "position": "G"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -11338,6 +12006,10 @@
           "weight": 300,
           "year": "JR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -11412,6 +12084,10 @@
           "weight": 308,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -11475,6 +12151,10 @@
           "school_full": "Florida State Seminoles",
           "position": "CB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.0,
+        "label": "Project"
       }
     },
     {
@@ -11549,6 +12229,10 @@
           "weight": 315,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -11623,6 +12307,10 @@
           "weight": 249,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -11697,6 +12385,10 @@
           "weight": 200,
           "year": "JR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -11771,6 +12463,10 @@
           "weight": 240,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -11837,6 +12533,10 @@
           "weight": 310,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -11900,6 +12600,10 @@
           "school_full": "Virginia Tech Hokies",
           "position": "HB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -11974,6 +12678,10 @@
           "weight": 325,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -12048,6 +12756,10 @@
           "weight": 315,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -12122,6 +12834,10 @@
           "weight": 240,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -12185,6 +12901,10 @@
           "school_full": "USC Trojans",
           "position": "LB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -12259,6 +12979,10 @@
           "weight": 210,
           "year": "JR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.0,
+        "label": "Project"
       }
     },
     {
@@ -12333,6 +13057,10 @@
           "weight": 173,
           "year": "JR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -12407,6 +13135,10 @@
           "weight": 190,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.25,
+        "label": "Developmental"
       }
     },
     {
@@ -12481,6 +13213,10 @@
           "weight": 320,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.25,
+        "label": "Developmental"
       }
     },
     {
@@ -12544,6 +13280,10 @@
           "school_full": "Nebraska Cornhuskers",
           "position": "T"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -12618,6 +13358,10 @@
           "weight": 220,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -12684,6 +13428,10 @@
           "weight": 190,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -12747,6 +13495,10 @@
           "school_full": "Notre Dame Fighting Irish",
           "position": "LB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -12821,6 +13573,10 @@
           "weight": 235,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.0,
+        "label": "Project"
       }
     },
     {
@@ -12887,6 +13643,10 @@
           "weight": 312,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -12950,6 +13710,10 @@
           "school_full": "Iowa Hawkeyes",
           "position": "ED"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -13016,6 +13780,10 @@
           "weight": 252,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -13079,6 +13847,10 @@
           "school_full": "Florida State Seminoles",
           "position": "C"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -13153,6 +13925,10 @@
           "weight": 207,
           "year": "SO"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.25,
+        "label": "Developmental"
       }
     },
     {
@@ -13216,6 +13992,10 @@
           "school_full": "Arkansas Razorbacks",
           "position": "ED"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.0,
+        "label": "Project"
       }
     },
     {
@@ -13290,6 +14070,10 @@
           "weight": 265,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -13364,6 +14148,10 @@
           "weight": 313,
           "year": "JR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -13438,6 +14226,10 @@
           "weight": 208,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -13501,6 +14293,10 @@
           "school_full": "UCLA Bruins",
           "position": "QB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.0,
+        "label": "Project"
       }
     },
     {
@@ -13575,6 +14371,10 @@
           "weight": 243,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -13649,6 +14449,10 @@
           "weight": 314,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -13723,6 +14527,10 @@
           "weight": 213,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -13789,6 +14597,10 @@
           "weight": 240,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -13863,6 +14675,10 @@
           "weight": 335,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -13929,6 +14745,10 @@
           "weight": 316,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -14003,6 +14823,10 @@
           "weight": 270,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -14077,6 +14901,10 @@
           "weight": 205,
           "year": "JR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -14151,6 +14979,10 @@
           "weight": 190,
           "year": "JR"
         }
+      },
+      "developmentCertainty": {
+        "score": 1.0,
+        "label": "Sure Fire"
       }
     },
     {
@@ -14225,6 +15057,10 @@
           "weight": 330,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.0,
+        "label": "Project"
       }
     },
     {
@@ -14299,6 +15135,10 @@
           "weight": 260,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -14365,6 +15205,10 @@
           "weight": 265,
           "year": "JR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -14439,6 +15283,10 @@
           "weight": 240,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -14505,6 +15353,10 @@
           "weight": 195,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -14579,6 +15431,10 @@
           "weight": 220,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -14653,6 +15509,10 @@
           "weight": 303,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -14727,6 +15587,10 @@
           "weight": 337,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.25,
+        "label": "Developmental"
       }
     },
     {
@@ -14801,6 +15665,10 @@
           "weight": 330,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -14867,6 +15735,10 @@
           "weight": 259,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -14941,6 +15813,10 @@
           "weight": 202,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -15007,6 +15883,10 @@
           "weight": 315,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -15081,6 +15961,10 @@
           "weight": 262,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.0,
+        "label": "Project"
       }
     },
     {
@@ -15155,6 +16039,10 @@
           "weight": 330,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.25,
+        "label": "Developmental"
       }
     },
     {
@@ -15218,6 +16106,10 @@
           "school_full": "Oregon Ducks",
           "position": "QB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.25,
+        "label": "Developmental"
       }
     },
     {
@@ -15292,6 +16184,10 @@
           "weight": 315,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.0,
+        "label": "Project"
       }
     },
     {
@@ -15366,6 +16262,10 @@
           "weight": 319,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -15432,6 +16332,10 @@
           "weight": 263,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -15506,6 +16410,10 @@
           "weight": 202,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.25,
+        "label": "Developmental"
       }
     },
     {
@@ -15580,6 +16488,10 @@
           "weight": 180,
           "year": "JR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -15643,6 +16555,10 @@
           "school_full": "Oregon Ducks",
           "position": "DI"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -15717,6 +16633,10 @@
           "weight": 170,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -15791,6 +16711,10 @@
           "weight": 260,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -15854,6 +16778,10 @@
           "school_full": "Rutgers Scarlet Knights",
           "position": "WR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -15928,6 +16856,10 @@
           "weight": 305,
           "year": "JR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -15991,6 +16923,10 @@
           "school_full": "Ohio State Buckeyes",
           "position": "T"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -16054,6 +16990,10 @@
           "school_full": "Oregon Ducks",
           "position": "ED"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -16117,6 +17057,10 @@
           "school_full": "Alabama Crimson Tide",
           "position": "LB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -16191,6 +17135,10 @@
           "weight": 335,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -16265,6 +17213,10 @@
           "weight": 311,
           "year": "JR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -16339,6 +17291,10 @@
           "weight": 235,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -16413,6 +17369,10 @@
           "weight": 220,
           "year": "JR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -16487,6 +17447,10 @@
           "weight": 205,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -16561,6 +17525,10 @@
           "weight": 210,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -16624,6 +17592,10 @@
           "school_full": "Duke Blue Devils",
           "position": "CB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -16698,6 +17670,10 @@
           "weight": 205,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.25,
+        "label": "Developmental"
       }
     },
     {
@@ -16761,6 +17737,10 @@
           "school_full": "Texas A&M Aggies",
           "position": "LB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -16835,6 +17815,10 @@
           "weight": 265,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -16909,6 +17893,10 @@
           "weight": 200,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.0,
+        "label": "Project"
       }
     },
     {
@@ -16983,6 +17971,10 @@
           "weight": 219,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -17046,6 +18038,10 @@
           "school_full": "Connecticut Huskies",
           "position": "WR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -17120,6 +18116,10 @@
           "weight": 195,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.0,
+        "label": "Project"
       }
     },
     {
@@ -17183,6 +18183,10 @@
           "school_full": "Miami (FL) Hurricanes",
           "position": "WR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -17257,6 +18261,10 @@
           "weight": 180,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -17320,6 +18328,10 @@
           "school_full": "Indiana Hoosiers",
           "position": "ED"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -17394,6 +18406,10 @@
           "weight": 302,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -17457,6 +18473,10 @@
           "school_full": "USC Trojans",
           "position": "QB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -17520,6 +18540,10 @@
           "school_full": "North Carolina State Wolfpack",
           "position": "TE"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -17583,6 +18607,10 @@
           "school_full": "Mississippi State Bulldogs",
           "position": "S"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -17646,6 +18674,10 @@
           "school_full": "Arizona State Sun Devils",
           "position": "QB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -17709,6 +18741,10 @@
           "school_full": "Alabama Crimson Tide",
           "position": "S"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -17772,6 +18808,10 @@
           "school_full": "South Carolina Gamecocks",
           "position": "QB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -17835,6 +18875,10 @@
           "school_full": "Notre Dame Fighting Irish",
           "position": "WR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.0,
+        "label": "Project"
       }
     },
     {
@@ -17898,6 +18942,10 @@
           "school_full": "Texas Tech Red Raiders",
           "position": "DI"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -17972,6 +19020,10 @@
           "weight": 330,
           "year": "SR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -18035,6 +19087,10 @@
           "school_full": "Notre Dame Fighting Irish",
           "position": "ED"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -18098,6 +19154,10 @@
           "school_full": "Missouri Tigers",
           "position": "T"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -18161,6 +19221,10 @@
           "school_full": "Miami (FL) Hurricanes",
           "position": "QB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -18224,6 +19288,10 @@
           "school_full": "Texas A&M Aggies",
           "position": "DI"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -18287,6 +19355,10 @@
           "school_full": "Texas Longhorns",
           "position": "S"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -18350,6 +19422,10 @@
           "school_full": "Oregon Ducks",
           "position": "DI"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -18413,6 +19489,10 @@
           "school_full": "Kansas State Wildcats",
           "position": "LB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -18476,6 +19556,10 @@
           "school_full": "Northwestern Wildcats",
           "position": "ED"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -18539,6 +19623,10 @@
           "school_full": "Michigan Wolverines",
           "position": "HB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -18602,6 +19690,10 @@
           "school_full": "Notre Dame Fighting Irish",
           "position": "S"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -18665,6 +19757,10 @@
           "school_full": "Ohio State Buckeyes",
           "position": "ED"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -18728,6 +19824,10 @@
           "school_full": "Texas Longhorns",
           "position": "T"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -18791,6 +19891,10 @@
           "school_full": "Kansas State Wildcats",
           "position": "WR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -18854,6 +19958,10 @@
           "school_full": "Penn State Nittany Lions",
           "position": "QB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -18917,6 +20025,10 @@
           "school_full": "North Dakota State Bison",
           "position": "WR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -18980,6 +20092,10 @@
           "school_full": "Louisville Cardinals",
           "position": "ED"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -19043,6 +20159,10 @@
           "school_full": "Texas Longhorns",
           "position": "HB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -19106,6 +20226,10 @@
           "school_full": "Virginia Cavaliers",
           "position": "HB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -19169,6 +20293,10 @@
           "school_full": "Texas A&M Aggies",
           "position": "HB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -19232,6 +20360,10 @@
           "school_full": "Penn State Nittany Lions",
           "position": "HB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.25,
+        "label": "Developmental"
       }
     },
     {
@@ -19295,6 +20427,10 @@
           "school_full": "Oklahoma Sooners",
           "position": "LB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -19358,6 +20494,10 @@
           "school_full": "Houston Cougars",
           "position": "TE"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -19421,6 +20561,10 @@
           "school_full": "Clemson Tigers",
           "position": "ED"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -19484,6 +20628,10 @@
           "school_full": "Cincinnati Bearcats",
           "position": "QB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -19547,6 +20695,10 @@
           "school_full": "Texas Longhorns",
           "position": "DI"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -19610,6 +20762,10 @@
           "school_full": "BYU Cougars",
           "position": "WR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -19673,6 +20829,10 @@
           "school_full": "Notre Dame Fighting Irish",
           "position": "S"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.25,
+        "label": "Developmental"
       }
     },
     {
@@ -19736,6 +20896,10 @@
           "school_full": "Alabama Crimson Tide",
           "position": "S"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -19799,6 +20963,10 @@
           "school_full": "TCU Horned Frogs",
           "position": "QB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -19862,6 +21030,10 @@
           "school_full": "Kansas Jayhawks",
           "position": "QB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -19925,6 +21097,10 @@
           "school_full": "Mississippi Rebels",
           "position": "ED"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -19988,6 +21164,10 @@
           "school_full": "Minnesota Golden Gophers",
           "position": "HB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -20051,6 +21231,10 @@
           "school_full": "Vanderbilt Commodores",
           "position": "QB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -20114,6 +21298,10 @@
           "school_full": "TCU Horned Frogs",
           "position": "S"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.25,
+        "label": "Developmental"
       }
     },
     {
@@ -20177,6 +21365,10 @@
           "school_full": "Florida State Seminoles",
           "position": "WR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -20240,6 +21432,10 @@
           "school_full": "Duke Blue Devils",
           "position": "QB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -20303,6 +21499,10 @@
           "school_full": "Alabama Crimson Tide",
           "position": "CB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -20366,6 +21566,10 @@
           "school_full": "Miami (FL) Hurricanes",
           "position": "HB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -20429,6 +21633,10 @@
           "school_full": "Missouri Tigers",
           "position": "ED"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -20492,6 +21700,10 @@
           "school_full": "Missouri Tigers",
           "position": "QB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -20555,6 +21767,10 @@
           "school_full": "Rutgers Scarlet Knights",
           "position": "QB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -20618,6 +21834,10 @@
           "school_full": "Illinois Fighting Illini",
           "position": "QB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -20681,6 +21901,10 @@
           "school_full": "Kentucky Wildcats",
           "position": "HB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -20744,6 +21968,10 @@
           "school_full": "North Carolina State Wolfpack",
           "position": "HB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.0,
+        "label": "Project"
       }
     },
     {
@@ -20807,6 +22035,10 @@
           "school_full": "Michigan Wolverines",
           "position": "DI"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -20870,6 +22102,10 @@
           "school_full": "Arkansas Razorbacks",
           "position": "QB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -20933,6 +22169,10 @@
           "school_full": "Houston Cougars",
           "position": "HB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -20996,6 +22236,10 @@
           "school_full": "Florida State Seminoles",
           "position": "QB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -21059,6 +22303,10 @@
           "school_full": "Southern Miss Golden Eagles",
           "position": "CB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -21122,6 +22370,10 @@
           "school_full": "Pittsburgh Panthers",
           "position": "LB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -21185,6 +22437,10 @@
           "school_full": "USF Bulls",
           "position": "QB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -21248,6 +22504,10 @@
           "school_full": "Missouri Tigers",
           "position": "S"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -21311,6 +22571,10 @@
           "school_full": "Kansas State Wildcats",
           "position": "QB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -21374,6 +22638,10 @@
           "school_full": "Indiana Hoosiers",
           "position": "C"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -21437,6 +22705,10 @@
           "school_full": "Mississippi Rebels",
           "position": "WR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -21500,6 +22772,10 @@
           "school_full": "Rutgers Scarlet Knights",
           "position": "ED"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -21563,6 +22839,10 @@
           "school_full": "Penn State Nittany Lions",
           "position": "WR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -21626,6 +22906,10 @@
           "school_full": "Oklahoma Sooners",
           "position": "S"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -21689,6 +22973,10 @@
           "school_full": "Tulane Green Wave",
           "position": "QB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -21752,6 +23040,10 @@
           "school_full": "Houston Cougars",
           "position": "QB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -21815,6 +23107,10 @@
           "school_full": "Iowa State Cyclones",
           "position": "QB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -21878,6 +23174,10 @@
           "school_full": "Pittsburgh Panthers",
           "position": "HB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.25,
+        "label": "Developmental"
       }
     },
     {
@@ -21941,6 +23241,10 @@
           "school_full": "Oklahoma Sooners",
           "position": "DI"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -22004,6 +23308,10 @@
           "school_full": "Utah Utes",
           "position": "ED"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -22067,6 +23375,10 @@
           "school_full": "Penn State Nittany Lions",
           "position": "T"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -22130,6 +23442,10 @@
           "school_full": "Kansas State Wildcats",
           "position": "S"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -22193,6 +23509,10 @@
           "school_full": "West Virginia Mountaineers",
           "position": "HB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -22256,6 +23576,10 @@
           "school_full": "SMU Mustangs",
           "position": "QB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -22319,6 +23643,10 @@
           "school_full": "Michigan Wolverines",
           "position": "CB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -22382,6 +23710,10 @@
           "school_full": "Oregon Ducks",
           "position": "HB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -22445,6 +23777,10 @@
           "school_full": "Utah Utes",
           "position": "QB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -22508,6 +23844,10 @@
           "school_full": "Mississippi Rebels",
           "position": "ED"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -22571,6 +23911,10 @@
           "school_full": "Illinois Fighting Illini",
           "position": "WR"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -22634,6 +23978,10 @@
           "school_full": "North Carolina State Wolfpack",
           "position": "DI"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     },
     {
@@ -22697,6 +24045,10 @@
           "school_full": "Mississippi Rebels",
           "position": "CB"
         }
+      },
+      "developmentCertainty": {
+        "score": 0.5,
+        "label": "Standard"
       }
     }
   ]
