@@ -1,6 +1,6 @@
 # GM Ops - Technical Design Document
 
-> **Last Updated:** January 24, 2026  
+> **Last Updated:** January 25, 2026  
 > **Purpose:** Single source of truth for all game systems, mechanics, and technical decisions.  
 > **Update Policy:** This document must be updated whenever design decisions are made in Claude chats.
 
@@ -684,5 +684,66 @@ New head coach hires start with elevated culture scores (benefit of the doubt), 
    - Skip `dev-guide.html` (requires styling work)
 
 5. **Before coding**: DESIGN.md must be updated with approved topic before any implementation starts
+
+---
+
+## Implementation Status
+
+### Draft Room UI (game-shell.html)
+
+**Layout**: 2-column design
+- Left: Draft Board (pick list with team needs, trade values)
+- Right: Team Info panel + Available Prospects
+
+**Team Info Panel** (collapsible):
+- Tabs: Needs | Picks | Scheme | Depth
+- Clicking any tab expands panel if collapsed
+- No scrollbar - content expands fully
+
+**Needs Tab**:
+- Side-by-side Offensive/Defensive needs
+- Position accordions with skill tags and scouting notes
+
+**Picks Tab**:
+- User's draft picks with round/pick numbers
+
+**Scheme Tab**:
+- Offensive scheme + Play Caller
+- Defensive scheme + Play Caller
+- Scheme Fit Traits summary
+
+**Depth Tab** (implemented Jan 25, 2026):
+- 2-deep roster display for all 32 teams
+- 11 positions per side (offense/defense)
+- Offense: QB, RB, WR×3, TE, LT, LG, C, RG, RT
+- Defense (nickel): LDE, LDT, RDT, RDE, LB×2, LCB, RCB, NB, FS, SS
+- Status flags: EXP (expiring contract), RET (retirement risk), INJ (long-term injury)
+- Data source: NFLverse depth charts + contracts
+
+**Data Files**:
+- `data/teams/depth_charts_2026.json` - 32 teams with 2-deep rosters
+- `data/raw/nflverse/depth_charts_2025.csv` - Source depth chart data
+- `data/raw/nflverse/contracts.csv` - Contract expiration data
+- `data/scripts/build_depth_charts.js` - Build script for depth chart JSON
+
+---
+
+## Session Log
+
+### January 25, 2026
+
+**Depth Chart Implementation**:
+- Added Depth tab to Team Info panel
+- Downloaded NFLverse depth charts and contract data
+- Created build script to merge depth charts with expiring contract flags
+- Implemented 11-position offense/defense structure (nickel defense)
+- Styled depth chart with equal-height columns, alternating rows
+- Added status flag legend (EXP, RET, INJ)
+
+**UI Fixes**:
+- Removed max-height constraint from Team Info panel (no scrollbars)
+- Fixed collapse/expand toggle for Team Info panel
+- Made tab clicks expand panel when collapsed
+- Restored Scheme tab content (Play Callers, Scheme Fit Traits)
 
 ---

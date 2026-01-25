@@ -73,8 +73,11 @@ Python HTTP server on port 5000 (static site).
 - **Jan 25**: Added Depth tab to Team Info with 2-deep roster by position
 - **Jan 25**: Downloaded NFLverse depth charts data (`data/raw/nflverse/depth_charts_2025.csv`)
 - **Jan 25**: Created `data/teams/depth_charts_2026.json` with expiring contract indicators
-- **Jan 25**: Depth tab shows offense (QB, RB, WR, TE, OL) and defense (EDGE, DL, LB, CB, S) grouped by scheme
-- **Jan 25**: Expiring contracts shown with dashed border + faded opacity
+- **Jan 25**: Depth tab shows 11 positions per side (offense: QB, RB, WR×3, TE, LT, LG, C, RG, RT; defense nickel: LDE, LDT, RDT, RDE, LB×2, LCB, RCB, NB, FS, SS)
+- **Jan 25**: Expiring contracts shown with EXP superscript flag
+- **Jan 25**: Depth chart legend with status flags (EXP, RET, INJ)
+- **Jan 25**: Team Info panel collapse/expand fixed (no scrollbars, tabs expand panel)
+- **Jan 25**: Restored Scheme tab content (Play Callers, Scheme Fit Traits)
 
 ## Future Work
 - **AI Draft Logic Implementation**: Implement the documented draft board generation and pick selection in game-shell.html
