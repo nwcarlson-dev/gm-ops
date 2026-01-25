@@ -16,6 +16,25 @@ const TEAM_ABBR_MAP = {
 
 const SPECIAL_TEAMS = ['PK', 'P', 'H', 'PR', 'KR', 'LS', 'K'];
 
+const OFFENSE_POSITIONS = {
+  'QB': { group: 'QB', count: 1 },
+  'RB': { group: 'RB', count: 1 },
+  'FB': { group: 'FB', count: 1 },
+  'WR': { group: 'WR', count: 3 },
+  'TE': { group: 'TE', count: 1 },
+  'LT': { group: 'LT', count: 1 },
+  'LG': { group: 'LG', count: 1 },
+  'C': { group: 'C', count: 1 },
+  'RG': { group: 'RG', count: 1 },
+  'RT': { group: 'RT', count: 1 }
+};
+
+const DEFENSE_DL = ['LDE', 'RDE', 'LDT', 'RDT', 'NT', 'DE', 'DT'];
+const DEFENSE_LB = ['MLB', 'WLB', 'SLB', 'LILB', 'RILB', 'LOLB', 'ROLB', 'ILB', 'OLB', 'LB'];
+const DEFENSE_CB = ['LCB', 'RCB', 'CB'];
+const DEFENSE_NB = ['NB', 'SCB', 'DB'];
+const DEFENSE_S = ['FS', 'SS', 'S'];
+
 function parseCSV(content) {
   const lines = content.trim().split('\n');
   const headers = lines[0].split(',');
@@ -73,85 +92,131 @@ function loadDepthCharts(expiringPlayers) {
   const latestRows = rows.filter(row => row.dt === latestDate);
   console.log(`${latestRows.length} entries for latest date`);
   
-  const teamDepthCharts = {};
+  const teamData = {};
   
   latestRows.forEach(row => {
     const team = TEAM_ABBR_MAP[row.team] || row.team;
     const posRank = parseInt(row.pos_rank) || 1;
-    
-    if (posRank > 2) return;
-    
     const posAbb = row.pos_abb || '';
-    const posSlot = parseInt(row.pos_slot) || 0;
     const posGroup = row.pos_grp || '';
     
     if (!posAbb || SPECIAL_TEAMS.includes(posAbb)) return;
     
-    if (!teamDepthCharts[team]) {
-      teamDepthCharts[team] = { offense: [], defense: [] };
+    if (!teamData[team]) {
+      teamData[team] = { offense: {}, defense: {} };
     }
     
     const playerName = row.player_name || '';
-    const nameLower = playerName.toLowerCase();
-    const isExpiring = expiringPlayers.has(nameLower);
+    const isExpiring = expiringPlayers.has(playerName.toLowerCase());
     
     const isDefense = posGroup.toLowerCase().includes('d') || 
-      ['LDE', 'RDE', 'LDT', 'RDT', 'NT', 'LOLB', 'ROLB', 'MLB', 'LILB', 'RILB', 'WILL', 'MIKE', 'SAM', 'WLB', 'SLB', 'LCB', 'RCB', 'SCB', 'NB', 'FS', 'SS'].includes(posAbb);
+      [...DEFENSE_DL, ...DEFENSE_LB, ...DEFENSE_CB, ...DEFENSE_NB, ...DEFENSE_S].includes(posAbb);
     
-    const entry = {
-      name: playerName,
-      pos: posAbb,
-      slot: posSlot,
-      depth: posRank,
-      expiring: isExpiring
-    };
+    const entry = { name: playerName, pos: posAbb, rank: posRank, expiring: isExpiring };
     
     if (isDefense) {
-      teamDepthCharts[team].defense.push(entry);
+      let group;
+      if (DEFENSE_DL.includes(posAbb)) group = posAbb;
+      else if (DEFENSE_LB.includes(posAbb)) group = 'LB';
+      else if (DEFENSE_CB.includes(posAbb)) group = posAbb;
+      else if (DEFENSE_NB.includes(posAbb)) group = 'NB';
+      else if (DEFENSE_S.includes(posAbb)) group = posAbb;
+      else group = posAbb;
+      
+      if (!teamData[team].defense[group]) teamData[team].defense[group] = [];
+      if (!teamData[team].defense[group].find(p => p.name === playerName)) {
+        teamData[team].defense[group].push(entry);
+      }
     } else {
-      teamDepthCharts[team].offense.push(entry);
+      const offPos = OFFENSE_POSITIONS[posAbb];
+      if (offPos) {
+        if (!teamData[team].offense[posAbb]) teamData[team].offense[posAbb] = [];
+        if (!teamData[team].offense[posAbb].find(p => p.name === playerName)) {
+          teamData[team].offense[posAbb].push(entry);
+        }
+      }
     }
   });
   
-  return teamDepthCharts;
-}
-
-function organizeDepthChart(entries) {
-  const byPosSlot = {};
-  
-  entries.forEach(e => {
-    const key = `${e.pos}-${e.slot}`;
-    if (!byPosSlot[key]) {
-      byPosSlot[key] = { pos: e.pos, slot: e.slot, starter: null, backup: null };
-    }
-    if (e.depth === 1) {
-      byPosSlot[key].starter = { name: e.name, expiring: e.expiring };
-    } else if (e.depth === 2) {
-      byPosSlot[key].backup = { name: e.name, expiring: e.expiring };
-    }
+  Object.keys(teamData).forEach(team => {
+    Object.keys(teamData[team].offense).forEach(pos => {
+      teamData[team].offense[pos].sort((a, b) => a.rank - b.rank);
+    });
+    Object.keys(teamData[team].defense).forEach(pos => {
+      teamData[team].defense[pos].sort((a, b) => a.rank - b.rank);
+    });
   });
   
-  return Object.values(byPosSlot).sort((a, b) => a.slot - b.slot);
+  return teamData;
 }
 
-function buildFinalDepthCharts(teamDepthCharts) {
+function buildFinalDepthCharts(teamData) {
   const result = {};
   
-  Object.keys(teamDepthCharts).forEach(team => {
-    const { offense, defense } = teamDepthCharts[team];
+  const offenseTemplate = [
+    { pos: 'QB', count: 1 },
+    { pos: 'RB', count: 1 },
+    { pos: 'WR', count: 3 },
+    { pos: 'TE', count: 1 },
+    { pos: 'LT', count: 1 },
+    { pos: 'LG', count: 1 },
+    { pos: 'C', count: 1 },
+    { pos: 'RG', count: 1 },
+    { pos: 'RT', count: 1 }
+  ];
+  
+  const defenseTemplate = [
+    { pos: 'LDE', count: 1 },
+    { pos: 'LDT', count: 1 },
+    { pos: 'RDT', count: 1 },
+    { pos: 'RDE', count: 1 },
+    { pos: 'LB', count: 2 },
+    { pos: 'LCB', count: 1 },
+    { pos: 'RCB', count: 1 },
+    { pos: 'NB', count: 1 },
+    { pos: 'FS', count: 1 },
+    { pos: 'SS', count: 1 }
+  ];
+  
+  Object.keys(teamData).forEach(team => {
+    const offense = [];
+    const defense = [];
     
-    result[team] = {
-      offense: organizeDepthChart(offense),
-      defense: organizeDepthChart(defense)
-    };
+    offenseTemplate.forEach(({ pos, count }) => {
+      const players = teamData[team].offense[pos] || [];
+      for (let i = 0; i < count; i++) {
+        const starter = players[i] || null;
+        const backup = players[i + count] || null;
+        offense.push({
+          pos: pos,
+          starter: starter ? { name: starter.name, expiring: starter.expiring } : null,
+          backup: backup ? { name: backup.name, expiring: backup.expiring } : null
+        });
+      }
+    });
+    
+    defenseTemplate.forEach(({ pos, count }) => {
+      const players = teamData[team].defense[pos] || [];
+      for (let i = 0; i < count; i++) {
+        const starter = players[i] || null;
+        const backup = players[i + count] || null;
+        defense.push({
+          pos: pos,
+          starter: starter ? { name: starter.name, expiring: starter.expiring } : null,
+          backup: backup ? { name: backup.name, expiring: backup.expiring } : null
+        });
+      }
+    });
+    
+    result[team] = { offense, defense };
   });
   
   return result;
 }
 
 const expiringPlayers = loadContracts();
-const depthCharts = loadDepthCharts(expiringPlayers);
-const finalData = buildFinalDepthCharts(depthCharts);
+const teamData = loadDepthCharts(expiringPlayers);
+const finalData = buildFinalDepthCharts(teamData);
 
 const outputPath = path.join(__dirname, '../teams/depth_charts_2026.json');
 fs.writeFileSync(outputPath, JSON.stringify(finalData, null, 2));
@@ -160,16 +225,12 @@ console.log(`Teams: ${Object.keys(finalData).length}`);
 
 const chi = finalData['CHI'];
 if (chi) {
-  console.log('\nBears offense:');
+  console.log('\nBears offense (11 positions):');
   chi.offense.forEach(p => {
-    const s = p.starter;
-    const b = p.backup;
-    console.log(`  ${p.pos}: ${s?.name || '-'}${s?.expiring ? ' [Q]' : ''} / ${b?.name || '-'}${b?.expiring ? ' [Q]' : ''}`);
+    console.log(`  ${p.pos}: ${p.starter?.name || '-'} / ${p.backup?.name || '-'}`);
   });
-  console.log('\nBears defense:');
+  console.log('\nBears defense (11 positions):');
   chi.defense.forEach(p => {
-    const s = p.starter;
-    const b = p.backup;
-    console.log(`  ${p.pos}: ${s?.name || '-'}${s?.expiring ? ' [Q]' : ''} / ${b?.name || '-'}${b?.expiring ? ' [Q]' : ''}`);
+    console.log(`  ${p.pos}: ${p.starter?.name || '-'} / ${p.backup?.name || '-'}`);
   });
 }
