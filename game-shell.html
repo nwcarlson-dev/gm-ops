@@ -2946,6 +2946,14 @@
             }
 
             function showTab(tabName) {
+                // Expand panel if collapsed
+                const header = document.getElementById("teamInfoHeader");
+                const content = document.getElementById("teamInfoContent");
+                if (header.classList.contains("collapsed")) {
+                    header.classList.remove("collapsed");
+                    content.classList.add("visible");
+                }
+                
                 document
                     .querySelectorAll(".tab-content")
                     .forEach((t) => t.classList.remove("active"));
