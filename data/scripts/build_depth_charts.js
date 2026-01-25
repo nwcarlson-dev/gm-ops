@@ -14,22 +14,6 @@ const TEAM_ABBR_MAP = {
   'SEA': 'SEA', 'SF': 'SF', 'TB': 'TB', 'TEN': 'TEN', 'WAS': 'WAS'
 };
 
-const OFFENSE_POSITIONS = {
-  'QB': 'QB',
-  'RB': 'RB',
-  'LWR': 'WR1', 'RWR': 'WR2', 'SWR': 'WR3',
-  'TE': 'TE',
-  'LT': 'LT', 'LG': 'LG', 'C': 'C', 'RG': 'RG', 'RT': 'RT'
-};
-
-const DEFENSE_POSITIONS = {
-  'LDE': 'EDGE1', 'RDE': 'EDGE2', 'LOLB': 'EDGE1', 'ROLB': 'EDGE2',
-  'LDT': 'DL1', 'RDT': 'DL2', 'NT': 'DL3', 'DT': 'DL1',
-  'MLB': 'LB1', 'LILB': 'LB1', 'RILB': 'LB2', 'WILL': 'LB1', 'MIKE': 'LB2', 'SAM': 'LB3',
-  'LCB': 'CB1', 'RCB': 'CB2', 'SCB': 'CB3', 'NB': 'CB3',
-  'FS': 'S1', 'SS': 'S2'
-};
-
 function parseCSV(content) {
   const lines = content.trim().split('\n');
   const headers = lines[0].split(',');
@@ -95,68 +79,87 @@ function loadDepthCharts(expiringPlayers) {
     
     if (posRank > 2) return;
     
-    const posAbb = row.pos_abb || row.pos_name;
+    const posAbb = row.pos_abb || '';
+    const posName = row.pos_name || '';
+    const posSlot = parseInt(row.pos_slot) || 0;
+    const posGroup = row.pos_grp || '';
     
-    const offenseKey = OFFENSE_POSITIONS[posAbb];
-    const defenseKey = DEFENSE_POSITIONS[posAbb];
-    
-    if (!offenseKey && !defenseKey) return;
+    if (!posAbb) return;
     
     if (!teamDepthCharts[team]) {
-      teamDepthCharts[team] = { offense: {}, defense: {} };
+      teamDepthCharts[team] = { offense: [], defense: [] };
     }
     
     const playerName = row.player_name || '';
     const isExpiring = expiringPlayers.has(playerName.toLowerCase());
     
+    const isDefense = posGroup.toLowerCase().includes('d') || 
+      ['LDE', 'RDE', 'LDT', 'RDT', 'NT', 'LOLB', 'ROLB', 'MLB', 'LILB', 'RILB', 'WILL', 'MIKE', 'SAM', 'WLB', 'SLB', 'LCB', 'RCB', 'SCB', 'NB', 'FS', 'SS'].includes(posAbb);
+    
     const entry = {
       name: playerName,
       pos: posAbb,
+      slot: posSlot,
       depth: posRank,
       expiring: isExpiring
     };
     
-    if (offenseKey) {
-      if (!teamDepthCharts[team].offense[offenseKey]) {
-        teamDepthCharts[team].offense[offenseKey] = [];
-      }
-      const existing = teamDepthCharts[team].offense[offenseKey];
-      if (!existing.find(p => p.name === playerName && p.depth === posRank)) {
-        existing.push(entry);
-      }
-    } else if (defenseKey) {
-      if (!teamDepthCharts[team].defense[defenseKey]) {
-        teamDepthCharts[team].defense[defenseKey] = [];
-      }
-      const existing = teamDepthCharts[team].defense[defenseKey];
-      if (!existing.find(p => p.name === playerName && p.depth === posRank)) {
-        existing.push(entry);
-      }
+    if (isDefense) {
+      teamDepthCharts[team].defense.push(entry);
+    } else {
+      teamDepthCharts[team].offense.push(entry);
     }
-  });
-  
-  Object.keys(teamDepthCharts).forEach(team => {
-    Object.keys(teamDepthCharts[team].offense).forEach(pos => {
-      teamDepthCharts[team].offense[pos].sort((a, b) => a.depth - b.depth);
-    });
-    Object.keys(teamDepthCharts[team].defense).forEach(pos => {
-      teamDepthCharts[team].defense[pos].sort((a, b) => a.depth - b.depth);
-    });
   });
   
   return teamDepthCharts;
 }
 
+function organizeDepthChart(entries) {
+  const byPosSlot = {};
+  
+  entries.forEach(e => {
+    const key = `${e.pos}-${e.slot}`;
+    if (!byPosSlot[key]) {
+      byPosSlot[key] = { pos: e.pos, slot: e.slot, starter: null, backup: null };
+    }
+    if (e.depth === 1) {
+      byPosSlot[key].starter = { name: e.name, expiring: e.expiring };
+    } else if (e.depth === 2) {
+      byPosSlot[key].backup = { name: e.name, expiring: e.expiring };
+    }
+  });
+  
+  return Object.values(byPosSlot).sort((a, b) => a.slot - b.slot);
+}
+
+function buildFinalDepthCharts(teamDepthCharts) {
+  const result = {};
+  
+  Object.keys(teamDepthCharts).forEach(team => {
+    const { offense, defense } = teamDepthCharts[team];
+    
+    result[team] = {
+      offense: organizeDepthChart(offense),
+      defense: organizeDepthChart(defense)
+    };
+  });
+  
+  return result;
+}
+
 const expiringPlayers = loadContracts();
 const depthCharts = loadDepthCharts(expiringPlayers);
+const finalData = buildFinalDepthCharts(depthCharts);
 
 const outputPath = path.join(__dirname, '../teams/depth_charts_2026.json');
-fs.writeFileSync(outputPath, JSON.stringify(depthCharts, null, 2));
+fs.writeFileSync(outputPath, JSON.stringify(finalData, null, 2));
 console.log(`Wrote depth charts to ${outputPath}`);
-console.log(`Teams: ${Object.keys(depthCharts).length}`);
+console.log(`Teams: ${Object.keys(finalData).length}`);
 
-const chi = depthCharts['CHI'];
+const chi = finalData['CHI'];
 if (chi) {
-  console.log('\nBears offense positions:', Object.keys(chi.offense));
-  console.log('Bears defense positions:', Object.keys(chi.defense));
+  console.log('\nBears offense:');
+  chi.offense.forEach(p => console.log(`  ${p.pos}: ${p.starter?.name || '-'} / ${p.backup?.name || '-'}`));
+  console.log('\nBears defense:');
+  chi.defense.forEach(p => console.log(`  ${p.pos}: ${p.starter?.name || '-'} / ${p.backup?.name || '-'}`));
 }
