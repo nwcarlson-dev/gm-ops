@@ -528,6 +528,20 @@ Derived from scouting report keywords and projection data:
 
 Formula: `finalVariance = baseVariance * (0.5 + certaintyMultiplier)`
 
+### Positional Value Modifier
+
+Certain positions have inherent draft value beyond their ranking:
+
+| Position | Modifier | Notes |
+|----------|----------|-------|
+| QB | +10-15 picks | Teams reach for franchise QBs |
+| OT | +5-8 picks | Premium on blindside protection |
+| EDGE | +5-8 picks | Pass rushers at a premium |
+| WR (playmaker) | +3-5 picks | Explosive pass catchers valued |
+| RB | -10-15 picks | Positional devaluation, shorter careers |
+
+These modifiers reflect real NFL draft tendencies where teams consistently overdraft QBs and pass rushers while letting RBs fall.
+
 ### Scheme Fit Calculation
 
 ```

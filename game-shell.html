@@ -2067,6 +2067,27 @@
             let watchlistCount = 0;
             let prospectsToShow = 50;
             let filledNeeds = {};
+            
+            // AI Draft Logic data
+            let schemeWeights = {};
+            let teamSchemes = {};
+            let teamDraftBoards = {}; // team name -> sorted array of prospect ids
+            
+            // Positional value modifiers (higher = boost up board)
+            const POSITION_VALUE = {
+                QB: 12,      // QBs go higher than ranked
+                OT: 6,       // Tackles at premium
+                EDGE: 6,     // Pass rushers at premium
+                WR: 3,       // Playmaking receivers valued
+                RB: -12,     // RBs typically drop
+                FB: -15,
+                TE: 0,
+                OG: 0, C: 0, IOL: 0, OL: 0,
+                IDL: 0, DT: 0, NT: 0, DL: 0,
+                LB: 0, ILB: 0, MLB: 0,
+                CB: 2,
+                S: 1, FS: 1, SS: 1
+            };
 
             const TEAM_DATA = {
                 Raiders: { abbr: "LV", color: "#000000", color2: "#A5ACAF" },
