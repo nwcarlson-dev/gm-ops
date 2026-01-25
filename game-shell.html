@@ -715,54 +715,59 @@
             .depth-section {
                 flex: 1;
             }
-            .depth-grid {
+            .depth-table {
                 display: flex;
                 flex-direction: column;
-                gap: 2px;
+                gap: 0;
+            }
+            .depth-header-row {
+                display: grid;
+                grid-template-columns: 36px 1fr 1fr;
+                gap: 8px;
+                padding: 2px 0;
+                border-bottom: 1px solid var(--card-border);
+                margin-bottom: 2px;
+            }
+            .depth-col-header {
+                font-family: "Barlow Condensed", sans-serif;
+                font-size: 9px;
+                font-weight: 700;
+                color: var(--text-muted);
+                text-transform: uppercase;
             }
             .depth-row {
-                display: flex;
-                align-items: center;
-                gap: 4px;
+                display: grid;
+                grid-template-columns: 36px 1fr 1fr;
+                gap: 8px;
+                padding: 1px 0;
             }
             .depth-pos {
                 font-family: "Barlow Condensed", sans-serif;
                 font-size: 10px;
                 font-weight: 700;
-                color: var(--gold);
-                min-width: 36px;
+                color: var(--text-muted);
                 text-transform: uppercase;
             }
-            .depth-players {
-                display: flex;
-                flex-direction: column;
-                gap: 1px;
-                flex: 1;
+            .depth-starter {
+                font-size: 11px;
+                color: #4a90d9;
+                font-weight: 500;
             }
-            .depth-player {
-                font-size: 10px;
-                color: var(--white);
-                padding: 1px 4px;
-                background: rgba(0, 0, 0, 0.2);
-                border-radius: 2px;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-            }
-            .depth-player.starter {
-                background: rgba(1, 51, 105, 0.4);
-            }
-            .depth-player.expiring {
-                opacity: 0.6;
-                border: 1px dashed var(--warning);
-            }
-            .depth-player.backup {
+            .depth-backup {
+                font-size: 11px;
                 color: var(--text-muted);
-                font-size: 9px;
             }
-            .depth-player.empty {
+            .depth-starter.expiring, .depth-backup.expiring {
+                opacity: 0.65;
+            }
+            .depth-starter.empty, .depth-backup.empty {
                 color: var(--text-muted);
                 opacity: 0.3;
+            }
+            .q-flag {
+                color: var(--nfl-red);
+                font-size: 9px;
+                font-weight: 700;
             }
 
             .my-picks-list {
@@ -2923,77 +2928,41 @@
                     return;
                 }
                 
-                const teamScheme = teamSchemes[userTeam.name] || {};
-                const defScheme = teamScheme.defense || '4-3';
-                const is34 = defScheme.includes('3-4');
-                
-                const offensePositions = [
-                    { group: 'QB', count: 1 },
-                    { group: 'RB', count: 1 },
-                    { group: 'WR', count: 3 },
-                    { group: 'TE', count: 1 },
-                    { group: 'OL', count: 5 }
-                ];
-                const defensePositions = is34 
-                    ? [
-                        { group: 'EDGE', count: 2 },
-                        { group: 'DL', count: 3 },
-                        { group: 'LB', count: 2 },
-                        { group: 'CB', count: 3 },
-                        { group: 'S', count: 2 }
-                    ]
-                    : [
-                        { group: 'EDGE', count: 2 },
-                        { group: 'DL', count: 2 },
-                        { group: 'LB', count: 3 },
-                        { group: 'CB', count: 3 },
-                        { group: 'S', count: 2 }
-                    ];
-                
-                function renderSide(data, positions, elementId) {
-                    let html = '';
-                    positions.forEach(({ group, count }) => {
-                        const players = data[group] || [];
-                        if (players.length === 0) return;
+                function renderSide(positions, elementId) {
+                    let html = '<div class="depth-table">';
+                    html += '<div class="depth-header-row"><span class="depth-pos"></span><span class="depth-col-header">STARTER</span><span class="depth-col-header">2ND</span></div>';
+                    
+                    positions.forEach(row => {
+                        const s = row.starter;
+                        const b = row.backup;
                         
-                        const depth1 = players.filter(p => p.depth === 1);
-                        const depth2 = players.filter(p => p.depth === 2);
+                        html += '<div class="depth-row">';
+                        html += '<span class="depth-pos">' + row.pos + '</span>';
                         
-                        for (let i = 0; i < count; i++) {
-                            const starter = depth1[i];
-                            const backup = depth2[i];
-                            if (!starter && !backup) continue;
-                            
-                            const posLabel = count > 1 ? group + (i + 1) : group;
-                            
-                            html += '<div class="depth-row">';
-                            html += '<div class="depth-pos">' + posLabel + '</div>';
-                            html += '<div class="depth-players">';
-                            
-                            if (starter) {
-                                const classes = ['depth-player', 'starter'];
-                                if (starter.expiring) classes.push('expiring');
-                                html += '<span class="' + classes.join(' ') + '">' + starter.name + '</span>';
-                            } else {
-                                html += '<span class="depth-player empty">-</span>';
-                            }
-                            
-                            if (backup) {
-                                const classes = ['depth-player', 'backup'];
-                                if (backup.expiring) classes.push('expiring');
-                                html += '<span class="' + classes.join(' ') + '">' + backup.name + '</span>';
-                            } else {
-                                html += '<span class="depth-player backup empty">-</span>';
-                            }
-                            
-                            html += '</div></div>';
+                        if (s) {
+                            const sClasses = ['depth-starter'];
+                            if (s.expiring) sClasses.push('expiring');
+                            html += '<span class="' + sClasses.join(' ') + '">' + s.name + (s.expiring ? ' <span class="q-flag">Q</span>' : '') + '</span>';
+                        } else {
+                            html += '<span class="depth-starter empty">-</span>';
                         }
+                        
+                        if (b) {
+                            const bClasses = ['depth-backup'];
+                            if (b.expiring) bClasses.push('expiring');
+                            html += '<span class="' + bClasses.join(' ') + '">' + b.name + (b.expiring ? ' <span class="q-flag">Q</span>' : '') + '</span>';
+                        } else {
+                            html += '<span class="depth-backup empty">-</span>';
+                        }
+                        
+                        html += '</div>';
                     });
+                    html += '</div>';
                     document.getElementById(elementId).innerHTML = html;
                 }
                 
-                renderSide(depthData.offense, offensePositions, 'offenseDepth');
-                renderSide(depthData.defense, defensePositions, 'defenseDepth');
+                renderSide(depthData.offense, 'offenseDepth');
+                renderSide(depthData.defense, 'defenseDepth');
             }
 
             function getTeamNeeds(teamName) {
