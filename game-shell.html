@@ -146,16 +146,7 @@
                 transform: rotate(-90deg);
             }
             .team-info-content {
-                overflow: hidden;
-                transition: max-height 0.3s ease;
-            }
-            .team-info-header.collapsed + .team-info-content {
-                max-height: 0 !important;
-                padding: 0 !important;
-                border: none !important;
-            }
-            .team-info-content.visible {
-                max-height: none;
+                display: none;
                 padding: 12px 16px;
                 background: var(--card-bg);
                 border: 1px solid var(--card-border);
@@ -163,7 +154,9 @@
                 border-radius: 0 0 8px 8px;
                 margin-top: -8px;
                 margin-bottom: 8px;
-                overflow: visible;
+            }
+            .team-info-content.visible {
+                display: block;
             }
 
             /* Side-by-side needs */
@@ -2041,7 +2034,7 @@
                             </div>
 
                         <!-- Expandable Team Info Content -->
-                        <div class="team-info-content" id="teamInfoContent" style="padding: 12px 16px; background: var(--card-bg); border: 1px solid var(--card-border); border-top: none; border-radius: 0 0 8px 8px; margin-top: -8px; margin-bottom: 8px;">
+                        <div class="team-info-content visible" id="teamInfoContent">
                             <div id="needsTab" class="tab-content active">
                                 <div class="needs-row">
                                     <div class="needs-section">
