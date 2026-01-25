@@ -1440,11 +1440,11 @@
         prospects: prospects
       };
 
-      // Store draft settings for draft-room to read
+      // Store draft settings for game-shell to read
       localStorage.setItem('gmops_draft_settings', JSON.stringify(settings));
       
       // Navigate to draft room
-      window.location.href = 'draft-room.html';
+      window.location.href = 'game-shell.html';
     }
 
     window.onload = renderTeams;
