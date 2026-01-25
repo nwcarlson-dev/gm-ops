@@ -14,6 +14,8 @@ const TEAM_ABBR_MAP = {
   'SEA': 'SEA', 'SF': 'SF', 'TB': 'TB', 'TEN': 'TEN', 'WAS': 'WAS'
 };
 
+const SPECIAL_TEAMS = ['PK', 'P', 'H', 'PR', 'KR', 'LS', 'K'];
+
 function parseCSV(content) {
   const lines = content.trim().split('\n');
   const headers = lines[0].split(',');
@@ -58,7 +60,27 @@ function loadContracts() {
   return expiringPlayers;
 }
 
-function loadDepthCharts(expiringPlayers) {
+function loadInjuryStatus() {
+  const content = fs.readFileSync(path.join(__dirname, '../raw/nflverse/rosters_2025.csv'), 'utf8');
+  const rows = parseCSV(content);
+  const injuredPlayers = {};
+  
+  rows.forEach(row => {
+    const status = row.status || '';
+    const statusAbbr = row.status_description_abbr || '';
+    const name = row.player_name || '';
+    
+    if (['RES', 'IR', 'PUP', 'NFI', 'SUS', 'EXE'].includes(status) || 
+        statusAbbr.includes('IR') || statusAbbr.includes('PUP')) {
+      injuredPlayers[name.toLowerCase()] = status;
+    }
+  });
+  
+  console.log(`Found ${Object.keys(injuredPlayers).length} players with injury/reserve status`);
+  return injuredPlayers;
+}
+
+function loadDepthCharts(expiringPlayers, injuredPlayers) {
   const content = fs.readFileSync(path.join(__dirname, '../raw/nflverse/depth_charts_2025.csv'), 'utf8');
   const rows = parseCSV(content);
   
@@ -80,18 +102,19 @@ function loadDepthCharts(expiringPlayers) {
     if (posRank > 2) return;
     
     const posAbb = row.pos_abb || '';
-    const posName = row.pos_name || '';
     const posSlot = parseInt(row.pos_slot) || 0;
     const posGroup = row.pos_grp || '';
     
-    if (!posAbb) return;
+    if (!posAbb || SPECIAL_TEAMS.includes(posAbb)) return;
     
     if (!teamDepthCharts[team]) {
       teamDepthCharts[team] = { offense: [], defense: [] };
     }
     
     const playerName = row.player_name || '';
-    const isExpiring = expiringPlayers.has(playerName.toLowerCase());
+    const nameLower = playerName.toLowerCase();
+    const isExpiring = expiringPlayers.has(nameLower);
+    const injuryStatus = injuredPlayers[nameLower] || null;
     
     const isDefense = posGroup.toLowerCase().includes('d') || 
       ['LDE', 'RDE', 'LDT', 'RDT', 'NT', 'LOLB', 'ROLB', 'MLB', 'LILB', 'RILB', 'WILL', 'MIKE', 'SAM', 'WLB', 'SLB', 'LCB', 'RCB', 'SCB', 'NB', 'FS', 'SS'].includes(posAbb);
@@ -101,7 +124,8 @@ function loadDepthCharts(expiringPlayers) {
       pos: posAbb,
       slot: posSlot,
       depth: posRank,
-      expiring: isExpiring
+      expiring: isExpiring,
+      injury: injuryStatus
     };
     
     if (isDefense) {
@@ -123,9 +147,9 @@ function organizeDepthChart(entries) {
       byPosSlot[key] = { pos: e.pos, slot: e.slot, starter: null, backup: null };
     }
     if (e.depth === 1) {
-      byPosSlot[key].starter = { name: e.name, expiring: e.expiring };
+      byPosSlot[key].starter = { name: e.name, expiring: e.expiring, injury: e.injury };
     } else if (e.depth === 2) {
-      byPosSlot[key].backup = { name: e.name, expiring: e.expiring };
+      byPosSlot[key].backup = { name: e.name, expiring: e.expiring, injury: e.injury };
     }
   });
   
@@ -148,7 +172,8 @@ function buildFinalDepthCharts(teamDepthCharts) {
 }
 
 const expiringPlayers = loadContracts();
-const depthCharts = loadDepthCharts(expiringPlayers);
+const injuredPlayers = loadInjuryStatus();
+const depthCharts = loadDepthCharts(expiringPlayers, injuredPlayers);
 const finalData = buildFinalDepthCharts(depthCharts);
 
 const outputPath = path.join(__dirname, '../teams/depth_charts_2026.json');
@@ -159,7 +184,19 @@ console.log(`Teams: ${Object.keys(finalData).length}`);
 const chi = finalData['CHI'];
 if (chi) {
   console.log('\nBears offense:');
-  chi.offense.forEach(p => console.log(`  ${p.pos}: ${p.starter?.name || '-'} / ${p.backup?.name || '-'}`));
-  console.log('\nBears defense:');
-  chi.defense.forEach(p => console.log(`  ${p.pos}: ${p.starter?.name || '-'} / ${p.backup?.name || '-'}`));
+  chi.offense.forEach(p => {
+    const s = p.starter;
+    const b = p.backup;
+    const sFlag = s ? (s.expiring ? ' [Q]' : '') + (s.injury ? ` [${s.injury}]` : '') : '';
+    const bFlag = b ? (b.expiring ? ' [Q]' : '') + (b.injury ? ` [${b.injury}]` : '') : '';
+    console.log(`  ${p.pos}: ${s?.name || '-'}${sFlag} / ${b?.name || '-'}${bFlag}`);
+  });
+}
+
+const lac = finalData['LAC'];
+if (lac) {
+  console.log('\nChargers defense (3-4):');
+  lac.defense.forEach(p => {
+    console.log(`  ${p.pos}: ${p.starter?.name || '-'} / ${p.backup?.name || '-'}`);
+  });
 }
