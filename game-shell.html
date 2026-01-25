@@ -94,33 +94,144 @@
                 grid-template-columns: 1fr;
             }
 
-            /* Team panel toggle */
-            .team-panel-toggle {
-                position: fixed;
-                right: 16px;
-                top: 72px;
-                z-index: 100;
-                background: var(--card-bg);
-                border: 1px solid var(--card-border);
-                border-radius: 6px;
-                padding: 6px 10px;
-                color: var(--text-muted);
-                cursor: pointer;
-                font-size: 12px;
+            /* New 2-column layout */
+            .draft-layout {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 16px;
+                height: calc(100vh - 72px);
+            }
+
+            /* Team info header - collapsible */
+            .team-info-header {
                 display: flex;
                 align-items: center;
-                gap: 4px;
-                transition: var(--transition-fast);
+                gap: 12px;
+                padding: 12px 16px;
+                background: var(--card-bg);
+                border: 1px solid var(--card-border);
+                border-radius: 8px;
+                cursor: pointer;
+                margin-bottom: 8px;
             }
-            .team-panel-toggle:hover {
-                background: rgba(255,255,255,0.1);
+            .team-info-header:hover {
+                background: rgba(255,255,255,0.05);
+            }
+            .team-info-summary {
+                flex: 1;
+                display: flex;
+                align-items: center;
+                gap: 12px;
+            }
+            .team-info-name {
+                font-family: var(--font-display);
+                font-size: 20px;
+                font-weight: 600;
                 color: var(--white);
             }
-            .right-panel.hidden {
-                display: none;
+            .team-info-meta {
+                font-size: 12px;
+                color: var(--text-muted);
             }
-            .draft-grid.panel-hidden {
-                grid-template-columns: 3fr 2fr !important;
+            .team-info-toggle {
+                color: var(--text-muted);
+                transition: transform 0.2s;
+            }
+            .team-info-header.collapsed .team-info-toggle {
+                transform: rotate(-90deg);
+            }
+            .team-info-content {
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+            }
+            .team-info-header.collapsed + .team-info-content {
+                max-height: 0 !important;
+                padding: 0;
+                border: none;
+            }
+            .team-info-content.visible {
+                max-height: 200px;
+                padding: 12px 16px;
+                background: var(--card-bg);
+                border: 1px solid var(--card-border);
+                border-top: none;
+                border-radius: 0 0 8px 8px;
+                margin-top: -8px;
+                margin-bottom: 8px;
+                overflow-y: auto;
+            }
+
+            /* Side-by-side needs */
+            .needs-row {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 16px;
+            }
+            .needs-row .needs-section {
+                margin-bottom: 0;
+            }
+
+            /* Sim controls in draft panel header */
+            .draft-panel-header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                gap: 12px;
+                padding: 12px 16px;
+                border-bottom: 1px solid var(--card-border);
+            }
+            .draft-panel-title {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+            }
+            .current-pick-badge {
+                background: var(--nfl-red);
+                color: white;
+                padding: 4px 10px;
+                border-radius: 4px;
+                font-size: 12px;
+                font-weight: 600;
+            }
+            .sim-controls-inline {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+            .sim-controls-inline select,
+            .sim-controls-inline input {
+                padding: 6px 8px;
+                font-size: 12px;
+                background: rgba(255,255,255,0.1);
+                border: 1px solid var(--card-border);
+                border-radius: 4px;
+                color: var(--white);
+            }
+            .sim-controls-inline input {
+                width: 60px;
+            }
+            .sim-btn {
+                padding: 6px 12px;
+                font-size: 12px;
+                border-radius: 4px;
+                border: none;
+                cursor: pointer;
+                font-weight: 500;
+            }
+            .sim-btn-primary {
+                background: var(--nfl-blue);
+                color: white;
+            }
+            .sim-btn-danger {
+                background: var(--nfl-red);
+                color: white;
+            }
+            .sim-btn-secondary {
+                background: rgba(255,255,255,0.1);
+                color: var(--text-muted);
+            }
+            .sim-btn:hover {
+                opacity: 0.9;
             }
 
             /* Draft pick action buttons */
@@ -1775,278 +1886,129 @@
             </aside>
 
             <main class="app-main">
-                <div class="page-header">
-                    <div>
-                        <h1 class="page-title">Draft Board</h1>
-                        <p class="page-subtitle" id="draftStatus">
-                            Round 1, Pick 1 - Raiders on the clock
-                        </p>
-                    </div>
-                    <div class="header-team-panel">
-                        <div id="headerTeamLogo"></div>
-                        <div class="header-team-info">
-                            <div class="header-team-name" id="headerTeamName">
-                                Chicago Bears
-                            </div>
-                            <div class="header-team-meta" id="headerTeamMeta">
-                                Next: R1 P25 &bull; 24 picks away
-                            </div>
-                        </div>
-                        <div class="sim-controls">
-                            <select id="simSpeed" class="sim-speed-select">
-                                <option value="0">Instant</option>
-                                <option value="500" selected>Fast</option>
-                                <option value="1500">Normal</option>
-                                <option value="3000">Slow</option>
-                            </select>
-                            <div class="sim-target">
-                                <span>Sim to #</span>
-                                <input
-                                    type="number"
-                                    id="simTargetPick"
-                                    min="1"
-                                    max="257"
-                                    value=""
-                                    placeholder="Pick"
-                                />
-                            </div>
-                            <button
-                                class="btn btn-secondary"
-                                id="simToPickBtn"
-                                onclick="startSim()"
-                            >
-                                Sim
-                            </button>
-                            <button
-                                class="btn btn-danger"
-                                id="stopSimBtn"
-                                onclick="stopSim()"
-                                style="display: none"
-                            >
-                                Stop
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <button class="team-panel-toggle" onclick="toggleTeamPanel()">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="3" y="3" width="18" height="18" rx="2"/>
-                        <path d="M15 3v18"/>
-                    </svg>
-                    <span id="panelToggleText">Hide Panel</span>
-                </button>
-                <div
-                    class="draft-grid"
-                    id="draftGrid"
-                    style="
-                        display: grid;
-                        grid-template-columns: 3fr 2fr minmax(240px, 280px);
-                        gap: 16px;
-                    "
-                >
-                    <div class="card draft-order-panel">
-                        <div class="card-header">
-                            <h3 class="card-title">Draft Board</h3>
-                            <div class="round-tabs">
-                                <button class="round-btn active">R1</button>
-                                <button class="round-btn">R2</button>
-                                <button class="round-btn">R3</button>
-                                <button class="round-btn">R4</button>
-                                <button class="round-btn">R5</button>
-                                <button class="round-btn">R6</button>
-                                <button class="round-btn">R7</button>
-                            </div>
-                        </div>
-                        <div class="draft-order-list" id="draftOrderList"></div>
-                    </div>
-
-                    <div class="card">
-                        <div
-                            class="card-header"
-                            style="
-                                flex-direction: column;
-                                align-items: flex-start;
-                                gap: 12px;
-                            "
-                        >
-                            <h3 class="card-title">Available Prospects</h3>
-                            <div class="position-filters">
-                                <button class="pos-filter active">All</button>
-                                <button class="pos-filter">QB</button>
-                                <button class="pos-filter">RB</button>
-                                <button class="pos-filter">WR</button>
-                                <button class="pos-filter">TE</button>
-                                <button class="pos-filter">OL</button>
-                                <button class="pos-filter">IDL</button>
-                                <button class="pos-filter">EDGE</button>
-                                <button class="pos-filter">LB</button>
-                                <button class="pos-filter">CB</button>
-                                <button class="pos-filter">S</button>
-                                <button class="pos-filter">K/P</button>
-                                <button
-                                    class="pos-filter watchlist-toggle"
-                                    id="watchlistToggle"
-                                    onclick="toggleWatchlistFilter()"
-                                >
-                                    <svg
-                                        width="12"
-                                        height="12"
-                                        viewBox="0 0 24 24"
-                                        fill="currentColor"
-                                        style="margin-right: 4px"
-                                    >
-                                        <path
-                                            d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
-                                        />
-                                    </svg>
-                                    Watchlist
-                                </button>
-                            </div>
-                        </div>
-                        <div class="prospect-list" id="prospectList"></div>
-                        <div class="watchlist-hint">
-                            <svg
-                                width="12"
-                                height="12"
-                                viewBox="0 0 24 24"
-                                fill="currentColor"
-                            >
-                                <path
-                                    d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"
-                                />
-                            </svg>
-                            <span
-                                >Click the star on any prospect to add them to
-                                your watchlist</span
-                            >
-                        </div>
-                    </div>
-
-                    <div class="right-panel" id="rightPanel">
-                        <div class="card">
-                            <div class="card-header" style="padding-bottom: 0">
-                                <h3 class="card-title">Team Info</h3>
-                            </div>
-                            <div class="panel-tabs">
-                                <button
-                                    class="panel-tab active"
-                                    onclick="showTab('needs')"
-                                >
-                                    Needs
-                                </button>
-                                <button
-                                    class="panel-tab"
-                                    onclick="showTab('picks')"
-                                >
-                                    Picks
-                                </button>
-                                <button
-                                    class="panel-tab"
-                                    onclick="showTab('scheme')"
-                                >
-                                    Scheme
-                                </button>
-                            </div>
-
-                            <div id="needsTab" class="tab-content active">
-                                <div class="needs-section">
-                                    <div class="needs-header">
-                                        Offensive Needs
-                                    </div>
-                                    <div id="offensiveNeeds"></div>
+                <div class="draft-layout">
+                    <!-- Left Column: Draft Board -->
+                    <div class="card draft-order-panel" style="display: flex; flex-direction: column; max-height: calc(100vh - 72px);">
+                        <div class="draft-panel-header">
+                            <div class="draft-panel-title">
+                                <div class="round-tabs">
+                                    <button class="round-btn active">R1</button>
+                                    <button class="round-btn">R2</button>
+                                    <button class="round-btn">R3</button>
+                                    <button class="round-btn">R4</button>
+                                    <button class="round-btn">R5</button>
+                                    <button class="round-btn">R6</button>
+                                    <button class="round-btn">R7</button>
                                 </div>
-                                <div class="needs-section">
-                                    <div class="needs-header">
-                                        Defensive Needs
+                                <div class="current-pick-badge" id="currentPickBadge">Pick 1</div>
+                                <span class="text-muted" style="font-size: 12px;" id="draftStatus">Raiders on the clock</span>
+                            </div>
+                            <div class="sim-controls-inline">
+                                <select id="simSpeed">
+                                    <option value="0">Instant</option>
+                                    <option value="500" selected>Fast</option>
+                                    <option value="1500">Normal</option>
+                                    <option value="3000">Slow</option>
+                                </select>
+                                <input type="number" id="simTargetPick" min="1" max="257" placeholder="#" />
+                                <button class="sim-btn sim-btn-primary" id="simToPickBtn" onclick="startSim()">Sim</button>
+                                <button class="sim-btn sim-btn-secondary" id="pauseSimBtn" onclick="pauseSim()" style="display: none;">Pause</button>
+                                <button class="sim-btn sim-btn-danger" id="stopSimBtn" onclick="stopSim()" style="display: none;">Stop</button>
+                            </div>
+                        </div>
+                        <div class="draft-order-list" id="draftOrderList" style="flex: 1; overflow-y: auto;"></div>
+                    </div>
+
+                    <!-- Right Column: Team Info + Prospects -->
+                    <div style="display: flex; flex-direction: column; max-height: calc(100vh - 72px); min-height: 0; gap: 0;">
+                        <!-- Collapsible Team Info Header -->
+                        <div class="team-info-header" id="teamInfoHeader" onclick="toggleTeamInfo()">
+                            <div class="team-info-summary">
+                                <div id="headerTeamLogo"></div>
+                                <div>
+                                    <div class="team-info-name" id="headerTeamName">Chicago Bears</div>
+                                    <div class="team-info-meta" id="headerTeamMeta">Next: R1 P25 - 24 picks away</div>
+                                </div>
+                            </div>
+                            <div class="panel-tabs" style="margin: 0;" onclick="event.stopPropagation();">
+                                <button class="panel-tab active" onclick="showTab('needs')">Needs</button>
+                                <button class="panel-tab" onclick="showTab('picks')">Picks</button>
+                                <button class="panel-tab" onclick="showTab('scheme')">Scheme</button>
+                            </div>
+                            <svg class="team-info-toggle" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <polyline points="6 9 12 15 18 9"></polyline>
+                            </svg>
+                        </div>
+
+                        <!-- Expandable Team Info Content -->
+                        <div class="team-info-content" id="teamInfoContent" style="max-height: 180px; padding: 12px 16px; background: var(--card-bg); border: 1px solid var(--card-border); border-top: none; border-radius: 0 0 8px 8px; margin-top: -8px; margin-bottom: 8px; overflow-y: auto;">
+                            <div id="needsTab" class="tab-content active">
+                                <div class="needs-row">
+                                    <div class="needs-section">
+                                        <div class="needs-header">Offensive Needs</div>
+                                        <div id="offensiveNeeds"></div>
                                     </div>
-                                    <div id="defensiveNeeds"></div>
+                                    <div class="needs-section">
+                                        <div class="needs-header">Defensive Needs</div>
+                                        <div id="defensiveNeeds"></div>
+                                    </div>
                                 </div>
                             </div>
 
                             <div id="picksTab" class="tab-content">
                                 <div class="needs-header">My Draft Picks</div>
-                                <div
-                                    class="my-picks-list"
-                                    id="myPicksList"
-                                ></div>
+                                <div class="my-picks-list" id="myPicksList"></div>
                             </div>
 
                             <div id="schemeTab" class="tab-content">
-                                <div class="scheme-section">
-                                    <div class="scheme-header">Offensive</div>
-                                    <div class="scheme-box">
-                                        <div class="scheme-label">Scheme</div>
-                                        <div
-                                            class="scheme-value"
-                                            id="offScheme"
-                                        >
-                                            Shanahan Wide Zone
+                                <div class="needs-row">
+                                    <div class="scheme-section">
+                                        <div class="scheme-header">Offensive</div>
+                                        <div class="scheme-box">
+                                            <div class="scheme-label">Scheme</div>
+                                            <div class="scheme-value" id="offScheme">Shanahan Wide Zone</div>
                                         </div>
                                     </div>
-                                    <div class="scheme-box">
-                                        <div class="scheme-label">
-                                            Play Caller
+                                    <div class="scheme-section">
+                                        <div class="scheme-header">Defensive</div>
+                                        <div class="scheme-box">
+                                            <div class="scheme-label">Scheme</div>
+                                            <div class="scheme-value" id="defScheme">4-3 Under</div>
                                         </div>
-                                        <div class="scheme-value" id="ocName">
-                                            Ben Johnson (HC)
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="scheme-section">
-                                    <div class="scheme-header">Defensive</div>
-                                    <div class="scheme-box">
-                                        <div class="scheme-label">Scheme</div>
-                                        <div
-                                            class="scheme-value"
-                                            id="defScheme"
-                                        >
-                                            4-3 Under
-                                        </div>
-                                    </div>
-                                    <div class="scheme-box">
-                                        <div class="scheme-label">
-                                            Play Caller
-                                        </div>
-                                        <div class="scheme-value" id="dcName">
-                                            Dennis Allen (DC)
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="scheme-section">
-                                    <div class="scheme-header">
-                                        Scheme Fit Traits
-                                    </div>
-                                    <div
-                                        class="scheme-box"
-                                        style="
-                                            font-size: 11px;
-                                            color: var(--silver);
-                                            line-height: 1.5;
-                                        "
-                                    >
-                                        <strong style="color: var(--gold)"
-                                            >Zone Blocking:</strong
-                                        >
-                                        Athletic OL who can move laterally<br />
-                                        <strong style="color: var(--gold)"
-                                            >Run Game:</strong
-                                        >
-                                        One-cut backs with vision and burst<br />
-                                        <strong style="color: var(--gold)"
-                                            >Pass Rush:</strong
-                                        >
-                                        Speed rushers who can bend the edge<br />
-                                        <strong style="color: var(--gold)"
-                                            >Coverage:</strong
-                                        >
-                                        Versatile DBs who can play man and zone
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
+
+                        <!-- Prospects Card -->
+                        <div class="card" style="flex: 1; display: flex; flex-direction: column; min-height: 0;">
+                            <div class="card-header" style="flex-direction: column; align-items: flex-start; gap: 8px; padding: 12px 16px;">
+                                <h3 class="card-title" style="font-size: 16px;">Available Prospects</h3>
+                                <div class="position-filters">
+                                    <button class="pos-filter active">All</button>
+                                    <button class="pos-filter">QB</button>
+                                    <button class="pos-filter">RB</button>
+                                    <button class="pos-filter">WR</button>
+                                    <button class="pos-filter">TE</button>
+                                    <button class="pos-filter">OL</button>
+                                    <button class="pos-filter">IDL</button>
+                                    <button class="pos-filter">EDGE</button>
+                                    <button class="pos-filter">LB</button>
+                                    <button class="pos-filter">CB</button>
+                                    <button class="pos-filter">S</button>
+                                    <button class="pos-filter">K/P</button>
+                                    <button class="pos-filter watchlist-toggle" id="watchlistToggle" onclick="toggleWatchlistFilter()">
+                                        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" style="margin-right: 4px">
+                                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                                        </svg>
+                                        Watchlist
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="prospect-list" id="prospectList" style="flex: 1; overflow-y: auto; min-height: 200px;"></div>
+                        </div>
+                    </div><!-- End right column -->
+                </div><!-- End draft-layout -->
             </main>
         </div>
 
@@ -2577,8 +2539,14 @@
 
             function renderProspects() {
                 const container = document.getElementById("prospectList");
+                if (!container) {
+                    console.error("prospectList container not found!");
+                    return;
+                }
+                console.log("renderProspects called, prospects:", prospects.length);
                 const onClock = isUserOnClock();
                 let filtered = prospects.filter((p) => !p.drafted);
+                console.log("filtered:", filtered.length, "first:", filtered[0]?.name);
 
                 if (currentFilter !== "All") {
                     const posMap = {
@@ -2607,6 +2575,7 @@
                 const showing = filtered.slice(0, prospectsToShow);
                 const hasMore = filtered.length > prospectsToShow;
 
+                try {
                 container.innerHTML = showing
                     .map((p, idx) => {
                         const isWatched = watchlist.has(p.id);
@@ -2685,6 +2654,7 @@
                     })
                     .join("");
 
+                console.log("innerHTML set, length:", container.innerHTML.length);
                 if (hasMore) {
                     container.innerHTML += `
                     <div class="load-more-row">
@@ -2693,6 +2663,9 @@
                         </button>
                     </div>
                 `;
+                }
+                } catch (err) {
+                    console.error("Error in renderProspects:", err);
                 }
             }
 
@@ -3059,17 +3032,21 @@
                 if (!targetPick || targetPick <= currentPick) return;
 
                 simRunning = true;
+                simPaused = false;
                 document.getElementById("simToPickBtn").style.display = "none";
-                document.getElementById("stopSimBtn").style.display =
-                    "inline-block";
+                document.getElementById("simToPickBtn").textContent = "Sim";
+                document.getElementById("pauseSimBtn").style.display = "inline-block";
+                document.getElementById("stopSimBtn").style.display = "inline-block";
 
                 runSimulation(targetPick);
             }
 
             function stopSim() {
                 simRunning = false;
-                document.getElementById("simToPickBtn").style.display =
-                    "inline-block";
+                simPaused = false;
+                document.getElementById("simToPickBtn").style.display = "inline-block";
+                document.getElementById("simToPickBtn").textContent = "Sim";
+                document.getElementById("pauseSimBtn").style.display = "none";
                 document.getElementById("stopSimBtn").style.display = "none";
             }
 
@@ -3080,6 +3057,7 @@
 
                 while (
                     simRunning &&
+                    !simPaused &&
                     currentPick < targetPick &&
                     currentPick <= 257
                 ) {
@@ -3360,16 +3338,16 @@
                 document.getElementById("headerTeamMeta").textContent =
                     metaText;
 
-                const simControls = document.querySelector(".sim-controls");
-                if (simControls) {
-                    simControls.style.display = onClock ? "none" : "flex";
-                }
-
                 const currentPickData = draftOrder.find(
                     (d) => d.overall === currentPick,
                 );
+                
+                // Update badge and status
+                const badge = document.getElementById("currentPickBadge");
+                if (badge) badge.textContent = `Pick ${currentPick}`;
+                
                 document.getElementById("draftStatus").textContent =
-                    `Round ${currentRound}, Pick ${currentPick} - ${currentPickData?.team || "TBD"} on the clock`;
+                    `${currentPickData?.team || "TBD"} on the clock`;
 
                 document.getElementById("draftOrderList").innerHTML = draftOrder
                     .map((d) => {
@@ -3475,13 +3453,20 @@
                 renderProspects();
             }
 
-            function toggleTeamPanel() {
-                const panel = document.getElementById("rightPanel");
-                const grid = document.getElementById("draftGrid");
-                const text = document.getElementById("panelToggleText");
-                const isHidden = panel.classList.toggle("hidden");
-                grid.classList.toggle("panel-hidden", isHidden);
-                text.textContent = isHidden ? "Show Panel" : "Hide Panel";
+            function toggleTeamInfo() {
+                const header = document.getElementById("teamInfoHeader");
+                const content = document.getElementById("teamInfoContent");
+                header.classList.toggle("collapsed");
+                content.classList.toggle("visible");
+            }
+
+            let simPaused = false;
+
+            function pauseSim() {
+                simPaused = true;
+                document.getElementById("pauseSimBtn").style.display = "none";
+                document.getElementById("simToPickBtn").textContent = "Resume";
+                document.getElementById("simToPickBtn").style.display = "inline-block";
             }
 
             function simToPick(targetPick) {
