@@ -2896,8 +2896,23 @@
                     const scoredProspects = prospects.map(p => {
                         const consensusRank = p.consensus_rank || 300;
                         
-                        // 1. Positional value modifier
-                        const posValue = POSITION_VALUE[p.position] || 0;
+                        // 1. Positional value modifier (scaled for RBs based on rank)
+                        let posValue = POSITION_VALUE[p.position] || 0;
+                        
+                        // Special handling for RBs: top RBs don't fall as much
+                        if (p.position === 'RB') {
+                            if (consensusRank <= 10) {
+                                posValue = -2; // Top 10 RBs: minimal penalty
+                            } else if (consensusRank <= 25) {
+                                posValue = -5; // Top 25 RBs: moderate penalty
+                            }
+                            // else use default -8
+                        }
+                        
+                        // Special handling for QBs: elite QBs get massive boost
+                        if (p.position === 'QB' && consensusRank <= 15) {
+                            posValue = 15; // Elite QBs almost always go top 3-5
+                        }
                         
                         // 2. Need boost (primary needs get bigger boost)
                         const needCategory = mapPositionToNeed(p.position);
@@ -2912,12 +2927,13 @@
                         const devCert = p.developmentCertainty?.score ?? 0.5;
                         const varianceMultiplier = 0.5 + (1 - devCert); // Sure fire = 0.5x, Project = 1.5x
                         
-                        // 4. Base variance by consensus tier
+                        // 4. Base variance by consensus tier (tighter for elite prospects)
                         let baseVariance;
-                        if (consensusRank <= 5) baseVariance = 5;
-                        else if (consensusRank <= 15) baseVariance = 10;
-                        else if (consensusRank <= 50) baseVariance = 20;
-                        else baseVariance = 30;
+                        if (consensusRank <= 3) baseVariance = 2;   // Top 3: almost no variance
+                        else if (consensusRank <= 10) baseVariance = 4;  // Top 10: very tight
+                        else if (consensusRank <= 20) baseVariance = 8;  // Top 20: tight
+                        else if (consensusRank <= 50) baseVariance = 15;
+                        else baseVariance = 25;
                         
                         // 5. Random variance (seeded by team+prospect for consistency)
                         const seed = (teamName + p.id).split('').reduce((a, c) => a + c.charCodeAt(0), 0);
