@@ -21,7 +21,8 @@ GM Ops is a comprehensive NFL franchise simulation game aiming to be "the best f
   - `data/teams/nflmdd_team_needs_2026.json` - Team needs by position
   - `data/schemes/scheme_skill_weights.json` - Skill importance weights by scheme (offense + defense)
   - `data/prospects/SCHEMA.md` - Documentation for prospect data structure
-  - `data/raw/nflverse/` - Raw data from NFLverse
+  - `data/raw/nflverse/` - Raw data from NFLverse (contracts, rosters, depth charts)
+  - `data/teams/depth_charts_2026.json` - 2-deep roster for all 32 teams with expiring contract flags
 
 ## Brand Guidelines
 - **Colors**: NFL Red (#D50A0A), NFL Blue (#013369), Silver (#A5ACAF)
@@ -69,6 +70,11 @@ Python HTTP server on port 5000 (static site).
 - **Jan 25**: Added panel titles to Draft Board and Team Info matching Available Prospects styling
 - **Jan 25**: Removed "Load More" button - all 338 prospects load initially with scrollable list
 - **Jan 25**: Fixed prospect visibility bug (removed overflow:hidden from prospect-card)
+- **Jan 25**: Added Depth tab to Team Info with 2-deep roster by position
+- **Jan 25**: Downloaded NFLverse depth charts data (`data/raw/nflverse/depth_charts_2025.csv`)
+- **Jan 25**: Created `data/teams/depth_charts_2026.json` with expiring contract indicators
+- **Jan 25**: Depth tab shows offense (QB, RB, WR, TE, OL) and defense (EDGE, DL, LB, CB, S) grouped by scheme
+- **Jan 25**: Expiring contracts shown with dashed border + faded opacity
 
 ## Future Work
 - **AI Draft Logic Implementation**: Implement the documented draft board generation and pick selection in game-shell.html
