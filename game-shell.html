@@ -718,43 +718,51 @@
             .depth-grid {
                 display: flex;
                 flex-direction: column;
-                gap: 4px;
+                gap: 2px;
             }
             .depth-row {
                 display: flex;
                 align-items: center;
-                gap: 6px;
+                gap: 4px;
             }
             .depth-pos {
                 font-family: "Barlow Condensed", sans-serif;
                 font-size: 10px;
                 font-weight: 700;
                 color: var(--gold);
-                min-width: 32px;
+                min-width: 36px;
                 text-transform: uppercase;
             }
             .depth-players {
                 display: flex;
-                gap: 4px;
+                flex-direction: column;
+                gap: 1px;
                 flex: 1;
             }
             .depth-player {
-                font-size: 11px;
+                font-size: 10px;
                 color: var(--white);
-                padding: 2px 6px;
+                padding: 1px 4px;
                 background: rgba(0, 0, 0, 0.2);
-                border-radius: 3px;
+                border-radius: 2px;
                 white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
             .depth-player.starter {
                 background: rgba(1, 51, 105, 0.4);
             }
             .depth-player.expiring {
-                opacity: 0.5;
+                opacity: 0.6;
                 border: 1px dashed var(--warning);
             }
             .depth-player.backup {
                 color: var(--text-muted);
+                font-size: 9px;
+            }
+            .depth-player.empty {
+                color: var(--text-muted);
+                opacity: 0.3;
             }
 
             .my-picks-list {
@@ -1998,7 +2006,7 @@
                             </div>
 
                         <!-- Expandable Team Info Content -->
-                        <div class="team-info-content" id="teamInfoContent" style="max-height: 180px; padding: 12px 16px; background: var(--card-bg); border: 1px solid var(--card-border); border-top: none; border-radius: 0 0 8px 8px; margin-top: -8px; margin-bottom: 8px; overflow-y: auto;">
+                        <div class="team-info-content" id="teamInfoContent" style="padding: 12px 16px; background: var(--card-bg); border: 1px solid var(--card-border); border-top: none; border-radius: 0 0 8px 8px; margin-top: -8px; margin-bottom: 8px;">
                             <div id="needsTab" class="tab-content active">
                                 <div class="needs-row">
                                     <div class="needs-section">
@@ -2919,48 +2927,73 @@
                 const defScheme = teamScheme.defense || '4-3';
                 const is34 = defScheme.includes('3-4');
                 
-                const offenseStarters = { QB: 1, RB: 1, WR: 3, TE: 1, OL: 5 };
-                const defenseStarters = is34 
-                    ? { EDGE: 2, DL: 3, LB: 2, CB: 3, S: 2 }
-                    : { EDGE: 2, DL: 2, LB: 3, CB: 3, S: 2 };
+                const offensePositions = [
+                    { group: 'QB', count: 1 },
+                    { group: 'RB', count: 1 },
+                    { group: 'WR', count: 3 },
+                    { group: 'TE', count: 1 },
+                    { group: 'OL', count: 5 }
+                ];
+                const defensePositions = is34 
+                    ? [
+                        { group: 'EDGE', count: 2 },
+                        { group: 'DL', count: 3 },
+                        { group: 'LB', count: 2 },
+                        { group: 'CB', count: 3 },
+                        { group: 'S', count: 2 }
+                    ]
+                    : [
+                        { group: 'EDGE', count: 2 },
+                        { group: 'DL', count: 2 },
+                        { group: 'LB', count: 3 },
+                        { group: 'CB', count: 3 },
+                        { group: 'S', count: 2 }
+                    ];
                 
-                function renderSide(data, starterCounts, elementId) {
+                function renderSide(data, positions, elementId) {
                     let html = '';
-                    Object.keys(starterCounts).forEach(pos => {
-                        const players = data[pos] || [];
+                    positions.forEach(({ group, count }) => {
+                        const players = data[group] || [];
                         if (players.length === 0) return;
                         
-                        const starterCount = starterCounts[pos];
                         const depth1 = players.filter(p => p.depth === 1);
                         const depth2 = players.filter(p => p.depth === 2);
-                        const starters = depth1.slice(0, starterCount);
-                        const backups = depth2.slice(0, starterCount);
                         
-                        html += '<div class="depth-row">';
-                        html += '<div class="depth-pos">' + pos + '</div>';
-                        html += '<div class="depth-players">';
-                        
-                        starters.forEach(p => {
-                            const classes = ['depth-player', 'starter'];
-                            if (p.expiring) classes.push('expiring');
-                            const lastName = p.name.split(' ').pop();
-                            html += '<span class="' + classes.join(' ') + '" title="' + p.name + (p.expiring ? ' (expiring)' : '') + '">' + lastName + '</span>';
-                        });
-                        
-                        backups.forEach(p => {
-                            const classes = ['depth-player', 'backup'];
-                            if (p.expiring) classes.push('expiring');
-                            const lastName = p.name.split(' ').pop();
-                            html += '<span class="' + classes.join(' ') + '" title="' + p.name + (p.expiring ? ' (expiring)' : '') + '">' + lastName + '</span>';
-                        });
-                        
-                        html += '</div></div>';
+                        for (let i = 0; i < count; i++) {
+                            const starter = depth1[i];
+                            const backup = depth2[i];
+                            if (!starter && !backup) continue;
+                            
+                            const posLabel = count > 1 ? group + (i + 1) : group;
+                            
+                            html += '<div class="depth-row">';
+                            html += '<div class="depth-pos">' + posLabel + '</div>';
+                            html += '<div class="depth-players">';
+                            
+                            if (starter) {
+                                const classes = ['depth-player', 'starter'];
+                                if (starter.expiring) classes.push('expiring');
+                                html += '<span class="' + classes.join(' ') + '">' + starter.name + '</span>';
+                            } else {
+                                html += '<span class="depth-player empty">-</span>';
+                            }
+                            
+                            if (backup) {
+                                const classes = ['depth-player', 'backup'];
+                                if (backup.expiring) classes.push('expiring');
+                                html += '<span class="' + classes.join(' ') + '">' + backup.name + '</span>';
+                            } else {
+                                html += '<span class="depth-player backup empty">-</span>';
+                            }
+                            
+                            html += '</div></div>';
+                        }
                     });
                     document.getElementById(elementId).innerHTML = html;
                 }
                 
-                renderSide(depthData.offense, offenseStarters, 'offenseDepth');
-                renderSide(depthData.defense, defenseStarters, 'defenseDepth');
+                renderSide(depthData.offense, offensePositions, 'offenseDepth');
+                renderSide(depthData.defense, defensePositions, 'defenseDepth');
             }
 
             function getTeamNeeds(teamName) {
