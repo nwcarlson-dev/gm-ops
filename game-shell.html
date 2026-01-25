@@ -94,6 +94,69 @@
                 grid-template-columns: 1fr;
             }
 
+            /* Team panel toggle */
+            .team-panel-toggle {
+                position: fixed;
+                right: 16px;
+                top: 72px;
+                z-index: 100;
+                background: var(--card-bg);
+                border: 1px solid var(--card-border);
+                border-radius: 6px;
+                padding: 6px 10px;
+                color: var(--text-muted);
+                cursor: pointer;
+                font-size: 12px;
+                display: flex;
+                align-items: center;
+                gap: 4px;
+                transition: var(--transition-fast);
+            }
+            .team-panel-toggle:hover {
+                background: rgba(255,255,255,0.1);
+                color: var(--white);
+            }
+            .right-panel.hidden {
+                display: none;
+            }
+            .draft-grid.panel-hidden {
+                grid-template-columns: 3fr 2fr !important;
+            }
+
+            /* Draft pick action buttons */
+            .draft-pick-actions {
+                display: none;
+                gap: 4px;
+                margin-left: auto;
+            }
+            .draft-pick:hover .draft-pick-actions {
+                display: flex;
+            }
+            .draft-pick.past .draft-pick-actions {
+                display: none !important;
+            }
+            .draft-pick-action {
+                background: rgba(255,255,255,0.1);
+                border: none;
+                border-radius: 4px;
+                padding: 4px 8px;
+                font-size: 10px;
+                color: var(--text-muted);
+                cursor: pointer;
+                white-space: nowrap;
+                transition: var(--transition-fast);
+            }
+            .draft-pick-action:hover {
+                background: var(--nfl-blue);
+                color: white;
+            }
+            .draft-pick-action.trade {
+                background: rgba(213, 10, 10, 0.2);
+            }
+            .draft-pick-action.trade:hover {
+                background: var(--nfl-red);
+            }
+
             .team-logo-gradient {
                 border-radius: 50%;
                 display: flex;
@@ -1766,10 +1829,19 @@
                     </div>
                 </div>
 
+                <button class="team-panel-toggle" onclick="toggleTeamPanel()">
+                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2"/>
+                        <path d="M15 3v18"/>
+                    </svg>
+                    <span id="panelToggleText">Hide Panel</span>
+                </button>
                 <div
+                    class="draft-grid"
+                    id="draftGrid"
                     style="
                         display: grid;
-                        grid-template-columns: 2fr 3fr minmax(240px, 280px);
+                        grid-template-columns: 3fr 2fr minmax(240px, 280px);
                         gap: 16px;
                     "
                 >
@@ -1851,7 +1923,7 @@
                         </div>
                     </div>
 
-                    <div class="right-panel">
+                    <div class="right-panel" id="rightPanel">
                         <div class="card">
                             <div class="card-header" style="padding-bottom: 0">
                                 <h3 class="card-title">Team Info</h3>
@@ -3318,6 +3390,12 @@
                         const draftedPlayer = d.drafted
                             ? `<div class="drafted-player">${d.drafted.name} <span class="drafted-pos">${d.drafted.position}</span></div>`
                             : needsDisplay;
+                        const actionButtons = !isPast ? `
+                            <div class="draft-pick-actions">
+                                <button class="draft-pick-action trade" onclick="event.stopPropagation(); openTradeModal(${d.overall})">Trade</button>
+                                <button class="draft-pick-action" onclick="event.stopPropagation(); simToPick(${d.overall})">Sim</button>
+                            </div>
+                        ` : '';
                         return `
                     <div class="${classes}" data-overall="${d.overall}" data-round="${d.round}">
                         <div class="draft-pick-num-container">
@@ -3329,6 +3407,7 @@
                             <div class="draft-pick-team">${d.team}${tradeInfo}</div>
                             ${draftedPlayer}
                         </div>
+                        ${actionButtons}
                     </div>
                 `;
                     })
@@ -3377,6 +3456,9 @@
                 `;
                         })
                         .join("");
+
+                // Auto-scroll to keep current pick centered
+                scrollToCurrentPick();
             }
 
             function toggleSidebar() {
@@ -3391,6 +3473,32 @@
                     .getElementById("watchlistToggle")
                     .classList.toggle("active", watchlistActive);
                 renderProspects();
+            }
+
+            function toggleTeamPanel() {
+                const panel = document.getElementById("rightPanel");
+                const grid = document.getElementById("draftGrid");
+                const text = document.getElementById("panelToggleText");
+                const isHidden = panel.classList.toggle("hidden");
+                grid.classList.toggle("panel-hidden", isHidden);
+                text.textContent = isHidden ? "Show Panel" : "Hide Panel";
+            }
+
+            function simToPick(targetPick) {
+                if (targetPick <= currentPick) return;
+                document.getElementById("simTargetPick").value = targetPick;
+                startSim();
+            }
+
+            function scrollToCurrentPick() {
+                const list = document.getElementById("draftOrderList");
+                const currentEl = list.querySelector(".draft-pick.current");
+                if (currentEl && list) {
+                    const listRect = list.getBoundingClientRect();
+                    const elRect = currentEl.getBoundingClientRect();
+                    const scrollTop = currentEl.offsetTop - list.offsetTop - (listRect.height / 2) + (elRect.height / 2);
+                    list.scrollTo({ top: scrollTop, behavior: "smooth" });
+                }
             }
 
             function updateWatchlistButton() {
