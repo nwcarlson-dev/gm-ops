@@ -1,0 +1,8154 @@
+{
+  "ARI": {
+    "offense": {
+      "QB": [
+        {
+          "name": "Jacoby Brissett",
+          "pos": "QB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Kedon Slovis",
+          "pos": "QB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "RB": [
+        {
+          "name": "Michael Carter",
+          "pos": "RB",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Emari Demercado",
+          "pos": "RB",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "WR": [
+        {
+          "name": "Michael Wilson",
+          "pos": "WR",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Xavier Weaver",
+          "pos": "WR",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "TE": [
+        {
+          "name": "Trey McBride",
+          "pos": "TE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Elijah Higgins",
+          "pos": "TE",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "OL": [
+        {
+          "name": "Josh Fryar",
+          "pos": "LT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Evan Brown",
+          "pos": "LG",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Hjalte Froholdt",
+          "pos": "C",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Isaiah Adams",
+          "pos": "RG",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Kelvin Beachum",
+          "pos": "RT",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Paris Johnson Jr.",
+          "pos": "LT",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Jon Gaines II",
+          "pos": "LG",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Jon Gaines II",
+          "pos": "C",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Will Hernandez",
+          "pos": "RG",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Christian Jones",
+          "pos": "RT",
+          "depth": 2,
+          "expiring": false
+        }
+      ]
+    },
+    "defense": {
+      "EDGE": [
+        {
+          "name": "Josh Sweat",
+          "pos": "LDE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Darius Robinson",
+          "pos": "RDE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Jordan Burch",
+          "pos": "LDE",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Dante Stills",
+          "pos": "RDE",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "DL": [
+        {
+          "name": "Calais Campbell",
+          "pos": "LDT",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Dalvin Tomlinson",
+          "pos": "RDT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "PJ Mustipher",
+          "pos": "LDT",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "L.J. Collier",
+          "pos": "RDT",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "LB": [
+        {
+          "name": "Cody Simon",
+          "pos": "MLB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Austin Keys",
+          "pos": "MLB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "CB": [
+        {
+          "name": "Will Johnson",
+          "pos": "LCB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Denzel Burke",
+          "pos": "RCB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Darren Hall",
+          "pos": "NB",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Elijah Jones",
+          "pos": "LCB",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Max Melton",
+          "pos": "RCB",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Jaden Davis",
+          "pos": "NB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "S": [
+        {
+          "name": "Jalen Thompson",
+          "pos": "SS",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Budda Baker",
+          "pos": "FS",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Kitan Crawford",
+          "pos": "SS",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Dadrion Taylor-Demerson",
+          "pos": "FS",
+          "depth": 2,
+          "expiring": false
+        }
+      ]
+    }
+  },
+  "ATL": {
+    "offense": {
+      "QB": [
+        {
+          "name": "Kirk Cousins",
+          "pos": "QB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Easton Stick",
+          "pos": "QB",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "RB": [
+        {
+          "name": "Bijan Robinson",
+          "pos": "RB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Tyler Allgeier",
+          "pos": "RB",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "WR": [
+        {
+          "name": "Drake London",
+          "pos": "WR",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Darnell Mooney",
+          "pos": "WR",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "TE": [
+        {
+          "name": "Kyle Pitts Sr.",
+          "pos": "TE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Charlie Woerner",
+          "pos": "TE",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "OL": [
+        {
+          "name": "Jake Matthews",
+          "pos": "LT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Matthew Bergeron",
+          "pos": "LG",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Ryan Neuzil",
+          "pos": "C",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Chris Lindstrom",
+          "pos": "RG",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Elijah Wilkinson",
+          "pos": "RT",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Michael Jerrell",
+          "pos": "LT",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Kyle Hinton",
+          "pos": "LG",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Jovaughn Gwyn",
+          "pos": "C",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Kyle Hinton",
+          "pos": "RG",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Jack Nelson",
+          "pos": "RT",
+          "depth": 2,
+          "expiring": false
+        }
+      ]
+    },
+    "defense": {
+      "EDGE": [
+        {
+          "name": "LaCale London",
+          "pos": "LDE",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "David Onyemata",
+          "pos": "RDE",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Elijah Garcia",
+          "pos": "LDE",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Brandon Dorlus",
+          "pos": "RDE",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "DL": [
+        {
+          "name": "Ruke Orhorhoro",
+          "pos": "NT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Kentavius Street",
+          "pos": "NT",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "LB": [
+        {
+          "name": "Divine Deablo",
+          "pos": "LILB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Kaden Elliss",
+          "pos": "RILB",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "JD Bertrand",
+          "pos": "LILB",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Ronnie Harrison Jr.",
+          "pos": "RILB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "CB": [
+        {
+          "name": "A.J. Terrell Jr.",
+          "pos": "LCB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Cobee Bryant",
+          "pos": "RCB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Dee Alford",
+          "pos": "NB",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Natrone Brooks",
+          "pos": "LCB",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "C.J. Henderson",
+          "pos": "RCB",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Mike Ford Jr.",
+          "pos": "NB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "S": [
+        {
+          "name": "Jessie Bates III",
+          "pos": "SS",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Xavier Watts",
+          "pos": "FS",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Jammie Robinson",
+          "pos": "SS",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Tysheem Johnson",
+          "pos": "FS",
+          "depth": 2,
+          "expiring": false
+        }
+      ]
+    }
+  },
+  "BAL": {
+    "offense": {
+      "QB": [
+        {
+          "name": "Lamar Jackson",
+          "pos": "QB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Tyler Huntley",
+          "pos": "QB",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "RB": [
+        {
+          "name": "Derrick Henry",
+          "pos": "RB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Patrick Ricard",
+          "pos": "FB",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Keaton Mitchell",
+          "pos": "RB",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Lucas Scott",
+          "pos": "FB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "WR": [
+        {
+          "name": "Zay Flowers",
+          "pos": "WR",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Rashod Bateman",
+          "pos": "WR",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "TE": [
+        {
+          "name": "Mark Andrews",
+          "pos": "TE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Isaiah Likely",
+          "pos": "TE",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "OL": [
+        {
+          "name": "Ronnie Stanley",
+          "pos": "LT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Andrew Vorhees",
+          "pos": "LG",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Tyler Linderbaum",
+          "pos": "C",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Daniel Faalele",
+          "pos": "RG",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Roger Rosengarten",
+          "pos": "RT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Joseph Noteboom",
+          "pos": "LT",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Emery Jones Jr.",
+          "pos": "LG",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Corey Bullock",
+          "pos": "C",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Emery Jones Jr.",
+          "pos": "RG",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Carson Vinson",
+          "pos": "RT",
+          "depth": 2,
+          "expiring": false
+        }
+      ]
+    },
+    "defense": {
+      "EDGE": [
+        {
+          "name": "Travis Jones",
+          "pos": "LDE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Brent Urban",
+          "pos": "RDE",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Aeneas Peebles",
+          "pos": "LDE",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "CJ Okoye",
+          "pos": "RDE",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "DL": [
+        {
+          "name": "John Jenkins",
+          "pos": "NT",
+          "depth": 1,
+          "expiring": true
+        }
+      ],
+      "LB": [
+        {
+          "name": "Roquan Smith",
+          "pos": "LILB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Trenton Simpson",
+          "pos": "RILB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Carl Jones",
+          "pos": "LILB",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Jake Hummel",
+          "pos": "RILB",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "CB": [
+        {
+          "name": "Nate Wiggins",
+          "pos": "LCB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Chidobe Awuzie",
+          "pos": "RCB",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Marlon Humphrey",
+          "pos": "NB",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Bilhal Kone",
+          "pos": "LCB",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "T.J. Tampa",
+          "pos": "RCB",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Keyon Martin",
+          "pos": "NB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "S": [
+        {
+          "name": "Kyle Hamilton",
+          "pos": "SS",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Alohi Gilman",
+          "pos": "FS",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Ar'Darius Washington",
+          "pos": "SS",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Malaki Starks",
+          "pos": "FS",
+          "depth": 2,
+          "expiring": false
+        }
+      ]
+    }
+  },
+  "BUF": {
+    "offense": {
+      "QB": [
+        {
+          "name": "Josh Allen",
+          "pos": "QB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Mitchell Trubisky",
+          "pos": "QB",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "RB": [
+        {
+          "name": "James Cook III",
+          "pos": "RB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Reggie Gilliam",
+          "pos": "FB",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Ty Johnson",
+          "pos": "RB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "WR": [
+        {
+          "name": "Khalil Shakir",
+          "pos": "WR",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Brandin Cooks",
+          "pos": "WR",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "TE": [
+        {
+          "name": "Dalton Kincaid",
+          "pos": "TE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Dawson Knox",
+          "pos": "TE",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "OL": [
+        {
+          "name": "Dion Dawkins",
+          "pos": "LT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "David Edwards",
+          "pos": "LG",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Connor McGovern",
+          "pos": "C",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "O'Cyrus Torrence",
+          "pos": "RG",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Spencer Brown",
+          "pos": "RT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Ryan Van Demark",
+          "pos": "LT",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Sedrick Van Pran-Granger",
+          "pos": "LG",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Alec Anderson",
+          "pos": "C",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Nick Broeker",
+          "pos": "RG",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Ryan Van Demark",
+          "pos": "RT",
+          "depth": 2,
+          "expiring": true
+        }
+      ]
+    },
+    "defense": {
+      "EDGE": [
+        {
+          "name": "Greg Rousseau",
+          "pos": "LDE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Joey Bosa",
+          "pos": "RDE",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "AJ Epenesa",
+          "pos": "LDE",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Javon Solomon",
+          "pos": "RDE",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "DL": [
+        {
+          "name": "Ed Oliver",
+          "pos": "LDT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "DaQuan Jones",
+          "pos": "RDT",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Deone Walker",
+          "pos": "LDT",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "T.J. Sanders",
+          "pos": "RDT",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "LB": [
+        {
+          "name": "Terrel Bernard",
+          "pos": "MLB",
+          "depth": 1,
+          "expiring": false
+        }
+      ],
+      "CB": [
+        {
+          "name": "Tre'Davious White",
+          "pos": "LCB",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Christian Benford",
+          "pos": "RCB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Taron Johnson",
+          "pos": "NB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Dane Jackson",
+          "pos": "LCB",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Maxwell Hairston",
+          "pos": "RCB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "S": [
+        {
+          "name": "Jordan Poyer",
+          "pos": "SS",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Cole Bishop",
+          "pos": "FS",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Jordan Hancock",
+          "pos": "SS",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Sam Franklin Jr.",
+          "pos": "FS",
+          "depth": 2,
+          "expiring": false
+        }
+      ]
+    }
+  },
+  "CAR": {
+    "offense": {
+      "QB": [
+        {
+          "name": "Bryce Young",
+          "pos": "QB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Andy Dalton",
+          "pos": "QB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "RB": [
+        {
+          "name": "Chuba Hubbard",
+          "pos": "RB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Rico Dowdle",
+          "pos": "RB",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "WR": [
+        {
+          "name": "Tetairoa McMillan",
+          "pos": "WR",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Jalen Coker",
+          "pos": "WR",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "TE": [
+        {
+          "name": "Tommy Tremble",
+          "pos": "TE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Mitchell Evans",
+          "pos": "TE",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "OL": [
+        {
+          "name": "Ikem Ekwonu",
+          "pos": "LT",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Damien Lewis",
+          "pos": "LG",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Cade Mays",
+          "pos": "C",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Robert Hunt",
+          "pos": "RG",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Taylor Moton",
+          "pos": "RT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Yosh Nijman",
+          "pos": "LT",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Jake Curhan",
+          "pos": "LG",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Austin Corbett",
+          "pos": "C",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Austin Corbett",
+          "pos": "RG",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Yosh Nijman",
+          "pos": "RT",
+          "depth": 2,
+          "expiring": false
+        }
+      ]
+    },
+    "defense": {
+      "EDGE": [
+        {
+          "name": "Tershawn Wharton",
+          "pos": "LDE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Derrick Brown",
+          "pos": "RDE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Bobby Brown III",
+          "pos": "LDE",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "LaBryan Ray",
+          "pos": "RDE",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "DL": [
+        {
+          "name": "A'Shawn Robinson",
+          "pos": "NT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Cam Jackson",
+          "pos": "NT",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "LB": [
+        {
+          "name": "Christian Rozeboom",
+          "pos": "LILB",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Claudin Cherelus",
+          "pos": "RILB",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Krys Barnes",
+          "pos": "LILB",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Bam Martin-Scott",
+          "pos": "RILB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "CB": [
+        {
+          "name": "Mike Jackson",
+          "pos": "LCB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Jaycee Horn",
+          "pos": "RCB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Chau Smith-Wade",
+          "pos": "NB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Akayleb Evans",
+          "pos": "LCB",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Robert Rochell",
+          "pos": "RCB",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "S": [
+        {
+          "name": "Tre'von Moehrig",
+          "pos": "SS",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Nick Scott",
+          "pos": "FS",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Lathan Ransom",
+          "pos": "SS",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Isaiah Simmons",
+          "pos": "FS",
+          "depth": 2,
+          "expiring": true
+        }
+      ]
+    }
+  },
+  "CHI": {
+    "offense": {
+      "QB": [
+        {
+          "name": "Caleb Williams",
+          "pos": "QB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Tyson Bagent",
+          "pos": "QB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "RB": [
+        {
+          "name": "D'Andre Swift",
+          "pos": "RB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Kyle Monangai",
+          "pos": "RB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "WR": [
+        {
+          "name": "Rome Odunze",
+          "pos": "WR",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "DJ Moore",
+          "pos": "WR",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "TE": [
+        {
+          "name": "Colston Loveland",
+          "pos": "TE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Cole Kmet",
+          "pos": "TE",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "OL": [
+        {
+          "name": "Braxton Jones",
+          "pos": "LT",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Joe Thuney",
+          "pos": "LG",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Drew Dalman",
+          "pos": "C",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Jonah Jackson",
+          "pos": "RG",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Darnell Wright",
+          "pos": "RT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Joe Thuney",
+          "pos": "LT",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Jordan McFadden",
+          "pos": "LG",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Ryan Bates",
+          "pos": "C",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Jordan McFadden",
+          "pos": "RG",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Ozzy Trapilo",
+          "pos": "RT",
+          "depth": 2,
+          "expiring": false
+        }
+      ]
+    },
+    "defense": {
+      "EDGE": [
+        {
+          "name": "Montez Sweat",
+          "pos": "LDE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Austin Booker",
+          "pos": "RDE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Joe Tryon-Shoyinka",
+          "pos": "LDE",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Dominique Robinson",
+          "pos": "RDE",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "DL": [
+        {
+          "name": "Grady Jarrett",
+          "pos": "LDT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Gervon Dexter Sr.",
+          "pos": "RDT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Chris Williams",
+          "pos": "LDT",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Andrew Billings",
+          "pos": "RDT",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "LB": [
+        {
+          "name": "Amen Ogbongbemiga",
+          "pos": "MLB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Nephi Sewell",
+          "pos": "MLB",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "CB": [
+        {
+          "name": "Jaylon Johnson",
+          "pos": "LCB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Kyler Gordon",
+          "pos": "RCB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "C.J. Gardner-Johnson",
+          "pos": "NB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Jaylon Jones",
+          "pos": "LCB",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Nahshon Wright",
+          "pos": "RCB",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Nick McCloud",
+          "pos": "NB",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "S": [
+        {
+          "name": "Jaquan Brisker",
+          "pos": "SS",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Kevin Byard III",
+          "pos": "FS",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Elijah Hicks",
+          "pos": "SS",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Jonathan Owens",
+          "pos": "FS",
+          "depth": 2,
+          "expiring": true
+        }
+      ]
+    }
+  },
+  "CIN": {
+    "offense": {
+      "QB": [
+        {
+          "name": "Joe Burrow",
+          "pos": "QB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Joe Flacco",
+          "pos": "QB",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "RB": [
+        {
+          "name": "Chase Brown",
+          "pos": "RB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Samaje Perine",
+          "pos": "RB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "WR": [
+        {
+          "name": "Ja'Marr Chase",
+          "pos": "WR",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Tee Higgins",
+          "pos": "WR",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "TE": [
+        {
+          "name": "Mike Gesicki",
+          "pos": "TE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Noah Fant",
+          "pos": "TE",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "OL": [
+        {
+          "name": "Orlando Brown Jr.",
+          "pos": "LT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Dylan Fairchild",
+          "pos": "LG",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Ted Karras",
+          "pos": "C",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Jalen Rivers",
+          "pos": "RG",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Amarius Mims",
+          "pos": "RT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Cody Ford",
+          "pos": "LT",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Lucas Patrick",
+          "pos": "LG",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Lucas Patrick",
+          "pos": "C",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Dalton Risner",
+          "pos": "RG",
+          "depth": 2,
+          "expiring": true
+        }
+      ]
+    },
+    "defense": {
+      "EDGE": [
+        {
+          "name": "Joseph Ossai",
+          "pos": "LDE",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Myles Murphy",
+          "pos": "RDE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Shemar Stewart",
+          "pos": "LDE",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Cam Sample",
+          "pos": "RDE",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "DL": [
+        {
+          "name": "T.J. Slaton Jr.",
+          "pos": "LDT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "B.J. Hill",
+          "pos": "RDT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "McKinnley Jackson",
+          "pos": "LDT",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Howard Cross III",
+          "pos": "RDT",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "LB": [
+        {
+          "name": "Barrett Carter",
+          "pos": "MLB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Joe Giles-Harris",
+          "pos": "MLB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "CB": [
+        {
+          "name": "Dax Hill",
+          "pos": "LCB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "DJ Turner II",
+          "pos": "RCB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Jalen Davis",
+          "pos": "NB",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "DJ Ivey",
+          "pos": "LCB",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Josh Newton",
+          "pos": "RCB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "S": [
+        {
+          "name": "Jordan Battle",
+          "pos": "SS",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Geno Stone",
+          "pos": "FS",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "PJ Jules",
+          "pos": "SS",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Tycen Anderson",
+          "pos": "FS",
+          "depth": 2,
+          "expiring": true
+        }
+      ]
+    }
+  },
+  "CLE": {
+    "offense": {
+      "QB": [
+        {
+          "name": "Shedeur Sanders",
+          "pos": "QB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Dillon Gabriel",
+          "pos": "QB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "RB": [
+        {
+          "name": "Dylan Sampson",
+          "pos": "RB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Raheim Sanders",
+          "pos": "RB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "WR": [
+        {
+          "name": "Jerry Jeudy",
+          "pos": "WR",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Cedric Tillman",
+          "pos": "WR",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "TE": [
+        {
+          "name": "Harold Fannin Jr.",
+          "pos": "TE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "David Njoku",
+          "pos": "TE",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "OL": [
+        {
+          "name": "Cam Robinson",
+          "pos": "LT",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Joel Bitonio",
+          "pos": "LG",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Luke Wypler",
+          "pos": "C",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Teven Jenkins",
+          "pos": "RG",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "KT Leveston",
+          "pos": "RT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "KT Leveston",
+          "pos": "LT",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Teven Jenkins",
+          "pos": "LG",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Kendrick Green",
+          "pos": "C",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Zak Zinter",
+          "pos": "RG",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Cornelius Lucas",
+          "pos": "RT",
+          "depth": 2,
+          "expiring": false
+        }
+      ]
+    },
+    "defense": {
+      "EDGE": [
+        {
+          "name": "Alex Wright",
+          "pos": "LDE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Myles Garrett",
+          "pos": "RDE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Cameron Thomas",
+          "pos": "LDE",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Isaiah McGuire",
+          "pos": "RDE",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "DL": [
+        {
+          "name": "Shelby Harris",
+          "pos": "LDT",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Mason Graham",
+          "pos": "RDT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Sam Kamara",
+          "pos": "LDT",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Mike Hall Jr.",
+          "pos": "RDT",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "LB": [
+        {
+          "name": "Jerome Baker",
+          "pos": "MLB",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Edefuan Ulofoshio",
+          "pos": "MLB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "CB": [
+        {
+          "name": "Denzel Ward",
+          "pos": "LCB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Tyson Campbell",
+          "pos": "RCB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Myles Harden",
+          "pos": "NB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Sam Webb",
+          "pos": "LCB",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "D'Angelo Ross",
+          "pos": "RCB",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "S": [
+        {
+          "name": "Grant Delpit",
+          "pos": "SS",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Ronnie Hickman",
+          "pos": "FS",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Rayshawn Jenkins",
+          "pos": "SS",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Donovan McMillon",
+          "pos": "FS",
+          "depth": 2,
+          "expiring": false
+        }
+      ]
+    }
+  },
+  "DAL": {
+    "offense": {
+      "QB": [
+        {
+          "name": "Dak Prescott",
+          "pos": "QB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Joe Milton III",
+          "pos": "QB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "RB": [
+        {
+          "name": "Jaydon Blue",
+          "pos": "RB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Hunter Luepke",
+          "pos": "FB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Phil Mafah",
+          "pos": "RB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "WR": [
+        {
+          "name": "CeeDee Lamb",
+          "pos": "WR",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "George Pickens",
+          "pos": "WR",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "TE": [
+        {
+          "name": "Jake Ferguson",
+          "pos": "TE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Brevyn Spann-Ford",
+          "pos": "TE",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "OL": [
+        {
+          "name": "Tyler Smith",
+          "pos": "LT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Brock Hoffman",
+          "pos": "LG",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Cooper Beebe",
+          "pos": "C",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Tyler Booker",
+          "pos": "RG",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Terence Steele",
+          "pos": "RT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Nate Thomas",
+          "pos": "LT",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Tyler Smith",
+          "pos": "LG",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Brock Hoffman",
+          "pos": "C",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Rob Jones",
+          "pos": "RG",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Hakeem Adeniji",
+          "pos": "RT",
+          "depth": 2,
+          "expiring": true
+        }
+      ]
+    },
+    "defense": {
+      "EDGE": [
+        {
+          "name": "Donovan Ezeiruaku",
+          "pos": "LDE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Dante Fowler Jr.",
+          "pos": "RDE",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Sam Williams",
+          "pos": "LDE",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Jadeveon Clowney",
+          "pos": "RDE",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "DL": [
+        {
+          "name": "Osa Odighizuwa",
+          "pos": "LDT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Quinnen Williams",
+          "pos": "RDT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Kenny Clark",
+          "pos": "LDT",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Solomon Thomas",
+          "pos": "RDT",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "LB": [
+        {
+          "name": "Shemar James",
+          "pos": "MLB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Logan Wilson",
+          "pos": "MLB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "CB": [
+        {
+          "name": "Shavon Revel Jr.",
+          "pos": "LCB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Caelen Carson",
+          "pos": "RCB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Reddy Steward",
+          "pos": "NB",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Trikweze Bridges",
+          "pos": "LCB",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Corey Ballentine",
+          "pos": "RCB",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "C.J. Goodwin",
+          "pos": "NB",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "S": [
+        {
+          "name": "Donovan Wilson",
+          "pos": "SS",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Malik Hooker",
+          "pos": "FS",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Markquese Bell",
+          "pos": "SS",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Alijah Clark",
+          "pos": "FS",
+          "depth": 2,
+          "expiring": false
+        }
+      ]
+    }
+  },
+  "DEN": {
+    "offense": {
+      "QB": [
+        {
+          "name": "Jarrett Stidham",
+          "pos": "QB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Sam Ehlinger",
+          "pos": "QB",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "RB": [
+        {
+          "name": "RJ Harvey",
+          "pos": "RB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Adam Prentice",
+          "pos": "FB",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Jaleel McLaughlin",
+          "pos": "RB",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Michael Burton",
+          "pos": "FB",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "WR": [
+        {
+          "name": "Courtland Sutton",
+          "pos": "WR",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Troy Franklin",
+          "pos": "WR",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "TE": [
+        {
+          "name": "Evan Engram",
+          "pos": "TE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Adam Trautman",
+          "pos": "TE",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "OL": [
+        {
+          "name": "Garett Bolles",
+          "pos": "LT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Ben Powers",
+          "pos": "LG",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Alex Forsyth",
+          "pos": "C",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Quinn Meinerz",
+          "pos": "RG",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Mike McGlinchey",
+          "pos": "RT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Matt Peart",
+          "pos": "LT",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Alex Palczewski",
+          "pos": "LG",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Sam Mustipher",
+          "pos": "C",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Nick Gargiulo",
+          "pos": "RG",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Alex Palczewski",
+          "pos": "RT",
+          "depth": 2,
+          "expiring": true
+        }
+      ]
+    },
+    "defense": {
+      "EDGE": [
+        {
+          "name": "Zach Allen",
+          "pos": "LDE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "John Franklin-Myers",
+          "pos": "RDE",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Jordan Jackson",
+          "pos": "LDE",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Malcolm Roach",
+          "pos": "RDE",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "DL": [
+        {
+          "name": "D.J. Jones",
+          "pos": "NT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Eyioma Uwazurike",
+          "pos": "NT",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "LB": [
+        {
+          "name": "Alex Singleton",
+          "pos": "LILB",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Dre Greenlaw",
+          "pos": "RILB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Karene Reid",
+          "pos": "LILB",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Justin Strnad",
+          "pos": "RILB",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "CB": [
+        {
+          "name": "Pat Surtain II",
+          "pos": "LCB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Riley Moss",
+          "pos": "RCB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Ja'Quan McMillian",
+          "pos": "NB",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Kris Abrams-Draine",
+          "pos": "LCB",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Reese Taylor",
+          "pos": "RCB",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Jahdae Barron",
+          "pos": "NB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "S": [
+        {
+          "name": "Talanoa Hufanga",
+          "pos": "SS",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "P.J. Locke",
+          "pos": "FS",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "JL Skinner",
+          "pos": "SS",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Devon Key",
+          "pos": "FS",
+          "depth": 2,
+          "expiring": true
+        }
+      ]
+    }
+  },
+  "DET": {
+    "offense": {
+      "QB": [
+        {
+          "name": "Jared Goff",
+          "pos": "QB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Kyle Allen",
+          "pos": "QB",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "RB": [
+        {
+          "name": "Jahmyr Gibbs",
+          "pos": "RB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "David Montgomery",
+          "pos": "RB",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "WR": [
+        {
+          "name": "Amon-Ra St. Brown",
+          "pos": "WR",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Jameson Williams",
+          "pos": "WR",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "TE": [
+        {
+          "name": "Shane Zylstra",
+          "pos": "TE",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Anthony Firkser",
+          "pos": "TE",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "OL": [
+        {
+          "name": "Taylor Decker",
+          "pos": "LT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Christian Mahogany",
+          "pos": "LG",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Graham Glasgow",
+          "pos": "C",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Tate Ratledge",
+          "pos": "RG",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Penei Sewell",
+          "pos": "RT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Dan Skipper",
+          "pos": "LT",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Kayode Awosika",
+          "pos": "LG",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Seth McLaughlin",
+          "pos": "C",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Kayode Awosika",
+          "pos": "RG",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Dan Skipper",
+          "pos": "RT",
+          "depth": 2,
+          "expiring": true
+        }
+      ]
+    },
+    "defense": {
+      "EDGE": [
+        {
+          "name": "Aidan Hutchinson",
+          "pos": "LDE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Al-Quadin Muhammad",
+          "pos": "RDE",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Tyrus Wheat",
+          "pos": "LDE",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Marcus Davenport",
+          "pos": "RDE",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "DL": [
+        {
+          "name": "Alim McNeill",
+          "pos": "LDT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "DJ Reader",
+          "pos": "RDT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Tyleik Williams",
+          "pos": "LDT",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Roy Lopez",
+          "pos": "RDT",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "LB": [
+        {
+          "name": "Jack Campbell",
+          "pos": "MLB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Zach Cunningham",
+          "pos": "MLB",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "CB": [
+        {
+          "name": "Rock Ya-Sin",
+          "pos": "LCB",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "D.J. Reed",
+          "pos": "RCB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Amik Robertson",
+          "pos": "NB",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Nick Whiteside",
+          "pos": "LCB",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Khalil Dorsey",
+          "pos": "RCB",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Arthur Maulet",
+          "pos": "NB",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "S": [
+        {
+          "name": "Avonte Maddox",
+          "pos": "SS",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Thomas Harper",
+          "pos": "FS",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Daniel Thomas",
+          "pos": "SS",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Jalen Mills",
+          "pos": "FS",
+          "depth": 2,
+          "expiring": true
+        }
+      ]
+    }
+  },
+  "GB": {
+    "offense": {
+      "QB": [
+        {
+          "name": "Jordan Love",
+          "pos": "QB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Malik Willis",
+          "pos": "QB",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "RB": [
+        {
+          "name": "Josh Jacobs",
+          "pos": "RB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Emanuel Wilson",
+          "pos": "RB",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "WR": [
+        {
+          "name": "Christian Watson",
+          "pos": "WR",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Romeo Doubs",
+          "pos": "WR",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "TE": [
+        {
+          "name": "Luke Musgrave",
+          "pos": "TE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Josh Whyle",
+          "pos": "TE",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "OL": [
+        {
+          "name": "Rasheed Walker",
+          "pos": "LT",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Aaron Banks",
+          "pos": "LG",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Sean Rhyan",
+          "pos": "C",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Anthony Belton",
+          "pos": "RG",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Zach Tom",
+          "pos": "RT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Jordan Morgan",
+          "pos": "LT",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Lecitus Smith",
+          "pos": "LG",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Jacob Monk",
+          "pos": "C",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Jordan Morgan",
+          "pos": "RG",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Jordan Morgan",
+          "pos": "RT",
+          "depth": 2,
+          "expiring": false
+        }
+      ]
+    },
+    "defense": {
+      "EDGE": [
+        {
+          "name": "Rashan Gary",
+          "pos": "LDE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Kingsley Enagbare",
+          "pos": "RDE",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Arron Mosby",
+          "pos": "LDE",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Lukas Van Ness",
+          "pos": "RDE",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "DL": [
+        {
+          "name": "Colby Wooden",
+          "pos": "LDT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Karl Brooks",
+          "pos": "RDT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Nazir Stackhouse",
+          "pos": "LDT",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Warren Brinson",
+          "pos": "RDT",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "LB": [
+        {
+          "name": "Quay Walker",
+          "pos": "MLB",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Jamon Johnson",
+          "pos": "MLB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "CB": [
+        {
+          "name": "Keisean Nixon",
+          "pos": "LCB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Carrington Valentine",
+          "pos": "RCB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Javon Bullard",
+          "pos": "NB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Tyron Herring",
+          "pos": "LCB",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Shemar Bartholomew",
+          "pos": "RCB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "S": [
+        {
+          "name": "Evan Williams",
+          "pos": "SS",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Xavier McKinney",
+          "pos": "FS",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Jaylin Simpson",
+          "pos": "SS",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Kitan Oladapo",
+          "pos": "FS",
+          "depth": 2,
+          "expiring": false
+        }
+      ]
+    }
+  },
+  "HOU": {
+    "offense": {
+      "QB": [
+        {
+          "name": "C.J. Stroud",
+          "pos": "QB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Davis Mills",
+          "pos": "QB",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "RB": [
+        {
+          "name": "Woody Marks",
+          "pos": "RB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Nick Chubb",
+          "pos": "RB",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "WR": [
+        {
+          "name": "Nico Collins",
+          "pos": "WR",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Jayden Higgins",
+          "pos": "WR",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "TE": [
+        {
+          "name": "Dalton Schultz",
+          "pos": "TE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Cade Stover",
+          "pos": "TE",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "OL": [
+        {
+          "name": "Aireontae Ersery",
+          "pos": "LT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Tytus Howard",
+          "pos": "LG",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Jake Andrews",
+          "pos": "C",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Ed Ingram",
+          "pos": "RG",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Trent Brown",
+          "pos": "RT",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Trent Brown",
+          "pos": "LT",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Jarrett Patterson",
+          "pos": "LG",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Jarrett Patterson",
+          "pos": "C",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Tytus Howard",
+          "pos": "RG",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Tytus Howard",
+          "pos": "RT",
+          "depth": 2,
+          "expiring": true
+        }
+      ]
+    },
+    "defense": {
+      "EDGE": [
+        {
+          "name": "Danielle Hunter",
+          "pos": "LDE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Will Anderson Jr.",
+          "pos": "RDE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Denico Autry",
+          "pos": "LDE",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Derek Barnett",
+          "pos": "RDE",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "DL": [
+        {
+          "name": "Tommy Togiai",
+          "pos": "LDT",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Sheldon Rankins",
+          "pos": "RDT",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Junior Tafuna",
+          "pos": "LDT",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Naquan Jones",
+          "pos": "RDT",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "LB": [
+        {
+          "name": "Azeez Al-Shaair",
+          "pos": "MLB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Christian Harris",
+          "pos": "MLB",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "CB": [
+        {
+          "name": "Derek Stingley Jr.",
+          "pos": "LCB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Kamari Lassiter",
+          "pos": "RCB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Jalen Pitre",
+          "pos": "NB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Tremon Smith",
+          "pos": "LCB",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Ja'Marcus Ingram",
+          "pos": "RCB",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Myles Bryant",
+          "pos": "NB",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "S": [
+        {
+          "name": "Calen Bullock",
+          "pos": "SS",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Jaylen Reed",
+          "pos": "FS",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Jimmie Ward",
+          "pos": "SS",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Jalen Pitre",
+          "pos": "FS",
+          "depth": 2,
+          "expiring": false
+        }
+      ]
+    }
+  },
+  "IND": {
+    "offense": {
+      "QB": [
+        {
+          "name": "Riley Leonard",
+          "pos": "QB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Seth Henigan",
+          "pos": "QB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "RB": [
+        {
+          "name": "Jonathan Taylor",
+          "pos": "RB",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Ameer Abdullah",
+          "pos": "RB",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "WR": [
+        {
+          "name": "Michael Pittman Jr.",
+          "pos": "WR",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Alec Pierce",
+          "pos": "WR",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "TE": [
+        {
+          "name": "Tyler Warren",
+          "pos": "TE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Mo Alie-Cox",
+          "pos": "TE",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "OL": [
+        {
+          "name": "Bernhard Raimann",
+          "pos": "LT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Quenton Nelson",
+          "pos": "LG",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Tanor Bortolini",
+          "pos": "C",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Matt Goncalves",
+          "pos": "RG",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Jalen Travis",
+          "pos": "RT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Jalen Travis",
+          "pos": "LT",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Josh Sills",
+          "pos": "LG",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Danny Pinter",
+          "pos": "C",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Dalton Tucker",
+          "pos": "RG",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Matt Goncalves",
+          "pos": "RT",
+          "depth": 2,
+          "expiring": false
+        }
+      ]
+    },
+    "defense": {
+      "EDGE": [
+        {
+          "name": "Kwity Paye",
+          "pos": "LDE",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Laiatu Latu",
+          "pos": "RDE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Tyquan Lewis",
+          "pos": "LDE",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Samson Ebukam",
+          "pos": "RDE",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "DL": [
+        {
+          "name": "Grover Stewart",
+          "pos": "LDT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Neville Gallimore",
+          "pos": "RDT",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Adetomiwa Adebawore",
+          "pos": "LDT",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Chris Wormley",
+          "pos": "RDT",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "LB": [
+        {
+          "name": "Zaire Franklin",
+          "pos": "MLB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Jacob Phillips",
+          "pos": "MLB",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "CB": [
+        {
+          "name": "Sauce Gardner",
+          "pos": "LCB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Mekhi Blackmon",
+          "pos": "RCB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Kenny Moore II",
+          "pos": "NB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Johnathan Edwards",
+          "pos": "LCB",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Jaylon Jones",
+          "pos": "RCB",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Chris Lammons",
+          "pos": "NB",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "S": [
+        {
+          "name": "Nick Cross",
+          "pos": "SS",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Cam Bynum",
+          "pos": "FS",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "George Odum",
+          "pos": "SS",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Rodney Thomas II",
+          "pos": "FS",
+          "depth": 2,
+          "expiring": false
+        }
+      ]
+    }
+  },
+  "JAC": {
+    "offense": {
+      "QB": [
+        {
+          "name": "Trevor Lawrence",
+          "pos": "QB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Nick Mullens",
+          "pos": "QB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "RB": [
+        {
+          "name": "Travis Etienne Jr.",
+          "pos": "RB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Bhayshul Tuten",
+          "pos": "RB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "WR": [
+        {
+          "name": "Brian Thomas Jr.",
+          "pos": "WR",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Jakobi Meyers",
+          "pos": "WR",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "TE": [
+        {
+          "name": "Brenton Strange",
+          "pos": "TE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Johnny Mundt",
+          "pos": "TE",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "OL": [
+        {
+          "name": "Cole Van Lanen",
+          "pos": "LT",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Ezra Cleveland",
+          "pos": "LG",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Robert Hainsey",
+          "pos": "C",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Patrick Mekari",
+          "pos": "RG",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Anton Harrison",
+          "pos": "RT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Walker Little",
+          "pos": "LT",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Wyatt Milum",
+          "pos": "LG",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Jonah Monheim",
+          "pos": "C",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Walker Little",
+          "pos": "RG",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Ricky Lee",
+          "pos": "RT",
+          "depth": 2,
+          "expiring": false
+        }
+      ]
+    },
+    "defense": {
+      "EDGE": [
+        {
+          "name": "Josh Hines-Allen",
+          "pos": "LDE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Travon Walker",
+          "pos": "RDE",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Dawuane Smoot",
+          "pos": "LDE",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Danny Striggow",
+          "pos": "RDE",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "DL": [
+        {
+          "name": "DaVon Hamilton",
+          "pos": "LDT",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Arik Armstead",
+          "pos": "RDT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Matt Dickerson",
+          "pos": "LDT",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Austin Johnson",
+          "pos": "RDT",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "LB": [
+        {
+          "name": "Devin Lloyd",
+          "pos": "MLB",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Ventrell Miller",
+          "pos": "MLB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "CB": [
+        {
+          "name": "Jarrian Jones",
+          "pos": "LCB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Greg Newsome II",
+          "pos": "RCB",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Montaric Brown",
+          "pos": "NB",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Keith Taylor",
+          "pos": "LCB",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Christian Braswell",
+          "pos": "RCB",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Jabbar Muhammad",
+          "pos": "NB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "S": [
+        {
+          "name": "Eric Murray",
+          "pos": "SS",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Andrew Wingard",
+          "pos": "FS",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Rayuan Lane III",
+          "pos": "SS",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Antonio Johnson",
+          "pos": "FS",
+          "depth": 2,
+          "expiring": false
+        }
+      ]
+    }
+  },
+  "KC": {
+    "offense": {
+      "QB": [
+        {
+          "name": "Chris Oladokun",
+          "pos": "QB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Patrick Mahomes",
+          "pos": "QB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "RB": [
+        {
+          "name": "Isiah Pacheco",
+          "pos": "RB",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Kareem Hunt",
+          "pos": "RB",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "WR": [
+        {
+          "name": "Xavier Worthy",
+          "pos": "WR",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Hollywood Brown",
+          "pos": "WR",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "TE": [
+        {
+          "name": "Travis Kelce",
+          "pos": "TE",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Noah Gray",
+          "pos": "TE",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "OL": [
+        {
+          "name": "Esa Pole",
+          "pos": "LT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Kingsley Suamataia",
+          "pos": "LG",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Creed Humphrey",
+          "pos": "C",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Trey Smith",
+          "pos": "RG",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Jaylon Moore",
+          "pos": "RT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Jaylon Moore",
+          "pos": "LT",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Mike Caliendo",
+          "pos": "LG",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Hunter Nourzad",
+          "pos": "C",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Mike Caliendo",
+          "pos": "RG",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Chukwuebuka Godrick",
+          "pos": "RT",
+          "depth": 2,
+          "expiring": false
+        }
+      ]
+    },
+    "defense": {
+      "EDGE": [
+        {
+          "name": "George Karlaftis",
+          "pos": "LDE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Mike Danna",
+          "pos": "RDE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Charles Omenihu",
+          "pos": "LDE",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Ashton Gillotte",
+          "pos": "RDE",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "DL": [
+        {
+          "name": "Chris Jones",
+          "pos": "LDT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Derrick Nnadi",
+          "pos": "RDT",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Jerry Tillery",
+          "pos": "LDT",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Mike Pennel",
+          "pos": "RDT",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "LB": [
+        {
+          "name": "Nick Bolton",
+          "pos": "MLB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Jack Cochrane",
+          "pos": "MLB",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "CB": [
+        {
+          "name": "Nohl Williams",
+          "pos": "LCB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Kristian Fulton",
+          "pos": "RCB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Mike Edwards",
+          "pos": "NB",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Nazeeh Johnson",
+          "pos": "LCB",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Joshua Williams",
+          "pos": "RCB",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Jaden Hicks",
+          "pos": "NB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "S": [
+        {
+          "name": "Chamarri Conner",
+          "pos": "SS",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Bryan Cook",
+          "pos": "FS",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Jaden Hicks",
+          "pos": "SS",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Kevin Knowles",
+          "pos": "FS",
+          "depth": 2,
+          "expiring": false
+        }
+      ]
+    }
+  },
+  "LAR": {
+    "offense": {
+      "QB": [
+        {
+          "name": "Matthew Stafford",
+          "pos": "QB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Jimmy Garoppolo",
+          "pos": "QB",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "RB": [
+        {
+          "name": "Kyren Williams",
+          "pos": "RB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Blake Corum",
+          "pos": "RB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "WR": [
+        {
+          "name": "Puka Nacua",
+          "pos": "WR",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Davante Adams",
+          "pos": "WR",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "TE": [
+        {
+          "name": "Colby Parkinson",
+          "pos": "TE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Tyler Higbee",
+          "pos": "TE",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "OL": [
+        {
+          "name": "Alaric Jackson",
+          "pos": "LT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Steve Avila",
+          "pos": "LG",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Coleman Shelton",
+          "pos": "C",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Kevin Dotson",
+          "pos": "RG",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Warren McClendon Jr.",
+          "pos": "RT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "D.J. Humphries",
+          "pos": "LT",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Justin Dedich",
+          "pos": "LG",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Beaux Limmer",
+          "pos": "C",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Justin Dedich",
+          "pos": "RG",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Rob Havenstein",
+          "pos": "RT",
+          "depth": 2,
+          "expiring": true
+        }
+      ]
+    },
+    "defense": {
+      "EDGE": [
+        {
+          "name": "Braden Fiske",
+          "pos": "LDE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Kobie Turner",
+          "pos": "RDE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Desjuan Johnson",
+          "pos": "LDE",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Tyler Davis",
+          "pos": "RDE",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "DL": [
+        {
+          "name": "Poona Ford",
+          "pos": "NT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Ty Hamilton",
+          "pos": "NT",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "LB": [
+        {
+          "name": "Nate Landman",
+          "pos": "LILB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Omar Speights",
+          "pos": "RILB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Troy Reeder",
+          "pos": "LILB",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Shaun Dolac",
+          "pos": "RILB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "CB": [
+        {
+          "name": "Cobie Durant",
+          "pos": "LCB",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Darious Williams",
+          "pos": "RCB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Quentin Lake",
+          "pos": "NB",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Emmanuel Forbes Jr.",
+          "pos": "LCB",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Roger McCreary",
+          "pos": "RCB",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Josh Wallace",
+          "pos": "NB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "S": [
+        {
+          "name": "Kam Curl",
+          "pos": "SS",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Kamren Kinchens",
+          "pos": "FS",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Nate Valcarcel",
+          "pos": "SS",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Jaylen McCollough",
+          "pos": "FS",
+          "depth": 2,
+          "expiring": false
+        }
+      ]
+    }
+  },
+  "LAC": {
+    "offense": {
+      "QB": [
+        {
+          "name": "Justin Herbert",
+          "pos": "QB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Trey Lance",
+          "pos": "QB",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "RB": [
+        {
+          "name": "Omarion Hampton",
+          "pos": "RB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Scott Matlock",
+          "pos": "FB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Kimani Vidal",
+          "pos": "RB",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "WR": [
+        {
+          "name": "Ladd McConkey",
+          "pos": "WR",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Quentin Johnston",
+          "pos": "WR",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "TE": [
+        {
+          "name": "Oronde Gadsden",
+          "pos": "TE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Tucker Fisk",
+          "pos": "TE",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "OL": [
+        {
+          "name": "Jamaree Salyer",
+          "pos": "LT",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Zion Johnson",
+          "pos": "LG",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Bradley Bozeman",
+          "pos": "C",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Mekhi Becton",
+          "pos": "RG",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Trey Pipkins III",
+          "pos": "RT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Bobby Hart",
+          "pos": "LT",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Jamaree Salyer",
+          "pos": "LG",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Andre James",
+          "pos": "C",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Trevor Penning",
+          "pos": "RG",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Savion Washington",
+          "pos": "RT",
+          "depth": 2,
+          "expiring": false
+        }
+      ]
+    },
+    "defense": {
+      "EDGE": [
+        {
+          "name": "Da'Shawn Hand",
+          "pos": "LDE",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Justin Eboigbe",
+          "pos": "RDE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Scott Matlock",
+          "pos": "LDE",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Otito Ogbonnia",
+          "pos": "RDE",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "DL": [
+        {
+          "name": "Teair Tart",
+          "pos": "NT",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Jamaree Caldwell",
+          "pos": "NT",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "LB": [
+        {
+          "name": "Daiyan Henley",
+          "pos": "LILB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Denzel Perryman",
+          "pos": "RILB",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Marlowe Wax",
+          "pos": "LILB",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Troy Dye",
+          "pos": "RILB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "CB": [
+        {
+          "name": "Donte Jackson",
+          "pos": "LCB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Cam Hart",
+          "pos": "RCB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Tarheeb Still",
+          "pos": "NB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Deane Leonard",
+          "pos": "LCB",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Benjamin St-Juste",
+          "pos": "RCB",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Nikko Reed",
+          "pos": "NB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "S": [
+        {
+          "name": "Derwin James Jr.",
+          "pos": "SS",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Elijah Molden",
+          "pos": "FS",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "RJ Mickens",
+          "pos": "SS",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Tony Jefferson",
+          "pos": "FS",
+          "depth": 2,
+          "expiring": true
+        }
+      ]
+    }
+  },
+  "LV": {
+    "offense": {
+      "QB": [
+        {
+          "name": "Geno Smith",
+          "pos": "QB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Kenny Pickett",
+          "pos": "QB",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "RB": [
+        {
+          "name": "Ashton Jeanty",
+          "pos": "RB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Raheem Mostert",
+          "pos": "RB",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "WR": [
+        {
+          "name": "Tre Tucker",
+          "pos": "WR",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Jack Bech",
+          "pos": "WR",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "TE": [
+        {
+          "name": "Michael Mayer",
+          "pos": "TE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Ian Thomas",
+          "pos": "TE",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "OL": [
+        {
+          "name": "Stone Forsythe",
+          "pos": "LT",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Dylan Parham",
+          "pos": "LG",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Will Putnam",
+          "pos": "C",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Caleb Rogers",
+          "pos": "RG",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "DJ Glaze",
+          "pos": "RT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Charles Grant",
+          "pos": "LT",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Atonio Mafi",
+          "pos": "LG",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Alex Cappa",
+          "pos": "C",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Laki Tasi",
+          "pos": "RG",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Stone Forsythe",
+          "pos": "RT",
+          "depth": 2,
+          "expiring": true
+        }
+      ]
+    },
+    "defense": {
+      "EDGE": [
+        {
+          "name": "Tyree Wilson",
+          "pos": "LDE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Malcolm Koonce",
+          "pos": "RDE",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Jahfari Harvey",
+          "pos": "LDE",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Charles Snowden",
+          "pos": "RDE",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "DL": [
+        {
+          "name": "Jonah Laulu",
+          "pos": "LDT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Adam Butler",
+          "pos": "RDT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Thomas Booker IV",
+          "pos": "LDT",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "JJ Pegues",
+          "pos": "RDT",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "LB": [
+        {
+          "name": "Elandon Roberts",
+          "pos": "MLB",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Tommy Eichenberg",
+          "pos": "MLB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "CB": [
+        {
+          "name": "Darien Porter",
+          "pos": "LCB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Eric Stokes",
+          "pos": "RCB",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Greedy Vance",
+          "pos": "NB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Chigozie Anusiem",
+          "pos": "LCB",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Decamerion Richardson",
+          "pos": "RCB",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Darnay Holmes",
+          "pos": "NB",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "S": [
+        {
+          "name": "Lonnie Johnson Jr.",
+          "pos": "SS",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Isaiah Pola-Mao",
+          "pos": "FS",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Jeremy Chinn",
+          "pos": "SS",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Tristin McCollum",
+          "pos": "FS",
+          "depth": 2,
+          "expiring": true
+        }
+      ]
+    }
+  },
+  "MIA": {
+    "offense": {
+      "QB": [
+        {
+          "name": "Quinn Ewers",
+          "pos": "QB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Zach Wilson",
+          "pos": "QB",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "RB": [
+        {
+          "name": "De'Von Achane",
+          "pos": "RB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Alec Ingold",
+          "pos": "FB",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Jaylen Wright",
+          "pos": "RB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "WR": [
+        {
+          "name": "Jaylen Waddle",
+          "pos": "WR",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Malik Washington",
+          "pos": "WR",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "TE": [
+        {
+          "name": "Greg Dulcich",
+          "pos": "TE",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Julian Hill",
+          "pos": "TE",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "OL": [
+        {
+          "name": "Patrick Paul",
+          "pos": "LT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Jonah Savaiinaea",
+          "pos": "LG",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Aaron Brewer",
+          "pos": "C",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Cole Strange",
+          "pos": "RG",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Austin Jackson",
+          "pos": "RT",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Kendall Lamm",
+          "pos": "LT",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Daniel Brunskill",
+          "pos": "LG",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Andrew Meyer",
+          "pos": "C",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Braeden Daniels",
+          "pos": "RG",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Larry Borom",
+          "pos": "RT",
+          "depth": 2,
+          "expiring": true
+        }
+      ]
+    },
+    "defense": {
+      "EDGE": [
+        {
+          "name": "Chop Robinson",
+          "pos": "LDE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Bradley Chubb",
+          "pos": "RDE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Derrick McLendon",
+          "pos": "LDE",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Seth Coleman",
+          "pos": "RDE",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "DL": [
+        {
+          "name": "Zach Sieler",
+          "pos": "LDT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Jordan Phillips",
+          "pos": "RDT",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Kenneth Grant",
+          "pos": "LDT",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Zeek Biggers",
+          "pos": "RDT",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "LB": [
+        {
+          "name": "Tyrel Dodson",
+          "pos": "MLB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "K.J. Britt",
+          "pos": "MLB",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "CB": [
+        {
+          "name": "Jack Jones",
+          "pos": "LCB",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Jason Marshall Jr.",
+          "pos": "RCB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Rasul Douglas",
+          "pos": "NB",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Ethan Bonner",
+          "pos": "LCB",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "A.J. Green III",
+          "pos": "RCB",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Ethan Robinson",
+          "pos": "NB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "S": [
+        {
+          "name": "Ashtyn Davis",
+          "pos": "SS",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Minkah Fitzpatrick",
+          "pos": "FS",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Dante Trader Jr.",
+          "pos": "SS",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Ifeatu Melifonwu",
+          "pos": "FS",
+          "depth": 2,
+          "expiring": true
+        }
+      ]
+    }
+  },
+  "MIN": {
+    "offense": {
+      "QB": [
+        {
+          "name": "J.J. McCarthy",
+          "pos": "QB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Max Brosmer",
+          "pos": "QB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "RB": [
+        {
+          "name": "Aaron Jones Sr.",
+          "pos": "RB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "C.J. Ham",
+          "pos": "FB",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Jordan Mason",
+          "pos": "RB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "WR": [
+        {
+          "name": "Justin Jefferson",
+          "pos": "WR",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Jordan Addison",
+          "pos": "WR",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "TE": [
+        {
+          "name": "T.J. Hockenson",
+          "pos": "TE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Josh Oliver",
+          "pos": "TE",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "OL": [
+        {
+          "name": "Justin Skule",
+          "pos": "LT",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Donovan Jackson",
+          "pos": "LG",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Michael Jurgens",
+          "pos": "C",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Will Fries",
+          "pos": "RG",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Brian O'Neill",
+          "pos": "RT",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Christian Darrisaw",
+          "pos": "LT",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Joe Huber",
+          "pos": "LG",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Vershon Lee",
+          "pos": "C",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Joe Huber",
+          "pos": "RG",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Blake Brandel",
+          "pos": "RT",
+          "depth": 2,
+          "expiring": false
+        }
+      ]
+    },
+    "defense": {
+      "EDGE": [
+        {
+          "name": "Jonathan Allen",
+          "pos": "LDE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Javon Hargrave",
+          "pos": "RDE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Levi Drake Rodriguez",
+          "pos": "LDE",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Tyrion Ingram-Dawkins",
+          "pos": "RDE",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "DL": [
+        {
+          "name": "Jalen Redmond",
+          "pos": "NT",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Taki Taimani",
+          "pos": "NT",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "LB": [
+        {
+          "name": "Blake Cashman",
+          "pos": "LILB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Eric Wilson",
+          "pos": "RILB",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Bo Richter",
+          "pos": "LILB",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Ivan Pace Jr.",
+          "pos": "RILB",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "CB": [
+        {
+          "name": "Isaiah Rodgers",
+          "pos": "LCB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Byron Murphy Jr.",
+          "pos": "RCB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Theo Jackson",
+          "pos": "NB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Zemaiah Vaughn",
+          "pos": "LCB",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Fabian Moreau",
+          "pos": "RCB",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Tavierre Thomas",
+          "pos": "NB",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "S": [
+        {
+          "name": "Harrison Smith",
+          "pos": "SS",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Jay Ward",
+          "pos": "FS",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Kahlef Hailassie",
+          "pos": "SS",
+          "depth": 2,
+          "expiring": false
+        }
+      ]
+    }
+  },
+  "NE": {
+    "offense": {
+      "QB": [
+        {
+          "name": "Drake Maye",
+          "pos": "QB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Joshua Dobbs",
+          "pos": "QB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "RB": [
+        {
+          "name": "Rhamondre Stevenson",
+          "pos": "RB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Jack Westover",
+          "pos": "FB",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "TreVeyon Henderson",
+          "pos": "RB",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Brock Lampe",
+          "pos": "FB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "WR": [
+        {
+          "name": "Stefon Diggs",
+          "pos": "WR",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Kayshon Boutte",
+          "pos": "WR",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "TE": [
+        {
+          "name": "Hunter Henry",
+          "pos": "TE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Austin Hooper",
+          "pos": "TE",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "OL": [
+        {
+          "name": "Will Campbell",
+          "pos": "LT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Jared Wilson",
+          "pos": "LG",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Garrett Bradbury",
+          "pos": "C",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Mike Onwenu",
+          "pos": "RG",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Morgan Moses",
+          "pos": "RT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Vederian Lowe",
+          "pos": "LT",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Ben Brown",
+          "pos": "LG",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Ben Brown",
+          "pos": "C",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Caedan Wallace",
+          "pos": "RG",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Marcus Bryant",
+          "pos": "RT",
+          "depth": 2,
+          "expiring": false
+        }
+      ]
+    },
+    "defense": {
+      "EDGE": [
+        {
+          "name": "Christian Barmore",
+          "pos": "LDE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Milton Williams",
+          "pos": "RDE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Joshua Farmer",
+          "pos": "LDE",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Cory Durden",
+          "pos": "RDE",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "DL": [
+        {
+          "name": "Khyiris Tonga",
+          "pos": "NT",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Eric Gregory",
+          "pos": "NT",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "LB": [
+        {
+          "name": "Robert Spillane",
+          "pos": "LILB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Christian Elliss",
+          "pos": "RILB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Jack Gibbens",
+          "pos": "LILB",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Jahlani Tavai",
+          "pos": "RILB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "CB": [
+        {
+          "name": "Carlton Davis III",
+          "pos": "LCB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Christian Gonzalez",
+          "pos": "RCB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Marcus Jones",
+          "pos": "NB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Charles Woods",
+          "pos": "LCB",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Alex Austin",
+          "pos": "RCB",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "S": [
+        {
+          "name": "Jaylinn Hawkins",
+          "pos": "SS",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Craig Woodson",
+          "pos": "FS",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Brenden Schooler",
+          "pos": "SS",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Dell Pettus",
+          "pos": "FS",
+          "depth": 2,
+          "expiring": false
+        }
+      ]
+    }
+  },
+  "NO": {
+    "offense": {
+      "QB": [
+        {
+          "name": "Tyler Shough",
+          "pos": "QB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Spencer Rattler",
+          "pos": "QB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "RB": [
+        {
+          "name": "Alvin Kamara",
+          "pos": "RB",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Audric Estime",
+          "pos": "RB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "WR": [
+        {
+          "name": "Chris Olave",
+          "pos": "WR",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Kevin Austin Jr.",
+          "pos": "WR",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "TE": [
+        {
+          "name": "Juwan Johnson",
+          "pos": "TE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Taysom Hill",
+          "pos": "TE",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "OL": [
+        {
+          "name": "Kelvin Banks Jr.",
+          "pos": "LT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Torricelli Simpkins III",
+          "pos": "LG",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Luke Fortner",
+          "pos": "C",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Cesar Ruiz",
+          "pos": "RG",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Taliese Fuaga",
+          "pos": "RT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Asim Richards",
+          "pos": "LT",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Dillon Radunz",
+          "pos": "LG",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Torricelli Simpkins III",
+          "pos": "C",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Will Sherman",
+          "pos": "RG",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Dillon Radunz",
+          "pos": "RT",
+          "depth": 2,
+          "expiring": true
+        }
+      ]
+    },
+    "defense": {
+      "EDGE": [
+        {
+          "name": "Cameron Jordan",
+          "pos": "LDE",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Bryan Bresee",
+          "pos": "RDE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Jonathan Bullard",
+          "pos": "LDE",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Nathan Shepherd",
+          "pos": "RDE",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "DL": [
+        {
+          "name": "Davon Godchaux",
+          "pos": "NT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Khristian Boyd",
+          "pos": "NT",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "LB": [
+        {
+          "name": "Demario Davis",
+          "pos": "LILB",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Pete Werner",
+          "pos": "RILB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Danny Stutsman",
+          "pos": "LILB",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Jaylan Ford",
+          "pos": "RILB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "CB": [
+        {
+          "name": "Kool-Aid McKinstry",
+          "pos": "LCB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Alontae Taylor",
+          "pos": "RCB",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Quincy Riley",
+          "pos": "NB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Dalys Beanum",
+          "pos": "LCB",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Rejzohn Wright",
+          "pos": "RCB",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Isaac Yiadom",
+          "pos": "NB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "S": [
+        {
+          "name": "Justin Reid",
+          "pos": "SS",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Jonas Sanker",
+          "pos": "FS",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Jordan Howden",
+          "pos": "SS",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Terrell Burgess",
+          "pos": "FS",
+          "depth": 2,
+          "expiring": true
+        }
+      ]
+    }
+  },
+  "NYG": {
+    "offense": {
+      "QB": [
+        {
+          "name": "Jaxson Dart",
+          "pos": "QB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Jameis Winston",
+          "pos": "QB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "RB": [
+        {
+          "name": "Tyrone Tracy Jr.",
+          "pos": "RB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Devin Singletary",
+          "pos": "RB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "WR": [
+        {
+          "name": "Darius Slayton",
+          "pos": "WR",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Isaiah Hodgins",
+          "pos": "WR",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "TE": [
+        {
+          "name": "Theo Johnson",
+          "pos": "TE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Daniel Bellinger",
+          "pos": "TE",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "OL": [
+        {
+          "name": "Marcus Mbow",
+          "pos": "LT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Jon Runyan",
+          "pos": "LG",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Austin Schlottmann",
+          "pos": "C",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Greg Van Roten",
+          "pos": "RG",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Jermaine Eluemunor",
+          "pos": "RT",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "James Hudson III",
+          "pos": "LT",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Aaron Stinnie",
+          "pos": "LG",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Bryan Hudson",
+          "pos": "C",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Aaron Stinnie",
+          "pos": "RG",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Marcus Mbow",
+          "pos": "RT",
+          "depth": 2,
+          "expiring": false
+        }
+      ]
+    },
+    "defense": {
+      "EDGE": [
+        {
+          "name": "Darius Alexander",
+          "pos": "LDE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Roy Robertson-Harris",
+          "pos": "RDE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Marlon Tuipulotu",
+          "pos": "LDE",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Elijah Chatman",
+          "pos": "RDE",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "DL": [
+        {
+          "name": "Dexter Lawrence II",
+          "pos": "NT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "D.J. Davidson",
+          "pos": "NT",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "LB": [
+        {
+          "name": "Bobby Okereke",
+          "pos": "LILB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Darius Muasau",
+          "pos": "RILB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Neville Hewitt",
+          "pos": "LILB",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Demetrius Flannigan-Fowles",
+          "pos": "RILB",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "CB": [
+        {
+          "name": "Paulson Adebo",
+          "pos": "LCB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Korie Black",
+          "pos": "RCB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Dru Phillips",
+          "pos": "NB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Deonte Banks",
+          "pos": "LCB",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Rico Payton",
+          "pos": "RCB",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Jarrick Bernard-Converse",
+          "pos": "NB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "S": [
+        {
+          "name": "Dane Belton",
+          "pos": "SS",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Jevon Holland",
+          "pos": "FS",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Raheem Layne",
+          "pos": "SS",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Beau Brade",
+          "pos": "FS",
+          "depth": 2,
+          "expiring": false
+        }
+      ]
+    }
+  },
+  "NYJ": {
+    "offense": {
+      "QB": [
+        {
+          "name": "Brady Cook",
+          "pos": "QB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Tyrod Taylor",
+          "pos": "QB",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "RB": [
+        {
+          "name": "Breece Hall",
+          "pos": "RB",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Andrew Beck",
+          "pos": "FB",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Khalil Herbert",
+          "pos": "RB",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "WR": [
+        {
+          "name": "John Metchie III",
+          "pos": "WR",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Adonai Mitchell",
+          "pos": "WR",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "TE": [
+        {
+          "name": "Jeremy Ruckert",
+          "pos": "TE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Stone Smartt",
+          "pos": "TE",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "OL": [
+        {
+          "name": "Olu Fashanu",
+          "pos": "LT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "John Simpson",
+          "pos": "LG",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Josh Myers",
+          "pos": "C",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Joe Tippmann",
+          "pos": "RG",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Armand Membou",
+          "pos": "RT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Max Mitchell",
+          "pos": "LT",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Kohl Levao",
+          "pos": "LG",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Joe Tippmann",
+          "pos": "C",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Marquis Hayes",
+          "pos": "RG",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Chukwuma Okorafor",
+          "pos": "RT",
+          "depth": 2,
+          "expiring": true
+        }
+      ]
+    },
+    "defense": {
+      "EDGE": [
+        {
+          "name": "Braiden McGregor",
+          "pos": "LDE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Jermaine Johnson",
+          "pos": "RDE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Ochaun Mathis",
+          "pos": "LDE",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Micheal Clemons",
+          "pos": "RDE",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "DL": [
+        {
+          "name": "Harrison Phillips",
+          "pos": "LDT",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Khalen Saunders",
+          "pos": "RDT",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Jowon Briggs",
+          "pos": "LDT",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Mazi Smith",
+          "pos": "RDT",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "LB": [
+        {
+          "name": "Jamien Sherwood",
+          "pos": "MLB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Mykal Walker",
+          "pos": "MLB",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "CB": [
+        {
+          "name": "Qwan'tez Stiggers",
+          "pos": "LCB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Brandon Stephens",
+          "pos": "RCB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Ja'Sir Taylor",
+          "pos": "NB",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Keidron Smith",
+          "pos": "LCB",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Tre Brown",
+          "pos": "RCB",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Jordan Clark",
+          "pos": "NB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "S": [
+        {
+          "name": "Malachi Moore",
+          "pos": "SS",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Dean Clark",
+          "pos": "FS",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Chris Smith II",
+          "pos": "SS",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Jarius Monroe",
+          "pos": "FS",
+          "depth": 2,
+          "expiring": false
+        }
+      ]
+    }
+  },
+  "PHI": {
+    "offense": {
+      "QB": [
+        {
+          "name": "Jalen Hurts",
+          "pos": "QB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Tanner McKee",
+          "pos": "QB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "RB": [
+        {
+          "name": "Saquon Barkley",
+          "pos": "RB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Ben VanSumeren",
+          "pos": "FB",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Tank Bigsby",
+          "pos": "RB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "WR": [
+        {
+          "name": "A.J. Brown",
+          "pos": "WR",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "DeVonta Smith",
+          "pos": "WR",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "TE": [
+        {
+          "name": "Dallas Goedert",
+          "pos": "TE",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Grant Calcaterra",
+          "pos": "TE",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "OL": [
+        {
+          "name": "Jordan Mailata",
+          "pos": "LT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Landon Dickerson",
+          "pos": "LG",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Cam Jurgens",
+          "pos": "C",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Tyler Steen",
+          "pos": "RG",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Lane Johnson",
+          "pos": "RT",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Fred Johnson",
+          "pos": "LT",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Brett Toth",
+          "pos": "LG",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Brett Toth",
+          "pos": "C",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Matt Pryor",
+          "pos": "RG",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Fred Johnson",
+          "pos": "RT",
+          "depth": 2,
+          "expiring": true
+        }
+      ]
+    },
+    "defense": {
+      "EDGE": [
+        {
+          "name": "Moro Ojomo",
+          "pos": "LDE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Jalen Carter",
+          "pos": "RDE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Byron Young",
+          "pos": "LDE",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Ty Robinson",
+          "pos": "RDE",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "DL": [
+        {
+          "name": "",
+          "pos": "NT",
+          "depth": 1,
+          "expiring": false
+        }
+      ],
+      "LB": [
+        {
+          "name": "Zack Baun",
+          "pos": "LILB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Nakobe Dean",
+          "pos": "RILB",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Smael Mondon Jr.",
+          "pos": "LILB",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Jihaad Campbell",
+          "pos": "RILB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "CB": [
+        {
+          "name": "Adoree' Jackson",
+          "pos": "LCB",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Quinyon Mitchell",
+          "pos": "RCB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Cooper DeJean",
+          "pos": "NB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Kelee Ringo",
+          "pos": "LCB",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Mac McWilliams",
+          "pos": "RCB",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Michael Carter II",
+          "pos": "NB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "S": [
+        {
+          "name": "Reed Blankenship",
+          "pos": "SS",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Marcus Epps",
+          "pos": "FS",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Michael Carter II",
+          "pos": "SS",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Sydney Brown",
+          "pos": "FS",
+          "depth": 2,
+          "expiring": false
+        }
+      ]
+    }
+  },
+  "PIT": {
+    "offense": {
+      "QB": [
+        {
+          "name": "Aaron Rodgers",
+          "pos": "QB",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Mason Rudolph",
+          "pos": "QB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "RB": [
+        {
+          "name": "Jaylen Warren",
+          "pos": "RB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Connor Heyward",
+          "pos": "FB",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Kenneth Gainwell",
+          "pos": "RB",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "WR": [
+        {
+          "name": "DK Metcalf",
+          "pos": "WR",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Calvin Austin III",
+          "pos": "WR",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "TE": [
+        {
+          "name": "Pat Freiermuth",
+          "pos": "TE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Jonnu Smith",
+          "pos": "TE",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "OL": [
+        {
+          "name": "Dylan Cook",
+          "pos": "LT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Isaac Seumalo",
+          "pos": "LG",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Zach Frazier",
+          "pos": "C",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Mason McCormick",
+          "pos": "RG",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Troy Fautanu",
+          "pos": "RT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Andrus Peat",
+          "pos": "LT",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Spencer Anderson",
+          "pos": "LG",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Ryan McCollum",
+          "pos": "C",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Jack Driscoll",
+          "pos": "RG",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Dylan Cook",
+          "pos": "RT",
+          "depth": 2,
+          "expiring": false
+        }
+      ]
+    },
+    "defense": {
+      "EDGE": [
+        {
+          "name": "Cameron Heyward",
+          "pos": "LDE",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Derrick Harmon",
+          "pos": "RDE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Esezi Otomewo",
+          "pos": "LDE",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Logan Lee",
+          "pos": "RDE",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "DL": [
+        {
+          "name": "Keeanu Benton",
+          "pos": "NT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Yahya Black",
+          "pos": "NT",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "LB": [
+        {
+          "name": "Patrick Queen",
+          "pos": "LILB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Malik Harrison",
+          "pos": "RILB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Cole Holcomb",
+          "pos": "LILB",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Payton Wilson",
+          "pos": "RILB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "CB": [
+        {
+          "name": "James Pierre",
+          "pos": "LCB",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Joey Porter Jr.",
+          "pos": "RCB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Jalen Ramsey",
+          "pos": "NB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Asante Samuel Jr.",
+          "pos": "LCB",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Daequan Hardy",
+          "pos": "RCB",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Brandin Echols",
+          "pos": "NB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "S": [
+        {
+          "name": "Kyle Dugger",
+          "pos": "SS",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Chuck Clark",
+          "pos": "FS",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Sebastian Castro",
+          "pos": "SS",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Jabrill Peppers",
+          "pos": "FS",
+          "depth": 2,
+          "expiring": true
+        }
+      ]
+    }
+  },
+  "SEA": {
+    "offense": {
+      "QB": [
+        {
+          "name": "Sam Darnold",
+          "pos": "QB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Drew Lock",
+          "pos": "QB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "RB": [
+        {
+          "name": "Kenneth Walker III",
+          "pos": "RB",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Robbie Ouzts",
+          "pos": "FB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "George Holani",
+          "pos": "RB",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Brady Russell",
+          "pos": "FB",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "WR": [
+        {
+          "name": "Jaxon Smith-Njigba",
+          "pos": "WR",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Cooper Kupp",
+          "pos": "WR",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "TE": [
+        {
+          "name": "AJ Barner",
+          "pos": "TE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Elijah Arroyo",
+          "pos": "TE",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "OL": [
+        {
+          "name": "Charles Cross",
+          "pos": "LT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Grey Zabel",
+          "pos": "LG",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Jalen Sundell",
+          "pos": "C",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Anthony Bradford",
+          "pos": "RG",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Abraham Lucas",
+          "pos": "RT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Josh Jones",
+          "pos": "LT",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Christian Haynes",
+          "pos": "LG",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Olu Oluwatimi",
+          "pos": "C",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Christian Haynes",
+          "pos": "RG",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Mason Richman",
+          "pos": "RT",
+          "depth": 2,
+          "expiring": false
+        }
+      ]
+    },
+    "defense": {
+      "EDGE": [
+        {
+          "name": "DeMarcus Lawrence",
+          "pos": "LDE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Derick Hall",
+          "pos": "RDE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Mike Morris",
+          "pos": "LDE",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Jared Ivey",
+          "pos": "RDE",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "DL": [
+        {
+          "name": "Byron Murphy II",
+          "pos": "LDT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Leonard Williams",
+          "pos": "RDT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Brandon Pili",
+          "pos": "LDT",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Jarran Reed",
+          "pos": "RDT",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "LB": [
+        {
+          "name": "Ernest Jones IV",
+          "pos": "MLB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Tyrice Knight",
+          "pos": "MLB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "CB": [
+        {
+          "name": "Devon Witherspoon",
+          "pos": "LCB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Josh Jobe",
+          "pos": "RCB",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Nick Emmanwori",
+          "pos": "NB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Nehemiah Pritchett",
+          "pos": "LCB",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Riq Woolen",
+          "pos": "RCB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "S": [
+        {
+          "name": "Coby Bryant",
+          "pos": "SS",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Julian Love",
+          "pos": "FS",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Ty Okada",
+          "pos": "SS",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Ty Okada",
+          "pos": "FS",
+          "depth": 2,
+          "expiring": true
+        }
+      ]
+    }
+  },
+  "SF": {
+    "offense": {
+      "QB": [
+        {
+          "name": "Brock Purdy",
+          "pos": "QB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Mac Jones",
+          "pos": "QB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "RB": [
+        {
+          "name": "Christian McCaffrey",
+          "pos": "RB",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Kyle Juszczyk",
+          "pos": "FB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Brian Robinson Jr.",
+          "pos": "RB",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "WR": [
+        {
+          "name": "Jauan Jennings",
+          "pos": "WR",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Ricky Pearsall",
+          "pos": "WR",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "TE": [
+        {
+          "name": "Jake Tonges",
+          "pos": "TE",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Luke Farrell",
+          "pos": "TE",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "OL": [
+        {
+          "name": "Trent Williams",
+          "pos": "LT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Spencer Burford",
+          "pos": "LG",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Jake Brendel",
+          "pos": "C",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Dominick Puni",
+          "pos": "RG",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Colton McKivitz",
+          "pos": "RT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Austen Pleasants",
+          "pos": "LT",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Connor Colby",
+          "pos": "LG",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Matt Hennessy",
+          "pos": "C",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Isaac Alarcon",
+          "pos": "RT",
+          "depth": 2,
+          "expiring": true
+        }
+      ]
+    },
+    "defense": {
+      "EDGE": [
+        {
+          "name": "Bryce Huff",
+          "pos": "LDE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Sam Okuayinonu",
+          "pos": "RDE",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Yetur Gross-Matos",
+          "pos": "LDE",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Clelin Ferrell",
+          "pos": "RDE",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "DL": [
+        {
+          "name": "Kalia Davis",
+          "pos": "LDT",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Alfred Collins",
+          "pos": "RDT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Kevin Givens",
+          "pos": "LDT",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Jordan Elliott",
+          "pos": "RDT",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "LB": [
+        {
+          "name": "Eric Kendricks",
+          "pos": "MLB",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Fred Warner",
+          "pos": "MLB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "CB": [
+        {
+          "name": "Renardo Green",
+          "pos": "LCB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Deommodore Lenoir",
+          "pos": "RCB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Upton Stout",
+          "pos": "NB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Darrell Luter Jr.",
+          "pos": "LCB",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Jakob Robinson",
+          "pos": "RCB",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Chase Lucas",
+          "pos": "NB",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "S": [
+        {
+          "name": "Ji'Ayir Brown",
+          "pos": "SS",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Malik Mustapha",
+          "pos": "FS",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Marques Sigle",
+          "pos": "SS",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Siran Neal",
+          "pos": "FS",
+          "depth": 2,
+          "expiring": false
+        }
+      ]
+    }
+  },
+  "TB": {
+    "offense": {
+      "QB": [
+        {
+          "name": "Baker Mayfield",
+          "pos": "QB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Teddy Bridgewater",
+          "pos": "QB",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "RB": [
+        {
+          "name": "Bucky Irving",
+          "pos": "RB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Rachaad White",
+          "pos": "RB",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "WR": [
+        {
+          "name": "Mike Evans",
+          "pos": "WR",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Chris Godwin Jr.",
+          "pos": "WR",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "TE": [
+        {
+          "name": "Cade Otton",
+          "pos": "TE",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Payne Durham",
+          "pos": "TE",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "OL": [
+        {
+          "name": "Tristan Wirfs",
+          "pos": "LT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Mike Jordan",
+          "pos": "LG",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Graham Barton",
+          "pos": "C",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Dan Feeney",
+          "pos": "RG",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Luke Goedeke",
+          "pos": "RT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Benjamin Chukwuma",
+          "pos": "LT",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Elijah Klein",
+          "pos": "LG",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Ben Scott",
+          "pos": "C",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Luke Haggard",
+          "pos": "RG",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Charlie Heck",
+          "pos": "RT",
+          "depth": 2,
+          "expiring": true
+        }
+      ]
+    },
+    "defense": {
+      "EDGE": [
+        {
+          "name": "Elijah Roberts",
+          "pos": "LDE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Logan Hall",
+          "pos": "RDE",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Calijah Kancey",
+          "pos": "LDE",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Greg Gaines",
+          "pos": "RDE",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "DL": [
+        {
+          "name": "Vita Vea",
+          "pos": "NT",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Elijah Simmons",
+          "pos": "NT",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "LB": [
+        {
+          "name": "SirVocea Dennis",
+          "pos": "LILB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Lavonte David",
+          "pos": "RILB",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Deion Jones",
+          "pos": "LILB",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Anthony Walker Jr.",
+          "pos": "RILB",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "CB": [
+        {
+          "name": "Jamel Dean",
+          "pos": "LCB",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Benjamin Morrison",
+          "pos": "RCB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Jacob Parrish",
+          "pos": "NB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Josh Hayes",
+          "pos": "LCB",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Kindle Vildor",
+          "pos": "RCB",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Damarion Williams",
+          "pos": "NB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "S": [
+        {
+          "name": "Antoine Winfield Jr.",
+          "pos": "SS",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Tykee Smith",
+          "pos": "FS",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Christian Izien",
+          "pos": "SS",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Rashad Wisdom",
+          "pos": "FS",
+          "depth": 2,
+          "expiring": false
+        }
+      ]
+    }
+  },
+  "TEN": {
+    "offense": {
+      "QB": [
+        {
+          "name": "Cam Ward",
+          "pos": "QB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Brandon Allen",
+          "pos": "QB",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "RB": [
+        {
+          "name": "Tony Pollard",
+          "pos": "RB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Tyjae Spears",
+          "pos": "RB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "WR": [
+        {
+          "name": "Elic Ayomanor",
+          "pos": "WR",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Chimere Dike",
+          "pos": "WR",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "TE": [
+        {
+          "name": "Chig Okonkwo",
+          "pos": "TE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Gunnar Helm",
+          "pos": "TE",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "OL": [
+        {
+          "name": "Dan Moore Jr.",
+          "pos": "LT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Peter Skoronski",
+          "pos": "LG",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Lloyd Cushenberry III",
+          "pos": "C",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Kevin Zeitler",
+          "pos": "RG",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "JC Latham",
+          "pos": "RT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Olisaemeka Udoh",
+          "pos": "LT",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Drew Moss",
+          "pos": "LG",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Corey Levin",
+          "pos": "C",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Garrett Dellinger",
+          "pos": "RG",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Olisaemeka Udoh",
+          "pos": "RT",
+          "depth": 2,
+          "expiring": true
+        }
+      ]
+    },
+    "defense": {
+      "EDGE": [
+        {
+          "name": "Sebastian Joseph-Day",
+          "pos": "LDE",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Jeffery Simmons",
+          "pos": "RDE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "James Lynch",
+          "pos": "LDE",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "C.J. Ravenell",
+          "pos": "RDE",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "DL": [
+        {
+          "name": "T'Vondre Sweat",
+          "pos": "NT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Cam Horsley",
+          "pos": "NT",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "LB": [
+        {
+          "name": "Cody Barton",
+          "pos": "LILB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Cedric Gray",
+          "pos": "RILB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Dorian Mausi",
+          "pos": "LILB",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "James Williams Sr.",
+          "pos": "RILB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "CB": [
+        {
+          "name": "Darrell Baker Jr.",
+          "pos": "LCB",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Kaiir Elam",
+          "pos": "RCB",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Kemon Hall",
+          "pos": "NB",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Micah Robinson",
+          "pos": "LCB",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "L'Jarius Sneed",
+          "pos": "RCB",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Kevin Winston Jr.",
+          "pos": "NB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "S": [
+        {
+          "name": "Amani Hooker",
+          "pos": "SS",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Kendell Brooks",
+          "pos": "FS",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Erick Hallett",
+          "pos": "SS",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Sanoussi Kane",
+          "pos": "FS",
+          "depth": 2,
+          "expiring": false
+        }
+      ]
+    }
+  },
+  "WAS": {
+    "offense": {
+      "QB": [
+        {
+          "name": "Marcus Mariota",
+          "pos": "QB",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Josh Johnson",
+          "pos": "QB",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "RB": [
+        {
+          "name": "Chris Rodriguez Jr.",
+          "pos": "RB",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Jacory Croskey-Merritt",
+          "pos": "RB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "WR": [
+        {
+          "name": "Terry McLaurin",
+          "pos": "WR",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Deebo Samuel",
+          "pos": "WR",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "TE": [
+        {
+          "name": "Ben Sinnott",
+          "pos": "TE",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "John Bates",
+          "pos": "TE",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "OL": [
+        {
+          "name": "Laremy Tunsil",
+          "pos": "LT",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Chris Paul",
+          "pos": "LG",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Nick Allegretti",
+          "pos": "C",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Andrew Wylie",
+          "pos": "RG",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Josh Conerly Jr.",
+          "pos": "RT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Brandon Coleman",
+          "pos": "LT",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Brandon Coleman",
+          "pos": "LG",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Tyler Biadasz",
+          "pos": "C",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Nick Allegretti",
+          "pos": "RG",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Trent Scott",
+          "pos": "RT",
+          "depth": 2,
+          "expiring": false
+        }
+      ]
+    },
+    "defense": {
+      "EDGE": [
+        {
+          "name": "Jalyn Holmes",
+          "pos": "LDE",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Preston Smith",
+          "pos": "RDE",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "DJ Johnson",
+          "pos": "LDE",
+          "depth": 2,
+          "expiring": false
+        },
+        {
+          "name": "Drake Jackson",
+          "pos": "RDE",
+          "depth": 2,
+          "expiring": true
+        }
+      ],
+      "DL": [
+        {
+          "name": "Daron Payne",
+          "pos": "LDT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Javon Kinlaw",
+          "pos": "RDT",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Sheldon Day",
+          "pos": "LDT",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Jer'Zhan Newton",
+          "pos": "RDT",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "LB": [
+        {
+          "name": "Bobby Wagner",
+          "pos": "MLB",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Kain Medrano",
+          "pos": "MLB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "CB": [
+        {
+          "name": "Antonio Hamilton Sr.",
+          "pos": "LCB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Mike Sainristil",
+          "pos": "RCB",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Noah Igbinoghene",
+          "pos": "NB",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Jonathan Jones",
+          "pos": "LCB",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Marshon Lattimore",
+          "pos": "RCB",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Darius Rush",
+          "pos": "NB",
+          "depth": 2,
+          "expiring": false
+        }
+      ],
+      "S": [
+        {
+          "name": "Jeremy Reaves",
+          "pos": "SS",
+          "depth": 1,
+          "expiring": true
+        },
+        {
+          "name": "Will Harris",
+          "pos": "FS",
+          "depth": 1,
+          "expiring": false
+        },
+        {
+          "name": "Percy Butler",
+          "pos": "SS",
+          "depth": 2,
+          "expiring": true
+        },
+        {
+          "name": "Quan Martin",
+          "pos": "FS",
+          "depth": 2,
+          "expiring": false
+        }
+      ]
+    }
+  }
+}
