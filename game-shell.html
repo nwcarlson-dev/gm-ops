@@ -3392,8 +3392,8 @@
                             : needsDisplay;
                         const actionButtons = !isPast ? `
                             <div class="draft-pick-actions">
-                                <button class="draft-pick-action trade" onclick="event.stopPropagation(); openTradeModal(${d.overall})">Trade</button>
-                                <button class="draft-pick-action" onclick="event.stopPropagation(); simToPick(${d.overall})">Sim</button>
+                                <button class="draft-pick-action trade" onclick="event.stopPropagation(); openTradeModal(${d.overall})">Trade for</button>
+                                <button class="draft-pick-action" onclick="event.stopPropagation(); simToPick(${d.overall})">Sim to</button>
                             </div>
                         ` : '';
                         return `
