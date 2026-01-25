@@ -570,12 +570,49 @@ When a prospect on a team's board is ranked significantly higher than the curren
 
 If all conditions met, team may initiate a trade offer.
 
+### 2026 Team Scheme Assignments
+
+| Team | Offensive Scheme | Defensive Scheme |
+|------|------------------|------------------|
+| 49ers | Shanahan Wide Zone | 4-3 Wide-9 |
+| Bears | Johnson Erhardt-Perkins | 4-3 Under |
+| Bengals | 11 Personnel Spread | 3-4 Zone |
+| Bills | Spread Vertical | 4-3 Zone |
+| Broncos | Payton West Coast | 3-4 Multiple |
+| Browns | Zone Run Heavy | 4-3 Aggressive |
+| Buccaneers | Vertical Attack | 3-4 Pressure |
+| Cardinals | Spread RPO | 3-4 Hybrid |
+| Chargers | Harbaugh Power Run | 3-4 Versatile |
+| Chiefs | West Coast Spread | 3-4 Multiple Blitz |
+| Colts | RPO Heavy | 4-3 Cover 3 |
+| Commanders | Air Raid Concepts | 4-2-5 Nickel |
+| Cowboys | Coryell Vertical | 4-3 Single High |
+| Dolphins | TBD | TBD |
+| Eagles | RPO Heavy Spread | Fangio Two-High |
+| Falcons | Wide Zone | 3-4 Aggressive |
+| Giants | Spread Concepts | 3-4 Pressure |
+| Jaguars | West Coast Balanced | 3-4 Pressure |
+| Jets | Shanahan Wide Zone | Multiple Front |
+| Lions | Power Gap Scheme | 4-3 Attacking |
+| Packers | LaFleur Zone Concepts | 4-3 Swarming |
+| Panthers | West Coast Zone | 3-4 Base |
+| Patriots | West Coast Power | Hybrid Multiple |
+| Raiders | Vertical Spread | 4-3 Cover 1 |
+| Rams | McVay Outside Zone | 3-4 Light Box |
+| Ravens | Power RPO | Disguised 3-4 |
+| Saints | West Coast Timing | 4-3 Under |
+| Seahawks | Macdonald Hybrid | 3-4 Ravens Style |
+| Steelers | Play-Action Power | 3-4 Traditional |
+| Texans | Shanahan Concepts | 4-3 Attacking Front |
+| Titans | Play-Action Vertical | 3-4 Multiple |
+| Vikings | McVay Wide Zone | 3-4 Exotic Pressures |
+
 ### Data Files
 
 | File | Purpose |
 |------|---------|
 | `data/schemes/scheme_skill_weights.json` | Skill importance weights by offensive/defensive scheme |
-| `draft-setup.html` (TEAM_DATA) | Team scheme assignments (`offScheme`, `defScheme`) |
+| `data/teams/team_schemes.json` | Team scheme assignments |
 | `data/prospects/current/2026_prospects.json` | Prospect data with `developmentCertainty` field |
 
 ### Testing / Debug Mode

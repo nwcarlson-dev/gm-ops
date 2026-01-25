@@ -2881,6 +2881,82 @@
             let simRunning = false;
             let simAbortController = null;
 
+            // Generate draft boards for all teams
+            function generateTeamDraftBoards() {
+                const teams = Object.keys(TEAM_DATA);
+                
+                teams.forEach(teamName => {
+                    const teamData = TEAM_DATA[teamName];
+                    const abbr = teamData.abbr;
+                    const schemes = teamSchemes[teamName] || { offScheme: "TBD", defScheme: "TBD" };
+                    const needs = allTeamNeeds[abbr] || { primary: [], secondary: [] };
+                    const allNeeds = [...(needs.primary || []), ...(needs.secondary || [])];
+                    
+                    // Score each prospect for this team
+                    const scoredProspects = prospects.map(p => {
+                        const consensusRank = p.consensus_rank || 300;
+                        
+                        // 1. Positional value modifier
+                        const posValue = POSITION_VALUE[p.position] || 0;
+                        
+                        // 2. Need boost (primary needs get bigger boost)
+                        const needCategory = mapPositionToNeed(p.position);
+                        let needBoost = 0;
+                        if (needs.primary && needs.primary.includes(needCategory)) {
+                            needBoost = 8; // Primary need
+                        } else if (needs.secondary && needs.secondary.includes(needCategory)) {
+                            needBoost = 4; // Secondary need
+                        }
+                        
+                        // 3. Development certainty affects variance
+                        const devCert = p.developmentCertainty?.score ?? 0.5;
+                        const varianceMultiplier = 0.5 + (1 - devCert); // Sure fire = 0.5x, Project = 1.5x
+                        
+                        // 4. Base variance by consensus tier
+                        let baseVariance;
+                        if (consensusRank <= 5) baseVariance = 5;
+                        else if (consensusRank <= 15) baseVariance = 10;
+                        else if (consensusRank <= 50) baseVariance = 20;
+                        else baseVariance = 30;
+                        
+                        // 5. Random variance (seeded by team+prospect for consistency)
+                        const seed = (teamName + p.id).split('').reduce((a, c) => a + c.charCodeAt(0), 0);
+                        const pseudoRandom = Math.sin(seed) * 10000;
+                        const randomFactor = (pseudoRandom - Math.floor(pseudoRandom)) * 2 - 1; // -1 to 1
+                        const variance = Math.round(randomFactor * baseVariance * varianceMultiplier);
+                        
+                        // Final board position (lower = better)
+                        const boardRank = consensusRank - posValue - needBoost + variance;
+                        
+                        return {
+                            id: p.id,
+                            boardRank: boardRank,
+                            consensusRank: consensusRank
+                        };
+                    });
+                    
+                    // Sort by board rank and store
+                    scoredProspects.sort((a, b) => a.boardRank - b.boardRank);
+                    teamDraftBoards[teamName] = scoredProspects.map(p => p.id);
+                });
+                
+                console.log("Generated draft boards for", teams.length, "teams");
+            }
+            
+            // Get best available prospect for a team based on their board
+            function getTeamPick(teamName) {
+                const board = teamDraftBoards[teamName];
+                if (!board) return prospects.find(p => !p.drafted);
+                
+                for (const prospectId of board) {
+                    const prospect = prospects.find(p => p.id === prospectId && !p.drafted);
+                    if (prospect) return prospect;
+                }
+                
+                // Fallback: first available
+                return prospects.find(p => !p.drafted);
+            }
+
             function startSim() {
                 const targetInput =
                     document.getElementById("simTargetPick").value;
@@ -2929,32 +3005,8 @@
                         break;
                     }
 
-                    const teamNeeds = getTeamNeedsArray(pickData.team);
-                    const available = prospects.filter((p) => !p.drafted);
-
-                    let pick = null;
-                    for (const need of teamNeeds) {
-                        const posMap = {
-                            QB: ["QB"],
-                            RB: ["RB", "FB"],
-                            WR: ["WR"],
-                            TE: ["TE"],
-                            OT: ["OT", "OL"],
-                            IOL: ["OG", "C", "IOL", "OL"],
-                            OL: ["OT", "OG", "C", "IOL", "OL"],
-                            DL: ["IDL", "DL", "DT", "NT"],
-                            EDGE: ["EDGE", "DE", "OLB"],
-                            LB: ["LB", "ILB", "MLB"],
-                            CB: ["CB"],
-                            S: ["S", "FS", "SS"],
-                        };
-                        const positions = posMap[need] || [need];
-                        pick = available.find((p) =>
-                            positions.includes(p.position),
-                        );
-                        if (pick) break;
-                    }
-                    if (!pick) pick = available[0];
+                    // Use AI draft board to select pick
+                    const pick = getTeamPick(pickData.team);
 
                     if (pick) {
                         pick.drafted = true;
@@ -3400,20 +3452,26 @@
 
             async function loadData() {
                 try {
-                    const [prospectsRes, draftRes, needsRes] =
+                    const [prospectsRes, draftRes, needsRes, schemesRes, teamSchemesRes] =
                         await Promise.all([
                             fetch("data/prospects/current/2026_prospects.json"),
                             fetch("data/draft/2026_draft_order.json"),
                             fetch("data/teams/nflmdd_team_needs_2026.json"),
+                            fetch("data/schemes/scheme_skill_weights.json"),
+                            fetch("data/teams/team_schemes.json"),
                         ]);
 
                     const prospectsData = await prospectsRes.json();
                     const draftData = await draftRes.json();
                     const needsData = await needsRes.json();
+                    const schemesData = await schemesRes.json();
+                    const teamSchemesData = await teamSchemesRes.json();
 
                     prospects = prospectsData.prospects || [];
                     draftOrder = draftData.picks || [];
                     allTeamNeeds = needsData.teams || {};
+                    schemeWeights = schemesData;
+                    teamSchemes = teamSchemesData.teams || {};
 
                     // Load user team picks from draft order
                     userTeam.picks = draftOrder
@@ -3505,6 +3563,9 @@
                 renderPickList();
                 renderProspects();
                 setupDraftListScroll();
+                
+                // Generate AI draft boards for all teams
+                generateTeamDraftBoards();
             }
 
             loadData();
