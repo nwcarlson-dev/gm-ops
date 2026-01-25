@@ -764,11 +764,25 @@
                 color: var(--text-muted);
                 opacity: 0.3;
             }
-            .q-flag {
-                color: var(--nfl-red);
-                font-size: 9px;
-                font-weight: 700;
+            .status-flag {
+                font-size: 8px;
+                font-weight: 600;
+                vertical-align: super;
+                margin-left: 2px;
             }
+            .flag-exp { color: var(--warning); }
+            .flag-ret { color: var(--nfl-red); }
+            .flag-inj { color: var(--nfl-red); }
+            .depth-legend {
+                display: flex;
+                gap: 12px;
+                margin-top: 8px;
+                padding-top: 6px;
+                border-top: 1px solid var(--card-border);
+                font-size: 9px;
+                color: var(--text-muted);
+            }
+            .depth-legend span { display: flex; align-items: center; gap: 3px; }
 
             .my-picks-list {
                 display: flex;
@@ -2053,12 +2067,17 @@
                                 <div class="needs-row">
                                     <div class="depth-section">
                                         <div class="needs-header">Offense</div>
-                                        <div class="depth-grid" id="offenseDepth"></div>
+                                        <div id="offenseDepth"></div>
                                     </div>
                                     <div class="depth-section">
                                         <div class="needs-header">Defense</div>
-                                        <div class="depth-grid" id="defenseDepth"></div>
+                                        <div id="defenseDepth"></div>
                                     </div>
+                                </div>
+                                <div class="depth-legend">
+                                    <span><span class="status-flag flag-exp">EXP</span> Expiring contract</span>
+                                    <span><span class="status-flag flag-ret">RET</span> Potential retirement</span>
+                                    <span><span class="status-flag flag-inj">INJ</span> Long term injury</span>
                                 </div>
                             </div>
                         </div>
@@ -2928,41 +2947,56 @@
                     return;
                 }
                 
-                function renderSide(positions, elementId) {
+                const offenseOrder = ['QB', 'RB', 'WR', 'FB', 'TE', 'LT', 'LG', 'C', 'RG', 'RT'];
+                
+                function sortPositions(positions, order) {
+                    const sorted = [];
+                    const posMap = {};
+                    positions.forEach(p => {
+                        if (!posMap[p.pos]) posMap[p.pos] = [];
+                        posMap[p.pos].push(p);
+                    });
+                    order.forEach(pos => {
+                        if (posMap[pos]) {
+                            posMap[pos].forEach(p => sorted.push(p));
+                            delete posMap[pos];
+                        }
+                    });
+                    Object.values(posMap).forEach(arr => arr.forEach(p => sorted.push(p)));
+                    return sorted;
+                }
+                
+                function renderPlayer(p, isStarter) {
+                    if (!p) return '<span class="' + (isStarter ? 'depth-starter' : 'depth-backup') + ' empty">-</span>';
+                    
+                    const classes = [isStarter ? 'depth-starter' : 'depth-backup'];
+                    if (p.expiring) classes.push('expiring');
+                    
+                    let flags = '';
+                    if (p.expiring) flags += '<span class="status-flag flag-exp">EXP</span>';
+                    
+                    return '<span class="' + classes.join(' ') + '">' + p.name + flags + '</span>';
+                }
+                
+                function renderSide(positions, elementId, order) {
+                    const sorted = order ? sortPositions(positions, order) : positions;
+                    
                     let html = '<div class="depth-table">';
                     html += '<div class="depth-header-row"><span class="depth-pos"></span><span class="depth-col-header">STARTER</span><span class="depth-col-header">2ND</span></div>';
                     
-                    positions.forEach(row => {
-                        const s = row.starter;
-                        const b = row.backup;
-                        
+                    sorted.forEach(row => {
                         html += '<div class="depth-row">';
                         html += '<span class="depth-pos">' + row.pos + '</span>';
-                        
-                        if (s) {
-                            const sClasses = ['depth-starter'];
-                            if (s.expiring) sClasses.push('expiring');
-                            html += '<span class="' + sClasses.join(' ') + '">' + s.name + (s.expiring ? ' <span class="q-flag">Q</span>' : '') + '</span>';
-                        } else {
-                            html += '<span class="depth-starter empty">-</span>';
-                        }
-                        
-                        if (b) {
-                            const bClasses = ['depth-backup'];
-                            if (b.expiring) bClasses.push('expiring');
-                            html += '<span class="' + bClasses.join(' ') + '">' + b.name + (b.expiring ? ' <span class="q-flag">Q</span>' : '') + '</span>';
-                        } else {
-                            html += '<span class="depth-backup empty">-</span>';
-                        }
-                        
+                        html += renderPlayer(row.starter, true);
+                        html += renderPlayer(row.backup, false);
                         html += '</div>';
                     });
                     html += '</div>';
                     document.getElementById(elementId).innerHTML = html;
                 }
                 
-                renderSide(depthData.offense, 'offenseDepth');
-                renderSide(depthData.defense, 'defenseDepth');
+                renderSide(depthData.offense, 'offenseDepth', offenseOrder);
+                renderSide(depthData.defense, 'defenseDepth', null);
             }
 
             function getTeamNeeds(teamName) {
