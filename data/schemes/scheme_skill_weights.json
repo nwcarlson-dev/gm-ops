@@ -1,0 +1,147 @@
+{
+  "meta": {
+    "description": "Skill importance weights (0-100) by scheme. Higher = more important for scheme fit.",
+    "calculation": "Player Scheme Fit = Σ(Skill Rating × Weight) / Σ(Weights)",
+    "created": "2026-01-25",
+    "version": "1.0"
+  },
+  "offensive": {
+    "West Coast": {
+      "description": "Short, timing-based passing. YAC emphasis.",
+      "QB": { "shortAccuracy": 90, "releaseSpeed": 85, "decisionMaking": 80, "pocketPresence": 70, "deepAccuracy": 50 },
+      "WR": { "routeRunning": 90, "hands": 85, "yac": 85, "separation": 75, "speed": 60 },
+      "RB": { "passCatching": 80, "routeRunning": 70, "vision": 65, "acceleration": 60 },
+      "TE": { "routeRunning": 80, "hands": 85, "yac": 70, "runBlocking": 50 },
+      "OT": { "passProtection": 85, "footwork": 80, "handTechnique": 75, "runBlocking": 55 },
+      "IOL": { "passProtection": 80, "anchor": 75, "handTechnique": 70, "runBlocking": 55 }
+    },
+    "Air Raid": {
+      "description": "Spread formations, 4-5 WR sets, mesh concepts, tempo.",
+      "QB": { "releaseSpeed": 90, "shortAccuracy": 85, "decisionMaking": 80, "mobility": 60, "armStrength": 50 },
+      "WR": { "hands": 90, "separation": 85, "routeRunning": 80, "speed": 75 },
+      "RB": { "passCatching": 90, "routeRunning": 75, "blitzPickup": 70 },
+      "TE": { "hands": 85, "routeRunning": 80, "separation": 70 },
+      "OT": { "passProtection": 90, "footwork": 85, "athleticism": 70 },
+      "IOL": { "passProtection": 85, "anchor": 80, "athleticism": 65 }
+    },
+    "Shanahan Wide Zone": {
+      "description": "Wide zone running, heavy play-action, motion.",
+      "QB": { "playAction": 90, "throwOnRun": 85, "decisionMaking": 75, "mobility": 70, "deepAccuracy": 65 },
+      "WR": { "runBlocking": 80, "yac": 85, "routeRunning": 70, "speed": 65 },
+      "RB": { "vision": 95, "agility": 90, "cutbackAbility": 85, "acceleration": 80, "patience": 75 },
+      "TE": { "runBlocking": 85, "yac": 75, "routeRunning": 70, "athleticism": 70 },
+      "OT": { "athleticism": 90, "zoneBlocking": 90, "footwork": 85, "reachBlocking": 80 },
+      "IOL": { "athleticism": 85, "zoneBlocking": 90, "mobility": 80, "comboBlocking": 75 }
+    },
+    "Power Gap": {
+      "description": "Downhill running, pulling guards, physical identity.",
+      "QB": { "handoff": 70, "playAction": 75, "pocketPresence": 80, "armStrength": 65 },
+      "WR": { "runBlocking": 85, "contested": 75, "physicality": 70 },
+      "RB": { "contactBalance": 95, "tackleBreaking": 90, "power": 85, "vision": 75, "acceleration": 70 },
+      "TE": { "runBlocking": 95, "inlineBlocking": 90, "physicality": 80 },
+      "OT": { "runBlocking": 90, "driveBlocking": 90, "anchor": 85, "physicality": 80 },
+      "IOL": { "pullAbility": 95, "runBlocking": 90, "driveBlocking": 85, "power": 85 }
+    },
+    "Spread Option RPO": {
+      "description": "Zone read, RPOs, mobile QB, numbers game.",
+      "QB": { "mobility": 95, "decisionMaking": 90, "throwOnRun": 85, "acceleration": 80, "readOption": 85 },
+      "WR": { "separation": 85, "routeRunning": 75, "speed": 80, "blockingWillingness": 65 },
+      "RB": { "vision": 85, "acceleration": 85, "agility": 80, "insideZone": 75 },
+      "TE": { "athleticism": 80, "routeRunning": 70, "runBlocking": 65 },
+      "OT": { "athleticism": 85, "zoneBlocking": 80, "passProtection": 70 },
+      "IOL": { "athleticism": 80, "zoneBlocking": 80, "mobility": 75 }
+    },
+    "Erhardt Perkins": {
+      "description": "Concept-based, multiple formations, option routes.",
+      "QB": { "decisionMaking": 95, "pocketPresence": 90, "presnap": 85, "accuracy": 80 },
+      "WR": { "routeRunning": 85, "decisionMaking": 80, "optionRoutes": 85, "footballIQ": 80 },
+      "RB": { "blitzPickup": 85, "passCatching": 75, "vision": 70 },
+      "TE": { "routeRunning": 80, "decisionMaking": 75, "versatility": 80 },
+      "OT": { "passProtection": 85, "technique": 80, "footballIQ": 75 },
+      "IOL": { "passProtection": 80, "communication": 85, "versatility": 75 }
+    },
+    "Vertical Deep Shot": {
+      "description": "Take the top off, big plays, strong arm.",
+      "QB": { "armStrength": 95, "deepAccuracy": 95, "pocketPresence": 80, "decisionMaking": 70 },
+      "WR": { "speed": 95, "deepRoutes": 90, "tracking": 85, "contested": 80 },
+      "RB": { "blitzPickup": 80, "passCatching": 60 },
+      "TE": { "speed": 80, "deepRoutes": 75, "contested": 70 },
+      "OT": { "passProtection": 95, "anchor": 90, "length": 80 },
+      "IOL": { "passProtection": 90, "anchor": 85 }
+    }
+  },
+  "defensive": {
+    "4-3 Under": {
+      "description": "Strong side overload, good vs run.",
+      "EDGE": { "runDefense": 85, "setEdge": 90, "passRush": 75, "power": 80 },
+      "IDL": { "anchor": 90, "passRush": 80, "gapControl": 85, "penetration": 70 },
+      "LB": { "runDefense": 90, "tackling": 85, "instincts": 80, "coverage": 60 },
+      "CB": { "tacklingWillingness": 80, "manCoverage": 75, "zoneCoverage": 70 },
+      "S": { "runSupport": 85, "tackling": 80, "zoneCoverage": 75, "range": 70 }
+    },
+    "3-4 Base": {
+      "description": "Two-gap DL, versatile OLBs, disguise.",
+      "EDGE": { "coverage": 80, "passRush": 85, "versatility": 85, "athleticism": 80 },
+      "IDL": { "anchor": 95, "doubleTeamOccupy": 90, "twoGap": 90, "size": 85 },
+      "LB": { "coverage": 85, "instincts": 85, "tackling": 80, "blitzing": 75 },
+      "CB": { "zoneCoverage": 80, "manCoverage": 75, "ballSkills": 70 },
+      "S": { "coverage": 85, "range": 80, "instincts": 75 }
+    },
+    "Tampa 2": {
+      "description": "Two-deep safeties, MLB drops deep, bend don't break.",
+      "EDGE": { "passRush": 90, "getOff": 85, "speed": 80 },
+      "IDL": { "passRush": 85, "penetration": 85, "quickness": 80 },
+      "LB": { "zoneCoverage": 95, "speed": 90, "range": 90, "dropback": 85, "instincts": 80 },
+      "CB": { "zoneCoverage": 85, "tacklingWillingness": 80, "discipline": 80 },
+      "S": { "range": 95, "zoneCoverage": 90, "ballSkills": 80, "tackling": 70 }
+    },
+    "Cover 3 Seattle": {
+      "description": "Single high safety, press corners, physical.",
+      "EDGE": { "passRush": 85, "power": 80, "setEdge": 75 },
+      "IDL": { "penetration": 85, "passRush": 80, "quickness": 75 },
+      "LB": { "tackling": 90, "runDefense": 85, "physicality": 80, "coverage": 65 },
+      "CB": { "press": 95, "physicality": 90, "manCoverage": 85, "length": 80 },
+      "S": { "range": 95, "ballHawk": 90, "coverage": 85, "playmaker": 80 }
+    },
+    "Fangio Multiple": {
+      "description": "Multiple fronts, heavy disguise, quarters-based.",
+      "EDGE": { "versatility": 90, "passRush": 80, "coverage": 70, "football IQ": 85 },
+      "IDL": { "versatility": 85, "gapControl": 80, "passRush": 75 },
+      "LB": { "zoneCoverage": 90, "instincts": 90, "versatility": 85, "footballIQ": 85 },
+      "CB": { "zoneCoverage": 85, "manCoverage": 80, "ballSkills": 80 },
+      "S": { "coverage": 90, "instincts": 90, "versatility": 85, "communication": 80 }
+    },
+    "Aggressive Man Blitz": {
+      "description": "Press man, heavy blitzing, take risks.",
+      "EDGE": { "passRush": 95, "getOff": 90, "speed": 85, "finishMoves": 85 },
+      "IDL": { "passRush": 90, "penetration": 90, "quickness": 85 },
+      "LB": { "blitzing": 95, "passRush": 85, "speed": 80, "manCoverage": 70 },
+      "CB": { "manCoverage": 95, "press": 95, "speed": 85, "recovery": 80 },
+      "S": { "manCoverage": 85, "blitzing": 80, "tackling": 85, "speed": 80 }
+    }
+  },
+  "schemeAliases": {
+    "West Coast Timing": "West Coast",
+    "West Coast Spread": "West Coast",
+    "West Coast Zone": "West Coast",
+    "West Coast Power": "West Coast",
+    "West Coast Balanced": "West Coast",
+    "Payton West Coast": "West Coast",
+    "Shanahan Concepts": "Shanahan Wide Zone",
+    "Shanahan Outside Zone": "Shanahan Wide Zone",
+    "Air Raid Concepts": "Air Raid",
+    "Power/Gap Scheme": "Power Gap",
+    "Spread Option / RPO": "Spread Option RPO",
+    "Erhardt-Perkins": "Erhardt Perkins",
+    "Vertical/Deep Shot": "Vertical Deep Shot",
+    "4-3 Wide-9": "4-3 Under",
+    "4-3 Attacking Front": "4-3 Under",
+    "3-4 Multiple": "3-4 Base",
+    "3-4 Multiple Blitz": "Aggressive Man Blitz",
+    "3-4 Pressure": "Aggressive Man Blitz",
+    "Cover 3 / Seattle": "Cover 3 Seattle",
+    "Multiple Front": "Fangio Multiple",
+    "Hybrid Multiple": "Fangio Multiple",
+    "4-2-5 Nickel": "Fangio Multiple"
+  }
+}

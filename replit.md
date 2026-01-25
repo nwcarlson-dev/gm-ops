@@ -19,6 +19,7 @@ GM Ops is a comprehensive NFL franchise simulation game aiming to be "the best f
   - `data/prospects/current/2026_prospects.json` - 338 prospects with full schema
   - `data/draft/2026_draft_order.json` - 257 picks with trade values (NFLMDD source)
   - `data/teams/nflmdd_team_needs_2026.json` - Team needs by position
+  - `data/schemes/scheme_skill_weights.json` - Skill importance weights by scheme (offense + defense)
   - `data/prospects/SCHEMA.md` - Documentation for prospect data structure
   - `data/raw/nflverse/` - Raw data from NFLverse
 
@@ -61,8 +62,11 @@ Python HTTP server on port 5000 (static site).
 - **Jan 24**: Trade Center - modal to propose trades with value-based fairness check
 - **Jan 24**: Position-to-need mapping for accurate needs tracking (OG->IOL, DE->EDGE, etc.)
 - **Jan 24**: Sim controls with speed settings (Instant/Fast/Normal/Slow), target pick input, and stop button
+- **Jan 25**: Created scheme skill weights JSON (`data/schemes/scheme_skill_weights.json`) with 7 offensive and 6 defensive schemes
 
 ## Future Work
+- **AI Draft Logic**: Team-specific draft boards with scheme fit, need boost, and variance (design documented)
+- **Trade Triggers**: AI trade-up logic when high-value prospect falls (design documented)
 - **Trade System**: Trade ticker, incoming calls, CPU-to-CPU trades, trade value chart
 - **Full Styling Pass**: Refactor draft-setup body content to use brand tokens
 - **Draft Results Page**: Grades, recap, export functionality
