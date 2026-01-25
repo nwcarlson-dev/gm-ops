@@ -10,7 +10,7 @@ GM Ops is a comprehensive NFL franchise simulation game aiming to be "the best f
 - `index.html` - Main menu with game mode selection
 - `draft-setup.html` - Draft configuration (team selection, settings)
 - `draft-room.html` - Legacy draft room (simpler UI)
-- `game-shell.html` - **Primary draft UI** with 3-column layout, JSON data loading
+- `game-shell.html` - **Primary draft UI** with 2-column layout (Draft Board | Team Info + Prospects), JSON data loading
 - `shared/styles.css` - Shared brand-compliant styles
 - `brand-guidelines.html` - Brand/style guidelines
 - `DESIGN.md` - Game design documentation
@@ -65,6 +65,10 @@ Python HTTP server on port 5000 (static site).
 - **Jan 25**: Created scheme skill weights JSON (`data/schemes/scheme_skill_weights.json`) with 7 offensive and 6 defensive schemes
 - **Jan 25**: Added `developmentCertainty` field to all 338 prospects (Sure Fire, High Floor, Standard, Developmental, Project)
 - **Jan 25**: Documented full AI Draft Logic System in DESIGN.md (board generation, variance tiers, scheme fit, trade triggers)
+- **Jan 25**: Restructured to 2-column layout: Draft Board (left) | Team Info + Prospects (right)
+- **Jan 25**: Added panel titles to Draft Board and Team Info matching Available Prospects styling
+- **Jan 25**: Removed "Load More" button - all 338 prospects load initially with scrollable list
+- **Jan 25**: Fixed prospect visibility bug (removed overflow:hidden from prospect-card)
 
 ## Future Work
 - **AI Draft Logic Implementation**: Implement the documented draft board generation and pick selection in game-shell.html
