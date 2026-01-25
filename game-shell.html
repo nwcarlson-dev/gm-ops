@@ -714,75 +714,91 @@
 
             .depth-section {
                 flex: 1;
-            }
-            .depth-table {
                 display: flex;
                 flex-direction: column;
-                gap: 0;
+            }
+            .depth-table {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
             }
             .depth-header-row {
                 display: grid;
-                grid-template-columns: 36px 1fr 1fr;
-                gap: 8px;
-                padding: 2px 0;
-                border-bottom: 1px solid var(--card-border);
-                margin-bottom: 2px;
+                grid-template-columns: 32px 1fr 1fr;
+                gap: 6px;
+                padding: 4px 8px;
+                background: rgba(0, 0, 0, 0.2);
+                border-radius: 4px 4px 0 0;
             }
             .depth-col-header {
                 font-family: "Barlow Condensed", sans-serif;
                 font-size: 9px;
-                font-weight: 700;
+                font-weight: 600;
                 color: var(--text-muted);
                 text-transform: uppercase;
+                letter-spacing: 0.05em;
             }
             .depth-row {
                 display: grid;
-                grid-template-columns: 36px 1fr 1fr;
-                gap: 8px;
-                padding: 1px 0;
+                grid-template-columns: 32px 1fr 1fr;
+                gap: 6px;
+                padding: 3px 8px;
+                border-bottom: 1px solid rgba(255,255,255,0.03);
+            }
+            .depth-row:last-child {
+                border-bottom: none;
+            }
+            .depth-row:nth-child(even) {
+                background: rgba(0, 0, 0, 0.1);
             }
             .depth-pos {
                 font-family: "Barlow Condensed", sans-serif;
                 font-size: 10px;
-                font-weight: 700;
-                color: var(--text-muted);
+                font-weight: 600;
+                color: var(--silver);
                 text-transform: uppercase;
             }
             .depth-starter {
                 font-size: 11px;
-                color: #4a90d9;
+                color: #5a9fd4;
                 font-weight: 500;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
             .depth-backup {
                 font-size: 11px;
                 color: var(--text-muted);
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
             }
             .depth-starter.expiring, .depth-backup.expiring {
-                opacity: 0.65;
+                opacity: 0.7;
             }
             .depth-starter.empty, .depth-backup.empty {
                 color: var(--text-muted);
-                opacity: 0.3;
+                opacity: 0.25;
             }
             .status-flag {
-                font-size: 8px;
-                font-weight: 600;
+                font-size: 7px;
+                font-weight: 700;
                 vertical-align: super;
                 margin-left: 2px;
+                opacity: 0.9;
             }
             .flag-exp { color: var(--warning); }
             .flag-ret { color: var(--nfl-red); }
             .flag-inj { color: var(--nfl-red); }
             .depth-legend {
                 display: flex;
-                gap: 12px;
-                margin-top: 8px;
-                padding-top: 6px;
-                border-top: 1px solid var(--card-border);
-                font-size: 9px;
+                gap: 10px;
+                padding: 6px 0 0;
+                font-size: 8px;
                 color: var(--text-muted);
+                justify-content: center;
             }
-            .depth-legend span { display: flex; align-items: center; gap: 3px; }
+            .depth-legend span { display: flex; align-items: center; gap: 2px; }
 
             .my-picks-list {
                 display: flex;
@@ -2064,20 +2080,20 @@
                             </div>
 
                             <div id="depthTab" class="tab-content">
-                                <div class="needs-row">
+                                <div class="needs-row" style="align-items: stretch;">
                                     <div class="depth-section">
-                                        <div class="needs-header">Offense</div>
-                                        <div id="offenseDepth"></div>
+                                        <div class="needs-header" style="margin-bottom: 4px;">Offense</div>
+                                        <div id="offenseDepth" style="background: rgba(0,0,0,0.15); border-radius: 4px; flex: 1;"></div>
                                     </div>
                                     <div class="depth-section">
-                                        <div class="needs-header">Defense</div>
-                                        <div id="defenseDepth"></div>
+                                        <div class="needs-header" style="margin-bottom: 4px;">Defense</div>
+                                        <div id="defenseDepth" style="background: rgba(0,0,0,0.15); border-radius: 4px; flex: 1;"></div>
                                     </div>
                                 </div>
                                 <div class="depth-legend">
-                                    <span><span class="status-flag flag-exp">EXP</span> Expiring contract</span>
-                                    <span><span class="status-flag flag-ret">RET</span> Potential retirement</span>
-                                    <span><span class="status-flag flag-inj">INJ</span> Long term injury</span>
+                                    <span><span class="status-flag flag-exp">EXP</span> Expiring</span>
+                                    <span><span class="status-flag flag-ret">RET</span> Retirement</span>
+                                    <span><span class="status-flag flag-inj">INJ</span> Injury</span>
                                 </div>
                             </div>
                         </div>
