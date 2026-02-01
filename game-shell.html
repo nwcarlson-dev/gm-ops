@@ -2500,8 +2500,13 @@
                 Wisconsin: { abbr: "WIS", color: "#C5050C", color2: "#FFFFFF" },
             };
 
-            const userTeam = {
-                name: "Bears",
+            // Load settings from localStorage
+            const draftSettings = JSON.parse(localStorage.getItem('gmops_draft_settings') || '{}');
+            const selectedTeamNames = draftSettings.selectedTeams || ["Bears"];
+            const mainTeamName = selectedTeamNames[0];
+
+            let userTeam = {
+                name: mainTeamName,
                 abbr: "CHI",
                 record: "11-6",
                 division: "Divisional Round",
@@ -2582,6 +2587,14 @@
                     defenseCoord: "Dennis Allen (DC)",
                 },
             };
+
+            // Update userTeam details from TEAM_DATA if available
+            if (TEAM_DATA[userTeam.name]) {
+                const td = TEAM_DATA[userTeam.name];
+                userTeam.abbr = td.abbr || userTeam.abbr;
+                userTeam.record = td.record || userTeam.record;
+                userTeam.division = td.division || userTeam.division;
+            }
 
             function getTeamLogo(teamName, size = 28) {
                 const team = TEAM_DATA[teamName];
