@@ -2511,7 +2511,30 @@
                 record: "11-6",
                 division: "Divisional Round",
                 picks: [],
-                offNeeds: [
+                offNeeds: [],
+                defNeeds: [],
+                scheme: {
+                    offense: "Shanahan Wide Zone",
+                    offenseCoord: "Ben Johnson (HC)",
+                    defense: "4-3 Under",
+                    defenseCoord: "Dennis Allen (DC)",
+                },
+            };
+
+            // Set default needs for non-Bears teams
+            const defaultNeeds = {
+                off: [
+                    { pos: "OT", archetype: "Pass Protector", priority: "high", skills: ["Pass Protection", "Footwork"], note: "Need blindside protection." },
+                    { pos: "WR", archetype: "Deep Threat", priority: "medium", skills: ["Speed", "Ball Skills"], note: "Vertical threat needed." }
+                ],
+                def: [
+                    { pos: "EDGE", archetype: "Speed Rusher", priority: "high", skills: ["Pass Rush", "Speed"], note: "Pass rush is a priority." },
+                    { pos: "CB", archetype: "Man Cover", priority: "medium", skills: ["Man Coverage", "Press"], note: "Secondary help needed." }
+                ]
+            };
+
+            const bearsNeeds = {
+                off: [
                     {
                         pos: "OT",
                         archetype: "Pass Protector",
@@ -2535,16 +2558,12 @@
                         note: "Depth needed for Shanahan-style rushing attack.",
                     },
                 ],
-                defNeeds: [
+                def: [
                     {
                         pos: "EDGE",
                         archetype: "Speed Rusher",
                         priority: "high",
-                        skills: [
-                            "Pass Rush Moves",
-                            "Bend/Flexibility",
-                            "Speed to Power",
-                        ],
+                        skills: ["Pass Rush Moves", "Bend/Flexibility", "Speed to Power"],
                         traits: ["Arm Length"],
                         note: "Need consistent pass rush opposite Montez Sweat. 29th in pressure rate.",
                     },
@@ -2552,11 +2571,7 @@
                         pos: "DL",
                         archetype: "Run Stuffer",
                         priority: "high",
-                        skills: [
-                            "Run Stuffing",
-                            "Anchor",
-                            "Double Team Resistance",
-                        ],
+                        skills: ["Run Stuffing", "Anchor", "Double Team Resistance"],
                         traits: ["Weight", "Strength"],
                         note: "Allowed most yards before contact in NFL. Interior run defense a major weakness.",
                     },
@@ -2571,24 +2586,22 @@
                         pos: "CB",
                         archetype: "Outside Corner",
                         priority: "medium",
-                        skills: [
-                            "Press Technique",
-                            "Man Coverage",
-                            "Ball Skills",
-                        ],
+                        skills: ["Press Technique", "Man Coverage", "Ball Skills"],
                         traits: ["Height", "Arm Length"],
                         note: "Wright and CJGJ pending FAs. Need upgrade on the outside.",
                     },
-                ],
-                scheme: {
-                    offense: "Shanahan Wide Zone",
-                    offenseCoord: "Ben Johnson (HC)",
-                    defense: "4-3 Under",
-                    defenseCoord: "Dennis Allen (DC)",
-                },
+                ]
             };
 
-            // Update userTeam details from TEAM_DATA if available
+            // Update userTeam details from TEAM_DATA and apply needs
+            if (userTeam.name === "Bears") {
+                userTeam.offNeeds = bearsNeeds.off;
+                userTeam.defNeeds = bearsNeeds.def;
+            } else {
+                userTeam.offNeeds = defaultNeeds.off;
+                userTeam.defNeeds = defaultNeeds.def;
+            }
+
             if (TEAM_DATA[userTeam.name]) {
                 const td = TEAM_DATA[userTeam.name];
                 userTeam.abbr = td.abbr || userTeam.abbr;
@@ -3851,10 +3864,19 @@
             }
 
             function init() {
+                const teamData = TEAM_DATA[userTeam.name];
+                
                 document.getElementById("headerTeamLogo").innerHTML =
                     getTeamLogo(userTeam.name, 36);
-                document.getElementById("headerTeamName").textContent =
-                    "Chicago " + userTeam.name;
+                
+                const headerName = document.getElementById("headerTeamName");
+                if (teamData && teamData.name) {
+                    headerName.textContent = teamData.name;
+                } else if (userTeam.name === "Bears") {
+                    headerName.textContent = "Chicago Bears";
+                } else {
+                    headerName.textContent = userTeam.name;
+                }
 
                 document
                     .querySelectorAll(".pos-filter")
