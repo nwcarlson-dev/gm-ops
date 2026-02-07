@@ -735,8 +735,13 @@
 
         async function loadData() {
             try {
-                const res = await fetch('data/draft/simulated_draft_results.json');
-                draftData = await res.json();
+                const liveData = localStorage.getItem('gmops_live_draft_results');
+                if (liveData) {
+                    draftData = JSON.parse(liveData);
+                } else {
+                    const res = await fetch('data/draft/simulated_draft_results.json');
+                    draftData = await res.json();
+                }
                 document.getElementById('loadingState').style.display = 'none';
                 document.getElementById('resultsContent').style.display = 'block';
                 renderMyTeam();
@@ -744,7 +749,7 @@
                 renderAllTeams();
                 renderTrades();
             } catch (e) {
-                document.getElementById('loadingState').textContent = 'Error loading draft results. Run a draft simulation first.';
+                document.getElementById('loadingState').textContent = 'Error loading draft results. Complete a draft first, then return here to see your grades.';
             }
         }
 

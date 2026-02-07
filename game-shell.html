@@ -2615,6 +2615,7 @@
                                     <option value="3000" selected>Slow</option>
                                 </select>
                                 <button class="sim-btn sim-btn-primary" id="simToggleBtn" onclick="toggleSim()">Sim</button>
+                                <a href="draft-results.html" class="sim-btn" id="viewResultsBtn" style="display:none; background: #2d7d46; color: #fff; text-decoration: none; text-align: center;">Results</a>
                             </div>
                         </div>
                         <button class="ticker-toggle" id="tickerToggle" onclick="toggleTicker()">
@@ -3771,6 +3772,7 @@
                 renderPickList();
                 renderProspects();
                 renderNeeds();
+                checkDraftComplete();
             }
 
             let simRunning = false;
@@ -3906,7 +3908,7 @@
                     simRunning &&
                     !simPaused &&
                     currentPick < targetPick &&
-                    currentPick <= 257
+                    currentPick <= draftOrder.length
                 ) {
                     const pickData = draftOrder.find(
                         (d) => d.overall === currentPick,
@@ -3970,6 +3972,12 @@
                     renderPickList();
                     renderProspects();
                     renderNeeds();
+                    checkDraftComplete();
+
+                    if (currentPick > draftOrder.length) {
+                        stopSim();
+                        return;
+                    }
 
                     const pickEl = document.querySelector(
                         `.draft-pick[data-overall="${currentPick}"]`,
@@ -4163,6 +4171,23 @@
                 const partner = document.getElementById("tradePartner").value;
                 if (!partner) return;
 
+                const yourPickDetails = selectedYourPicks.map(o => draftOrder.find(d => d.overall === o)).filter(Boolean);
+                const partnerPickDetails = selectedPartnerPicks.map(o => draftOrder.find(d => d.overall === o)).filter(Boolean);
+
+                const giveVal = yourPickDetails.reduce((s, p) => s + (p.pickValue || 0), 0);
+                const recVal = partnerPickDetails.reduce((s, p) => s + (p.pickValue || 0), 0);
+
+                tradeLog.push({
+                    beforePick: currentPick,
+                    buyer: userTeam.name,
+                    seller: partner,
+                    buyerGives: yourPickDetails.map(p => ({ overall: p.overall, round: p.round, value: p.pickValue || 0 })),
+                    buyerReceives: partnerPickDetails.map(p => ({ overall: p.overall, round: p.round, value: p.pickValue || 0 })),
+                    giveValue: giveVal,
+                    receiveValue: recVal,
+                    motivation: null
+                });
+
                 selectedYourPicks.forEach((overall) => {
                     const pick = draftOrder.find((d) => d.overall === overall);
                     if (pick) {
@@ -4194,6 +4219,7 @@
             let pendingTradeOffer = null;
             let simWasRunning = false;
             let simTargetBeforePause = 258;
+            let tradeLog = [];
 
             function toggleTicker() {
                 tickerVisible = !tickerVisible;
@@ -4391,6 +4417,17 @@
                     if (p) { p.team = buyerTeam; p.via = sellerTeam; }
                 });
 
+                tradeLog.push({
+                    beforePick: currentPick,
+                    buyer: buyerTeam,
+                    seller: sellerTeam,
+                    buyerGives: tradePackage.give.map(p => ({ overall: p.overall, round: p.round, value: p.value || 0 })),
+                    buyerReceives: tradePackage.receive.map(p => ({ overall: p.overall, round: p.round, value: p.value || 0 })),
+                    giveValue: tradePackage.giveValue || 0,
+                    receiveValue: tradePackage.receiveValue || 0,
+                    motivation: null
+                });
+
                 const giveSummary = tradePackage.give.map(p => `#${p.overall}`).join(', ');
                 const recSummary = tradePackage.receive.map(p => `#${p.overall}`).join(', ');
 
@@ -4493,6 +4530,17 @@
             function acceptTradeOffer() {
                 if (!pendingTradeOffer) return;
                 const offer = pendingTradeOffer;
+
+                tradeLog.push({
+                    beforePick: currentPick,
+                    buyer: offer.buyerTeam,
+                    seller: userTeam.name,
+                    buyerGives: offer.package.give.map(p => ({ overall: p.overall, round: p.round, value: p.value || 0 })),
+                    buyerReceives: offer.package.receive.map(p => ({ overall: p.overall, round: p.round, value: p.value || 0 })),
+                    giveValue: offer.package.giveValue || 0,
+                    receiveValue: offer.package.receiveValue || 0,
+                    motivation: offer.motivation ? { needLevel: offer.motivation.needLevel, targetPlayer: offer.motivation.prospect?.name, targetPosition: offer.motivation.prospect?.position } : null
+                });
 
                 offer.package.give.forEach(pick => {
                     const p = draftOrder.find(d => d.overall === pick.overall);
@@ -4967,6 +5015,8 @@
                 renderNeeds();
             }
 
+            localStorage.removeItem('gmops_live_draft_results');
+
             function initDraftBoard() {
                 document
                     .querySelectorAll(".pos-filter")
@@ -4992,6 +5042,113 @@
                 setupDraftListScroll();
                 
                 generateTeamDraftBoards();
+            }
+
+            function buildDraftResults() {
+                const allTeamNeeds_backup = {};
+                Object.keys(TEAM_DATA).forEach(teamName => {
+                    const abbr = TEAM_DATA[teamName].abbr;
+                    const needs = allTeamNeeds[abbr];
+                    if (needs) {
+                        allTeamNeeds_backup[teamName] = {
+                            primary: [...(needs.primary || [])],
+                            secondary: [...(needs.secondary || [])]
+                        };
+                    }
+                });
+
+                const picks = draftOrder.filter(d => d.drafted).map(d => {
+                    const prospect = prospects.find(p => p.name === d.drafted.name && p.position === d.drafted.position);
+                    const teamName = d.team;
+                    const abbr = TEAM_DATA[teamName]?.abbr || teamName;
+                    const boardRank = teamDraftBoards[teamName] ?
+                        teamDraftBoards[teamName].indexOf(prospect?.id) + 1 || d.overall : d.overall;
+
+                    const teamNeeds = allTeamNeeds_backup[teamName] || { primary: [], secondary: [] };
+                    const needCategory = mapPositionToNeed(d.drafted.position);
+                    let needLevel = 'none';
+                    if (teamNeeds.primary.includes(needCategory)) needLevel = 'primary';
+                    else if (teamNeeds.secondary.includes(needCategory)) needLevel = 'secondary';
+
+                    const consensusRank = prospect?.consensus_rank || 300;
+                    const valueOverConsensus = d.overall - consensusRank;
+
+                    const tradeForPick = tradeLog.find(t =>
+                        t.buyerReceives.some(p => p.overall === d.overall) &&
+                        t.buyer === teamName
+                    );
+
+                    const schemes = teamSchemes[teamName] || {};
+
+                    return {
+                        overall: d.overall,
+                        round: d.round,
+                        pickInRound: d.pick || ((d.overall - 1) % 32) + 1,
+                        team: teamName,
+                        teamAbbr: abbr,
+                        via: d.via || null,
+                        pickValue: d.pickValue || 0,
+                        player: {
+                            id: prospect?.id || '',
+                            name: d.drafted.name,
+                            position: d.drafted.position,
+                            school: prospect?.school || '',
+                            consensusRank: consensusRank,
+                            rangeLow: prospect?.range_low || consensusRank,
+                            rangeHigh: prospect?.range_high || consensusRank,
+                            pffGrade: prospect?.pff_grade || 0,
+                            archetype: prospect?.archetype || '',
+                            comparison: prospect?.comparison || '',
+                            developmentCertainty: prospect?.developmentCertainty || { score: 0.5, label: 'Standard' }
+                        },
+                        analysis: {
+                            boardRank: boardRank,
+                            needLevel: needLevel,
+                            needCategory: needCategory,
+                            valueOverConsensus: valueOverConsensus,
+                            isReach: valueOverConsensus > 10,
+                            isSteal: valueOverConsensus < -10,
+                            tradedUp: !!tradeForPick,
+                            tradedAway: false,
+                            tradeDetails: tradeForPick || null,
+                            offScheme: schemes.offScheme || 'TBD',
+                            defScheme: schemes.defScheme || 'TBD'
+                        },
+                        isUserTeam: teamName === userTeam.name
+                    };
+                });
+
+                return {
+                    meta: {
+                        generated: new Date().toISOString(),
+                        sessionSeed: draftSessionSeed,
+                        userTeam: userTeam.name,
+                        totalPicks: picks.length,
+                        totalTrades: tradeLog.length
+                    },
+                    picks: picks,
+                    trades: tradeLog,
+                    teamSummaries: {}
+                };
+            }
+
+            function checkDraftComplete() {
+                const totalDrafted = draftOrder.filter(d => d.drafted).length;
+                const totalPicks = draftOrder.length;
+                if (totalDrafted >= totalPicks && totalPicks > 0) {
+                    onDraftComplete();
+                }
+            }
+
+            function onDraftComplete() {
+                const results = buildDraftResults();
+                localStorage.setItem('gmops_live_draft_results', JSON.stringify(results));
+
+                document.getElementById('viewResultsBtn').style.display = '';
+                document.getElementById('simToggleBtn').style.display = 'none';
+
+                document.getElementById('draftStatus').textContent = 'Draft Complete!';
+                document.getElementById('currentPickBadge').textContent = 'Final';
             }
 
             initTeamPanel();
