@@ -131,6 +131,8 @@ See `data/prospects/SCHEMA.md` for full documentation. Key fields:
 - **Slow down** - don't jump ahead before topics are concluded
 - **Vet features** before implementing - present options first
 - Update DESIGN.md before coding
+- **MANDATORY: Review all existing documentation and data BEFORE making any changes** - never overwrite existing content without first understanding what's there and confirming it won't lose valuable context
+- **Do not touch sections the user didn't ask to change** - scope changes strictly to what was requested
 
 ## Dev Feedback Tool
 Standalone local tool for recording planning dialogue. Runs on Mac, independent of Replit.
