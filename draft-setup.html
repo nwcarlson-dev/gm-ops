@@ -1420,7 +1420,7 @@
       };
 
       localStorage.setItem('gmops_draft_settings', JSON.stringify(settings));
-      window.location.href = 'game-shell.html';
+      window.location.href = 'game-shell.html?team=' + encodeURIComponent(teamName) + '&v=' + Date.now();
     }
 
     window.onload = renderTeams;

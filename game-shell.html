@@ -2492,6 +2492,9 @@
                 Wisconsin: { abbr: "WIS", color: "#C5050C", color2: "#FFFFFF" },
             };
 
+            const urlParams = new URLSearchParams(window.location.search);
+            const urlTeam = urlParams.get('team');
+
             let draftSettings = {};
             try {
                 draftSettings = JSON.parse(localStorage.getItem('gmops_draft_settings') || '{}');
@@ -2499,9 +2502,9 @@
                 console.error("Failed to parse draft settings from localStorage:", e);
             }
             const selectedTeamNames = draftSettings.selectedTeams || ["Bears"];
-            const mainTeamName = selectedTeamNames[0];
+            const mainTeamName = urlTeam || selectedTeamNames[0];
             const setupTeamData = draftSettings.teamData || null;
-            console.log("Draft settings loaded - Team:", mainTeamName, "Setup data:", setupTeamData ? "present" : "missing");
+            console.log("Draft settings loaded - Team:", mainTeamName, "URL team:", urlTeam, "LS team:", selectedTeamNames[0], "Setup data:", setupTeamData ? "present" : "missing");
 
             const POSITION_NAME_TO_ABBR = {
                 "Quarterback": "QB", "Running Back": "RB", "Wide Receiver": "WR",
@@ -3495,19 +3498,31 @@
             }
 
             function renderPickList() {
+                if (!userTeam.picks.length && draftOrder.length) {
+                    userTeam.picks = draftOrder
+                        .filter((d) => d.team === userTeam.name)
+                        .map((d) => d.overall)
+                        .sort((a, b) => a - b);
+                }
+
                 const nextUserPick =
                     userTeam.picks.find((p) => p >= currentPick) ||
                     userTeam.picks[0];
-                const picksAway = nextUserPick - currentPick;
-                const onClock = isUserOnClock();
 
-                const nextPickData = draftOrder.find(
-                    (d) => d.overall === nextUserPick,
-                );
-                const nextRound = nextPickData ? nextPickData.round : 1;
-                const metaText = onClock
-                    ? "On the clock!"
-                    : `Next: R${nextRound} P${nextPickData?.pick || nextUserPick} \u2022 ${picksAway} picks away`;
+                const onClock = isUserOnClock();
+                let metaText = "";
+                if (!nextUserPick) {
+                    metaText = "No picks found";
+                } else if (onClock) {
+                    metaText = "On the clock!";
+                } else {
+                    const picksAway = nextUserPick - currentPick;
+                    const nextPickData = draftOrder.find(
+                        (d) => d.overall === nextUserPick,
+                    );
+                    const nextRound = nextPickData ? nextPickData.round : 1;
+                    metaText = `Next: R${nextRound} P${nextPickData?.pick || nextUserPick} \u2022 ${picksAway} picks away`;
+                }
                 document.getElementById("headerTeamMeta").textContent =
                     metaText;
 
@@ -3876,6 +3891,23 @@
                 } else if (summaryEl) {
                     const recordStr = userTeam.record ? ` (${userTeam.record})` : "";
                     summaryEl.textContent = `${teamData ? teamData.name : userTeam.name}${recordStr}`;
+                }
+
+                if (userTeam.offNeeds.length === 0 && userTeam.defNeeds.length === 0 && Object.keys(allTeamNeeds).length > 0) {
+                    const jsonNeeds = allTeamNeeds[userTeam.abbr];
+                    if (jsonNeeds) {
+                        const offPositions = ["QB", "RB", "WR", "TE", "OT", "IOL"];
+                        jsonNeeds.primary.forEach(pos => {
+                            const need = { pos, archetype: "", priority: "high", skills: [], note: "" };
+                            if (offPositions.includes(pos)) userTeam.offNeeds.push(need);
+                            else userTeam.defNeeds.push(need);
+                        });
+                        jsonNeeds.secondary.slice(0, 3).forEach(pos => {
+                            const need = { pos, archetype: "", priority: "medium", skills: [], note: "" };
+                            if (offPositions.includes(pos)) userTeam.offNeeds.push(need);
+                            else userTeam.defNeeds.push(need);
+                        });
+                    }
                 }
 
                 renderNeeds();
