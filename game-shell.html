@@ -2963,14 +2963,9 @@
                 });
             }
 
-            const BRIDGE_QBS = [
-                'Jacoby Brissett', 'Geno Smith', 'Jimmy Garoppolo', 'Andy Dalton',
-                'Tyrod Taylor', 'Case Keenum', 'Nick Foles', 'Ryan Fitzpatrick',
-                'Colt McCoy', 'Joe Flacco', 'Mason Rudolph', 'Davis Mills',
-                'Gardner Minshew', 'Taylor Heinicke', 'Brett Rypien', 'Tim Boyle',
-                'Blaine Gabbert', 'Brandon Allen', 'Aidan O\'Connell',
-                'Zach Wilson', 'Drew Lock', 'Kenny Pickett', 'Bryce Young',
-                'Brady Cook',
+            const RECENT_R1_QBS = [
+                'Shedeur Sanders', 'Cam Ward', 'Jaxson Dart',
+                'Riley Leonard', 'Quinn Ewers',
             ];
 
             const AGING_QB_THRESHOLD = 37;
@@ -3000,8 +2995,8 @@
                         const starter = qbEntry.starter || {};
                         const starterName = starter.name || '';
                         const isExpiring = starter.expiring === true;
-                        const isBridgeQB = BRIDGE_QBS.some(bqb =>
-                            starterName.toLowerCase().includes(bqb.toLowerCase())
+                        const isRecentR1QB = RECENT_R1_QBS.some(rqb =>
+                            starterName.toLowerCase().includes(rqb.toLowerCase())
                         );
                         const knownAge = KNOWN_QB_AGES[starterName];
                         const isAging = knownAge && knownAge >= AGING_QB_THRESHOLD;
@@ -3009,7 +3004,7 @@
                         const qbInPrimary = (needs.primary || []).includes('QB');
                         const qbInSecondary = (needs.secondary || []).includes('QB');
 
-                        if (qbInPrimary && !isExpiring && !isBridgeQB && !isAging) {
+                        if (qbInPrimary && isRecentR1QB && !isExpiring) {
                             needs.primary = needs.primary.filter(n => n !== 'QB');
                             if (!qbInSecondary) {
                                 needs.secondary = needs.secondary || [];
@@ -3017,12 +3012,40 @@
                             }
                             corrections.push({
                                 team: needs.name || abbr,
-                                action: 'QB demoted from primary to secondary',
-                                reason: `${starterName} is invested starter (non-expiring, not a bridge QB)`
+                                action: 'QB demoted from primary (rookie shield)',
+                                reason: `${starterName} was a recent 1st-round pick`
                             });
                         }
 
-                        if (!qbInPrimary && (isExpiring || isBridgeQB || isAging)) {
+                        if (qbInPrimary && isExpiring) {
+                            corrections.push({
+                                team: needs.name || abbr,
+                                action: 'QB confirmed as primary need',
+                                reason: `${starterName} is on an expiring contract`
+                            });
+                        }
+
+                        if (qbInPrimary && isAging && !isExpiring) {
+                            corrections.push({
+                                team: needs.name || abbr,
+                                action: 'QB confirmed as primary need',
+                                reason: `${starterName} is aging (${knownAge})`
+                            });
+                        }
+
+                        if (!qbInPrimary && isExpiring) {
+                            needs.primary.push('QB');
+                            if (qbInSecondary) {
+                                needs.secondary = needs.secondary.filter(n => n !== 'QB');
+                            }
+                            corrections.push({
+                                team: needs.name || abbr,
+                                action: 'QB promoted to primary need',
+                                reason: `${starterName} is on an expiring contract`
+                            });
+                        }
+
+                        if (!qbInPrimary && isAging && !isExpiring && !isRecentR1QB) {
                             if (!needs.primary.includes('QB')) {
                                 needs.primary.push('QB');
                             }
@@ -3032,7 +3055,7 @@
                             corrections.push({
                                 team: needs.name || abbr,
                                 action: 'QB promoted to primary need',
-                                reason: `${starterName} is ${isExpiring ? 'expiring' : isBridgeQB ? 'bridge QB' : 'aging ('+knownAge+')'}`
+                                reason: `${starterName} is aging (${knownAge})`
                             });
                         }
                     }
