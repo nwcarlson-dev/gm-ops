@@ -2265,9 +2265,9 @@
                                 <button class="trade-btn-header" onclick="openTradeModal()">Trade</button>
                                 <select id="simSpeed">
                                     <option value="0">Instant</option>
-                                    <option value="500" selected>Fast</option>
+                                    <option value="500">Fast</option>
                                     <option value="1500">Normal</option>
-                                    <option value="3000">Slow</option>
+                                    <option value="3000" selected>Slow</option>
                                 </select>
                                 <button class="sim-btn sim-btn-primary" id="simToggleBtn" onclick="toggleSim()">Sim</button>
                             </div>
@@ -2886,6 +2886,14 @@
                     userTeam.defNeeds = buildNeedsFromSetup(setupTeamData.defNeeds);
                 }
 
+                if (setupTeamData.summary) {
+                    if (userTeam.offNeeds.length > 0 && !userTeam.offNeeds[0].note) {
+                        userTeam.offNeeds[0].note = setupTeamData.summary;
+                    }
+                    if (userTeam.defNeeds.length > 0 && !userTeam.defNeeds[0].note) {
+                        userTeam.defNeeds[0].note = setupTeamData.summary;
+                    }
+                }
             }
 
             function getTeamLogo(teamName, size = 28) {
