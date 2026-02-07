@@ -16,7 +16,12 @@ GM Ops is an NFL franchise simulation game with the ambition to be the leading f
 - MANDATORY: When issues or unwanted results occur, fix the root cause — the logic or workflow that produced the problem — not the symptom. No one-off patches. Always treat the cause, not the symptom.
 
 ## System Architecture
-The project is structured around several HTML pages, each serving a specific game mode or utility, with `game-shell.html` being the primary draft UI. Data is loaded asynchronously from JSON files.
+The project is structured around several HTML pages with mode routing via query parameters. `index.html` is the main menu, `game-setup.html` handles team selection for both Draft and Offseason modes (via `?mode=draft` or `?mode=offseason`), and `game-shell.html` is the primary draft UI. Data is loaded asynchronously from JSON files.
+
+**Navigation Flow:**
+- `index.html` → `game-setup.html?mode=draft` → `game-shell.html` (Draft mode)
+- `index.html` → `game-setup.html?mode=offseason` → (Offseason phases) (Offseason mode)
+- Old `draft-setup.html` kept for backward compatibility but `game-setup.html` is the canonical file.
 
 **UI/UX Decisions:**
 - **Brand Guidelines:** Uses NFL Red (#D50A0A), NFL Blue (#013369), and Silver (#A5ACAF). Fonts include Teko (headlines), Barlow Condensed (UI), and Inter (body). The logo features a skewed block design with "GM" in red and "OPS" in blue/white border.
@@ -38,6 +43,10 @@ The project is structured around several HTML pages, each serving a specific gam
 - **Prospect Data:** Includes detailed bio, rankings, grades, combine metrics, skills (0-100), traits, archetype, projection, and scouting reports. `developmentCertainty` is a key field.
 - **Needs Intelligence (`validateTeamNeeds`):** Runs at game startup to correct algorithmically-generated team needs using depth chart data. QB rules use an inclusion-based approach: only QBs on the `RECENT_R1_QBS` list (recent 1st-round picks like Sanders, Ward, Dart, Leonard, Ewers) trigger the rookie shield to demote QB from primary. Expiring contracts and aging QBs (37+ via `KNOWN_QB_AGES`) promote QB to primary. All other QBs (journeymen, late-round picks, bridges) are left alone — no exclusion list needed. Also validates premium positions (EDGE, OT, CB, WR) — if 2+ non-expiring starters exist, demotes from primary.
 - **Future Draft Picks:** 2027 and 2028 picks initialized with real-world traded picks applied (sourced from Wikipedia 2027 NFL draft article and Draft Insiders Digest). `REAL_FUTURE_TRADES` array captures 28 known 2027 trades and 5 known 2028 trades. Trade values discounted by year (2027 ≈ 1 round lower, 2028 ≈ 2 rounds lower).
+- **Player Trade Values:** `scripts/build_player_trade_values.js` generates `data/teams/player_trade_values.json` with trade values for rostered players using the same point system as draft picks. Performance tiers: elite/starter/developing/bridge/backup. Age curves per position. Draft-round-aware contract modifiers (1st round: 1.55-1.70x, 2nd: 1.10-1.20x). "Developing" tier added for 2nd-round rookies.
+- **Cap Summary Data:** `scripts/build_cap_summary.js` generates `data/teams/cap_summary_2026.json` with cap space, dead money, and expiring contracts per team from `data/raw/nflverse/contracts.csv`.
+- **Offseason Phase System:** 7 configurable phases stored as `OFFSEASON_PHASES` array: Franchise Tags → Contract Decisions → Free Agency → Pre-Draft → NFL Draft → UDFA Signing → Roster Finalization. Phase timeline renders as a compact horizontal progress bar. Order is configurable (not hardcoded) to support future user setting to move FA after draft.
+- **Cap Data on Team Cards:** Both Draft and Offseason modes show cap space (green/red), expiring contracts count, and dead money as small badges on team selection cards. Data loaded from `cap_summary_2026.json` with team name-to-abbreviation mapping.
 
 ## External Dependencies
 - **NFLMDD:** Source for draft order with trade values.

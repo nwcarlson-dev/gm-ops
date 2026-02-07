@@ -1,0 +1,1161 @@
+{
+  "meta": {
+    "generated": "2026-02-07T23:28:38.617Z",
+    "season": 2026,
+    "salaryCap": 272.5
+  },
+  "teams": {
+    "ARI": {
+      "salaryCap": 272.5,
+      "totalCommitted": 229.1,
+      "deadMoney": 65.7,
+      "capSpace": 43.4,
+      "activeContracts": 55,
+      "expiringContracts": 9,
+      "topContracts": [
+        {
+          "player": "Kyler Murray",
+          "position": "QB",
+          "capHit": 46.1
+        },
+        {
+          "player": "Josh Sweat",
+          "position": "ED",
+          "capHit": 19.1
+        },
+        {
+          "player": "Trey McBride",
+          "position": "TE",
+          "capHit": 19
+        },
+        {
+          "player": "Budda Baker",
+          "position": "S",
+          "capHit": 18
+        },
+        {
+          "player": "Dalvin Tomlinson",
+          "position": "IDL",
+          "capHit": 14.5
+        }
+      ],
+      "rosterSize": 38
+    },
+    "ATL": {
+      "salaryCap": 272.5,
+      "totalCommitted": 234.6,
+      "deadMoney": 80.1,
+      "capSpace": 37.9,
+      "activeContracts": 45,
+      "expiringContracts": 9,
+      "topContracts": [
+        {
+          "player": "Kirk Cousins",
+          "position": "QB",
+          "capHit": 45
+        },
+        {
+          "player": "Jake Matthews",
+          "position": "LT",
+          "capHit": 22.5
+        },
+        {
+          "player": "Chris Lindstrom",
+          "position": "RG",
+          "capHit": 20.5
+        },
+        {
+          "player": "A.J. Terrell",
+          "position": "CB",
+          "capHit": 20.3
+        },
+        {
+          "player": "Jessie Bates III",
+          "position": "S",
+          "capHit": 16
+        }
+      ],
+      "rosterSize": 34
+    },
+    "BAL": {
+      "salaryCap": 272.5,
+      "totalCommitted": 242.7,
+      "deadMoney": 98,
+      "capSpace": 29.8,
+      "activeContracts": 42,
+      "expiringContracts": 14,
+      "topContracts": [
+        {
+          "player": "Lamar Jackson",
+          "position": "QB",
+          "capHit": 52
+        },
+        {
+          "player": "Kyle Hamilton",
+          "position": "S",
+          "capHit": 25.1
+        },
+        {
+          "player": "Nnamdi Madubuike",
+          "position": "IDL",
+          "capHit": 24.5
+        },
+        {
+          "player": "Ronnie Stanley",
+          "position": "LT",
+          "capHit": 20
+        },
+        {
+          "player": "Roquan Smith",
+          "position": "LB",
+          "capHit": 20
+        }
+      ],
+      "rosterSize": 34
+    },
+    "BUF": {
+      "salaryCap": 272.5,
+      "totalCommitted": 269.7,
+      "deadMoney": 114.1,
+      "capSpace": 2.8,
+      "activeContracts": 42,
+      "expiringContracts": 11,
+      "topContracts": [
+        {
+          "player": "Josh Allen",
+          "position": "QB",
+          "capHit": 55
+        },
+        {
+          "player": "Dion Dawkins",
+          "position": "LT",
+          "capHit": 20
+        },
+        {
+          "player": "Gregory Rousseau",
+          "position": "ED",
+          "capHit": 20
+        },
+        {
+          "player": "Spencer Brown",
+          "position": "RT",
+          "capHit": 18
+        },
+        {
+          "player": "Christian Benford",
+          "position": "CB",
+          "capHit": 17.3
+        }
+      ],
+      "rosterSize": 37
+    },
+    "CAR": {
+      "salaryCap": 272.5,
+      "totalCommitted": 239.1,
+      "deadMoney": 90.3,
+      "capSpace": 33.4,
+      "activeContracts": 51,
+      "expiringContracts": 14,
+      "topContracts": [
+        {
+          "player": "Jaycee Horn",
+          "position": "CB",
+          "capHit": 25
+        },
+        {
+          "player": "Derrick Brown",
+          "position": "IDL",
+          "capHit": 24
+        },
+        {
+          "player": "Taylor Moton",
+          "position": "RT",
+          "capHit": 22
+        },
+        {
+          "player": "Robert Hunt",
+          "position": "RG",
+          "capHit": 20
+        },
+        {
+          "player": "Trevon Moehrig",
+          "position": "S",
+          "capHit": 17
+        }
+      ],
+      "rosterSize": 33
+    },
+    "CHI": {
+      "salaryCap": 272.5,
+      "totalCommitted": 274.1,
+      "deadMoney": 103,
+      "capSpace": -1.6,
+      "activeContracts": 38,
+      "expiringContracts": 16,
+      "topContracts": [
+        {
+          "player": "D.J. Moore",
+          "position": "WR",
+          "capHit": 27.5
+        },
+        {
+          "player": "Montez Sweat",
+          "position": "ED",
+          "capHit": 24.5
+        },
+        {
+          "player": "Jaylon Johnson",
+          "position": "CB",
+          "capHit": 19
+        },
+        {
+          "player": "Tremaine Edmunds",
+          "position": "LB",
+          "capHit": 18
+        },
+        {
+          "player": "Joe Thuney",
+          "position": "LG",
+          "capHit": 17.5
+        }
+      ],
+      "rosterSize": 38
+    },
+    "CIN": {
+      "salaryCap": 272.5,
+      "totalCommitted": 242.2,
+      "deadMoney": 77.7,
+      "capSpace": 30.3,
+      "activeContracts": 58,
+      "expiringContracts": 10,
+      "topContracts": [
+        {
+          "player": "Joe Burrow",
+          "position": "QB",
+          "capHit": 55
+        },
+        {
+          "player": "Ja'Marr Chase",
+          "position": "WR",
+          "capHit": 40.3
+        },
+        {
+          "player": "Tee Higgins",
+          "position": "WR",
+          "capHit": 28.8
+        },
+        {
+          "player": "Orlando Brown Jr.",
+          "position": "LT",
+          "capHit": 16
+        },
+        {
+          "player": "B.J. Hill",
+          "position": "IDL",
+          "capHit": 11
+        }
+      ],
+      "rosterSize": 36
+    },
+    "CLE": {
+      "salaryCap": 272.5,
+      "totalCommitted": 211.2,
+      "deadMoney": 79.6,
+      "capSpace": 61.3,
+      "activeContracts": 43,
+      "expiringContracts": 15,
+      "topContracts": [
+        {
+          "player": "Deshaun Watson",
+          "position": "QB",
+          "capHit": 46
+        },
+        {
+          "player": "Myles Garrett",
+          "position": "ED",
+          "capHit": 40
+        },
+        {
+          "player": "Denzel Ward",
+          "position": "CB",
+          "capHit": 20.1
+        },
+        {
+          "player": "Jerry Jeudy",
+          "position": "WR",
+          "capHit": 17.5
+        },
+        {
+          "player": "Jeremiah Owusu-Koramoah",
+          "position": "LB",
+          "capHit": 12.5
+        }
+      ],
+      "rosterSize": 37
+    },
+    "DAL": {
+      "salaryCap": 272.5,
+      "totalCommitted": 253.3,
+      "deadMoney": 101.2,
+      "capSpace": 19.2,
+      "activeContracts": 45,
+      "expiringContracts": 11,
+      "topContracts": [
+        {
+          "player": "Dak Prescott",
+          "position": "QB",
+          "capHit": 60
+        },
+        {
+          "player": "CeeDee Lamb",
+          "position": "WR",
+          "capHit": 34
+        },
+        {
+          "player": "Tyler Smith",
+          "position": "LG",
+          "capHit": 24
+        },
+        {
+          "player": "DaRon Bland",
+          "position": "CB",
+          "capHit": 22.5
+        },
+        {
+          "player": "Osa Odighizuwa",
+          "position": "IDL",
+          "capHit": 20
+        }
+      ],
+      "rosterSize": 38
+    },
+    "DEN": {
+      "salaryCap": 272.5,
+      "totalCommitted": 306.2,
+      "deadMoney": 108.4,
+      "capSpace": -33.7,
+      "activeContracts": 41,
+      "expiringContracts": 13,
+      "topContracts": [
+        {
+          "player": "Nik Bonitto",
+          "position": "ED",
+          "capHit": 26.5
+        },
+        {
+          "player": "Zach Allen",
+          "position": "IDL",
+          "capHit": 25.5
+        },
+        {
+          "player": "Patrick Surtain II",
+          "position": "CB",
+          "capHit": 24
+        },
+        {
+          "player": "Courtland Sutton",
+          "position": "WR",
+          "capHit": 23
+        },
+        {
+          "player": "Garett Bolles",
+          "position": "LT",
+          "capHit": 20.5
+        }
+      ],
+      "rosterSize": 34
+    },
+    "DET": {
+      "salaryCap": 272.5,
+      "totalCommitted": 334,
+      "deadMoney": 108.4,
+      "capSpace": -61.5,
+      "activeContracts": 46,
+      "expiringContracts": 19,
+      "topContracts": [
+        {
+          "player": "Jared Goff",
+          "position": "QB",
+          "capHit": 53
+        },
+        {
+          "player": "Aidan Hutchinson",
+          "position": "ED",
+          "capHit": 45
+        },
+        {
+          "player": "Amon-Ra St. Brown",
+          "position": "WR",
+          "capHit": 30
+        },
+        {
+          "player": "Penei Sewell",
+          "position": "RT",
+          "capHit": 28
+        },
+        {
+          "player": "Jameson Williams",
+          "position": "WR",
+          "capHit": 26.7
+        }
+      ],
+      "rosterSize": 38
+    },
+    "GB": {
+      "salaryCap": 272.5,
+      "totalCommitted": 291.3,
+      "deadMoney": 106.6,
+      "capSpace": -18.8,
+      "activeContracts": 61,
+      "expiringContracts": 10,
+      "topContracts": [
+        {
+          "player": "Jordan Love",
+          "position": "QB",
+          "capHit": 55
+        },
+        {
+          "player": "Micah Parsons",
+          "position": "ED",
+          "capHit": 46.5
+        },
+        {
+          "player": "Rashan Gary",
+          "position": "ED",
+          "capHit": 24
+        },
+        {
+          "player": "Zach Tom",
+          "position": "RT",
+          "capHit": 22
+        },
+        {
+          "player": "Aaron Banks",
+          "position": "LG",
+          "capHit": 19.3
+        }
+      ],
+      "rosterSize": 37
+    },
+    "HOU": {
+      "salaryCap": 272.5,
+      "totalCommitted": 202.1,
+      "deadMoney": 59,
+      "capSpace": 70.4,
+      "activeContracts": 46,
+      "expiringContracts": 18,
+      "topContracts": [
+        {
+          "player": "Danielle Hunter",
+          "position": "ED",
+          "capHit": 35.6
+        },
+        {
+          "player": "Derek Stingley Jr.",
+          "position": "CB",
+          "capHit": 30
+        },
+        {
+          "player": "Nico Collins",
+          "position": "WR",
+          "capHit": 24.3
+        },
+        {
+          "player": "Jalen Pitre",
+          "position": "CB",
+          "capHit": 13
+        },
+        {
+          "player": "Dalton Schultz",
+          "position": "TE",
+          "capHit": 12
+        }
+      ],
+      "rosterSize": 38
+    },
+    "IND": {
+      "salaryCap": 272.5,
+      "totalCommitted": 186.2,
+      "deadMoney": 57.1,
+      "capSpace": 86.3,
+      "activeContracts": 55,
+      "expiringContracts": 15,
+      "topContracts": [
+        {
+          "player": "Bernhard Raimann",
+          "position": "LT",
+          "capHit": 25
+        },
+        {
+          "player": "Michael Pittman, Jr.",
+          "position": "WR",
+          "capHit": 23.3
+        },
+        {
+          "player": "Charvarius Ward",
+          "position": "CB",
+          "capHit": 18
+        },
+        {
+          "player": "Cam Bynum",
+          "position": "S",
+          "capHit": 15
+        },
+        {
+          "player": "Grover Stewart",
+          "position": "IDL",
+          "capHit": 13
+        }
+      ],
+      "rosterSize": 38
+    },
+    "JAC": {
+      "salaryCap": 272.5,
+      "totalCommitted": 274.4,
+      "deadMoney": 117.2,
+      "capSpace": -1.9,
+      "activeContracts": 55,
+      "expiringContracts": 13,
+      "topContracts": [
+        {
+          "player": "Trevor Lawrence",
+          "position": "QB",
+          "capHit": 55
+        },
+        {
+          "player": "Josh Hines-Allen",
+          "position": "ED",
+          "capHit": 28.3
+        },
+        {
+          "player": "Jakobi Meyers",
+          "position": "WR",
+          "capHit": 20
+        },
+        {
+          "player": "Cole Van Lanen",
+          "position": "LT",
+          "capHit": 17
+        },
+        {
+          "player": "Arik Armstead",
+          "position": "ED",
+          "capHit": 14.5
+        }
+      ],
+      "rosterSize": 38
+    },
+    "KC": {
+      "salaryCap": 272.5,
+      "totalCommitted": 274.7,
+      "deadMoney": 93.2,
+      "capSpace": -2.2,
+      "activeContracts": 50,
+      "expiringContracts": 14,
+      "topContracts": [
+        {
+          "player": "Patrick Mahomes",
+          "position": "QB",
+          "capHit": 45
+        },
+        {
+          "player": "Chris Jones",
+          "position": "IDL",
+          "capHit": 31.8
+        },
+        {
+          "player": "Trey Smith",
+          "position": "RG",
+          "capHit": 23.5
+        },
+        {
+          "player": "George Karlaftis",
+          "position": "ED",
+          "capHit": 22
+        },
+        {
+          "player": "Jawaan Taylor",
+          "position": "RT",
+          "capHit": 20
+        }
+      ],
+      "rosterSize": 38
+    },
+    "LAR": {
+      "salaryCap": 272.5,
+      "totalCommitted": 195.3,
+      "deadMoney": 51,
+      "capSpace": 77.2,
+      "activeContracts": 38,
+      "expiringContracts": 10,
+      "topContracts": [
+        {
+          "player": "Matt Stafford",
+          "position": "QB",
+          "capHit": 40
+        },
+        {
+          "player": "Davante Adams",
+          "position": "WR",
+          "capHit": 22
+        },
+        {
+          "player": "Alaric Jackson",
+          "position": "LT",
+          "capHit": 19.3
+        },
+        {
+          "player": "Kevin Dotson",
+          "position": "RG",
+          "capHit": 16
+        },
+        {
+          "player": "Quentin Lake",
+          "position": "S",
+          "capHit": 12.8
+        }
+      ],
+      "rosterSize": 34
+    },
+    "LAC": {
+      "salaryCap": 272.5,
+      "totalCommitted": 179.8,
+      "deadMoney": 64.9,
+      "capSpace": 92.7,
+      "activeContracts": 49,
+      "expiringContracts": 16,
+      "topContracts": [
+        {
+          "player": "Justin Herbert",
+          "position": "QB",
+          "capHit": 52.5
+        },
+        {
+          "player": "Rashawn Slater",
+          "position": "LT",
+          "capHit": 28.5
+        },
+        {
+          "player": "Mekhi Becton",
+          "position": "RG",
+          "capHit": 10
+        },
+        {
+          "player": "Joe Alt",
+          "position": "RT",
+          "capHit": 8.3
+        },
+        {
+          "player": "Donte Jackson",
+          "position": "CB",
+          "capHit": 6.5
+        }
+      ],
+      "rosterSize": 34
+    },
+    "LV": {
+      "salaryCap": 272.5,
+      "totalCommitted": 184.4,
+      "deadMoney": 66.8,
+      "capSpace": 88.1,
+      "activeContracts": 46,
+      "expiringContracts": 15,
+      "topContracts": [
+        {
+          "player": "Geno Smith",
+          "position": "QB",
+          "capHit": 37.5
+        },
+        {
+          "player": "Maxx Crosby",
+          "position": "ED",
+          "capHit": 35.5
+        },
+        {
+          "player": "Kolton Miller",
+          "position": "LT",
+          "capHit": 22
+        },
+        {
+          "player": "Ashton Jeanty",
+          "position": "RB",
+          "capHit": 9
+        },
+        {
+          "player": "Jeremy Chinn",
+          "position": "S",
+          "capHit": 8.1
+        }
+      ],
+      "rosterSize": 38
+    },
+    "MIA": {
+      "salaryCap": 272.5,
+      "totalCommitted": 243.7,
+      "deadMoney": 59,
+      "capSpace": 28.8,
+      "activeContracts": 47,
+      "expiringContracts": 16,
+      "topContracts": [
+        {
+          "player": "Tua Tagovailoa",
+          "position": "QB",
+          "capHit": 53.1
+        },
+        {
+          "player": "Tyreek Hill",
+          "position": "WR",
+          "capHit": 30
+        },
+        {
+          "player": "Jaylen Waddle",
+          "position": "WR",
+          "capHit": 28.3
+        },
+        {
+          "player": "Zach Sieler",
+          "position": "IDL",
+          "capHit": 21.3
+        },
+        {
+          "player": "Bradley Chubb",
+          "position": "ED",
+          "capHit": 18.2
+        }
+      ],
+      "rosterSize": 38
+    },
+    "MIN": {
+      "salaryCap": 272.5,
+      "totalCommitted": 274.8,
+      "deadMoney": 99,
+      "capSpace": -2.3,
+      "activeContracts": 51,
+      "expiringContracts": 7,
+      "topContracts": [
+        {
+          "player": "Justin Jefferson",
+          "position": "WR",
+          "capHit": 35
+        },
+        {
+          "player": "Christian Darrisaw",
+          "position": "LT",
+          "capHit": 26
+        },
+        {
+          "player": "Jonathan Greenard",
+          "position": "ED",
+          "capHit": 19
+        },
+        {
+          "player": "Byron Murphy",
+          "position": "CB",
+          "capHit": 18
+        },
+        {
+          "player": "Will Fries",
+          "position": "RG",
+          "capHit": 17.5
+        }
+      ],
+      "rosterSize": 33
+    },
+    "NE": {
+      "salaryCap": 272.5,
+      "totalCommitted": 260.7,
+      "deadMoney": 94.8,
+      "capSpace": 11.8,
+      "activeContracts": 48,
+      "expiringContracts": 5,
+      "topContracts": [
+        {
+          "player": "Milton Williams",
+          "position": "IDL",
+          "capHit": 26
+        },
+        {
+          "player": "Stefon Diggs",
+          "position": "WR",
+          "capHit": 21.2
+        },
+        {
+          "player": "Christian Barmore",
+          "position": "IDL",
+          "capHit": 21
+        },
+        {
+          "player": "Michael Onwenu",
+          "position": "RT",
+          "capHit": 19
+        },
+        {
+          "player": "Carlton Davis",
+          "position": "CB",
+          "capHit": 18
+        }
+      ],
+      "rosterSize": 33
+    },
+    "NO": {
+      "salaryCap": 272.5,
+      "totalCommitted": 156.8,
+      "deadMoney": 45.8,
+      "capSpace": 115.7,
+      "activeContracts": 55,
+      "expiringContracts": 11,
+      "topContracts": [
+        {
+          "player": "Chase Young",
+          "position": "ED",
+          "capHit": 17
+        },
+        {
+          "player": "Carl Granderson",
+          "position": "ED",
+          "capHit": 13
+        },
+        {
+          "player": "Erik McCoy",
+          "position": "C",
+          "capHit": 12
+        },
+        {
+          "player": "Cesar Ruiz",
+          "position": "RG",
+          "capHit": 11
+        },
+        {
+          "player": "Justin Reid",
+          "position": "S",
+          "capHit": 10.5
+        }
+      ],
+      "rosterSize": 34
+    },
+    "NYG": {
+      "salaryCap": 272.5,
+      "totalCommitted": 233.7,
+      "deadMoney": 93.1,
+      "capSpace": 38.8,
+      "activeContracts": 51,
+      "expiringContracts": 8,
+      "topContracts": [
+        {
+          "player": "Brian Burns",
+          "position": "ED",
+          "capHit": 28.2
+        },
+        {
+          "player": "Andrew Thomas",
+          "position": "LT",
+          "capHit": 23.5
+        },
+        {
+          "player": "Dexter Lawrence",
+          "position": "IDL",
+          "capHit": 22.5
+        },
+        {
+          "player": "Paulson Adebo",
+          "position": "CB",
+          "capHit": 18
+        },
+        {
+          "player": "Jevon Holland",
+          "position": "S",
+          "capHit": 15.1
+        }
+      ],
+      "rosterSize": 34
+    },
+    "NYJ": {
+      "salaryCap": 272.5,
+      "totalCommitted": 147.5,
+      "deadMoney": 50.2,
+      "capSpace": 125,
+      "activeContracts": 44,
+      "expiringContracts": 13,
+      "topContracts": [
+        {
+          "player": "Garrett Wilson",
+          "position": "WR",
+          "capHit": 32.5
+        },
+        {
+          "player": "Justin Fields",
+          "position": "QB",
+          "capHit": 20
+        },
+        {
+          "player": "Jamien Sherwood",
+          "position": "LB",
+          "capHit": 15
+        },
+        {
+          "player": "Brandon Stephens",
+          "position": "CB",
+          "capHit": 12
+        },
+        {
+          "player": "Armand Membou",
+          "position": "RT",
+          "capHit": 8
+        }
+      ],
+      "rosterSize": 38
+    },
+    "PHI": {
+      "salaryCap": 272.5,
+      "totalCommitted": 267.3,
+      "deadMoney": 79.3,
+      "capSpace": 5.2,
+      "activeContracts": 47,
+      "expiringContracts": 12,
+      "topContracts": [
+        {
+          "player": "Jalen Hurts",
+          "position": "QB",
+          "capHit": 51
+        },
+        {
+          "player": "A.J. Brown",
+          "position": "WR",
+          "capHit": 32
+        },
+        {
+          "player": "DeVonta Smith",
+          "position": "WR",
+          "capHit": 25
+        },
+        {
+          "player": "Jordan Mailata",
+          "position": "LT",
+          "capHit": 22
+        },
+        {
+          "player": "Landon Dickerson",
+          "position": "LG",
+          "capHit": 21
+        }
+      ],
+      "rosterSize": 34
+    },
+    "PIT": {
+      "salaryCap": 272.5,
+      "totalCommitted": 198.5,
+      "deadMoney": 70.9,
+      "capSpace": 74,
+      "activeContracts": 51,
+      "expiringContracts": 15,
+      "topContracts": [
+        {
+          "player": "T.J. Watt",
+          "position": "ED",
+          "capHit": 41
+        },
+        {
+          "player": "D.K. Metcalf",
+          "position": "WR",
+          "capHit": 33
+        },
+        {
+          "player": "Alex Highsmith",
+          "position": "ED",
+          "capHit": 17
+        },
+        {
+          "player": "Patrick Queen",
+          "position": "LB",
+          "capHit": 13.7
+        },
+        {
+          "player": "Pat Freiermuth",
+          "position": "TE",
+          "capHit": 12.1
+        }
+      ],
+      "rosterSize": 34
+    },
+    "SEA": {
+      "salaryCap": 272.5,
+      "totalCommitted": 223.3,
+      "deadMoney": 72.1,
+      "capSpace": 49.2,
+      "activeContracts": 41,
+      "expiringContracts": 9,
+      "topContracts": [
+        {
+          "player": "Sam Darnold",
+          "position": "QB",
+          "capHit": 33.5
+        },
+        {
+          "player": "Charles Cross",
+          "position": "LT",
+          "capHit": 26.1
+        },
+        {
+          "player": "Leonard Williams",
+          "position": "IDL",
+          "capHit": 21.5
+        },
+        {
+          "player": "Abraham Lucas",
+          "position": "RT",
+          "capHit": 15.3
+        },
+        {
+          "player": "Cooper Kupp",
+          "position": "WR",
+          "capHit": 15
+        }
+      ],
+      "rosterSize": 37
+    },
+    "SF": {
+      "salaryCap": 272.5,
+      "totalCommitted": 277.6,
+      "deadMoney": 101.4,
+      "capSpace": -5.1,
+      "activeContracts": 38,
+      "expiringContracts": 16,
+      "topContracts": [
+        {
+          "player": "Brock Purdy",
+          "position": "QB",
+          "capHit": 53
+        },
+        {
+          "player": "Nick Bosa",
+          "position": "ED",
+          "capHit": 34
+        },
+        {
+          "player": "Brandon Aiyuk",
+          "position": "WR",
+          "capHit": 30
+        },
+        {
+          "player": "Trent Williams",
+          "position": "LT",
+          "capHit": 27.6
+        },
+        {
+          "player": "Fred Warner",
+          "position": "LB",
+          "capHit": 21
+        }
+      ],
+      "rosterSize": 37
+    },
+    "TB": {
+      "salaryCap": 272.5,
+      "totalCommitted": 216.2,
+      "deadMoney": 70.4,
+      "capSpace": 56.3,
+      "activeContracts": 50,
+      "expiringContracts": 11,
+      "topContracts": [
+        {
+          "player": "Baker Mayfield",
+          "position": "QB",
+          "capHit": 33.3
+        },
+        {
+          "player": "Tristan Wirfs",
+          "position": "RT",
+          "capHit": 28.1
+        },
+        {
+          "player": "Luke Goedeke",
+          "position": "LG",
+          "capHit": 22.5
+        },
+        {
+          "player": "Chris Godwin",
+          "position": "WR",
+          "capHit": 22
+        },
+        {
+          "player": "Antoine Winfield, Jr.",
+          "position": "S",
+          "capHit": 21
+        }
+      ],
+      "rosterSize": 34
+    },
+    "TEN": {
+      "salaryCap": 272.5,
+      "totalCommitted": 195.7,
+      "deadMoney": 76.1,
+      "capSpace": 76.8,
+      "activeContracts": 48,
+      "expiringContracts": 13,
+      "topContracts": [
+        {
+          "player": "Jeffery Simmons",
+          "position": "IDL",
+          "capHit": 23.5
+        },
+        {
+          "player": "Calvin Ridley",
+          "position": "WR",
+          "capHit": 23
+        },
+        {
+          "player": "Dan Moore Jr.",
+          "position": "LT",
+          "capHit": 20.5
+        },
+        {
+          "player": "L'Jarius Sneed",
+          "position": "CB",
+          "capHit": 19.1
+        },
+        {
+          "player": "Amani Hooker",
+          "position": "S",
+          "capHit": 13.5
+        }
+      ],
+      "rosterSize": 34
+    },
+    "WAS": {
+      "salaryCap": 272.5,
+      "totalCommitted": 187.5,
+      "deadMoney": 59,
+      "capSpace": 85,
+      "activeContracts": 46,
+      "expiringContracts": 17,
+      "topContracts": [
+        {
+          "player": "Terry McLaurin",
+          "position": "WR",
+          "capHit": 29
+        },
+        {
+          "player": "Daron Payne",
+          "position": "IDL",
+          "capHit": 22.5
+        },
+        {
+          "player": "Samuel Cosmi",
+          "position": "RG",
+          "capHit": 18.5
+        },
+        {
+          "player": "Javon Kinlaw",
+          "position": "IDL",
+          "capHit": 15
+        },
+        {
+          "player": "Dorance Armstrong Jr.",
+          "position": "ED",
+          "capHit": 11
+        }
+      ],
+      "rosterSize": 38
+    }
+  }
+}
