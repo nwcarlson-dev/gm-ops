@@ -92,12 +92,19 @@ Python HTTP server on port 5000 (static site).
   - Fernando Mendoza (QB, Indiana) updated to consensus #1 overall (Heisman winner, led Indiana to natl championship)
   - 337 prospects total (was 338)
   - AI draft board variance now uses per-session random seed for unique drafts each playthrough
-- **Feb 7**: Prospect ranking update
-  - Added NFLMDD consensus big board (aggregated from 92 big boards, 557 mock drafts)
-  - Updated Daniel Jeremiah Top 50 (NFL.com, Feb 2026)
-  - Consensus now calculated as median of 4 sources: PFF, CBS, NFLMDD, NFL.com (Jeremiah)
+- **Feb 7**: Multi-source ranking enrichment pipeline (7 scrapers)
+  - **NFLMDD**: 852 prospects from React props JSON (consensus of 92+ big boards, 557+ mock drafts)
+  - **CBS Sports**: 150 prospects from https://www.cbssports.com/nfl/draft/prospect-rankings/
+  - **DraftTek**: 300 prospects from https://www.drafttek.com/2026-NFL-Draft-Big-Board/ (3 pages)
+  - **Daniel Jeremiah (NFL.com)**: 50 prospects with FULL scouting reports + player comparisons from https://www.nfl.com/news/daniel-jeremiah-s-top-50-2026-nfl-draft-prospect-rankings-1-0
+  - **FantasyPros**: 100 prospects with best/worst/avg/stddev from https://www.fantasypros.com/2026/02/2026-nfl-draft-big-board-prospect-rankings/
+  - **NFL Draft Buzz**: scraper built but site blocks server requests (403)
+  - **Tankathon**: scraper built but site uses JavaScript rendering
+  - Blended consensus = median of all available sources per prospect
+  - 92 prospects have 5+ ranking sources; top 15 all have 7 sources
+  - 50 Jeremiah scouting reports saved with player comparisons (Matt Ryan, Fred Warner, Amon-Ra St. Brown, etc.)
   - Range (low/high) derived from min/max across all sources per prospect
-  - 73 prospect rankings adjusted; Mendoza unanimous #1, Bain #2, Reese #3
+  - Admin UI (admin-enrichment.html) updated with all source stats
 
 - **Feb 7**: Draft ticker formatting updated to sentence-style ("The Raiders select QB Fernando Mendoza with the #1 overall pick")
 - **Feb 7**: Ticker font bumped from 11px to 13px with Barlow Condensed for readability
