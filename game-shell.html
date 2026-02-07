@@ -1955,6 +1955,352 @@
                 background: rgba(239, 68, 68, 0.2);
                 color: var(--danger);
             }
+
+            @media (max-width: 1024px) {
+                .draft-layout {
+                    grid-template-columns: 1fr;
+                    height: auto;
+                    overflow: visible;
+                }
+                body {
+                    overflow: auto;
+                }
+                .draft-order-panel {
+                    max-height: 50vh;
+                }
+                .right-panel {
+                    overflow: visible;
+                }
+                .app-header {
+                    padding: 0 12px;
+                }
+                .header-nav a {
+                    display: none;
+                }
+            }
+
+            @media (max-width: 768px) {
+                .draft-layout {
+                    gap: 4px;
+                    padding: 4px;
+                }
+                .app-main {
+                    padding: 4px;
+                }
+                .draft-panel-header {
+                    flex-wrap: wrap;
+                    gap: 6px;
+                    padding: 8px 10px;
+                }
+                .draft-panel-title {
+                    width: 100%;
+                    justify-content: space-between;
+                }
+                .sim-controls-inline {
+                    width: 100%;
+                    justify-content: flex-start;
+                    flex-wrap: wrap;
+                    gap: 4px;
+                }
+                .round-tabs {
+                    overflow-x: auto;
+                    flex-wrap: nowrap;
+                    -webkit-overflow-scrolling: touch;
+                    scrollbar-width: none;
+                    padding-bottom: 2px;
+                }
+                .round-tabs::-webkit-scrollbar {
+                    display: none;
+                }
+                .round-btn {
+                    flex-shrink: 0;
+                }
+                .draft-order-list {
+                    padding: 8px;
+                }
+                .draft-pick {
+                    padding: 6px 8px;
+                    gap: 6px;
+                }
+                .draft-pick-needs {
+                    display: none;
+                }
+                .team-info-header {
+                    padding: 10px 12px;
+                    gap: 8px;
+                }
+                .team-info-name {
+                    font-size: 17px;
+                }
+                .needs-row {
+                    grid-template-columns: 1fr;
+                    gap: 8px;
+                }
+                .team-info-content {
+                    padding: 10px 12px;
+                }
+                .panel-tabs {
+                    margin-bottom: 8px;
+                }
+                .panel-tab {
+                    padding: 6px 8px;
+                    font-size: 10px;
+                }
+                .card-header {
+                    padding: 8px 12px !important;
+                }
+                .card-title {
+                    font-size: 12px !important;
+                }
+                .position-filters {
+                    overflow-x: auto;
+                    flex-wrap: nowrap;
+                    -webkit-overflow-scrolling: touch;
+                    scrollbar-width: none;
+                    padding-bottom: 2px;
+                }
+                .position-filters::-webkit-scrollbar {
+                    display: none;
+                }
+                .pos-filter {
+                    flex-shrink: 0;
+                    padding: 5px 8px;
+                    font-size: 10px;
+                }
+                .prospect-row {
+                    padding: 8px 10px;
+                    gap: 8px;
+                }
+                .prospect-college-logo {
+                    width: 28px;
+                    height: 28px;
+                }
+                .prospect-name {
+                    font-size: 12px;
+                }
+                .prospect-bio {
+                    display: none;
+                }
+                .accordion-grid {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+                .accordion-content {
+                    padding: 10px 12px;
+                }
+                .modal {
+                    width: 95%;
+                    max-height: 90vh;
+                    border-radius: 8px;
+                }
+                .modal-body {
+                    max-height: calc(90vh - 100px);
+                }
+                .modal-grid {
+                    grid-template-columns: repeat(2, 1fr);
+                }
+                .trade-modal {
+                    width: 95%;
+                    max-height: 90vh;
+                }
+                .trade-columns {
+                    flex-direction: column;
+                    gap: 12px;
+                }
+                .trade-modal-body {
+                    padding: 12px;
+                }
+                .trade-offer-modal {
+                    width: 95%;
+                    max-height: 90vh;
+                }
+                .trade-offer-sides {
+                    flex-direction: column;
+                    gap: 8px;
+                }
+                .trade-offer-body {
+                    padding: 12px;
+                }
+                .header-team-panel {
+                    padding: 6px 10px;
+                    gap: 8px;
+                }
+                .header-team-name {
+                    font-size: 15px;
+                }
+                .header-team-meta {
+                    font-size: 10px;
+                }
+                .scheme-section .needs-row {
+                    grid-template-columns: 1fr;
+                }
+                .depth-legend {
+                    flex-wrap: wrap;
+                    gap: 8px;
+                }
+            }
+
+            @media (max-width: 480px) {
+                .app-header {
+                    padding: 0 8px;
+                    height: 48px;
+                }
+                .app-header .logo {
+                    height: 28px;
+                }
+                .draft-layout {
+                    height: auto;
+                    gap: 2px;
+                    padding: 2px;
+                }
+                .app-main {
+                    padding: 2px;
+                }
+                .draft-panel-header {
+                    padding: 6px 8px;
+                }
+                .sim-controls-inline select,
+                .sim-btn,
+                .trade-btn-header {
+                    font-size: 10px;
+                    padding: 3px 6px;
+                }
+                .current-pick-badge {
+                    font-size: 10px;
+                    padding: 3px 8px;
+                }
+                .draft-order-panel {
+                    max-height: 40vh;
+                }
+                .draft-pick {
+                    padding: 5px 6px;
+                    font-size: 11px;
+                }
+                .draft-pick-num {
+                    width: 20px;
+                    height: 20px;
+                    font-size: 10px;
+                }
+                .draft-pick-team {
+                    font-size: 11px;
+                }
+                .draft-pick-actions {
+                    display: none !important;
+                }
+                .team-info-header {
+                    padding: 8px 10px;
+                }
+                .team-info-name {
+                    font-size: 15px;
+                }
+                .team-info-meta {
+                    font-size: 10px;
+                }
+                .panel-tab {
+                    padding: 5px 6px;
+                    font-size: 9px;
+                    letter-spacing: 0.04em;
+                }
+                .need-item {
+                    padding: 4px 6px;
+                }
+                .prospect-row {
+                    padding: 6px 8px;
+                    gap: 6px;
+                }
+                .prospect-rank {
+                    font-size: 11px;
+                    min-width: 18px;
+                }
+                .prospect-college-logo {
+                    width: 24px;
+                    height: 24px;
+                }
+                .prospect-name {
+                    font-size: 11px;
+                }
+                .prospect-meta {
+                    font-size: 9px;
+                }
+                .prospect-pos {
+                    font-size: 9px;
+                    padding: 3px 5px;
+                }
+                .consensus-range {
+                    display: none;
+                }
+                .prospect-star {
+                    width: 22px;
+                    height: 22px;
+                }
+                .prospect-toggle {
+                    width: 22px;
+                    height: 22px;
+                }
+                .select-player-btn {
+                    font-size: 9px;
+                    padding: 3px 8px;
+                }
+                .accordion-grid {
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 4px;
+                }
+                .accordion-stat {
+                    padding: 6px;
+                }
+                .accordion-stat-value {
+                    font-size: 16px;
+                }
+                .modal {
+                    width: 100%;
+                    max-height: 100vh;
+                    border-radius: 0;
+                    margin: 0;
+                }
+                .modal-body {
+                    max-height: calc(100vh - 80px);
+                    padding: 12px;
+                }
+                .modal-header {
+                    padding: 12px 14px;
+                }
+                .modal-grid {
+                    grid-template-columns: repeat(2, 1fr);
+                    gap: 4px;
+                }
+                .trade-modal {
+                    width: 100%;
+                    max-height: 100vh;
+                    border-radius: 0;
+                }
+                .trade-offer-modal {
+                    width: 100%;
+                    max-height: 100vh;
+                    border-radius: 0;
+                }
+                .trade-offer-actions {
+                    flex-wrap: wrap;
+                }
+                .trade-offer-actions button {
+                    min-width: 45%;
+                }
+                .ticker-event {
+                    font-size: 11px;
+                    padding: 4px 8px;
+                }
+                .depth-header-row,
+                .depth-row {
+                    grid-template-columns: 28px 1fr 1fr;
+                    gap: 4px;
+                    padding: 3px 6px;
+                }
+                .depth-starter,
+                .depth-backup {
+                    font-size: 10px;
+                }
+                .mode-indicator {
+                    font-size: 10px !important;
+                }
+            }
         </style>
     </head>
     <body>

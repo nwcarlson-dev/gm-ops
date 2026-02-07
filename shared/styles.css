@@ -661,7 +661,8 @@ body::before {
 
 @media (max-width: 768px) {
     .app-header {
-        padding: 0 16px;
+        padding: 0 12px;
+        height: 48px;
     }
 
     .header-nav a {
@@ -669,6 +670,45 @@ body::before {
     }
 
     .app-main {
-        padding: 16px;
+        padding: 12px;
+    }
+
+    .logo {
+        height: 30px;
+    }
+
+    .user-button {
+        padding: 4px 8px;
+        font-size: 12px;
+        gap: 6px;
+    }
+
+    .user-avatar {
+        width: 24px;
+        height: 24px;
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .app-header {
+        padding: 0 8px;
+        height: 44px;
+    }
+
+    .app-main {
+        padding: 8px;
+    }
+
+    .logo {
+        height: 26px;
+    }
+
+    .mode-indicator {
+        font-size: 10px;
+    }
+
+    .user-button span {
+        display: none;
     }
 }

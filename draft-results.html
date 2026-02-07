@@ -552,6 +552,144 @@
             font-size: 18px;
             color: var(--text-muted);
         }
+
+        @media (max-width: 768px) {
+            .header {
+                padding: 0 16px;
+                height: 52px;
+            }
+            .logo-text {
+                font-size: 22px;
+            }
+            .header-title {
+                font-size: 14px;
+                padding-left: 10px;
+            }
+            .container {
+                padding: 16px;
+            }
+            .overview-grid {
+                grid-template-columns: 1fr;
+                gap: 16px;
+            }
+            .grade-card {
+                padding: 20px;
+            }
+            .grade-circle {
+                width: 90px;
+                height: 90px;
+                font-size: 42px;
+            }
+            .breakdown-cards {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+            .needs-report {
+                grid-template-columns: 1fr;
+                gap: 10px;
+            }
+            .pick-header {
+                grid-template-columns: 40px 36px 1fr 60px 40px;
+                padding: 10px 12px;
+                gap: 8px;
+            }
+            .pick-number {
+                font-size: 18px;
+            }
+            .pick-player-name {
+                font-size: 14px;
+            }
+            .pick-grade {
+                font-size: 22px;
+            }
+            .analysis-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 6px;
+            }
+            .analysis-narrative {
+                font-size: 12px;
+                padding: 10px;
+            }
+            .tab-btn {
+                font-size: 12px;
+                padding: 8px 12px;
+                letter-spacing: 0.5px;
+            }
+            .trade-row {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 8px;
+                padding: 12px;
+            }
+            .section-title {
+                font-size: 22px;
+            }
+            .team-filter-bar {
+                overflow-x: auto;
+                flex-wrap: nowrap;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                padding-bottom: 4px;
+            }
+            .team-filter-bar::-webkit-scrollbar {
+                display: none;
+            }
+            .team-filter-btn {
+                flex-shrink: 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .header {
+                padding: 0 10px;
+                height: 48px;
+            }
+            .header-title {
+                display: none;
+            }
+            .container {
+                padding: 10px 8px;
+            }
+            .grade-circle {
+                width: 80px;
+                height: 80px;
+                font-size: 36px;
+            }
+            .pick-header {
+                grid-template-columns: 32px 1fr 40px;
+                gap: 6px;
+                padding: 8px 10px;
+            }
+            .pick-round-badge {
+                display: none;
+            }
+            .pick-value-badge {
+                display: none;
+            }
+            .pick-player-name {
+                font-size: 13px;
+            }
+            .pick-player-meta {
+                font-size: 11px;
+            }
+            .pick-grade {
+                font-size: 20px;
+            }
+            .analysis-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+            .tab-btn {
+                font-size: 11px;
+                padding: 6px 8px;
+            }
+            .back-btn {
+                font-size: 12px;
+                padding: 4px 10px;
+            }
+            .breakdown-value {
+                font-size: 28px;
+            }
+        }
     </style>
 </head>
 <body>
