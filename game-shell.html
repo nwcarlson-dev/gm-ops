@@ -3102,82 +3102,77 @@
             let simRunning = false;
             let simAbortController = null;
 
-            // Generate draft boards for all teams
+            let draftSessionSeed = Math.floor(Math.random() * 1000000);
+
+            function seededRandom(seed) {
+                const x = Math.sin(seed) * 10000;
+                return x - Math.floor(x);
+            }
+
             function generateTeamDraftBoards() {
                 const teams = Object.keys(TEAM_DATA);
-                
+
                 teams.forEach(teamName => {
                     const teamData = TEAM_DATA[teamName];
                     const abbr = teamData.abbr;
                     const schemes = teamSchemes[teamName] || { offScheme: "TBD", defScheme: "TBD" };
                     const needs = allTeamNeeds[abbr] || { primary: [], secondary: [] };
                     const allNeeds = [...(needs.primary || []), ...(needs.secondary || [])];
-                    
-                    // Score each prospect for this team
+
                     const scoredProspects = prospects.map(p => {
                         const consensusRank = p.consensus_rank || 300;
-                        
-                        // 1. Positional value modifier (scaled for RBs based on rank)
+
                         let posValue = POSITION_VALUE[p.position] || 0;
-                        
-                        // Special handling for RBs: top RBs don't fall as much
+
                         if (p.position === 'RB') {
                             if (consensusRank <= 10) {
-                                posValue = -2; // Top 10 RBs: minimal penalty
+                                posValue = -2;
                             } else if (consensusRank <= 25) {
-                                posValue = -5; // Top 25 RBs: moderate penalty
+                                posValue = -5;
                             }
-                            // else use default -8
                         }
-                        
-                        // Special handling for QBs: elite QBs get massive boost
+
                         if (p.position === 'QB' && consensusRank <= 15) {
-                            posValue = 15; // Elite QBs almost always go top 3-5
+                            posValue = 15;
                         }
-                        
-                        // 2. Need boost (primary needs get bigger boost)
+
                         const needCategory = mapPositionToNeed(p.position);
                         let needBoost = 0;
                         if (needs.primary && needs.primary.includes(needCategory)) {
-                            needBoost = 8; // Primary need
+                            needBoost = 8;
                         } else if (needs.secondary && needs.secondary.includes(needCategory)) {
-                            needBoost = 4; // Secondary need
+                            needBoost = 4;
                         }
-                        
-                        // 3. Development certainty affects variance
+
                         const devCert = p.developmentCertainty?.score ?? 0.5;
-                        const varianceMultiplier = 0.5 + (1 - devCert); // Sure fire = 0.5x, Project = 1.5x
-                        
-                        // 4. Base variance by consensus tier (tighter for elite prospects)
+                        const varianceMultiplier = 0.5 + (1 - devCert);
+
                         let baseVariance;
-                        if (consensusRank <= 3) baseVariance = 2;   // Top 3: almost no variance
-                        else if (consensusRank <= 10) baseVariance = 4;  // Top 10: very tight
-                        else if (consensusRank <= 20) baseVariance = 8;  // Top 20: tight
+                        if (consensusRank <= 3) baseVariance = 2;
+                        else if (consensusRank <= 10) baseVariance = 4;
+                        else if (consensusRank <= 20) baseVariance = 8;
                         else if (consensusRank <= 50) baseVariance = 15;
                         else baseVariance = 25;
-                        
-                        // 5. Random variance (seeded by team+prospect for consistency)
-                        const seed = (teamName + p.id).split('').reduce((a, c) => a + c.charCodeAt(0), 0);
-                        const pseudoRandom = Math.sin(seed) * 10000;
-                        const randomFactor = (pseudoRandom - Math.floor(pseudoRandom)) * 2 - 1; // -1 to 1
+
+                        const charSum = (teamName + p.id).split('').reduce((a, c) => a + c.charCodeAt(0), 0);
+                        const seed = charSum * 2654435761 + draftSessionSeed;
+                        const randomFactor = seededRandom(seed) * 2 - 1;
                         const variance = Math.round(randomFactor * baseVariance * varianceMultiplier);
-                        
-                        // Final board position (lower = better)
+
                         const boardRank = consensusRank - posValue - needBoost + variance;
-                        
+
                         return {
                             id: p.id,
                             boardRank: boardRank,
                             consensusRank: consensusRank
                         };
                     });
-                    
-                    // Sort by board rank and store
+
                     scoredProspects.sort((a, b) => a.boardRank - b.boardRank);
                     teamDraftBoards[teamName] = scoredProspects.map(p => p.id);
                 });
-                
-                console.log("Generated draft boards for", teams.length, "teams");
+
+                console.log("Generated draft boards for", teams.length, "teams", "(seed:", draftSessionSeed + ")");
             }
             
             // Get best available prospect for a team based on their board
