@@ -196,17 +196,13 @@
                 align-items: center;
                 gap: 8px;
             }
-            .sim-controls-inline select,
-            .sim-controls-inline input {
+            .sim-controls-inline select {
                 padding: 6px 8px;
                 font-size: 12px;
                 background: rgba(255,255,255,0.1);
                 border: 1px solid var(--card-border);
                 border-radius: 4px;
                 color: var(--white);
-            }
-            .sim-controls-inline input {
-                width: 60px;
             }
             .sim-btn {
                 padding: 6px 12px;
@@ -223,10 +219,6 @@
             .sim-btn-danger {
                 background: var(--nfl-red);
                 color: white;
-            }
-            .sim-btn-secondary {
-                background: rgba(255,255,255,0.1);
-                color: var(--text-muted);
             }
             .sim-btn:hover {
                 opacity: 0.9;
@@ -1999,10 +1991,7 @@
                                     <option value="1500">Normal</option>
                                     <option value="3000">Slow</option>
                                 </select>
-                                <input type="number" id="simTargetPick" min="1" max="257" placeholder="#" />
-                                <button class="sim-btn sim-btn-primary" id="simToPickBtn" onclick="startSim()">Sim</button>
-                                <button class="sim-btn sim-btn-secondary" id="pauseSimBtn" onclick="pauseSim()" style="display: none;">Pause</button>
-                                <button class="sim-btn sim-btn-danger" id="stopSimBtn" onclick="stopSim()" style="display: none;">Stop</button>
+                                <button class="sim-btn sim-btn-primary" id="simToggleBtn" onclick="toggleSim()">Sim</button>
                             </div>
                         </div>
                         <div class="draft-order-list" id="draftOrderList" style="flex: 1; overflow-y: auto;"></div>
@@ -3205,25 +3194,27 @@
                 return prospects.find(p => !p.drafted);
             }
 
-            function startSim() {
-                const targetInput =
-                    document.getElementById("simTargetPick").value;
-                let targetPick;
-
-                if (targetInput && !isNaN(parseInt(targetInput))) {
-                    targetPick = parseInt(targetInput);
+            function toggleSim() {
+                if (simRunning) {
+                    stopSim();
                 } else {
-                    targetPick = userTeam.picks.find((p) => p >= currentPick);
+                    startSim();
+                }
+            }
+
+            function startSim(targetPick) {
+                if (!targetPick) {
+                    targetPick = 258;
                 }
 
-                if (!targetPick || targetPick <= currentPick) return;
+                if (targetPick <= currentPick) return;
 
                 simRunning = true;
                 simPaused = false;
-                document.getElementById("simToPickBtn").style.display = "none";
-                document.getElementById("simToPickBtn").textContent = "Sim";
-                document.getElementById("pauseSimBtn").style.display = "inline-block";
-                document.getElementById("stopSimBtn").style.display = "inline-block";
+                const btn = document.getElementById("simToggleBtn");
+                btn.textContent = "Stop";
+                btn.classList.remove("sim-btn-primary");
+                btn.classList.add("sim-btn-danger");
 
                 runSimulation(targetPick);
             }
@@ -3231,10 +3222,10 @@
             function stopSim() {
                 simRunning = false;
                 simPaused = false;
-                document.getElementById("simToPickBtn").style.display = "inline-block";
-                document.getElementById("simToPickBtn").textContent = "Sim";
-                document.getElementById("pauseSimBtn").style.display = "none";
-                document.getElementById("stopSimBtn").style.display = "none";
+                const btn = document.getElementById("simToggleBtn");
+                btn.textContent = "Sim";
+                btn.classList.remove("sim-btn-danger");
+                btn.classList.add("sim-btn-primary");
             }
 
             async function runSimulation(targetPick) {
@@ -3661,17 +3652,9 @@
 
             let simPaused = false;
 
-            function pauseSim() {
-                simPaused = true;
-                document.getElementById("pauseSimBtn").style.display = "none";
-                document.getElementById("simToPickBtn").textContent = "Resume";
-                document.getElementById("simToPickBtn").style.display = "inline-block";
-            }
-
             function simToPick(targetPick) {
                 if (targetPick <= currentPick) return;
-                document.getElementById("simTargetPick").value = targetPick;
-                startSim();
+                startSim(targetPick);
             }
 
             function scrollToCurrentPick() {
