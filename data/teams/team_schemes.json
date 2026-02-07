@@ -2,36 +2,38 @@
   "meta": {
     "description": "NFL team scheme assignments for 2026 draft",
     "created": "2026-01-25",
-    "version": "1.0"
+    "updated": "2026-02-07",
+    "version": "2.0",
+    "notes": "Updated all 32 teams with 2026 coaching changes (10 new HCs, 20+ coordinator changes)"
   },
   "teams": {
     "Raiders": {
-      "offScheme": "Vertical Spread",
-      "defScheme": "4-3 Cover 1"
+      "offScheme": "Kubiak Zone Run",
+      "defScheme": "TBD"
     },
     "Jets": {
-      "offScheme": "Shanahan Wide Zone",
-      "defScheme": "Multiple Front"
+      "offScheme": "Reich Erhardt-Perkins",
+      "defScheme": "Glenn Hybrid Man"
     },
     "Cardinals": {
-      "offScheme": "Spread RPO",
-      "defScheme": "3-4 Hybrid"
+      "offScheme": "LaFleur Zone Concepts",
+      "defScheme": "TBD"
     },
     "Titans": {
-      "offScheme": "Play-Action Vertical",
-      "defScheme": "3-4 Multiple"
+      "offScheme": "Daboll Erhardt-Perkins",
+      "defScheme": "4-3 Wide-9"
     },
     "Giants": {
-      "offScheme": "Spread Concepts",
-      "defScheme": "3-4 Pressure"
+      "offScheme": "Nagy West Coast",
+      "defScheme": "Multiple Front"
     },
     "Browns": {
-      "offScheme": "Zone Run Heavy",
-      "defScheme": "4-3 Aggressive"
+      "offScheme": "Monken Vertical",
+      "defScheme": "Fangio Two-High"
     },
     "Commanders": {
-      "offScheme": "Air Raid Concepts",
-      "defScheme": "4-2-5 Nickel"
+      "offScheme": "Blough Concepts",
+      "defScheme": "Flores Pressure"
     },
     "Saints": {
       "offScheme": "West Coast Timing",
@@ -46,12 +48,12 @@
       "defScheme": "3-4 Zone"
     },
     "Dolphins": {
-      "offScheme": "TBD",
-      "defScheme": "TBD"
+      "offScheme": "Shanahan Concepts",
+      "defScheme": "Cover 3 Zone"
     },
     "Cowboys": {
       "offScheme": "Coryell Vertical",
-      "defScheme": "4-3 Single High"
+      "defScheme": "Fangio Two-High"
     },
     "Rams": {
       "offScheme": "McVay Outside Zone",
@@ -62,11 +64,11 @@
       "defScheme": "Disguised 3-4"
     },
     "Buccaneers": {
-      "offScheme": "Vertical Attack",
+      "offScheme": "Robinson Zone Scheme",
       "defScheme": "3-4 Pressure"
     },
     "Lions": {
-      "offScheme": "Power Gap Scheme",
+      "offScheme": "Petzing Balanced",
       "defScheme": "4-3 Attacking"
     },
     "Vikings": {
@@ -78,15 +80,15 @@
       "defScheme": "3-4 Base"
     },
     "Steelers": {
-      "offScheme": "Play-Action Power",
-      "defScheme": "3-4 Traditional"
+      "offScheme": "McCarthy West Coast",
+      "defScheme": "Multiple Front"
     },
     "Chargers": {
-      "offScheme": "Harbaugh Power Run",
+      "offScheme": "McDaniel Zone Scheme",
       "defScheme": "3-4 Versatile"
     },
     "Eagles": {
-      "offScheme": "RPO Heavy Spread",
+      "offScheme": "Mannion Zone Concepts",
       "defScheme": "Fangio Two-High"
     },
     "Bears": {
@@ -94,12 +96,12 @@
       "defScheme": "4-3 Under"
     },
     "Bills": {
-      "offScheme": "Spread Vertical",
-      "defScheme": "4-3 Zone"
+      "offScheme": "Brady Spread",
+      "defScheme": "Leonhard Quarters"
     },
     "49ers": {
       "offScheme": "Shanahan Wide Zone",
-      "defScheme": "4-3 Wide-9"
+      "defScheme": "Aggressive Multiple"
     },
     "Texans": {
       "offScheme": "Shanahan Concepts",
@@ -122,12 +124,12 @@
       "defScheme": "4-3 Cover 3"
     },
     "Falcons": {
-      "offScheme": "Wide Zone",
+      "offScheme": "Stefanski Wide Zone",
       "defScheme": "3-4 Aggressive"
     },
     "Packers": {
       "offScheme": "LaFleur Zone Concepts",
-      "defScheme": "4-3 Swarming"
+      "defScheme": "Gannon Quarters"
     },
     "Jaguars": {
       "offScheme": "West Coast Balanced",

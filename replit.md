@@ -79,6 +79,13 @@ Python HTTP server on port 5000 (static site).
 - **Jan 25**: Team Info panel collapse/expand fixed (no scrollbars, tabs expand panel)
 - **Jan 25**: Restored Scheme tab content (Play Callers, Scheme Fit Traits)
 
+- **Feb 7**: Comprehensive 2026 coaching staff update across all 32 teams
+  - 10 new head coaches: Raiders (Klint Kubiak), Cardinals (Mike LaFleur), Giants (John Harbaugh), Browns (Todd Monken), Dolphins (Jeff Hafley), Titans (Robert Saleh), Ravens (Jesse Minter), Falcons (Kevin Stefanski), Bills (Joe Brady), Steelers (Mike McCarthy)
+  - 20+ coordinator changes: Jets (Frank Reich OC, Glenn calls D), Commanders (David Blough OC, Daronte Jones DC), Chargers (Mike McDaniel OC, Chris O'Leary DC), Lions (Drew Petzing OC), Packers (Jonathan Gannon DC), Eagles (Sean Mannion OC), 49ers (Raheem Morris DC), Chiefs (Eric Bieniemy OC), Rams (Kliff Kingsbury OC), Buccaneers (Zac Robinson OC), Cowboys (Christian Parker DC), Bears (Doyle left for Ravens)
+  - Updated `draft-setup.html` (all 32 teams OC/DC/scheme), `team_schemes.json`, `scheme_skill_weights.json` (75+ scheme aliases)
+  - Scheme alias system maps team-specific scheme names → canonical categories for skill weights
+  - TBD schemes for teams with incomplete coaching hires (Raiders DC, Cardinals DC)
+
 ## Future Work
 - **AI Draft Logic Implementation**: Implement the documented draft board generation and pick selection in game-shell.html
 - **Trade Triggers**: AI trade-up logic when high-value prospect falls (design documented in DESIGN.md)
