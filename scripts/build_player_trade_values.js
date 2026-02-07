@@ -5,22 +5,22 @@ const CURRENT_YEAR = 2026;
 const REFERENCE_DATE = new Date('2026-04-24');
 
 const POSITION_BASE_VALUES = {
-  QB:   { elite: 1800, starter: 800, bridge: 150, backup: 30 },
-  EDGE: { elite: 1200, starter: 600, bridge: 200, backup: 60 },
-  OT:   { elite: 900, starter: 500, bridge: 150, backup: 40 },
-  CB:   { elite: 800, starter: 450, bridge: 130, backup: 35 },
-  WR:   { elite: 800, starter: 450, bridge: 130, backup: 35 },
-  DL:   { elite: 700, starter: 400, bridge: 120, backup: 30 },
-  LB:   { elite: 550, starter: 300, bridge: 100, backup: 25 },
-  S:    { elite: 500, starter: 280, bridge: 90, backup: 20 },
-  TE:   { elite: 450, starter: 250, bridge: 80, backup: 20 },
-  IOL:  { elite: 400, starter: 220, bridge: 70, backup: 15 },
-  RB:   { elite: 350, starter: 180, bridge: 60, backup: 15 },
-  K:    { elite: 40, starter: 20, bridge: 10, backup: 5 },
-  P:    { elite: 40, starter: 20, bridge: 10, backup: 5 },
-  LS:   { elite: 10, starter: 5, bridge: 2, backup: 1 },
-  FB:   { elite: 60, starter: 30, bridge: 15, backup: 5 },
-  NB:   { elite: 500, starter: 280, bridge: 90, backup: 20 },
+  QB:   { elite: 1800, starter: 800, developing: 400, bridge: 150, backup: 30 },
+  EDGE: { elite: 1200, starter: 600, developing: 350, bridge: 200, backup: 60 },
+  OT:   { elite: 900, starter: 500, developing: 280, bridge: 150, backup: 40 },
+  CB:   { elite: 800, starter: 450, developing: 250, bridge: 130, backup: 35 },
+  WR:   { elite: 800, starter: 450, developing: 250, bridge: 130, backup: 35 },
+  DL:   { elite: 700, starter: 400, developing: 220, bridge: 120, backup: 30 },
+  LB:   { elite: 550, starter: 300, developing: 170, bridge: 100, backup: 25 },
+  S:    { elite: 500, starter: 280, developing: 150, bridge: 90, backup: 20 },
+  TE:   { elite: 450, starter: 250, developing: 135, bridge: 80, backup: 20 },
+  IOL:  { elite: 400, starter: 220, developing: 120, bridge: 70, backup: 15 },
+  RB:   { elite: 350, starter: 180, developing: 100, bridge: 60, backup: 15 },
+  K:    { elite: 40, starter: 20, developing: 12, bridge: 10, backup: 5 },
+  P:    { elite: 40, starter: 20, developing: 12, bridge: 10, backup: 5 },
+  LS:   { elite: 10, starter: 5, developing: 3, bridge: 2, backup: 1 },
+  FB:   { elite: 60, starter: 30, developing: 18, bridge: 15, backup: 5 },
+  NB:   { elite: 500, starter: 280, developing: 150, bridge: 90, backup: 20 },
 };
 
 const POSITION_PRIME_WINDOWS = {
@@ -68,8 +68,8 @@ function getPerformanceTier(position, apy, isStarter, isRookieDeal, draftRound) 
 
   if (isRookieDeal) {
     if (draftRound && draftRound <= 1) return 'elite';
-    if (draftRound && draftRound <= 3) return 'starter';
-    if (draftRound && draftRound <= 5) return 'bridge';
+    if (draftRound && draftRound <= 2) return 'developing';
+    if (draftRound && draftRound <= 4) return 'bridge';
     return 'bridge';
   }
 
@@ -149,17 +149,32 @@ function getAgeCurveMultiplier(position, age) {
   }
 }
 
-function getContractModifier(apy, position, yearsRemaining, isRookieDeal) {
+function getContractModifier(apy, position, yearsRemaining, isRookieDeal, draftRound) {
   const avgAPY = POSITION_AVG_APY[position] || 10;
   const marketRatio = apy / avgAPY;
 
   if (isRookieDeal) {
-    let modifier = 1.0;
-    if (yearsRemaining >= 3) modifier = 1.25;
-    else if (yearsRemaining >= 2) modifier = 1.15;
-    else if (yearsRemaining >= 1) modifier = 1.0;
-    else modifier = 0.75;
-    return modifier;
+    if (draftRound && draftRound <= 1) {
+      if (yearsRemaining >= 3) return 1.70;
+      if (yearsRemaining >= 2) return 1.55;
+      if (yearsRemaining >= 1) return 1.25;
+      return 0.85;
+    } else if (draftRound && draftRound <= 2) {
+      if (yearsRemaining >= 3) return 1.20;
+      if (yearsRemaining >= 2) return 1.10;
+      if (yearsRemaining >= 1) return 0.90;
+      return 0.65;
+    } else if (draftRound && draftRound <= 3) {
+      if (yearsRemaining >= 3) return 1.05;
+      if (yearsRemaining >= 2) return 0.95;
+      if (yearsRemaining >= 1) return 0.80;
+      return 0.55;
+    } else {
+      if (yearsRemaining >= 3) return 0.90;
+      if (yearsRemaining >= 2) return 0.80;
+      if (yearsRemaining >= 1) return 0.65;
+      return 0.45;
+    }
   }
 
   let modifier = 1.0;
@@ -360,7 +375,7 @@ function main() {
           const baseValue = baseValues[performanceTier] || baseValues.backup;
           const ageMultiplier = getAgeCurveMultiplier(valuePos, age);
           const contractModifier = contractFound
-            ? getContractModifier(apy, valuePos, yearsRemaining, isRookieDeal)
+            ? getContractModifier(apy, valuePos, yearsRemaining, isRookieDeal, draftRound)
             : 1.0;
 
           let tradeValue = Math.round(baseValue * ageMultiplier * contractModifier);
