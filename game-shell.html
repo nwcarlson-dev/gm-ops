@@ -3553,10 +3553,12 @@
                         const draftedPlayer = d.drafted
                             ? `<div class="drafted-player">${d.drafted.name} <span class="drafted-pos">${d.drafted.position}</span></div>`
                             : needsDisplay;
+                        const isCurrent = d.overall === currentPick;
+                        const simLabel = isCurrent ? 'Sim' : 'Sim to';
                         const actionButtons = !isPast ? `
                             <div class="draft-pick-actions">
                                 <button class="draft-pick-action trade" onclick="event.stopPropagation(); openTradeModal(${d.overall})">Trade for</button>
-                                <button class="draft-pick-action" onclick="event.stopPropagation(); simToPick(${d.overall})">Sim to</button>
+                                <button class="draft-pick-action" onclick="event.stopPropagation(); simToPick(${d.overall})">${simLabel}</button>
                             </div>
                         ` : '';
                         return `
@@ -3648,7 +3650,8 @@
             let simPaused = false;
 
             function simToPick(targetPick) {
-                if (targetPick <= currentPick) return;
+                if (targetPick < currentPick) return;
+                if (targetPick === currentPick) targetPick = currentPick + 1;
                 startSim(targetPick);
             }
 
