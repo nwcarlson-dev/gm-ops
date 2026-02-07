@@ -897,14 +897,13 @@
   <div class="container">
     <header class="header">
       <h1>Select Your Team</h1>
-      <p>Choose which team(s) you'll control in the draft</p>
+      <p>Choose which team you'll control in the draft</p>
     </header>
 
     <div class="controls">
       <span class="controls-label">Sort:</span>
       <button class="sort-btn active" id="sortOrder" onclick="setSort('order')">Draft Order</button>
       <button class="sort-btn" id="sortAlpha" onclick="setSort('alpha')">A-Z</button>
-      <button class="select-all-btn" id="selectAllBtn" onclick="toggleSelectAll()">Select All</button>
     </div>
 
     <div id="teamGrid" class="team-grid"></div>
@@ -957,7 +956,7 @@
   <div class="action-footer">
     <div class="footer-content">
       <div class="selection-count">
-        <span id="selectedCount">0</span> of 32 teams selected
+        <span id="selectedCount">No team selected</span>
       </div>
       <button class="start-btn" id="startBtn" onclick="submitDraft()">
         Enter Draft
@@ -1281,26 +1280,16 @@
       event.target.classList.add('active');
     }
 
-    function toggleSelectAll() {
-      const cards = document.querySelectorAll('.team-card');
-      allSelected = !allSelected;
-      
-      cards.forEach(card => {
-        if (allSelected) {
-          card.classList.add('selected');
-        } else {
-          card.classList.remove('selected');
-        }
-      });
-      
-      document.getElementById('selectAllBtn').textContent = allSelected ? 'Deselect All' : 'Select All';
-      updateSelectionCount();
-    }
-
     function updateSelectionCount() {
-      const count = document.querySelectorAll('.team-card.selected').length;
-      document.getElementById('selectedCount').textContent = count;
-      document.getElementById('startBtn').disabled = count === 0;
+      const selected = document.querySelector('.team-card.selected');
+      const countEl = document.getElementById('selectedCount');
+      if (selected) {
+        const teamName = selected.querySelector('.team-name').innerText;
+        countEl.innerHTML = `<span>${teamName}</span> selected`;
+      } else {
+        countEl.textContent = 'No team selected';
+      }
+      document.getElementById('startBtn').disabled = !selected;
     }
 
     function toggleExpand(teamName, e) {
@@ -1318,13 +1307,12 @@
     function toggleSelect(card, e) {
       if (e.target.closest('.expand-btn')) return;
       
-      card.classList.toggle('selected');
+      const wasSelected = card.classList.contains('selected');
+      document.querySelectorAll('.team-card.selected').forEach(c => c.classList.remove('selected'));
+      if (!wasSelected) {
+        card.classList.add('selected');
+      }
       updateSelectionCount();
-      
-      const allCards = document.querySelectorAll('.team-card');
-      const selectedCards = document.querySelectorAll('.team-card.selected');
-      allSelected = allCards.length === selectedCards.length;
-      document.getElementById('selectAllBtn').textContent = allSelected ? 'Deselect All' : 'Select All';
     }
 
     function renderTeams() {
@@ -1401,28 +1389,37 @@
     }
 
     function submitDraft() {
-      const selectedCards = document.querySelectorAll('.team-card.selected');
-      const selected = Array.from(selectedCards).map(c => 
-        c.querySelector('.team-name').innerText
-      );
+      const selectedCard = document.querySelector('.team-card.selected');
 
-      if (!selected.length) {
-        alert("Please select at least one team!");
+      if (!selectedCard) {
+        alert("Please select a team!");
         return;
       }
 
+      const teamName = selectedCard.querySelector('.team-name').innerText;
+      const teamObj = teams.find(t => t.n === teamName);
+
       const settings = {
-        selectedTeams: selected,
+        selectedTeams: [teamName],
+        teamData: teamObj ? {
+          name: teamObj.n,
+          pick: teamObj.p,
+          record: teamObj.rec,
+          oc: teamObj.oc,
+          dc: teamObj.dc,
+          offScheme: teamObj.offScheme,
+          defScheme: teamObj.defScheme,
+          offNeeds: teamObj.offNeeds,
+          defNeeds: teamObj.defNeeds,
+          summary: teamObj.summary
+        } : null,
         posVal: document.getElementById('posVal').innerText,
         needVal: document.getElementById('needVal').innerText,
         rounds: selectedRounds,
         prospects: prospects
       };
 
-      // Store draft settings for game-shell to read
       localStorage.setItem('gmops_draft_settings', JSON.stringify(settings));
-      
-      // Navigate to draft room
       window.location.href = 'game-shell.html';
     }
 

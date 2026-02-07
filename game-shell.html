@@ -2255,42 +2255,38 @@
             };
 
             const TEAM_DATA = {
-                Raiders: { abbr: "LV", color: "#000000", color2: "#A5ACAF" },
-                Jets: { abbr: "NYJ", color: "#125740", color2: "#000000" },
-                Cardinals: { abbr: "ARI", color: "#97233F", color2: "#000000" },
-                Titans: { abbr: "TEN", color: "#4B92DB", color2: "#0C2340" },
-                Giants: { abbr: "NYG", color: "#0B2265", color2: "#A71930" },
-                Browns: { abbr: "CLE", color: "#311D00", color2: "#FF3C00" },
-                Commanders: {
-                    abbr: "WAS",
-                    color: "#5A1414",
-                    color2: "#FFB612",
-                },
-                Saints: { abbr: "NO", color: "#D3BC8D", color2: "#101820" },
-                Chiefs: { abbr: "KC", color: "#E31837", color2: "#FFB81C" },
-                Bengals: { abbr: "CIN", color: "#FB4F14", color2: "#000000" },
-                Dolphins: { abbr: "MIA", color: "#008E97", color2: "#FC4C02" },
-                Cowboys: { abbr: "DAL", color: "#003594", color2: "#869397" },
-                Rams: { abbr: "LAR", color: "#003594", color2: "#FFA300" },
-                Ravens: { abbr: "BAL", color: "#241773", color2: "#9E7C0C" },
-                Buccaneers: { abbr: "TB", color: "#D50A0A", color2: "#34302B" },
-                Falcons: { abbr: "ATL", color: "#A71930", color2: "#000000" },
-                Lions: { abbr: "DET", color: "#0076B6", color2: "#B0B7BC" },
-                Vikings: { abbr: "MIN", color: "#4F2683", color2: "#FFC62F" },
-                Panthers: { abbr: "CAR", color: "#0085CA", color2: "#101820" },
-                Jaguars: { abbr: "JAX", color: "#006778", color2: "#D7A22A" },
-                Steelers: { abbr: "PIT", color: "#FFB612", color2: "#101820" },
-                Chargers: { abbr: "LAC", color: "#0080C6", color2: "#FFC20E" },
-                Eagles: { abbr: "PHI", color: "#004C54", color2: "#A5ACAF" },
-                Colts: { abbr: "IND", color: "#002C5F", color2: "#A2AAAD" },
-                Bears: { abbr: "CHI", color: "#0B162A", color2: "#C83803" },
-                Bills: { abbr: "BUF", color: "#00338D", color2: "#C60C30" },
-                "49ers": { abbr: "SF", color: "#AA0000", color2: "#B3995D" },
-                Texans: { abbr: "HOU", color: "#03202F", color2: "#A71930" },
-                Packers: { abbr: "GB", color: "#203731", color2: "#FFB612" },
-                Patriots: { abbr: "NE", color: "#002244", color2: "#C60C30" },
-                Broncos: { abbr: "DEN", color: "#FB4F14", color2: "#002244" },
-                Seahawks: { abbr: "SEA", color: "#002244", color2: "#69BE28" },
+                Raiders: { abbr: "LV", name: "Las Vegas Raiders", color: "#000000", color2: "#A5ACAF" },
+                Jets: { abbr: "NYJ", name: "New York Jets", color: "#125740", color2: "#000000" },
+                Cardinals: { abbr: "ARI", name: "Arizona Cardinals", color: "#97233F", color2: "#000000" },
+                Titans: { abbr: "TEN", name: "Tennessee Titans", color: "#4B92DB", color2: "#0C2340" },
+                Giants: { abbr: "NYG", name: "New York Giants", color: "#0B2265", color2: "#A71930" },
+                Browns: { abbr: "CLE", name: "Cleveland Browns", color: "#311D00", color2: "#FF3C00" },
+                Commanders: { abbr: "WAS", name: "Washington Commanders", color: "#5A1414", color2: "#FFB612" },
+                Saints: { abbr: "NO", name: "New Orleans Saints", color: "#D3BC8D", color2: "#101820" },
+                Chiefs: { abbr: "KC", name: "Kansas City Chiefs", color: "#E31837", color2: "#FFB81C" },
+                Bengals: { abbr: "CIN", name: "Cincinnati Bengals", color: "#FB4F14", color2: "#000000" },
+                Dolphins: { abbr: "MIA", name: "Miami Dolphins", color: "#008E97", color2: "#FC4C02" },
+                Cowboys: { abbr: "DAL", name: "Dallas Cowboys", color: "#003594", color2: "#869397" },
+                Rams: { abbr: "LAR", name: "Los Angeles Rams", color: "#003594", color2: "#FFA300" },
+                Ravens: { abbr: "BAL", name: "Baltimore Ravens", color: "#241773", color2: "#9E7C0C" },
+                Buccaneers: { abbr: "TB", name: "Tampa Bay Buccaneers", color: "#D50A0A", color2: "#34302B" },
+                Falcons: { abbr: "ATL", name: "Atlanta Falcons", color: "#A71930", color2: "#000000" },
+                Lions: { abbr: "DET", name: "Detroit Lions", color: "#0076B6", color2: "#B0B7BC" },
+                Vikings: { abbr: "MIN", name: "Minnesota Vikings", color: "#4F2683", color2: "#FFC62F" },
+                Panthers: { abbr: "CAR", name: "Carolina Panthers", color: "#0085CA", color2: "#101820" },
+                Jaguars: { abbr: "JAX", name: "Jacksonville Jaguars", color: "#006778", color2: "#D7A22A" },
+                Steelers: { abbr: "PIT", name: "Pittsburgh Steelers", color: "#FFB612", color2: "#101820" },
+                Chargers: { abbr: "LAC", name: "Los Angeles Chargers", color: "#0080C6", color2: "#FFC20E" },
+                Eagles: { abbr: "PHI", name: "Philadelphia Eagles", color: "#004C54", color2: "#A5ACAF" },
+                Colts: { abbr: "IND", name: "Indianapolis Colts", color: "#002C5F", color2: "#A2AAAD" },
+                Bears: { abbr: "CHI", name: "Chicago Bears", color: "#0B162A", color2: "#C83803" },
+                Bills: { abbr: "BUF", name: "Buffalo Bills", color: "#00338D", color2: "#C60C30" },
+                "49ers": { abbr: "SF", name: "San Francisco 49ers", color: "#AA0000", color2: "#B3995D" },
+                Texans: { abbr: "HOU", name: "Houston Texans", color: "#03202F", color2: "#A71930" },
+                Packers: { abbr: "GB", name: "Green Bay Packers", color: "#203731", color2: "#FFB612" },
+                Patriots: { abbr: "NE", name: "New England Patriots", color: "#002244", color2: "#C60C30" },
+                Broncos: { abbr: "DEN", name: "Denver Broncos", color: "#FB4F14", color2: "#002244" },
+                Seahawks: { abbr: "SEA", name: "Seattle Seahawks", color: "#002244", color2: "#69BE28" },
             };
 
             const COLLEGE_DATA = {
@@ -2500,113 +2496,72 @@
                 Wisconsin: { abbr: "WIS", color: "#C5050C", color2: "#FFFFFF" },
             };
 
-            // Load settings from localStorage
             const draftSettings = JSON.parse(localStorage.getItem('gmops_draft_settings') || '{}');
             const selectedTeamNames = draftSettings.selectedTeams || ["Bears"];
             const mainTeamName = selectedTeamNames[0];
+            const setupTeamData = draftSettings.teamData || null;
+
+            const POSITION_NAME_TO_ABBR = {
+                "Quarterback": "QB", "Running Back": "RB", "Wide Receiver": "WR",
+                "Tight End": "TE", "Offensive Tackle": "OT", "Interior O-Line": "IOL",
+                "Edge Rusher": "EDGE", "Defensive Line": "DL", "Cornerback": "CB",
+                "Safety": "S", "Linebacker": "LB"
+            };
+
+            const OFFENSE_POSITIONS = new Set(["QB", "RB", "WR", "TE", "OT", "IOL"]);
+
+            function buildNeedsFromSetup(setupNeeds) {
+                if (!setupNeeds) return [];
+                return setupNeeds.map(n => ({
+                    pos: POSITION_NAME_TO_ABBR[n[1]] || n[1],
+                    archetype: n[2] || "",
+                    priority: n[0] ? "high" : "medium",
+                    skills: [],
+                    note: ""
+                }));
+            }
 
             let userTeam = {
                 name: mainTeamName,
-                abbr: "CHI",
-                record: "11-6",
-                division: "Divisional Round",
+                abbr: "???",
+                record: "",
+                division: "",
                 picks: [],
                 offNeeds: [],
                 defNeeds: [],
                 scheme: {
-                    offense: "Shanahan Wide Zone",
-                    offenseCoord: "Ben Johnson (HC)",
-                    defense: "4-3 Under",
-                    defenseCoord: "Dennis Allen (DC)",
+                    offense: "TBD",
+                    offenseCoord: "TBD",
+                    defense: "TBD",
+                    defenseCoord: "TBD",
                 },
             };
-
-            // Set default needs for non-Bears teams
-            const defaultNeeds = {
-                off: [
-                    { pos: "OT", archetype: "Pass Protector", priority: "high", skills: ["Pass Protection", "Footwork"], note: "Need blindside protection." },
-                    { pos: "WR", archetype: "Deep Threat", priority: "medium", skills: ["Speed", "Ball Skills"], note: "Vertical threat needed." }
-                ],
-                def: [
-                    { pos: "EDGE", archetype: "Speed Rusher", priority: "high", skills: ["Pass Rush", "Speed"], note: "Pass rush is a priority." },
-                    { pos: "CB", archetype: "Man Cover", priority: "medium", skills: ["Man Coverage", "Press"], note: "Secondary help needed." }
-                ]
-            };
-
-            const bearsNeeds = {
-                off: [
-                    {
-                        pos: "OT",
-                        archetype: "Pass Protector",
-                        priority: "high",
-                        skills: ["Pass Protection", "Footwork", "Anchor"],
-                        traits: ["Arm Length", "Height"],
-                        note: "Ozzy Trapilo out with patellar injury. Braxton Jones benched. LT is a glaring hole.",
-                    },
-                    {
-                        pos: "RB",
-                        archetype: "Dynamic Playmaker",
-                        priority: "medium",
-                        skills: ["Acceleration", "Vision", "Elusiveness"],
-                        note: "Need explosive home run threat to pair with Caleb Williams.",
-                    },
-                    {
-                        pos: "IOL",
-                        archetype: "Zone Blocker",
-                        priority: "low",
-                        skills: ["Run Blocking", "Pull Ability", "Awareness"],
-                        note: "Depth needed for Shanahan-style rushing attack.",
-                    },
-                ],
-                def: [
-                    {
-                        pos: "EDGE",
-                        archetype: "Speed Rusher",
-                        priority: "high",
-                        skills: ["Pass Rush Moves", "Bend/Flexibility", "Speed to Power"],
-                        traits: ["Arm Length"],
-                        note: "Need consistent pass rush opposite Montez Sweat. 29th in pressure rate.",
-                    },
-                    {
-                        pos: "DL",
-                        archetype: "Run Stuffer",
-                        priority: "high",
-                        skills: ["Run Stuffing", "Anchor", "Double Team Resistance"],
-                        traits: ["Weight", "Strength"],
-                        note: "Allowed most yards before contact in NFL. Interior run defense a major weakness.",
-                    },
-                    {
-                        pos: "S",
-                        archetype: "Versatile",
-                        priority: "high",
-                        skills: ["Range", "Man Coverage", "Tackling"],
-                        note: "Brisker and Byard both FAs. Could lose entire starting safety tandem.",
-                    },
-                    {
-                        pos: "CB",
-                        archetype: "Outside Corner",
-                        priority: "medium",
-                        skills: ["Press Technique", "Man Coverage", "Ball Skills"],
-                        traits: ["Height", "Arm Length"],
-                        note: "Wright and CJGJ pending FAs. Need upgrade on the outside.",
-                    },
-                ]
-            };
-
-            // Update userTeam details from TEAM_DATA and apply needs
-            if (userTeam.name === "Bears") {
-                userTeam.offNeeds = bearsNeeds.off;
-                userTeam.defNeeds = bearsNeeds.def;
-            } else {
-                userTeam.offNeeds = defaultNeeds.off;
-                userTeam.defNeeds = defaultNeeds.def;
-            }
 
             if (TEAM_DATA[userTeam.name]) {
                 const td = TEAM_DATA[userTeam.name];
                 userTeam.abbr = td.abbr || userTeam.abbr;
-                userTeam.record = td.record || userTeam.record;
-                userTeam.division = td.division || userTeam.division;
+                userTeam.record = td.record || "";
+                userTeam.division = td.division || "";
+            }
+
+            if (setupTeamData) {
+                userTeam.record = setupTeamData.record || userTeam.record;
+                userTeam.scheme.offense = setupTeamData.offScheme || "TBD";
+                userTeam.scheme.defense = setupTeamData.defScheme || "TBD";
+                userTeam.scheme.offenseCoord = setupTeamData.oc || "TBD";
+                userTeam.scheme.defenseCoord = setupTeamData.dc || "TBD";
+
+                if (setupTeamData.offNeeds) {
+                    userTeam.offNeeds = buildNeedsFromSetup(setupTeamData.offNeeds);
+                }
+                if (setupTeamData.defNeeds) {
+                    userTeam.defNeeds = buildNeedsFromSetup(setupTeamData.defNeeds);
+                }
+
+                if (setupTeamData.summary) {
+                    userTeam.offNeeds.forEach(n => { if (!n.note) n.note = setupTeamData.summary; });
+                    userTeam.defNeeds.forEach(n => { if (!n.note) n.note = setupTeamData.summary; });
+                }
             }
 
             function getTeamLogo(teamName, size = 28) {
@@ -3872,11 +3827,14 @@
                 const headerName = document.getElementById("headerTeamName");
                 if (teamData && teamData.name) {
                     headerName.textContent = teamData.name;
-                } else if (userTeam.name === "Bears") {
-                    headerName.textContent = "Chicago Bears";
                 } else {
                     headerName.textContent = userTeam.name;
                 }
+
+                document.getElementById("offScheme").textContent = userTeam.scheme.offense;
+                document.getElementById("defScheme").textContent = userTeam.scheme.defense;
+                document.getElementById("ocName").textContent = userTeam.scheme.offenseCoord;
+                document.getElementById("dcName").textContent = userTeam.scheme.defenseCoord;
 
                 document
                     .querySelectorAll(".pos-filter")
@@ -3901,7 +3859,6 @@
                 renderProspects();
                 setupDraftListScroll();
                 
-                // Generate AI draft boards for all teams
                 generateTeamDraftBoards();
             }
 
