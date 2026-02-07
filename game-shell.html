@@ -281,15 +281,14 @@
                 border-radius: 2px;
             }
             .ticker-event {
-                display: flex;
-                align-items: center;
-                gap: 8px;
-                padding: 4px 8px;
+                padding: 5px 10px;
                 border-radius: 4px;
-                font-size: 11px;
+                font-size: 13px;
+                font-family: 'Barlow Condensed', sans-serif;
                 color: var(--silver);
                 animation: tickerSlideIn 0.3s ease;
                 flex-shrink: 0;
+                line-height: 1.4;
             }
             @keyframes tickerSlideIn {
                 from { opacity: 0; transform: translateY(-8px); }
@@ -3893,18 +3892,9 @@
 
                 list.innerHTML = tickerEvents.slice(0, maxShow).map(e => {
                     if (e.type === 'pick') {
-                        return `<div class="ticker-event pick">
-                            <span class="ticker-pick-num">#${e.data.overall}</span>
-                            <span class="ticker-player">${e.data.playerName}</span>
-                            <span class="ticker-pos">${e.data.position}</span>
-                            <span class="ticker-team">${e.data.team}</span>
-                        </div>`;
+                        return `<div class="ticker-event pick">The ${e.data.team} select <strong>${e.data.position} ${e.data.playerName}</strong> with the #${e.data.overall} overall pick</div>`;
                     } else if (e.type === 'trade') {
-                        return `<div class="ticker-event trade">
-                            <span class="ticker-trade-icon">TRADE</span>
-                            <span>${e.data.team1} ↔ ${e.data.team2}</span>
-                            <span class="ticker-team">${e.data.summary}</span>
-                        </div>`;
+                        return `<div class="ticker-event trade"><span class="ticker-trade-icon">TRADE</span> The ${e.data.seller} trade ${e.data.targetPick} overall to the ${e.data.buyer} for picks ${e.data.sentPicks}</div>`;
                     }
                     return '';
                 }).join('');
@@ -4060,9 +4050,10 @@
                 const recSummary = tradePackage.receive.map(p => `#${p.overall}`).join(', ');
 
                 addTickerEvent('trade', {
-                    team1: buyerTeam,
-                    team2: sellerTeam,
-                    summary: `${buyerTeam} sends ${giveSummary} for ${recSummary}`
+                    buyer: buyerTeam,
+                    seller: sellerTeam,
+                    targetPick: recSummary,
+                    sentPicks: giveSummary
                 });
 
                 if (!tickerVisible) {
@@ -4169,10 +4160,13 @@
 
                 userTeam.picks = draftOrder.filter(d => d.team === userTeam.name).map(d => d.overall).sort((a, b) => a - b);
 
+                const givePicks = offer.package.give.map(p => `#${p.overall}`).join(', ');
+                const recPicks = offer.package.receive.map(p => `#${p.overall}`).join(', ');
                 addTickerEvent('trade', {
-                    team1: offer.buyerTeam,
-                    team2: userTeam.name,
-                    summary: `${offer.buyerTeam} trades up with ${userTeam.name}`
+                    buyer: offer.buyerTeam,
+                    seller: userTeam.name,
+                    targetPick: recPicks,
+                    sentPicks: givePicks
                 });
 
                 closeTradeOfferModal();
