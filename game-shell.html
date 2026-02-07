@@ -2492,10 +2492,16 @@
                 Wisconsin: { abbr: "WIS", color: "#C5050C", color2: "#FFFFFF" },
             };
 
-            const draftSettings = JSON.parse(localStorage.getItem('gmops_draft_settings') || '{}');
+            let draftSettings = {};
+            try {
+                draftSettings = JSON.parse(localStorage.getItem('gmops_draft_settings') || '{}');
+            } catch(e) {
+                console.error("Failed to parse draft settings from localStorage:", e);
+            }
             const selectedTeamNames = draftSettings.selectedTeams || ["Bears"];
             const mainTeamName = selectedTeamNames[0];
             const setupTeamData = draftSettings.teamData || null;
+            console.log("Draft settings loaded - Team:", mainTeamName, "Setup data:", setupTeamData ? "present" : "missing");
 
             const POSITION_NAME_TO_ABBR = {
                 "Quarterback": "QB", "Running Back": "RB", "Wide Receiver": "WR",
@@ -3726,30 +3732,34 @@
                 });
             }
 
+            async function safeFetch(url) {
+                try {
+                    const res = await fetch(url);
+                    if (!res.ok) return null;
+                    return await res.json();
+                } catch (e) {
+                    console.warn("Failed to load " + url, e);
+                    return null;
+                }
+            }
+
             async function loadData() {
                 try {
-                    const [prospectsRes, draftRes, needsRes, schemesRes, teamSchemesRes, depthRes] =
+                    const [prospectsData, draftData, needsData, schemesData, teamSchemesData, depthChartsData] =
                         await Promise.all([
-                            fetch("data/prospects/current/2026_prospects.json"),
-                            fetch("data/draft/2026_draft_order.json"),
-                            fetch("data/teams/nflmdd_team_needs_2026.json"),
-                            fetch("data/schemes/scheme_skill_weights.json"),
-                            fetch("data/teams/team_schemes.json"),
-                            fetch("data/teams/depth_charts_2026.json"),
+                            safeFetch("data/prospects/current/2026_prospects.json"),
+                            safeFetch("data/draft/2026_draft_order.json"),
+                            safeFetch("data/teams/nflmdd_team_needs_2026.json"),
+                            safeFetch("data/schemes/scheme_skill_weights.json"),
+                            safeFetch("data/teams/team_schemes.json"),
+                            safeFetch("data/teams/depth_charts_2026.json"),
                         ]);
 
-                    const prospectsData = await prospectsRes.json();
-                    const draftData = await draftRes.json();
-                    const needsData = await needsRes.json();
-                    const schemesData = await schemesRes.json();
-                    const teamSchemesData = await teamSchemesRes.json();
-                    const depthChartsData = await depthRes.json();
-
-                    prospects = prospectsData.prospects || [];
-                    draftOrder = draftData.picks || [];
-                    allTeamNeeds = needsData.teams || {};
-                    schemeWeights = schemesData;
-                    teamSchemes = teamSchemesData.teams || {};
+                    prospects = (prospectsData && prospectsData.prospects) || [];
+                    draftOrder = (draftData && draftData.picks) || [];
+                    allTeamNeeds = (needsData && needsData.teams) || {};
+                    schemeWeights = schemesData || {};
+                    teamSchemes = (teamSchemesData && teamSchemesData.teams) || {};
                     allDepthCharts = depthChartsData || {};
 
                     userTeam.picks = draftOrder
@@ -3834,7 +3844,7 @@
                         );
                     });
 
-                    init();
+                    initDraftBoard();
                 } catch (err) {
                     console.error("Error loading data:", err);
                     document.getElementById("prospectList").innerHTML =
@@ -3842,7 +3852,7 @@
                 }
             }
 
-            function init() {
+            function initTeamPanel() {
                 const teamData = TEAM_DATA[userTeam.name];
                 
                 document.getElementById("headerTeamLogo").innerHTML =
@@ -3868,6 +3878,10 @@
                     summaryEl.textContent = `${teamData ? teamData.name : userTeam.name}${recordStr}`;
                 }
 
+                renderNeeds();
+            }
+
+            function initDraftBoard() {
                 document
                     .querySelectorAll(".pos-filter")
                     .forEach(function (btn) {
@@ -3886,7 +3900,7 @@
                         });
                     });
 
-                renderNeeds();
+                initTeamPanel();
                 renderPickList();
                 renderProspects();
                 setupDraftListScroll();
@@ -3894,6 +3908,7 @@
                 generateTeamDraftBoards();
             }
 
+            initTeamPanel();
             loadData();
         </script>
     </body>
