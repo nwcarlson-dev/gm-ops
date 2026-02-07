@@ -2019,8 +2019,8 @@
                                 <div class="team-info-summary">
                                     <div id="headerTeamLogo"></div>
                                     <div>
-                                        <div class="team-info-name" id="headerTeamName">Chicago Bears</div>
-                                        <div class="team-info-meta" id="headerTeamMeta">Next: R1 P25 - 24 picks away</div>
+                                        <div class="team-info-name" id="headerTeamName">Loading...</div>
+                                        <div class="team-info-meta" id="headerTeamMeta"></div>
                                     </div>
                                 </div>
                                 <div class="panel-tabs" style="margin: 0;" onclick="event.stopPropagation();">
@@ -2060,32 +2060,28 @@
                                         <div class="scheme-header">Offensive</div>
                                         <div class="scheme-box">
                                             <div class="scheme-label">Scheme</div>
-                                            <div class="scheme-value" id="offScheme">Shanahan Wide Zone</div>
+                                            <div class="scheme-value" id="offScheme">—</div>
                                         </div>
                                         <div class="scheme-box">
                                             <div class="scheme-label">Play Caller</div>
-                                            <div class="scheme-value" id="ocName">Ben Johnson (HC)</div>
+                                            <div class="scheme-value" id="ocName">—</div>
                                         </div>
                                     </div>
                                     <div class="scheme-section">
                                         <div class="scheme-header">Defensive</div>
                                         <div class="scheme-box">
                                             <div class="scheme-label">Scheme</div>
-                                            <div class="scheme-value" id="defScheme">4-3 Under</div>
+                                            <div class="scheme-value" id="defScheme">—</div>
                                         </div>
                                         <div class="scheme-box">
                                             <div class="scheme-label">Play Caller</div>
-                                            <div class="scheme-value" id="dcName">Dennis Allen (DC)</div>
+                                            <div class="scheme-value" id="dcName">—</div>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="scheme-section" style="margin-top: 8px;">
-                                    <div class="scheme-header">Scheme Fit Traits</div>
-                                    <div class="scheme-box" style="font-size: 11px; color: var(--silver); line-height: 1.5;">
-                                        <strong style="color: var(--gold)">Zone Blocking:</strong> Athletic OL who can move laterally<br/>
-                                        <strong style="color: var(--gold)">Run Game:</strong> One-cut backs with vision and burst<br/>
-                                        <strong style="color: var(--gold)">Pass Rush:</strong> Speed rushers who can bend the edge<br/>
-                                        <strong style="color: var(--gold)">Coverage:</strong> Versatile DBs who can play man and zone
+                                    <div class="scheme-header">Team Summary</div>
+                                    <div class="scheme-box" style="font-size: 11px; color: var(--silver); line-height: 1.5;" id="teamSummary">
                                     </div>
                                 </div>
                             </div>
@@ -3756,11 +3752,39 @@
                     teamSchemes = teamSchemesData.teams || {};
                     allDepthCharts = depthChartsData || {};
 
-                    // Load user team picks from draft order
                     userTeam.picks = draftOrder
                         .filter((d) => d.team === userTeam.name)
                         .map((d) => d.overall)
                         .sort((a, b) => a - b);
+
+                    const jsonScheme = teamSchemes[userTeam.name];
+                    if (jsonScheme) {
+                        if (userTeam.scheme.offense === "TBD") userTeam.scheme.offense = jsonScheme.offScheme || "TBD";
+                        if (userTeam.scheme.defense === "TBD") userTeam.scheme.defense = jsonScheme.defScheme || "TBD";
+                    }
+
+                    if (userTeam.offNeeds.length === 0 && userTeam.defNeeds.length === 0) {
+                        const jsonNeeds = allTeamNeeds[userTeam.abbr];
+                        if (jsonNeeds) {
+                            const offPositions = ["QB", "RB", "WR", "TE", "OT", "IOL"];
+                            jsonNeeds.primary.forEach((pos, i) => {
+                                const need = { pos, archetype: "", priority: "high", skills: [], note: "" };
+                                if (offPositions.includes(pos)) {
+                                    userTeam.offNeeds.push(need);
+                                } else {
+                                    userTeam.defNeeds.push(need);
+                                }
+                            });
+                            jsonNeeds.secondary.slice(0, 3).forEach(pos => {
+                                const need = { pos, archetype: "", priority: "medium", skills: [], note: "" };
+                                if (offPositions.includes(pos)) {
+                                    userTeam.offNeeds.push(need);
+                                } else {
+                                    userTeam.defNeeds.push(need);
+                                }
+                            });
+                        }
+                    }
 
                     prospects.forEach((p) => {
                         if (p.name && typeof p.name === "object") {
@@ -3835,6 +3859,14 @@
                 document.getElementById("defScheme").textContent = userTeam.scheme.defense;
                 document.getElementById("ocName").textContent = userTeam.scheme.offenseCoord;
                 document.getElementById("dcName").textContent = userTeam.scheme.defenseCoord;
+
+                const summaryEl = document.getElementById("teamSummary");
+                if (summaryEl && setupTeamData && setupTeamData.summary) {
+                    summaryEl.textContent = setupTeamData.summary;
+                } else if (summaryEl) {
+                    const recordStr = userTeam.record ? ` (${userTeam.record})` : "";
+                    summaryEl.textContent = `${teamData ? teamData.name : userTeam.name}${recordStr}`;
+                }
 
                 document
                     .querySelectorAll(".pos-filter")
