@@ -2258,7 +2258,7 @@
                             <span class="ticker-badge" id="tickerCount" style="display:none;">0</span>
                             <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
                         </button>
-                        <div class="draft-ticker" id="draftTicker">
+                        <div class="draft-ticker visible" id="draftTicker">
                             <div class="draft-ticker-inner" id="tickerList"></div>
                         </div>
                         <div class="draft-order-list" id="draftOrderList" style="flex: 1; overflow-y: auto;"></div>
@@ -3822,7 +3822,7 @@
             }
 
             let tickerEvents = [];
-            let tickerVisible = false;
+            let tickerVisible = true;
             let tickerUnread = 0;
             let pendingTradeOffer = null;
             let simWasRunning = false;
@@ -3866,7 +3866,7 @@
             function renderTicker() {
                 const list = document.getElementById('tickerList');
                 const speed = parseInt(document.getElementById('simSpeed').value);
-                const maxShow = speed <= 500 ? 8 : 15;
+                const maxShow = 2;
 
                 list.innerHTML = tickerEvents.slice(0, maxShow).map(e => {
                     if (e.type === 'pick') {
