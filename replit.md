@@ -90,6 +90,12 @@ Python HTTP server on port 5000 (static site).
   - Fernando Mendoza (QB, Indiana) updated to consensus #1 overall (Heisman winner, led Indiana to natl championship)
   - 337 prospects total (was 338)
   - AI draft board variance now uses per-session random seed for unique drafts each playthrough
+- **Feb 7**: Prospect ranking update
+  - Added NFLMDD consensus big board (aggregated from 92 big boards, 557 mock drafts)
+  - Updated Daniel Jeremiah Top 50 (NFL.com, Feb 2026)
+  - Consensus now calculated as median of 4 sources: PFF, CBS, NFLMDD, NFL.com (Jeremiah)
+  - Range (low/high) derived from min/max across all sources per prospect
+  - 73 prospect rankings adjusted; Mendoza unanimous #1, Bain #2, Reese #3
 
 ## Future Work
 - **AI Draft Logic Implementation**: Implement the documented draft board generation and pick selection in game-shell.html
