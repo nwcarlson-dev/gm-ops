@@ -15,6 +15,8 @@ GM Ops is a comprehensive NFL franchise simulation game aiming to be "the best f
 - `brand-guidelines.html` - Brand/style guidelines
 - `DESIGN.md` - Game design documentation
 - `dev-guide.html` - Developer guide
+- `draft-results.html` - Draft analysis/grades page (pick-by-pick analysis, team grades, trade log)
+- `scripts/simulate-draft.js` - Node.js script to simulate a full draft for testing/development
 - `data/` - Data files and scripts
   - `data/prospects/current/2026_prospects.json` - 337 prospects with full schema
   - `data/draft/2026_draft_order.json` - 257 picks with trade values (NFLMDD source)
@@ -97,6 +99,21 @@ Python HTTP server on port 5000 (static site).
   - Range (low/high) derived from min/max across all sources per prospect
   - 73 prospect rankings adjusted; Mendoza unanimous #1, Bain #2, Reese #3
 
+- **Feb 7**: Draft ticker formatting updated to sentence-style ("The Raiders select QB Fernando Mendoza with the #1 overall pick")
+- **Feb 7**: Ticker font bumped from 11px to 13px with Barlow Condensed for readability
+- **Feb 7**: Draft Analysis / Grade Page (`draft-results.html`)
+  - Grading based on: value vs. consensus rank, need fill (primary/secondary/none), trade impact, development certainty
+  - Pick grades weighted: Rounds 1-2 (3x), Rounds 3-4 (2x), Rounds 5-7 (1x)
+  - Value semantics: positive `valueOverConsensus` = REACH (picked before consensus), negative = STEAL
+  - Trade-up bonus: moving up for value at a need position boosts grade; reaching on trade-ups penalized
+  - Pick-by-pick narrative analysis with contextual commentary
+  - 4 tabs: My Team (grade + breakdown + needs + picks), All Picks (257 picks by round), All Teams (32 teams ranked by grade), Trades (full trade log)
+  - Needs report: primary/secondary filled vs. unfilled
+  - Team draft grade includes need fill rate and trade value net adjustments
+- **Feb 7**: Draft simulation script (`scripts/simulate-draft.js`)
+  - Node.js script mirrors game-shell.html AI logic (board generation, variance, needs, trades)
+  - Outputs `data/draft/simulated_draft_results.json` with full pick analysis data
+  - Fixed trade buyer/seller bug (original seller captured before trade mutates pickData.team)
 - **Feb 7**: Trade system and draft ticker implementation
   - Trade button added to draft board header (next to sim controls)
   - Draft ticker: collapsible event feed showing picks and trades as they happen

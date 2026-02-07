@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GM Ops - Draft Analysis</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --nfl-red: #D50A0A;
+            --nfl-blue: #013369;
+            --white: #FFFFFF;
+            --silver: #A5ACAF;
+            --dark-navy: #0A1628;
+            --card-bg: rgba(1, 51, 105, 0.3);
+            --card-border: rgba(165, 172, 175, 0.2);
+            --text-muted: #8a9bae;
+            --success: #10B981;
+            --warning: #F59E0B;
+            --danger: #EF4444;
+            --gold: #D4AF37;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--dark-navy);
+            color: var(--white);
+            min-height: 100vh;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background:
+                radial-gradient(ellipse at 20% 20%, rgba(213,10,10,0.05) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 80%, rgba(1,51,105,0.15) 0%, transparent 50%),
+                linear-gradient(180deg, var(--dark-navy) 0%, #0d1e33 100%);
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .header {
+            background: var(--nfl-blue);
+            padding: 0 32px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            height: 64px;
+            border-bottom: 3px solid var(--nfl-red);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .logo-text {
+            font-family: 'Teko', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .logo-text .gm { color: var(--nfl-red); }
+        .logo-text .ops { color: var(--white); }
+
+        .header-title {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 18px;
+            font-weight: 500;
+            color: var(--silver);
+            border-left: 1px solid rgba(255,255,255,0.2);
+            padding-left: 16px;
+        }
+
+        .back-btn {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            padding: 6px 16px;
+            background: rgba(255,255,255,0.1);
+            color: var(--white);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 4px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: background 0.2s;
+        }
+
+        .back-btn:hover { background: rgba(255,255,255,0.2); }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 24px 32px;
+        }
+
+        .overview-grid {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 24px;
+            margin-bottom: 32px;
+        }
+
+        .grade-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 12px;
+            padding: 32px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .grade-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Teko', sans-serif;
+            font-size: 56px;
+            font-weight: 700;
+            border: 4px solid;
+        }
+
+        .grade-A-plus, .grade-A { border-color: #10B981; color: #10B981; background: rgba(16,185,129,0.1); }
+        .grade-A-minus { border-color: #34D399; color: #34D399; background: rgba(52,211,153,0.1); }
+        .grade-B-plus, .grade-B { border-color: #60A5FA; color: #60A5FA; background: rgba(96,165,250,0.1); }
+        .grade-B-minus { border-color: #93C5FD; color: #93C5FD; background: rgba(147,197,253,0.1); }
+        .grade-C-plus, .grade-C { border-color: var(--warning); color: var(--warning); background: rgba(245,158,11,0.1); }
+        .grade-C-minus { border-color: #FBBF24; color: #FBBF24; background: rgba(251,191,36,0.1); }
+        .grade-D-plus, .grade-D, .grade-D-minus { border-color: #F87171; color: #F87171; background: rgba(248,113,113,0.1); }
+        .grade-F { border-color: var(--danger); color: var(--danger); background: rgba(239,68,68,0.1); }
+
+        .grade-label {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--silver);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .grade-summary {
+            font-size: 13px;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        .breakdown-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+        }
+
+        .breakdown-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            padding: 16px;
+        }
+
+        .breakdown-card h4 {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--silver);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 8px;
+        }
+
+        .breakdown-value {
+            font-family: 'Teko', sans-serif;
+            font-size: 36px;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .breakdown-detail {
+            font-size: 12px;
+            color: var(--text-muted);
+            margin-top: 4px;
+        }
+
+        .value-positive { color: var(--success); }
+        .value-neutral { color: #60A5FA; }
+        .value-negative { color: var(--danger); }
+
+        .section-title {
+            font-family: 'Teko', sans-serif;
+            font-size: 28px;
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: 16px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--nfl-red);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .needs-report {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .needs-card {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            padding: 16px;
+        }
+
+        .needs-card h4 {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--silver);
+            margin-bottom: 10px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .need-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 4px 0;
+            font-size: 13px;
+        }
+
+        .need-filled {
+            color: var(--success);
+        }
+
+        .need-unfilled {
+            color: var(--text-muted);
+        }
+
+        .need-icon {
+            width: 16px;
+            text-align: center;
+            font-size: 12px;
+        }
+
+        .trades-section {
+            margin-bottom: 32px;
+        }
+
+        .trade-row {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            padding: 14px 18px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .trade-badge {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 3px 8px;
+            border-radius: 3px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            flex-shrink: 0;
+        }
+
+        .trade-badge.up {
+            background: rgba(16,185,129,0.2);
+            color: var(--success);
+            border: 1px solid rgba(16,185,129,0.3);
+        }
+
+        .trade-badge.down {
+            background: rgba(96,165,250,0.2);
+            color: #60A5FA;
+            border: 1px solid rgba(96,165,250,0.3);
+        }
+
+        .trade-text {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 14px;
+            color: var(--silver);
+            flex: 1;
+        }
+
+        .trade-value-tag {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+        }
+
+        .pick-list {
+            margin-bottom: 32px;
+        }
+
+        .pick-row {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: 8px;
+            margin-bottom: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: border-color 0.2s;
+        }
+
+        .pick-row:hover {
+            border-color: rgba(165,172,175,0.4);
+        }
+
+        .pick-row.expanded {
+            border-color: var(--nfl-red);
+        }
+
+        .pick-header {
+            display: grid;
+            grid-template-columns: 60px 48px 1fr 100px 60px;
+            align-items: center;
+            padding: 12px 16px;
+            gap: 12px;
+        }
+
+        .pick-number {
+            font-family: 'Teko', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--silver);
+        }
+
+        .pick-round-badge {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 3px;
+            text-transform: uppercase;
+            background: rgba(1,51,105,0.5);
+            color: var(--text-muted);
+            text-align: center;
+        }
+
+        .pick-player-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .pick-player-name {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--white);
+        }
+
+        .pick-player-meta {
+            font-size: 12px;
+            color: var(--text-muted);
+        }
+
+        .pick-value-badge {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 13px;
+            font-weight: 600;
+            text-align: center;
+            padding: 3px 8px;
+            border-radius: 4px;
+        }
+
+        .pick-value-badge.steal {
+            background: rgba(16,185,129,0.15);
+            color: var(--success);
+        }
+
+        .pick-value-badge.reach {
+            background: rgba(239,68,68,0.15);
+            color: var(--danger);
+        }
+
+        .pick-value-badge.fair {
+            background: rgba(96,165,250,0.1);
+            color: #60A5FA;
+        }
+
+        .pick-grade {
+            font-family: 'Teko', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            text-align: center;
+        }
+
+        .pick-detail {
+            display: none;
+            padding: 0 16px 16px;
+            border-top: 1px solid var(--card-border);
+        }
+
+        .pick-row.expanded .pick-detail {
+            display: block;
+        }
+
+        .analysis-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        .analysis-item {
+            background: rgba(0,0,0,0.15);
+            border-radius: 6px;
+            padding: 10px;
+        }
+
+        .analysis-item label {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 10px;
+            font-weight: 600;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            display: block;
+            margin-bottom: 4px;
+        }
+
+        .analysis-item .value {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .analysis-narrative {
+            margin-top: 12px;
+            font-size: 13px;
+            color: var(--silver);
+            line-height: 1.6;
+            padding: 12px;
+            background: rgba(0,0,0,0.1);
+            border-radius: 6px;
+            border-left: 3px solid var(--nfl-blue);
+        }
+
+        .tag {
+            display: inline-block;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 11px;
+            font-weight: 600;
+            padding: 2px 6px;
+            border-radius: 3px;
+            text-transform: uppercase;
+        }
+
+        .tag-primary { background: rgba(213,10,10,0.2); color: #ff6b6b; }
+        .tag-secondary { background: rgba(245,158,11,0.2); color: var(--warning); }
+        .tag-none { background: rgba(165,172,175,0.1); color: var(--text-muted); }
+        .tag-trade { background: rgba(96,165,250,0.2); color: #60A5FA; }
+
+        .round-divider {
+            font-family: 'Teko', sans-serif;
+            font-size: 22px;
+            font-weight: 600;
+            color: var(--nfl-red);
+            padding: 16px 0 8px;
+            border-bottom: 1px solid rgba(213,10,10,0.3);
+            margin-bottom: 10px;
+        }
+
+        .all-teams-section {
+            margin-bottom: 32px;
+        }
+
+        .team-filter-bar {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            margin-bottom: 16px;
+        }
+
+        .team-filter-btn {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 12px;
+            font-weight: 600;
+            padding: 4px 10px;
+            border-radius: 4px;
+            border: 1px solid var(--card-border);
+            background: var(--card-bg);
+            color: var(--text-muted);
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .team-filter-btn:hover, .team-filter-btn.active {
+            background: var(--nfl-blue);
+            color: var(--white);
+            border-color: var(--nfl-blue);
+        }
+
+        .tab-bar {
+            display: flex;
+            gap: 0;
+            margin-bottom: 24px;
+            border-bottom: 2px solid var(--card-border);
+        }
+
+        .tab-btn {
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 15px;
+            font-weight: 600;
+            padding: 10px 24px;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            cursor: pointer;
+            border-bottom: 2px solid transparent;
+            margin-bottom: -2px;
+            transition: all 0.2s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .tab-btn:hover { color: var(--silver); }
+        .tab-btn.active {
+            color: var(--white);
+            border-bottom-color: var(--nfl-red);
+        }
+
+        .tab-panel { display: none; }
+        .tab-panel.active { display: block; }
+
+        .loading {
+            text-align: center;
+            padding: 60px;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 18px;
+            color: var(--text-muted);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="header-left">
+            <div class="logo-text"><span class="gm">GM</span><span class="ops">OPS</span></div>
+            <div class="header-title">Draft Analysis</div>
+        </div>
+        <a href="game-shell.html" class="back-btn">Back to Draft</a>
+    </div>
+
+    <div class="container">
+        <div class="loading" id="loadingState">Loading draft results...</div>
+        <div id="resultsContent" style="display:none;">
+
+            <div class="tab-bar">
+                <button class="tab-btn active" data-tab="myTeam">My Team</button>
+                <button class="tab-btn" data-tab="allPicks">All Picks</button>
+                <button class="tab-btn" data-tab="allTeams">All Teams</button>
+                <button class="tab-btn" data-tab="trades">Trades</button>
+            </div>
+
+            <div class="tab-panel active" id="tab-myTeam"></div>
+            <div class="tab-panel" id="tab-allPicks"></div>
+            <div class="tab-panel" id="tab-allTeams"></div>
+            <div class="tab-panel" id="tab-trades"></div>
+        </div>
+    </div>
+
+    <script>
+        let draftData = null;
+
+        const TEAM_COLORS = {
+            Raiders: "#000000", Jets: "#125740", Cardinals: "#97233F", Titans: "#4B92DB",
+            Giants: "#0B2265", Browns: "#311D00", Commanders: "#5A1414", Saints: "#D3BC8D",
+            Chiefs: "#E31837", Bengals: "#FB4F14", Dolphins: "#008E97", Cowboys: "#003594",
+            Rams: "#003594", Ravens: "#241773", Panthers: "#0085CA", Jaguars: "#006778",
+            Colts: "#002C5F", Chargers: "#0080C6", Bears: "#0B162A", Falcons: "#A71930",
+            "49ers": "#AA0000", Seahawks: "#002244", Packers: "#203731", Texans: "#03202F",
+            Vikings: "#4F2683", Buccaneers: "#D50A0A", Steelers: "#FFB612", Eagles: "#004C54",
+            Bills: "#00338D", Lions: "#0076B6", Broncos: "#FB4F14", Patriots: "#002244"
+        };
+
+        async function loadData() {
+            try {
+                const res = await fetch('data/draft/simulated_draft_results.json');
+                draftData = await res.json();
+                document.getElementById('loadingState').style.display = 'none';
+                document.getElementById('resultsContent').style.display = 'block';
+                renderMyTeam();
+                renderAllPicks();
+                renderAllTeams();
+                renderTrades();
+            } catch (e) {
+                document.getElementById('loadingState').textContent = 'Error loading draft results. Run a draft simulation first.';
+            }
+        }
+
+        function gradeScore(score) {
+            if (score >= 93) return 'A+';
+            if (score >= 88) return 'A';
+            if (score >= 83) return 'A-';
+            if (score >= 78) return 'B+';
+            if (score >= 73) return 'B';
+            if (score >= 68) return 'B-';
+            if (score >= 63) return 'C+';
+            if (score >= 58) return 'C';
+            if (score >= 53) return 'C-';
+            if (score >= 48) return 'D+';
+            if (score >= 43) return 'D';
+            if (score >= 38) return 'D-';
+            return 'F';
+        }
+
+        function gradeClass(grade) {
+            const base = grade.charAt(0);
+            if (grade.includes('+')) return 'grade-' + base + '-plus';
+            if (grade.includes('-')) return 'grade-' + base + '-minus';
+            return 'grade-' + base;
+        }
+
+        function gradeColorClass(grade) {
+            const base = grade.replace('+','').replace('-','');
+            if (base === 'A') return 'value-positive';
+            if (base === 'B') return 'value-neutral';
+            if (base === 'C') return 'value-neutral';
+            return 'value-negative';
+        }
+
+        function calcPickGrade(pick) {
+            let score = 60;
+
+            const valueDiff = pick.analysis.valueOverConsensus;
+            if (valueDiff < -30) score += 20;
+            else if (valueDiff < -15) score += 15;
+            else if (valueDiff < -5) score += 10;
+            else if (valueDiff <= 5) score += 5;
+            else if (valueDiff <= 15) score -= 5;
+            else if (valueDiff <= 30) score -= 12;
+            else score -= 20;
+
+            if (pick.analysis.needLevel === 'primary') score += 15;
+            else if (pick.analysis.needLevel === 'secondary') score += 8;
+            else score -= 5;
+
+            if (pick.analysis.tradedUp) {
+                if (valueDiff < -5 && pick.analysis.needLevel !== 'none') score += 8;
+                else if (valueDiff > 15) score -= 10;
+                else score += 2;
+            }
+
+            const devScore = pick.player.developmentCertainty?.score || 0.5;
+            if (devScore >= 0.75) score += 5;
+            else if (devScore <= 0.3) score -= 5;
+
+            return Math.max(20, Math.min(100, score));
+        }
+
+        function calcTeamDraftGrade(teamName) {
+            const picks = draftData.picks.filter(p => p.team === teamName);
+            if (picks.length === 0) return { score: 50, grade: 'C' };
+
+            let totalScore = 0;
+            let totalWeight = 0;
+
+            picks.forEach(pick => {
+                const pickScore = calcPickGrade(pick);
+                const weight = pick.round <= 2 ? 3 : (pick.round <= 4 ? 2 : 1);
+                totalScore += pickScore * weight;
+                totalWeight += weight;
+            });
+
+            let score = totalScore / totalWeight;
+
+            const summary = draftData.teamSummaries[teamName];
+            if (summary) {
+                const primaryFilled = summary.needsFilled.primary?.length || 0;
+                const totalPrimary = primaryFilled + (summary.needsUnfilled?.length || 0);
+                if (totalPrimary > 0) {
+                    const fillRate = primaryFilled / totalPrimary;
+                    score += (fillRate - 0.5) * 10;
+                }
+
+                if (summary.tradeValueNet > 200) score += 5;
+                else if (summary.tradeValueNet > 0) score += 2;
+                else if (summary.tradeValueNet < -200) score -= 5;
+            }
+
+            score = Math.max(20, Math.min(100, score));
+            return { score: Math.round(score), grade: gradeScore(score) };
+        }
+
+        function generateNarrative(pick) {
+            const name = pick.player.name;
+            const pos = pick.player.position;
+            const overall = pick.overall;
+            const consensus = pick.player.consensusRank;
+            const need = pick.analysis.needLevel;
+            const valueDiff = pick.analysis.valueOverConsensus;
+            const team = pick.team;
+
+            let parts = [];
+
+            if (valueDiff < -20) {
+                parts.push(`${name} is a significant steal at #${overall}, falling ${Math.abs(valueDiff)} spots past his consensus rank of #${consensus}.`);
+            } else if (valueDiff < -5) {
+                parts.push(`Solid value selection getting ${name} at #${overall} (consensus #${consensus}), picking up ${Math.abs(valueDiff)} spots of value.`);
+            } else if (valueDiff <= 5) {
+                parts.push(`${name} goes right around his consensus range at #${overall} (ranked #${consensus}). Fair market pick.`);
+            } else if (valueDiff <= 15) {
+                parts.push(`${name} is a slight reach at #${overall}, going ${valueDiff} spots above his consensus rank of #${consensus}.`);
+            } else {
+                parts.push(`${name} is a notable reach at #${overall}, selected ${valueDiff} spots ahead of his consensus rank (#${consensus}).`);
+            }
+
+            if (need === 'primary') {
+                parts.push(`Fills a key need at ${pos} for the ${team}.`);
+            } else if (need === 'secondary') {
+                parts.push(`Addresses a secondary need at ${pos}.`);
+            } else {
+                parts.push(`${pos} was not a listed need for the ${team}, raising questions about the pick's impact.`);
+            }
+
+            if (pick.analysis.tradedUp) {
+                if (valueDiff < -5 && need !== 'none') {
+                    parts.push(`The trade up to get ${name} was well-executed — securing value at a position of need.`);
+                } else if (valueDiff > 15) {
+                    parts.push(`Trading up for a player ranked well below this slot hurts the overall value of this move.`);
+                } else {
+                    parts.push(`The ${team} moved up via trade to make this selection.`);
+                }
+            }
+
+            const dev = pick.player.developmentCertainty;
+            if (dev) {
+                if (dev.score >= 0.75) parts.push(`${name} is considered a "${dev.label}" prospect with high development certainty.`);
+                else if (dev.score <= 0.3) parts.push(`As a "${dev.label}" prospect, ${name} carries significant development risk.`);
+            }
+
+            if (pick.player.comparison) {
+                parts.push(`Comparison: ${pick.player.comparison}.`);
+            }
+
+            return parts.join(' ');
+        }
+
+        function renderPickRow(pick, showTeam = false) {
+            const pickScore = calcPickGrade(pick);
+            const grade = gradeScore(pickScore);
+            const valueDiff = pick.analysis.valueOverConsensus;
+            const via = pick.via ? ` (via ${pick.via})` : '';
+
+            let valueLabel, valueClass;
+            if (valueDiff < -10) { valueLabel = `Steal (+${Math.abs(valueDiff)})`; valueClass = 'steal'; }
+            else if (valueDiff <= 10) { valueLabel = 'Fair Value'; valueClass = 'fair'; }
+            else { valueLabel = `Reach (${valueDiff})`; valueClass = 'reach'; }
+
+            const teamLabel = showTeam ? `${pick.team}${via}` : `${pick.player.school}`;
+
+            const needTag = pick.analysis.needLevel === 'primary' ? '<span class="tag tag-primary">Key Need</span>' :
+                            pick.analysis.needLevel === 'secondary' ? '<span class="tag tag-secondary">Need</span>' :
+                            '<span class="tag tag-none">BPA</span>';
+
+            const tradeTag = pick.analysis.tradedUp ? ' <span class="tag tag-trade">Trade Up</span>' : '';
+
+            return `
+                <div class="pick-row" onclick="this.classList.toggle('expanded')">
+                    <div class="pick-header">
+                        <div class="pick-number">#${pick.overall}</div>
+                        <div class="pick-round-badge">R${pick.round}</div>
+                        <div class="pick-player-info">
+                            <div class="pick-player-name">${pick.player.position} ${pick.player.name} ${needTag}${tradeTag}</div>
+                            <div class="pick-player-meta">${teamLabel} ${pick.player.archetype ? '· ' + pick.player.archetype : ''}</div>
+                        </div>
+                        <div class="pick-value-badge ${valueClass}">${valueLabel}</div>
+                        <div class="pick-grade ${gradeColorClass(grade)}">${grade}</div>
+                    </div>
+                    <div class="pick-detail">
+                        <div class="analysis-grid">
+                            <div class="analysis-item">
+                                <label>Consensus Rank</label>
+                                <div class="value">#${pick.player.consensusRank}</div>
+                            </div>
+                            <div class="analysis-item">
+                                <label>Value vs. Pick</label>
+                                <div class="value ${valueDiff < 0 ? 'value-positive' : valueDiff > 10 ? 'value-negative' : 'value-neutral'}">${valueDiff < 0 ? 'Steal (+' + Math.abs(valueDiff) + ')' : valueDiff > 0 ? 'Reach (-' + valueDiff + ')' : 'Even'}</div>
+                            </div>
+                            <div class="analysis-item">
+                                <label>Need Impact</label>
+                                <div class="value" style="text-transform:capitalize">${pick.analysis.needLevel === 'none' ? 'No need' : pick.analysis.needLevel + ' need'}</div>
+                            </div>
+                            <div class="analysis-item">
+                                <label>Dev Certainty</label>
+                                <div class="value">${pick.player.developmentCertainty?.label || 'Standard'}</div>
+                            </div>
+                        </div>
+                        <div class="analysis-narrative">${generateNarrative(pick)}</div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function renderMyTeam() {
+            const panel = document.getElementById('tab-myTeam');
+            const teamName = draftData.meta.userTeam;
+            const summary = draftData.teamSummaries[teamName];
+            const teamPicks = draftData.picks.filter(p => p.team === teamName);
+            const teamTrades = draftData.trades.filter(t => t.buyer === teamName || t.seller === teamName);
+            const { score, grade } = calcTeamDraftGrade(teamName);
+
+            const avgValue = teamPicks.length > 0 ?
+                Math.round(teamPicks.reduce((sum, p) => sum + p.analysis.valueOverConsensus, 0) / teamPicks.length) : 0;
+
+            const primaryFilled = summary?.needsFilled?.primary || [];
+            const secondaryFilled = summary?.needsFilled?.secondary || [];
+            const unfilled = summary?.needsUnfilled || [];
+
+            let needsSummary = '';
+            if (unfilled.length === 0) {
+                needsSummary = 'All primary needs addressed';
+            } else {
+                needsSummary = `${unfilled.length} primary need${unfilled.length > 1 ? 's' : ''} unaddressed`;
+            }
+
+            let gradeSummaryText = '';
+            if (score >= 83) gradeSummaryText = 'Outstanding draft class. Strong value picks that address team needs.';
+            else if (score >= 73) gradeSummaryText = 'Good draft overall. Solid mix of need and value picks.';
+            else if (score >= 63) gradeSummaryText = 'Average draft class. Some good picks but room for improvement.';
+            else if (score >= 53) gradeSummaryText = 'Below average draft. Missed on value or needs in key spots.';
+            else gradeSummaryText = 'Poor draft class. Significant reaches and unaddressed needs.';
+
+            let html = `
+                <div class="overview-grid">
+                    <div class="grade-card">
+                        <div class="grade-circle ${gradeClass(grade)}">${grade}</div>
+                        <div class="grade-label">${teamName} Draft Grade</div>
+                        <div class="grade-summary">${gradeSummaryText}</div>
+                    </div>
+                    <div>
+                        <div class="breakdown-cards">
+                            <div class="breakdown-card">
+                                <h4>Value Score</h4>
+                                <div class="breakdown-value ${avgValue < 0 ? 'value-positive' : avgValue > 10 ? 'value-negative' : 'value-neutral'}">${avgValue < 0 ? '+' + Math.abs(avgValue) : avgValue > 0 ? '-' + avgValue : '0'}</div>
+                                <div class="breakdown-detail">Avg. surplus value per pick</div>
+                            </div>
+                            <div class="breakdown-card">
+                                <h4>Needs Filled</h4>
+                                <div class="breakdown-value value-positive">${primaryFilled.length + secondaryFilled.length}</div>
+                                <div class="breakdown-detail">${needsSummary}</div>
+                            </div>
+                            <div class="breakdown-card">
+                                <h4>Trades</h4>
+                                <div class="breakdown-value value-neutral">${teamTrades.length}</div>
+                                <div class="breakdown-detail">Net value: ${summary?.tradeValueNet > 0 ? '+' : ''}${summary?.tradeValueNet || 0}</div>
+                            </div>
+                            <div class="breakdown-card">
+                                <h4>Total Picks</h4>
+                                <div class="breakdown-value">${teamPicks.length}</div>
+                                <div class="breakdown-detail">${teamPicks.filter(p => p.round <= 3).length} in first 3 rounds</div>
+                            </div>
+                            <div class="breakdown-card">
+                                <h4>Best Value</h4>
+                                ${(() => {
+                                    const best = [...teamPicks].sort((a,b) => a.analysis.valueOverConsensus - b.analysis.valueOverConsensus)[0];
+                                    const bv = best ? Math.abs(best.analysis.valueOverConsensus) : 0;
+                                    return best ? `<div class="breakdown-value value-positive">+${bv}</div>
+                                    <div class="breakdown-detail">${best.player.name} (R${best.round})</div>` : '<div class="breakdown-value">-</div>';
+                                })()}
+                            </div>
+                            <div class="breakdown-card">
+                                <h4>Scheme</h4>
+                                <div class="breakdown-value" style="font-size:18px; color: var(--silver);">${summary?.offScheme || 'N/A'}</div>
+                                <div class="breakdown-detail">${summary?.defScheme || ''}</div>
+                            </div>
+                        </div>
+
+                        <div style="margin-top: 16px;">
+                            <div class="needs-report">
+                                <div class="needs-card">
+                                    <h4>Needs Addressed</h4>
+                                    ${[...primaryFilled.map(n => `<div class="need-item need-filled"><span class="need-icon">&#10003;</span> ${n} <span class="tag tag-primary" style="margin-left:auto;">Primary</span></div>`),
+                                      ...secondaryFilled.map(n => `<div class="need-item need-filled"><span class="need-icon">&#10003;</span> ${n} <span class="tag tag-secondary" style="margin-left:auto;">Secondary</span></div>`)
+                                    ].join('') || '<div class="need-item need-unfilled">No needs addressed</div>'}
+                                </div>
+                                <div class="needs-card">
+                                    <h4>Still Needed</h4>
+                                    ${unfilled.map(n => `<div class="need-item need-unfilled"><span class="need-icon">&#10007;</span> ${n}</div>`).join('') || '<div class="need-item need-filled"><span class="need-icon">&#10003;</span> All primary needs met</div>'}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="section-title">Pick-by-Pick Analysis</div>
+                <div class="pick-list">
+                    ${teamPicks.map(p => renderPickRow(p, false)).join('')}
+                </div>
+            `;
+
+            panel.innerHTML = html;
+        }
+
+        function renderAllPicks() {
+            const panel = document.getElementById('tab-allPicks');
+            let html = '';
+            let currentRound = 0;
+
+            draftData.picks.forEach(pick => {
+                if (pick.round !== currentRound) {
+                    currentRound = pick.round;
+                    html += `<div class="round-divider">Round ${currentRound}</div>`;
+                }
+                html += renderPickRow(pick, true);
+            });
+
+            panel.innerHTML = `<div class="pick-list">${html}</div>`;
+        }
+
+        function renderAllTeams() {
+            const panel = document.getElementById('tab-allTeams');
+            const teams = Object.keys(draftData.teamSummaries).sort((a, b) => {
+                const ga = calcTeamDraftGrade(a);
+                const gb = calcTeamDraftGrade(b);
+                return gb.score - ga.score;
+            });
+
+            let html = '';
+            teams.forEach((teamName, rank) => {
+                const { score, grade } = calcTeamDraftGrade(teamName);
+                const summary = draftData.teamSummaries[teamName];
+                const teamPicks = summary.picks;
+                const isUser = teamName === draftData.meta.userTeam;
+
+                const pickList = teamPicks.map(p =>
+                    `<span style="margin-right:8px;font-size:12px;color:var(--silver);">R${p.round}: <strong>${p.position}</strong> ${p.player} <span style="color:${p.valueOverConsensus < 0 ? 'var(--success)' : p.valueOverConsensus > 15 ? 'var(--danger)' : 'var(--text-muted)'}">(${p.valueOverConsensus < 0 ? '+' + Math.abs(p.valueOverConsensus) : p.valueOverConsensus > 0 ? '-' + p.valueOverConsensus : '0'})</span></span>`
+                ).join('');
+
+                const primaryFilled = summary.needsFilled?.primary?.length || 0;
+                const secondaryFilled = summary.needsFilled?.secondary?.length || 0;
+                const unfilled = summary.needsUnfilled?.length || 0;
+
+                html += `
+                    <div class="pick-row" onclick="this.classList.toggle('expanded')" style="${isUser ? 'border-color: var(--nfl-red);' : ''}">
+                        <div class="pick-header" style="grid-template-columns: 40px 1fr 120px 60px;">
+                            <div class="pick-number" style="font-size:18px;">${rank + 1}</div>
+                            <div class="pick-player-info">
+                                <div class="pick-player-name" style="font-size:15px;">${teamName} ${isUser ? '<span class="tag tag-primary">Your Team</span>' : ''}</div>
+                                <div class="pick-player-meta">${teamPicks.length} picks · ${primaryFilled + secondaryFilled} needs filled · ${summary.trades} trades</div>
+                            </div>
+                            <div class="pick-value-badge fair">${summary.offScheme || ''}</div>
+                            <div class="pick-grade ${gradeColorClass(grade)}">${grade}</div>
+                        </div>
+                        <div class="pick-detail">
+                            <div style="display:flex;flex-wrap:wrap;gap:4px;margin-top:8px;">${pickList}</div>
+                            ${unfilled > 0 ? `<div style="margin-top:8px;font-size:12px;color:var(--text-muted);">Unfilled needs: ${summary.needsUnfilled.join(', ')}</div>` : ''}
+                        </div>
+                    </div>
+                `;
+            });
+
+            panel.innerHTML = `
+                <div class="section-title">All 32 Teams — Ranked by Grade</div>
+                <div class="pick-list">${html}</div>
+            `;
+        }
+
+        function renderTrades() {
+            const panel = document.getElementById('tab-trades');
+
+            if (!draftData.trades.length) {
+                panel.innerHTML = '<div class="loading">No trades occurred during this draft.</div>';
+                return;
+            }
+
+            let html = `<div class="section-title">Draft Day Trades (${draftData.trades.length})</div>`;
+
+            draftData.trades.forEach(trade => {
+                const gives = trade.buyerGives.map(p => `#${p.overall} (R${p.round})`).join(', ');
+                const gets = trade.buyerReceives.map(p => `#${p.overall} (R${p.round})`).join(', ');
+                const valueDiff = trade.giveValue - trade.receiveValue;
+                const isOverpay = valueDiff > 0;
+
+                html += `
+                    <div class="trade-row">
+                        <span class="trade-badge up">TRADE</span>
+                        <div class="trade-text">
+                            The <strong>${trade.buyer}</strong> trade picks ${gives} to the <strong>${trade.seller}</strong> for pick ${gets}
+                            ${trade.motivation ? ` — targeting ${trade.motivation.targetPosition} ${trade.motivation.targetPlayer}` : ''}
+                        </div>
+                        <div class="trade-value-tag ${isOverpay ? 'value-negative' : 'value-positive'}">
+                            ${isOverpay ? 'Overpay' : 'Good value'}: ${Math.abs(valueDiff)} pts
+                        </div>
+                    </div>
+                `;
+            });
+
+            panel.innerHTML = html;
+        }
+
+        document.querySelectorAll('.tab-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+                document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+                btn.classList.add('active');
+                document.getElementById('tab-' + btn.dataset.tab).classList.add('active');
+            });
+        });
+
+        loadData();
+    </script>
+</body>
+</html>
