@@ -1131,9 +1131,14 @@
 
             let html = `<div class="section-title">Draft Day Trades (${draftData.trades.length})</div>`;
 
+            function formatPickLabel(p) {
+                if (p.isFuture) return `${p.year} R${p.round}${p.originalTeam ? ' (' + p.originalTeam + ')' : ''}`;
+                return `#${p.overall} (R${p.round})`;
+            }
+
             draftData.trades.forEach(trade => {
-                const gives = trade.buyerGives.map(p => `#${p.overall} (R${p.round})`).join(', ');
-                const gets = trade.buyerReceives.map(p => `#${p.overall} (R${p.round})`).join(', ');
+                const gives = trade.buyerGives.map(p => formatPickLabel(p)).join(', ');
+                const gets = trade.buyerReceives.map(p => formatPickLabel(p)).join(', ');
                 const valueDiff = trade.giveValue - trade.receiveValue;
                 const isOverpay = valueDiff > 0;
 

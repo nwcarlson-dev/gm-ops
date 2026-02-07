@@ -2885,7 +2885,84 @@
             let watchlistCount = 0;
             let prospectsToShow = 50;
             let filledNeeds = {};
-            
+
+            const FUTURE_PICK_VALUES = {
+                2027: { 1: 580, 2: 265, 3: 96, 4: 36, 5: 18, 6: 3, 7: 1 },
+                2028: { 1: 265, 2: 96, 3: 36, 4: 18, 5: 3, 6: 1, 7: 1 }
+            };
+
+            let futurePicks = {};
+
+            const REAL_FUTURE_TRADES = [
+                { year: 2027, round: 1, from: 'Packers', to: 'Cowboys' },
+                { year: 2027, round: 1, from: 'Colts', to: 'Jets' },
+                { year: 2027, round: 1, from: 'Cowboys', to: 'Jets' },
+                { year: 2027, round: 4, from: 'Vikings', to: 'Panthers' },
+                { year: 2027, round: 5, from: 'Cowboys', to: 'Steelers' },
+                { year: 2027, round: 5, from: 'Steelers', to: 'Dolphins' },
+                { year: 2027, round: 5, from: 'Panthers', to: 'Vikings' },
+                { year: 2027, round: 5, from: 'Texans', to: 'Browns' },
+                { year: 2027, round: 6, from: 'Steelers', to: 'Cowboys' },
+                { year: 2027, round: 6, from: '49ers', to: 'Chiefs' },
+                { year: 2027, round: 6, from: 'Jets', to: 'Vikings' },
+                { year: 2027, round: 6, from: 'Packers', to: 'Eagles' },
+                { year: 2027, round: 6, from: 'Saints', to: 'Patriots' },
+                { year: 2027, round: 6, from: 'Browns', to: 'Texans' },
+                { year: 2027, round: 6, from: 'Eagles', to: 'Jets' },
+                { year: 2027, round: 6, from: 'Chargers', to: 'Saints' },
+                { year: 2027, round: 6, from: 'Chiefs', to: 'Jets' },
+                { year: 2027, round: 7, from: 'Rams', to: 'Chargers' },
+                { year: 2027, round: 7, from: 'Dolphins', to: 'Steelers' },
+                { year: 2027, round: 7, from: 'Saints', to: 'Broncos' },
+                { year: 2027, round: 7, from: 'Chiefs', to: '49ers' },
+                { year: 2027, round: 7, from: 'Vikings', to: 'Jets' },
+                { year: 2027, round: 7, from: 'Eagles', to: 'Vikings' },
+                { year: 2027, round: 7, from: 'Chargers', to: 'Texans' },
+                { year: 2027, round: 7, from: 'Falcons', to: 'Seahawks' },
+                { year: 2027, round: 7, from: 'Giants', to: 'Dolphins' },
+                { year: 2027, round: 7, from: 'Texans', to: 'Browns' },
+                { year: 2027, round: 7, from: 'Jets', to: 'Eagles' },
+                { year: 2028, round: 6, from: 'Saints', to: 'Cowboys' },
+                { year: 2028, round: 7, from: 'Browns', to: 'Rams' },
+                { year: 2028, round: 7, from: 'Cowboys', to: 'Saints' },
+                { year: 2028, round: 7, from: 'Saints', to: 'Patriots' },
+                { year: 2028, round: 7, from: 'Ravens', to: 'Eagles' },
+                { year: 2028, round: 7, from: 'Jets', to: 'Chargers' },
+            ];
+
+            function initFuturePicks() {
+                const teams = Object.keys(TEAM_DATA);
+                teams.forEach(teamName => {
+                    futurePicks[teamName] = [];
+                    [2027, 2028].forEach(year => {
+                        for (let round = 1; round <= 7; round++) {
+                            futurePicks[teamName].push({
+                                id: `future-${year}-${round}-${teamName}`,
+                                year: year,
+                                round: round,
+                                team: teamName,
+                                originalTeam: teamName,
+                                value: FUTURE_PICK_VALUES[year][round],
+                                isFuture: true
+                            });
+                        }
+                    });
+                });
+
+                REAL_FUTURE_TRADES.forEach(trade => {
+                    const fromTeam = trade.from;
+                    const toTeam = trade.to;
+                    const pickIdx = futurePicks[fromTeam]?.findIndex(
+                        p => p.year === trade.year && p.round === trade.round && p.originalTeam === fromTeam
+                    );
+                    if (pickIdx > -1) {
+                        const pick = futurePicks[fromTeam].splice(pickIdx, 1)[0];
+                        pick.team = toTeam;
+                        futurePicks[toTeam].push(pick);
+                    }
+                });
+            }
+
             // AI Draft Logic data
             let schemeWeights = {};
             let teamSchemes = {};
@@ -4014,6 +4091,29 @@
 
             let selectedYourPicks = new Set();
             let selectedPartnerPicks = new Set();
+            let selectedYourFuturePicks = new Set();
+            let selectedPartnerFuturePicks = new Set();
+
+            function getTeamFuturePicks(teamName) {
+                return (futurePicks[teamName] || []);
+            }
+
+            function renderFuturePickItems(teamFuture, selectedSet, toggleFn) {
+                if (!teamFuture.length) return '';
+                let html = '<div style="margin-top: 8px; padding-top: 6px; border-top: 1px solid rgba(138,155,174,0.15);">';
+                html += '<div style="font-size: 10px; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px; font-family: Barlow Condensed, sans-serif;">Future Picks</div>';
+                teamFuture.forEach(fp => {
+                    html += `
+                    <div class="trade-pick-item ${selectedSet.has(fp.id) ? "selected" : ""}" 
+                         onclick="${toggleFn}('${fp.id}')" style="opacity: 0.85;">
+                        <span class="trade-pick-round">${fp.year} R${fp.round}</span>
+                        <span style="font-size: 10px; color: var(--text-muted);">${fp.originalTeam !== fp.team ? 'via ' + fp.originalTeam : ''}</span>
+                        <span class="trade-pick-value">${fp.value}</span>
+                    </div>`;
+                });
+                html += '</div>';
+                return html;
+            }
 
             function openTradeModal() {
                 const modal = document.getElementById("tradeModal");
@@ -4029,6 +4129,8 @@
 
                 selectedYourPicks.clear();
                 selectedPartnerPicks.clear();
+                selectedYourFuturePicks.clear();
+                selectedPartnerFuturePicks.clear();
                 renderYourPicks();
                 document.getElementById("partnerPicksList").innerHTML = "";
                 updateTradeValues();
@@ -4047,8 +4149,7 @@
                         d.overall >= currentPick &&
                         !d.drafted,
                 );
-                document.getElementById("yourPicksList").innerHTML =
-                    available
+                const currentPicksHtml = available
                         .map(
                             (p) => `
                 <div class="trade-pick-item ${selectedYourPicks.has(p.overall) ? "selected" : ""}" 
@@ -4059,13 +4160,20 @@
                 </div>
             `,
                         )
-                        .join("") ||
+                        .join("");
+
+                const myFuture = getTeamFuturePicks(userTeam.name);
+                const futureHtml = renderFuturePickItems(myFuture, selectedYourFuturePicks, 'toggleYourFuturePick');
+
+                document.getElementById("yourPicksList").innerHTML =
+                    (currentPicksHtml + futureHtml) ||
                     '<div style="color: var(--text-muted); font-size: 12px;">No picks available</div>';
             }
 
             function updatePartnerPicks() {
                 const partner = document.getElementById("tradePartner").value;
                 selectedPartnerPicks.clear();
+                selectedPartnerFuturePicks.clear();
 
                 if (!partner) {
                     document.getElementById("partnerPicksList").innerHTML = "";
@@ -4079,8 +4187,7 @@
                         d.overall >= currentPick &&
                         !d.drafted,
                 );
-                document.getElementById("partnerPicksList").innerHTML =
-                    available
+                const currentPicksHtml = available
                         .map(
                             (p) => `
                 <div class="trade-pick-item ${selectedPartnerPicks.has(p.overall) ? "selected" : ""}" 
@@ -4091,7 +4198,13 @@
                 </div>
             `,
                         )
-                        .join("") ||
+                        .join("");
+
+                const partnerFuture = getTeamFuturePicks(partner);
+                const futureHtml = renderFuturePickItems(partnerFuture, selectedPartnerFuturePicks, 'togglePartnerFuturePick');
+
+                document.getElementById("partnerPicksList").innerHTML =
+                    (currentPicksHtml + futureHtml) ||
                     '<div style="color: var(--text-muted); font-size: 12px;">No picks available</div>';
                 updateTradeValues();
             }
@@ -4115,17 +4228,52 @@
                 updatePartnerPicks();
             }
 
+            function toggleYourFuturePick(id) {
+                if (selectedYourFuturePicks.has(id)) {
+                    selectedYourFuturePicks.delete(id);
+                } else {
+                    selectedYourFuturePicks.add(id);
+                }
+                renderYourPicks();
+                updateTradeValues();
+            }
+
+            function togglePartnerFuturePick(id) {
+                if (selectedPartnerFuturePicks.has(id)) {
+                    selectedPartnerFuturePicks.delete(id);
+                } else {
+                    selectedPartnerFuturePicks.add(id);
+                }
+                updatePartnerPicks();
+            }
+
+            function getFuturePickById(id) {
+                for (const team of Object.keys(futurePicks)) {
+                    const fp = futurePicks[team].find(p => p.id === id);
+                    if (fp) return fp;
+                }
+                return null;
+            }
+
             function updateTradeValues() {
                 let yourValue = 0;
                 selectedYourPicks.forEach((o) => {
                     const pick = draftOrder.find((d) => d.overall === o);
                     yourValue += pick?.value || 0;
                 });
+                selectedYourFuturePicks.forEach(id => {
+                    const fp = getFuturePickById(id);
+                    yourValue += fp?.value || 0;
+                });
 
                 let partnerValue = 0;
                 selectedPartnerPicks.forEach((o) => {
                     const pick = draftOrder.find((d) => d.overall === o);
                     partnerValue += pick?.value || 0;
+                });
+                selectedPartnerFuturePicks.forEach(id => {
+                    const fp = getFuturePickById(id);
+                    partnerValue += fp?.value || 0;
                 });
 
                 document.getElementById("yourTradeValue").textContent =
@@ -4136,17 +4284,14 @@
                 const fairnessEl = document.getElementById("tradeFairness");
                 const proposeBtn = document.getElementById("proposeTradeBtn");
 
-                if (
-                    selectedYourPicks.size === 0 &&
-                    selectedPartnerPicks.size === 0
-                ) {
+                const yourTotal = selectedYourPicks.size + selectedYourFuturePicks.size;
+                const partnerTotal = selectedPartnerPicks.size + selectedPartnerFuturePicks.size;
+
+                if (yourTotal === 0 && partnerTotal === 0) {
                     fairnessEl.textContent = "Select picks to see trade value";
                     fairnessEl.className = "trade-fairness";
                     proposeBtn.disabled = true;
-                } else if (
-                    selectedYourPicks.size === 0 ||
-                    selectedPartnerPicks.size === 0
-                ) {
+                } else if (yourTotal === 0 || partnerTotal === 0) {
                     fairnessEl.textContent = "Select picks from both sides";
                     fairnessEl.className = "trade-fairness";
                     proposeBtn.disabled = true;
@@ -4171,18 +4316,29 @@
                 const partner = document.getElementById("tradePartner").value;
                 if (!partner) return;
 
-                const yourPickDetails = selectedYourPicks.map(o => draftOrder.find(d => d.overall === o)).filter(Boolean);
-                const partnerPickDetails = selectedPartnerPicks.map(o => draftOrder.find(d => d.overall === o)).filter(Boolean);
+                const yourPickDetails = [...selectedYourPicks].map(o => draftOrder.find(d => d.overall === o)).filter(Boolean);
+                const partnerPickDetails = [...selectedPartnerPicks].map(o => draftOrder.find(d => d.overall === o)).filter(Boolean);
+                const yourFutureDetails = [...selectedYourFuturePicks].map(id => getFuturePickById(id)).filter(Boolean);
+                const partnerFutureDetails = [...selectedPartnerFuturePicks].map(id => getFuturePickById(id)).filter(Boolean);
 
-                const giveVal = yourPickDetails.reduce((s, p) => s + (p.pickValue || 0), 0);
-                const recVal = partnerPickDetails.reduce((s, p) => s + (p.pickValue || 0), 0);
+                const giveVal = yourPickDetails.reduce((s, p) => s + (p.value || 0), 0) + yourFutureDetails.reduce((s, p) => s + (p.value || 0), 0);
+                const recVal = partnerPickDetails.reduce((s, p) => s + (p.value || 0), 0) + partnerFutureDetails.reduce((s, p) => s + (p.value || 0), 0);
+
+                const buyerGives = [
+                    ...yourPickDetails.map(p => ({ overall: p.overall, round: p.round, value: p.value || 0 })),
+                    ...yourFutureDetails.map(p => ({ id: p.id, year: p.year, round: p.round, value: p.value, isFuture: true, originalTeam: p.originalTeam }))
+                ];
+                const buyerReceives = [
+                    ...partnerPickDetails.map(p => ({ overall: p.overall, round: p.round, value: p.value || 0 })),
+                    ...partnerFutureDetails.map(p => ({ id: p.id, year: p.year, round: p.round, value: p.value, isFuture: true, originalTeam: p.originalTeam }))
+                ];
 
                 tradeLog.push({
                     beforePick: currentPick,
                     buyer: userTeam.name,
                     seller: partner,
-                    buyerGives: yourPickDetails.map(p => ({ overall: p.overall, round: p.round, value: p.pickValue || 0 })),
-                    buyerReceives: partnerPickDetails.map(p => ({ overall: p.overall, round: p.round, value: p.pickValue || 0 })),
+                    buyerGives: buyerGives,
+                    buyerReceives: buyerReceives,
                     giveValue: giveVal,
                     receiveValue: recVal,
                     motivation: null
@@ -4201,6 +4357,26 @@
                     if (pick) {
                         pick.team = userTeam.name;
                         pick.via = partner;
+                    }
+                });
+
+                yourFutureDetails.forEach(fp => {
+                    const idx = futurePicks[userTeam.name].findIndex(p => p.id === fp.id);
+                    if (idx > -1) {
+                        const removed = futurePicks[userTeam.name].splice(idx, 1)[0];
+                        removed.team = partner;
+                        if (!futurePicks[partner]) futurePicks[partner] = [];
+                        futurePicks[partner].push(removed);
+                    }
+                });
+
+                partnerFutureDetails.forEach(fp => {
+                    const idx = futurePicks[partner].findIndex(p => p.id === fp.id);
+                    if (idx > -1) {
+                        const removed = futurePicks[partner].splice(idx, 1)[0];
+                        removed.team = userTeam.name;
+                        if (!futurePicks[userTeam.name]) futurePicks[userTeam.name] = [];
+                        futurePicks[userTeam.name].push(removed);
                     }
                 });
 
@@ -4354,7 +4530,11 @@
                 const buyerPicks = draftOrder.filter(d => d.team === buyerTeam && d.overall >= currentPick && !d.drafted)
                     .sort((a, b) => a.overall - b.overall);
 
-                if (buyerPicks.length < 2) return null;
+                const buyerFuture = (futurePicks[buyerTeam] || [])
+                    .filter(fp => fp.round <= 3)
+                    .sort((a, b) => b.value - a.value);
+
+                if (buyerPicks.length < 1) return null;
 
                 const targetPick = draftOrder.find(d => d.overall === targetPickOverall);
                 if (!targetPick) return null;
@@ -4363,43 +4543,41 @@
                 let bestPackage = null;
                 let bestOverpay = Infinity;
 
+                function tryPackage(picks, giveValue) {
+                    if (giveValue >= targetValue * 0.85 && giveValue <= targetValue * 1.5) {
+                        const overpay = giveValue - targetValue;
+                        if (overpay >= 0 && overpay < bestOverpay) {
+                            bestOverpay = overpay;
+                            bestPackage = { give: [...picks], receive: [targetPick], giveValue: giveValue, receiveValue: targetValue };
+                        }
+                    }
+                }
+
                 for (let i = 0; i < buyerPicks.length; i++) {
                     const main = buyerPicks[i];
                     if (main.overall <= targetPickOverall) continue;
+                    const mainVal = main.value || 0;
 
-                    let package_ = [main];
-                    let packageValue = main.value || 0;
-
-                    if (packageValue >= targetValue * 0.85 && packageValue <= targetValue * 1.3) {
-                        const overpay = packageValue - targetValue;
-                        if (Math.abs(overpay) < Math.abs(bestOverpay)) {
-                            bestOverpay = overpay;
-                            bestPackage = { give: [...package_], receive: [targetPick], giveValue: packageValue, receiveValue: targetValue };
-                        }
-                    }
+                    tryPackage([main], mainVal);
 
                     for (let j = i + 1; j < buyerPicks.length && j < i + 4; j++) {
                         const extra = buyerPicks[j];
-                        const twoPickValue = packageValue + (extra.value || 0);
-
-                        if (twoPickValue >= targetValue * 0.85 && twoPickValue <= targetValue * 1.5) {
-                            const overpay = twoPickValue - targetValue;
-                            if (overpay >= 0 && overpay < bestOverpay) {
-                                bestOverpay = overpay;
-                                bestPackage = { give: [main, extra], receive: [targetPick], giveValue: twoPickValue, receiveValue: targetValue };
-                            }
-                        }
+                        const twoVal = mainVal + (extra.value || 0);
+                        tryPackage([main, extra], twoVal);
 
                         for (let k = j + 1; k < buyerPicks.length && k < j + 3; k++) {
                             const third = buyerPicks[k];
-                            const threePickValue = twoPickValue + (third.value || 0);
-                            if (threePickValue >= targetValue * 0.9 && threePickValue <= targetValue * 1.5) {
-                                const overpay = threePickValue - targetValue;
-                                if (overpay >= 0 && overpay < bestOverpay) {
-                                    bestOverpay = overpay;
-                                    bestPackage = { give: [main, extra, third], receive: [targetPick], giveValue: threePickValue, receiveValue: targetValue };
-                                }
-                            }
+                            tryPackage([main, extra, third], twoVal + (third.value || 0));
+                        }
+                    }
+
+                    for (const fp of buyerFuture.slice(0, 3)) {
+                        const withFutureVal = mainVal + fp.value;
+                        tryPackage([main, fp], withFutureVal);
+
+                        for (let j = i + 1; j < buyerPicks.length && j < i + 3; j++) {
+                            const extra = buyerPicks[j];
+                            tryPackage([main, extra, fp], withFutureVal + (extra.value || 0));
                         }
                     }
                 }
@@ -4409,27 +4587,54 @@
 
             function executeCPUTrade(buyerTeam, sellerTeam, tradePackage) {
                 tradePackage.give.forEach(pick => {
-                    const p = draftOrder.find(d => d.overall === pick.overall);
-                    if (p) { p.team = sellerTeam; p.via = buyerTeam; }
+                    if (pick.isFuture) {
+                        const idx = futurePicks[buyerTeam]?.findIndex(p => p.id === pick.id);
+                        if (idx > -1) {
+                            const removed = futurePicks[buyerTeam].splice(idx, 1)[0];
+                            removed.team = sellerTeam;
+                            if (!futurePicks[sellerTeam]) futurePicks[sellerTeam] = [];
+                            futurePicks[sellerTeam].push(removed);
+                        }
+                    } else {
+                        const p = draftOrder.find(d => d.overall === pick.overall);
+                        if (p) { p.team = sellerTeam; p.via = buyerTeam; }
+                    }
                 });
                 tradePackage.receive.forEach(pick => {
-                    const p = draftOrder.find(d => d.overall === pick.overall);
-                    if (p) { p.team = buyerTeam; p.via = sellerTeam; }
+                    if (pick.isFuture) {
+                        const idx = futurePicks[sellerTeam]?.findIndex(p => p.id === pick.id);
+                        if (idx > -1) {
+                            const removed = futurePicks[sellerTeam].splice(idx, 1)[0];
+                            removed.team = buyerTeam;
+                            if (!futurePicks[buyerTeam]) futurePicks[buyerTeam] = [];
+                            futurePicks[buyerTeam].push(removed);
+                        }
+                    } else {
+                        const p = draftOrder.find(d => d.overall === pick.overall);
+                        if (p) { p.team = buyerTeam; p.via = sellerTeam; }
+                    }
                 });
+
+                const logGives = tradePackage.give.map(p => p.isFuture
+                    ? { id: p.id, year: p.year, round: p.round, value: p.value, isFuture: true, originalTeam: p.originalTeam }
+                    : { overall: p.overall, round: p.round, value: p.value || 0 });
+                const logReceives = tradePackage.receive.map(p => p.isFuture
+                    ? { id: p.id, year: p.year, round: p.round, value: p.value, isFuture: true, originalTeam: p.originalTeam }
+                    : { overall: p.overall, round: p.round, value: p.value || 0 });
 
                 tradeLog.push({
                     beforePick: currentPick,
                     buyer: buyerTeam,
                     seller: sellerTeam,
-                    buyerGives: tradePackage.give.map(p => ({ overall: p.overall, round: p.round, value: p.value || 0 })),
-                    buyerReceives: tradePackage.receive.map(p => ({ overall: p.overall, round: p.round, value: p.value || 0 })),
+                    buyerGives: logGives,
+                    buyerReceives: logReceives,
                     giveValue: tradePackage.giveValue || 0,
                     receiveValue: tradePackage.receiveValue || 0,
                     motivation: null
                 });
 
-                const giveSummary = tradePackage.give.map(p => `#${p.overall}`).join(', ');
-                const recSummary = tradePackage.receive.map(p => `#${p.overall}`).join(', ');
+                const giveSummary = tradePackage.give.map(p => p.isFuture ? `${p.year} R${p.round}` : `#${p.overall}`).join(', ');
+                const recSummary = tradePackage.receive.map(p => p.isFuture ? `${p.year} R${p.round}` : `#${p.overall}`).join(', ');
 
                 addTickerEvent('trade', {
                     buyer: buyerTeam,
@@ -4506,11 +4711,15 @@
                 document.getElementById('tradeOfferTheirLabel').textContent = `${offer.buyerTeam} Sends`;
 
                 document.getElementById('tradeOfferTheirPicks').innerHTML = offer.package.give.map(p =>
-                    `<div class="trade-offer-pick"><span>R${p.round} P${p.pick} (#${p.overall})</span><span class="trade-offer-pick-val">${p.value || 0}</span></div>`
+                    p.isFuture
+                        ? `<div class="trade-offer-pick"><span>${p.year} R${p.round}</span><span class="trade-offer-pick-val">${p.value || 0}</span></div>`
+                        : `<div class="trade-offer-pick"><span>R${p.round} P${p.pick} (#${p.overall})</span><span class="trade-offer-pick-val">${p.value || 0}</span></div>`
                 ).join('');
 
                 document.getElementById('tradeOfferYourPicks').innerHTML = offer.package.receive.map(p =>
-                    `<div class="trade-offer-pick"><span>R${p.round} P${p.pick} (#${p.overall})</span><span class="trade-offer-pick-val">${p.value || 0}</span></div>`
+                    p.isFuture
+                        ? `<div class="trade-offer-pick"><span>${p.year} R${p.round}</span><span class="trade-offer-pick-val">${p.value || 0}</span></div>`
+                        : `<div class="trade-offer-pick"><span>R${p.round} P${p.pick} (#${p.overall})</span><span class="trade-offer-pick-val">${p.value || 0}</span></div>`
                 ).join('');
 
                 document.getElementById('tradeOfferTheirVal').textContent = offer.package.giveValue;
@@ -4531,30 +4740,57 @@
                 if (!pendingTradeOffer) return;
                 const offer = pendingTradeOffer;
 
+                const logGives = offer.package.give.map(p => p.isFuture
+                    ? { id: p.id, year: p.year, round: p.round, value: p.value, isFuture: true, originalTeam: p.originalTeam }
+                    : { overall: p.overall, round: p.round, value: p.value || 0 });
+                const logReceives = offer.package.receive.map(p => p.isFuture
+                    ? { id: p.id, year: p.year, round: p.round, value: p.value, isFuture: true, originalTeam: p.originalTeam }
+                    : { overall: p.overall, round: p.round, value: p.value || 0 });
+
                 tradeLog.push({
                     beforePick: currentPick,
                     buyer: offer.buyerTeam,
                     seller: userTeam.name,
-                    buyerGives: offer.package.give.map(p => ({ overall: p.overall, round: p.round, value: p.value || 0 })),
-                    buyerReceives: offer.package.receive.map(p => ({ overall: p.overall, round: p.round, value: p.value || 0 })),
+                    buyerGives: logGives,
+                    buyerReceives: logReceives,
                     giveValue: offer.package.giveValue || 0,
                     receiveValue: offer.package.receiveValue || 0,
                     motivation: offer.motivation ? { needLevel: offer.motivation.needLevel, targetPlayer: offer.motivation.prospect?.name, targetPosition: offer.motivation.prospect?.position } : null
                 });
 
                 offer.package.give.forEach(pick => {
-                    const p = draftOrder.find(d => d.overall === pick.overall);
-                    if (p) { p.team = userTeam.name; p.via = offer.buyerTeam; }
+                    if (pick.isFuture) {
+                        const idx = futurePicks[offer.buyerTeam]?.findIndex(p => p.id === pick.id);
+                        if (idx > -1) {
+                            const removed = futurePicks[offer.buyerTeam].splice(idx, 1)[0];
+                            removed.team = userTeam.name;
+                            if (!futurePicks[userTeam.name]) futurePicks[userTeam.name] = [];
+                            futurePicks[userTeam.name].push(removed);
+                        }
+                    } else {
+                        const p = draftOrder.find(d => d.overall === pick.overall);
+                        if (p) { p.team = userTeam.name; p.via = offer.buyerTeam; }
+                    }
                 });
                 offer.package.receive.forEach(pick => {
-                    const p = draftOrder.find(d => d.overall === pick.overall);
-                    if (p) { p.team = offer.buyerTeam; p.via = userTeam.name; }
+                    if (pick.isFuture) {
+                        const idx = futurePicks[userTeam.name]?.findIndex(p => p.id === pick.id);
+                        if (idx > -1) {
+                            const removed = futurePicks[userTeam.name].splice(idx, 1)[0];
+                            removed.team = offer.buyerTeam;
+                            if (!futurePicks[offer.buyerTeam]) futurePicks[offer.buyerTeam] = [];
+                            futurePicks[offer.buyerTeam].push(removed);
+                        }
+                    } else {
+                        const p = draftOrder.find(d => d.overall === pick.overall);
+                        if (p) { p.team = offer.buyerTeam; p.via = userTeam.name; }
+                    }
                 });
 
                 userTeam.picks = draftOrder.filter(d => d.team === userTeam.name).map(d => d.overall).sort((a, b) => a - b);
 
-                const givePicks = offer.package.give.map(p => `#${p.overall}`).join(', ');
-                const recPicks = offer.package.receive.map(p => `#${p.overall}`).join(', ');
+                const givePicks = offer.package.give.map(p => p.isFuture ? `${p.year} R${p.round}` : `#${p.overall}`).join(', ');
+                const recPicks = offer.package.receive.map(p => p.isFuture ? `${p.year} R${p.round}` : `#${p.overall}`).join(', ');
                 addTickerEvent('trade', {
                     buyer: offer.buyerTeam,
                     seller: userTeam.name,
@@ -4878,6 +5114,8 @@
                     schemeWeights = schemesData || {};
                     teamSchemes = (teamSchemesData && teamSchemesData.teams) || {};
                     allDepthCharts = depthChartsData || {};
+
+                    initFuturePicks();
 
                     userTeam.picks = draftOrder
                         .filter((d) => d.team === userTeam.name)
