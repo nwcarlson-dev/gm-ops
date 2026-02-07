@@ -223,6 +223,264 @@
             .sim-btn:hover {
                 opacity: 0.9;
             }
+            .trade-btn-header {
+                padding: 6px 10px;
+                font-size: 11px;
+                border-radius: 4px;
+                border: 1px solid rgba(213, 10, 10, 0.4);
+                cursor: pointer;
+                font-weight: 600;
+                background: rgba(213, 10, 10, 0.15);
+                color: var(--nfl-red);
+                font-family: 'Barlow Condensed', sans-serif;
+                letter-spacing: 0.05em;
+                text-transform: uppercase;
+                transition: var(--transition-fast);
+            }
+            .trade-btn-header:hover {
+                background: var(--nfl-red);
+                color: white;
+                border-color: var(--nfl-red);
+            }
+
+            .draft-ticker {
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+                border-bottom: 1px solid var(--card-border);
+                background: rgba(0,0,0,0.15);
+            }
+            .draft-ticker.visible {
+                max-height: 200px;
+            }
+            .draft-ticker-inner {
+                padding: 6px 12px;
+                display: flex;
+                flex-direction: column;
+                gap: 2px;
+                max-height: 120px;
+                overflow-y: auto;
+            }
+            .draft-ticker-inner::-webkit-scrollbar {
+                width: 4px;
+            }
+            .draft-ticker-inner::-webkit-scrollbar-thumb {
+                background: rgba(255,255,255,0.15);
+                border-radius: 2px;
+            }
+            .ticker-event {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                padding: 4px 8px;
+                border-radius: 4px;
+                font-size: 11px;
+                color: var(--silver);
+                animation: tickerSlideIn 0.3s ease;
+                flex-shrink: 0;
+            }
+            @keyframes tickerSlideIn {
+                from { opacity: 0; transform: translateY(-8px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            .ticker-event.pick {
+                background: rgba(0,0,0,0.1);
+            }
+            .ticker-event.trade {
+                background: rgba(213, 10, 10, 0.1);
+                border-left: 2px solid var(--nfl-red);
+                color: var(--white);
+            }
+            .ticker-pick-num {
+                font-weight: 700;
+                color: var(--text-muted);
+                font-size: 10px;
+                min-width: 20px;
+            }
+            .ticker-player {
+                font-weight: 600;
+                color: var(--white);
+            }
+            .ticker-pos {
+                font-size: 10px;
+                color: var(--gold);
+                font-weight: 600;
+            }
+            .ticker-team {
+                font-size: 10px;
+                color: var(--text-muted);
+                margin-left: auto;
+            }
+            .ticker-trade-icon {
+                color: var(--nfl-red);
+                font-weight: 700;
+                font-size: 10px;
+            }
+            .ticker-toggle {
+                display: flex;
+                align-items: center;
+                gap: 4px;
+                padding: 2px 8px;
+                font-size: 10px;
+                color: var(--text-muted);
+                cursor: pointer;
+                background: none;
+                border: none;
+                border-bottom: 1px solid var(--card-border);
+            }
+            .ticker-toggle:hover {
+                color: var(--white);
+            }
+            .ticker-badge {
+                background: var(--nfl-red);
+                color: white;
+                font-size: 9px;
+                padding: 1px 5px;
+                border-radius: 8px;
+                font-weight: 700;
+            }
+
+            .trade-offer-modal {
+                background: var(--card-bg);
+                border-radius: 12px;
+                width: 90%;
+                max-width: 500px;
+                max-height: 80vh;
+                overflow: hidden;
+                display: flex;
+                flex-direction: column;
+                border: 1px solid var(--nfl-red);
+                box-shadow: 0 0 40px rgba(213, 10, 10, 0.2);
+            }
+            .trade-offer-header {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                padding: 16px 20px;
+                border-bottom: 1px solid var(--card-border);
+                background: rgba(213, 10, 10, 0.08);
+            }
+            .trade-offer-header h2 {
+                font-family: 'Teko', sans-serif;
+                font-size: 22px;
+                color: var(--white);
+                margin: 0;
+                flex: 1;
+            }
+            .trade-offer-subtitle {
+                font-size: 12px;
+                color: var(--text-muted);
+            }
+            .trade-offer-body {
+                padding: 16px 20px;
+            }
+            .trade-offer-sides {
+                display: flex;
+                gap: 16px;
+                align-items: flex-start;
+            }
+            .trade-offer-side {
+                flex: 1;
+                background: rgba(0,0,0,0.2);
+                border-radius: 8px;
+                padding: 12px;
+            }
+            .trade-offer-side h4 {
+                font-family: 'Barlow Condensed', sans-serif;
+                font-size: 11px;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.1em;
+                color: var(--text-muted);
+                margin: 0 0 8px 0;
+            }
+            .trade-offer-pick {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 6px 8px;
+                background: rgba(255,255,255,0.05);
+                border-radius: 4px;
+                margin-bottom: 4px;
+                font-size: 12px;
+                color: var(--silver);
+            }
+            .trade-offer-pick-val {
+                font-size: 10px;
+                color: var(--text-muted);
+            }
+            .trade-offer-value {
+                display: flex;
+                justify-content: space-between;
+                padding: 8px 0;
+                margin-top: 8px;
+                border-top: 1px solid var(--card-border);
+                font-size: 12px;
+                color: var(--text-muted);
+            }
+            .trade-offer-value span {
+                font-weight: 600;
+                color: var(--white);
+            }
+            .trade-offer-reason {
+                font-size: 11px;
+                color: var(--text-muted);
+                padding: 8px 12px;
+                background: rgba(0,0,0,0.15);
+                border-radius: 6px;
+                margin-top: 12px;
+                font-style: italic;
+            }
+            .trade-offer-actions {
+                display: flex;
+                gap: 8px;
+                padding: 16px 20px;
+                border-top: 1px solid var(--card-border);
+            }
+            .trade-offer-actions button {
+                flex: 1;
+                padding: 10px;
+                border-radius: 6px;
+                border: none;
+                cursor: pointer;
+                font-size: 13px;
+                font-weight: 600;
+                transition: var(--transition-fast);
+            }
+            .btn-accept {
+                background: #28a745;
+                color: white;
+            }
+            .btn-accept:hover { background: #218838; }
+            .btn-decline {
+                background: rgba(255,255,255,0.1);
+                color: var(--silver);
+                border: 1px solid var(--card-border) !important;
+            }
+            .btn-decline:hover { background: rgba(255,255,255,0.15); }
+            .btn-counter {
+                background: rgba(1, 51, 105, 0.5);
+                color: var(--white);
+                border: 1px solid var(--nfl-blue) !important;
+            }
+            .btn-counter:hover { background: var(--nfl-blue); }
+            .btn-resume-sim {
+                margin-top: 8px;
+                padding: 8px;
+                width: 100%;
+                border-radius: 6px;
+                border: 1px solid var(--card-border);
+                background: rgba(255,255,255,0.05);
+                color: var(--text-muted);
+                cursor: pointer;
+                font-size: 11px;
+                transition: var(--transition-fast);
+            }
+            .btn-resume-sim:hover {
+                background: var(--nfl-blue);
+                color: white;
+                border-color: var(--nfl-blue);
+            }
 
             /* Draft pick action buttons */
             .draft-pick-actions {
@@ -1985,6 +2243,7 @@
                                 <span class="text-muted" style="font-size: 12px;" id="draftStatus">Raiders on the clock</span>
                             </div>
                             <div class="sim-controls-inline">
+                                <button class="trade-btn-header" onclick="openTradeModal()">Trade</button>
                                 <select id="simSpeed">
                                     <option value="0">Instant</option>
                                     <option value="500" selected>Fast</option>
@@ -1993,6 +2252,14 @@
                                 </select>
                                 <button class="sim-btn sim-btn-primary" id="simToggleBtn" onclick="toggleSim()">Sim</button>
                             </div>
+                        </div>
+                        <button class="ticker-toggle" id="tickerToggle" onclick="toggleTicker()">
+                            <span>Activity</span>
+                            <span class="ticker-badge" id="tickerCount" style="display:none;">0</span>
+                            <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+                        </button>
+                        <div class="draft-ticker" id="draftTicker">
+                            <div class="draft-ticker-inner" id="tickerList"></div>
                         </div>
                         <div class="draft-order-list" id="draftOrderList" style="flex: 1; overflow-y: auto;"></div>
                     </div>
@@ -2199,6 +2466,43 @@
                             Propose Trade
                         </button>
                     </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal-overlay" id="tradeOfferModal" onclick="if(event.target === this) declineTradeOffer()">
+            <div class="trade-offer-modal">
+                <div class="trade-offer-header">
+                    <h2 id="tradeOfferTitle">Trade Offer</h2>
+                    <button class="modal-close" onclick="declineTradeOffer()">&times;</button>
+                </div>
+                <div class="trade-offer-body">
+                    <div class="trade-offer-sides">
+                        <div class="trade-offer-side">
+                            <h4 id="tradeOfferTheirLabel">They Send</h4>
+                            <div id="tradeOfferTheirPicks"></div>
+                        </div>
+                        <div style="display:flex;align-items:center;padding:0 4px;">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="var(--text-muted)" stroke-width="2"><path d="M7 10l5-5 5 5M7 14l5 5 5-5"/></svg>
+                        </div>
+                        <div class="trade-offer-side">
+                            <h4>You Send</h4>
+                            <div id="tradeOfferYourPicks"></div>
+                        </div>
+                    </div>
+                    <div class="trade-offer-value">
+                        <div>Their Value: <span id="tradeOfferTheirVal">0</span></div>
+                        <div>Your Value: <span id="tradeOfferYourVal">0</span></div>
+                    </div>
+                    <div class="trade-offer-reason" id="tradeOfferReason"></div>
+                </div>
+                <div class="trade-offer-actions">
+                    <button class="btn-accept" onclick="acceptTradeOffer()">Accept</button>
+                    <button class="btn-decline" onclick="declineTradeOffer()">Decline</button>
+                    <button class="btn-counter" onclick="counterTradeOffer()">Counter</button>
+                </div>
+                <div style="padding: 0 20px 12px;">
+                    <button class="btn-resume-sim" id="resumeSimBtn" onclick="resumeSimAfterOffer()" style="display:none;">Resume Simulation</button>
                 </div>
             </div>
         </div>
@@ -3090,6 +3394,13 @@
                     filledNeeds[prospect.position] = prospect.name;
                 }
 
+                addTickerEvent('pick', {
+                    overall: currentPick,
+                    playerName: prospect.name,
+                    position: prospect.position,
+                    team: userTeam.name
+                });
+
                 currentPick++;
                 currentRound = Math.ceil(currentPick / 32) || 1;
                 if (currentRound > 7) currentRound = 7;
@@ -3240,11 +3551,34 @@
                     if (!pickData) break;
 
                     if (pickData.team === userTeam.name) {
+                        const offer = checkCPUOfferToUser(currentPick);
+                        if (offer) {
+                            simWasRunning = true;
+                            simTargetBeforePause = targetPick;
+                            stopSim();
+                            showTradeOffer(offer);
+                            return;
+                        }
                         stopSim();
                         break;
                     }
 
-                    // Use AI draft board to select pick
+                    if (!pickData._tradeChecked) {
+                        const cpuTrade = checkCPUTradeOpportunity(currentPick);
+                        if (cpuTrade) {
+                            pickData._tradeChecked = true;
+                            executeCPUTrade(cpuTrade.buyerTeam, cpuTrade.sellerTeam, cpuTrade.package);
+
+                            if (speed >= 1500) {
+                                await new Promise(r => setTimeout(r, 1200));
+                            } else if (speed >= 500) {
+                                await new Promise(r => setTimeout(r, 400));
+                            }
+
+                            continue;
+                        }
+                    }
+
                     const pick = getTeamPick(pickData.team);
 
                     if (pick) {
@@ -3257,6 +3591,13 @@
                         if (!teamFilledNeeds[pickData.team])
                             teamFilledNeeds[pickData.team] = [];
                         teamFilledNeeds[pickData.team].push(needCategory);
+
+                        addTickerEvent('pick', {
+                            overall: currentPick,
+                            playerName: pick.name,
+                            position: pick.position,
+                            team: pickData.team
+                        });
                     }
 
                     currentPick++;
@@ -3271,8 +3612,7 @@
                         `.draft-pick[data-overall="${currentPick}"]`,
                     );
                     if (pickEl) {
-                        // Scroll within draft list container only, not the whole page
-                        const draftList = document.getElementById("draftList");
+                        const draftList = document.getElementById("draftOrderList");
                         if (draftList) {
                             const listRect = draftList.getBoundingClientRect();
                             const pickRect = pickEl.getBoundingClientRect();
@@ -3483,6 +3823,370 @@
 
                 closeTradeModal();
                 renderPickList();
+            }
+
+            let tickerEvents = [];
+            let tickerVisible = false;
+            let tickerUnread = 0;
+            let pendingTradeOffer = null;
+            let simWasRunning = false;
+            let simTargetBeforePause = 258;
+
+            function toggleTicker() {
+                tickerVisible = !tickerVisible;
+                const ticker = document.getElementById('draftTicker');
+                ticker.classList.toggle('visible', tickerVisible);
+                if (tickerVisible) {
+                    tickerUnread = 0;
+                    updateTickerBadge();
+                }
+            }
+
+            function updateTickerBadge() {
+                const badge = document.getElementById('tickerCount');
+                if (tickerUnread > 0) {
+                    badge.textContent = tickerUnread;
+                    badge.style.display = '';
+                } else {
+                    badge.style.display = 'none';
+                }
+            }
+
+            function addTickerEvent(type, data) {
+                const speed = parseInt(document.getElementById('simSpeed').value);
+                if (speed === 0 && type === 'pick') return;
+
+                tickerEvents.unshift({ type, data, time: Date.now() });
+                if (tickerEvents.length > 50) tickerEvents.length = 50;
+
+                if (!tickerVisible) {
+                    tickerUnread++;
+                    updateTickerBadge();
+                }
+
+                renderTicker();
+            }
+
+            function renderTicker() {
+                const list = document.getElementById('tickerList');
+                const speed = parseInt(document.getElementById('simSpeed').value);
+                const maxShow = speed <= 500 ? 8 : 15;
+
+                list.innerHTML = tickerEvents.slice(0, maxShow).map(e => {
+                    if (e.type === 'pick') {
+                        return `<div class="ticker-event pick">
+                            <span class="ticker-pick-num">#${e.data.overall}</span>
+                            <span class="ticker-player">${e.data.playerName}</span>
+                            <span class="ticker-pos">${e.data.position}</span>
+                            <span class="ticker-team">${e.data.team}</span>
+                        </div>`;
+                    } else if (e.type === 'trade') {
+                        return `<div class="ticker-event trade">
+                            <span class="ticker-trade-icon">TRADE</span>
+                            <span>${e.data.team1} ↔ ${e.data.team2}</span>
+                            <span class="ticker-team">${e.data.summary}</span>
+                        </div>`;
+                    }
+                    return '';
+                }).join('');
+
+                if (tickerVisible) {
+                    list.scrollTop = 0;
+                }
+            }
+
+            function evaluateTradeMotivation(teamName, pickOverall) {
+                const board = teamDraftBoards[teamName];
+                if (!board) return null;
+
+                const teamData = TEAM_DATA[teamName];
+                if (!teamData) return null;
+                const abbr = teamData.abbr;
+                const needs = allTeamNeeds[abbr] || { primary: [], secondary: [] };
+                const filled = teamFilledNeeds[teamName] || [];
+                const primaryNeeds = (needs.primary || []).filter(n => !filled.includes(n));
+                const secondaryNeeds = (needs.secondary || []).filter(n => !filled.includes(n));
+
+                const teamPicks = draftOrder.filter(d => d.team === teamName && d.overall >= currentPick && !d.drafted);
+                if (teamPicks.length < 2) return null;
+
+                const nextTeamPick = teamPicks[0];
+                if (!nextTeamPick || nextTeamPick.overall <= pickOverall) return null;
+
+                const spotsAhead = nextTeamPick.overall - pickOverall;
+                if (spotsAhead < 2) return null;
+
+                const availableProspects = prospects.filter(p => !p.drafted);
+
+                let bestTarget = null;
+                let bestMotivation = 0;
+
+                for (let i = 0; i < Math.min(board.length, 80); i++) {
+                    const prospectId = board[i];
+                    const prospect = availableProspects.find(p => p.id === prospectId);
+                    if (!prospect) continue;
+
+                    const boardRank = i + 1;
+                    const teamPickSlot = nextTeamPick.overall;
+
+                    const rankAdvantage = teamPickSlot - pickOverall;
+                    const boardGap = teamPickSlot - boardRank;
+                    if (boardGap < 3) continue;
+
+                    const needCategory = mapPositionToNeed(prospect.position);
+                    let needScore = 0;
+                    if (primaryNeeds.includes(needCategory)) needScore = 15;
+                    else if (secondaryNeeds.includes(needCategory)) needScore = 7;
+
+                    let positionPremium = 0;
+                    if (prospect.position === 'QB' && boardRank <= 10) positionPremium = 12;
+                    else if (['EDGE', 'OT'].includes(prospect.position) && boardRank <= 15) positionPremium = 6;
+                    else if (prospect.position === 'WR' && boardRank <= 12) positionPremium = 4;
+
+                    let riskOfLoss = 0;
+                    if (spotsAhead > 20) riskOfLoss = 3;
+                    else if (spotsAhead > 10) riskOfLoss = 6;
+                    else if (spotsAhead > 5) riskOfLoss = 10;
+                    else riskOfLoss = 14;
+
+                    const motivation = boardGap * 0.6 + needScore + positionPremium + riskOfLoss;
+
+                    if (motivation > bestMotivation && motivation >= 18) {
+                        bestMotivation = motivation;
+                        bestTarget = {
+                            prospect,
+                            prospectId,
+                            motivation,
+                            boardRank,
+                            needLevel: primaryNeeds.includes(needCategory) ? 'primary' : (secondaryNeeds.includes(needCategory) ? 'secondary' : 'none'),
+                            fromPick: nextTeamPick.overall,
+                            toPick: pickOverall
+                        };
+                    }
+
+                    if (bestTarget) break;
+                }
+
+                return bestTarget;
+            }
+
+            function buildTradePackage(buyerTeam, targetPickOverall) {
+                const buyerPicks = draftOrder.filter(d => d.team === buyerTeam && d.overall >= currentPick && !d.drafted)
+                    .sort((a, b) => a.overall - b.overall);
+
+                if (buyerPicks.length < 2) return null;
+
+                const targetPick = draftOrder.find(d => d.overall === targetPickOverall);
+                if (!targetPick) return null;
+                const targetValue = targetPick.value || 0;
+
+                let bestPackage = null;
+                let bestOverpay = Infinity;
+
+                for (let i = 0; i < buyerPicks.length; i++) {
+                    const main = buyerPicks[i];
+                    if (main.overall <= targetPickOverall) continue;
+
+                    let package_ = [main];
+                    let packageValue = main.value || 0;
+
+                    if (packageValue >= targetValue * 0.85 && packageValue <= targetValue * 1.3) {
+                        const overpay = packageValue - targetValue;
+                        if (Math.abs(overpay) < Math.abs(bestOverpay)) {
+                            bestOverpay = overpay;
+                            bestPackage = { give: [...package_], receive: [targetPick], giveValue: packageValue, receiveValue: targetValue };
+                        }
+                    }
+
+                    for (let j = i + 1; j < buyerPicks.length && j < i + 4; j++) {
+                        const extra = buyerPicks[j];
+                        const twoPickValue = packageValue + (extra.value || 0);
+
+                        if (twoPickValue >= targetValue * 0.85 && twoPickValue <= targetValue * 1.5) {
+                            const overpay = twoPickValue - targetValue;
+                            if (overpay >= 0 && overpay < bestOverpay) {
+                                bestOverpay = overpay;
+                                bestPackage = { give: [main, extra], receive: [targetPick], giveValue: twoPickValue, receiveValue: targetValue };
+                            }
+                        }
+
+                        for (let k = j + 1; k < buyerPicks.length && k < j + 3; k++) {
+                            const third = buyerPicks[k];
+                            const threePickValue = twoPickValue + (third.value || 0);
+                            if (threePickValue >= targetValue * 0.9 && threePickValue <= targetValue * 1.5) {
+                                const overpay = threePickValue - targetValue;
+                                if (overpay >= 0 && overpay < bestOverpay) {
+                                    bestOverpay = overpay;
+                                    bestPackage = { give: [main, extra, third], receive: [targetPick], giveValue: threePickValue, receiveValue: targetValue };
+                                }
+                            }
+                        }
+                    }
+                }
+
+                return bestPackage;
+            }
+
+            function executeCPUTrade(buyerTeam, sellerTeam, tradePackage) {
+                tradePackage.give.forEach(pick => {
+                    const p = draftOrder.find(d => d.overall === pick.overall);
+                    if (p) { p.team = sellerTeam; p.via = buyerTeam; }
+                });
+                tradePackage.receive.forEach(pick => {
+                    const p = draftOrder.find(d => d.overall === pick.overall);
+                    if (p) { p.team = buyerTeam; p.via = sellerTeam; }
+                });
+
+                const giveSummary = tradePackage.give.map(p => `#${p.overall}`).join(', ');
+                const recSummary = tradePackage.receive.map(p => `#${p.overall}`).join(', ');
+
+                addTickerEvent('trade', {
+                    team1: buyerTeam,
+                    team2: sellerTeam,
+                    summary: `${buyerTeam} sends ${giveSummary} for ${recSummary}`
+                });
+
+                if (!tickerVisible) {
+                    const ticker = document.getElementById('draftTicker');
+                    ticker.classList.add('visible');
+                    tickerVisible = true;
+                }
+
+                renderPickList();
+            }
+
+            function checkCPUTradeOpportunity(pickOverall) {
+                const pickData = draftOrder.find(d => d.overall === pickOverall);
+                if (!pickData) return null;
+
+                const sellerTeam = pickData.team;
+                const teams = Object.keys(TEAM_DATA).filter(t => t !== sellerTeam && t !== userTeam.name);
+
+                const shuffled = [...teams].sort(() => seededRandom(pickOverall * 31 + draftSessionSeed) - 0.5);
+
+                for (const buyerTeam of shuffled.slice(0, 10)) {
+                    const motivation = evaluateTradeMotivation(buyerTeam, pickOverall);
+                    if (!motivation) continue;
+
+                    const tradeRoll = seededRandom(pickOverall * 97 + buyerTeam.length * 13 + draftSessionSeed);
+                    const tradeChance = Math.min(0.35, (motivation.motivation - 18) * 0.03 + 0.08);
+                    if (tradeRoll > tradeChance) continue;
+
+                    const package_ = buildTradePackage(buyerTeam, pickOverall);
+                    if (!package_) continue;
+
+                    return { buyerTeam, sellerTeam, package: package_, motivation };
+                }
+
+                return null;
+            }
+
+            function checkCPUOfferToUser(pickOverall) {
+                const pickData = draftOrder.find(d => d.overall === pickOverall);
+                if (!pickData || pickData.team !== userTeam.name) return null;
+
+                const teams = Object.keys(TEAM_DATA).filter(t => t !== userTeam.name);
+                const shuffled = [...teams].sort(() => seededRandom(pickOverall * 43 + draftSessionSeed) - 0.5);
+
+                for (const buyerTeam of shuffled.slice(0, 8)) {
+                    const motivation = evaluateTradeMotivation(buyerTeam, pickOverall);
+                    if (!motivation) continue;
+
+                    const tradeRoll = seededRandom(pickOverall * 71 + buyerTeam.length * 19 + draftSessionSeed);
+                    const tradeChance = Math.min(0.3, (motivation.motivation - 18) * 0.025 + 0.06);
+                    if (tradeRoll > tradeChance) continue;
+
+                    const package_ = buildTradePackage(buyerTeam, pickOverall);
+                    if (!package_) continue;
+
+                    return { buyerTeam, package: package_, motivation };
+                }
+
+                return null;
+            }
+
+            function showTradeOffer(offer) {
+                pendingTradeOffer = offer;
+                const modal = document.getElementById('tradeOfferModal');
+                modal.classList.add('active');
+
+                document.getElementById('tradeOfferTitle').textContent = `${offer.buyerTeam} wants to trade`;
+                document.getElementById('tradeOfferTheirLabel').textContent = `${offer.buyerTeam} Sends`;
+
+                document.getElementById('tradeOfferTheirPicks').innerHTML = offer.package.give.map(p =>
+                    `<div class="trade-offer-pick"><span>R${p.round} P${p.pick} (#${p.overall})</span><span class="trade-offer-pick-val">${p.value || 0}</span></div>`
+                ).join('');
+
+                document.getElementById('tradeOfferYourPicks').innerHTML = offer.package.receive.map(p =>
+                    `<div class="trade-offer-pick"><span>R${p.round} P${p.pick} (#${p.overall})</span><span class="trade-offer-pick-val">${p.value || 0}</span></div>`
+                ).join('');
+
+                document.getElementById('tradeOfferTheirVal').textContent = offer.package.giveValue;
+                document.getElementById('tradeOfferYourVal').textContent = offer.package.receiveValue;
+
+                const m = offer.motivation;
+                let reason = `${offer.buyerTeam} is interested in moving up`;
+                if (m.needLevel === 'primary') reason += ` to address a key need at ${m.prospect.position}`;
+                else if (m.needLevel === 'secondary') reason += ` — they like a ${m.prospect.position} on their board`;
+                else reason += ` for a top prospect`;
+                document.getElementById('tradeOfferReason').textContent = reason;
+
+                const resumeBtn = document.getElementById('resumeSimBtn');
+                resumeBtn.style.display = simWasRunning ? '' : 'none';
+            }
+
+            function acceptTradeOffer() {
+                if (!pendingTradeOffer) return;
+                const offer = pendingTradeOffer;
+
+                offer.package.give.forEach(pick => {
+                    const p = draftOrder.find(d => d.overall === pick.overall);
+                    if (p) { p.team = userTeam.name; p.via = offer.buyerTeam; }
+                });
+                offer.package.receive.forEach(pick => {
+                    const p = draftOrder.find(d => d.overall === pick.overall);
+                    if (p) { p.team = offer.buyerTeam; p.via = userTeam.name; }
+                });
+
+                userTeam.picks = draftOrder.filter(d => d.team === userTeam.name).map(d => d.overall).sort((a, b) => a - b);
+
+                addTickerEvent('trade', {
+                    team1: offer.buyerTeam,
+                    team2: userTeam.name,
+                    summary: `${offer.buyerTeam} trades up with ${userTeam.name}`
+                });
+
+                closeTradeOfferModal();
+                renderPickList();
+            }
+
+            function declineTradeOffer() {
+                closeTradeOfferModal();
+            }
+
+            function counterTradeOffer() {
+                if (!pendingTradeOffer) return;
+                const buyerTeam = pendingTradeOffer.buyerTeam;
+                closeTradeOfferModal();
+                openTradeModal();
+                setTimeout(() => {
+                    const partnerSelect = document.getElementById('tradePartner');
+                    partnerSelect.value = buyerTeam;
+                    updatePartnerPicks();
+                }, 100);
+            }
+
+            function closeTradeOfferModal() {
+                document.getElementById('tradeOfferModal').classList.remove('active');
+                pendingTradeOffer = null;
+            }
+
+            function resumeSimAfterOffer() {
+                closeTradeOfferModal();
+                if (simWasRunning) {
+                    simWasRunning = false;
+                    startSim(simTargetBeforePause);
+                }
             }
 
             function isUserOnClock() {

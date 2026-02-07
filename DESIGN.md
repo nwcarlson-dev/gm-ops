@@ -560,15 +560,57 @@ When an AI team is on the clock:
 
 This replaces the current "first available at need position" logic.
 
-### Trade-Up Triggers (Future Implementation)
+### Trade-Up Triggers (Implemented Feb 7, 2026)
 
-When a prospect on a team's board is ranked significantly higher than the current pick slot:
+CPU teams evaluate trade-up opportunities before each pick using a **motivation score** system. This allows trades at all points in the draft, not just for large rank gaps.
 
-- **Trigger threshold**: Prospect ranked 15+ spots higher than current pick on team's board
-- **Value check**: Would the trade be fair based on trade value chart?
-- **Capital check**: Does the team have enough picks to trade up?
+#### Motivation Score Components
 
-If all conditions met, team may initiate a trade offer.
+| Factor | Points | Description |
+|--------|--------|-------------|
+| **Board Gap** | gap × 0.6 | How much higher the prospect is on team's board vs their pick position |
+| **Primary Need** | +15 | Prospect fills a primary team need |
+| **Secondary Need** | +7 | Prospect fills a secondary need |
+| **Position Premium** | +4 to +12 | QB (12 if top 10), EDGE/OT (6 if top 15), WR (4 if top 12) |
+| **Risk of Loss** | +3 to +14 | Higher when fewer picks separate team from target (14 if ≤5 spots) |
+
+**Trade threshold**: Motivation ≥ 18 triggers trade evaluation
+
+**Trade probability**: `min(0.35, (motivation - 18) × 0.03 + 0.08)` — higher motivation = more likely to trade
+
+#### Trade Package Building
+
+- Searches buyer's available picks for value-balanced packages (1-3 picks)
+- Acceptable range: 85%-150% of target pick value (prefers minimal overpay)
+- Teams must retain at least 1 pick after trading
+
+#### Trade Types
+
+| Type | Behavior |
+|------|----------|
+| **CPU-to-CPU** | Executes automatically, appears in ticker, brief pause on Normal/Slow |
+| **CPU-to-User** | Always pauses the draft regardless of speed. User can Accept, Decline, or Counter |
+| **User-Initiated** | User opens Trade Center modal, selects picks, proposes trade |
+
+#### Speed-Based Trade Behavior
+
+| Speed | CPU-CPU Trade Pause | Ticker Picks | CPU-User Offers |
+|-------|-------------------|--------------|-----------------|
+| Instant | No pause | Skipped | Always pause |
+| Fast | 400ms pause | Shown | Always pause |
+| Normal | 1200ms pause | Shown | Always pause |
+| Slow | 1200ms pause | Shown | Always pause |
+
+#### CPU-to-User Trade Offers
+
+When the user is on the clock, CPU teams may offer to trade up:
+- Sim pauses and trade offer modal appears
+- Shows what they send vs what you send, with values
+- Explains their motivation (e.g., "addressing a key need at EDGE")
+- **Accept**: Execute trade, pick changes hands
+- **Decline**: Close modal, draft stays paused
+- **Counter**: Opens full Trade Center pre-filled with that team
+- **Resume Sim**: Available if sim was running when offer came in
 
 ### 2026 Team Scheme Assignments
 

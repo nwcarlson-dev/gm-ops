@@ -97,14 +97,22 @@ Python HTTP server on port 5000 (static site).
   - Range (low/high) derived from min/max across all sources per prospect
   - 73 prospect rankings adjusted; Mendoza unanimous #1, Bain #2, Reese #3
 
+- **Feb 7**: Trade system and draft ticker implementation
+  - Trade button added to draft board header (next to sim controls)
+  - Draft ticker: collapsible event feed showing picks and trades as they happen
+  - Ticker behavior: picks skipped on Instant, shown on Fast/Normal/Slow; trades always shown
+  - CPU-to-CPU trades: motivation-based trade-up logic (board rank + need + scheme fit + position premium + risk)
+  - CPU-to-user trade offers: always pauses draft, modal with Accept/Decline/Counter + Resume Sim
+  - Trade package building: value-balanced 1-3 pick packages using existing trade value chart
+  - Speed-aware trade pauses: 1200ms on Normal/Slow, 400ms on Fast, none on Instant
+  - Updated DESIGN.md with full trade trigger documentation
+
 ## Future Work
-- **AI Draft Logic Implementation**: Implement the documented draft board generation and pick selection in game-shell.html
-- **Trade Triggers**: AI trade-up logic when high-value prospect falls (design documented in DESIGN.md)
-- **Trade System**: Trade ticker, incoming calls, CPU-to-CPU trades, trade value chart
 - **Full Styling Pass**: Refactor draft-setup body content to use brand tokens
 - **Draft Results Page**: Grades, recap, export functionality
 - **Team Selection**: Let user pick any team (currently hardcoded to Bears)
 - **Draft Timer**: Add clock/timer for user picks
+- **Scheme Fit in AI Draft Boards**: Wire scheme skill weights into board generation (currently uses position value + needs + variance only)
 
 ## Prospect Data Schema
 See `data/prospects/SCHEMA.md` for full documentation. Key fields:
