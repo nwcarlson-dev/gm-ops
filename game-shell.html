@@ -2887,12 +2887,8 @@
                 }
 
                 if (setupTeamData.summary) {
-                    if (userTeam.offNeeds.length > 0 && !userTeam.offNeeds[0].note) {
-                        userTeam.offNeeds[0].note = setupTeamData.summary;
-                    }
-                    if (userTeam.defNeeds.length > 0 && !userTeam.defNeeds[0].note) {
-                        userTeam.defNeeds[0].note = setupTeamData.summary;
-                    }
+                    userTeam.offNeeds.forEach(n => { if (!n.note) n.note = setupTeamData.summary; });
+                    userTeam.defNeeds.forEach(n => { if (!n.note) n.note = setupTeamData.summary; });
                 }
             }
 
