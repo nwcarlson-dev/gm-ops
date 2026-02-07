@@ -13,6 +13,7 @@ GM Ops is an NFL franchise simulation game with the ambition to be the leading f
 - Update DESIGN.md before coding
 - MANDATORY: Review all existing documentation and data BEFORE making any changes - never overwrite existing content without first understanding what's there and confirming it won't lose valuable context
 - Do not touch sections the user didn't ask to change - scope changes strictly to what was requested
+- MANDATORY: When issues or unwanted results occur, fix the root cause — the logic or workflow that produced the problem — not the symptom. No one-off patches. Always treat the cause, not the symptom.
 
 ## System Architecture
 The project is structured around several HTML pages, each serving a specific game mode or utility, with `game-shell.html` being the primary draft UI. Data is loaded asynchronously from JSON files.
