@@ -1,14 +1,15 @@
 {
   "meta": {
     "draft_year": 2026,
-    "last_updated": "2026-01-25",
+    "last_updated": "2026-02-07",
     "sources": [
       "PFF",
       "CBS"
     ],
     "version": "1.4",
-    "total_prospects": 338,
-    "consensus_method": "median_of_sources"
+    "total_prospects": 337,
+    "consensus_method": "median_of_sources",
+    "notes": "Removed Dante Moore (returned to Oregon Jan 15 2026). Mendoza updated to consensus #1."
   },
   "prospects": [
     {
@@ -47,7 +48,7 @@
         "cbs": 1
       },
       "consensus": {
-        "rank": 1,
+        "rank": 2,
         "range_low": 1,
         "range_high": 2
       },
@@ -509,7 +510,7 @@
         }
       },
       "developmentCertainty": {
-        "score": 1.0,
+        "score": 1,
         "label": "Sure Fire"
       }
     },
@@ -1112,7 +1113,7 @@
         }
       },
       "developmentCertainty": {
-        "score": 0.0,
+        "score": 0,
         "label": "Project"
       }
     },
@@ -1246,7 +1247,7 @@
         }
       },
       "developmentCertainty": {
-        "score": 0.0,
+        "score": 0,
         "label": "Project"
       }
     },
@@ -1715,7 +1716,7 @@
         }
       },
       "developmentCertainty": {
-        "score": 0.0,
+        "score": 0,
         "label": "Project"
       }
     },
@@ -1891,7 +1892,7 @@
         "range_high": 139
       },
       "grades": {
-        "pff_overall": 61.0,
+        "pff_overall": 61,
         "pff_waa": -0.065
       },
       "combine": {},
@@ -1909,7 +1910,7 @@
       "source_raw": {
         "pff": {
           "rank": 31,
-          "grade": 61.0,
+          "grade": 61,
           "waa": -0.065,
           "school_full": "Texas Longhorns",
           "position": "HB"
@@ -2525,7 +2526,7 @@
         }
       },
       "developmentCertainty": {
-        "score": 0.0,
+        "score": 0,
         "label": "Project"
       }
     },
@@ -2796,7 +2797,7 @@
         }
       },
       "developmentCertainty": {
-        "score": 0.0,
+        "score": 0,
         "label": "Project"
       }
     },
@@ -2863,7 +2864,7 @@
         }
       },
       "developmentCertainty": {
-        "score": 0.0,
+        "score": 0,
         "label": "Project"
       }
     },
@@ -3134,7 +3135,7 @@
         }
       },
       "developmentCertainty": {
-        "score": 0.0,
+        "score": 0,
         "label": "Project"
       }
     },
@@ -3472,7 +3473,7 @@
         }
       },
       "developmentCertainty": {
-        "score": 0.0,
+        "score": 0,
         "label": "Project"
       }
     },
@@ -3729,7 +3730,7 @@
         "range_high": 49
       },
       "grades": {
-        "pff_overall": 64.0,
+        "pff_overall": 64,
         "pff_waa": 0.002
       },
       "combine": {},
@@ -3747,7 +3748,7 @@
       "source_raw": {
         "pff": {
           "rank": 54,
-          "grade": 64.0,
+          "grade": 64,
           "waa": 0.002,
           "school_full": "Michigan Wolverines",
           "position": "S"
@@ -3796,7 +3797,7 @@
         "range_high": 109
       },
       "grades": {
-        "pff_overall": 64.0,
+        "pff_overall": 64,
         "pff_waa": -0.354
       },
       "combine": {},
@@ -3814,7 +3815,7 @@
       "source_raw": {
         "pff": {
           "rank": 55,
-          "grade": 64.0,
+          "grade": 64,
           "waa": -0.354,
           "school_full": "Oklahoma Sooners",
           "position": "QB"
@@ -3955,7 +3956,7 @@
         }
       },
       "developmentCertainty": {
-        "score": 1.0,
+        "score": 1,
         "label": "Sure Fire"
       }
     },
@@ -4022,7 +4023,7 @@
         }
       },
       "developmentCertainty": {
-        "score": 0.0,
+        "score": 0,
         "label": "Project"
       }
     },
@@ -4382,7 +4383,7 @@
         }
       },
       "developmentCertainty": {
-        "score": 0.0,
+        "score": 0,
         "label": "Project"
       }
     },
@@ -4569,7 +4570,7 @@
         "range_high": 148
       },
       "grades": {
-        "pff_overall": 66.0,
+        "pff_overall": 66,
         "pff_waa": -0.008
       },
       "combine": {},
@@ -4587,7 +4588,7 @@
       "source_raw": {
         "pff": {
           "rank": 67,
-          "grade": 66.0,
+          "grade": 66,
           "waa": -0.008,
           "school_full": "Texas Longhorns",
           "position": "LB"
@@ -5043,7 +5044,7 @@
         }
       },
       "developmentCertainty": {
-        "score": 0.0,
+        "score": 0,
         "label": "Project"
       }
     },
@@ -5177,7 +5178,7 @@
         }
       },
       "developmentCertainty": {
-        "score": 0.0,
+        "score": 0,
         "label": "Project"
       }
     },
@@ -5333,7 +5334,7 @@
         }
       },
       "developmentCertainty": {
-        "score": 1.0,
+        "score": 1,
         "label": "Sure Fire"
       }
     },
@@ -5685,7 +5686,7 @@
         }
       },
       "developmentCertainty": {
-        "score": 0.0,
+        "score": 0,
         "label": "Project"
       }
     },
@@ -5725,9 +5726,9 @@
         "cbs": 1
       },
       "consensus": {
-        "rank": 11,
+        "rank": 1,
         "range_low": 1,
-        "range_high": 22
+        "range_high": 1
       },
       "grades": {
         "pff_overall": 91.6,
@@ -5805,7 +5806,7 @@
         "range_high": 91
       },
       "grades": {
-        "pff_overall": 67.0,
+        "pff_overall": 67,
         "pff_waa": 0.003
       },
       "combine": {},
@@ -5823,7 +5824,7 @@
       "source_raw": {
         "pff": {
           "rank": 74,
-          "grade": 67.0,
+          "grade": 67,
           "waa": 0.003,
           "school_full": "LSU Tigers",
           "position": "LB"
@@ -5975,7 +5976,7 @@
         }
       },
       "developmentCertainty": {
-        "score": 0.0,
+        "score": 0,
         "label": "Project"
       }
     },
@@ -6209,7 +6210,7 @@
         }
       },
       "developmentCertainty": {
-        "score": 1.0,
+        "score": 1,
         "label": "Sure Fire"
       }
     },
@@ -6625,7 +6626,7 @@
         "range_high": 132
       },
       "grades": {
-        "pff_overall": 66.0,
+        "pff_overall": 66,
         "pff_waa": 0.03
       },
       "combine": {},
@@ -6643,7 +6644,7 @@
       "source_raw": {
         "pff": {
           "rank": 66,
-          "grade": 66.0,
+          "grade": 66,
           "waa": 0.03,
           "school_full": "Boston College Eagles",
           "position": "T"
@@ -7969,7 +7970,7 @@
         "range_high": 203
       },
       "grades": {
-        "pff_overall": 61.0,
+        "pff_overall": 61,
         "pff_waa": -0.112
       },
       "combine": {},
@@ -7987,7 +7988,7 @@
       "source_raw": {
         "pff": {
           "rank": 32,
-          "grade": 61.0,
+          "grade": 61,
           "waa": -0.112,
           "school_full": "LSU Tigers",
           "position": "LB"
@@ -8744,7 +8745,7 @@
         }
       },
       "developmentCertainty": {
-        "score": 1.0,
+        "score": 1,
         "label": "Sure Fire"
       }
     },
@@ -8811,7 +8812,7 @@
         }
       },
       "developmentCertainty": {
-        "score": 0.0,
+        "score": 0,
         "label": "Project"
       }
     },
@@ -8956,7 +8957,7 @@
         }
       },
       "developmentCertainty": {
-        "score": 0.0,
+        "score": 0,
         "label": "Project"
       }
     },
@@ -9068,7 +9069,7 @@
         "range_high": 291
       },
       "grades": {
-        "pff_overall": 69.0,
+        "pff_overall": 69,
         "pff_waa": 0.07
       },
       "combine": {},
@@ -9086,7 +9087,7 @@
       "source_raw": {
         "pff": {
           "rank": 91,
-          "grade": 69.0,
+          "grade": 69,
           "waa": 0.07,
           "school_full": "Kansas Jayhawks",
           "position": "C"
@@ -9539,7 +9540,7 @@
         }
       },
       "developmentCertainty": {
-        "score": 1.0,
+        "score": 1,
         "label": "Sure Fire"
       }
     },
@@ -10114,7 +10115,7 @@
         }
       },
       "developmentCertainty": {
-        "score": 0.0,
+        "score": 0,
         "label": "Project"
       }
     },
@@ -10619,7 +10620,7 @@
         }
       },
       "developmentCertainty": {
-        "score": 0.0,
+        "score": 0,
         "label": "Project"
       }
     },
@@ -10731,7 +10732,7 @@
         "range_high": 56
       },
       "grades": {
-        "pff_overall": 79.0,
+        "pff_overall": 79,
         "pff_waa": 0.207
       },
       "combine": {},
@@ -10749,7 +10750,7 @@
       "source_raw": {
         "pff": {
           "rank": 154,
-          "grade": 79.0,
+          "grade": 79,
           "waa": 0.207,
           "school_full": "Tennessee Volunteers",
           "position": "CB"
@@ -10764,7 +10765,7 @@
         }
       },
       "developmentCertainty": {
-        "score": 0.0,
+        "score": 0,
         "label": "Project"
       }
     },
@@ -10842,7 +10843,7 @@
         }
       },
       "developmentCertainty": {
-        "score": 0.0,
+        "score": 0,
         "label": "Project"
       }
     },
@@ -11099,7 +11100,7 @@
         "range_high": 69
       },
       "grades": {
-        "pff_overall": 76.0,
+        "pff_overall": 76,
         "pff_waa": 0.033
       },
       "combine": {},
@@ -11117,7 +11118,7 @@
       "source_raw": {
         "pff": {
           "rank": 180,
-          "grade": 76.0,
+          "grade": 76,
           "waa": 0.033,
           "school_full": "Georgia Bulldogs",
           "position": "LB"
@@ -12153,7 +12154,7 @@
         }
       },
       "developmentCertainty": {
-        "score": 0.0,
+        "score": 0,
         "label": "Project"
       }
     },
@@ -12981,7 +12982,7 @@
         }
       },
       "developmentCertainty": {
-        "score": 0.0,
+        "score": 0,
         "label": "Project"
       }
     },
@@ -13575,7 +13576,7 @@
         }
       },
       "developmentCertainty": {
-        "score": 0.0,
+        "score": 0,
         "label": "Project"
       }
     },
@@ -13688,7 +13689,7 @@
       },
       "grades": {
         "pff_overall": 71.7,
-        "pff_waa": 0.0
+        "pff_waa": 0
       },
       "combine": {},
       "skills": {},
@@ -13706,7 +13707,7 @@
         "pff": {
           "rank": 123,
           "grade": 71.7,
-          "waa": 0.0,
+          "waa": 0,
           "school_full": "Iowa Hawkeyes",
           "position": "ED"
         }
@@ -13894,7 +13895,7 @@
         "range_high": 76
       },
       "grades": {
-        "pff_overall": 91.0,
+        "pff_overall": 91,
         "pff_waa": 0.576
       },
       "combine": {},
@@ -13912,7 +13913,7 @@
       "source_raw": {
         "pff": {
           "rank": 173,
-          "grade": 91.0,
+          "grade": 91,
           "waa": 0.576,
           "school_full": "Oregon Ducks",
           "position": "S"
@@ -13994,7 +13995,7 @@
         }
       },
       "developmentCertainty": {
-        "score": 0.0,
+        "score": 0,
         "label": "Project"
       }
     },
@@ -14295,7 +14296,7 @@
         }
       },
       "developmentCertainty": {
-        "score": 0.0,
+        "score": 0,
         "label": "Project"
       }
     },
@@ -14981,7 +14982,7 @@
         }
       },
       "developmentCertainty": {
-        "score": 1.0,
+        "score": 1,
         "label": "Sure Fire"
       }
     },
@@ -15059,7 +15060,7 @@
         }
       },
       "developmentCertainty": {
-        "score": 0.0,
+        "score": 0,
         "label": "Project"
       }
     },
@@ -15963,7 +15964,7 @@
         }
       },
       "developmentCertainty": {
-        "score": 0.0,
+        "score": 0,
         "label": "Project"
       }
     },
@@ -16046,73 +16047,6 @@
       }
     },
     {
-      "id": "dante-moore-2026",
-      "name": {
-        "display": "Dante Moore",
-        "first": "Dante",
-        "last": "Moore"
-      },
-      "position": "QB",
-      "position_source": {
-        "pff": "QB"
-      },
-      "school": "Oregon",
-      "conference": null,
-      "class_year": null,
-      "bio": {
-        "height_in": null,
-        "weight_lbs": null,
-        "birth_date": null,
-        "age_years": null,
-        "age_months": null,
-        "hometown": null,
-        "arm_length_in": null,
-        "hand_size_in": null
-      },
-      "rankings": {
-        "pff": 26,
-        "cbs": null,
-        "espn": null,
-        "nfl": null,
-        "the_athletic": null
-      },
-      "position_rankings": {},
-      "consensus": {
-        "rank": 26,
-        "range_low": 26,
-        "range_high": 26
-      },
-      "grades": {
-        "pff_overall": 90.2,
-        "pff_waa": 1.121
-      },
-      "combine": {},
-      "skills": {},
-      "traits": [],
-      "archetype": "Developing QB",
-      "projection": {
-        "round": 5,
-        "range_low": 149,
-        "range_high": 149,
-        "label": "Early 5th"
-      },
-      "scouting_report": "Talented passer with good arm strength. Accuracy shows flashes. Decision-making is developing. Pocket presence is improving. Mobility is adequate. High school pedigree. Development needed.",
-      "comparison": "Sam Howell",
-      "source_raw": {
-        "pff": {
-          "rank": 149,
-          "grade": 90.2,
-          "waa": 1.121,
-          "school_full": "Oregon Ducks",
-          "position": "QB"
-        }
-      },
-      "developmentCertainty": {
-        "score": 0.25,
-        "label": "Developmental"
-      }
-    },
-    {
       "id": "blake-miller-2026",
       "name": {
         "display": "Blake Miller",
@@ -16186,7 +16120,7 @@
         }
       },
       "developmentCertainty": {
-        "score": 0.0,
+        "score": 0,
         "label": "Project"
       }
     },
@@ -16457,7 +16391,7 @@
         "range_high": 123
       },
       "grades": {
-        "pff_overall": 82.0,
+        "pff_overall": 82,
         "pff_waa": 0.313
       },
       "combine": {},
@@ -16475,7 +16409,7 @@
       "source_raw": {
         "pff": {
           "rank": 216,
-          "grade": 82.0,
+          "grade": 82,
           "waa": 0.313,
           "school_full": "Georgia Bulldogs",
           "position": "WR"
@@ -16532,7 +16466,7 @@
         "range_high": 38
       },
       "grades": {
-        "pff_overall": 80.0,
+        "pff_overall": 80,
         "pff_waa": 0.217
       },
       "combine": {},
@@ -16550,7 +16484,7 @@
       "source_raw": {
         "pff": {
           "rank": 158,
-          "grade": 80.0,
+          "grade": 80,
           "waa": 0.217,
           "school_full": "Oregon Ducks",
           "position": "DI"
@@ -16825,7 +16759,7 @@
         "range_high": 114
       },
       "grades": {
-        "pff_overall": 86.0,
+        "pff_overall": 86,
         "pff_waa": 0.141
       },
       "combine": {},
@@ -16843,7 +16777,7 @@
       "source_raw": {
         "pff": {
           "rank": 206,
-          "grade": 86.0,
+          "grade": 86,
           "waa": 0.141,
           "school_full": "Duke Blue Devils",
           "position": "T"
@@ -17182,7 +17116,7 @@
         "range_high": 198
       },
       "grades": {
-        "pff_overall": 80.0,
+        "pff_overall": 80,
         "pff_waa": 0.104
       },
       "combine": {},
@@ -17200,7 +17134,7 @@
       "source_raw": {
         "pff": {
           "rank": 259,
-          "grade": 80.0,
+          "grade": 80,
           "waa": 0.104,
           "school_full": "Boise State Broncos",
           "position": "T"
@@ -17260,7 +17194,7 @@
         "range_high": 125
       },
       "grades": {
-        "pff_overall": 93.0,
+        "pff_overall": 93,
         "pff_waa": 0.445
       },
       "combine": {},
@@ -17278,7 +17212,7 @@
       "source_raw": {
         "pff": {
           "rank": 212,
-          "grade": 93.0,
+          "grade": 93,
           "waa": 0.445,
           "school_full": "Texas Tech Red Raiders",
           "position": "LB"
@@ -17494,7 +17428,7 @@
         "range_high": 127
       },
       "grades": {
-        "pff_overall": 79.0,
+        "pff_overall": 79,
         "pff_waa": 0.431
       },
       "combine": {},
@@ -17512,7 +17446,7 @@
       "source_raw": {
         "pff": {
           "rank": 217,
-          "grade": 79.0,
+          "grade": 79,
           "waa": 0.431,
           "school_full": "Clemson Tigers",
           "position": "QB"
@@ -17714,7 +17648,7 @@
         "range_high": 62
       },
       "grades": {
-        "pff_overall": 83.0,
+        "pff_overall": 83,
         "pff_waa": 0.378
       },
       "combine": {},
@@ -17732,7 +17666,7 @@
       "source_raw": {
         "pff": {
           "rank": 176,
-          "grade": 83.0,
+          "grade": 83,
           "waa": 0.378,
           "school_full": "Texas A&M Aggies",
           "position": "LB"
@@ -17895,7 +17829,7 @@
         }
       },
       "developmentCertainty": {
-        "score": 0.0,
+        "score": 0,
         "label": "Project"
       }
     },
@@ -18118,7 +18052,7 @@
         }
       },
       "developmentCertainty": {
-        "score": 0.0,
+        "score": 0,
         "label": "Project"
       }
     },
@@ -18230,7 +18164,7 @@
         "range_high": 224
       },
       "grades": {
-        "pff_overall": 79.0,
+        "pff_overall": 79,
         "pff_waa": 0.205
       },
       "combine": {},
@@ -18248,7 +18182,7 @@
       "source_raw": {
         "pff": {
           "rank": 270,
-          "grade": 79.0,
+          "grade": 79,
           "waa": 0.205,
           "school_full": "Missouri Tigers",
           "position": "WR"
@@ -18718,7 +18652,7 @@
         "range_high": 106
       },
       "grades": {
-        "pff_overall": 82.0,
+        "pff_overall": 82,
         "pff_waa": 0.356
       },
       "combine": {},
@@ -18736,7 +18670,7 @@
       "source_raw": {
         "pff": {
           "rank": 203,
-          "grade": 82.0,
+          "grade": 82,
           "waa": 0.356,
           "school_full": "Alabama Crimson Tide",
           "position": "S"
@@ -18877,7 +18811,7 @@
         }
       },
       "developmentCertainty": {
-        "score": 0.0,
+        "score": 0,
         "label": "Project"
       }
     },
@@ -19868,7 +19802,7 @@
         "range_high": 146
       },
       "grades": {
-        "pff_overall": 75.0,
+        "pff_overall": 75,
         "pff_waa": 0.063
       },
       "combine": {},
@@ -19886,7 +19820,7 @@
       "source_raw": {
         "pff": {
           "rank": 230,
-          "grade": 75.0,
+          "grade": 75,
           "waa": 0.063,
           "school_full": "Kansas State Wildcats",
           "position": "WR"
@@ -20471,7 +20405,7 @@
         "range_high": 169
       },
       "grades": {
-        "pff_overall": 78.0,
+        "pff_overall": 78,
         "pff_waa": 0.214
       },
       "combine": {},
@@ -20489,7 +20423,7 @@
       "source_raw": {
         "pff": {
           "rank": 243,
-          "grade": 78.0,
+          "grade": 78,
           "waa": 0.214,
           "school_full": "Houston Cougars",
           "position": "TE"
@@ -21970,7 +21904,7 @@
         }
       },
       "developmentCertainty": {
-        "score": 0.0,
+        "score": 0,
         "label": "Project"
       }
     },
@@ -22079,7 +22013,7 @@
         "range_high": 234
       },
       "grades": {
-        "pff_overall": 83.0,
+        "pff_overall": 83,
         "pff_waa": 0.182
       },
       "combine": {},
@@ -22097,7 +22031,7 @@
       "source_raw": {
         "pff": {
           "rank": 276,
-          "grade": 83.0,
+          "grade": 83,
           "waa": 0.182,
           "school_full": "Arkansas Razorbacks",
           "position": "QB"
@@ -22146,7 +22080,7 @@
         "range_high": 237
       },
       "grades": {
-        "pff_overall": 76.0,
+        "pff_overall": 76,
         "pff_waa": 0.028
       },
       "combine": {},
@@ -22164,7 +22098,7 @@
       "source_raw": {
         "pff": {
           "rank": 277,
-          "grade": 76.0,
+          "grade": 76,
           "waa": 0.028,
           "school_full": "Houston Cougars",
           "position": "HB"
@@ -23486,7 +23420,7 @@
         "range_high": 286
       },
       "grades": {
-        "pff_overall": 74.0,
+        "pff_overall": 74,
         "pff_waa": -0.001
       },
       "combine": {},
@@ -23504,7 +23438,7 @@
       "source_raw": {
         "pff": {
           "rank": 298,
-          "grade": 74.0,
+          "grade": 74,
           "waa": -0.001,
           "school_full": "West Virginia Mountaineers",
           "position": "HB"
@@ -23754,7 +23688,7 @@
         "range_high": 297
       },
       "grades": {
-        "pff_overall": 84.0,
+        "pff_overall": 84,
         "pff_waa": 0.265
       },
       "combine": {},
@@ -23772,7 +23706,7 @@
       "source_raw": {
         "pff": {
           "rank": 302,
-          "grade": 84.0,
+          "grade": 84,
           "waa": 0.265,
           "school_full": "Utah Utes",
           "position": "QB"

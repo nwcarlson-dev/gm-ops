@@ -746,4 +746,17 @@ New head coach hires start with elevated culture scores (benefit of the doubt), 
 - Made tab clicks expand panel when collapsed
 - Restored Scheme tab content (Play Callers, Scheme Fit Traits)
 
+### February 7, 2026
+
+**Prospect Data Corrections**:
+- Removed Dante Moore (QB, Oregon) — announced Jan 15, 2026 he's returning to school for 2026 season, targeting 2027 draft
+- Fernando Mendoza (QB, Indiana) updated to consensus #1 overall — Heisman winner, led Indiana to national championship, unanimous top pick across PFF/CBS/Yahoo/FOX/Ringer mocks
+- Weak QB class without Moore: only Mendoza is a clear 1st-round QB; Ty Simpson (Alabama) potential QB2
+- 337 prospects total (was 338)
+
+**AI Draft Board Variance Fix**:
+- Previous implementation used deterministic seed (team+prospect name) producing identical boards every draft
+- Added per-session random seed (`draftSessionSeed`) so each draft playthrough generates unique team boards
+- Variance tiers and development certainty modifiers still apply per DESIGN.md spec
+
 ---

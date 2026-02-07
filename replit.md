@@ -16,7 +16,7 @@ GM Ops is a comprehensive NFL franchise simulation game aiming to be "the best f
 - `DESIGN.md` - Game design documentation
 - `dev-guide.html` - Developer guide
 - `data/` - Data files and scripts
-  - `data/prospects/current/2026_prospects.json` - 338 prospects with full schema
+  - `data/prospects/current/2026_prospects.json` - 337 prospects with full schema
   - `data/draft/2026_draft_order.json` - 257 picks with trade values (NFLMDD source)
   - `data/teams/nflmdd_team_needs_2026.json` - Team needs by position
   - `data/schemes/scheme_skill_weights.json` - Skill importance weights by scheme (offense + defense)
@@ -42,13 +42,13 @@ Python HTTP server on port 5000 (static site).
 - Added scheme-fit matching system: team needs show position skills (gold tags) + physical traits (silver tags)
 - Synced DESIGN.md from GitHub with full skill definitions per position
 - **Jan 2026**: 3-column draft layout (Draft Order | Big Board | Team Panel)
-- **Jan 2026**: Created `data/prospects/2026_prospects.json` with 338 prospects
+- **Jan 2026**: Created `data/prospects/2026_prospects.json` with 337 prospects (originally 338; Dante Moore removed Feb 2026)
 - **Jan 2026**: Draft room now loads all data from JSON files (prospects, draft order, team needs)
 - **Jan 2026**: "More Info" button on player cards opens scouting report modal with rankings & comparisons
 - **Jan 2026**: Filled-need indicators track when user drafts at need positions
 - **Jan 2026**: Draft pick list shows trade values and traded picks (via team)
 - **Jan 2026**: 257 picks with NFLMDD trade values, Bears at #25
-- **Jan 24**: game-shell.html now loads 338 prospects from JSON with college colors, position filters, watchlist
+- **Jan 24**: game-shell.html now loads 337 prospects from JSON with college colors, position filters, watchlist
 - **Jan 24**: Accordion expansion for prospect details (replaced modal popup)
 - **Jan 24**: Consensus range uses descriptive labels (Top 10, Late 1st, etc.) in Range stat card
 - **Jan 24**: Draft Board shows ALL 257 picks with team needs as placeholders (PFF-style)
@@ -64,11 +64,11 @@ Python HTTP server on port 5000 (static site).
 - **Jan 24**: Position-to-need mapping for accurate needs tracking (OG->IOL, DE->EDGE, etc.)
 - **Jan 24**: Sim controls with speed settings (Instant/Fast/Normal/Slow), target pick input, and stop button
 - **Jan 25**: Created scheme skill weights JSON (`data/schemes/scheme_skill_weights.json`) with 7 offensive and 6 defensive schemes
-- **Jan 25**: Added `developmentCertainty` field to all 338 prospects (Sure Fire, High Floor, Standard, Developmental, Project)
+- **Jan 25**: Added `developmentCertainty` field to all 337 prospects (Sure Fire, High Floor, Standard, Developmental, Project)
 - **Jan 25**: Documented full AI Draft Logic System in DESIGN.md (board generation, variance tiers, scheme fit, trade triggers)
 - **Jan 25**: Restructured to 2-column layout: Draft Board (left) | Team Info + Prospects (right)
 - **Jan 25**: Added panel titles to Draft Board and Team Info matching Available Prospects styling
-- **Jan 25**: Removed "Load More" button - all 338 prospects load initially with scrollable list
+- **Jan 25**: Removed "Load More" button - all 337 prospects load initially with scrollable list
 - **Jan 25**: Fixed prospect visibility bug (removed overflow:hidden from prospect-card)
 - **Jan 25**: Added Depth tab to Team Info with 2-deep roster by position
 - **Jan 25**: Downloaded NFLverse depth charts data (`data/raw/nflverse/depth_charts_2025.csv`)
@@ -85,6 +85,11 @@ Python HTTP server on port 5000 (static site).
   - Updated `draft-setup.html` (all 32 teams OC/DC/scheme), `team_schemes.json`, `scheme_skill_weights.json` (75+ scheme aliases)
   - Scheme alias system maps team-specific scheme names → canonical categories for skill weights
   - TBD schemes for teams with incomplete coaching hires (Raiders DC, Cardinals DC)
+- **Feb 7**: Prospect data corrections
+  - Removed Dante Moore (QB, Oregon) — returned to school Jan 15, 2026; not in 2026 draft class
+  - Fernando Mendoza (QB, Indiana) updated to consensus #1 overall (Heisman winner, led Indiana to natl championship)
+  - 337 prospects total (was 338)
+  - AI draft board variance now uses per-session random seed for unique drafts each playthrough
 
 ## Future Work
 - **AI Draft Logic Implementation**: Implement the documented draft board generation and pick selection in game-shell.html
