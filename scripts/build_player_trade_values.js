@@ -5,22 +5,22 @@ const CURRENT_YEAR = 2026;
 const REFERENCE_DATE = new Date('2026-04-24');
 
 const POSITION_BASE_VALUES = {
-  QB:   { elite: 3500, starter: 2000, bridge: 400, backup: 150 },
-  EDGE: { elite: 2200, starter: 1500, bridge: 600, backup: 250 },
-  OT:   { elite: 1800, starter: 1200, bridge: 500, backup: 200 },
-  CB:   { elite: 1700, starter: 1100, bridge: 450, backup: 200 },
-  WR:   { elite: 1700, starter: 1100, bridge: 450, backup: 200 },
-  DL:   { elite: 1500, starter: 1000, bridge: 400, backup: 150 },
-  LB:   { elite: 1200, starter: 800, bridge: 350, backup: 150 },
-  S:    { elite: 1100, starter: 750, bridge: 300, backup: 120 },
-  TE:   { elite: 1000, starter: 650, bridge: 250, backup: 100 },
-  IOL:  { elite: 900, starter: 600, bridge: 250, backup: 100 },
-  RB:   { elite: 700, starter: 450, bridge: 200, backup: 80 },
-  K:    { elite: 80, starter: 50, bridge: 30, backup: 10 },
-  P:    { elite: 80, starter: 50, bridge: 30, backup: 10 },
-  LS:   { elite: 15, starter: 10, bridge: 5, backup: 5 },
-  FB:   { elite: 150, starter: 100, bridge: 50, backup: 20 },
-  NB:   { elite: 1000, starter: 700, bridge: 300, backup: 120 },
+  QB:   { elite: 1800, starter: 800, bridge: 150, backup: 30 },
+  EDGE: { elite: 1200, starter: 600, bridge: 200, backup: 60 },
+  OT:   { elite: 900, starter: 500, bridge: 150, backup: 40 },
+  CB:   { elite: 800, starter: 450, bridge: 130, backup: 35 },
+  WR:   { elite: 800, starter: 450, bridge: 130, backup: 35 },
+  DL:   { elite: 700, starter: 400, bridge: 120, backup: 30 },
+  LB:   { elite: 550, starter: 300, bridge: 100, backup: 25 },
+  S:    { elite: 500, starter: 280, bridge: 90, backup: 20 },
+  TE:   { elite: 450, starter: 250, bridge: 80, backup: 20 },
+  IOL:  { elite: 400, starter: 220, bridge: 70, backup: 15 },
+  RB:   { elite: 350, starter: 180, bridge: 60, backup: 15 },
+  K:    { elite: 40, starter: 20, bridge: 10, backup: 5 },
+  P:    { elite: 40, starter: 20, bridge: 10, backup: 5 },
+  LS:   { elite: 10, starter: 5, bridge: 2, backup: 1 },
+  FB:   { elite: 60, starter: 30, bridge: 15, backup: 5 },
+  NB:   { elite: 500, starter: 280, bridge: 90, backup: 20 },
 };
 
 const POSITION_PRIME_WINDOWS = {
@@ -153,31 +153,36 @@ function getContractModifier(apy, position, yearsRemaining, isRookieDeal) {
   const avgAPY = POSITION_AVG_APY[position] || 10;
   const marketRatio = apy / avgAPY;
 
+  if (isRookieDeal) {
+    let modifier = 1.0;
+    if (yearsRemaining >= 3) modifier = 1.25;
+    else if (yearsRemaining >= 2) modifier = 1.15;
+    else if (yearsRemaining >= 1) modifier = 1.0;
+    else modifier = 0.75;
+    return modifier;
+  }
+
   let modifier = 1.0;
   if (marketRatio < 0.5) {
-    modifier = 1.35;
+    modifier = 1.25;
   } else if (marketRatio < 0.75) {
-    modifier = 1.2;
+    modifier = 1.1;
   } else if (marketRatio < 1.0) {
-    modifier = 1.05;
+    modifier = 1.0;
   } else if (marketRatio < 1.3) {
-    modifier = 0.95;
+    modifier = 0.9;
   } else if (marketRatio < 1.6) {
-    modifier = 0.8;
+    modifier = 0.75;
   } else {
-    modifier = 0.6;
+    modifier = 0.55;
   }
 
-  if (isRookieDeal && yearsRemaining >= 2) {
-    modifier *= 1.3;
-  } else if (isRookieDeal && yearsRemaining >= 1) {
-    modifier *= 1.15;
-  }
-
-  if (yearsRemaining >= 3 && modifier > 0.9) {
-    modifier *= 1.1;
+  if (yearsRemaining >= 3) {
+    modifier *= 1.05;
   } else if (yearsRemaining <= 1) {
     modifier *= 0.8;
+  } else if (yearsRemaining === 0) {
+    modifier *= 0.6;
   }
 
   return modifier;
@@ -464,18 +469,19 @@ function main() {
 }
 
 function tradeValueToPickDescription(value) {
-  if (value >= 3000) return 'Top-5 pick';
-  if (value >= 2600) return 'Top-10 pick';
-  if (value >= 2000) return 'Mid 1st';
-  if (value >= 1500) return 'Late 1st';
-  if (value >= 1000) return 'Early 2nd';
-  if (value >= 700) return '2nd round';
-  if (value >= 500) return 'Late 2nd/Early 3rd';
-  if (value >= 300) return '3rd round';
-  if (value >= 200) return '4th round';
-  if (value >= 100) return '5th round';
-  if (value >= 40) return '6th round';
-  if (value >= 10) return '7th round';
+  if (value >= 3000) return '#1 overall';
+  if (value >= 2200) return 'Top-3 pick';
+  if (value >= 1700) return 'Top-5 pick';
+  if (value >= 1300) return 'Top-10 pick';
+  if (value >= 1000) return 'Mid 1st';
+  if (value >= 590) return 'Late 1st';
+  if (value >= 400) return 'Early 2nd';
+  if (value >= 270) return '2nd/3rd round';
+  if (value >= 150) return '3rd/4th round';
+  if (value >= 100) return '4th round';
+  if (value >= 42) return '5th round';
+  if (value >= 18) return '6th round';
+  if (value >= 5) return '7th round';
   return 'Minimal';
 }
 
