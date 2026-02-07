@@ -2886,8 +2886,7 @@
                 }
 
                 if (setupTeamData.summary) {
-                    userTeam.offNeeds.forEach(n => { if (!n.note) n.note = setupTeamData.summary; });
-                    userTeam.defNeeds.forEach(n => { if (!n.note) n.note = setupTeamData.summary; });
+                    userTeam.summary = setupTeamData.summary;
                 }
             }
 
