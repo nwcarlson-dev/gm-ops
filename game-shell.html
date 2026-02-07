@@ -2493,7 +2493,16 @@
             };
 
             const urlParams = new URLSearchParams(window.location.search);
-            const urlTeam = urlParams.get('team');
+            const urlTeamRaw = urlParams.get('team');
+
+            function resolveTeamName(raw) {
+                if (!raw) return null;
+                if (TEAM_DATA[raw]) return raw;
+                for (const key in TEAM_DATA) {
+                    if (key.toUpperCase() === raw.toUpperCase()) return key;
+                }
+                return raw;
+            }
 
             let draftSettings = {};
             try {
@@ -2502,9 +2511,11 @@
                 console.error("Failed to parse draft settings from localStorage:", e);
             }
             const selectedTeamNames = draftSettings.selectedTeams || ["Bears"];
-            const mainTeamName = urlTeam || selectedTeamNames[0];
+            const urlTeam = resolveTeamName(urlTeamRaw);
+            const lsTeam = resolveTeamName(selectedTeamNames[0]);
+            const mainTeamName = urlTeam || lsTeam;
             const setupTeamData = draftSettings.teamData || null;
-            console.log("Draft settings loaded - Team:", mainTeamName, "URL team:", urlTeam, "LS team:", selectedTeamNames[0], "Setup data:", setupTeamData ? "present" : "missing");
+            console.log("Draft settings loaded - Team:", mainTeamName, "URL team:", urlTeamRaw, "->", urlTeam, "LS team:", selectedTeamNames[0], "->", lsTeam, "Setup data:", setupTeamData ? "present" : "missing");
 
             const POSITION_NAME_TO_ABBR = {
                 "Quarterback": "QB", "Running Back": "RB", "Wide Receiver": "WR",

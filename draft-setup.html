@@ -1284,7 +1284,7 @@
       const selected = document.querySelector('.team-card.selected');
       const countEl = document.getElementById('selectedCount');
       if (selected) {
-        const teamName = selected.querySelector('.team-name').innerText;
+        const teamName = selected.querySelector('.team-name').textContent;
         countEl.innerHTML = `<span>${teamName}</span> selected`;
       } else {
         countEl.textContent = 'No team selected';
@@ -1396,7 +1396,7 @@
         return;
       }
 
-      const teamName = selectedCard.querySelector('.team-name').innerText;
+      const teamName = selectedCard.querySelector('.team-name').textContent;
       const teamObj = teams.find(t => t.n === teamName);
 
       const settings = {
