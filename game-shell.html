@@ -2867,10 +2867,6 @@
                     userTeam.defNeeds = buildNeedsFromSetup(setupTeamData.defNeeds);
                 }
 
-                if (setupTeamData.summary) {
-                    userTeam.offNeeds.forEach(n => { if (!n.note) n.note = setupTeamData.summary; });
-                    userTeam.defNeeds.forEach(n => { if (!n.note) n.note = setupTeamData.summary; });
-                }
             }
 
             function getTeamLogo(teamName, size = 28) {
