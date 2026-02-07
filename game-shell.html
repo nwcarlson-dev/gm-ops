@@ -2963,6 +2963,116 @@
                 });
             }
 
+            const BRIDGE_QBS = [
+                'Jacoby Brissett', 'Geno Smith', 'Jimmy Garoppolo', 'Andy Dalton',
+                'Tyrod Taylor', 'Case Keenum', 'Nick Foles', 'Ryan Fitzpatrick',
+                'Colt McCoy', 'Joe Flacco', 'Mason Rudolph', 'Davis Mills',
+                'Gardner Minshew', 'Taylor Heinicke', 'Brett Rypien', 'Tim Boyle',
+                'Blaine Gabbert', 'Brandon Allen', 'Aidan O\'Connell',
+                'Zach Wilson', 'Drew Lock', 'Kenny Pickett', 'Bryce Young',
+            ];
+
+            const AGING_QB_THRESHOLD = 37;
+
+            const KNOWN_QB_AGES = {
+                'Matthew Stafford': 38, 'Aaron Rodgers': 42, 'Russell Wilson': 37,
+                'Kirk Cousins': 37, 'Ryan Tannehill': 37, 'Derek Carr': 35,
+                'Jimmy Garoppolo': 34, 'Geno Smith': 35, 'Jacoby Brissett': 32,
+                'Joe Flacco': 41, 'Andy Dalton': 38, 'Tyrod Taylor': 36,
+            };
+
+            function validateTeamNeeds() {
+                if (!allTeamNeeds || !allDepthCharts) return;
+
+                let corrections = [];
+
+                for (const [abbr, needs] of Object.entries(allTeamNeeds)) {
+                    if (!needs.primary && !needs.secondary) continue;
+
+                    const depthChart = allDepthCharts[abbr];
+                    if (!depthChart) continue;
+
+                    const offense = depthChart.offense || [];
+                    const qbEntry = offense.find(p => p.pos === 'QB');
+
+                    if (qbEntry) {
+                        const starter = qbEntry.starter || {};
+                        const starterName = starter.name || '';
+                        const isExpiring = starter.expiring === true;
+                        const isBridgeQB = BRIDGE_QBS.some(bqb =>
+                            starterName.toLowerCase().includes(bqb.toLowerCase())
+                        );
+                        const knownAge = KNOWN_QB_AGES[starterName];
+                        const isAging = knownAge && knownAge >= AGING_QB_THRESHOLD;
+
+                        const qbInPrimary = (needs.primary || []).includes('QB');
+                        const qbInSecondary = (needs.secondary || []).includes('QB');
+
+                        if (qbInPrimary && !isExpiring && !isBridgeQB && !isAging) {
+                            needs.primary = needs.primary.filter(n => n !== 'QB');
+                            if (!qbInSecondary) {
+                                needs.secondary = needs.secondary || [];
+                                needs.secondary.push('QB');
+                            }
+                            corrections.push({
+                                team: needs.name || abbr,
+                                action: 'QB demoted from primary to secondary',
+                                reason: `${starterName} is invested starter (non-expiring, not a bridge QB)`
+                            });
+                        }
+
+                        if (!qbInPrimary && (isExpiring || isBridgeQB || isAging)) {
+                            if (!needs.primary.includes('QB')) {
+                                needs.primary.push('QB');
+                            }
+                            if (qbInSecondary) {
+                                needs.secondary = needs.secondary.filter(n => n !== 'QB');
+                            }
+                            corrections.push({
+                                team: needs.name || abbr,
+                                action: 'QB promoted to primary need',
+                                reason: `${starterName} is ${isExpiring ? 'expiring' : isBridgeQB ? 'bridge QB' : 'aging ('+knownAge+')'}`
+                            });
+                        }
+                    }
+
+                    const premiumPositions = ['EDGE', 'OT', 'CB', 'WR'];
+                    premiumPositions.forEach(pos => {
+                        if (!(needs.primary || []).includes(pos)) return;
+
+                        const side = ['EDGE', 'CB', 'DL', 'LB', 'S'].includes(pos) ? 'defense' : 'offense';
+                        const posMap = { 'EDGE': ['EDGE','DE','OLB'], 'OT': ['OT','LT','RT'], 'CB': ['CB'], 'WR': ['WR'] };
+                        const depthPositions = posMap[pos] || [pos];
+                        const sideData = depthChart[side] || [];
+
+                        const posEntries = sideData.filter(p => depthPositions.includes(p.pos));
+
+                        const allStartersFilled = posEntries.length >= 1 && posEntries.every(entry => {
+                            const s = entry.starter || {};
+                            return s.name && s.expiring === false;
+                        });
+
+                        if (allStartersFilled && posEntries.length >= 2) {
+                            needs.primary = needs.primary.filter(n => n !== pos);
+                            if (!(needs.secondary || []).includes(pos)) {
+                                needs.secondary = needs.secondary || [];
+                                needs.secondary.push(pos);
+                            }
+                            corrections.push({
+                                team: needs.name || abbr,
+                                action: `${pos} demoted from primary to secondary`,
+                                reason: `Multiple non-expiring starters at ${pos}`
+                            });
+                        }
+                    });
+                }
+
+                if (corrections.length > 0) {
+                    console.log(`Needs Intelligence: ${corrections.length} correction(s) applied`);
+                    corrections.forEach(c => console.log(`  ${c.team}: ${c.action} — ${c.reason}`));
+                }
+            }
+
             // AI Draft Logic data
             let schemeWeights = {};
             let teamSchemes = {};
@@ -5115,6 +5225,7 @@
                     teamSchemes = (teamSchemesData && teamSchemesData.teams) || {};
                     allDepthCharts = depthChartsData || {};
 
+                    validateTeamNeeds();
                     initFuturePicks();
 
                     userTeam.picks = draftOrder

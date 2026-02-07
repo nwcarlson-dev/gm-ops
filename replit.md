@@ -35,6 +35,8 @@ The project is structured around several HTML pages, each serving a specific gam
 - **Draft Results:** A `draft-results.html` page provides detailed analysis and grades based on value over consensus rank, need fulfillment, trade impact, and development certainty. It includes pick-by-pick narratives and team grades.
 - **Draft Simulation Script:** A Node.js script (`scripts/simulate-draft.js`) mirrors in-game AI logic for testing and generating simulated draft results.
 - **Prospect Data:** Includes detailed bio, rankings, grades, combine metrics, skills (0-100), traits, archetype, projection, and scouting reports. `developmentCertainty` is a key field.
+- **Needs Intelligence (`validateTeamNeeds`):** Runs at game startup to correct algorithmically-generated team needs using depth chart data. QB rules: rookie shield (non-expiring invested starter → demote QB from primary), bridge QB override (known placeholder QBs keep QB as primary), expiring/aging QB promotion. Also validates premium positions (EDGE, OT, CB, WR) — if 2+ non-expiring starters exist, demotes from primary. Configurable via `BRIDGE_QBS` list and `KNOWN_QB_AGES` map.
+- **Future Draft Picks:** 2027 and 2028 picks initialized with real-world traded picks applied (sourced from Wikipedia 2027 NFL draft article and Draft Insiders Digest). `REAL_FUTURE_TRADES` array captures 28 known 2027 trades and 5 known 2028 trades. Trade values discounted by year (2027 ≈ 1 round lower, 2028 ≈ 2 rounds lower).
 
 ## External Dependencies
 - **NFLMDD:** Source for draft order with trade values.
