@@ -270,8 +270,15 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding: 4px 6px;
+            padding: 3px 6px;
             gap: 1px;
+        }
+
+        .pill-top-row {
+            display: flex;
+            align-items: baseline;
+            gap: 5px;
+            min-width: 0;
         }
 
         .pill-name {
@@ -282,10 +289,20 @@
             text-overflow: ellipsis;
             line-height: 1.2;
             color: #e2e8f0;
+            flex-shrink: 1;
+            min-width: 0;
+        }
+
+        .pill-pff {
+            flex-shrink: 0;
+            font-size: 10px;
+            font-weight: 500;
+            white-space: nowrap;
+            line-height: 1.2;
         }
 
         .pill-stats {
-            font-size: 10px;
+            font-size: 10.5px;
             font-weight: 500;
             color: var(--text-muted);
             white-space: nowrap;
@@ -313,6 +330,15 @@
             margin-right: 1px;
             text-transform: uppercase;
             letter-spacing: 0.04em;
+        }
+
+        .pill-stats .stats-year {
+            font-size: 8px;
+            font-weight: 600;
+            opacity: 0.45;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            margin-right: 3px;
         }
 
         .pill-stats .stat-val {
@@ -662,24 +688,25 @@
                         const body = document.createElement('div');
                         body.className = 'pill-body';
 
-                        const nameEl = document.createElement('div');
+                        const topRow = document.createElement('div');
+                        topRow.className = 'pill-top-row';
+                        const nameEl = document.createElement('span');
                         nameEl.className = 'pill-name';
                         nameEl.textContent = row.players[i];
-                        body.appendChild(nameEl);
-
-                        const statsEl = document.createElement('div');
-                        statsEl.className = 'pill-stats';
-                        let statsLine = '';
+                        topRow.appendChild(nameEl);
                         if (pff && pff.grade != null) {
-                            statsLine += `<span class="pff-label">PFF</span><span class="pff-badge ${getGradeClass(pff.grade)}">${pff.grade.toFixed(1)}</span>`;
+                            const pffEl = document.createElement('span');
+                            pffEl.className = 'pill-pff';
+                            pffEl.innerHTML = `<span class="pff-label">PFF</span><span class="pff-badge ${getGradeClass(pff.grade)}">${pff.grade.toFixed(1)}</span>`;
+                            topRow.appendChild(pffEl);
                         }
+                        body.appendChild(topRow);
+
                         const posStats = pff ? getStatsHtml(row.pos, pff) : '';
                         if (posStats) {
-                            if (statsLine) statsLine += '<span class="stat-sep">|</span>';
-                            statsLine += posStats;
-                        }
-                        if (statsLine) {
-                            statsEl.innerHTML = statsLine;
+                            const statsEl = document.createElement('div');
+                            statsEl.className = 'pill-stats';
+                            statsEl.innerHTML = '<span class="stats-year">2025 Stats</span> ' + posStats;
                             body.appendChild(statsEl);
                         }
 
