@@ -59,18 +59,19 @@ async function getGitHubClient() {
     return new Octokit({ auth: accessToken });
 }
 
-app.use((req, res, next) => {
-    if (req.path.endsWith('.html') || req.path.endsWith('.js') || req.path.endsWith('.css') || req.path.endsWith('.json')) {
-        res.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
-        res.set('Pragma', 'no-cache');
-        res.set('Expires', '0');
-    }
-    next();
-});
 app.get('/offseason', (req, res) => {
     res.redirect('/game-shell.html?mode=offseason');
 });
-app.use(express.static('.'));
+app.use(express.static('.', {
+    etag: false,
+    lastModified: false,
+    setHeaders: (res, filePath) => {
+        res.set('Cache-Control', 'no-store, no-cache, must-revalidate, proxy-revalidate');
+        res.set('Pragma', 'no-cache');
+        res.set('Expires', '0');
+        res.set('Surrogate-Control', 'no-store');
+    }
+}));
 app.use(express.json());
 
 app.post('/api/transcribe', upload.single('audio'), async (req, res) => {
