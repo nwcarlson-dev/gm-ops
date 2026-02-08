@@ -2301,6 +2301,480 @@
                     font-size: 10px !important;
                 }
             }
+
+            .phase-bar {
+                display: none;
+                background: rgba(10, 22, 40, 0.95);
+                border-bottom: 1px solid var(--card-border);
+                padding: 8px 24px;
+                height: 44px;
+                align-items: center;
+            }
+            .phase-bar.visible { display: flex; }
+            .phase-bar-track {
+                display: flex;
+                align-items: center;
+                width: 100%;
+                position: relative;
+            }
+            .phase-node {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                gap: 2px;
+                flex: 1;
+                position: relative;
+                z-index: 1;
+                cursor: default;
+            }
+            .phase-dot {
+                width: 12px;
+                height: 12px;
+                border-radius: 50%;
+                border: 2px solid var(--card-border);
+                background: transparent;
+                transition: all 0.3s;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+            }
+            .phase-node.active .phase-dot {
+                background: var(--nfl-red);
+                border-color: var(--nfl-red);
+                width: 14px;
+                height: 14px;
+            }
+            .phase-node.completed .phase-dot {
+                background: var(--success);
+                border-color: var(--success);
+            }
+            .phase-dot .phase-check {
+                display: none;
+            }
+            .phase-node.completed .phase-dot .phase-check {
+                display: block;
+            }
+            .phase-label {
+                font-family: 'Barlow Condensed', sans-serif;
+                font-size: 10px;
+                font-weight: 500;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+                color: var(--text-muted);
+                white-space: nowrap;
+            }
+            .phase-node.active .phase-label {
+                color: var(--white);
+                font-weight: 600;
+            }
+            .phase-bar-line {
+                position: absolute;
+                top: 6px;
+                left: 10%;
+                right: 10%;
+                height: 2px;
+                background: var(--card-border);
+                z-index: 0;
+            }
+
+            .phase-content-area {
+                padding: 16px;
+                height: calc(100vh - 108px);
+                overflow-y: auto;
+            }
+
+            .offseason-mode-indicator {
+                background: rgba(212, 175, 55, 0.15);
+                border: 1px solid rgba(212, 175, 55, 0.3);
+            }
+            .offseason-mode-indicator .mode-dot {
+                background: var(--gold);
+            }
+
+            .os-layout-2col {
+                display: grid;
+                grid-template-columns: 60% 40%;
+                gap: 16px;
+                height: 100%;
+            }
+            .os-layout-2col-fa {
+                display: grid;
+                grid-template-columns: 55% 45%;
+                gap: 16px;
+                height: 100%;
+            }
+            .os-panel {
+                background: var(--card-bg);
+                border: 1px solid var(--card-border);
+                border-radius: 10px;
+                display: flex;
+                flex-direction: column;
+                overflow: hidden;
+            }
+            .os-panel-header {
+                padding: 12px 16px;
+                border-bottom: 1px solid var(--card-border);
+                font-family: 'Barlow Condensed', sans-serif;
+                font-size: 14px;
+                font-weight: 700;
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+                color: var(--white);
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+            }
+            .os-panel-body {
+                flex: 1;
+                overflow-y: auto;
+                padding: 12px 16px;
+            }
+            .os-table {
+                width: 100%;
+                border-collapse: collapse;
+                font-size: 13px;
+            }
+            .os-table th {
+                font-family: 'Barlow Condensed', sans-serif;
+                font-weight: 600;
+                font-size: 11px;
+                letter-spacing: 0.08em;
+                text-transform: uppercase;
+                color: var(--text-muted);
+                text-align: left;
+                padding: 6px 8px;
+                border-bottom: 1px solid var(--card-border);
+                white-space: nowrap;
+            }
+            .os-table td {
+                padding: 8px;
+                border-bottom: 1px solid rgba(165,172,175,0.08);
+                color: var(--white);
+                vertical-align: middle;
+            }
+            .os-table tr:hover td {
+                background: rgba(255,255,255,0.03);
+            }
+            .os-pos-badge {
+                display: inline-block;
+                padding: 2px 8px;
+                border-radius: 3px;
+                font-family: 'Barlow Condensed', sans-serif;
+                font-weight: 600;
+                font-size: 11px;
+                letter-spacing: 0.04em;
+                text-transform: uppercase;
+                background: rgba(1,51,105,0.5);
+                color: var(--silver);
+            }
+            .os-tier-badge {
+                display: inline-block;
+                padding: 2px 8px;
+                border-radius: 3px;
+                font-family: 'Barlow Condensed', sans-serif;
+                font-weight: 600;
+                font-size: 10px;
+                letter-spacing: 0.04em;
+                text-transform: uppercase;
+            }
+            .os-tier-elite { background: rgba(212,175,55,0.2); color: var(--gold); }
+            .os-tier-starter { background: rgba(16,185,129,0.15); color: var(--success); }
+            .os-tier-bridge { background: rgba(245,158,11,0.15); color: var(--warning); }
+            .os-tier-developing { background: rgba(1,51,105,0.4); color: var(--silver); }
+            .os-tier-backup { background: rgba(255,255,255,0.05); color: var(--text-muted); }
+            .os-select {
+                padding: 4px 8px;
+                font-size: 11px;
+                font-family: 'Barlow Condensed', sans-serif;
+                font-weight: 500;
+                background: rgba(255,255,255,0.08);
+                border: 1px solid var(--card-border);
+                border-radius: 4px;
+                color: var(--white);
+                cursor: pointer;
+            }
+            .os-select:focus {
+                outline: none;
+                border-color: var(--gold);
+            }
+            .os-cap-meter {
+                height: 8px;
+                background: rgba(255,255,255,0.1);
+                border-radius: 4px;
+                overflow: hidden;
+                margin: 8px 0;
+            }
+            .os-cap-meter-fill {
+                height: 100%;
+                border-radius: 4px;
+                transition: width 0.3s ease;
+            }
+            .os-cap-stat {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 4px 0;
+                font-size: 12px;
+            }
+            .os-cap-label {
+                color: var(--text-muted);
+                font-family: 'Barlow Condensed', sans-serif;
+                font-weight: 500;
+                letter-spacing: 0.04em;
+                text-transform: uppercase;
+                font-size: 11px;
+            }
+            .os-cap-value {
+                font-weight: 600;
+                font-family: 'Barlow Condensed', sans-serif;
+                font-size: 14px;
+            }
+            .os-league-tag-item {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                padding: 6px 0;
+                border-bottom: 1px solid rgba(165,172,175,0.06);
+                font-size: 12px;
+            }
+            .os-league-tag-team {
+                font-family: 'Barlow Condensed', sans-serif;
+                font-weight: 600;
+                color: var(--silver);
+                min-width: 32px;
+            }
+            .os-league-tag-type {
+                font-family: 'Barlow Condensed', sans-serif;
+                font-weight: 600;
+                font-size: 10px;
+                letter-spacing: 0.04em;
+                text-transform: uppercase;
+                padding: 2px 6px;
+                border-radius: 3px;
+            }
+            .os-tag-franchise { background: rgba(212,175,55,0.2); color: var(--gold); }
+            .os-tag-transition { background: rgba(1,51,105,0.4); color: var(--silver); }
+            .os-action-group {
+                display: flex;
+                gap: 4px;
+            }
+            .os-action-btn {
+                padding: 4px 10px;
+                font-size: 10px;
+                font-family: 'Barlow Condensed', sans-serif;
+                font-weight: 600;
+                letter-spacing: 0.04em;
+                text-transform: uppercase;
+                border-radius: 4px;
+                border: 1px solid var(--card-border);
+                cursor: pointer;
+                background: transparent;
+                color: var(--text-muted);
+                transition: all 0.15s ease;
+            }
+            .os-action-btn:hover {
+                background: rgba(255,255,255,0.08);
+                color: var(--white);
+            }
+            .os-action-btn.active-walk {
+                background: rgba(239,68,68,0.15);
+                border-color: rgba(239,68,68,0.4);
+                color: var(--danger);
+            }
+            .os-action-btn.active-extend {
+                background: rgba(16,185,129,0.15);
+                border-color: rgba(16,185,129,0.4);
+                color: var(--success);
+            }
+            .os-action-btn.active-release {
+                background: rgba(245,158,11,0.15);
+                border-color: rgba(245,158,11,0.4);
+                color: var(--warning);
+            }
+            .os-advance-bar {
+                padding: 12px 16px;
+                border-top: 1px solid var(--card-border);
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                background: rgba(10,22,40,0.5);
+            }
+            .os-impact-pos { color: var(--success); font-weight: 600; }
+            .os-impact-neg { color: var(--danger); font-weight: 600; }
+            .os-running-total {
+                font-family: 'Barlow Condensed', sans-serif;
+                font-size: 16px;
+                font-weight: 600;
+                color: var(--white);
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+            .os-fa-card {
+                background: rgba(1,51,105,0.2);
+                border: 1px solid var(--card-border);
+                border-radius: 8px;
+                padding: 10px 14px;
+                margin-bottom: 6px;
+                transition: border-color 0.15s ease;
+            }
+            .os-fa-card:hover {
+                border-color: rgba(165,172,175,0.4);
+            }
+            .os-fa-card-header {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                margin-bottom: 4px;
+            }
+            .os-fa-card-name {
+                font-weight: 600;
+                font-size: 14px;
+                color: var(--white);
+            }
+            .os-fa-card-meta {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                font-size: 12px;
+                color: var(--text-muted);
+            }
+            .os-fa-offer-row {
+                margin-top: 8px;
+                padding-top: 8px;
+                border-top: 1px solid rgba(165,172,175,0.1);
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                flex-wrap: wrap;
+            }
+            .os-fa-offer-field {
+                display: flex;
+                flex-direction: column;
+                gap: 2px;
+            }
+            .os-fa-offer-label {
+                font-family: 'Barlow Condensed', sans-serif;
+                font-size: 10px;
+                font-weight: 600;
+                letter-spacing: 0.06em;
+                text-transform: uppercase;
+                color: var(--text-muted);
+            }
+            .os-fa-offer-input {
+                padding: 4px 8px;
+                font-size: 12px;
+                background: rgba(255,255,255,0.08);
+                border: 1px solid var(--card-border);
+                border-radius: 4px;
+                color: var(--white);
+                width: 80px;
+                font-family: inherit;
+            }
+            .os-fa-offer-input:focus {
+                outline: none;
+                border-color: var(--gold);
+            }
+            .os-news-ticker {
+                background: rgba(0,0,0,0.2);
+                border: 1px solid var(--card-border);
+                border-radius: 6px;
+                padding: 8px 12px;
+                margin-bottom: 8px;
+                max-height: 120px;
+                overflow-y: auto;
+            }
+            .os-news-item {
+                font-size: 12px;
+                color: var(--text-muted);
+                padding: 3px 0;
+                border-bottom: 1px solid rgba(165,172,175,0.06);
+            }
+            .os-news-item:last-child { border-bottom: none; }
+            .os-news-highlight {
+                color: var(--gold);
+                font-weight: 600;
+            }
+            .os-day-counter {
+                font-family: 'Barlow Condensed', sans-serif;
+                font-size: 14px;
+                font-weight: 600;
+                color: var(--gold);
+                letter-spacing: 0.05em;
+                text-transform: uppercase;
+            }
+            .os-filter-tabs {
+                display: flex;
+                gap: 4px;
+                padding: 8px 0;
+                flex-wrap: wrap;
+            }
+            .os-filter-tab {
+                padding: 4px 10px;
+                font-family: 'Barlow Condensed', sans-serif;
+                font-size: 11px;
+                font-weight: 600;
+                letter-spacing: 0.04em;
+                text-transform: uppercase;
+                border-radius: 4px;
+                border: 1px solid var(--card-border);
+                background: transparent;
+                color: var(--text-muted);
+                cursor: pointer;
+                transition: all 0.15s ease;
+            }
+            .os-filter-tab:hover {
+                background: rgba(255,255,255,0.08);
+                color: var(--white);
+            }
+            .os-filter-tab.active {
+                background: var(--nfl-blue);
+                border-color: var(--nfl-blue);
+                color: var(--white);
+            }
+            .os-signing-item {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                padding: 6px 0;
+                border-bottom: 1px solid rgba(165,172,175,0.06);
+                font-size: 12px;
+                color: var(--silver);
+            }
+            .os-roster-mini {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 4px;
+                padding: 4px 0;
+            }
+            .os-roster-mini-item {
+                padding: 2px 6px;
+                font-size: 10px;
+                font-family: 'Barlow Condensed', sans-serif;
+                font-weight: 500;
+                background: rgba(255,255,255,0.05);
+                border-radius: 3px;
+                color: var(--text-muted);
+            }
+            .os-section-label {
+                font-family: 'Barlow Condensed', sans-serif;
+                font-size: 11px;
+                font-weight: 700;
+                letter-spacing: 0.1em;
+                text-transform: uppercase;
+                color: var(--text-muted);
+                margin: 12px 0 6px 0;
+            }
+            .os-market-settled {
+                text-align: center;
+                padding: 20px;
+                font-family: 'Barlow Condensed', sans-serif;
+                font-size: 18px;
+                font-weight: 600;
+                color: var(--gold);
+                letter-spacing: 0.05em;
+                text-transform: uppercase;
+            }
         </style>
     </head>
     <body>
@@ -2321,9 +2795,9 @@
                             ><span class="ps">PS</span></span
                         >
                     </a>
-                    <div class="mode-indicator draft">
+                    <div class="mode-indicator draft" id="modeIndicator">
                         <span class="mode-dot"></span>
-                        <span>Draft Mode</span>
+                        <span id="modeLabel">Draft Mode</span>
                     </div>
                 </div>
 
@@ -2337,9 +2811,16 @@
                 </div>
             </header>
 
+            <div class="phase-bar" id="phaseBar">
+                <div class="phase-bar-track" id="phaseBarTrack">
+                    <div class="phase-bar-line"></div>
+                </div>
+            </div>
+
             <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
             <aside class="app-sidebar">
                 <div class="sidebar-content">
+                    <div id="sidebarDraft">
                     <div class="sidebar-section">
                         <div class="sidebar-section-title">Draft</div>
                         <ul class="sidebar-nav">
@@ -2571,6 +3052,105 @@
                             </li>
                         </ul>
                     </div>
+                    </div>
+
+                    <div id="sidebarOffseason" style="display:none">
+                    <div class="sidebar-section">
+                        <div class="sidebar-section-title">Tools</div>
+                        <ul class="sidebar-nav">
+                            <li class="sidebar-nav-item active">
+                                <a href="#">
+                                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" />
+                                        <circle cx="9" cy="7" r="4" />
+                                        <path d="M23 21v-2a4 4 0 0 0-3-3.87" />
+                                        <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                                    </svg>
+                                    <span>My Roster</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-nav-item">
+                                <a href="#">
+                                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M16 3h5v5" />
+                                        <path d="M8 21H3v-5" />
+                                        <path d="M21 3l-9 9" />
+                                        <path d="M3 21l9-9" />
+                                    </svg>
+                                    <span>Trade Center</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-nav-item">
+                                <a href="#">
+                                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <line x1="12" y1="1" x2="12" y2="23" />
+                                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" />
+                                    </svg>
+                                    <span>Salary Cap</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-divider"></div>
+
+                    <div class="sidebar-section">
+                        <div class="sidebar-section-title">Info</div>
+                        <ul class="sidebar-nav">
+                            <li class="sidebar-nav-item">
+                                <a href="#">
+                                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
+                                        <polyline points="14 2 14 8 20 8" />
+                                        <line x1="16" y1="13" x2="8" y2="13" />
+                                        <line x1="16" y1="17" x2="8" y2="17" />
+                                    </svg>
+                                    <span>Team Needs</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-nav-item">
+                                <a href="#">
+                                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M22 12h-4l-3 9L9 3l-3 9H2" />
+                                    </svg>
+                                    <span>League Activity</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="sidebar-divider"></div>
+
+                    <div class="sidebar-section">
+                        <div class="sidebar-section-title">Franchise</div>
+                        <ul class="sidebar-nav">
+                            <li class="sidebar-nav-item teaser">
+                                <a href="#">
+                                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <rect x="3" y="4" width="18" height="18" rx="2" ry="2" />
+                                        <line x1="16" y1="2" x2="16" y2="6" />
+                                        <line x1="8" y1="2" x2="8" y2="6" />
+                                        <line x1="3" y1="10" x2="21" y2="10" />
+                                    </svg>
+                                    <span>Season</span>
+                                    <span class="upgrade-badge">FULL</span>
+                                </a>
+                            </li>
+                            <li class="sidebar-nav-item teaser">
+                                <a href="#">
+                                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M12 20V10" />
+                                        <path d="M18 20V4" />
+                                        <path d="M6 20v-4" />
+                                    </svg>
+                                    <span>Standings</span>
+                                    <span class="upgrade-badge">FULL</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                    </div>
+
                 </div>
 
                 <div class="sidebar-footer">
@@ -2586,6 +3166,7 @@
             </aside>
 
             <main class="app-main">
+                <div id="draftContent">
                 <div class="draft-layout">
                     <!-- Left Column: Draft Board -->
                     <div class="card draft-order-panel" style="display: flex; flex-direction: column; max-height: calc(100vh - 72px);">
@@ -2756,6 +3337,13 @@
                         </div>
                     </div><!-- End right column -->
                 </div><!-- End draft-layout -->
+                </div><!-- End draftContent -->
+
+                <div id="offseasonContent" style="display:none">
+                    <div id="phaseContent" class="phase-content-area">
+                        Phase content loading...
+                    </div>
+                </div>
             </main>
         </div>
 
@@ -2873,6 +3461,20 @@
         </div>
 
         <script>
+            const urlParams = new URLSearchParams(window.location.search);
+            const gameMode = urlParams.get('mode') || 'draft';
+
+            const OFFSEASON_PHASES = [
+                { id: 'franchise-tags', label: 'Franchise Tags', shortLabel: 'Tags' },
+                { id: 'contract-decisions', label: 'Contract Decisions', shortLabel: 'Contracts' },
+                { id: 'free-agency', label: 'Free Agency', shortLabel: 'FA' },
+                { id: 'pre-draft', label: 'Pre-Draft', shortLabel: 'Pre-Draft' },
+                { id: 'nfl-draft', label: 'NFL Draft', shortLabel: 'Draft' },
+                { id: 'udfa', label: 'UDFA Signing', shortLabel: 'UDFA' },
+                { id: 'roster-final', label: 'Roster Finalization', shortLabel: 'Roster' },
+            ];
+            let currentPhase = 0;
+
             let prospects = [];
             let draftOrder = [];
             let allTeamNeeds = {};
@@ -5524,8 +6126,817 @@
                 document.getElementById('currentPickBadge').textContent = 'Final';
             }
 
-            initTeamPanel();
-            loadData();
+            function renderPhaseBar() {
+                const track = document.getElementById('phaseBarTrack');
+                const existingNodes = track.querySelectorAll('.phase-node');
+                existingNodes.forEach(n => n.remove());
+
+                OFFSEASON_PHASES.forEach((phase, i) => {
+                    const node = document.createElement('div');
+                    node.className = 'phase-node';
+                    if (i < currentPhase) node.classList.add('completed');
+                    if (i === currentPhase) node.classList.add('active');
+
+                    const dot = document.createElement('div');
+                    dot.className = 'phase-dot';
+
+                    if (i < currentPhase) {
+                        const check = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+                        check.setAttribute('class', 'phase-check');
+                        check.setAttribute('width', '8');
+                        check.setAttribute('height', '8');
+                        check.setAttribute('viewBox', '0 0 24 24');
+                        check.setAttribute('fill', 'none');
+                        check.setAttribute('stroke', '#fff');
+                        check.setAttribute('stroke-width', '3');
+                        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+                        path.setAttribute('d', 'M20 6L9 17l-5-5');
+                        check.appendChild(path);
+                        dot.appendChild(check);
+                    }
+
+                    const label = document.createElement('div');
+                    label.className = 'phase-label';
+                    label.textContent = phase.shortLabel;
+
+                    node.appendChild(dot);
+                    node.appendChild(label);
+                    track.appendChild(node);
+                });
+            }
+
+            const TEAM_NAME_TO_ABBR = {
+                'Raiders': 'LV', 'Titans': 'TEN', 'Giants': 'NYG', 'Browns': 'CLE',
+                'Jaguars': 'JAC', 'Jets': 'NYJ', 'Panthers': 'CAR', 'Saints': 'NO',
+                'Chiefs': 'KC', 'Bengals': 'CIN', 'Dolphins': 'MIA', 'Cowboys': 'DAL',
+                'Rams': 'LAR', 'Ravens': 'BAL', 'Buccaneers': 'TB', 'Commanders': 'WAS',
+                'Lions': 'DET', 'Vikings': 'MIN', 'Steelers': 'PIT', 'Chargers': 'LAC',
+                'Eagles': 'PHI', 'Bears': 'CHI', 'Bills': 'BUF', '49ers': 'SF',
+                'Texans': 'HOU', 'Patriots': 'NE', 'Broncos': 'DEN', 'Seahawks': 'SEA',
+                'Colts': 'IND', 'Falcons': 'ATL', 'Packers': 'GB', 'Cardinals': 'ARI',
+            };
+
+            const FRANCHISE_TAG_COSTS = {
+                'QB': 35.0, 'EDGE': 22.0, 'WR': 21.5, 'OT': 19.5, 'CB': 18.5,
+                'S': 15.5, 'DL': 18.0, 'LB': 18.5, 'TE': 12.5, 'IOL': 16.0,
+                'RB': 11.0, 'K': 5.5, 'P': 4.0, 'NB': 15.0, 'FB': 5.0,
+            };
+
+            const ABBR_TO_NAME = Object.fromEntries(Object.entries(TEAM_NAME_TO_ABBR).map(([k,v]) => [v,k]));
+
+            let offseasonState = {
+                userTeam: null,
+                userTeamName: null,
+                rosters: {},
+                capData: {},
+                franchiseTags: {},
+                contractDecisions: {},
+                freeAgents: [],
+                faSignings: [],
+                faDay: 1,
+                faOffers: [],
+                faNoSigningDays: 0,
+                faMarketSettled: false,
+                faFilter: 'All',
+            };
+
+            function getTagCost(player) {
+                const posAvg = FRANCHISE_TAG_COSTS[player.position] || 10.0;
+                return Math.max(player.apy * 1.2, posAvg);
+            }
+
+            function getTransitionTagCost(player) {
+                return getTagCost(player) * 0.8;
+            }
+
+            function formatMoney(val) {
+                if (val === undefined || val === null) return '$0.0M';
+                return '$' + val.toFixed(1) + 'M';
+            }
+
+            function posBadgeHTML(pos) {
+                return '<span class="os-pos-badge">' + pos + '</span>';
+            }
+
+            function tierBadgeHTML(tier) {
+                const cls = 'os-tier-' + (tier || 'backup');
+                return '<span class="os-tier-badge ' + cls + '">' + (tier || 'Unknown') + '</span>';
+            }
+
+            function runCPUFranchiseTags() {
+                const userAbbr = offseasonState.userTeam;
+                Object.keys(offseasonState.rosters).forEach(function(teamAbbr) {
+                    if (teamAbbr === userAbbr) return;
+                    const players = offseasonState.rosters[teamAbbr];
+                    const eligible = players.filter(function(p) { return p.isExpiring && !p.isRookieDeal; })
+                        .sort(function(a,b) { return b.tradeValue - a.tradeValue; });
+                    const tagState = { franchise: null, transition: null };
+                    if (eligible.length > 0 && eligible[0].tradeValue > 200) {
+                        tagState.franchise = eligible[0].name;
+                    }
+                    if (eligible.length > 1 && eligible[1].tradeValue > 150) {
+                        tagState.transition = eligible[1].name;
+                    }
+                    offseasonState.franchiseTags[teamAbbr] = tagState;
+                });
+            }
+
+            function getUserCapAfterTags() {
+                const abbr = offseasonState.userTeam;
+                const cap = offseasonState.capData[abbr];
+                if (!cap) return 0;
+                let space = cap.capSpace;
+                const tags = offseasonState.franchiseTags[abbr] || {};
+                const players = offseasonState.rosters[abbr] || [];
+                if (tags.franchise) {
+                    const p = players.find(function(pl) { return pl.name === tags.franchise; });
+                    if (p) space -= (getTagCost(p) - p.apy);
+                }
+                if (tags.transition) {
+                    const p = players.find(function(pl) { return pl.name === tags.transition; });
+                    if (p) space -= (getTransitionTagCost(p) - p.apy);
+                }
+                return space;
+            }
+
+            function renderFranchiseTagsPhase() {
+                const container = document.getElementById('phaseContent');
+                const abbr = offseasonState.userTeam;
+                const players = (offseasonState.rosters[abbr] || []);
+                const eligible = players.filter(function(p) { return p.isExpiring && !p.isRookieDeal; })
+                    .sort(function(a,b) { return b.tradeValue - a.tradeValue; });
+                const cap = offseasonState.capData[abbr] || {};
+                if (!offseasonState.franchiseTags[abbr]) {
+                    offseasonState.franchiseTags[abbr] = { franchise: null, transition: null };
+                }
+                runCPUFranchiseTags();
+
+                const tags = offseasonState.franchiseTags[abbr];
+                const capAfter = getUserCapAfterTags();
+                const capPct = cap.salaryCap ? Math.min(100, ((cap.totalCommitted) / cap.salaryCap) * 100) : 0;
+                const capColor = capAfter < 0 ? 'var(--danger)' : capAfter < 15 ? 'var(--warning)' : 'var(--success)';
+
+                let rows = '';
+                eligible.forEach(function(p) {
+                    const fCost = getTagCost(p);
+                    const tCost = getTransitionTagCost(p);
+                    const isFranchised = tags.franchise === p.name;
+                    const isTransitioned = tags.transition === p.name;
+                    const franchiseUsed = tags.franchise && tags.franchise !== p.name;
+                    const transitionUsed = tags.transition && tags.transition !== p.name;
+                    let selected = 'none';
+                    if (isFranchised) selected = 'franchise';
+                    if (isTransitioned) selected = 'transition';
+
+                    rows += '<tr>' +
+                        '<td style="font-weight:600;">' + p.name + '</td>' +
+                        '<td>' + posBadgeHTML(p.position) + '</td>' +
+                        '<td>' + p.age + '</td>' +
+                        '<td>' + formatMoney(p.apy) + '</td>' +
+                        '<td style="font-family:\'Barlow Condensed\',sans-serif;font-weight:600;">' +
+                            '<div>F: ' + formatMoney(fCost) + '</div>' +
+                            '<div style="font-size:11px;color:var(--text-muted);">T: ' + formatMoney(tCost) + '</div>' +
+                        '</td>' +
+                        '<td>' +
+                            '<select class="os-select" onchange="handleTagChange(\'' + p.name.replace(/'/g, "\\'") + '\', this.value)">' +
+                                '<option value="none"' + (selected === 'none' ? ' selected' : '') + '>No Tag</option>' +
+                                '<option value="franchise"' + (selected === 'franchise' ? ' selected' : '') + (franchiseUsed ? ' disabled' : '') + '>Franchise Tag</option>' +
+                                '<option value="transition"' + (selected === 'transition' ? ' selected' : '') + (transitionUsed ? ' disabled' : '') + '>Transition Tag</option>' +
+                            '</select>' +
+                        '</td>' +
+                    '</tr>';
+                });
+
+                let leagueTags = '';
+                Object.keys(offseasonState.franchiseTags).forEach(function(t) {
+                    if (t === abbr) return;
+                    const ft = offseasonState.franchiseTags[t];
+                    if (ft.franchise) {
+                        leagueTags += '<div class="os-league-tag-item">' +
+                            '<span class="os-league-tag-team">' + t + '</span>' +
+                            '<span class="os-league-tag-type os-tag-franchise">Franchise</span>' +
+                            '<span>' + ft.franchise + '</span>' +
+                        '</div>';
+                    }
+                    if (ft.transition) {
+                        leagueTags += '<div class="os-league-tag-item">' +
+                            '<span class="os-league-tag-team">' + t + '</span>' +
+                            '<span class="os-league-tag-type os-tag-transition">Transition</span>' +
+                            '<span>' + ft.transition + '</span>' +
+                        '</div>';
+                    }
+                });
+
+                container.innerHTML =
+                    '<div class="os-layout-2col">' +
+                        '<div class="os-panel">' +
+                            '<div class="os-panel-header">' +
+                                '<span>Your Eligible Players</span>' +
+                                '<span style="font-size:11px;color:var(--text-muted);font-weight:500;text-transform:none;">' + eligible.length + ' eligible</span>' +
+                            '</div>' +
+                            '<div class="os-panel-body">' +
+                                (eligible.length === 0 ? '<div style="padding:20px;text-align:center;color:var(--text-muted);">No eligible players for tagging</div>' :
+                                '<table class="os-table">' +
+                                    '<thead><tr><th>Player</th><th>Pos</th><th>Age</th><th>Current APY</th><th>Tag Cost</th><th>Action</th></tr></thead>' +
+                                    '<tbody>' + rows + '</tbody>' +
+                                '</table>') +
+                            '</div>' +
+                            '<div class="os-advance-bar">' +
+                                '<div style="font-size:12px;color:var(--text-muted);">Tags applied: ' + (tags.franchise ? 1 : 0) + ' Franchise, ' + (tags.transition ? 1 : 0) + ' Transition</div>' +
+                                '<button class="btn btn-primary" onclick="confirmFranchiseTags()">Confirm Tags &amp; Continue</button>' +
+                            '</div>' +
+                        '</div>' +
+                        '<div style="display:flex;flex-direction:column;gap:12px;">' +
+                            '<div class="os-panel">' +
+                                '<div class="os-panel-header">Cap Summary</div>' +
+                                '<div class="os-panel-body">' +
+                                    '<div class="os-cap-meter"><div class="os-cap-meter-fill" style="width:' + capPct + '%;background:' + capColor + ';"></div></div>' +
+                                    '<div class="os-cap-stat"><span class="os-cap-label">Salary Cap</span><span class="os-cap-value">' + formatMoney(cap.salaryCap) + '</span></div>' +
+                                    '<div class="os-cap-stat"><span class="os-cap-label">Total Committed</span><span class="os-cap-value">' + formatMoney(cap.totalCommitted) + '</span></div>' +
+                                    '<div class="os-cap-stat"><span class="os-cap-label">Current Cap Space</span><span class="os-cap-value" style="color:' + (cap.capSpace >= 0 ? 'var(--success)' : 'var(--danger)') + '">' + formatMoney(cap.capSpace) + '</span></div>' +
+                                    '<div class="os-cap-stat" style="border-top:1px solid var(--card-border);padding-top:8px;margin-top:4px;"><span class="os-cap-label">Projected After Tags</span><span class="os-cap-value" style="color:' + capColor + '">' + formatMoney(capAfter) + '</span></div>' +
+                                '</div>' +
+                            '</div>' +
+                            '<div class="os-panel" style="flex:1;">' +
+                                '<div class="os-panel-header">League Tags</div>' +
+                                '<div class="os-panel-body">' +
+                                    (leagueTags || '<div style="padding:10px;text-align:center;color:var(--text-muted);font-size:12px;">No league tags applied</div>') +
+                                '</div>' +
+                            '</div>' +
+                        '</div>' +
+                    '</div>';
+            }
+
+            function handleTagChange(playerName, value) {
+                const abbr = offseasonState.userTeam;
+                const tags = offseasonState.franchiseTags[abbr];
+                if (tags.franchise === playerName) tags.franchise = null;
+                if (tags.transition === playerName) tags.transition = null;
+                if (value === 'franchise') tags.franchise = playerName;
+                else if (value === 'transition') tags.transition = playerName;
+                renderFranchiseTagsPhase();
+            }
+
+            function confirmFranchiseTags() {
+                advancePhase();
+            }
+
+            function runCPUContractDecisions() {
+                const userAbbr = offseasonState.userTeam;
+                Object.keys(offseasonState.rosters).forEach(function(teamAbbr) {
+                    if (teamAbbr === userAbbr) return;
+                    const players = offseasonState.rosters[teamAbbr];
+                    const tags = offseasonState.franchiseTags[teamAbbr] || {};
+                    const decisions = {};
+                    players.forEach(function(p) {
+                        if (!p.isExpiring) return;
+                        if (tags.franchise === p.name || tags.transition === p.name) return;
+                        const tier = p.performanceTier;
+                        if ((tier === 'elite' || tier === 'starter') && p.tradeValue > 300) {
+                            decisions[p.name] = { action: 'extend' };
+                        } else if (tier === 'bridge' || tier === 'backup') {
+                            decisions[p.name] = { action: 'walk' };
+                        } else {
+                            decisions[p.name] = { action: Math.random() > 0.5 ? 'extend' : 'walk' };
+                        }
+                    });
+                    offseasonState.contractDecisions[teamAbbr] = decisions;
+                });
+            }
+
+            function renderContractDecisionsPhase() {
+                const container = document.getElementById('phaseContent');
+                const abbr = offseasonState.userTeam;
+                const players = (offseasonState.rosters[abbr] || []);
+                const tags = offseasonState.franchiseTags[abbr] || {};
+                const cap = offseasonState.capData[abbr] || {};
+                const expiring = players.filter(function(p) {
+                    return p.isExpiring && p.name !== tags.franchise && p.name !== tags.transition;
+                }).sort(function(a,b) { return b.tradeValue - a.tradeValue; });
+
+                if (!offseasonState.contractDecisions[abbr]) {
+                    offseasonState.contractDecisions[abbr] = {};
+                    expiring.forEach(function(p) {
+                        offseasonState.contractDecisions[abbr][p.name] = { action: 'walk' };
+                    });
+                }
+                runCPUContractDecisions();
+
+                const decisions = offseasonState.contractDecisions[abbr];
+                let capDelta = 0;
+                expiring.forEach(function(p) {
+                    const d = decisions[p.name];
+                    if (!d) return;
+                    if (d.action === 'extend') {
+                        capDelta -= (p.apy * 1.1 - p.apy);
+                    } else if (d.action === 'release') {
+                        const deadCap = (p.guaranteed || 0) * 0.5;
+                        capDelta += p.apy - deadCap;
+                    }
+                });
+                const baseSpace = getUserCapAfterTags();
+                const projectedSpace = baseSpace + capDelta;
+                const projColor = projectedSpace < 0 ? 'var(--danger)' : projectedSpace < 10 ? 'var(--warning)' : 'var(--success)';
+
+                let rows = '';
+                expiring.forEach(function(p) {
+                    const d = decisions[p.name] || { action: 'walk' };
+                    let impact = '';
+                    let impactClass = '';
+                    if (d.action === 'extend') {
+                        const cost = p.apy * 0.1;
+                        impact = '-' + formatMoney(cost);
+                        impactClass = 'os-impact-neg';
+                    } else if (d.action === 'release') {
+                        const deadCap = (p.guaranteed || 0) * 0.5;
+                        const savings = p.apy - deadCap;
+                        impact = '+' + formatMoney(Math.abs(savings));
+                        impactClass = savings >= 0 ? 'os-impact-pos' : 'os-impact-neg';
+                    } else {
+                        impact = '--';
+                        impactClass = '';
+                    }
+
+                    rows += '<tr>' +
+                        '<td style="font-weight:600;">' + p.name + '</td>' +
+                        '<td>' + posBadgeHTML(p.position) + '</td>' +
+                        '<td>' + p.age + '</td>' +
+                        '<td>' + tierBadgeHTML(p.performanceTier) + '</td>' +
+                        '<td>' + formatMoney(p.apy) + '</td>' +
+                        '<td>' + (p.yearsRemaining || 0) + '</td>' +
+                        '<td>' +
+                            '<div class="os-action-group">' +
+                                '<button class="os-action-btn' + (d.action === 'walk' ? ' active-walk' : '') + '" onclick="handleContractAction(\'' + p.name.replace(/'/g, "\\'") + '\', \'walk\')">Walk</button>' +
+                                '<button class="os-action-btn' + (d.action === 'extend' ? ' active-extend' : '') + '" onclick="handleContractAction(\'' + p.name.replace(/'/g, "\\'") + '\', \'extend\')">Extend</button>' +
+                                '<button class="os-action-btn' + (d.action === 'release' ? ' active-release' : '') + '" onclick="handleContractAction(\'' + p.name.replace(/'/g, "\\'") + '\', \'release\')">Release</button>' +
+                            '</div>' +
+                        '</td>' +
+                        '<td><span class="' + impactClass + '">' + impact + '</span></td>' +
+                    '</tr>';
+                });
+
+                container.innerHTML =
+                    '<div style="display:flex;flex-direction:column;height:100%;">' +
+                        '<div class="os-panel" style="flex:1;">' +
+                            '<div class="os-panel-header">' +
+                                '<span>Contract Decisions</span>' +
+                                '<div class="os-running-total">' +
+                                    'Cap Space: ' + formatMoney(baseSpace) +
+                                    ' <span style="color:var(--text-muted);font-size:14px;">--></span> ' +
+                                    '<span style="color:' + projColor + ';">' + formatMoney(projectedSpace) + '</span>' +
+                                '</div>' +
+                            '</div>' +
+                            '<div class="os-panel-body">' +
+                                (expiring.length === 0 ? '<div style="padding:20px;text-align:center;color:var(--text-muted);">No expiring contracts to review</div>' :
+                                '<table class="os-table">' +
+                                    '<thead><tr><th>Player</th><th>Pos</th><th>Age</th><th>Tier</th><th>APY</th><th>Yrs Left</th><th>Action</th><th>Impact</th></tr></thead>' +
+                                    '<tbody>' + rows + '</tbody>' +
+                                '</table>') +
+                            '</div>' +
+                            '<div class="os-advance-bar">' +
+                                '<div style="font-size:12px;color:var(--text-muted);">' + expiring.length + ' expiring contracts</div>' +
+                                '<button class="btn btn-primary" onclick="confirmContractDecisions()">Finalize Decisions &amp; Continue</button>' +
+                            '</div>' +
+                        '</div>' +
+                    '</div>';
+            }
+
+            function handleContractAction(playerName, action) {
+                const abbr = offseasonState.userTeam;
+                if (!offseasonState.contractDecisions[abbr]) offseasonState.contractDecisions[abbr] = {};
+                offseasonState.contractDecisions[abbr][playerName] = { action: action };
+                renderContractDecisionsPhase();
+            }
+
+            function confirmContractDecisions() {
+                buildFreeAgentPool();
+                advancePhase();
+            }
+
+            function buildFreeAgentPool() {
+                const fas = [];
+                Object.keys(offseasonState.rosters).forEach(function(teamAbbr) {
+                    const players = offseasonState.rosters[teamAbbr];
+                    const tags = offseasonState.franchiseTags[teamAbbr] || {};
+                    const decisions = offseasonState.contractDecisions[teamAbbr] || {};
+                    players.forEach(function(p) {
+                        if (!p.isExpiring) return;
+                        if (tags.franchise === p.name || tags.transition === p.name) return;
+                        const d = decisions[p.name];
+                        if (!d || d.action === 'walk') {
+                            fas.push(Object.assign({}, p, { previousTeam: teamAbbr, askingAPY: p.apy }));
+                        }
+                    });
+                });
+                fas.sort(function(a,b) { return b.tradeValue - a.tradeValue; });
+                offseasonState.freeAgents = fas;
+                offseasonState.faDay = 1;
+                offseasonState.faOffers = [];
+                offseasonState.faSignings = [];
+                offseasonState.faNoSigningDays = 0;
+                offseasonState.faMarketSettled = false;
+                offseasonState.faFilter = 'All';
+            }
+
+            function getFilteredFAs() {
+                const filter = offseasonState.faFilter;
+                const signed = offseasonState.faSignings.map(function(s) { return s.player.name; });
+                let list = offseasonState.freeAgents.filter(function(fa) {
+                    return signed.indexOf(fa.name) === -1;
+                });
+                if (filter !== 'All') {
+                    const posMap = { 'OL': ['OT','IOL'], 'IDL': ['DL'] };
+                    const positions = posMap[filter] || [filter];
+                    list = list.filter(function(fa) { return positions.indexOf(fa.position) !== -1; });
+                }
+                return list;
+            }
+
+            function renderFreeAgencyPhase() {
+                const container = document.getElementById('phaseContent');
+                const abbr = offseasonState.userTeam;
+                const cap = offseasonState.capData[abbr] || {};
+                const baseSpace = getUserCapAfterTags();
+                let spentOnSignings = 0;
+                offseasonState.faSignings.forEach(function(s) {
+                    if (s.team === abbr) spentOnSignings += s.apy;
+                });
+                const userContractDelta = getUserContractDelta();
+                const currentCap = baseSpace + userContractDelta - spentOnSignings;
+
+                const filteredFAs = getFilteredFAs();
+                const filters = ['All','QB','RB','WR','TE','OL','IDL','EDGE','LB','CB','S'];
+
+                let filterHTML = '<div class="os-filter-tabs">';
+                filters.forEach(function(f) {
+                    filterHTML += '<button class="os-filter-tab' + (offseasonState.faFilter === f ? ' active' : '') + '" onclick="setFAFilter(\'' + f + '\')">' + f + '</button>';
+                });
+                filterHTML += '</div>';
+
+                let faListHTML = '';
+                filteredFAs.forEach(function(fa) {
+                    const hasOffer = offseasonState.faOffers.find(function(o) { return o.playerName === fa.name && o.team === abbr; });
+                    faListHTML += '<div class="os-fa-card" id="fa-card-' + fa.name.replace(/[^a-zA-Z0-9]/g, '_') + '">' +
+                        '<div class="os-fa-card-header">' +
+                            '<span class="os-fa-card-name">' + fa.name + '</span>' +
+                            (!hasOffer ? '<button class="sim-btn sim-btn-primary" onclick="toggleFAOffer(\'' + fa.name.replace(/'/g, "\\'") + '\')">Make Offer</button>' : '') +
+                        '</div>' +
+                        '<div class="os-fa-card-meta">' +
+                            posBadgeHTML(fa.position) +
+                            '<span>Age ' + fa.age + '</span>' +
+                            '<span>From: ' + fa.previousTeam + '</span>' +
+                            '<span>Asking: ' + formatMoney(fa.askingAPY) + '/yr</span>' +
+                            tierBadgeHTML(fa.performanceTier) +
+                        '</div>' +
+                        (hasOffer ? '<div class="os-fa-offer-row" style="color:var(--gold);font-size:12px;font-family:\'Barlow Condensed\',sans-serif;">Offer pending: ' + hasOffer.years + 'yr, ' + formatMoney(hasOffer.apy) + '/yr</div>' : '') +
+                        '<div class="os-fa-offer-row" id="offer-form-' + fa.name.replace(/[^a-zA-Z0-9]/g, '_') + '" style="display:none;">' +
+                            '<div class="os-fa-offer-field">' +
+                                '<span class="os-fa-offer-label">Years</span>' +
+                                '<input type="range" min="1" max="4" value="2" class="os-fa-offer-input" style="width:100px;" id="offer-years-' + fa.name.replace(/[^a-zA-Z0-9]/g, '_') + '" oninput="document.getElementById(\'offer-years-val-' + fa.name.replace(/[^a-zA-Z0-9]/g, '_') + '\').textContent=this.value">' +
+                                '<span id="offer-years-val-' + fa.name.replace(/[^a-zA-Z0-9]/g, '_') + '" style="font-size:12px;color:var(--white);margin-left:4px;">2</span>' +
+                            '</div>' +
+                            '<div class="os-fa-offer-field">' +
+                                '<span class="os-fa-offer-label">APY ($M)</span>' +
+                                '<input type="number" step="0.5" min="' + (fa.askingAPY * 0.8).toFixed(1) + '" value="' + fa.askingAPY.toFixed(1) + '" class="os-fa-offer-input" id="offer-apy-' + fa.name.replace(/[^a-zA-Z0-9]/g, '_') + '">' +
+                            '</div>' +
+                            '<button class="sim-btn sim-btn-primary" onclick="submitFAOffer(\'' + fa.name.replace(/'/g, "\\'") + '\')">Submit</button>' +
+                            '<button class="sim-btn" style="background:transparent;color:var(--text-muted);border:1px solid var(--card-border);" onclick="toggleFAOffer(\'' + fa.name.replace(/'/g, "\\'") + '\')">Cancel</button>' +
+                        '</div>' +
+                    '</div>';
+                });
+
+                let newsHTML = '';
+                offseasonState.faSignings.slice().reverse().forEach(function(s) {
+                    newsHTML += '<div class="os-news-item">' +
+                        '<span class="os-news-highlight">' + s.player.position + '</span> ' +
+                        s.player.name + ' signs with ' + (ABBR_TO_NAME[s.team] || s.team) +
+                        ' (' + s.years + 'yr, ' + formatMoney(s.apy) + '/yr)' +
+                    '</div>';
+                });
+
+                let rosterPositions = {};
+                (offseasonState.rosters[abbr] || []).forEach(function(p) {
+                    if (!p.isExpiring || (offseasonState.franchiseTags[abbr] && (offseasonState.franchiseTags[abbr].franchise === p.name || offseasonState.franchiseTags[abbr].transition === p.name))) {
+                        if (!rosterPositions[p.position]) rosterPositions[p.position] = 0;
+                        rosterPositions[p.position]++;
+                    }
+                });
+                const extendedPlayers = offseasonState.contractDecisions[abbr] || {};
+                Object.keys(extendedPlayers).forEach(function(pn) {
+                    if (extendedPlayers[pn].action === 'extend') {
+                        const p = (offseasonState.rosters[abbr] || []).find(function(pl) { return pl.name === pn; });
+                        if (p) {
+                            if (!rosterPositions[p.position]) rosterPositions[p.position] = 0;
+                            rosterPositions[p.position]++;
+                        }
+                    }
+                });
+                offseasonState.faSignings.forEach(function(s) {
+                    if (s.team === abbr) {
+                        if (!rosterPositions[s.player.position]) rosterPositions[s.player.position] = 0;
+                        rosterPositions[s.player.position]++;
+                    }
+                });
+
+                let rosterHTML = '<div class="os-roster-mini">';
+                Object.keys(rosterPositions).sort().forEach(function(pos) {
+                    rosterHTML += '<span class="os-roster-mini-item">' + pos + ': ' + rosterPositions[pos] + '</span>';
+                });
+                rosterHTML += '</div>';
+
+                let userSigningsHTML = '';
+                offseasonState.faSignings.filter(function(s) { return s.team === abbr; }).forEach(function(s) {
+                    userSigningsHTML += '<div class="os-signing-item">' +
+                        posBadgeHTML(s.player.position) + ' ' + s.player.name +
+                        ' - ' + s.years + 'yr, ' + formatMoney(s.apy) + '/yr' +
+                    '</div>';
+                });
+
+                container.innerHTML =
+                    '<div class="os-layout-2col-fa">' +
+                        '<div class="os-panel">' +
+                            '<div class="os-panel-header">' +
+                                '<span>Free Agent Market</span>' +
+                                '<span class="os-day-counter">Day ' + offseasonState.faDay + ' of Free Agency</span>' +
+                            '</div>' +
+                            '<div class="os-panel-body">' +
+                                filterHTML +
+                                (offseasonState.faMarketSettled ? '<div class="os-market-settled">Market has settled</div>' : '') +
+                                (newsHTML ? '<div class="os-news-ticker">' + newsHTML + '</div>' : '') +
+                                '<div style="max-height:calc(100vh - 340px);overflow-y:auto;">' + (faListHTML || '<div style="padding:20px;text-align:center;color:var(--text-muted);">No free agents available</div>') + '</div>' +
+                            '</div>' +
+                            '<div class="os-advance-bar">' +
+                                '<div style="font-size:12px;color:var(--text-muted);">' + getFilteredFAs().length + ' available free agents</div>' +
+                                '<div style="display:flex;gap:8px;">' +
+                                    '<button class="btn btn-secondary" onclick="advanceFADay()" ' + (offseasonState.faMarketSettled ? 'disabled' : '') + '>Advance Day</button>' +
+                                    (offseasonState.faMarketSettled ? '<button class="btn btn-primary" onclick="confirmFreeAgency()">Continue to Pre-Draft</button>' : '') +
+                                '</div>' +
+                            '</div>' +
+                        '</div>' +
+                        '<div style="display:flex;flex-direction:column;gap:12px;">' +
+                            '<div class="os-panel">' +
+                                '<div class="os-panel-header">Your Team</div>' +
+                                '<div class="os-panel-body">' +
+                                    '<div class="os-cap-stat"><span class="os-cap-label">Cap Space Remaining</span><span class="os-cap-value" style="color:' + (currentCap >= 0 ? 'var(--success)' : 'var(--danger)') + '">' + formatMoney(currentCap) + '</span></div>' +
+                                    '<div class="os-section-label">Roster Composition</div>' +
+                                    rosterHTML +
+                                '</div>' +
+                            '</div>' +
+                            '<div class="os-panel" style="flex:1;">' +
+                                '<div class="os-panel-header">' +
+                                    '<span>Signings</span>' +
+                                    '<span style="font-size:11px;color:var(--text-muted);font-weight:500;text-transform:none;">' + offseasonState.faSignings.filter(function(s) { return s.team === abbr; }).length + ' signed</span>' +
+                                '</div>' +
+                                '<div class="os-panel-body">' +
+                                    (userSigningsHTML || '<div style="padding:10px;text-align:center;color:var(--text-muted);font-size:12px;">No signings yet</div>') +
+                                '</div>' +
+                            '</div>' +
+                            '<div class="os-panel">' +
+                                '<div class="os-panel-header">Pending Offers</div>' +
+                                '<div class="os-panel-body">' +
+                                    (offseasonState.faOffers.filter(function(o) { return o.team === abbr; }).length === 0 ?
+                                        '<div style="padding:10px;text-align:center;color:var(--text-muted);font-size:12px;">No pending offers</div>' :
+                                        offseasonState.faOffers.filter(function(o) { return o.team === abbr; }).map(function(o) {
+                                            return '<div class="os-signing-item">' + o.playerName + ' - ' + o.years + 'yr, ' + formatMoney(o.apy) + '/yr</div>';
+                                        }).join('')) +
+                                '</div>' +
+                            '</div>' +
+                        '</div>' +
+                    '</div>';
+            }
+
+            function getUserContractDelta() {
+                const abbr = offseasonState.userTeam;
+                const decisions = offseasonState.contractDecisions[abbr] || {};
+                const players = offseasonState.rosters[abbr] || [];
+                let delta = 0;
+                Object.keys(decisions).forEach(function(pn) {
+                    const d = decisions[pn];
+                    const p = players.find(function(pl) { return pl.name === pn; });
+                    if (!p) return;
+                    if (d.action === 'extend') delta -= (p.apy * 0.1);
+                    else if (d.action === 'release') {
+                        const deadCap = (p.guaranteed || 0) * 0.5;
+                        delta += (p.apy - deadCap);
+                    }
+                });
+                return delta;
+            }
+
+            function setFAFilter(f) {
+                offseasonState.faFilter = f;
+                renderFreeAgencyPhase();
+            }
+
+            function toggleFAOffer(playerName) {
+                const id = 'offer-form-' + playerName.replace(/[^a-zA-Z0-9]/g, '_');
+                const el = document.getElementById(id);
+                if (el) el.style.display = el.style.display === 'none' ? 'flex' : 'none';
+            }
+
+            function submitFAOffer(playerName) {
+                const safeId = playerName.replace(/[^a-zA-Z0-9]/g, '_');
+                const yearsEl = document.getElementById('offer-years-' + safeId);
+                const apyEl = document.getElementById('offer-apy-' + safeId);
+                if (!yearsEl || !apyEl) return;
+                const years = parseInt(yearsEl.value) || 2;
+                const apy = parseFloat(apyEl.value) || 0;
+                const fa = offseasonState.freeAgents.find(function(f) { return f.name === playerName; });
+                if (!fa) return;
+                if (apy < fa.askingAPY * 0.8) {
+                    apyEl.style.borderColor = 'var(--danger)';
+                    return;
+                }
+                offseasonState.faOffers = offseasonState.faOffers.filter(function(o) { return !(o.playerName === playerName && o.team === offseasonState.userTeam); });
+                offseasonState.faOffers.push({ playerName: playerName, team: offseasonState.userTeam, years: years, apy: apy });
+                renderFreeAgencyPhase();
+            }
+
+            function advanceFADay() {
+                const allTeams = Object.keys(offseasonState.rosters);
+                const userAbbr = offseasonState.userTeam;
+                const signed = offseasonState.faSignings.map(function(s) { return s.player.name; });
+                const unsignedFAs = offseasonState.freeAgents.filter(function(fa) { return signed.indexOf(fa.name) === -1; });
+
+                unsignedFAs.forEach(function(fa) {
+                    allTeams.forEach(function(t) {
+                        if (t === userAbbr) return;
+                        const capInfo = offseasonState.capData[t];
+                        if (!capInfo || capInfo.capSpace < fa.askingAPY) return;
+                        if (Math.random() < 0.3) {
+                            const offerAPY = fa.askingAPY * (0.95 + Math.random() * 0.15);
+                            const years = Math.floor(Math.random() * 3) + 1;
+                            offseasonState.faOffers.push({ playerName: fa.name, team: t, years: years, apy: offerAPY });
+                        }
+                    });
+                });
+
+                let daySignings = 0;
+                const offersGrouped = {};
+                offseasonState.faOffers.forEach(function(o) {
+                    if (signed.indexOf(o.playerName) !== -1) return;
+                    if (!offersGrouped[o.playerName]) offersGrouped[o.playerName] = [];
+                    offersGrouped[o.playerName].push(o);
+                });
+
+                Object.keys(offersGrouped).forEach(function(pn) {
+                    const offers = offersGrouped[pn];
+                    const fa = offseasonState.freeAgents.find(function(f) { return f.name === pn; });
+                    if (!fa) return;
+                    offers.sort(function(a,b) { return b.apy - a.apy; });
+                    const best = offers[0];
+                    if (best.apy >= fa.askingAPY * 0.9) {
+                        offseasonState.faSignings.push({
+                            player: fa,
+                            team: best.team,
+                            years: best.years,
+                            apy: best.apy,
+                            day: offseasonState.faDay,
+                        });
+                        if (offseasonState.capData[best.team]) {
+                            offseasonState.capData[best.team].capSpace -= best.apy;
+                        }
+                        daySignings++;
+                    }
+                });
+
+                offseasonState.faOffers = offseasonState.faOffers.filter(function(o) {
+                    return offseasonState.faSignings.findIndex(function(s) { return s.player.name === o.playerName; }) === -1;
+                });
+
+                offseasonState.faDay++;
+                if (daySignings === 0) {
+                    offseasonState.faNoSigningDays++;
+                } else {
+                    offseasonState.faNoSigningDays = 0;
+                }
+                if (offseasonState.faNoSigningDays >= 3) {
+                    offseasonState.faMarketSettled = true;
+                }
+                renderFreeAgencyPhase();
+            }
+
+            function confirmFreeAgency() {
+                advancePhase();
+            }
+
+            function renderPreDraftPhase() {
+                const container = document.getElementById('phaseContent');
+                const teamName = offseasonState.userTeamName || 'Your Team';
+                const abbr = offseasonState.userTeam;
+                const cap = offseasonState.capData[abbr] || {};
+                const capAfterTags = getUserCapAfterTags();
+                const contractDelta = getUserContractDelta();
+                let faSpent = 0;
+                offseasonState.faSignings.forEach(function(s) { if (s.team === abbr) faSpent += s.apy; });
+                const currentCap = capAfterTags + contractDelta - faSpent;
+
+                const signingCount = offseasonState.faSignings.filter(function(s) { return s.team === abbr; }).length;
+                const walkedCount = offseasonState.freeAgents.filter(function(fa) { return fa.previousTeam === abbr; }).length;
+
+                container.innerHTML =
+                    '<div style="max-width:640px;margin:40px auto;text-align:center;">' +
+                        '<div style="font-family:\'Teko\',sans-serif;font-size:32px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:var(--white);margin-bottom:8px;">Pre-Draft</div>' +
+                        '<div style="font-size:14px;color:var(--text-muted);margin-bottom:32px;">The offseason moves are complete. Review your roster or explore trades before the draft.</div>' +
+                        '<div class="os-panel" style="margin-bottom:24px;">' +
+                            '<div class="os-panel-header"><span>Offseason Summary</span></div>' +
+                            '<div class="os-panel-body">' +
+                                '<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px;text-align:center;">' +
+                                    '<div>' +
+                                        '<div style="font-family:\'Barlow Condensed\',sans-serif;font-size:24px;font-weight:600;color:var(--white);">' + formatMoney(currentCap) + '</div>' +
+                                        '<div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;">Cap Space</div>' +
+                                    '</div>' +
+                                    '<div>' +
+                                        '<div style="font-family:\'Barlow Condensed\',sans-serif;font-size:24px;font-weight:600;color:var(--success);">' + signingCount + '</div>' +
+                                        '<div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;">FA Signings</div>' +
+                                    '</div>' +
+                                    '<div>' +
+                                        '<div style="font-family:\'Barlow Condensed\',sans-serif;font-size:24px;font-weight:600;color:var(--warning);">' + walkedCount + '</div>' +
+                                        '<div style="font-size:11px;color:var(--text-muted);text-transform:uppercase;">Players Lost</div>' +
+                                    '</div>' +
+                                '</div>' +
+                            '</div>' +
+                        '</div>' +
+                        '<div style="display:flex;gap:16px;justify-content:center;">' +
+                            '<button class="btn btn-secondary" onclick="alert(\'Trade Center coming soon\')" style="padding:14px 28px;font-family:\'Barlow Condensed\',sans-serif;font-size:16px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;border-radius:8px;border:1px solid var(--card-border);background:var(--card-bg);color:var(--white);cursor:pointer;">Explore Trades</button>' +
+                            '<button class="btn btn-primary" onclick="advancePhase()" style="padding:14px 28px;font-family:\'Barlow Condensed\',sans-serif;font-size:16px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;border-radius:8px;background:var(--nfl-red);color:var(--white);border:none;cursor:pointer;">Enter the Draft</button>' +
+                        '</div>' +
+                    '</div>';
+            }
+
+            function loadPhaseContent(phaseIndex) {
+                currentPhase = phaseIndex;
+                renderPhaseBar();
+                if (phaseIndex === 0) {
+                    renderFranchiseTagsPhase();
+                } else if (phaseIndex === 1) {
+                    renderContractDecisionsPhase();
+                } else if (phaseIndex === 2) {
+                    renderFreeAgencyPhase();
+                } else if (phaseIndex === 3) {
+                    renderPreDraftPhase();
+                } else {
+                    const phase = OFFSEASON_PHASES[phaseIndex];
+                    const phaseContent = document.getElementById('phaseContent');
+                    phaseContent.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100%;"><div style="text-align:center;"><div style="font-family:\'Barlow Condensed\',sans-serif;font-size:24px;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;color:var(--white);margin-bottom:8px;">' + phase.label + '</div><div style="font-size:14px;color:var(--text-muted);">Coming Soon</div></div></div>';
+                }
+            }
+
+            function advancePhase() {
+                if (currentPhase < OFFSEASON_PHASES.length - 1) {
+                    currentPhase++;
+                    loadPhaseContent(currentPhase);
+                }
+            }
+
+            async function initOffseasonMode() {
+                document.getElementById('draftContent').style.display = 'none';
+                document.getElementById('offseasonContent').style.display = '';
+                document.getElementById('sidebarDraft').style.display = 'none';
+                document.getElementById('sidebarOffseason').style.display = '';
+
+                const indicator = document.getElementById('modeIndicator');
+                indicator.className = 'mode-indicator offseason offseason-mode-indicator';
+                document.getElementById('modeLabel').textContent = 'Offseason Mode';
+
+                document.title = 'GM Ops - Offseason';
+
+                const settings = JSON.parse(localStorage.getItem('gmops_draft_settings') || '{}');
+                const teamFromUrl = urlParams.get('team');
+                offseasonState.userTeamName = teamFromUrl || (settings.selectedTeams && settings.selectedTeams[0]) || 'Cowboys';
+                offseasonState.userTeam = TEAM_NAME_TO_ABBR[offseasonState.userTeamName] || 'DAL';
+
+                const phaseContent = document.getElementById('phaseContent');
+                phaseContent.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:200px;"><div style="text-align:center;color:var(--text-muted);">Loading offseason data...</div></div>';
+
+                try {
+                    const [rosterRes, capRes] = await Promise.all([
+                        fetch('/data/teams/player_trade_values.json'),
+                        fetch('/data/teams/cap_summary_2026.json'),
+                    ]);
+                    const rosterData = await rosterRes.json();
+                    const capData = await capRes.json();
+                    offseasonState.rosters = rosterData.teams || {};
+                    offseasonState.capData = capData.teams || {};
+                } catch(e) {
+                    console.error('Failed to load offseason data:', e);
+                    phaseContent.innerHTML = '<div style="padding:40px;text-align:center;color:var(--danger);">Failed to load offseason data. Please refresh.</div>';
+                    return;
+                }
+
+                const phaseBar = document.getElementById('phaseBar');
+                phaseBar.classList.add('visible');
+
+                renderPhaseBar();
+                loadPhaseContent(currentPhase);
+            }
+
+            if (gameMode === 'draft') {
+                initTeamPanel();
+                loadData();
+            } else if (gameMode === 'offseason') {
+                initOffseasonMode();
+            }
         </script>
     </body>
 </html>
