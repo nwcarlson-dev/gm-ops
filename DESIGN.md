@@ -1,6 +1,6 @@
 # GM Ops - Technical Design Document
 
-> **Last Updated:** January 25, 2026  
+> **Last Updated:** February 8, 2026  
 > **Purpose:** Single source of truth for all game systems, mechanics, and technical decisions.  
 > **Update Policy:** This document must be updated whenever design decisions are made in Claude chats.
 
@@ -663,6 +663,196 @@ A hidden "Show AI Boards" toggle can display each team's hidden rankings for tes
 
 ---
 
+## Offseason Structure
+
+**Implemented: February 2026**
+
+### Overview
+
+The offseason is a phased progression system. Each phase represents a distinct period of NFL offseason activity. The user completes actions in each phase before advancing to the next. CPU teams process their decisions simultaneously.
+
+### Phase System
+
+Seven phases stored in a configurable `OFFSEASON_PHASES` array:
+
+| # | Phase | Description |
+|---|-------|-------------|
+| 1 | **Franchise Tags** | Protect top expiring players |
+| 2 | **Contract Decisions** | Extend, release, or let walk remaining expiring players |
+| 3 | **Free Agency** | Sign available free agents, compete with CPU teams |
+| 4 | **Pre-Draft** | Offseason recap, option to explore trades or enter draft |
+| 5 | **NFL Draft** | 7-round draft (transitions to existing draft system) |
+| 6 | **UDFA Signing** | Sign undrafted free agents (future) |
+| 7 | **Roster Finalization** | Cut to 53, set depth chart (future) |
+
+Phase order is configurable (not hardcoded) to support a future user setting to move Free Agency after the draft.
+
+### Navigation & UI Architecture
+
+- Offseason mode uses the same `game-shell.html` as Draft mode, detected via `?mode=offseason` query param
+- A horizontal phase progress bar renders below the header, only visible in offseason mode
+- Sidebar shows persistent tools (My Roster, Trade Center, Salary Cap, Team Needs, League Activity) instead of draft-specific items
+- Main content area swaps between `draftContent` and `offseasonContent` divs based on mode
+- No cross-navigation between modes (draft stays in draft, offseason stays in offseason)
+
+### State Management
+
+A global `offseasonState` object tracks all offseason data:
+
+```javascript
+offseasonState = {
+  userTeam: "NYG",           // User's team abbreviation
+  currentPhase: 0,           // Index into OFFSEASON_PHASES
+  rosters: { ... },          // All 32 teams' rosters from player_trade_values.json
+  capData: { ... },          // Cap space, dead money per team from cap_summary_2026.json
+  franchiseTags: {           // Per-team tag decisions
+    "NYG": { franchise: "PlayerName", transition: "PlayerName" },
+    ...
+  },
+  contractDecisions: {       // Per-team contract actions
+    "NYG": { "PlayerName": { action: "extend"|"release"|"walk" } },
+    ...
+  },
+  freeAgents: [],            // Built after Phase 2, array of player objects
+  faSignings: [],            // Completed FA signings { player, team, apy, years }
+  faDay: 1,                  // Current FA day
+  faOffers: [],              // Pending user offers
+  faNoSigningDays: 0,        // Consecutive days with no signings (market settlement tracker)
+  faMarketSettled: false,    // True when 3 consecutive no-signing days
+  faFilter: "All"            // Position filter for FA market display
+}
+```
+
+### Cap Calculation Chain
+
+Cap calculations flow consistently across all phases with no double-counting:
+
+1. **Base Cap** = `capData.capSpace` (from `cap_summary_2026.json`)
+2. **After Tags** = Base - tag cost deltas (tag cost - player's existing APY for each tag applied)
+3. **After Contracts** = After Tags + contract deltas:
+   - Extend: costs 10% more than current APY (delta = -APY * 0.1)
+   - Release: saves APY minus dead cap (delta = +APY - guaranteed * 0.5)
+   - Walk: no cap impact (player was expiring anyway)
+4. **After FA** = After Contracts - sum of all FA signing APYs
+
+Each phase UI shows the running cap total reflecting all prior phase decisions.
+
+### Phase 1: Franchise Tags
+
+**Layout**: 2-column. Left: eligible player list. Right: cap summary with meter bar + league-wide tag decisions.
+
+**Eligibility**: Expiring players on the roster, excluding rookies (players on rookie contracts).
+
+**Tag Types & Costs**:
+
+| Tag Type | Cost Formula | Limit |
+|----------|-------------|-------|
+| Franchise | max(120% of player's APY, position average from `FRANCHISE_TAG_COSTS`) | 1 per team |
+| Transition | 80% of franchise tag cost | 1 per team |
+
+Position-based franchise tag cost averages (`FRANCHISE_TAG_COSTS` constant):
+- QB: $35M, WR: $22M, Edge: $21M, OT: $18M, CB: $18M, S: $15M, DT: $14M, LB: $13M, TE: $12M, RB: $10M, OG: $16M, C: $15M, K/P: $5M
+
+**CPU Auto-Tag Logic**: CPU teams tag their highest trade-value expiring starters:
+- Trade value > 200: Apply franchise tag
+- Trade value > 150: Apply transition tag
+- Process one franchise tag and one transition tag per team max
+
+**User Actions**: Select "No Tag", "Franchise", or "Transition" per player via dropdown. Confirm to advance.
+
+### Phase 2: Contract Decisions
+
+**Layout**: Full-width table of expiring contracts, excluding players tagged in Phase 1.
+
+**Actions Per Player**:
+
+| Action | Effect | Cap Impact |
+|--------|--------|-----------|
+| **Let Walk** | Player enters FA pool | None (was expiring) |
+| **Extend** | 2-year extension at 110% of current APY | Costs 10% more cap |
+| **Release** | Cut with dead cap | Saves APY, costs 50% of guaranteed as dead cap |
+
+Default action is "Let Walk" (no decision needed).
+
+**Running Cap Total**: Updates live as user toggles decisions, showing projected cap space after all decisions.
+
+**CPU Contract Logic**: CPU teams extend players with trade value > 300 (elite/starter tier). All others default to walk. This keeps star players while letting depth/bridge players hit the market.
+
+**Advancing**: User confirms all decisions. Free agent pool is constructed. Phase advances.
+
+### Phase 3: Free Agency
+
+**Layout**: 2-column. Left: FA market with position filter tabs and player cards. Right: user's cap space, roster composition, pending offers, completed signings.
+
+**FA Pool Construction** (built at end of Phase 2):
+1. Iterate all 32 teams' rosters
+2. Include players where `isExpiring === true`
+3. Exclude players who were franchise/transition tagged in Phase 1
+4. Exclude players whose contract decision was "extend" in Phase 2
+5. Exclude players whose contract decision was "release" (they are cut, not free agents)
+6. Only "walk" players (explicit or default) enter the FA pool
+7. Sort by trade value descending
+8. Each FA carries: name, position, age, APY (asking price), trade value, previous team
+
+**User Offer System**:
+- Inline offer forms per player card with years slider (1-5) and APY input
+- Offers are pending until next day advancement
+- Multiple pending offers allowed (cap permitting)
+
+**Day-by-Day Simulation**:
+1. User makes offers, then clicks "Advance Day"
+2. CPU teams process FA decisions:
+   - Each CPU team scans available FAs
+   - 30% chance per player that matches a team need AND team has cap space
+   - CPU offer = player's asking APY * random(0.9-1.1)
+   - Higher trade value players get more competitive bids
+3. User offers resolve (accepted if no higher CPU bid)
+4. Track consecutive days with zero signings (`faNoSigningDays`)
+5. Market settles after 3 consecutive no-signing days (auto-advance option)
+
+**Market Settlement**: When `faNoSigningDays >= 3`, remaining FAs are considered unsigned. Phase advances.
+
+### Phase 4: Pre-Draft
+
+**Layout**: Centered summary card showing offseason recap.
+
+**Summary Content**:
+- Current cap space (after all phases)
+- Number of FA signings made
+- Number of players lost (walked from user's team)
+
+**Two Actions**:
+- "Explore Trades" - Opens trade center for pre-draft trades (future implementation)
+- "Enter the Draft" - Transitions to Draft mode within the same shell
+
+This is intentionally minimal since users have already scouted real prospects via the draft mode's prospect database.
+
+### Phases 5-7 (Future)
+
+- **Phase 5 - NFL Draft**: Transitions to existing draft system
+- **Phase 6 - UDFA Signing**: Sign undrafted free agents post-draft
+- **Phase 7 - Roster Finalization**: Cut roster to 53, finalize depth chart, practice squad
+
+### Data Sources
+
+| File | Purpose |
+|------|---------|
+| `data/teams/player_trade_values.json` | ~1150 rostered players with contracts, tiers, trade values |
+| `data/teams/cap_summary_2026.json` | Per-team cap space, dead money, expiring contract counts |
+| `scripts/build_player_trade_values.js` | Generates player trade values from NFLverse data |
+| `scripts/build_cap_summary.js` | Generates cap summary from NFLverse contracts |
+
+### CSS Architecture
+
+Offseason-specific styles use the `.os-*` prefix (50+ classes) to avoid conflicts with draft mode styles. Key class families:
+- `.os-table-*` - Tables for contract decisions, tag lists
+- `.os-badge-*` - Tier badges, position pills, status indicators
+- `.os-cap-*` - Cap meter bars, cap summary displays
+- `.os-fa-*` - Free agent cards, offer forms, market display
+- `.os-phase-*` - Phase progress bar, phase headers
+
+---
+
 ## Culture System
 
 **Approved: January 24, 2026**
@@ -768,6 +958,52 @@ New head coach hires start with elevated culture scores (benefit of the doubt), 
 - `data/raw/nflverse/contracts.csv` - Contract expiration data
 - `data/scripts/build_depth_charts.js` - Build script for depth chart JSON
 
+### Offseason Mode (game-shell.html)
+
+**Implemented: February 2026**
+
+**Mode Detection**: URL query param `?mode=offseason` triggers offseason UI. Default is draft mode.
+
+**Phase Progress Bar**: Horizontal bar below header showing all 7 phases. Current phase highlighted, completed phases marked. Only visible in offseason mode.
+
+**Sidebar (Offseason)**:
+- My Roster - View current roster
+- Trade Center - Propose/evaluate trades
+- Salary Cap - Cap space breakdown
+- Team Needs - Current positional needs
+- League Activity - Recent league transactions
+
+**Phase 1 UI - Franchise Tags**:
+- 2-column layout (eligible players | cap summary + league tags)
+- Dropdown per player: No Tag / Franchise / Transition
+- Cap meter bar showing projected impact
+- League-wide tag decisions from CPU teams displayed on right
+
+**Phase 2 UI - Contract Decisions**:
+- Full-width table with player name, position, age, APY, tier, guaranteed
+- Three action buttons per row: Let Walk / Extend / Release
+- Running cap total bar updates on every action change
+- "Confirm Decisions" button to advance
+
+**Phase 3 UI - Free Agency**:
+- 2-column layout (FA market | user cap + signings)
+- Position filter tabs across top of market column
+- Player cards with inline offer forms (years slider 1-5, APY input)
+- "Advance Day" button triggers CPU bidding round
+- Completed signings list on right panel
+- Market settlement notification after 3 quiet days
+
+**Phase 4 UI - Pre-Draft**:
+- Centered summary card showing offseason recap stats
+- Two action buttons: "Explore Trades" / "Enter the Draft"
+
+**Data Dependencies**:
+- `data/teams/player_trade_values.json` - Roster data with trade values
+- `data/teams/cap_summary_2026.json` - Cap space data
+- Team name-to-abbreviation mapping via `TEAM_ABBR_MAP` constant
+
+**localStorage Key**: `gmops_draft_settings` (shared with draft mode setup via `game-setup.html`)
+
 ---
 
 ## Session Log
@@ -800,5 +1036,29 @@ New head coach hires start with elevated culture scores (benefit of the doubt), 
 - Previous implementation used deterministic seed (team+prospect name) producing identical boards every draft
 - Added per-session random seed (`draftSessionSeed`) so each draft playthrough generates unique team boards
 - Variance tiers and development certainty modifiers still apply per DESIGN.md spec
+
+### February 8, 2026
+
+**Offseason Mode Implementation**:
+- Added mode detection to game-shell.html via `?mode=offseason` query param
+- Built horizontal phase progress bar (7 phases) below header, offseason-only
+- Created adaptive sidebar: persistent tools for offseason, draft-specific items for draft
+- Implemented Phase 1 (Franchise Tags): eligible player list, tag cost calculations (120% APY or position average), CPU auto-tagging, cap meter
+- Implemented Phase 2 (Contract Decisions): expiring contracts table, extend/release/walk actions, running cap total, CPU logic (extend elite/starters > 300 trade value)
+- Implemented Phase 3 (Free Agency): FA market with position filters, inline offer forms, day-by-day CPU bidding (30% per need match), market settlement after 3 quiet days
+- Implemented Phase 4 (Pre-Draft): summary screen with offseason recap, "Explore Trades" or "Enter the Draft" options
+- Added 50+ offseason CSS classes with `.os-*` prefix to avoid draft mode conflicts
+- Data loaded from `player_trade_values.json` and `cap_summary_2026.json`
+
+**Bug Fixes**:
+- Fixed localStorage key mismatch: game-setup saves to `gmops_draft_settings`, game-shell now reads from same key
+- Fixed `previousTeamAbbr` bug in Pre-Draft phase: property was named `previousTeam` in FA pool construction but referenced as `previousTeamAbbr` in walked-player count
+- Verified FA pool correctly excludes tagged and extended players, only includes "walk" decisions
+- Confirmed draft mode completely unaffected by offseason additions
+
+**Documentation**:
+- Added comprehensive Offseason Structure section to DESIGN.md with phase system, state management, cap chain, CPU logic, FA pool rules
+- Added Offseason Mode to Implementation Status section
+- Updated replit.md with offseason phase details
 
 ---
