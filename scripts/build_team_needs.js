@@ -185,32 +185,22 @@ function getRosterNote(abbr, pos) {
   return parts.length > 0 ? parts.join('. ') + '.' : null;
 }
 
-function evaluateRosterStrength(abbr, pos) {
+function isPositionCovered(abbr, pos) {
   const players = ptvTeams[abbr];
-  if (!players) return { strength: 'unknown', reason: null };
+  if (!players) return false;
 
   const posPlayers = players.filter(p => normalizePos(p.position) === pos || normalizePos(p.depthChartPos) === pos);
-  if (posPlayers.length === 0) return { strength: 'empty', reason: 'No players on roster' };
-
   const starters = posPlayers.filter(p => p.role === 'starter');
-  const elite = starters.filter(p => p.performanceTier === 'elite' || p.performanceTier === 'starter');
-  const expiring = starters.filter(p => p.isExpiring);
-  const aging = starters.filter(p => p.age >= 32);
+  if (starters.length === 0) return false;
 
   const MULTI_STARTER = { IOL: 3, OT: 2, WR: 2, CB: 2, S: 2 };
   const minStarters = MULTI_STARTER[pos] || 1;
-  const nonExpNonAging = elite.filter(p => !p.isExpiring && p.age < 32);
 
-  if (nonExpNonAging.length >= minStarters) {
-    return { strength: 'strong', reason: `${nonExpNonAging.length} quality non-expiring starter(s)` };
-  }
-  if (elite.length >= minStarters && expiring.length === 0 && aging.length === 0) {
-    return { strength: 'solid', reason: `${elite.length} quality starter(s)` };
-  }
-  if (expiring.length > 0 || aging.length > 0) {
-    return { strength: 'vulnerable', reason: null };
-  }
-  return { strength: 'weak', reason: null };
+  const AGING_THRESHOLD = { QB: 36, RB: 29, WR: 31, TE: 32, OT: 33, IOL: 33, EDGE: 31, DL: 31, LB: 31, CB: 30, S: 31 };
+  const ageCutoff = AGING_THRESHOLD[pos] || 32;
+
+  const secure = starters.filter(p => !p.isExpiring && p.age < ageCutoff);
+  return secure.length >= minStarters;
 }
 
 function buildTeamNeeds(abbr) {
@@ -247,10 +237,10 @@ function buildTeamNeeds(abbr) {
   }
 
   function addNeed(pos, priority) {
-    const roster = evaluateRosterStrength(abbr, pos);
     const hasIntel = intel.some(i => i.pos === pos);
+    const covered = isPositionCovered(abbr, pos);
 
-    if (roster.strength === 'strong' && !hasIntel) {
+    if (covered && !hasIntel) {
       const label = priority === 'high' ? 'primary' : 'secondary';
       removedCount[label]++;
       return;
@@ -258,7 +248,7 @@ function buildTeamNeeds(abbr) {
 
     const need = buildNeed(pos, priority);
 
-    if (roster.strength === 'strong' && hasIntel) {
+    if (covered && hasIntel) {
       need.priority = 'medium';
     }
 

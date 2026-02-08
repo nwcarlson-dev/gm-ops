@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated": "2026-02-08T02:46:36.013Z",
+    "generated": "2026-02-08T02:56:04.421Z",
     "description": "Auto-generated team needs with archetypes and contextual notes. Re-run scripts/build_team_needs.js to regenerate.",
     "inputs": [
       "nflmdd_team_needs_2026.json",
@@ -21,12 +21,6 @@
           "note": "Allowed 53 sacks in 2025 (6th-most). OL rebuild is top priority. Kelvin Beachum (36) aging. Josh Fryar is only bridge-level."
         },
         {
-          "pos": "QB",
-          "archetype": "Pocket Passer",
-          "priority": "high",
-          "note": "Jacoby Brissett (33) aging."
-        },
-        {
           "pos": "RB",
           "archetype": "Zone Runner",
           "priority": "medium",
@@ -41,12 +35,6 @@
       ],
       "defNeeds": [
         {
-          "pos": "LB",
-          "archetype": "Sideline-to-Sideline",
-          "priority": "high",
-          "note": "Cody Simon is only bridge-level."
-        },
-        {
           "pos": "EDGE",
           "archetype": "Speed Rusher",
           "priority": "medium",
@@ -57,12 +45,6 @@
           "archetype": "Centerfield",
           "priority": "medium",
           "note": "Jalen Thompson on expiring contract."
-        },
-        {
-          "pos": "CB",
-          "archetype": "Press-Man",
-          "priority": "medium",
-          "note": "Denzel Burke is only bridge-level."
         }
       ]
     },
@@ -73,12 +55,6 @@
           "archetype": "YAC Monster",
           "priority": "high",
           "note": "Need a YAC monster for Stefanski's wide zone play-action game. David Sills V is only bridge-level."
-        },
-        {
-          "pos": "IOL",
-          "archetype": "Athletic",
-          "priority": "medium",
-          "note": ""
         },
         {
           "pos": "TE",
@@ -100,12 +76,6 @@
         }
       ],
       "defNeeds": [
-        {
-          "pos": "CB",
-          "archetype": "Man-Press",
-          "priority": "high",
-          "note": "Cobee Bryant is only bridge-level."
-        },
         {
           "pos": "DL",
           "archetype": "Penetrator",
@@ -129,12 +99,6 @@
           "note": "Need a contested-catch WR to help Lamar in the red zone. DeAndre Hopkins (33) aging."
         },
         {
-          "pos": "OT",
-          "archetype": "Mauler",
-          "priority": "high",
-          "note": "Ronnie Stanley (32) aging."
-        },
-        {
           "pos": "IOL",
           "archetype": "Road Grader",
           "priority": "medium",
@@ -151,7 +115,7 @@
         {
           "pos": "EDGE",
           "archetype": "Power",
-          "priority": "high",
+          "priority": "medium",
           "note": "4th-lowest pressure rate in NFL. Need a power rusher. Brent Urban (34) aging. Travis Jones is only bridge-level."
         },
         {
@@ -179,15 +143,9 @@
       ],
       "defNeeds": [
         {
-          "pos": "EDGE",
-          "archetype": "Power",
-          "priority": "high",
-          "note": "Joey Bosa on expiring contract. Greg Rousseau is only bridge-level."
-        },
-        {
           "pos": "LB",
           "archetype": "Sideline-to-Sideline",
-          "priority": "high",
+          "priority": "medium",
           "note": "Need a sideline-to-sideline LB to cover the middle. Terrel Bernard is only bridge-level."
         },
         {
@@ -265,7 +223,7 @@
         {
           "pos": "DL",
           "archetype": "Penetrator",
-          "priority": "high",
+          "priority": "medium",
           "note": "Need a penetrating 3-tech to collapse the pocket. Grady Jarrett (32) aging."
         },
         {
@@ -279,18 +237,6 @@
           "archetype": "Centerfield",
           "priority": "high",
           "note": "Brisker and Byard both FAs. Safety room gutted. Kevin Byard III (32) aging. Jaquan Brisker on expiring contract."
-        },
-        {
-          "pos": "CB",
-          "archetype": "Press-Man",
-          "priority": "medium",
-          "note": ""
-        },
-        {
-          "pos": "LB",
-          "archetype": "Sideline-to-Sideline",
-          "priority": "medium",
-          "note": "Amen Ogbongbemiga is only bridge-level."
         }
       ]
     },
@@ -327,18 +273,6 @@
           "archetype": "Anchor",
           "priority": "medium",
           "note": "Defensive line needs an anchor against the run. T.J. Slaton Jr. is only bridge-level."
-        },
-        {
-          "pos": "CB",
-          "archetype": "Zone",
-          "priority": "high",
-          "note": "Dax Hill is only bridge-level."
-        },
-        {
-          "pos": "LB",
-          "archetype": "Versatile",
-          "priority": "medium",
-          "note": "Barrett Carter is only bridge-level."
         }
       ]
     },
@@ -365,7 +299,7 @@
         {
           "pos": "QB",
           "archetype": "Pocket Passer",
-          "priority": "high",
+          "priority": "medium",
           "note": "QB room unsettled with Gabriel/Sanders. Monken needs a passer. Shedeur Sanders is only bridge-level."
         }
       ],
@@ -387,12 +321,6 @@
     "DAL": {
       "offNeeds": [
         {
-          "pos": "RB",
-          "archetype": "Scat Back",
-          "priority": "high",
-          "note": "Jaydon Blue is only bridge-level."
-        },
-        {
           "pos": "WR",
           "archetype": "Field Stretcher",
           "priority": "medium",
@@ -403,20 +331,14 @@
         {
           "pos": "EDGE",
           "archetype": "Technical",
-          "priority": "high",
+          "priority": "medium",
           "note": "Need a technical pass rusher to complement Quinnen Williams trade. Dante Fowler Jr. on expiring contract."
         },
         {
           "pos": "CB",
           "archetype": "Zone",
-          "priority": "high",
+          "priority": "medium",
           "note": "Defense allowed most points in franchise history (~30 PPG). Shavon Revel Jr., Caelen Carson are only bridge-level."
-        },
-        {
-          "pos": "LB",
-          "archetype": "Coverage",
-          "priority": "high",
-          "note": "Shemar James is only bridge-level."
         },
         {
           "pos": "S",
@@ -445,18 +367,6 @@
           "archetype": "Pass Protector",
           "priority": "medium",
           "note": "Garett Bolles (33) aging."
-        },
-        {
-          "pos": "IOL",
-          "archetype": "Pivot",
-          "priority": "medium",
-          "note": "Alex Forsyth is only bridge-level."
-        },
-        {
-          "pos": "RB",
-          "archetype": "Pass Catcher",
-          "priority": "medium",
-          "note": ""
         }
       ],
       "defNeeds": [
@@ -485,7 +395,7 @@
         {
           "pos": "OT",
           "archetype": "Mauler",
-          "priority": "high",
+          "priority": "medium",
           "note": "Taylor Decker considering retirement. Glasgow struggled at C (56.8 PFF). Taylor Decker (32) aging."
         },
         {
@@ -531,12 +441,6 @@
           "note": "Rasheed Walker on expiring contract. Zach Tom is only bridge-level."
         },
         {
-          "pos": "TE",
-          "archetype": "Move",
-          "priority": "high",
-          "note": ""
-        },
-        {
           "pos": "IOL",
           "archetype": "Athletic",
           "priority": "medium",
@@ -545,15 +449,9 @@
       ],
       "defNeeds": [
         {
-          "pos": "CB",
-          "archetype": "Zone",
-          "priority": "high",
-          "note": "Carrington Valentine is only bridge-level."
-        },
-        {
           "pos": "DL",
           "archetype": "Anchor",
-          "priority": "high",
+          "priority": "medium",
           "note": "DT unit ranked 31st in PFF run-defense grade (30.6). Run defense terrible. Colby Wooden, Karl Brooks are only bridge-level."
         },
         {
@@ -581,7 +479,7 @@
         {
           "pos": "RB",
           "archetype": "Zone Runner",
-          "priority": "high",
+          "priority": "medium",
           "note": "Joe Mixon missed entire 2025 (foot, NFI). Marks/Chubb filled in. Woody Marks is only bridge-level."
         },
         {
@@ -602,18 +500,6 @@
     },
     "IND": {
       "offNeeds": [
-        {
-          "pos": "OT",
-          "archetype": "Athletic",
-          "priority": "high",
-          "note": "Bernhard Raimann, Jalen Travis are only bridge-level."
-        },
-        {
-          "pos": "QB",
-          "archetype": "Dual-Threat",
-          "priority": "high",
-          "note": "Riley Leonard is only bridge-level."
-        },
         {
           "pos": "RB",
           "archetype": "Dynamic Playmaker",
@@ -731,10 +617,10 @@
       ],
       "defNeeds": [
         {
-          "pos": "CB",
-          "archetype": "Zone",
+          "pos": "DL",
+          "archetype": "Two-Gap",
           "priority": "high",
-          "note": "Nohl Williams is only bridge-level."
+          "note": "Derrick Nnadi on expiring contract."
         },
         {
           "pos": "S",
@@ -749,7 +635,7 @@
         {
           "pos": "QB",
           "archetype": "Pocket Passer",
-          "priority": "high",
+          "priority": "medium",
           "note": "No franchise QB since Gannon era. First R1 QB since JaMarcus Russell (2007). Geno Smith (35) aging."
         },
         {
@@ -821,18 +707,6 @@
           "note": "Need a penetrator up front to complement the pass rush."
         },
         {
-          "pos": "EDGE",
-          "archetype": "Power",
-          "priority": "high",
-          "note": "Da'Shawn Hand on expiring contract. Justin Eboigbe is only bridge-level."
-        },
-        {
-          "pos": "LB",
-          "archetype": "Coverage",
-          "priority": "medium",
-          "note": "Daiyan Henley is only bridge-level."
-        },
-        {
           "pos": "CB",
           "archetype": "Technical",
           "priority": "medium",
@@ -842,12 +716,6 @@
     },
     "LAR": {
       "offNeeds": [
-        {
-          "pos": "OT",
-          "archetype": "Zone Blocker",
-          "priority": "high",
-          "note": "Warren McClendon Jr. is only bridge-level."
-        },
         {
           "pos": "WR",
           "archetype": "YAC Monster",
@@ -867,18 +735,6 @@
           "archetype": "Ballhawk",
           "priority": "high",
           "note": "Cobie Durant and Ahkello Witherspoon headed to FA. Darious Williams (33) aging. Cobie Durant on expiring contract."
-        },
-        {
-          "pos": "S",
-          "archetype": "Centerfield",
-          "priority": "medium",
-          "note": "Kam Curl, Kamren Kinchens are only bridge-level."
-        },
-        {
-          "pos": "LB",
-          "archetype": "Coverage",
-          "priority": "medium",
-          "note": "Nate Landman is only bridge-level."
         },
         {
           "pos": "DL",
@@ -905,7 +761,7 @@
         {
           "pos": "QB",
           "archetype": "Pocket Passer",
-          "priority": "high",
+          "priority": "medium",
           "note": "Tua's future uncertain. Hafley rebuilding from ground up. Quinn Ewers is only bridge-level."
         },
         {
@@ -939,6 +795,12 @@
     "MIN": {
       "offNeeds": [
         {
+          "pos": "RB",
+          "archetype": "Zone Runner",
+          "priority": "high",
+          "note": ""
+        },
+        {
           "pos": "WR",
           "archetype": "YAC Monster",
           "priority": "medium",
@@ -955,7 +817,7 @@
         {
           "pos": "CB",
           "archetype": "Technical",
-          "priority": "high",
+          "priority": "medium",
           "note": "Need a technical corner to hold up in Flores' exotic pressures. Isaiah Rodgers is only bridge-level."
         },
         {
@@ -985,12 +847,6 @@
           "archetype": "Route Technician",
           "priority": "high",
           "note": "Drake Maye breakout season but needs more weapons around him. Kyle Williams is only bridge-level."
-        },
-        {
-          "pos": "IOL",
-          "archetype": "Pivot",
-          "priority": "medium",
-          "note": "Jared Wilson, Mike Onwenu are only bridge-level."
         }
       ],
       "defNeeds": [
@@ -1053,12 +909,6 @@
           "archetype": "Sideline-to-Sideline",
           "priority": "medium",
           "note": "Demario Davis (37) aging."
-        },
-        {
-          "pos": "S",
-          "archetype": "Centerfield",
-          "priority": "medium",
-          "note": "Jonas Sanker is only bridge-level."
         }
       ]
     },
@@ -1115,7 +965,7 @@
         {
           "pos": "QB",
           "archetype": "Pocket Passer",
-          "priority": "high",
+          "priority": "medium",
           "note": "NFL-record 0 interceptions in 2025. Need a true franchise signal-caller. Brady Cook is only bridge-level."
         },
         {
@@ -1129,7 +979,7 @@
         {
           "pos": "CB",
           "archetype": "Ballhawk",
-          "priority": "high",
+          "priority": "medium",
           "note": "D.J. Reed entering final year. Sauce Gardner traded to Jaguars. Qwan'tez Stiggers is only bridge-level."
         },
         {
@@ -1143,12 +993,6 @@
           "archetype": "Bendy",
           "priority": "medium",
           "note": "Haason Reddick departed. Pass rush needs rebuilding. Braiden McGregor is only bridge-level."
-        },
-        {
-          "pos": "S",
-          "archetype": "Playmaker",
-          "priority": "medium",
-          "note": "Malachi Moore, Dean Clark are only bridge-level."
         }
       ]
     },
@@ -1171,12 +1015,6 @@
           "archetype": "Move",
           "priority": "high",
           "note": "Dallas Goedert on expiring contract."
-        },
-        {
-          "pos": "IOL",
-          "archetype": "Athletic",
-          "priority": "medium",
-          "note": "Tyler Steen is only bridge-level."
         }
       ],
       "defNeeds": [
@@ -1213,18 +1051,6 @@
           "archetype": "Pocket Passer",
           "priority": "high",
           "note": "Aaron Rodgers not returning. 9th straight year without playoff win. Aaron Rodgers (42) aging."
-        },
-        {
-          "pos": "OT",
-          "archetype": "Pass Protector",
-          "priority": "high",
-          "note": "Dylan Cook is only bridge-level."
-        },
-        {
-          "pos": "RB",
-          "archetype": "Pass Catcher",
-          "priority": "medium",
-          "note": "Jaylen Warren is only bridge-level."
         }
       ],
       "defNeeds": [
@@ -1281,24 +1107,6 @@
           "archetype": "Bendy",
           "priority": "medium",
           "note": "Bosa and Williams both tore ACLs. Dead last in sacks (20). Sam Okuayinonu on expiring contract."
-        },
-        {
-          "pos": "CB",
-          "archetype": "Man-Press",
-          "priority": "high",
-          "note": ""
-        },
-        {
-          "pos": "S",
-          "archetype": "Hybrid",
-          "priority": "medium",
-          "note": "Ji'Ayir Brown, Malik Mustapha are only bridge-level."
-        },
-        {
-          "pos": "DL",
-          "archetype": "Penetrator",
-          "priority": "medium",
-          "note": "Kalia Davis on expiring contract."
         }
       ]
     },
@@ -1313,7 +1121,7 @@
         {
           "pos": "IOL",
           "archetype": "Road Grader",
-          "priority": "high",
+          "priority": "medium",
           "note": "Kubiak leaving for Raiders HC. Interior OL needs a mauler. Jalen Sundell, Anthony Bradford are only bridge-level."
         },
         {
@@ -1339,7 +1147,7 @@
         {
           "pos": "EDGE",
           "archetype": "Explosive",
-          "priority": "high",
+          "priority": "medium",
           "note": "Need an explosive edge rusher in Durde's 3-4. DeMarcus Lawrence (33) aging."
         }
       ]
@@ -1369,13 +1177,13 @@
         {
           "pos": "LB",
           "archetype": "Blitzer",
-          "priority": "high",
+          "priority": "medium",
           "note": "Lavonte David turns 36, likely last season. 15th year with Bucs if he returns. SirVocea Dennis is only bridge-level."
         },
         {
           "pos": "EDGE",
           "archetype": "Long Arm",
-          "priority": "high",
+          "priority": "medium",
           "note": "Need a long-arm rusher to generate consistent pressure. Logan Hall on expiring contract. Elijah Roberts is only bridge-level."
         },
         {
@@ -1389,12 +1197,6 @@
           "archetype": "Penetrator",
           "priority": "medium",
           "note": ""
-        },
-        {
-          "pos": "S",
-          "archetype": "Hybrid",
-          "priority": "medium",
-          "note": "Tykee Smith, Antoine Winfield Jr. are only bridge-level."
         }
       ]
     },
@@ -1413,12 +1215,6 @@
           "archetype": "Press-Man",
           "priority": "medium",
           "note": "Saleh's Wide-9 demands press-man corners. Current CBs don't fit. Kaiir Elam, Darrell Baker Jr. on expiring contracts."
-        },
-        {
-          "pos": "S",
-          "archetype": "Centerfield",
-          "priority": "medium",
-          "note": "Kendell Brooks is only bridge-level."
         }
       ]
     },
@@ -1435,12 +1231,6 @@
           "archetype": "Pass Catcher",
           "priority": "medium",
           "note": "Chris Rodriguez Jr. on expiring contract."
-        },
-        {
-          "pos": "TE",
-          "archetype": "Move",
-          "priority": "medium",
-          "note": ""
         }
       ],
       "defNeeds": [
