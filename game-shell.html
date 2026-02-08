@@ -3149,7 +3149,7 @@
             }
             .universal-layout {
                 display: flex;
-                height: calc(100vh - 64px);
+                height: 100%;
                 overflow: hidden;
             }
             .phase-content-col {
@@ -3594,8 +3594,10 @@
 
             @media (max-width: 768px) {
                 .universal-layout {
-                    grid-template-columns: 1fr;
+                    flex-direction: column;
+                    height: auto;
                 }
+                .phase-content-col { width: 100%; height: auto; }
                 .mgmt-panel {
                     display: none;
                 }
@@ -7977,9 +7979,18 @@
                 const menuBtn = document.querySelector('.menu-btn');
                 if (menuBtn) menuBtn.style.display = 'none';
 
+                const appLayout = document.querySelector('.app-layout');
+                if (appLayout) {
+                    appLayout.style.display = 'flex';
+                    appLayout.style.flexDirection = 'column';
+                    appLayout.style.height = '100vh';
+                    appLayout.style.overflow = 'hidden';
+                }
                 if (mainEl) {
                     mainEl.style.padding = '0';
                     mainEl.style.overflow = 'hidden';
+                    mainEl.style.flex = '1';
+                    mainEl.style.minHeight = '0';
                 }
 
                 const indicator = document.getElementById('modeIndicator');
