@@ -2804,6 +2804,7 @@
                 width: 100%;
                 border-collapse: collapse;
                 font-size: 13px;
+                table-layout: fixed;
             }
             .os-table th {
                 font-family: 'Barlow Condensed', sans-serif;
@@ -3244,7 +3245,9 @@
                 display: none;
                 flex: 1;
                 overflow-y: auto;
+                overflow-x: hidden;
                 min-height: 0;
+                min-width: 0;
             }
             .mgmt-tab-content.active {
                 display: flex;
@@ -3253,6 +3256,8 @@
 
             .dc-positions {
                 padding: 6px 10px;
+                overflow: hidden;
+                max-width: 100%;
             }
             .dc-pos-row {
                 display: grid;
@@ -3261,6 +3266,8 @@
                 align-items: center;
                 padding: 5px 0;
                 border-bottom: 1px solid rgba(255,255,255,0.04);
+                max-width: 100%;
+                overflow: hidden;
             }
             .dc-pos-row:last-child {
                 border-bottom: none;
@@ -3293,7 +3300,7 @@
                 box-sizing: border-box;
                 transition: background 0.15s, box-shadow 0.15s;
                 white-space: nowrap;
-                overflow: visible;
+                overflow: hidden;
             }
             .player-pill:hover {
                 background: rgba(255,255,255,0.10);
