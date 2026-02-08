@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated": "2026-02-08T02:56:04.421Z",
+    "generated": "2026-02-08T03:06:02.680Z",
     "description": "Auto-generated team needs with archetypes and contextual notes. Re-run scripts/build_team_needs.js to regenerate.",
     "inputs": [
       "nflmdd_team_needs_2026.json",
@@ -18,19 +18,13 @@
           "pos": "OT",
           "archetype": "Zone Blocker",
           "priority": "high",
-          "note": "Allowed 53 sacks in 2025 (6th-most). OL rebuild is top priority. Kelvin Beachum (36) aging. Josh Fryar is only bridge-level."
+          "note": "Allowed 53 sacks in 2025 (6th-most). OL rebuild is top priority. Kelvin Beachum on expiring contract."
         },
         {
           "pos": "RB",
           "archetype": "Zone Runner",
           "priority": "medium",
           "note": "James Conner aging. Need a workhorse back for LaFleur's zone scheme. Michael Carter on expiring contract."
-        },
-        {
-          "pos": "WR",
-          "archetype": "YAC Monster",
-          "priority": "medium",
-          "note": "Jalen Brooks is only bridge-level."
         }
       ],
       "defNeeds": [
@@ -53,8 +47,8 @@
         {
           "pos": "WR",
           "archetype": "YAC Monster",
-          "priority": "high",
-          "note": "Need a YAC monster for Stefanski's wide zone play-action game. David Sills V is only bridge-level."
+          "priority": "medium",
+          "note": "Need a YAC monster for Stefanski's wide zone play-action game. Drake London on expiring contract."
         },
         {
           "pos": "TE",
@@ -66,13 +60,7 @@
           "pos": "OT",
           "archetype": "Zone Blocker",
           "priority": "medium",
-          "note": "Jake Matthews (34) aging. Elijah Wilkinson on expiring contract."
-        },
-        {
-          "pos": "QB",
-          "archetype": "Pocket Passer",
-          "priority": "medium",
-          "note": "Kirk Cousins (37) aging."
+          "note": "Elijah Wilkinson on expiring contract."
         }
       ],
       "defNeeds": [
@@ -86,7 +74,7 @@
           "pos": "EDGE",
           "archetype": "Explosive",
           "priority": "high",
-          "note": "David Onyemata (33) aging. LaCale London on expiring contract."
+          "note": "LaCale London, David Onyemata on expiring contracts."
         }
       ]
     },
@@ -95,14 +83,14 @@
         {
           "pos": "WR",
           "archetype": "Field Stretcher",
-          "priority": "high",
-          "note": "Need a contested-catch WR to help Lamar in the red zone. DeAndre Hopkins (33) aging."
+          "priority": "medium",
+          "note": "Need a contested-catch WR to help Lamar in the red zone. DeAndre Hopkins on expiring contract."
         },
         {
           "pos": "IOL",
           "archetype": "Road Grader",
           "priority": "medium",
-          "note": "Linderbaum FA bound (no 5th-year option). May lose star center. Tyler Linderbaum, Daniel Faalele on expiring contracts. Andrew Vorhees is only bridge-level."
+          "note": "Linderbaum FA bound (no 5th-year option). May lose star center. Tyler Linderbaum, Daniel Faalele on expiring contracts."
         }
       ],
       "defNeeds": [
@@ -116,13 +104,13 @@
           "pos": "EDGE",
           "archetype": "Power",
           "priority": "medium",
-          "note": "4th-lowest pressure rate in NFL. Need a power rusher. Brent Urban (34) aging. Travis Jones is only bridge-level."
+          "note": "4th-lowest pressure rate in NFL. Need a power rusher. Brent Urban on expiring contract."
         },
         {
           "pos": "CB",
           "archetype": "Man-Press",
           "priority": "medium",
-          "note": "Man-press corner needed for Weaver's disguised looks. Chidobe Awuzie on expiring contract."
+          "note": "Man-press corner needed for Weaver's disguised looks. Chidobe Awuzie, Marlon Humphrey on expiring contracts."
         }
       ]
     },
@@ -131,14 +119,14 @@
         {
           "pos": "WR",
           "archetype": "Contested Catch",
-          "priority": "high",
-          "note": "Need contested-catch weapons around Josh Allen."
+          "priority": "medium",
+          "note": "Need contested-catch weapons around Josh Allen. Brandin Cooks on expiring contract."
         },
         {
           "pos": "IOL",
           "archetype": "Athletic",
           "priority": "medium",
-          "note": "Connor McGovern, David Edwards on expiring contracts."
+          "note": "David Edwards, Connor McGovern on expiring contracts."
         }
       ],
       "defNeeds": [
@@ -146,36 +134,24 @@
           "pos": "LB",
           "archetype": "Sideline-to-Sideline",
           "priority": "medium",
-          "note": "Need a sideline-to-sideline LB to cover the middle. Terrel Bernard is only bridge-level."
-        },
-        {
-          "pos": "CB",
-          "archetype": "Man-Press",
-          "priority": "high",
-          "note": "Tre'Davious White on expiring contract. Christian Benford is only bridge-level."
+          "note": "Need a sideline-to-sideline LB to cover the middle. Matt Milano on expiring contract."
         },
         {
           "pos": "DL",
           "archetype": "Two-Gap",
           "priority": "medium",
-          "note": "Need a two-gap DL to anchor Leonhard's quarters scheme. DaQuan Jones (34) aging."
+          "note": "Need a two-gap DL to anchor Leonhard's quarters scheme. DaQuan Jones on expiring contract."
         },
         {
           "pos": "S",
           "archetype": "Ballhawk",
           "priority": "medium",
-          "note": "Jordan Poyer (34) aging."
+          "note": "Jordan Poyer on expiring contract."
         }
       ]
     },
     "CAR": {
       "offNeeds": [
-        {
-          "pos": "WR",
-          "archetype": "Route Technician",
-          "priority": "high",
-          "note": ""
-        },
         {
           "pos": "OT",
           "archetype": "Pass Protector",
@@ -195,12 +171,6 @@
           "archetype": "3-Tech",
           "priority": "high",
           "note": "Need a 3-tech penetrator. Defensive interior is thin."
-        },
-        {
-          "pos": "LB",
-          "archetype": "Run Stuffer",
-          "priority": "medium",
-          "note": "Christian Rozeboom on expiring contract."
         }
       ]
     },
@@ -211,12 +181,6 @@
           "archetype": "Mauler",
           "priority": "high",
           "note": "Ozzy Trapilo (LT) out 6-12 months with patellar tendon injury. Braxton Jones on expiring contract."
-        },
-        {
-          "pos": "WR",
-          "archetype": "Contested Catch",
-          "priority": "medium",
-          "note": ""
         }
       ],
       "defNeeds": [
@@ -224,19 +188,19 @@
           "pos": "DL",
           "archetype": "Penetrator",
           "priority": "medium",
-          "note": "Need a penetrating 3-tech to collapse the pocket. Grady Jarrett (32) aging."
+          "note": "Need a penetrating 3-tech to collapse the pocket."
         },
         {
           "pos": "EDGE",
           "archetype": "Speed Rusher",
           "priority": "medium",
-          "note": "29th in pressure rate in 2025. Pass rush is nonexistent. Austin Booker is only bridge-level."
+          "note": "29th in pressure rate in 2025. Pass rush is nonexistent."
         },
         {
           "pos": "S",
           "archetype": "Centerfield",
           "priority": "high",
-          "note": "Brisker and Byard both FAs. Safety room gutted. Kevin Byard III (32) aging. Jaquan Brisker on expiring contract."
+          "note": "Brisker and Byard both FAs. Safety room gutted. Jaquan Brisker on expiring contract."
         }
       ]
     },
@@ -249,16 +213,10 @@
           "note": "OL remains priority around Burrow. Highest pick since Ja'Marr Chase."
         },
         {
-          "pos": "WR",
-          "archetype": "Route Technician",
-          "priority": "medium",
-          "note": "Andrei Iosivas is only bridge-level."
-        },
-        {
           "pos": "IOL",
           "archetype": "Athletic",
           "priority": "medium",
-          "note": "Interior line gave up too much pressure. Road grader needed. Ted Karras (33) aging. Dylan Fairchild, Jalen Rivers are only bridge-level."
+          "note": "Interior line gave up too much pressure. Road grader needed. Ted Karras on expiring contract."
         }
       ],
       "defNeeds": [
@@ -266,13 +224,13 @@
           "pos": "S",
           "archetype": "Ballhawk",
           "priority": "high",
-          "note": "Geno Stone on expiring contract. Jordan Battle is only bridge-level."
+          "note": "Geno Stone on expiring contract."
         },
         {
           "pos": "DL",
           "archetype": "Anchor",
           "priority": "medium",
-          "note": "Defensive line needs an anchor against the run. T.J. Slaton Jr. is only bridge-level."
+          "note": "Defensive line needs an anchor against the run."
         }
       ]
     },
@@ -282,25 +240,19 @@
           "pos": "OT",
           "archetype": "Pass Protector",
           "priority": "high",
-          "note": "Dawand Jones struggled. Need a mauler to protect the QB. Cam Robinson on expiring contract. KT Leveston is only bridge-level."
-        },
-        {
-          "pos": "WR",
-          "archetype": "Field Stretcher",
-          "priority": "high",
-          "note": "Isaiah Bond is only bridge-level."
+          "note": "Dawand Jones struggled. Need a mauler to protect the QB. Cam Robinson on expiring contract."
         },
         {
           "pos": "IOL",
           "archetype": "Road Grader",
           "priority": "high",
-          "note": "Joel Bitonio (34) aging. Teven Jenkins on expiring contract. Luke Wypler is only bridge-level."
+          "note": "Joel Bitonio, Teven Jenkins on expiring contracts."
         },
         {
           "pos": "QB",
           "archetype": "Pocket Passer",
           "priority": "medium",
-          "note": "QB room unsettled with Gabriel/Sanders. Monken needs a passer. Shedeur Sanders is only bridge-level."
+          "note": "QB room unsettled with Gabriel/Sanders. Monken needs a passer."
         }
       ],
       "defNeeds": [
@@ -308,25 +260,18 @@
           "pos": "S",
           "archetype": "Centerfield",
           "priority": "medium",
-          "note": "Grant Delpit, Ronnie Hickman on expiring contracts."
+          "note": "Ronnie Hickman, Grant Delpit on expiring contracts."
         },
         {
           "pos": "LB",
           "archetype": "Coverage",
           "priority": "medium",
-          "note": "Need sideline-to-sideline LB to replace Schwartz-era scheme losses. Jerome Baker on expiring contract."
+          "note": "Need sideline-to-sideline LB to replace Schwartz-era scheme losses. Mohamoud Diabate, Jerome Baker on expiring contracts."
         }
       ]
     },
     "DAL": {
-      "offNeeds": [
-        {
-          "pos": "WR",
-          "archetype": "Field Stretcher",
-          "priority": "medium",
-          "note": "Ryan Flournoy is only bridge-level."
-        }
-      ],
+      "offNeeds": [],
       "defNeeds": [
         {
           "pos": "EDGE",
@@ -338,7 +283,7 @@
           "pos": "CB",
           "archetype": "Zone",
           "priority": "medium",
-          "note": "Defense allowed most points in franchise history (~30 PPG). Shavon Revel Jr., Caelen Carson are only bridge-level."
+          "note": "Defense allowed most points in franchise history (~30 PPG). Reddy Steward on expiring contract."
         },
         {
           "pos": "S",
@@ -355,26 +300,14 @@
           "archetype": "Seam Stretcher",
           "priority": "medium",
           "note": "Need a seam stretcher for Payton's West Coast passing game."
-        },
-        {
-          "pos": "WR",
-          "archetype": "Route Technician",
-          "priority": "high",
-          "note": "Pat Bryant is only bridge-level."
-        },
-        {
-          "pos": "OT",
-          "archetype": "Pass Protector",
-          "priority": "medium",
-          "note": "Garett Bolles (33) aging."
         }
       ],
       "defNeeds": [
         {
           "pos": "LB",
           "archetype": "Sideline-to-Sideline",
-          "priority": "high",
-          "note": "Need a sideline-to-sideline LB in Vance Joseph's 3-4. Alex Singleton (32) aging."
+          "priority": "medium",
+          "note": "Need a sideline-to-sideline LB in Vance Joseph's 3-4. Alex Singleton on expiring contract."
         },
         {
           "pos": "DL",
@@ -396,13 +329,13 @@
           "pos": "OT",
           "archetype": "Mauler",
           "priority": "medium",
-          "note": "Taylor Decker considering retirement. Glasgow struggled at C (56.8 PFF). Taylor Decker (32) aging."
+          "note": "Taylor Decker considering retirement. Glasgow struggled at C (56.8 PFF)."
         },
         {
           "pos": "IOL",
           "archetype": "Pivot",
-          "priority": "high",
-          "note": "Frank Ragnow retired (failed comeback physical). Center is a crisis. Graham Glasgow (33) aging. Christian Mahogany is only bridge-level."
+          "priority": "medium",
+          "note": "Frank Ragnow retired (failed comeback physical). Center is a crisis."
         },
         {
           "pos": "TE",
@@ -422,13 +355,13 @@
           "pos": "CB",
           "archetype": "Technical",
           "priority": "high",
-          "note": "Rock Ya-Sin on expiring contract."
+          "note": "Rock Ya-Sin, Amik Robertson on expiring contracts."
         },
         {
           "pos": "S",
           "archetype": "Hybrid",
           "priority": "medium",
-          "note": "Avonte Maddox on expiring contract. Thomas Harper is only bridge-level."
+          "note": "Avonte Maddox on expiring contract."
         }
       ]
     },
@@ -438,7 +371,7 @@
           "pos": "OT",
           "archetype": "Zone Blocker",
           "priority": "high",
-          "note": "Rasheed Walker on expiring contract. Zach Tom is only bridge-level."
+          "note": "Rasheed Walker on expiring contract."
         },
         {
           "pos": "IOL",
@@ -452,7 +385,7 @@
           "pos": "DL",
           "archetype": "Anchor",
           "priority": "medium",
-          "note": "DT unit ranked 31st in PFF run-defense grade (30.6). Run defense terrible. Colby Wooden, Karl Brooks are only bridge-level."
+          "note": "DT unit ranked 31st in PFF run-defense grade (30.6). Run defense terrible."
         },
         {
           "pos": "LB",
@@ -468,25 +401,19 @@
           "pos": "OT",
           "archetype": "Athletic",
           "priority": "high",
-          "note": "Trent Brown (33) aging."
+          "note": "Trent Brown on expiring contract."
         },
         {
           "pos": "IOL",
           "archetype": "Zone Blocker",
           "priority": "high",
-          "note": "Interior OL remains weak. Need a pivot for Shanahan concepts. Tytus Howard, Ed Ingram on expiring contracts. Jake Andrews is only bridge-level."
+          "note": "Interior OL remains weak. Need a pivot for Shanahan concepts. Tytus Howard, Ed Ingram on expiring contracts."
         },
         {
           "pos": "RB",
           "archetype": "Zone Runner",
           "priority": "medium",
-          "note": "Joe Mixon missed entire 2025 (foot, NFI). Marks/Chubb filled in. Woody Marks is only bridge-level."
-        },
-        {
-          "pos": "WR",
-          "archetype": "YAC Monster",
-          "priority": "medium",
-          "note": "Christian Kirk on expiring contract."
+          "note": "Joe Mixon missed entire 2025 (foot, NFI). Marks/Chubb filled in."
         }
       ],
       "defNeeds": [
@@ -494,7 +421,7 @@
           "pos": "DL",
           "archetype": "Penetrator",
           "priority": "high",
-          "note": "Sheldon Rankins (32) aging. Tommy Togiai on expiring contract."
+          "note": "Tommy Togiai, Sheldon Rankins on expiring contracts."
         }
       ]
     },
@@ -510,7 +437,7 @@
           "pos": "IOL",
           "archetype": "Zone Blocker",
           "priority": "medium",
-          "note": "Quenton Nelson on expiring contract. Matt Goncalves, Tanor Bortolini are only bridge-level."
+          "note": "Quenton Nelson on expiring contract."
         }
       ],
       "defNeeds": [
@@ -521,16 +448,10 @@
           "note": "Speed rusher needed to generate pressure off the edge. Kwity Paye on expiring contract."
         },
         {
-          "pos": "DL",
-          "archetype": "Anchor",
-          "priority": "medium",
-          "note": "Grover Stewart (32) aging. Neville Gallimore on expiring contract."
-        },
-        {
           "pos": "CB",
           "archetype": "Zone",
           "priority": "medium",
-          "note": "Gus Bradley left for Titans DC. Need press-man corners for replacement scheme. Sauce Gardner, Mekhi Blackmon are only bridge-level."
+          "note": "Gus Bradley left for Titans DC. Need press-man corners for replacement scheme."
         }
       ]
     },
@@ -600,13 +521,13 @@
           "pos": "TE",
           "archetype": "Seam Stretcher",
           "priority": "medium",
-          "note": "Travis Kelce era ending (likely retirement). Massive hole at TE. Travis Kelce (36) aging."
+          "note": "Travis Kelce era ending (likely retirement). Massive hole at TE. Travis Kelce on expiring contract."
         },
         {
           "pos": "OT",
           "archetype": "Pass Protector",
           "priority": "medium",
-          "note": "Need an athletic tackle to match Mahomes' extending-play style. Esa Pole is only bridge-level."
+          "note": "Need an athletic tackle to match Mahomes' extending-play style."
         },
         {
           "pos": "WR",
@@ -617,16 +538,10 @@
       ],
       "defNeeds": [
         {
-          "pos": "DL",
-          "archetype": "Two-Gap",
-          "priority": "high",
-          "note": "Derrick Nnadi on expiring contract."
-        },
-        {
           "pos": "S",
           "archetype": "Ballhawk",
           "priority": "medium",
-          "note": "Bryan Cook on expiring contract. Chamarri Conner is only bridge-level."
+          "note": "Bryan Cook on expiring contract."
         }
       ]
     },
@@ -636,45 +551,39 @@
           "pos": "QB",
           "archetype": "Pocket Passer",
           "priority": "medium",
-          "note": "No franchise QB since Gannon era. First R1 QB since JaMarcus Russell (2007). Geno Smith (35) aging."
-        },
-        {
-          "pos": "WR",
-          "archetype": "YAC Monster",
-          "priority": "high",
-          "note": "Dont'e Thornton Jr. is only bridge-level."
+          "note": "No franchise QB since Gannon era. First R1 QB since JaMarcus Russell (2007)."
         },
         {
           "pos": "OT",
           "archetype": "Zone Blocker",
           "priority": "high",
-          "note": "Kolton Miller aging, pass protection struggled all season. Stone Forsythe on expiring contract. DJ Glaze is only bridge-level."
+          "note": "Kolton Miller aging, pass protection struggled all season. Stone Forsythe on expiring contract."
         },
         {
           "pos": "IOL",
           "archetype": "Road Grader",
           "priority": "medium",
-          "note": "Dylan Parham, Will Putnam on expiring contracts. Caleb Rogers is only bridge-level."
+          "note": "Dylan Parham, Will Putnam on expiring contracts."
         }
       ],
       "defNeeds": [
         {
           "pos": "CB",
           "archetype": "Press-Man",
-          "priority": "high",
-          "note": "Nate Hobbs entering contract year. Secondary needs youth. Eric Stokes on expiring contract. Darien Porter is only bridge-level."
+          "priority": "medium",
+          "note": "Nate Hobbs entering contract year. Secondary needs youth. Eric Stokes on expiring contract."
         },
         {
           "pos": "LB",
           "archetype": "Sideline-to-Sideline",
           "priority": "medium",
-          "note": "Elandon Roberts (32) aging."
+          "note": "Jamal Adams, Elandon Roberts on expiring contracts."
         },
         {
           "pos": "S",
           "archetype": "Centerfield",
           "priority": "medium",
-          "note": "Lonnie Johnson Jr. on expiring contract. Isaiah Pola-Mao is only bridge-level."
+          "note": "Lonnie Johnson Jr. on expiring contract."
         }
       ]
     },
@@ -684,7 +593,7 @@
           "pos": "IOL",
           "archetype": "Road Grader",
           "priority": "high",
-          "note": "Slater and Alt injuries killed OL (47.6 pass-block grade, worst in NFL). Zion Johnson on expiring contract. Bradley Bozeman is only bridge-level."
+          "note": "Slater and Alt injuries killed OL (47.6 pass-block grade, worst in NFL). Zion Johnson on expiring contract."
         },
         {
           "pos": "OT",
@@ -696,7 +605,7 @@
           "pos": "TE",
           "archetype": "Inline Blocker",
           "priority": "medium",
-          "note": "Need an inline blocker for McDaniel's zone scheme. Oronde Gadsden is only bridge-level."
+          "note": "Need an inline blocker for McDaniel's zone scheme."
         }
       ],
       "defNeeds": [
@@ -705,28 +614,16 @@
           "archetype": "Penetrator",
           "priority": "high",
           "note": "Need a penetrator up front to complement the pass rush."
-        },
-        {
-          "pos": "CB",
-          "archetype": "Technical",
-          "priority": "medium",
-          "note": "Cam Hart is only bridge-level."
         }
       ]
     },
     "LAR": {
       "offNeeds": [
         {
-          "pos": "WR",
-          "archetype": "YAC Monster",
-          "priority": "high",
-          "note": "Konata Mumpfield is only bridge-level."
-        },
-        {
           "pos": "QB",
           "archetype": "Pocket Passer",
-          "priority": "high",
-          "note": "Stafford returning for 2026 but successor planning needed. Matthew Stafford (38) aging."
+          "priority": "medium",
+          "note": "Stafford returning for 2026 but successor planning needed."
         }
       ],
       "defNeeds": [
@@ -734,7 +631,7 @@
           "pos": "CB",
           "archetype": "Ballhawk",
           "priority": "high",
-          "note": "Cobie Durant and Ahkello Witherspoon headed to FA. Darious Williams (33) aging. Cobie Durant on expiring contract."
+          "note": "Cobie Durant and Ahkello Witherspoon headed to FA. Cobie Durant, Quentin Lake on expiring contracts."
         },
         {
           "pos": "DL",
@@ -753,16 +650,10 @@
           "note": "Shanahan concepts demand athletic tackles. Current OTs don't fit. Austin Jackson on expiring contract."
         },
         {
-          "pos": "WR",
-          "archetype": "YAC Monster",
-          "priority": "high",
-          "note": "Cedrick Wilson Jr. on expiring contract."
-        },
-        {
           "pos": "QB",
           "archetype": "Pocket Passer",
           "priority": "medium",
-          "note": "Tua's future uncertain. Hafley rebuilding from ground up. Quinn Ewers is only bridge-level."
+          "note": "Tua's future uncertain. Hafley rebuilding from ground up."
         },
         {
           "pos": "TE",
@@ -776,7 +667,7 @@
           "pos": "CB",
           "archetype": "Physical",
           "priority": "high",
-          "note": "Jack Jones on expiring contract. Jason Marshall Jr. is only bridge-level."
+          "note": "Jack Jones, Rasul Douglas on expiring contracts."
         },
         {
           "pos": "S",
@@ -795,22 +686,10 @@
     "MIN": {
       "offNeeds": [
         {
-          "pos": "RB",
-          "archetype": "Zone Runner",
-          "priority": "high",
-          "note": ""
-        },
-        {
-          "pos": "WR",
-          "archetype": "YAC Monster",
-          "priority": "medium",
-          "note": "Jalen Nailor on expiring contract."
-        },
-        {
           "pos": "IOL",
           "archetype": "Athletic",
           "priority": "medium",
-          "note": "Ryan Kelly likely retiring (3 concussions in 2025). Center need is critical. Michael Jurgens is only bridge-level."
+          "note": "Ryan Kelly likely retiring (3 concussions in 2025). Center need is critical."
         }
       ],
       "defNeeds": [
@@ -818,7 +697,7 @@
           "pos": "CB",
           "archetype": "Technical",
           "priority": "medium",
-          "note": "Need a technical corner to hold up in Flores' exotic pressures. Isaiah Rodgers is only bridge-level."
+          "note": "Need a technical corner to hold up in Flores' exotic pressures."
         },
         {
           "pos": "DL",
@@ -830,7 +709,7 @@
           "pos": "S",
           "archetype": "Centerfield",
           "priority": "high",
-          "note": "Harrison Smith retiring at 37. Era-defining safety leaving a void. Harrison Smith (37) aging. Jay Ward is only bridge-level."
+          "note": "Harrison Smith retiring at 37. Era-defining safety leaving a void. Harrison Smith on expiring contract."
         }
       ]
     },
@@ -839,14 +718,14 @@
         {
           "pos": "OT",
           "archetype": "Pass Protector",
-          "priority": "high",
-          "note": "Need an athletic tackle to protect the franchise QB. Morgan Moses (35) aging."
+          "priority": "medium",
+          "note": "Need an athletic tackle to protect the franchise QB."
         },
         {
           "pos": "WR",
           "archetype": "Route Technician",
-          "priority": "high",
-          "note": "Drake Maye breakout season but needs more weapons around him. Kyle Williams is only bridge-level."
+          "priority": "medium",
+          "note": "Drake Maye breakout season but needs more weapons around him."
         }
       ],
       "defNeeds": [
@@ -866,7 +745,7 @@
           "pos": "S",
           "archetype": "Ballhawk",
           "priority": "medium",
-          "note": "Jaylinn Hawkins on expiring contract. Craig Woodson is only bridge-level."
+          "note": "Jaylinn Hawkins on expiring contract."
         }
       ]
     },
@@ -876,7 +755,7 @@
           "pos": "WR",
           "archetype": "Route Technician",
           "priority": "high",
-          "note": "Need a field stretcher to take the top off defenses for Shough. Dante Pettis on expiring contract."
+          "note": "Need a field stretcher to take the top off defenses for Shough. Chris Olave, Dante Pettis on expiring contracts."
         },
         {
           "pos": "RB",
@@ -890,25 +769,13 @@
           "pos": "EDGE",
           "archetype": "Speed Rusher",
           "priority": "medium",
-          "note": "Cameron Jordan nearing retirement. Need a power rusher to replace him. Cameron Jordan (36) aging."
+          "note": "Cameron Jordan nearing retirement. Need a power rusher to replace him. Cameron Jordan on expiring contract."
         },
         {
           "pos": "DL",
           "archetype": "Penetrator",
           "priority": "high",
           "note": ""
-        },
-        {
-          "pos": "CB",
-          "archetype": "Press-Man",
-          "priority": "medium",
-          "note": "Alontae Taylor on expiring contract."
-        },
-        {
-          "pos": "LB",
-          "archetype": "Sideline-to-Sideline",
-          "priority": "medium",
-          "note": "Demario Davis (37) aging."
         }
       ]
     },
@@ -918,19 +785,19 @@
           "pos": "WR",
           "archetype": "Route Technician",
           "priority": "high",
-          "note": "Wan'Dale Robinson is a FA. Need playmakers around Malik Nabers. Gunner Olszewski on expiring contract."
+          "note": "Wan'Dale Robinson is a FA. Need playmakers around Malik Nabers. Isaiah Hodgins, Gunner Olszewski on expiring contracts."
         },
         {
           "pos": "OT",
           "archetype": "Pass Protector",
           "priority": "high",
-          "note": "Jermaine Eluemunor on expiring contract. Marcus Mbow is only bridge-level."
+          "note": "Jermaine Eluemunor on expiring contract."
         },
         {
           "pos": "IOL",
           "archetype": "Pivot",
           "priority": "medium",
-          "note": "Greg Van Roten (36) aging. Austin Schlottmann on expiring contract. Jon Runyan is only bridge-level."
+          "note": "Austin Schlottmann, Greg Van Roten on expiring contracts."
         }
       ],
       "defNeeds": [
@@ -944,13 +811,13 @@
           "pos": "CB",
           "archetype": "Press-Man",
           "priority": "medium",
-          "note": "Secondary has been a liability. Deonte Banks inconsistent. Korie Black is only bridge-level."
+          "note": "Secondary has been a liability. Deonte Banks inconsistent."
         },
         {
           "pos": "EDGE",
           "archetype": "Explosive",
           "priority": "medium",
-          "note": "Need explosive pass rusher to pair with Brian Burns. Roy Robertson-Harris (32) aging. Darius Alexander is only bridge-level."
+          "note": "Need explosive pass rusher to pair with Brian Burns."
         },
         {
           "pos": "DL",
@@ -966,13 +833,13 @@
           "pos": "QB",
           "archetype": "Pocket Passer",
           "priority": "medium",
-          "note": "NFL-record 0 interceptions in 2025. Need a true franchise signal-caller. Brady Cook is only bridge-level."
+          "note": "NFL-record 0 interceptions in 2025. Need a true franchise signal-caller."
         },
         {
           "pos": "WR",
           "archetype": "Contested Catch",
-          "priority": "high",
-          "note": "Need a contested-catch alpha WR to complement the passing game. Isaiah Williams is only bridge-level."
+          "priority": "medium",
+          "note": "Need a contested-catch alpha WR to complement the passing game. John Metchie III on expiring contract."
         }
       ],
       "defNeeds": [
@@ -980,7 +847,7 @@
           "pos": "CB",
           "archetype": "Ballhawk",
           "priority": "medium",
-          "note": "D.J. Reed entering final year. Sauce Gardner traded to Jaguars. Qwan'tez Stiggers is only bridge-level."
+          "note": "D.J. Reed entering final year. Sauce Gardner traded to Jaguars. Ja'Sir Taylor on expiring contract."
         },
         {
           "pos": "DL",
@@ -992,7 +859,7 @@
           "pos": "EDGE",
           "archetype": "Bendy",
           "priority": "medium",
-          "note": "Haason Reddick departed. Pass rush needs rebuilding. Braiden McGregor is only bridge-level."
+          "note": "Haason Reddick departed. Pass rush needs rebuilding."
         }
       ]
     },
@@ -1002,13 +869,7 @@
           "pos": "OT",
           "archetype": "Zone Blocker",
           "priority": "high",
-          "note": "Lane Johnson (35) aging."
-        },
-        {
-          "pos": "WR",
-          "archetype": "Field Stretcher",
-          "priority": "high",
-          "note": "Jahan Dotson on expiring contract."
+          "note": "Lane Johnson on expiring contract."
         },
         {
           "pos": "TE",
@@ -1022,7 +883,7 @@
           "pos": "EDGE",
           "archetype": "Technical",
           "priority": "medium",
-          "note": "Need a bendy rusher for Fangio's two-high scheme. Moro Ojomo is only bridge-level."
+          "note": "Need a bendy rusher for Fangio's two-high scheme."
         },
         {
           "pos": "CB",
@@ -1044,20 +905,20 @@
           "pos": "WR",
           "archetype": "Route Technician",
           "priority": "high",
-          "note": "Need a contested-catch WR to be the alpha target. Marquez Valdes-Scantling on expiring contract."
+          "note": "Need a contested-catch WR to be the alpha target. Calvin Austin III, Marquez Valdes-Scantling on expiring contracts."
         },
         {
           "pos": "QB",
           "archetype": "Pocket Passer",
           "priority": "high",
-          "note": "Aaron Rodgers not returning. 9th straight year without playoff win. Aaron Rodgers (42) aging."
+          "note": "Aaron Rodgers not returning. 9th straight year without playoff win. Aaron Rodgers on expiring contract."
         }
       ],
       "defNeeds": [
         {
           "pos": "CB",
           "archetype": "Press-Man",
-          "priority": "high",
+          "priority": "medium",
           "note": "Zone corner needed for Graham's multiple front scheme. James Pierre on expiring contract."
         },
         {
@@ -1070,7 +931,7 @@
           "pos": "S",
           "archetype": "Box",
           "priority": "medium",
-          "note": "Kyle Dugger, Chuck Clark on expiring contracts."
+          "note": "Chuck Clark, Kyle Dugger on expiring contracts."
         }
       ]
     },
@@ -1079,20 +940,20 @@
         {
           "pos": "OT",
           "archetype": "Zone Blocker",
-          "priority": "high",
-          "note": "Need a zone blocker for Shanahan's outside zone concepts. Trent Williams (37) aging."
+          "priority": "medium",
+          "note": "Need a zone blocker for Shanahan's outside zone concepts."
         },
         {
           "pos": "WR",
           "archetype": "YAC Monster",
-          "priority": "high",
-          "note": "Aiyuk being released. Jennings is FA. WR room decimated. Demarcus Robinson is only bridge-level."
+          "priority": "medium",
+          "note": "Aiyuk being released. Jennings is FA. WR room decimated. Jauan Jennings on expiring contract."
         },
         {
           "pos": "IOL",
           "archetype": "Athletic",
           "priority": "medium",
-          "note": "Jake Brendel (33) aging. Spencer Burford on expiring contract. Dominick Puni is only bridge-level."
+          "note": "Spencer Burford on expiring contract."
         },
         {
           "pos": "TE",
@@ -1113,22 +974,16 @@
     "SEA": {
       "offNeeds": [
         {
-          "pos": "WR",
-          "archetype": "Route Technician",
-          "priority": "high",
-          "note": "Rashid Shaheed on expiring contract."
-        },
-        {
           "pos": "IOL",
           "archetype": "Road Grader",
           "priority": "medium",
-          "note": "Kubiak leaving for Raiders HC. Interior OL needs a mauler. Jalen Sundell, Anthony Bradford are only bridge-level."
+          "note": "Kubiak leaving for Raiders HC. Interior OL needs a mauler."
         },
         {
           "pos": "OT",
           "archetype": "Mauler",
           "priority": "medium",
-          "note": "Need a technician at tackle. Protection broke down in playoffs. Abraham Lucas is only bridge-level."
+          "note": "Need a technician at tackle. Protection broke down in playoffs."
         },
         {
           "pos": "RB",
@@ -1139,16 +994,10 @@
       ],
       "defNeeds": [
         {
-          "pos": "CB",
-          "archetype": "Zone",
-          "priority": "high",
-          "note": "Josh Jobe on expiring contract."
-        },
-        {
           "pos": "EDGE",
           "archetype": "Explosive",
           "priority": "medium",
-          "note": "Need an explosive edge rusher in Durde's 3-4. DeMarcus Lawrence (33) aging."
+          "note": "Need an explosive edge rusher in Durde's 3-4."
         }
       ]
     },
@@ -1164,7 +1013,7 @@
           "pos": "IOL",
           "archetype": "Athletic",
           "priority": "medium",
-          "note": "Dan Feeney on expiring contract. Mike Jordan is only bridge-level."
+          "note": "Dan Feeney on expiring contract."
         },
         {
           "pos": "OT",
@@ -1178,19 +1027,13 @@
           "pos": "LB",
           "archetype": "Blitzer",
           "priority": "medium",
-          "note": "Lavonte David turns 36, likely last season. 15th year with Bucs if he returns. SirVocea Dennis is only bridge-level."
+          "note": "Lavonte David turns 36, likely last season. 15th year with Bucs if he returns."
         },
         {
           "pos": "EDGE",
           "archetype": "Long Arm",
           "priority": "medium",
-          "note": "Need a long-arm rusher to generate consistent pressure. Logan Hall on expiring contract. Elijah Roberts is only bridge-level."
-        },
-        {
-          "pos": "CB",
-          "archetype": "Press-Man",
-          "priority": "high",
-          "note": "Jamel Dean on expiring contract."
+          "note": "Need a long-arm rusher to generate consistent pressure. Logan Hall on expiring contract."
         },
         {
           "pos": "DL",
@@ -1205,8 +1048,8 @@
         {
           "pos": "WR",
           "archetype": "Contested Catch",
-          "priority": "high",
-          "note": "Building around Cam Ward. Desperately need weapons for young QB. James Proche II is only bridge-level."
+          "priority": "medium",
+          "note": "Building around Cam Ward. Desperately need weapons for young QB."
         }
       ],
       "defNeeds": [
@@ -1214,7 +1057,7 @@
           "pos": "CB",
           "archetype": "Press-Man",
           "priority": "medium",
-          "note": "Saleh's Wide-9 demands press-man corners. Current CBs don't fit. Kaiir Elam, Darrell Baker Jr. on expiring contracts."
+          "note": "Saleh's Wide-9 demands press-man corners. Current CBs don't fit. Darrell Baker Jr., Kaiir Elam, Kemon Hall on expiring contracts."
         }
       ]
     },
@@ -1224,7 +1067,7 @@
           "pos": "WR",
           "archetype": "Possession",
           "priority": "high",
-          "note": "Treylon Burks on expiring contract."
+          "note": "Deebo Samuel, Treylon Burks on expiring contracts."
         },
         {
           "pos": "RB",
@@ -1238,25 +1081,19 @@
           "pos": "EDGE",
           "archetype": "Speed Rusher",
           "priority": "high",
-          "note": "Pass rush disappeared in big games. Need a speed rusher. Preston Smith (33) aging. Jalyn Holmes on expiring contract."
+          "note": "Pass rush disappeared in big games. Need a speed rusher. Jalyn Holmes, Preston Smith on expiring contracts."
         },
         {
           "pos": "S",
           "archetype": "Centerfield",
           "priority": "high",
-          "note": "Jeremy Reaves on expiring contract. Will Harris is only bridge-level."
-        },
-        {
-          "pos": "LB",
-          "archetype": "Blitzer",
-          "priority": "high",
-          "note": "Bobby Wagner (35) aging."
+          "note": "Jeremy Reaves on expiring contract."
         },
         {
           "pos": "CB",
           "archetype": "Technical",
           "priority": "medium",
-          "note": "Secondary burned regularly. Need a technical corner. Antonio Hamilton Sr. (33) aging."
+          "note": "Secondary burned regularly. Need a technical corner. Noah Igbinoghene on expiring contract."
         }
       ]
     }

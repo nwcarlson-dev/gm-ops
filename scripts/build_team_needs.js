@@ -5,16 +5,91 @@ const DATA_DIR = path.join(__dirname, '..', 'data');
 const TEAMS_DIR = path.join(DATA_DIR, 'teams');
 
 const baselineNeeds = JSON.parse(fs.readFileSync(path.join(TEAMS_DIR, 'nflmdd_team_needs_2026.json'), 'utf8'));
-const capSummary = JSON.parse(fs.readFileSync(path.join(TEAMS_DIR, 'cap_summary_2026.json'), 'utf8'));
 const depthCharts = JSON.parse(fs.readFileSync(path.join(TEAMS_DIR, 'depth_charts_2026.json'), 'utf8'));
-const playerTradeValues = JSON.parse(fs.readFileSync(path.join(TEAMS_DIR, 'player_trade_values.json'), 'utf8'));
 const teamSchemes = JSON.parse(fs.readFileSync(path.join(TEAMS_DIR, 'team_schemes.json'), 'utf8'));
 const teamIntel = JSON.parse(fs.readFileSync(path.join(TEAMS_DIR, 'team_intel.json'), 'utf8'));
+const contractsCSV = fs.readFileSync(path.join(DATA_DIR, 'raw', 'nflverse', 'contracts.csv'), 'utf8');
 
 const teams = baselineNeeds.teams || baselineNeeds;
-const capTeams = capSummary.teams || capSummary;
-const ptvTeams = playerTradeValues.teams || playerTradeValues;
 const schemeTeams = teamSchemes.teams || teamSchemes;
+
+function parseCSV(content) {
+  const lines = content.split('\n').filter(l => l.trim());
+  const headers = lines[0].split(',');
+  return lines.slice(1).map(line => {
+    const vals = [];
+    let current = '';
+    let inQuotes = false;
+    for (const ch of line) {
+      if (ch === '"') { inQuotes = !inQuotes; }
+      else if (ch === ',' && !inQuotes) { vals.push(current.trim()); current = ''; }
+      else { current += ch; }
+    }
+    vals.push(current.trim());
+    const obj = {};
+    headers.forEach((h, i) => { obj[h] = vals[i] || ''; });
+    return obj;
+  });
+}
+
+const contracts = parseCSV(contractsCSV);
+const TEAM_NAME_TO_ABBR_CONTRACTS = {
+  'Cardinals': 'ARI', 'Falcons': 'ATL', 'Ravens': 'BAL', 'Bills': 'BUF',
+  'Panthers': 'CAR', 'Bears': 'CHI', 'Bengals': 'CIN', 'Browns': 'CLE',
+  'Cowboys': 'DAL', 'Broncos': 'DEN', 'Lions': 'DET', 'Packers': 'GB',
+  'Texans': 'HOU', 'Colts': 'IND', 'Jaguars': 'JAX', 'Chiefs': 'KC',
+  'Raiders': 'LV', 'Chargers': 'LAC', 'Rams': 'LAR', 'Dolphins': 'MIA',
+  'Vikings': 'MIN', 'Patriots': 'NE', 'Saints': 'NO', 'Giants': 'NYG',
+  'Jets': 'NYJ', 'Eagles': 'PHI', 'Steelers': 'PIT', '49ers': 'SF',
+  'Seahawks': 'SEA', 'Buccaneers': 'TB', 'Titans': 'TEN', 'Commanders': 'WAS'
+};
+
+function buildPlayerAgeMap() {
+  const ageMap = {};
+  const now = new Date('2026-03-01');
+  contracts.filter(c => c.is_active === 'True').forEach(c => {
+    const team = TEAM_NAME_TO_ABBR_CONTRACTS[c.team];
+    if (!team) return;
+    const key = `${team}:${c.player}`;
+    if (ageMap[key]) return;
+    let age = null;
+    if (c.date_of_birth) {
+      const dob = new Date(c.date_of_birth);
+      if (!isNaN(dob)) {
+        age = Math.floor((now - dob) / (365.25 * 24 * 60 * 60 * 1000));
+      }
+    }
+    ageMap[key] = age;
+  });
+  return ageMap;
+}
+
+const playerAgeMap = buildPlayerAgeMap();
+
+function getDepthChartStarters(abbr, pos) {
+  const teamDC = depthCharts[abbr];
+  if (!teamDC) return [];
+
+  const normalizedPos = pos;
+  const starters = [];
+  const sides = [teamDC.offense || [], teamDC.defense || []];
+
+  for (const side of sides) {
+    for (const slot of side) {
+      const slotPos = normalizePos(slot.pos);
+      if (slotPos === normalizedPos && slot.starter) {
+        const ageKey = `${abbr}:${slot.starter.name}`;
+        starters.push({
+          name: slot.starter.name,
+          expiring: slot.starter.expiring || false,
+          age: playerAgeMap[ageKey] || null
+        });
+      }
+    }
+  }
+
+  return starters;
+}
 
 const ABBR_TO_NAME = {
   'ARI': 'Cardinals', 'ATL': 'Falcons', 'BAL': 'Ravens', 'BUF': 'Bills',
@@ -112,7 +187,8 @@ function normalizePos(pos) {
     'ILB': 'LB', 'MLB': 'LB', 'RILB': 'LB', 'LILB': 'LB', 'WLB': 'LB', 'SLB': 'LB',
     'LT': 'OT', 'RT': 'OT', 'T': 'OT',
     'LG': 'IOL', 'RG': 'IOL', 'C': 'IOL', 'G': 'IOL',
-    'FS': 'S', 'SS': 'S',
+    'FS': 'S', 'SS': 'S', 'NB': 'CB',
+    'LCB': 'CB', 'RCB': 'CB', 'LDT': 'DL', 'RDT': 'DL',
     'Defensive Tackle': 'DL', 'Defensive Line': 'DL',
     'Edge Rusher': 'EDGE', 'Linebacker': 'LB', 'Cornerback': 'CB',
     'Safety': 'S', 'Wide Receiver': 'WR', 'Running Back': 'RB',
@@ -152,16 +228,16 @@ function findSchemeArchetype(offScheme, defScheme, pos) {
   }
 }
 
-function getRosterNote(abbr, pos) {
-  const players = ptvTeams[abbr];
-  if (!players) return null;
-  const posPlayers = players.filter(p => normalizePos(p.position) === pos || normalizePos(p.depthChartPos) === pos);
-  if (posPlayers.length === 0) return null;
+const AGING_THRESHOLD = { QB: 36, RB: 29, WR: 31, TE: 32, OT: 33, IOL: 33, EDGE: 31, DL: 31, LB: 31, CB: 30, S: 31 };
+const MULTI_STARTER = { IOL: 3, OT: 2, WR: 2, CB: 2, S: 2 };
 
-  const starters = posPlayers.filter(p => p.role === 'starter');
-  const aging = starters.filter(p => p.age >= 32);
-  const expiring = starters.filter(p => p.isExpiring);
-  const lowTier = starters.filter(p => p.performanceTier === 'backup' || p.performanceTier === 'bridge');
+function getRosterNote(abbr, pos) {
+  const starters = getDepthChartStarters(abbr, pos);
+  if (starters.length === 0) return null;
+
+  const ageCutoff = AGING_THRESHOLD[pos] || 32;
+  const aging = starters.filter(p => p.age && p.age >= ageCutoff);
+  const expiring = starters.filter(p => p.expiring);
 
   const parts = [];
   if (aging.length > 0) {
@@ -173,33 +249,17 @@ function getRosterNote(abbr, pos) {
       parts.push(`${names.join(', ')} on expiring ${names.length === 1 ? 'contract' : 'contracts'}`);
     }
   }
-  if (lowTier.length > 0) {
-    const names = lowTier.filter(p => !aging.some(a => a.name === p.name) && !expiring.some(e => e.name === p.name)).map(p => p.name);
-    if (names.length > 0) {
-      parts.push(`${names.join(', ')} ${names.length === 1 ? 'is' : 'are'} only ${lowTier[0].performanceTier}-level`);
-    }
-  }
-  if (starters.length === 0 && posPlayers.length > 0) {
-    parts.push('No clear starter on roster');
-  }
   return parts.length > 0 ? parts.join('. ') + '.' : null;
 }
 
 function isPositionCovered(abbr, pos) {
-  const players = ptvTeams[abbr];
-  if (!players) return false;
-
-  const posPlayers = players.filter(p => normalizePos(p.position) === pos || normalizePos(p.depthChartPos) === pos);
-  const starters = posPlayers.filter(p => p.role === 'starter');
+  const starters = getDepthChartStarters(abbr, pos);
   if (starters.length === 0) return false;
 
-  const MULTI_STARTER = { IOL: 3, OT: 2, WR: 2, CB: 2, S: 2 };
   const minStarters = MULTI_STARTER[pos] || 1;
-
-  const AGING_THRESHOLD = { QB: 36, RB: 29, WR: 31, TE: 32, OT: 33, IOL: 33, EDGE: 31, DL: 31, LB: 31, CB: 30, S: 31 };
   const ageCutoff = AGING_THRESHOLD[pos] || 32;
 
-  const secure = starters.filter(p => !p.isExpiring && p.age < ageCutoff);
+  const secure = starters.filter(p => !p.expiring && (!p.age || p.age < ageCutoff));
   return secure.length >= minStarters;
 }
 
