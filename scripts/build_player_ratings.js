@@ -406,16 +406,49 @@ function generatePlayerRatings(player, skillMap) {
 
   const weights = redistributeWeights(available);
 
+  const yearsExp = player.yearsExp || 0;
+  if (yearsExp <= 2 && weights.pff && weights.madden) {
+    const discount = yearsExp <= 1 ? 0.40 : 0.20;
+    const pffReduction = weights.pff * discount;
+    weights.pff -= pffReduction;
+    const otherBuckets = ['madden', 'tier', 'contract', 'draftCapital'].filter(k => weights[k] != null);
+    const perBucket = pffReduction / otherBuckets.length;
+    for (const bucket of otherBuckets) {
+      weights[bucket] += perBucket;
+    }
+  }
+
+  if (yearsExp >= 5 && weights.madden && weights.pff && player.madden && player.madden.ovr >= 88) {
+    const shift = weights.pff * (yearsExp >= 7 ? 0.15 : 0.08);
+    weights.pff -= shift;
+    weights.madden += shift;
+  }
+
+  let effectivePff = pffBase;
+  if (yearsExp <= 1 && pffBase != null) {
+    effectivePff = pffBase * 0.75 + 50 * 0.25;
+  } else if (yearsExp === 2 && pffBase != null) {
+    effectivePff = pffBase * 0.88 + 50 * 0.12;
+  }
+
   let baseRating = 0;
-  if (weights.pff) baseRating += pffBase * weights.pff;
+  if (weights.pff) baseRating += effectivePff * weights.pff;
   if (weights.madden) baseRating += maddenOvr * weights.madden;
-  if (weights.nflStats) baseRating += (pffBase || tierBase) * weights.nflStats;
+  if (weights.nflStats) baseRating += (effectivePff || tierBase) * weights.nflStats;
   if (weights.contract) baseRating += contractBase * weights.contract;
   if (weights.draftCapital) baseRating += draftBase * weights.draftCapital;
   if (weights.tier) baseRating += tierBase * weights.tier;
 
   baseRating += roleAdjust(player.role);
   baseRating += ageAdjust(player.age);
+
+  if (yearsExp >= 5 && player.madden && player.madden.ovr >= 90) {
+    const veteranFloor = madden99to2080(player.madden.ovr) - 10;
+    if (baseRating < veteranFloor) {
+      baseRating = baseRating * 0.3 + veteranFloor * 0.7;
+    }
+  }
+
   baseRating = Math.max(25, Math.min(75, baseRating));
 
   const maddenSkills = getMaddenSkillRatings(player, canonicalPos, skillMap);
