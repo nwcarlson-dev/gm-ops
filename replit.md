@@ -38,7 +38,8 @@ The project uses several HTML pages, with mode routing handled by query paramete
 **Technical Implementations & Feature Specifications:**
 - **Data Loading:** All game data, including prospects, draft order, and team needs, is loaded from JSON files.
 - **Player Rating Scale:** All player skill and trait ratings use the **20-80 scouting scale** (professional scouting standard). 50=average NFL starter, 80=franchise elite/All-Pro, 20=non-prospect. PFF grades (0-100) are a separate observational system displayed alongside scouting ratings. Full scale breakdown in DESIGN.md under "Player Rating System."
-- **Scheme Fit System:** Matches team needs with prospect attributes based on `scheme_skill_weights.json`.
+- **Player Ratings Generation:** `scripts/build_player_ratings.js` generates 20-80 skill ratings for all 1,293 rostered players using PFF grades, position-specific PFF stats, performance tiers, role/age adjustments, and controlled variance. Each player gets individual skill ratings for every position skill (QB has 11, WR has 9, etc.) plus scheme-specific overall ratings calculated against all offensive or defensive schemes. Ratings are stored in `player_database.json` under each player's `ratings` object.
+- **Scheme Fit System:** Matches team needs with prospect attributes based on `scheme_skill_weights.json`. Version 2.0 uses canonical skill keys aligned with DESIGN.md position skills. Supports 7 offensive and 6 defensive schemes with full position coverage.
 - **Draft Logic:** AI draft logic, detailed in `DESIGN.md`, includes board generation, variance tiers, scheme fit, and trade triggers.
 - **Scouting Reports:** Player cards provide detailed scouting reports, rankings, and comparisons via modals.
 - **Draft Flow:** Supports "Sim to Pick" for AI drafting and manual player selection. Features a dynamic **Pick Presentation System** with trade alerts, on-the-clock displays, and pick reveals, adjusting timing based on speed settings.
