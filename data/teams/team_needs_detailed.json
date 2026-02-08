@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated": "2026-02-08T03:33:35.448Z",
+    "generated": "2026-02-08T03:42:38.457Z",
     "description": "Auto-generated team needs with archetypes and contextual notes. Re-run scripts/build_team_needs.js to regenerate.",
     "inputs": [
       "nflmdd_team_needs_2026.json",
