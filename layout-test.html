@@ -291,13 +291,7 @@
         }
 
         .pos-pill.shift-preview {
-            transform: translateX(4px);
-            opacity: 0.6;
-        }
-
-        .pos-pill.insert-target {
-            border-color: rgba(74, 222, 128, 0.5);
-            box-shadow: inset 0 0 0 1px rgba(74, 222, 128, 0.15);
+            opacity: 0.7;
         }
 
         .pos-pill.starter {
@@ -665,25 +659,62 @@
                 }
             }
 
-            function showPreview(row, insertIndex) {
-                const pills = Array.from(row.children);
-                pills.forEach(p => {
-                    p.classList.remove('shift-preview', 'insert-target');
-                });
+            function showPreview(targetRow, hoverIndex) {
+                clearPreview();
+                const { pill, fromRow, fromIndex } = dragState;
+                const sameRow = targetRow === fromRow;
+                const gap = 8;
 
-                const clampedIndex = Math.min(insertIndex, pills.length - 1);
-                pills[clampedIndex].classList.add('insert-target');
-                for (let i = clampedIndex; i < pills.length; i++) {
-                    if (!pills[i].classList.contains('drag-source')) {
-                        pills[i].classList.add('shift-preview');
-                    }
+                if (sameRow) {
+                    const pills = Array.from(targetRow.children);
+                    const pillWidth = pills[0].getBoundingClientRect().width;
+                    const shift = pillWidth + gap;
+                    let effectiveInsert = hoverIndex;
+                    if (fromIndex < hoverIndex) effectiveInsert--;
+                    if (effectiveInsert === fromIndex) return;
+
+                    pills.forEach((p, i) => {
+                        if (i === fromIndex) return;
+                        if (p.classList.contains('empty-slot')) return;
+                        if (effectiveInsert < fromIndex) {
+                            if (i >= effectiveInsert && i < fromIndex) {
+                                p.style.transform = `translateX(${shift}px)`;
+                                p.classList.add('shift-preview');
+                            }
+                        } else {
+                            if (i > fromIndex && i <= effectiveInsert + 1) {
+                                p.style.transform = `translateX(-${shift}px)`;
+                                p.classList.add('shift-preview');
+                            }
+                        }
+                    });
+                } else {
+                    const sourcePills = Array.from(fromRow.children);
+                    const sourceShift = sourcePills[0].getBoundingClientRect().width + gap;
+                    sourcePills.forEach((p, i) => {
+                        if (i > fromIndex && !p.classList.contains('empty-slot')) {
+                            p.style.transform = `translateX(-${sourceShift}px)`;
+                            p.classList.add('shift-preview');
+                        }
+                    });
+
+                    const targetPills = Array.from(targetRow.children);
+                    const targetShift = targetPills[0].getBoundingClientRect().width + gap;
+                    const clampedIndex = Math.min(hoverIndex, targetPills.length - 1);
+                    targetPills.forEach((p, i) => {
+                        if (i >= clampedIndex && !p.classList.contains('empty-slot')) {
+                            p.style.transform = `translateX(${targetShift}px)`;
+                            p.classList.add('shift-preview');
+                        }
+                    });
                 }
             }
 
             function clearPreview() {
                 rows.forEach(r => {
                     Array.from(r.children).forEach(p => {
-                        p.classList.remove('shift-preview', 'insert-target');
+                        p.classList.remove('shift-preview');
+                        p.style.transform = '';
                     });
                 });
             }
