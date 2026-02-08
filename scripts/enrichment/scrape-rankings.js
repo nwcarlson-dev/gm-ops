@@ -120,9 +120,9 @@ async function scrapeCBSSports() {
 
 async function scrapeDraftTek() {
   const prospects = [];
-  console.log('[DraftTek] Fetching big board (up to 300 prospects) with bio data...');
+  console.log('[DraftTek] Fetching big board (up to 500 prospects) with bio data...');
 
-  for (let page = 1; page <= 3; page++) {
+  for (let page = 1; page <= 5; page++) {
     try {
       const url = `https://www.drafttek.com/2026-NFL-Draft-Big-Board/Top-NFL-Draft-Prospects-2026-Page-${page}.asp`;
       const html = await fetchWithRetry(url);
@@ -183,7 +183,7 @@ async function scrapeDraftTek() {
         }
       });
 
-      if (page < 3) await new Promise(r => setTimeout(r, 1500));
+      if (page < 5) await new Promise(r => setTimeout(r, 1500));
     } catch (err) {
       console.error(`[DraftTek] Page ${page} error:`, err.message);
     }
@@ -464,6 +464,7 @@ async function runRankingScrape(progressCallback) {
   const results = {
     sources: {},
     updatedProspects: 0,
+    newProspectsAdded: 0,
     errors: [],
     unmatchedNames: [],
     scoutingReportsAdded: 0
@@ -538,6 +539,83 @@ async function runRankingScrape(progressCallback) {
         if (scraped.comparison) {
           if (!prospect.source_raw.comparisons) prospect.source_raw.comparisons = {};
           prospect.source_raw.comparisons[scraper.name] = scraped.comparison;
+        }
+      }
+
+      if (scraper.name === 'drafttek') {
+        let added = 0;
+        for (const u of matchResult.unmatched) {
+          const s = u.scraped;
+          if (!s.name || !s.position || !s.school) continue;
+
+          const nameParts = s.name.trim().split(/\s+/);
+          const first = nameParts[0] || '';
+          const last = nameParts.slice(1).join(' ') || '';
+          const schoolSlug = s.school.toLowerCase().replace(/[^a-z]/g, '').slice(0, 10);
+          const nameSlug = s.name.toLowerCase()
+            .replace(/[''`]/g, '')
+            .replace(/[^a-z0-9\s-]/g, '')
+            .replace(/\s+/g, '-')
+            .replace(/-+/g, '-')
+            .trim();
+          let id = nameSlug + '-2026';
+          if (data.prospects.some(p => p.id === id)) {
+            id = nameSlug + '-' + schoolSlug + '-2026';
+          }
+          if (data.prospects.some(p => p.id === id)) continue;
+
+          const position = normalizePosition(s.position);
+          const newProspect = {
+            id,
+            name: { display: s.name, first, last },
+            position,
+            position_source: 'drafttek',
+            school: s.school,
+            conference: null,
+            class_year: s.class_year || null,
+            bio: {
+              height_in: s.height_in || null,
+              weight_lbs: s.weight_lbs || null,
+              birth_date: null,
+              age_years: null,
+              age_months: null,
+              hometown: null,
+              arm_length_in: null,
+              hand_size_in: null,
+              class_year: s.class_year || null
+            },
+            rankings: { drafttek: s.rank },
+            position_rankings: {},
+            consensus: { rank: s.rank, range_low: s.rank, range_high: s.rank, sources_count: 1 },
+            grades: {},
+            combine: {},
+            skills: null,
+            traits: null,
+            archetype: null,
+            projection: {
+              round: getRound(s.rank),
+              range_low: s.rank,
+              range_high: s.rank,
+              label: getProjectionLabel(s.rank)
+            },
+            scouting_report: null,
+            comparison: null,
+            source_raw: {
+              drafttek_ranking: {
+                rank: s.rank,
+                position: s.position,
+                scraped_date: new Date().toISOString().split('T')[0]
+              }
+            },
+            developmentCertainty: null
+          };
+
+          data.prospects.push(newProspect);
+          added++;
+        }
+        if (added > 0) {
+          results.newProspectsAdded += added;
+          console.log(`[drafttek] Added ${added} NEW prospects from extended big board`);
         }
       }
 
