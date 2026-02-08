@@ -66,14 +66,8 @@ function buildPlayerAgeMap() {
 
 const playerAgeMap = buildPlayerAgeMap();
 
-function dcAbbr(abbr) {
-  if (depthCharts[abbr]) return abbr;
-  const altMap = { 'JAX': 'JAC', 'JAC': 'JAX' };
-  return altMap[abbr] && depthCharts[altMap[abbr]] ? altMap[abbr] : abbr;
-}
-
 function getDepthChartStarters(abbr, pos) {
-  const teamDC = depthCharts[dcAbbr(abbr)];
+  const teamDC = depthCharts[abbr];
   if (!teamDC) return [];
 
   const normalizedPos = pos;
@@ -279,7 +273,7 @@ function getStarterOpenings(abbr, pos) {
 }
 
 function getDepthChartBackups(abbr, pos) {
-  const teamDC = depthCharts[dcAbbr(abbr)];
+  const teamDC = depthCharts[abbr];
   if (!teamDC) return [];
 
   const backups = [];

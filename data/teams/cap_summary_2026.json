@@ -509,42 +509,6 @@
       ],
       "rosterSize": 38
     },
-    "JAC": {
-      "salaryCap": 272.5,
-      "totalCommitted": 274.4,
-      "deadMoney": 117.2,
-      "capSpace": -1.9,
-      "activeContracts": 55,
-      "expiringContracts": 13,
-      "topContracts": [
-        {
-          "player": "Trevor Lawrence",
-          "position": "QB",
-          "capHit": 55
-        },
-        {
-          "player": "Josh Hines-Allen",
-          "position": "ED",
-          "capHit": 28.3
-        },
-        {
-          "player": "Jakobi Meyers",
-          "position": "WR",
-          "capHit": 20
-        },
-        {
-          "player": "Cole Van Lanen",
-          "position": "LT",
-          "capHit": 17
-        },
-        {
-          "player": "Arik Armstead",
-          "position": "ED",
-          "capHit": 14.5
-        }
-      ],
-      "rosterSize": 38
-    },
     "KC": {
       "salaryCap": 272.5,
       "totalCommitted": 274.7,
@@ -1153,6 +1117,42 @@
           "player": "Dorance Armstrong Jr.",
           "position": "ED",
           "capHit": 11
+        }
+      ],
+      "rosterSize": 38
+    },
+    "JAX": {
+      "salaryCap": 272.5,
+      "totalCommitted": 274.4,
+      "deadMoney": 117.2,
+      "capSpace": -1.9,
+      "activeContracts": 55,
+      "expiringContracts": 13,
+      "topContracts": [
+        {
+          "player": "Trevor Lawrence",
+          "position": "QB",
+          "capHit": 55
+        },
+        {
+          "player": "Josh Hines-Allen",
+          "position": "ED",
+          "capHit": 28.3
+        },
+        {
+          "player": "Jakobi Meyers",
+          "position": "WR",
+          "capHit": 20
+        },
+        {
+          "player": "Cole Van Lanen",
+          "position": "LT",
+          "capHit": 17
+        },
+        {
+          "player": "Arik Armstead",
+          "position": "ED",
+          "capHit": 14.5
         }
       ],
       "rosterSize": 38

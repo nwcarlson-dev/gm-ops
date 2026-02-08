@@ -3402,254 +3402,6 @@
       }
     ]
   },
-  "JAC": {
-    "offense": [
-      {
-        "pos": "QB",
-        "starter": {
-          "name": "Trevor Lawrence",
-          "expiring": false
-        },
-        "backup": {
-          "name": "Nick Mullens",
-          "expiring": false
-        }
-      },
-      {
-        "pos": "RB",
-        "starter": {
-          "name": "Travis Etienne Jr.",
-          "expiring": false
-        },
-        "backup": {
-          "name": "Bhayshul Tuten",
-          "expiring": false
-        }
-      },
-      {
-        "pos": "WR",
-        "starter": {
-          "name": "Brian Thomas Jr.",
-          "expiring": false
-        },
-        "backup": {
-          "name": "Tim Patrick",
-          "expiring": true
-        }
-      },
-      {
-        "pos": "WR",
-        "starter": {
-          "name": "Jakobi Meyers",
-          "expiring": false
-        },
-        "backup": {
-          "name": "Tim Jones",
-          "expiring": false
-        }
-      },
-      {
-        "pos": "WR",
-        "starter": {
-          "name": "Parker Washington",
-          "expiring": false
-        },
-        "backup": {
-          "name": "Dyami Brown",
-          "expiring": true
-        }
-      },
-      {
-        "pos": "TE",
-        "starter": {
-          "name": "Brenton Strange",
-          "expiring": false
-        },
-        "backup": {
-          "name": "Johnny Mundt",
-          "expiring": false
-        }
-      },
-      {
-        "pos": "LT",
-        "starter": {
-          "name": "Cole Van Lanen",
-          "expiring": true
-        },
-        "backup": {
-          "name": "Walker Little",
-          "expiring": false
-        }
-      },
-      {
-        "pos": "LG",
-        "starter": {
-          "name": "Ezra Cleveland",
-          "expiring": false
-        },
-        "backup": {
-          "name": "Wyatt Milum",
-          "expiring": false
-        }
-      },
-      {
-        "pos": "C",
-        "starter": {
-          "name": "Robert Hainsey",
-          "expiring": false
-        },
-        "backup": {
-          "name": "Jonah Monheim",
-          "expiring": false
-        }
-      },
-      {
-        "pos": "RG",
-        "starter": {
-          "name": "Patrick Mekari",
-          "expiring": false
-        },
-        "backup": {
-          "name": "Walker Little",
-          "expiring": false
-        }
-      },
-      {
-        "pos": "RT",
-        "starter": {
-          "name": "Anton Harrison",
-          "expiring": false
-        },
-        "backup": {
-          "name": "Ricky Lee",
-          "expiring": false
-        }
-      }
-    ],
-    "defense": [
-      {
-        "pos": "LDE",
-        "starter": {
-          "name": "Josh Hines-Allen",
-          "expiring": false
-        },
-        "backup": {
-          "name": "Dawuane Smoot",
-          "expiring": true
-        }
-      },
-      {
-        "pos": "LDT",
-        "starter": {
-          "name": "DaVon Hamilton",
-          "expiring": true
-        },
-        "backup": {
-          "name": "Matt Dickerson",
-          "expiring": true
-        }
-      },
-      {
-        "pos": "RDT",
-        "starter": {
-          "name": "Arik Armstead",
-          "expiring": false
-        },
-        "backup": {
-          "name": "Austin Johnson",
-          "expiring": true
-        }
-      },
-      {
-        "pos": "RDE",
-        "starter": {
-          "name": "Travon Walker",
-          "expiring": true
-        },
-        "backup": {
-          "name": "Danny Striggow",
-          "expiring": false
-        }
-      },
-      {
-        "pos": "LB",
-        "starter": {
-          "name": "Foyesade Oluokun",
-          "expiring": false
-        },
-        "backup": {
-          "name": "Dennis Gardeck",
-          "expiring": true
-        }
-      },
-      {
-        "pos": "LB",
-        "starter": {
-          "name": "Devin Lloyd",
-          "expiring": true
-        },
-        "backup": {
-          "name": "Branson Combs",
-          "expiring": false
-        }
-      },
-      {
-        "pos": "LCB",
-        "starter": {
-          "name": "Jarrian Jones",
-          "expiring": false
-        },
-        "backup": {
-          "name": "Keith Taylor",
-          "expiring": true
-        }
-      },
-      {
-        "pos": "RCB",
-        "starter": {
-          "name": "Greg Newsome II",
-          "expiring": true
-        },
-        "backup": {
-          "name": "Christian Braswell",
-          "expiring": true
-        }
-      },
-      {
-        "pos": "NB",
-        "starter": {
-          "name": "Montaric Brown",
-          "expiring": true
-        },
-        "backup": {
-          "name": "Jabbar Muhammad",
-          "expiring": false
-        }
-      },
-      {
-        "pos": "FS",
-        "starter": {
-          "name": "Andrew Wingard",
-          "expiring": true
-        },
-        "backup": {
-          "name": "Antonio Johnson",
-          "expiring": false
-        }
-      },
-      {
-        "pos": "SS",
-        "starter": {
-          "name": "Eric Murray",
-          "expiring": false
-        },
-        "backup": {
-          "name": "Rayuan Lane III",
-          "expiring": false
-        }
-      }
-    ]
-  },
   "KC": {
     "offense": [
       {
@@ -7730,6 +7482,254 @@
         "backup": {
           "name": "Percy Butler",
           "expiring": true
+        }
+      }
+    ]
+  },
+  "JAX": {
+    "offense": [
+      {
+        "pos": "QB",
+        "starter": {
+          "name": "Trevor Lawrence",
+          "expiring": false
+        },
+        "backup": {
+          "name": "Nick Mullens",
+          "expiring": false
+        }
+      },
+      {
+        "pos": "RB",
+        "starter": {
+          "name": "Travis Etienne Jr.",
+          "expiring": false
+        },
+        "backup": {
+          "name": "Bhayshul Tuten",
+          "expiring": false
+        }
+      },
+      {
+        "pos": "WR",
+        "starter": {
+          "name": "Brian Thomas Jr.",
+          "expiring": false
+        },
+        "backup": {
+          "name": "Tim Patrick",
+          "expiring": true
+        }
+      },
+      {
+        "pos": "WR",
+        "starter": {
+          "name": "Jakobi Meyers",
+          "expiring": false
+        },
+        "backup": {
+          "name": "Tim Jones",
+          "expiring": false
+        }
+      },
+      {
+        "pos": "WR",
+        "starter": {
+          "name": "Parker Washington",
+          "expiring": false
+        },
+        "backup": {
+          "name": "Dyami Brown",
+          "expiring": true
+        }
+      },
+      {
+        "pos": "TE",
+        "starter": {
+          "name": "Brenton Strange",
+          "expiring": false
+        },
+        "backup": {
+          "name": "Johnny Mundt",
+          "expiring": false
+        }
+      },
+      {
+        "pos": "LT",
+        "starter": {
+          "name": "Cole Van Lanen",
+          "expiring": true
+        },
+        "backup": {
+          "name": "Walker Little",
+          "expiring": false
+        }
+      },
+      {
+        "pos": "LG",
+        "starter": {
+          "name": "Ezra Cleveland",
+          "expiring": false
+        },
+        "backup": {
+          "name": "Wyatt Milum",
+          "expiring": false
+        }
+      },
+      {
+        "pos": "C",
+        "starter": {
+          "name": "Robert Hainsey",
+          "expiring": false
+        },
+        "backup": {
+          "name": "Jonah Monheim",
+          "expiring": false
+        }
+      },
+      {
+        "pos": "RG",
+        "starter": {
+          "name": "Patrick Mekari",
+          "expiring": false
+        },
+        "backup": {
+          "name": "Walker Little",
+          "expiring": false
+        }
+      },
+      {
+        "pos": "RT",
+        "starter": {
+          "name": "Anton Harrison",
+          "expiring": false
+        },
+        "backup": {
+          "name": "Ricky Lee",
+          "expiring": false
+        }
+      }
+    ],
+    "defense": [
+      {
+        "pos": "LDE",
+        "starter": {
+          "name": "Josh Hines-Allen",
+          "expiring": false
+        },
+        "backup": {
+          "name": "Dawuane Smoot",
+          "expiring": true
+        }
+      },
+      {
+        "pos": "LDT",
+        "starter": {
+          "name": "DaVon Hamilton",
+          "expiring": true
+        },
+        "backup": {
+          "name": "Matt Dickerson",
+          "expiring": true
+        }
+      },
+      {
+        "pos": "RDT",
+        "starter": {
+          "name": "Arik Armstead",
+          "expiring": false
+        },
+        "backup": {
+          "name": "Austin Johnson",
+          "expiring": true
+        }
+      },
+      {
+        "pos": "RDE",
+        "starter": {
+          "name": "Travon Walker",
+          "expiring": true
+        },
+        "backup": {
+          "name": "Danny Striggow",
+          "expiring": false
+        }
+      },
+      {
+        "pos": "LB",
+        "starter": {
+          "name": "Foyesade Oluokun",
+          "expiring": false
+        },
+        "backup": {
+          "name": "Dennis Gardeck",
+          "expiring": true
+        }
+      },
+      {
+        "pos": "LB",
+        "starter": {
+          "name": "Devin Lloyd",
+          "expiring": true
+        },
+        "backup": {
+          "name": "Branson Combs",
+          "expiring": false
+        }
+      },
+      {
+        "pos": "LCB",
+        "starter": {
+          "name": "Jarrian Jones",
+          "expiring": false
+        },
+        "backup": {
+          "name": "Keith Taylor",
+          "expiring": true
+        }
+      },
+      {
+        "pos": "RCB",
+        "starter": {
+          "name": "Greg Newsome II",
+          "expiring": true
+        },
+        "backup": {
+          "name": "Christian Braswell",
+          "expiring": true
+        }
+      },
+      {
+        "pos": "NB",
+        "starter": {
+          "name": "Montaric Brown",
+          "expiring": true
+        },
+        "backup": {
+          "name": "Jabbar Muhammad",
+          "expiring": false
+        }
+      },
+      {
+        "pos": "FS",
+        "starter": {
+          "name": "Andrew Wingard",
+          "expiring": true
+        },
+        "backup": {
+          "name": "Antonio Johnson",
+          "expiring": false
+        }
+      },
+      {
+        "pos": "SS",
+        "starter": {
+          "name": "Eric Murray",
+          "expiring": false
+        },
+        "backup": {
+          "name": "Rayuan Lane III",
+          "expiring": false
         }
       }
     ]
