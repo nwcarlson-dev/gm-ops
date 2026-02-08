@@ -1,13 +1,12 @@
 {
   "meta": {
-    "generated": "2026-02-08T03:06:02.680Z",
+    "generated": "2026-02-08T03:18:46.918Z",
     "description": "Auto-generated team needs with archetypes and contextual notes. Re-run scripts/build_team_needs.js to regenerate.",
     "inputs": [
       "nflmdd_team_needs_2026.json",
       "team_schemes.json",
       "depth_charts_2026.json",
-      "cap_summary_2026.json",
-      "player_trade_values.json",
+      "contracts.csv",
       "team_intel.json"
     ]
   },
@@ -39,6 +38,18 @@
           "archetype": "Centerfield",
           "priority": "medium",
           "note": "Jalen Thompson on expiring contract."
+        }
+      ],
+      "depthNeeds": [
+        {
+          "pos": "DL",
+          "archetype": "Penetrator",
+          "priority": "low"
+        },
+        {
+          "pos": "LB",
+          "archetype": "Sideline-to-Sideline",
+          "priority": "low"
         }
       ]
     },
@@ -76,6 +87,33 @@
           "priority": "high",
           "note": "LaCale London, David Onyemata on expiring contracts."
         }
+      ],
+      "depthNeeds": [
+        {
+          "pos": "QB",
+          "archetype": "Pocket Passer",
+          "priority": "low"
+        },
+        {
+          "pos": "RB",
+          "archetype": "Zone Runner",
+          "priority": "low"
+        },
+        {
+          "pos": "IOL",
+          "archetype": "Athletic",
+          "priority": "low"
+        },
+        {
+          "pos": "LB",
+          "archetype": "Blitzer",
+          "priority": "low"
+        },
+        {
+          "pos": "CB",
+          "archetype": "Man-Press",
+          "priority": "low"
+        }
       ]
     },
     "BAL": {
@@ -90,7 +128,8 @@
           "pos": "IOL",
           "archetype": "Road Grader",
           "priority": "medium",
-          "note": "Linderbaum FA bound (no 5th-year option). May lose star center. Tyler Linderbaum, Daniel Faalele on expiring contracts."
+          "note": "Linderbaum FA bound (no 5th-year option). May lose star center. Tyler Linderbaum, Daniel Faalele on expiring contracts.",
+          "count": 2
         }
       ],
       "defNeeds": [
@@ -112,6 +151,33 @@
           "priority": "medium",
           "note": "Man-press corner needed for Weaver's disguised looks. Chidobe Awuzie, Marlon Humphrey on expiring contracts."
         }
+      ],
+      "depthNeeds": [
+        {
+          "pos": "QB",
+          "archetype": "Dual-Threat",
+          "priority": "low"
+        },
+        {
+          "pos": "RB",
+          "archetype": "Power",
+          "priority": "low"
+        },
+        {
+          "pos": "TE",
+          "archetype": "Inline Blocker",
+          "priority": "low"
+        },
+        {
+          "pos": "OT",
+          "archetype": "Mauler",
+          "priority": "low"
+        },
+        {
+          "pos": "LB",
+          "archetype": "Sideline-to-Sideline",
+          "priority": "low"
+        }
       ]
     },
     "BUF": {
@@ -126,7 +192,8 @@
           "pos": "IOL",
           "archetype": "Athletic",
           "priority": "medium",
-          "note": "David Edwards, Connor McGovern on expiring contracts."
+          "note": "David Edwards, Connor McGovern on expiring contracts.",
+          "count": 2
         }
       ],
       "defNeeds": [
@@ -147,6 +214,18 @@
           "archetype": "Ballhawk",
           "priority": "medium",
           "note": "Jordan Poyer on expiring contract."
+        }
+      ],
+      "depthNeeds": [
+        {
+          "pos": "QB",
+          "archetype": "Dual-Threat",
+          "priority": "low"
+        },
+        {
+          "pos": "OT",
+          "archetype": "Pass Protector",
+          "priority": "low"
         }
       ]
     },
@@ -171,6 +250,33 @@
           "archetype": "3-Tech",
           "priority": "high",
           "note": "Need a 3-tech penetrator. Defensive interior is thin."
+        }
+      ],
+      "depthNeeds": [
+        {
+          "pos": "RB",
+          "archetype": "Pass Catcher",
+          "priority": "low"
+        },
+        {
+          "pos": "WR",
+          "archetype": "Route Technician",
+          "priority": "low"
+        },
+        {
+          "pos": "EDGE",
+          "archetype": "Power",
+          "priority": "low"
+        },
+        {
+          "pos": "LB",
+          "archetype": "Run Stuffer",
+          "priority": "low"
+        },
+        {
+          "pos": "CB",
+          "archetype": "Press-Man",
+          "priority": "low"
         }
       ]
     },
@@ -202,6 +308,28 @@
           "priority": "high",
           "note": "Brisker and Byard both FAs. Safety room gutted. Jaquan Brisker on expiring contract."
         }
+      ],
+      "depthNeeds": [
+        {
+          "pos": "WR",
+          "archetype": "Contested Catch",
+          "priority": "low"
+        },
+        {
+          "pos": "IOL",
+          "archetype": "Road Grader",
+          "priority": "low"
+        },
+        {
+          "pos": "LB",
+          "archetype": "Sideline-to-Sideline",
+          "priority": "low"
+        },
+        {
+          "pos": "CB",
+          "archetype": "Press-Man",
+          "priority": "low"
+        }
       ]
     },
     "CIN": {
@@ -232,6 +360,18 @@
           "priority": "medium",
           "note": "Defensive line needs an anchor against the run."
         }
+      ],
+      "depthNeeds": [
+        {
+          "pos": "QB",
+          "archetype": "Dual-Threat",
+          "priority": "low"
+        },
+        {
+          "pos": "TE",
+          "archetype": "Move",
+          "priority": "low"
+        }
       ]
     },
     "CLE": {
@@ -246,7 +386,8 @@
           "pos": "IOL",
           "archetype": "Road Grader",
           "priority": "high",
-          "note": "Joel Bitonio, Teven Jenkins on expiring contracts."
+          "note": "Joel Bitonio, Teven Jenkins on expiring contracts.",
+          "count": 2
         },
         {
           "pos": "QB",
@@ -260,13 +401,41 @@
           "pos": "S",
           "archetype": "Centerfield",
           "priority": "medium",
-          "note": "Ronnie Hickman, Grant Delpit on expiring contracts."
+          "note": "Ronnie Hickman, Grant Delpit on expiring contracts.",
+          "count": 2
         },
         {
           "pos": "LB",
           "archetype": "Coverage",
           "priority": "medium",
           "note": "Need sideline-to-sideline LB to replace Schwartz-era scheme losses. Mohamoud Diabate, Jerome Baker on expiring contracts."
+        }
+      ],
+      "depthNeeds": [
+        {
+          "pos": "WR",
+          "archetype": "Field Stretcher",
+          "priority": "low"
+        },
+        {
+          "pos": "TE",
+          "archetype": "Seam Stretcher",
+          "priority": "low"
+        },
+        {
+          "pos": "EDGE",
+          "archetype": "Technical",
+          "priority": "low"
+        },
+        {
+          "pos": "DL",
+          "archetype": "Anchor",
+          "priority": "low"
+        },
+        {
+          "pos": "CB",
+          "archetype": "Zone",
+          "priority": "low"
         }
       ]
     },
@@ -289,7 +458,20 @@
           "pos": "S",
           "archetype": "Centerfield",
           "priority": "medium",
-          "note": "Box safety needed for Parker's Fangio Two-High scheme. Malik Hooker, Donovan Wilson on expiring contracts."
+          "note": "Box safety needed for Parker's Fangio Two-High scheme. Malik Hooker, Donovan Wilson on expiring contracts.",
+          "count": 2
+        }
+      ],
+      "depthNeeds": [
+        {
+          "pos": "WR",
+          "archetype": "Field Stretcher",
+          "priority": "low"
+        },
+        {
+          "pos": "OT",
+          "archetype": "Pass Protector",
+          "priority": "low"
         }
       ]
     },
@@ -320,6 +502,38 @@
           "archetype": "Ballhawk",
           "priority": "medium",
           "note": "P.J. Locke on expiring contract."
+        }
+      ],
+      "depthNeeds": [
+        {
+          "pos": "QB",
+          "archetype": "Pocket Passer",
+          "priority": "low"
+        },
+        {
+          "pos": "RB",
+          "archetype": "Pass Catcher",
+          "priority": "low"
+        },
+        {
+          "pos": "WR",
+          "archetype": "Route Technician",
+          "priority": "low"
+        },
+        {
+          "pos": "OT",
+          "archetype": "Pass Protector",
+          "priority": "low"
+        },
+        {
+          "pos": "IOL",
+          "archetype": "Pivot",
+          "priority": "low"
+        },
+        {
+          "pos": "EDGE",
+          "archetype": "Power",
+          "priority": "low"
         }
       ]
     },
@@ -363,6 +577,33 @@
           "priority": "medium",
           "note": "Avonte Maddox on expiring contract."
         }
+      ],
+      "depthNeeds": [
+        {
+          "pos": "QB",
+          "archetype": "Pocket Passer",
+          "priority": "low"
+        },
+        {
+          "pos": "RB",
+          "archetype": "Dynamic Playmaker",
+          "priority": "low"
+        },
+        {
+          "pos": "WR",
+          "archetype": "Route Technician",
+          "priority": "low"
+        },
+        {
+          "pos": "DL",
+          "archetype": "Penetrator",
+          "priority": "low"
+        },
+        {
+          "pos": "LB",
+          "archetype": "Thumper",
+          "priority": "low"
+        }
       ]
     },
     "GB": {
@@ -393,6 +634,28 @@
           "priority": "medium",
           "note": "Need a thumper LB. 4th-most rushing yards allowed between tackles. Quay Walker on expiring contract."
         }
+      ],
+      "depthNeeds": [
+        {
+          "pos": "QB",
+          "archetype": "Pocket Passer",
+          "priority": "low"
+        },
+        {
+          "pos": "RB",
+          "archetype": "Zone Runner",
+          "priority": "low"
+        },
+        {
+          "pos": "TE",
+          "archetype": "Move",
+          "priority": "low"
+        },
+        {
+          "pos": "EDGE",
+          "archetype": "Power",
+          "priority": "low"
+        }
       ]
     },
     "HOU": {
@@ -407,7 +670,8 @@
           "pos": "IOL",
           "archetype": "Zone Blocker",
           "priority": "high",
-          "note": "Interior OL remains weak. Need a pivot for Shanahan concepts. Tytus Howard, Ed Ingram on expiring contracts."
+          "note": "Interior OL remains weak. Need a pivot for Shanahan concepts. Tytus Howard, Ed Ingram on expiring contracts.",
+          "count": 2
         },
         {
           "pos": "RB",
@@ -422,6 +686,33 @@
           "archetype": "Penetrator",
           "priority": "high",
           "note": "Tommy Togiai, Sheldon Rankins on expiring contracts."
+        }
+      ],
+      "depthNeeds": [
+        {
+          "pos": "QB",
+          "archetype": "Pocket Passer",
+          "priority": "low"
+        },
+        {
+          "pos": "EDGE",
+          "archetype": "Speed Rusher",
+          "priority": "low"
+        },
+        {
+          "pos": "LB",
+          "archetype": "Thumper",
+          "priority": "low"
+        },
+        {
+          "pos": "CB",
+          "archetype": "Technical",
+          "priority": "low"
+        },
+        {
+          "pos": "S",
+          "archetype": "Hybrid",
+          "priority": "low"
         }
       ]
     },
@@ -453,6 +744,28 @@
           "priority": "medium",
           "note": "Gus Bradley left for Titans DC. Need press-man corners for replacement scheme."
         }
+      ],
+      "depthNeeds": [
+        {
+          "pos": "WR",
+          "archetype": "Field Stretcher",
+          "priority": "low"
+        },
+        {
+          "pos": "TE",
+          "archetype": "Move",
+          "priority": "low"
+        },
+        {
+          "pos": "DL",
+          "archetype": "Anchor",
+          "priority": "low"
+        },
+        {
+          "pos": "LB",
+          "archetype": "Coverage",
+          "priority": "low"
+        }
       ]
     },
     "JAX": {
@@ -461,13 +774,15 @@
           "pos": "OT",
           "archetype": "Pass Protector",
           "priority": "high",
-          "note": "Looking for depth pieces. Contender filling gaps."
+          "note": "Looking for depth pieces. Contender filling gaps.",
+          "count": 2
         },
         {
           "pos": "IOL",
           "archetype": "Pivot",
           "priority": "high",
-          "note": ""
+          "note": "",
+          "count": 3
         },
         {
           "pos": "RB",
@@ -493,7 +808,8 @@
           "pos": "S",
           "archetype": "Hybrid",
           "priority": "high",
-          "note": "Need a ballhawk safety to complement the secondary."
+          "note": "Need a ballhawk safety to complement the secondary.",
+          "count": 2
         },
         {
           "pos": "EDGE",
@@ -505,9 +821,11 @@
           "pos": "CB",
           "archetype": "Press-Man",
           "priority": "medium",
-          "note": "Need a man-press corner after acquiring Sauce Gardner (scheme fit matters)."
+          "note": "Need a man-press corner after acquiring Sauce Gardner (scheme fit matters).",
+          "count": 2
         }
-      ]
+      ],
+      "depthNeeds": []
     },
     "KC": {
       "offNeeds": [
@@ -543,6 +861,28 @@
           "priority": "medium",
           "note": "Bryan Cook on expiring contract."
         }
+      ],
+      "depthNeeds": [
+        {
+          "pos": "IOL",
+          "archetype": "Pivot",
+          "priority": "low"
+        },
+        {
+          "pos": "EDGE",
+          "archetype": "Power",
+          "priority": "low"
+        },
+        {
+          "pos": "DL",
+          "archetype": "Two-Gap",
+          "priority": "low"
+        },
+        {
+          "pos": "CB",
+          "archetype": "Zone",
+          "priority": "low"
+        }
       ]
     },
     "LV": {
@@ -563,7 +903,8 @@
           "pos": "IOL",
           "archetype": "Road Grader",
           "priority": "medium",
-          "note": "Dylan Parham, Will Putnam on expiring contracts."
+          "note": "Dylan Parham, Will Putnam on expiring contracts.",
+          "count": 2
         }
       ],
       "defNeeds": [
@@ -584,6 +925,28 @@
           "archetype": "Centerfield",
           "priority": "medium",
           "note": "Lonnie Johnson Jr. on expiring contract."
+        }
+      ],
+      "depthNeeds": [
+        {
+          "pos": "RB",
+          "archetype": "Workhorse",
+          "priority": "low"
+        },
+        {
+          "pos": "WR",
+          "archetype": "YAC Monster",
+          "priority": "low"
+        },
+        {
+          "pos": "TE",
+          "archetype": "Inline Blocker",
+          "priority": "low"
+        },
+        {
+          "pos": "EDGE",
+          "archetype": "Speed Rusher",
+          "priority": "low"
         }
       ]
     },
@@ -615,6 +978,38 @@
           "priority": "high",
           "note": "Need a penetrator up front to complement the pass rush."
         }
+      ],
+      "depthNeeds": [
+        {
+          "pos": "QB",
+          "archetype": "Pocket Passer",
+          "priority": "low"
+        },
+        {
+          "pos": "RB",
+          "archetype": "Zone Runner",
+          "priority": "low"
+        },
+        {
+          "pos": "EDGE",
+          "archetype": "Power",
+          "priority": "low"
+        },
+        {
+          "pos": "LB",
+          "archetype": "Coverage",
+          "priority": "low"
+        },
+        {
+          "pos": "CB",
+          "archetype": "Technical",
+          "priority": "low"
+        },
+        {
+          "pos": "S",
+          "archetype": "Box",
+          "priority": "low"
+        }
       ]
     },
     "LAR": {
@@ -638,6 +1033,28 @@
           "archetype": "Penetrator",
           "priority": "medium",
           "note": ""
+        }
+      ],
+      "depthNeeds": [
+        {
+          "pos": "WR",
+          "archetype": "YAC Monster",
+          "priority": "low"
+        },
+        {
+          "pos": "TE",
+          "archetype": "Move",
+          "priority": "low"
+        },
+        {
+          "pos": "OT",
+          "archetype": "Zone Blocker",
+          "priority": "low"
+        },
+        {
+          "pos": "IOL",
+          "archetype": "Athletic",
+          "priority": "low"
         }
       ]
     },
@@ -681,6 +1098,13 @@
           "priority": "medium",
           "note": "Need a two-gap nose to anchor Duggan's Cover 3 front. Jordan Phillips on expiring contract."
         }
+      ],
+      "depthNeeds": [
+        {
+          "pos": "LB",
+          "archetype": "Run Stuffer",
+          "priority": "low"
+        }
       ]
     },
     "MIN": {
@@ -710,6 +1134,13 @@
           "archetype": "Centerfield",
           "priority": "high",
           "note": "Harrison Smith retiring at 37. Era-defining safety leaving a void. Harrison Smith on expiring contract."
+        }
+      ],
+      "depthNeeds": [
+        {
+          "pos": "LB",
+          "archetype": "Coverage",
+          "priority": "low"
         }
       ]
     },
@@ -747,6 +1178,23 @@
           "priority": "medium",
           "note": "Jaylinn Hawkins on expiring contract."
         }
+      ],
+      "depthNeeds": [
+        {
+          "pos": "TE",
+          "archetype": "Seam Stretcher",
+          "priority": "low"
+        },
+        {
+          "pos": "LB",
+          "archetype": "Thumper",
+          "priority": "low"
+        },
+        {
+          "pos": "CB",
+          "archetype": "Physical",
+          "priority": "low"
+        }
       ]
     },
     "NO": {
@@ -777,6 +1225,23 @@
           "priority": "high",
           "note": ""
         }
+      ],
+      "depthNeeds": [
+        {
+          "pos": "TE",
+          "archetype": "Seam Stretcher",
+          "priority": "low"
+        },
+        {
+          "pos": "OT",
+          "archetype": "Pass Protector",
+          "priority": "low"
+        },
+        {
+          "pos": "S",
+          "archetype": "Centerfield",
+          "priority": "low"
+        }
       ]
     },
     "NYG": {
@@ -797,7 +1262,8 @@
           "pos": "IOL",
           "archetype": "Pivot",
           "priority": "medium",
-          "note": "Austin Schlottmann, Greg Van Roten on expiring contracts."
+          "note": "Austin Schlottmann, Greg Van Roten on expiring contracts.",
+          "count": 2
         }
       ],
       "defNeeds": [
@@ -824,6 +1290,13 @@
           "archetype": "Versatile",
           "priority": "medium",
           "note": ""
+        }
+      ],
+      "depthNeeds": [
+        {
+          "pos": "TE",
+          "archetype": "Seam Stretcher",
+          "priority": "low"
         }
       ]
     },
@@ -861,6 +1334,23 @@
           "priority": "medium",
           "note": "Haason Reddick departed. Pass rush needs rebuilding."
         }
+      ],
+      "depthNeeds": [
+        {
+          "pos": "TE",
+          "archetype": "Move",
+          "priority": "low"
+        },
+        {
+          "pos": "OT",
+          "archetype": "Mauler",
+          "priority": "low"
+        },
+        {
+          "pos": "LB",
+          "archetype": "Coverage",
+          "priority": "low"
+        }
       ]
     },
     "PHI": {
@@ -895,7 +1385,20 @@
           "pos": "S",
           "archetype": "Centerfield",
           "priority": "medium",
-          "note": "Marcus Epps, Reed Blankenship on expiring contracts."
+          "note": "Marcus Epps, Reed Blankenship on expiring contracts.",
+          "count": 2
+        }
+      ],
+      "depthNeeds": [
+        {
+          "pos": "IOL",
+          "archetype": "Athletic",
+          "priority": "low"
+        },
+        {
+          "pos": "LB",
+          "archetype": "Coverage",
+          "priority": "low"
         }
       ]
     },
@@ -931,7 +1434,30 @@
           "pos": "S",
           "archetype": "Box",
           "priority": "medium",
-          "note": "Chuck Clark, Kyle Dugger on expiring contracts."
+          "note": "Chuck Clark, Kyle Dugger on expiring contracts.",
+          "count": 2
+        }
+      ],
+      "depthNeeds": [
+        {
+          "pos": "RB",
+          "archetype": "Pass Catcher",
+          "priority": "low"
+        },
+        {
+          "pos": "TE",
+          "archetype": "Seam Stretcher",
+          "priority": "low"
+        },
+        {
+          "pos": "OT",
+          "archetype": "Pass Protector",
+          "priority": "low"
+        },
+        {
+          "pos": "EDGE",
+          "archetype": "Explosive",
+          "priority": "low"
         }
       ]
     },
@@ -969,6 +1495,23 @@
           "priority": "medium",
           "note": "Bosa and Williams both tore ACLs. Dead last in sacks (20). Sam Okuayinonu on expiring contract."
         }
+      ],
+      "depthNeeds": [
+        {
+          "pos": "DL",
+          "archetype": "Penetrator",
+          "priority": "low"
+        },
+        {
+          "pos": "LB",
+          "archetype": "Coverage",
+          "priority": "low"
+        },
+        {
+          "pos": "CB",
+          "archetype": "Man-Press",
+          "priority": "low"
+        }
       ]
     },
     "SEA": {
@@ -998,6 +1541,18 @@
           "archetype": "Explosive",
           "priority": "medium",
           "note": "Need an explosive edge rusher in Durde's 3-4."
+        }
+      ],
+      "depthNeeds": [
+        {
+          "pos": "WR",
+          "archetype": "Route Technician",
+          "priority": "low"
+        },
+        {
+          "pos": "DL",
+          "archetype": "Two-Gap",
+          "priority": "low"
         }
       ]
     },
@@ -1041,6 +1596,28 @@
           "priority": "medium",
           "note": ""
         }
+      ],
+      "depthNeeds": [
+        {
+          "pos": "QB",
+          "archetype": "Pocket Passer",
+          "priority": "low"
+        },
+        {
+          "pos": "RB",
+          "archetype": "Zone Runner",
+          "priority": "low"
+        },
+        {
+          "pos": "CB",
+          "archetype": "Press-Man",
+          "priority": "low"
+        },
+        {
+          "pos": "S",
+          "archetype": "Hybrid",
+          "priority": "low"
+        }
       ]
     },
     "TEN": {
@@ -1057,7 +1634,30 @@
           "pos": "CB",
           "archetype": "Press-Man",
           "priority": "medium",
-          "note": "Saleh's Wide-9 demands press-man corners. Current CBs don't fit. Darrell Baker Jr., Kaiir Elam, Kemon Hall on expiring contracts."
+          "note": "Saleh's Wide-9 demands press-man corners. Current CBs don't fit. Darrell Baker Jr., Kaiir Elam, Kemon Hall on expiring contracts.",
+          "count": 2
+        }
+      ],
+      "depthNeeds": [
+        {
+          "pos": "QB",
+          "archetype": "Pocket Passer",
+          "priority": "low"
+        },
+        {
+          "pos": "OT",
+          "archetype": "Mauler",
+          "priority": "low"
+        },
+        {
+          "pos": "EDGE",
+          "archetype": "Speed Rusher",
+          "priority": "low"
+        },
+        {
+          "pos": "LB",
+          "archetype": "Coverage",
+          "priority": "low"
         }
       ]
     },
@@ -1094,6 +1694,18 @@
           "archetype": "Technical",
           "priority": "medium",
           "note": "Secondary burned regularly. Need a technical corner. Noah Igbinoghene on expiring contract."
+        }
+      ],
+      "depthNeeds": [
+        {
+          "pos": "DL",
+          "archetype": "Penetrator",
+          "priority": "low"
+        },
+        {
+          "pos": "LB",
+          "archetype": "Blitzer",
+          "priority": "low"
         }
       ]
     }

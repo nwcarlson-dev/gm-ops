@@ -4330,9 +4330,10 @@
                     const checkmark = filled
                         ? '<span style="color: var(--success); margin-left: auto;">&#10003;</span>'
                         : "";
+                    const posLabel = n.count && n.count > 1 ? `${n.pos} (${n.count})` : n.pos;
                     return `
                     <div class="need-item ${n.priority} ${expanded} ${filledClass}" data-pos="${n.pos}">
-                        <div class="need-pos">${n.pos}</div>
+                        <div class="need-pos">${posLabel}</div>
                         <div style="flex: 1;">
                             <div class="need-content" onclick="toggleNeed('${n.pos}')">
                                 <div style="display: flex; align-items: center; justify-content: space-between;">
@@ -4566,6 +4567,8 @@
                     const schemes = teamSchemes[teamName] || { offScheme: "TBD", defScheme: "TBD" };
                     const needs = allTeamNeeds[abbr] || { primary: [], secondary: [] };
                     const allNeeds = [...(needs.primary || []), ...(needs.secondary || [])];
+                    const detailed = detailedTeamNeeds[abbr] || {};
+                    const depthNeedPositions = (detailed.depthNeeds || []).map(d => d.pos);
 
                     const scoredProspects = prospects.map(p => {
                         const consensusRank = p.consensus_rank || 300;
@@ -4590,6 +4593,8 @@
                             needBoost = 8;
                         } else if (needs.secondary && needs.secondary.includes(needCategory)) {
                             needBoost = 4;
+                        } else if (depthNeedPositions.includes(needCategory)) {
+                            needBoost = 2;
                         }
 
                         const devCert = p.developmentCertainty?.score ?? 0.5;
@@ -5939,12 +5944,12 @@
                             userTeam.offNeeds = (detailed.offNeeds || []).map(n => ({
                                 pos: n.pos, archetype: n.archetype || DEFAULT_ARCHETYPES[n.pos] || 'Versatile',
                                 priority: n.priority || 'medium', skills: n.skills || [], traits: n.traits || [],
-                                note: n.note || ''
+                                note: n.note || '', count: n.count || 1
                             }));
                             userTeam.defNeeds = (detailed.defNeeds || []).map(n => ({
                                 pos: n.pos, archetype: n.archetype || DEFAULT_ARCHETYPES[n.pos] || 'Versatile',
                                 priority: n.priority || 'medium', skills: n.skills || [], traits: n.traits || [],
-                                note: n.note || ''
+                                note: n.note || '', count: n.count || 1
                             }));
                         } else {
                             const jsonNeeds = allTeamNeeds[userTeam.abbr];
@@ -5972,6 +5977,7 @@
                                 if (d) {
                                     if (!n.archetype) n.archetype = d.archetype || DEFAULT_ARCHETYPES[n.pos] || 'Versatile';
                                     if (!n.note) n.note = d.note || '';
+                                    if (d.count && d.count > 1) n.count = d.count;
                                 }
                                 if (!n.archetype) n.archetype = DEFAULT_ARCHETYPES[n.pos] || 'Versatile';
                             });

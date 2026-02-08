@@ -263,6 +263,63 @@ function isPositionCovered(abbr, pos) {
   return secure.length >= minStarters;
 }
 
+function getStarterOpenings(abbr, pos) {
+  const starters = getDepthChartStarters(abbr, pos);
+  const minStarters = MULTI_STARTER[pos] || 1;
+  const ageCutoff = AGING_THRESHOLD[pos] || 32;
+  const secure = starters.filter(p => !p.expiring && (!p.age || p.age < ageCutoff));
+  const openings = minStarters - secure.length;
+  return openings > 0 ? openings : 1;
+}
+
+function getDepthChartBackups(abbr, pos) {
+  const teamDC = depthCharts[abbr];
+  if (!teamDC) return [];
+
+  const backups = [];
+  const sides = [teamDC.offense || [], teamDC.defense || []];
+
+  for (const side of sides) {
+    for (const slot of side) {
+      const slotPos = normalizePos(slot.pos);
+      if (slotPos === pos && slot.backup) {
+        const ageKey = `${abbr}:${slot.backup.name}`;
+        backups.push({
+          name: slot.backup.name,
+          expiring: slot.backup.expiring || false,
+          age: playerAgeMap[ageKey] || null
+        });
+      }
+    }
+  }
+
+  return backups;
+}
+
+function getDepthNeeds(abbr, offScheme, defScheme) {
+  const allPositions = [...OFF_POSITIONS, ...DEF_POSITIONS];
+  const depthNeeds = [];
+
+  for (const pos of allPositions) {
+    if (!isPositionCovered(abbr, pos)) continue;
+
+    const backups = getDepthChartBackups(abbr, pos);
+    if (backups.length === 0) continue;
+
+    const ageCutoff = AGING_THRESHOLD[pos] || 32;
+    const secureBackups = backups.filter(b => !b.expiring && (!b.age || b.age < ageCutoff));
+    const totalBackupSlots = backups.length;
+    const expiringBackups = backups.filter(b => b.expiring);
+
+    if (secureBackups.length < totalBackupSlots && expiringBackups.length > 0) {
+      const archetype = findSchemeArchetype(offScheme, defScheme, pos);
+      depthNeeds.push({ pos, archetype, priority: 'low' });
+    }
+  }
+
+  return depthNeeds;
+}
+
 function buildTeamNeeds(abbr) {
   const teamName = ABBR_TO_NAME[abbr];
   if (!teamName) return null;
@@ -293,7 +350,10 @@ function buildTeamNeeds(abbr) {
 
     const note = allNotes.join(' ');
 
-    return { pos, archetype, priority, note };
+    const count = getStarterOpenings(abbr, pos);
+    const need = { pos, archetype, priority, note };
+    if (count > 1) need.count = count;
+    return need;
   }
 
   function addNeed(pos, priority) {
@@ -323,14 +383,18 @@ function buildTeamNeeds(abbr) {
     console.log(`  ${abbr}: Removed ${removedCount.primary} primary + ${removedCount.secondary} secondary needs (roster strength)`);
   }
 
-  return { offNeeds, defNeeds };
+  const starterPositions = new Set([...offNeeds, ...defNeeds].map(n => n.pos));
+  const depthNeeds = getDepthNeeds(abbr, offScheme, defScheme)
+    .filter(d => !starterPositions.has(d.pos));
+
+  return { offNeeds, defNeeds, depthNeeds };
 }
 
 const output = {
   meta: {
     generated: new Date().toISOString(),
     description: 'Auto-generated team needs with archetypes and contextual notes. Re-run scripts/build_team_needs.js to regenerate.',
-    inputs: ['nflmdd_team_needs_2026.json', 'team_schemes.json', 'depth_charts_2026.json', 'cap_summary_2026.json', 'player_trade_values.json', 'team_intel.json']
+    inputs: ['nflmdd_team_needs_2026.json', 'team_schemes.json', 'depth_charts_2026.json', 'contracts.csv', 'team_intel.json']
   },
   teams: {}
 };
@@ -338,14 +402,16 @@ const output = {
 const allAbbrs = Object.keys(teams);
 let totalNeeds = 0;
 let needsWithNotes = 0;
+let totalDepthNeeds = 0;
 
 allAbbrs.forEach(abbr => {
   const result = buildTeamNeeds(abbr);
   if (result) {
     output.teams[abbr] = result;
-    const all = [...result.offNeeds, ...result.defNeeds];
-    totalNeeds += all.length;
-    needsWithNotes += all.filter(n => n.note && n.note.trim().length > 0).length;
+    const starterNeeds = [...result.offNeeds, ...result.defNeeds];
+    totalNeeds += starterNeeds.length;
+    needsWithNotes += starterNeeds.filter(n => n.note && n.note.trim().length > 0).length;
+    totalDepthNeeds += (result.depthNeeds || []).length;
   }
 });
 
@@ -354,6 +420,7 @@ fs.writeFileSync(outputPath, JSON.stringify(output, null, 2));
 
 console.log(`Generated team_needs_detailed.json`);
 console.log(`  Teams: ${Object.keys(output.teams).length}`);
-console.log(`  Total needs: ${totalNeeds}`);
-console.log(`  Needs with notes: ${needsWithNotes} (${Math.round(needsWithNotes/totalNeeds*100)}%)`);
+console.log(`  Starter needs: ${totalNeeds}`);
+console.log(`  Starter needs with notes: ${needsWithNotes} (${Math.round(needsWithNotes/totalNeeds*100)}%)`);
+console.log(`  Depth needs: ${totalDepthNeeds}`);
 console.log(`  Output: ${outputPath}`);
