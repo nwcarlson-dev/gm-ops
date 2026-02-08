@@ -83,10 +83,13 @@ function pffGradeToBase(pffGrade) {
 function tierToBase(tier) {
   switch (tier) {
     case 'elite': return 68;
-    case 'above_average': return 58;
+    case 'above_average': return 60;
+    case 'starter': return 55;
     case 'average': return 50;
     case 'below_average': return 42;
+    case 'bridge': return 42;
     case 'developing': return 38;
+    case 'backup': return 35;
     default: return 45;
   }
 }
@@ -518,6 +521,86 @@ function validateSchemeWeights(schemes) {
   return errors;
 }
 
+function correctTiersAndRoles(db) {
+  let corrections = 0;
+  const correctionLog = [];
+
+  for (const [teamCode, players] of Object.entries(db.teams)) {
+    const byPosition = {};
+    for (const player of players) {
+      const pos = player.position;
+      if (!byPosition[pos]) byPosition[pos] = [];
+      byPosition[pos].push(player);
+    }
+
+    for (const player of players) {
+      const maddenOvr = player.madden ? player.madden.ovr : null;
+      const pffGrade = player.pff ? player.pff.grade : null;
+      const apy = player.contract ? player.contract.apy : 0;
+
+      const signalScore = (maddenOvr || 0) * 0.4 + (pffGrade || 0) * 0.4 + Math.min(apy * 0.8, 20) * 1.0;
+
+      const posGroup = byPosition[player.position] || [];
+      const posSignals = posGroup.map(p => {
+        const mo = p.madden ? p.madden.ovr : 0;
+        const pg = p.pff ? p.pff.grade : 0;
+        const a = p.contract ? p.contract.apy : 0;
+        return { player: p, score: mo * 0.4 + pg * 0.4 + Math.min(a * 0.8, 20) * 1.0 };
+      }).sort((a, b) => b.score - a.score);
+
+      const rank = posSignals.findIndex(s => s.player === player);
+      const isTopAtPos = rank === 0;
+
+      const oldRole = player.role;
+      const oldTier = player.performanceTier;
+
+      if (player.role === 'backup' && isTopAtPos && posGroup.length > 1 && signalScore > 50) {
+        player.role = 'starter';
+        correctionLog.push(`  ${player.name} (${teamCode} ${player.position}): role backup->starter (signal: ${Math.round(signalScore)}, Mad:${maddenOvr}, PFF:${pffGrade})`);
+      }
+
+      if (maddenOvr == null && pffGrade == null) continue;
+
+      let correctedTier = null;
+
+      if ((maddenOvr >= 90 && (pffGrade == null || pffGrade >= 70)) ||
+          (pffGrade >= 85 && (maddenOvr == null || maddenOvr >= 80)) ||
+          (maddenOvr >= 85 && pffGrade >= 80)) {
+        correctedTier = 'elite';
+      } else if ((maddenOvr >= 80 && (pffGrade == null || pffGrade >= 60)) ||
+                 (pffGrade >= 75 && (maddenOvr == null || maddenOvr >= 70))) {
+        correctedTier = 'above_average';
+      } else if ((maddenOvr >= 70 && (pffGrade == null || pffGrade >= 50)) ||
+                 (pffGrade >= 65 && (maddenOvr == null || maddenOvr >= 60))) {
+        correctedTier = 'average';
+      } else if ((maddenOvr >= 60) || (pffGrade >= 55)) {
+        correctedTier = 'below_average';
+      } else {
+        correctedTier = 'developing';
+      }
+
+      const tierRank = { elite: 5, above_average: 4, average: 3, starter: 3, below_average: 2, bridge: 2, developing: 1, backup: 0 };
+      if ((tierRank[correctedTier] || 0) > (tierRank[oldTier] || 0)) {
+        player.performanceTier = correctedTier;
+        corrections++;
+        if (corrections <= 30) {
+          correctionLog.push(`  ${player.name} (${teamCode} ${player.position}): tier ${oldTier}->${correctedTier} (Mad:${maddenOvr}, PFF:${pffGrade})`);
+        }
+      }
+    }
+  }
+
+  console.log(`\n--- Tier/Role Corrections (${corrections} players) ---`);
+  for (const line of correctionLog) {
+    console.log(line);
+  }
+  if (corrections > 30) {
+    console.log(`  ... and ${corrections - 30} more`);
+  }
+
+  return corrections;
+}
+
 function main() {
   console.log('Loading player database...');
   const db = JSON.parse(fs.readFileSync(DB_PATH, 'utf-8'));
@@ -535,6 +618,9 @@ function main() {
   } else {
     console.log('All scheme weight keys are valid.\n');
   }
+
+  console.log('Correcting tier/role assignments using PFF + Madden signals...');
+  correctTiersAndRoles(db);
 
   let totalPlayers = 0;
   let ratingsGenerated = 0;
