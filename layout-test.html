@@ -7,7 +7,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="shared/styles.css">
-    <script src="/node_modules/sortablejs/Sortable.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -275,21 +274,30 @@
             border-color: rgba(255,255,255,0.08);
         }
 
-        .pos-pill.sortable-ghost {
-            opacity: 0.3;
+        .pos-pill.drag-source {
+            opacity: 0.25;
             transform: scale(0.95);
         }
 
-        .pos-pill.sortable-drag {
-            opacity: 1;
+        .pos-pill.drag-clone {
+            position: fixed;
+            pointer-events: none;
+            z-index: 1000;
+            opacity: 0.95;
             transform: scale(1.05);
             box-shadow: 0 8px 24px rgba(0,0,0,0.5);
             border-color: rgba(74, 222, 128, 0.5);
-            z-index: 1000;
+            transition: none;
         }
 
-        .pos-pill.sortable-chosen {
-            border-color: rgba(255,255,255,0.3);
+        .pos-pill.shift-preview {
+            transform: translateX(4px);
+            opacity: 0.6;
+        }
+
+        .pos-pill.insert-target {
+            border-color: rgba(74, 222, 128, 0.5);
+            box-shadow: inset 0 0 0 1px rgba(74, 222, 128, 0.15);
         }
 
         .pos-pill.starter {
@@ -458,7 +466,7 @@
             return compat;
         }
 
-        function buildTab(tabEl, data, groupName) {
+        function buildTab(tabEl, data) {
             const labelsCol = document.createElement('div');
             labelsCol.className = 'labels-col';
 
@@ -516,7 +524,7 @@
             tabEl.appendChild(labelsCol);
             tabEl.appendChild(pillsArea);
 
-            initSortable(tabEl, data, groupName);
+            initDragDrop(tabEl);
         }
 
         function updateDepthLabels(row) {
@@ -526,35 +534,6 @@
             });
         }
 
-        function normalizeRow(row) {
-            const pills = Array.from(row.querySelectorAll('.pos-pill'));
-            const filled = pills.filter(p => !p.classList.contains('empty-slot'));
-            const empties = pills.filter(p => p.classList.contains('empty-slot'));
-
-            while (filled.length + empties.length < DEPTH_SLOTS) {
-                const empty = createEmptyPill(row.dataset.pos);
-                empties.push(empty);
-            }
-
-            while (filled.length + empties.length > DEPTH_SLOTS) {
-                if (empties.length > 0) {
-                    const last = empties.pop();
-                    if (last.parentNode) last.parentNode.removeChild(last);
-                }
-            }
-
-            row.innerHTML = '';
-            filled.forEach(p => row.appendChild(p));
-            const neededEmpties = DEPTH_SLOTS - filled.length;
-            for (let i = 0; i < neededEmpties; i++) {
-                if (empties[i]) {
-                    row.appendChild(empties[i]);
-                } else {
-                    row.appendChild(createEmptyPill(row.dataset.pos));
-                }
-            }
-        }
-
         function createEmptyPill(pos) {
             const pill = document.createElement('div');
             pill.className = 'pos-pill empty-slot';
@@ -562,74 +541,221 @@
             return pill;
         }
 
-        let currentDragPos = null;
+        function rebuildRow(row) {
+            const pos = row.dataset.pos;
+            const pills = Array.from(row.querySelectorAll('.pos-pill'));
+            const filled = pills.filter(p => !p.classList.contains('empty-slot'));
+            row.innerHTML = '';
+            filled.forEach(p => row.appendChild(p));
+            for (let i = filled.length; i < DEPTH_SLOTS; i++) {
+                row.appendChild(createEmptyPill(pos));
+            }
+            updateDepthLabels(row);
+        }
 
-        function initSortable(tabEl, data, groupName) {
+        let dragState = null;
+
+        function initDragDrop(tabEl) {
             const rows = tabEl.querySelectorAll('.pill-row');
             const labels = tabEl.querySelectorAll('.pos-label');
 
-            rows.forEach((row) => {
-                Sortable.create(row, {
-                    group: {
-                        name: groupName,
-                        pull: true,
-                        put: function(to) {
-                            const toPos = to.el.dataset.pos;
-                            const fromPos = currentDragPos;
-                            if (!fromPos) return true;
-                            const compat = getCompatiblePositions(fromPos);
-                            return compat.has(toPos);
-                        }
-                    },
-                    animation: 200,
-                    ghostClass: 'sortable-ghost',
-                    dragClass: 'sortable-drag',
-                    chosenClass: 'sortable-chosen',
-                    swapThreshold: 0.5,
-                    fallbackOnBody: true,
-                    filter: '.empty-slot',
-                    onStart: function(evt) {
-                        const draggedPill = evt.item;
-                        currentDragPos = draggedPill.dataset.pos;
-                        const compat = getCompatiblePositions(currentDragPos);
+            rows.forEach(row => {
+                row.addEventListener('mousedown', onMouseDown);
+                row.addEventListener('touchstart', onTouchStart, { passive: false });
+            });
 
-                        rows.forEach((r, i) => {
-                            const rPos = r.dataset.pos;
-                            if (!compat.has(rPos)) {
-                                r.classList.add('drop-ineligible');
-                                labels[i].classList.add('drop-ineligible');
-                            }
-                        });
-                    },
-                    onEnd: function(evt) {
-                        currentDragPos = null;
+            function onTouchStart(e) {
+                const pill = e.target.closest('.pos-pill');
+                if (!pill || pill.classList.contains('empty-slot')) return;
+                e.preventDefault();
+                const touch = e.touches[0];
+                startDrag(pill, touch.clientX, touch.clientY);
+            }
 
-                        rows.forEach((r, i) => {
-                            r.classList.remove('drop-ineligible');
-                            labels[i].classList.remove('drop-ineligible');
-                        });
+            function onMouseDown(e) {
+                if (e.button !== 0) return;
+                const pill = e.target.closest('.pos-pill');
+                if (!pill || pill.classList.contains('empty-slot')) return;
+                e.preventDefault();
+                startDrag(pill, e.clientX, e.clientY);
+            }
 
-                        const fromRow = evt.from;
-                        const toRow = evt.to;
+            function startDrag(pill, startX, startY) {
+                const fromRow = pill.closest('.pill-row');
+                const fromIndex = Array.from(fromRow.children).indexOf(pill);
+                const rect = pill.getBoundingClientRect();
+                const compat = getCompatiblePositions(pill.dataset.pos);
 
-                        if (fromRow !== toRow) {
-                            evt.item.dataset.pos = toRow.dataset.pos;
-                            evt.item.classList.add('cross-move');
-                            setTimeout(() => evt.item.classList.remove('cross-move'), 500);
-                        }
+                const clone = pill.cloneNode(true);
+                clone.classList.add('drag-clone');
+                clone.style.width = rect.width + 'px';
+                clone.style.height = rect.height + 'px';
+                clone.style.left = rect.left + 'px';
+                clone.style.top = rect.top + 'px';
+                document.body.appendChild(clone);
 
-                        normalizeRow(fromRow);
-                        normalizeRow(toRow);
-                        updateDepthLabels(fromRow);
-                        updateDepthLabels(toRow);
+                pill.classList.add('drag-source');
+
+                rows.forEach((r, i) => {
+                    if (!compat.has(r.dataset.pos)) {
+                        r.classList.add('drop-ineligible');
+                        labels[i].classList.add('drop-ineligible');
                     }
                 });
-            });
+
+                dragState = {
+                    pill, clone, fromRow, fromIndex, compat,
+                    offsetX: startX - rect.left,
+                    offsetY: startY - rect.top,
+                    lastHoverRow: null,
+                    lastHoverIndex: -1
+                };
+
+                document.addEventListener('mousemove', onMouseMove);
+                document.addEventListener('mouseup', onMouseUp);
+                document.addEventListener('touchmove', onTouchMove, { passive: false });
+                document.addEventListener('touchend', onTouchEnd);
+            }
+
+            function onTouchMove(e) {
+                e.preventDefault();
+                const touch = e.touches[0];
+                handleMove(touch.clientX, touch.clientY);
+            }
+
+            function onMouseMove(e) {
+                handleMove(e.clientX, e.clientY);
+            }
+
+            function handleMove(clientX, clientY) {
+                if (!dragState) return;
+                const { clone, compat, offsetX, offsetY } = dragState;
+
+                clone.style.left = (clientX - offsetX) + 'px';
+                clone.style.top = (clientY - offsetY) + 'px';
+
+                let hoverRow = null;
+                let hoverIndex = -1;
+
+                rows.forEach(r => {
+                    if (!compat.has(r.dataset.pos)) return;
+                    const rRect = r.getBoundingClientRect();
+                    if (clientY >= rRect.top && clientY <= rRect.bottom &&
+                        clientX >= rRect.left && clientX <= rRect.right) {
+                        hoverRow = r;
+                        const pillEls = Array.from(r.children);
+                        for (let i = 0; i < pillEls.length; i++) {
+                            const pRect = pillEls[i].getBoundingClientRect();
+                            if (clientX < pRect.left + pRect.width / 2) {
+                                hoverIndex = i;
+                                return;
+                            }
+                        }
+                        hoverIndex = pillEls.length;
+                    }
+                });
+
+                if (hoverRow !== dragState.lastHoverRow || hoverIndex !== dragState.lastHoverIndex) {
+                    clearPreview();
+                    dragState.lastHoverRow = hoverRow;
+                    dragState.lastHoverIndex = hoverIndex;
+                    if (hoverRow && hoverIndex >= 0) {
+                        showPreview(hoverRow, hoverIndex);
+                    }
+                }
+            }
+
+            function showPreview(row, insertIndex) {
+                const pills = Array.from(row.children);
+                pills.forEach(p => {
+                    p.classList.remove('shift-preview', 'insert-target');
+                });
+
+                const clampedIndex = Math.min(insertIndex, pills.length - 1);
+                pills[clampedIndex].classList.add('insert-target');
+                for (let i = clampedIndex; i < pills.length; i++) {
+                    if (!pills[i].classList.contains('drag-source')) {
+                        pills[i].classList.add('shift-preview');
+                    }
+                }
+            }
+
+            function clearPreview() {
+                rows.forEach(r => {
+                    Array.from(r.children).forEach(p => {
+                        p.classList.remove('shift-preview', 'insert-target');
+                    });
+                });
+            }
+
+            function onTouchEnd(e) {
+                finishDrag();
+            }
+
+            function onMouseUp(e) {
+                finishDrag();
+            }
+
+            function finishDrag() {
+                if (!dragState) return;
+                const { pill, clone, fromRow, fromIndex, lastHoverRow, lastHoverIndex } = dragState;
+
+                document.removeEventListener('mousemove', onMouseMove);
+                document.removeEventListener('mouseup', onMouseUp);
+                document.removeEventListener('touchmove', onTouchMove);
+                document.removeEventListener('touchend', onTouchEnd);
+
+                clone.remove();
+                pill.classList.remove('drag-source');
+                clearPreview();
+
+                rows.forEach((r, i) => {
+                    r.classList.remove('drop-ineligible');
+                    labels[i].classList.remove('drop-ineligible');
+                });
+
+                if (lastHoverRow && lastHoverIndex >= 0) {
+                    const isCrossRow = lastHoverRow !== fromRow;
+                    let targetIndex = Math.min(lastHoverIndex, DEPTH_SLOTS - 1);
+
+                    if (!isCrossRow) {
+                        if (fromIndex < targetIndex) targetIndex--;
+                    }
+
+                    pill.remove();
+                    if (isCrossRow) {
+                        rebuildRow(fromRow);
+                        pill.dataset.pos = lastHoverRow.dataset.pos;
+                        pill.classList.add('cross-move');
+                        setTimeout(() => pill.classList.remove('cross-move'), 500);
+                    }
+
+                    const allPills = Array.from(lastHoverRow.querySelectorAll('.pos-pill'));
+                    const filled = allPills.filter(p => !p.classList.contains('empty-slot'));
+                    const insertAt = Math.min(targetIndex, filled.length);
+                    filled.splice(insertAt, 0, pill);
+
+                    lastHoverRow.innerHTML = '';
+                    filled.slice(0, DEPTH_SLOTS).forEach(p => lastHoverRow.appendChild(p));
+                    for (let i = Math.min(filled.length, DEPTH_SLOTS); i < DEPTH_SLOTS; i++) {
+                        lastHoverRow.appendChild(createEmptyPill(lastHoverRow.dataset.pos));
+                    }
+
+                    updateDepthLabels(lastHoverRow);
+                    if (!isCrossRow) {
+                        updateDepthLabels(lastHoverRow);
+                    } else {
+                        updateDepthLabels(fromRow);
+                    }
+                }
+
+                dragState = null;
+            }
         }
 
-        buildTab(document.getElementById('tab-offense'), offenseData, 'depth-offense');
-        buildTab(document.getElementById('tab-defense'), defenseData, 'depth-defense');
-        buildTab(document.getElementById('tab-special'), specialData, 'depth-special');
+        buildTab(document.getElementById('tab-offense'), offenseData);
+        buildTab(document.getElementById('tab-defense'), defenseData);
+        buildTab(document.getElementById('tab-special'), specialData);
 
         document.querySelectorAll('.panel-tab').forEach(tab => {
             tab.addEventListener('click', () => {
