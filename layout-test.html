@@ -711,7 +711,7 @@
 
                     const targetShift = targetPills[0].getBoundingClientRect().width + gap;
                     targetPills.forEach((p, i) => {
-                        if (i >= clampedIndex && !p.classList.contains('empty-slot')) {
+                        if (i > clampedIndex && !p.classList.contains('empty-slot')) {
                             p.style.transform = `translateX(${targetShift}px)`;
                             p.classList.add('shift-preview');
                         }
