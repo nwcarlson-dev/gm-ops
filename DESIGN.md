@@ -571,6 +571,84 @@ The player generator (not yet built) will need to produce players with this mini
 ```
 The ceiling function then takes this player and outputs `ceilingSkills`, `ceilingOverall`, and `ceilingSchemeOveralls` — the same way it does for real players. The generator itself will control the distribution of talent, development tiers, and archetypes to produce realistic draft classes with appropriate variance (a few elite prospects, a solid middle tier, and a long tail of later-round depth players).
 
+### Staff Generation System (Future Implementation)
+
+**Status:** Not yet implemented. Documented here for future build-out.
+
+**Concept:** Franchise mode requires generating coaching staff and front office personnel over time — to fill vacancies from firings, retirements, and expansion. Staff members come from two sources:
+
+**Source 1: Retired Player Pipeline**
+Players who retire (or shortly after) can enter coaching or front office roles based on their intellectual and leadership ratings during their playing career. This creates an authentic "former player becomes coach" pipeline that mirrors real NFL dynamics.
+
+**Qualifying Factors for Retired Players → Staff:**
+- **Football IQ** (universal skill, 20-80): Primary driver. Higher IQ → more likely to enter coaching/FO, and at a higher starting competency.
+- **Motor** (universal skill, 20-80): Reflects work ethic and teaching ability — high-motor players make better position coaches.
+- **Position played:** Determines which coaching roles are natural fits. QBs → OC/HC pipeline. Defensive players with high IQ → DC pipeline. OL → OL coach pipeline. Scouts/personnel roles draw from any position.
+- **Years of experience:** Longer careers = more institutional knowledge = higher starting staff rating.
+- **Career performance tier:** Elite/Pro Bowl players are more likely to enter the pipeline and start at higher levels.
+
+**Retired Player → Staff Role Mapping:**
+| Playing Position | Natural Coaching Roles | Natural FO Roles |
+|-----------------|----------------------|-----------------|
+| QB | QB Coach → OC → HC | — |
+| RB | RB Coach | Scout |
+| WR | WR Coach | Scout |
+| TE | TE Coach | Scout |
+| OL (OT/OG/OC) | OL Coach | Scout, Personnel |
+| EDGE/IDL | DL Coach | Scout |
+| LB | LB Coach → DC | Scout, Personnel |
+| CB/S | Secondary Coach → DC | Scout, Personnel |
+| K/P | ST Coordinator | — |
+
+Not every retiring player enters the pipeline — only those exceeding a Football IQ threshold (e.g., 55+) have a chance, with probability scaling with IQ. A player with a 75 Football IQ almost certainly enters the pipeline; a 55 has maybe a 15% chance.
+
+**Source 2: Generated Staff (Non-Player Background)**
+Some coaches and most front office personnel were never NFL players. The generator creates these staff members with:
+- Name, age, background (college coaching, analytics, scouting)
+- Staff ratings on the same 20-80 scale
+- Coaching specialty / scheme affinity (for coaches)
+- A career trajectory that determines whether they improve, plateau, or decline over seasons
+
+**Staff Rating System:**
+Staff members (from either source) share a common rating structure:
+
+```json
+{
+  "name": "...",
+  "role": "Offensive Coordinator",
+  "age": 42,
+  "origin": "retired_player",
+  "formerPlayer": { "name": "...", "position": "QB", "yearsPlayed": 12 },
+  "ratings": {
+    "schemeKnowledge": 65,
+    "playerDevelopment": 58,
+    "gameManagement": 62,
+    "talentEvaluation": 55,
+    "leadership": 70,
+    "adaptability": 60
+  },
+  "schemeAffinity": ["West Coast", "Erhardt Perkins"],
+  "developmentTier": "standard"
+}
+```
+
+**Staff Ratings (20-80 Scale):**
+| Rating | Description | Impact |
+|--------|-------------|--------|
+| Scheme Knowledge | Mastery of their scheme(s) | Scheme effectiveness modifier |
+| Player Development | Ability to develop players at their position | Position group development rate |
+| Game Management | In-game decision quality | Simulation outcome modifier (HC/OC/DC) |
+| Talent Evaluation | Ability to assess player ability | Prospect/FA grade accuracy (FO/scouts) |
+| Leadership | Locker room presence, player morale | Culture system modifier |
+| Adaptability | Ability to adjust schemes to roster | How well scheme weights flex to personnel |
+
+**Career Progression for Staff:**
+- Staff members improve, plateau, or decline based on their `developmentTier` and age.
+- Coordinators can get poached as Head Coaches by other teams (coaching carousel).
+- Position coaches can be promoted to coordinator roles.
+- Scouts can be promoted to Director → Assistant GM → GM.
+- The same `developmentTier` concept used for players applies to staff — it controls the ceiling and trajectory.
+
 ### Physical Attributes (All Players)
 
 | Attribute | Description |
