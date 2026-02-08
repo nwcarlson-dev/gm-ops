@@ -116,6 +116,255 @@ Users can still play however they want - custom settings just mark the save as "
 
 ---
 
+## Universal Game Shell Layout
+
+**Designed: February 2026**
+
+### Design Principle
+
+GM Ops is a roster construction game. The depth chart is the heartbeat of the experience — it should always be accessible regardless of what phase the user is in. Every screen in the game follows the same two-panel layout: phase-specific content on the left, a persistent Management Panel on the right.
+
+### Layout Structure
+
+```
+┌──────────────────────────────────────────────────────────────────────────┐
+│  GM OPS  ●  [CURRENT PHASE]                          [User Profile]     │
+│  [Phase Progress Bar - offseason/franchise only]                        │
+├─────────────────────────────────┬────────────────────────────────────────┤
+│                                 │  MANAGEMENT PANEL                     │
+│                                 │  [Offense] [Defense] [ST] [Tools]     │
+│   PHASE CONTENT                 │                                       │
+│                                 │  (Tab content here - depth chart      │
+│   Content changes based on      │   when O/D/ST selected, tools menu    │
+│   the active game phase:        │   when Tools selected)                │
+│                                 │                                       │
+│   • Franchise Tag explanation   │                                       │
+│   • Free agent market           │                                       │
+│   • Draft board                 │                                       │
+│   • Game planning               │                                       │
+│   • Training camp               │                                       │
+│                                 │                                       │
+└─────────────────────────────────┴────────────────────────────────────────┘
+```
+
+### Elastic Panel Width
+
+The Management Panel has three width states. It expands and contracts based on what the user is doing:
+
+| State | Panel Width | Phase Content | When Used |
+|-------|-------------|---------------|-----------|
+| **Default** | ~45% | Visible (~55%) | Browsing depth chart, reviewing roster |
+| **Expanded** | ~60-65% | Compressed but visible | Viewing deeper depth chart backups (columns 3-4+) |
+| **Full-Screen** | 100% | Hidden | Trade Center, Free Agent market, detailed Cap tables |
+
+Full-screen tools display a clear "Close" or "Back" button that returns the panel to its default width and restores the phase content on the left.
+
+### Management Panel Tabs
+
+Four tabs across the top of the Management Panel:
+
+| Tab | Content |
+|-----|---------|
+| **Offense** | Offensive depth chart (QB, RB, WR×3, TE, LT, LG, C, RG, RT) |
+| **Defense** | Defensive depth chart in nickel base (LDE, LDT, RDT, RDE, LB×2, LCB, RCB, NB, FS, SS) |
+| **ST** | Special teams depth chart (K, P, KR, PR, LS) |
+| **Tools** | Vertical hierarchical menu of management tools |
+
+Tabs are mutually exclusive — only one tab's content is visible at a time. When "Tools" is active, the depth chart is not visible. When "Offense" is active, the Tools menu is not visible.
+
+### Tools Menu
+
+The Tools tab displays a vertical hierarchical menu listing available management options. Menu items vary by phase/mode but the core set includes:
+
+| Tool | Description | Panel Width |
+|------|-------------|-------------|
+| **Transactions** | Trade center for proposing and evaluating trades | Full-screen |
+| **Free Agents** | Browse and sign available free agents (when applicable) | Full-screen |
+| **Cap Management** | Salary cap breakdown, restructure options, dead money | Expanded or full-screen |
+| **Stats** | Team and player statistics for the current season/phase | Expanded |
+| **Team Needs** | Positional needs with archetypes and context | Default |
+| **League Activity** | Recent league-wide transactions and news | Default |
+| **Draft Picks** | View owned draft picks and trade value (when applicable) | Default |
+| **Settings** | Game speed, control level, audio preferences | Default (modal) |
+
+### Phase Content (Left Side)
+
+The left panel content swaps entirely based on the active game phase. It provides context, instructions, and phase-specific interfaces:
+
+| Phase | Left Panel Content |
+|-------|-------------------|
+| **Franchise Tags** | Explanation of franchise vs transition tags, list of eligible expiring-contract players to consider |
+| **Contract Decisions** | Expiring contracts overview, extend/release/walk interface |
+| **Free Agency** | FA market overview (detailed browsing moves to full-screen via Tools) |
+| **Pre-Draft** | Offseason recap summary, trade exploration prompt |
+| **NFL Draft** | Draft board with pick list, team needs, prospect rankings |
+| **UDFA Signing** | Available undrafted free agents |
+| **Roster Finalization** | Roster cut-down interface |
+| **Regular Season** | Game schedule, matchup preview, weekly recap |
+| **Training Camp** | Camp battles, roster bubble, preseason results |
+
+### Mobile Behavior
+
+On screens narrower than 768px, the two-panel layout collapses to a single column. The Management Panel becomes a slide-out drawer accessible via a persistent tab/button at the bottom or side of the screen. Player pills are designed to work in both wide (desktop) and narrow (drawer) contexts.
+
+---
+
+### Depth Chart Component
+
+The depth chart is the primary view within the Offense, Defense, and ST tabs of the Management Panel.
+
+#### Position Rows (Shelves)
+
+Each starting position gets a horizontal row/shelf. The position label appears once on the left side of the row. All players in that row are implied to play that position — no position label is repeated on individual player cards.
+
+**Offense positions (11):** QB, RB, WR1, WR2, WR3, TE, LT, LG, C, RG, RT
+**Defense positions (11, nickel):** LDE, LDT, RDT, RDE, LB1, LB2, LCB, RCB, NB, FS, SS
+**Special Teams (5):** K, P, KR, PR, LS
+
+#### Depth Display
+
+- **Default view:** 2-deep per position (starter + first backup visible)
+- **Expandable:** A "show more" indicator (arrow or `+N`) at the end of a row reveals additional backups to the right when clicked
+- When additional depth is revealed, the Management Panel may widen to Expanded state (~60-65%) to accommodate
+
+#### Player Pills
+
+Each player is displayed as a compact, rounded-rectangle card ("pill") within their position row.
+
+**Default pill content (always visible):**
+
+```
+┌─────────────────────────────────────────────┐
+│  Player Name   │ Stat1 │ Stat2 │ ⓘ  │ ⋮   │
+│                │       │       │    │     │
+│  [subtle status indicator bar at bottom]    │
+└─────────────────────────────────────────────┘
+```
+
+| Element | Description |
+|---------|-------------|
+| **Player Name** | Full name, truncated if needed |
+| **Stat 1** | Primary phase-contextual stat (see table below) |
+| **Stat 2** | Secondary phase-contextual stat (see table below) |
+| **ⓘ (Tooltip icon)** | Opens detailed player popup with full info |
+| **⋮ (Action menu)** | Opens contextual action dropdown |
+| **Status indicator** | Subtle colored bar or accent at the bottom edge of the pill (not the entire pill) |
+
+#### Phase-Contextual Stats on Pills
+
+The two stat slots on each player pill change based on the current game phase:
+
+| Phase | Stat 1 | Stat 2 |
+|-------|--------|--------|
+| **Offseason (Tags, Contracts, FA)** | PFF Grade | Cap Hit / APY |
+| **Pre-Draft** | PFF Grade | Contract Status (expiring, years left) |
+| **NFL Draft** | PFF Grade | Cap Hit |
+| **Regular Season** | Last Game Key Stat (yards, TDs, tackles, etc.) | Injury Status |
+| **Training Camp** | Camp Performance Grade | Roster Bubble indicator |
+| **Franchise Mode (system grades)** | System-Generated Grade | Cap Hit |
+
+#### Tooltip Popup (ⓘ)
+
+Clicking the tooltip icon opens a detailed popup overlay for that player. Contains information not shown on the pill:
+
+- Age, height, weight
+- Full contract breakdown (years, total value, guaranteed, cap hits by year)
+- Career stats summary
+- Injury history
+- PFF grades breakdown (if available)
+- Scheme fit assessment
+- Trade value
+- Development trajectory (franchise mode)
+
+#### Action Menu (⋮)
+
+Clicking the action menu icon opens a contextual dropdown of available actions for that player. Actions vary by phase:
+
+| Action | Available During | Description |
+|--------|-----------------|-------------|
+| **Trade** | All phases (except active draft pick) | Opens trade center with this player pre-loaded |
+| **Extend** | Offseason contract phases | Offer a contract extension |
+| **Restructure** | All phases | Convert salary to signing bonus to create cap space |
+| **Release** | All phases | Cut the player (with dead cap implications) |
+| **Apply Franchise Tag** | Phase 1 (Franchise Tags) only | Tag this player with the franchise tag |
+| **Apply Transition Tag** | Phase 1 (Franchise Tags) only | Tag this player with the transition tag |
+| **View Full Stats** | All phases | Opens detailed stats view |
+| **Move on Depth Chart** | All phases | Promote/demote within the position shelf |
+
+Only contextually relevant actions appear — for example, "Apply Franchise Tag" only shows on expiring-contract players during the Franchise Tag phase.
+
+#### Drag-and-Drop Reordering
+
+Player pills within a position row are draggable. Users can reorder depth by dragging a pill left (promote) or right (demote) within its row. Visual feedback (drop zone highlight, pill shadow) indicates valid drop targets during drag.
+
+#### Subtle Status Indicators
+
+Player pills use subtle visual cues — never full-pill coloring — to communicate status at a glance:
+
+| Indicator | Visual Treatment | Meaning |
+|-----------|-----------------|---------|
+| **Expiring contract** | Thin amber/yellow bottom border | Contract expires after this season |
+| **Injured** | Small red dot or thin red accent | Currently injured |
+| **High performer** | Thin green bottom border | Top-tier PFF grade or system grade |
+| **Rookie** | Small blue dot or thin blue accent | First-year player |
+| **Franchise tagged** | Thin gold bottom border | Player has been franchise/transition tagged |
+| **Roster bubble** | Thin orange dashed border | At risk of being cut (training camp) |
+
+Only one indicator shows at a time, prioritized by urgency (injured > expiring > bubble > tagged > rookie > performer).
+
+---
+
+### Franchise & Transition Tags (Phase 1 — Enhanced Design)
+
+#### Overview
+
+Franchise and transition tags are tools NFL teams use to retain key players whose contracts are expiring. A team can use one franchise tag OR one transition tag per year (not both types on different players — one tag total, of either type). Tags are one-year contracts at a guaranteed salary based on top positional pay.
+
+#### Why Teams Use Tags
+
+**Franchise Tag:** Used when a team absolutely must keep a player. The high cost signals the player is elite. If another team signs the player to an offer sheet, the original team can match the offer or receive two first-round draft picks as compensation. This makes it extremely rare for a franchised player to actually leave.
+
+**Transition Tag:** A budget-friendly alternative when a team wants the right to match any offer but can accept losing the player. The salary is lower (~12-20% cheaper) because there is no draft pick compensation if the player leaves. Teams use this when they value the player but aren't willing to pay franchise-tag money.
+
+#### Tag Rules
+
+| Rule | Detail |
+|------|--------|
+| **Limit** | One tag per team per year (franchise OR transition, not both) |
+| **Eligibility** | Players with expiring contracts only; excludes rookies on rookie deals |
+| **Franchise tag cost** | Higher of: (a) average of top 5 salaries at the position, or (b) 120% of the player's prior salary |
+| **Transition tag cost** | Higher of: (a) average of top 10 salaries at the position, or (b) 120% of the player's prior salary |
+| **Consecutive tags** | 2nd consecutive year: 120% of prior tag cost. 3rd year: 144% of prior year or the QB tag rate, whichever is higher |
+| **Right of first refusal** | Both tags grant the original team the right to match any outside offer |
+| **Compensation if player leaves** | Franchise: two 1st-round picks. Transition: nothing |
+| **Negotiation window** | Tagged players can negotiate long-term extensions until mid-July; after that, they play on the one-year tag |
+
+#### Tag Costs by Position (GM Ops Values)
+
+| Position | Franchise Tag | Transition Tag |
+|----------|--------------|----------------|
+| QB | $40M | $35M |
+| LB | $25M | $21M |
+| DT/DL | $25M | $21M |
+| WR | $24M | $21M |
+| OL | $23M | $21M |
+| EDGE/DE | $22M | $20M |
+| CB | $20M | $18M |
+| S | $19M | $15M |
+| RB | $14M | $11M |
+| TE | $12M | $10M |
+| K/P | $6M | $5M |
+
+#### Phase 1 UI (Updated for Universal Layout)
+
+**Left panel (Phase Content):** Educational content explaining the difference between franchise and transition tags, how costs are calculated, and strategic guidance on when to use each. Below the explanation, a list of the user's expiring-contract players eligible for tagging, with their position, current APY, and projected tag costs for both tag types. This serves as a reference/recommendation list.
+
+**Right panel (Management Panel):** The depth chart is visible in its default state. Expiring-contract players show the amber "expiring" status indicator on their pills. The user applies tags via the action menu (⋮) on individual player pills — selecting "Apply Franchise Tag" or "Apply Transition Tag" from the dropdown. Once a tag is applied, the pill's status indicator updates to gold (tagged) and the tag cost is reflected in the cap calculations.
+
+**Advancing:** A "Confirm & Advance" button in the left panel locks in tag decisions and moves to Phase 2.
+
+---
+
 ## Player Rating System
 
 ### Physical Attributes (All Players)
@@ -1081,4 +1330,25 @@ New head coach hires start with elevated culture scores (benefit of the doubt), 
 - Added Offseason Mode to Implementation Status section
 - Updated replit.md with offseason phase details
 
----
+### February 8, 2026 (cont.)
+
+**Universal Game Shell Layout Design**:
+- Designed two-panel universal layout: Phase Content (left, ~55%) + Management Panel (right, ~45%)
+- Management Panel has 4 tabs: Offense, Defense, ST, Tools (mutually exclusive — standard tab behavior)
+- Depth chart tabs show position rows with draggable player pills; Tools tab shows vertical hierarchical menu
+- Elastic panel width system: Default (~45%), Expanded (~60-65%), Full-Screen (100%)
+- Full-screen used for Trade Center, Free Agent market; hides phase content with "Close" to return
+- Player pills show: Name, two phase-contextual stats, tooltip icon (ⓘ), action menu (⋮)
+- Action menu items are phase-aware: Trade, Extend, Restructure, Release, Apply Franchise/Transition Tag, View Stats, Move on Depth Chart
+- Subtle status indicators on pill bottom edge (amber=expiring, red=injured, green=high performer, blue=rookie, gold=tagged, orange dashed=roster bubble)
+- Phase 1 (Franchise Tags) redesigned: left panel shows educational content + eligible players; tags applied via player pill action menus on depth chart
+- Updated franchise/transition tag costs and rules based on 2025 NFL data
+- Mobile: Management Panel becomes slide-out drawer on screens < 768px
+- Documented in DESIGN.md as new "Universal Game Shell Layout" section with sub-sections for depth chart component, player pills, tools menu, and elastic panel
+
+**ESPN Logo Integration**:
+- Integrated ESPN CDN logos for all 32 NFL teams and 754 college programs across game-shell, game-setup, and draft-results pages
+- Built `data/espn_college_ids.json` with 2,612 name variant entries for comprehensive college logo lookup
+- All logos have graceful fallback (onerror hides image, shows gradient abbreviation box)
+- NFL logos: `https://a.espncdn.com/i/teamlogos/nfl/500/{abbr}.png`
+- College logos: `https://a.espncdn.com/i/teamlogos/ncaa/500/{id}.png`

@@ -14,6 +14,7 @@ GM Ops is an NFL franchise simulation game aiming to be the leading football GM 
 - MANDATORY: Review all existing documentation and data BEFORE making any changes - never overwrite existing content without first understanding what's there and confirming it won't lose valuable context
 - Do not touch sections the user didn't ask to change - scope changes strictly to what was requested
 - MANDATORY: When issues or unwanted results occur, fix the root cause — the logic or workflow that produced the problem — not the symptom. No one-off patches. Always treat the cause, not the symptom.
+- MANDATORY: All screens and components must be mobile-friendly. Use responsive CSS with breakpoints for tablet (768px) and phone (480px). Layouts should collapse to single-column, text/elements should scale down, and touch targets should be appropriately sized. Follow the mobile-responsive patterns established in the draft presentation cards and game-setup pages.
 
 ## System Architecture
 The project uses several HTML pages, with mode routing handled by query parameters. `index.html` serves as the main menu, `game-setup.html` manages team selection for different modes, and `game-shell.html` is the primary interface for both Draft and Offseason modes. All game data is loaded asynchronously from JSON files.
@@ -24,8 +25,9 @@ The project uses several HTML pages, with mode routing handled by query paramete
 
 **UI/UX Decisions:**
 - **Brand Guidelines:** Utilizes NFL Red (#D50A0A), NFL Blue (#013369), and Silver (#A5ACAF). Typography includes Teko (headlines), Barlow Condensed (UI), and Inter (body). The logo features a skewed block design.
-- **Layout:** The primary game UI (`game-shell.html`) uses a 2-column layout (e.g., Draft Board | Team Info + Prospects in Draft mode).
-- **Design Elements:** Incorporates a live activity ticker, countdown timers, collapsible sidebars, and gradient team logos.
+- **Universal Game Shell Layout:** All modes use a consistent two-panel layout: Phase Content (left, ~55%) + Management Panel (right, ~45%). The Management Panel has 4 mutually exclusive tabs: Offense, Defense, ST (depth charts), and Tools (vertical menu of management options like Transactions, Cap Management, Stats, etc.). The panel is elastic — default ~45%, expanded ~60-65% for deeper depth chart views, and full-screen (100%, hiding left panel) for heavy tools like Trade Center and Free Agent market.
+- **Player Pills:** Roster players displayed as compact draggable cards in depth chart position rows. Each pill shows: Name, two phase-contextual stats, tooltip icon (ⓘ) for full details, and action menu (⋮) with phase-aware options (Trade, Extend, Restructure, Release, Apply Tags, etc.). Subtle bottom-edge color indicators for status (amber=expiring, red=injured, green=performer, gold=tagged).
+- **Design Elements:** Incorporates a live activity ticker, countdown timers, and ESPN CDN logos for all 32 NFL teams and 754 colleges.
 - **Draft Board:** Displays all draft picks, team needs, and dynamically updates. Includes round navigation and subtle trade value indicators.
 - **Prospect Display:** Shows prospects with college colors, position filters, and a watchlist. Prospect details are presented in an expandable accordion format.
 - **Team Info Panel:** Features a Depth tab showing a 2-deep roster with contract and scheme-fit information.
