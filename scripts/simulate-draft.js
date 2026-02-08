@@ -29,12 +29,19 @@ const TEAM_DATA = {
 
 function mapPositionToNeed(pos) {
     const map = {
-        OT: "OT", OG: "IOL", C: "IOL", IOL: "IOL", OL: "OL",
+        OT: "OT", LT: "OT", RT: "OT", T: "OT",
+        OG: "IOL", G: "IOL", C: "IOL", LG: "IOL", RG: "IOL",
+        IOL: "IOL", OL: "OL",
         DE: "EDGE", OLB: "EDGE", EDGE: "EDGE",
+        LDE: "EDGE", RDE: "EDGE", LOLB: "EDGE", ROLB: "EDGE",
         DT: "DL", NT: "DL", IDL: "DL", DL: "DL",
+        LDT: "DL", RDT: "DL",
         ILB: "LB", MLB: "LB", LB: "LB",
-        FS: "S", SS: "S", S: "S", CB: "CB",
-        QB: "QB", WR: "WR", RB: "RB", TE: "TE", FB: "RB", K: "K", P: "P", LS: "LS"
+        WILL: "LB", MIKE: "LB", SAM: "LB",
+        FS: "S", SS: "S", S: "S",
+        CB: "CB", LCB: "CB", RCB: "CB", NB: "CB",
+        QB: "QB", WR: "WR", RB: "RB", TE: "TE", FB: "RB",
+        K: "K", P: "P", LS: "LS"
     };
     return map[pos] || pos;
 }
