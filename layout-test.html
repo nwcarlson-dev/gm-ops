@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Layout Test</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="shared/styles.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .page-wrapper {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            display: flex;
+            flex: 1;
+            min-height: 0;
+            gap: 0;
+        }
+
+        .left-panel {
+            width: 58%;
+            height: 100%;
+            overflow-y: auto;
+            border: 2px solid #ff0;
+            padding: 12px 16px;
+        }
+
+        .right-panel {
+            width: 42%;
+            height: 100%;
+            border: 2px solid #0ff;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="page-wrapper">
+        <header class="app-header">
+            <div style="display: flex; align-items: center; gap: 12px">
+                <a href="index.html" class="logo-blocks">
+                    <span class="gm">GM</span>
+                    <span class="ops"><span class="o">O</span><span class="ps">PS</span></span>
+                </a>
+                <div class="mode-indicator offseason" style="background: rgba(212, 175, 55, 0.15); border: 1px solid rgba(212, 175, 55, 0.3);">
+                    <span class="mode-dot" style="background: #D4AF37;"></span>
+                    <span>Offseason Mode</span>
+                </div>
+            </div>
+            <div class="header-nav">
+                <a href="index.html">Home</a>
+                <div class="user-menu">
+                    <span class="user-avatar">G</span>
+                    <span>Guest</span>
+                </div>
+            </div>
+        </header>
+
+        <div class="container">
+            <div class="left-panel">
+                <h2 style="color: #ff0; margin-bottom: 10px;">Left Panel (58%)</h2>
+                <p style="color: #ccc;">This is the left panel content area.</p>
+            </div>
+            <div class="right-panel">
+                <h2 style="color: #0ff; margin-bottom: 10px;">Right Panel (42%)</h2>
+                <p style="color: #ccc;">This is the right panel content area.</p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

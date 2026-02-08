@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Two Panel Layout</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .container {
+            display: flex;
+            height: 100vh;
+            gap: 20px; /* Space between the two main divs */
+            padding: 20px; /* Optional: padding around the entire layout */
+        }
+
+        .left-panel {
+            width: 55%;
+            height: 100%;
+            overflow-y: auto; /* Allows scrolling if content exceeds height */
+            border: 1px solid #ccc; /* Visual aid */
+        }
+
+        .left-content {
+            display: flex;
+            gap: 10px; /* Space between columns */
+            min-height: 100%; /* Allows content to expand if needed for scrolling */
+        }
+
+        .column {
+            width: 50%;
+            display: flex;
+            flex-direction: column;
+            gap: 10px; /* Space between rows */
+        }
+
+        .row {
+            flex: 1; /* Equal height for all rows */
+            border: 1px solid #999; /* Visual aid */
+            padding: 10px;
+            min-height: 0; /* Prevents flex items from overflowing */
+        }
+
+        .right-panel {
+            width: 45%;
+            height: 100%;
+            border: 1px solid #ccc; /* Visual aid */
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="left-panel">
+            <div class="left-content">
+                <div class="column">
+                    <div class="row">Row 1</div>
+                    <div class="row">Row 2</div>
+                    <div class="row">Row 3</div>
+                    <div class="row">Row 4</div>
+                    <div class="row">Row 5</div>
+                    <div class="row">Row 6</div>
+                    <div class="row">Row 7</div>
+                    <div class="row">Row 8</div>
+                    <div class="row">Row 9</div>
+                    <div class="row">Row 10</div>
+                    <div class="row">Row 11</div>
+                </div>
+                <div class="column">
+                    <div class="row">Row 1</div>
+                    <div class="row">Row 2</div>
+                    <div class="row">Row 3</div>
+                    <div class="row">Row 4</div>
+                    <div class="row">Row 5</div>
+                    <div class="row">Row 6</div>
+                    <div class="row">Row 7</div>
+                    <div class="row">Row 8</div>
+                    <div class="row">Row 9</div>
+                    <div class="row">Row 10</div>
+                    <div class="row">Row 11</div>
+                </div>
+            </div>
+        </div>
+        <div class="right-panel">
+            <h2>Right Panel Content</h2>
+            <p>This is the 45% width panel.</p>
+        </div>
+    </div>
+</body>
+</html>
