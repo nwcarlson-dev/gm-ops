@@ -27,12 +27,19 @@
         }
 
         .panel-controls {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 6px;
-            padding: 8px 12px 0 12px;
+            position: relative;
+            height: 26px;
             flex-shrink: 0;
+        }
+
+        .chevron-group {
+            position: absolute;
+            top: 8px;
+            left: calc(12px + (100% - 36px) * 0.55 + 6px);
+            transform: translateX(-50%);
+            display: flex;
+            gap: 4px;
+            transition: left 0.25s ease, transform 0.25s ease;
         }
 
         .panel-chevron {
@@ -47,7 +54,7 @@
             align-items: center;
             justify-content: center;
             font-size: 10px;
-            transition: opacity 0.2s ease;
+            transition: opacity 0.15s ease;
         }
 
         .panel-chevron:hover {
@@ -57,8 +64,17 @@
         }
 
         .panel-chevron.hidden {
-            opacity: 0;
-            pointer-events: none;
+            display: none;
+        }
+
+        .page-wrapper.expand-right .chevron-group {
+            left: 12px;
+            transform: translateX(0);
+        }
+
+        .page-wrapper.expand-left .chevron-group {
+            left: calc(100% - 12px);
+            transform: translateX(-100%);
         }
 
         .container {
@@ -249,8 +265,10 @@
         </header>
 
         <div class="panel-controls">
-            <div class="panel-chevron" id="chevronLeft" title="Expand roster panel">&#x276E;</div>
-            <div class="panel-chevron" id="chevronRight" title="Expand main panel">&#x276F;</div>
+            <div class="chevron-group">
+                <div class="panel-chevron" id="chevronLeft" title="Expand roster panel">&#x276E;</div>
+                <div class="panel-chevron" id="chevronRight" title="Expand main panel">&#x276F;</div>
+            </div>
         </div>
 
         <div class="container" id="mainContainer">
@@ -355,36 +373,41 @@
             });
         });
 
+        const wrapper = document.querySelector('.page-wrapper');
         const container = document.getElementById('mainContainer');
         const chevLeft = document.getElementById('chevronLeft');
         const chevRight = document.getElementById('chevronRight');
 
-        function updateChevrons() {
-            chevLeft.classList.toggle('hidden', container.classList.contains('expand-right'));
-            chevRight.classList.toggle('hidden', container.classList.contains('expand-left'));
+        function setState(state) {
+            wrapper.classList.remove('expand-left', 'expand-right');
+            container.classList.remove('expand-left', 'expand-right');
+            if (state) {
+                wrapper.classList.add(state);
+                container.classList.add(state);
+            }
+            chevLeft.classList.toggle('hidden', state === 'expand-right');
+            chevRight.classList.toggle('hidden', state === 'expand-left');
         }
 
         chevLeft.addEventListener('click', () => {
-            if (container.classList.contains('expand-right')) return;
-            if (container.classList.contains('expand-left')) {
-                container.classList.remove('expand-left');
+            if (wrapper.classList.contains('expand-right')) return;
+            if (wrapper.classList.contains('expand-left')) {
+                setState(null);
             } else {
-                container.classList.add('expand-right');
+                setState('expand-right');
             }
-            updateChevrons();
         });
 
         chevRight.addEventListener('click', () => {
-            if (container.classList.contains('expand-left')) return;
-            if (container.classList.contains('expand-right')) {
-                container.classList.remove('expand-right');
+            if (wrapper.classList.contains('expand-left')) return;
+            if (wrapper.classList.contains('expand-right')) {
+                setState(null);
             } else {
-                container.classList.add('expand-left');
+                setState('expand-left');
             }
-            updateChevrons();
         });
 
-        updateChevrons();
+        setState(null);
     </script>
 </body>
 </html>
