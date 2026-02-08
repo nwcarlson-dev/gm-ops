@@ -185,6 +185,34 @@ function getRosterNote(abbr, pos) {
   return parts.length > 0 ? parts.join('. ') + '.' : null;
 }
 
+function evaluateRosterStrength(abbr, pos) {
+  const players = ptvTeams[abbr];
+  if (!players) return { strength: 'unknown', reason: null };
+
+  const posPlayers = players.filter(p => normalizePos(p.position) === pos || normalizePos(p.depthChartPos) === pos);
+  if (posPlayers.length === 0) return { strength: 'empty', reason: 'No players on roster' };
+
+  const starters = posPlayers.filter(p => p.role === 'starter');
+  const elite = starters.filter(p => p.performanceTier === 'elite' || p.performanceTier === 'starter');
+  const expiring = starters.filter(p => p.isExpiring);
+  const aging = starters.filter(p => p.age >= 32);
+
+  const MULTI_STARTER = { IOL: 3, OT: 2, WR: 2, CB: 2, S: 2 };
+  const minStarters = MULTI_STARTER[pos] || 1;
+  const nonExpNonAging = elite.filter(p => !p.isExpiring && p.age < 32);
+
+  if (nonExpNonAging.length >= minStarters) {
+    return { strength: 'strong', reason: `${nonExpNonAging.length} quality non-expiring starter(s)` };
+  }
+  if (elite.length >= minStarters && expiring.length === 0 && aging.length === 0) {
+    return { strength: 'solid', reason: `${elite.length} quality starter(s)` };
+  }
+  if (expiring.length > 0 || aging.length > 0) {
+    return { strength: 'vulnerable', reason: null };
+  }
+  return { strength: 'weak', reason: null };
+}
+
 function buildTeamNeeds(abbr) {
   const teamName = ABBR_TO_NAME[abbr];
   if (!teamName) return null;
@@ -199,6 +227,7 @@ function buildTeamNeeds(abbr) {
 
   const offNeeds = [];
   const defNeeds = [];
+  const removedCount = { primary: 0, secondary: 0 };
 
   function buildNeed(pos, priority) {
     const archetype = findSchemeArchetype(offScheme, defScheme, pos);
@@ -217,17 +246,32 @@ function buildTeamNeeds(abbr) {
     return { pos, archetype, priority, note };
   }
 
-  baseline.primary.forEach(pos => {
-    const need = buildNeed(pos, 'high');
-    if (OFF_POSITIONS.includes(pos)) offNeeds.push(need);
-    else defNeeds.push(need);
-  });
+  function addNeed(pos, priority) {
+    const roster = evaluateRosterStrength(abbr, pos);
+    const hasIntel = intel.some(i => i.pos === pos);
 
-  baseline.secondary.slice(0, 4).forEach(pos => {
-    const need = buildNeed(pos, 'medium');
+    if (roster.strength === 'strong' && !hasIntel) {
+      const label = priority === 'high' ? 'primary' : 'secondary';
+      removedCount[label]++;
+      return;
+    }
+
+    const need = buildNeed(pos, priority);
+
+    if (roster.strength === 'strong' && hasIntel) {
+      need.priority = 'medium';
+    }
+
     if (OFF_POSITIONS.includes(pos)) offNeeds.push(need);
     else defNeeds.push(need);
-  });
+  }
+
+  baseline.primary.forEach(pos => addNeed(pos, 'high'));
+  baseline.secondary.slice(0, 4).forEach(pos => addNeed(pos, 'medium'));
+
+  if (removedCount.primary > 0 || removedCount.secondary > 0) {
+    console.log(`  ${abbr}: Removed ${removedCount.primary} primary + ${removedCount.secondary} secondary needs (roster strength)`);
+  }
 
   return { offNeeds, defNeeds };
 }
