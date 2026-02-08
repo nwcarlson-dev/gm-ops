@@ -251,16 +251,29 @@
 
         .pill-grade {
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
-            width: 30px;
+            width: 34px;
             flex-shrink: 0;
             font-family: 'Teko', sans-serif;
-            font-size: 16px;
-            font-weight: 600;
             line-height: 1;
             color: #fff;
             border-right: 1px solid rgba(255,255,255,0.06);
+            gap: 1px;
+        }
+
+        .pill-grade-label {
+            font-size: 7px;
+            font-weight: 600;
+            letter-spacing: 0.08em;
+            opacity: 0.7;
+            text-transform: uppercase;
+        }
+
+        .pill-grade-num {
+            font-size: 18px;
+            font-weight: 600;
         }
 
         .pill-grade.grade-elite { background: rgba(212, 175, 55, 0.3); color: #f0d060; }
@@ -275,12 +288,12 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding: 3px 6px;
-            gap: 1px;
+            padding: 4px 6px;
+            gap: 0px;
         }
 
         .pill-name {
-            font-size: 13px;
+            font-size: 14px;
             font-weight: 700;
             white-space: nowrap;
             overflow: hidden;
@@ -289,8 +302,17 @@
             color: #e2e8f0;
         }
 
+        .pill-stats-label {
+            font-size: 8px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: rgba(255,255,255,0.25);
+            line-height: 1;
+        }
+
         .pill-stats {
-            font-size: 10px;
+            font-size: 11px;
             font-weight: 500;
             color: var(--text-muted);
             white-space: nowrap;
@@ -640,7 +662,14 @@
                         if (pff && pff.grade != null) {
                             const gradeEl = document.createElement('div');
                             gradeEl.className = 'pill-grade ' + getGradeClass(pff.grade);
-                            gradeEl.textContent = Math.round(pff.grade);
+                            const labelEl = document.createElement('span');
+                            labelEl.className = 'pill-grade-label';
+                            labelEl.textContent = 'PFF';
+                            gradeEl.appendChild(labelEl);
+                            const numEl = document.createElement('span');
+                            numEl.className = 'pill-grade-num';
+                            numEl.textContent = Math.round(pff.grade);
+                            gradeEl.appendChild(numEl);
                             pill.appendChild(gradeEl);
                         }
 
@@ -653,10 +682,17 @@
                         body.appendChild(nameEl);
 
                         if (pff) {
-                            const statsEl = document.createElement('div');
-                            statsEl.className = 'pill-stats';
-                            statsEl.innerHTML = getStatsHtml(row.pos, pff);
-                            if (statsEl.innerHTML) body.appendChild(statsEl);
+                            const statsHtml = getStatsHtml(row.pos, pff);
+                            if (statsHtml) {
+                                const statsLabelEl = document.createElement('div');
+                                statsLabelEl.className = 'pill-stats-label';
+                                statsLabelEl.textContent = '2025 Stats';
+                                body.appendChild(statsLabelEl);
+                                const statsEl = document.createElement('div');
+                                statsEl.className = 'pill-stats';
+                                statsEl.innerHTML = statsHtml;
+                                body.appendChild(statsEl);
+                            }
                         }
 
                         pill.appendChild(body);
