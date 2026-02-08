@@ -650,6 +650,7 @@
                         hoverRow = r;
                         const pillEls = Array.from(r.children);
                         for (let i = 0; i < pillEls.length; i++) {
+                            if (pillEls[i].classList.contains('drag-source')) continue;
                             const pRect = pillEls[i].getBoundingClientRect();
                             if (clientX < pRect.left + pRect.width / 2) {
                                 hoverIndex = i;
