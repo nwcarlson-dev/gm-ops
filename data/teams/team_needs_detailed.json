@@ -1,6 +1,6 @@
 {
   "meta": {
-    "generated": "2026-02-08T03:18:46.918Z",
+    "generated": "2026-02-08T03:26:56.481Z",
     "description": "Auto-generated team needs with archetypes and contextual notes. Re-run scripts/build_team_needs.js to regenerate.",
     "inputs": [
       "nflmdd_team_needs_2026.json",
@@ -774,58 +774,45 @@
           "pos": "OT",
           "archetype": "Pass Protector",
           "priority": "high",
-          "note": "Looking for depth pieces. Contender filling gaps.",
-          "count": 2
-        },
-        {
-          "pos": "IOL",
-          "archetype": "Pivot",
-          "priority": "high",
-          "note": "",
-          "count": 3
-        },
-        {
-          "pos": "RB",
-          "archetype": "Pass Catcher",
-          "priority": "medium",
-          "note": ""
-        },
-        {
-          "pos": "TE",
-          "archetype": "Seam Stretcher",
-          "priority": "medium",
-          "note": ""
+          "note": "Looking for depth pieces. Contender filling gaps. Cole Van Lanen on expiring contract."
         }
       ],
       "defNeeds": [
         {
-          "pos": "DL",
-          "archetype": "Penetrator",
-          "priority": "high",
-          "note": ""
-        },
-        {
           "pos": "S",
           "archetype": "Hybrid",
           "priority": "high",
-          "note": "Need a ballhawk safety to complement the secondary.",
-          "count": 2
-        },
-        {
-          "pos": "EDGE",
-          "archetype": "Long Arm",
-          "priority": "medium",
-          "note": ""
+          "note": "Need a ballhawk safety to complement the secondary. Andrew Wingard on expiring contract."
         },
         {
           "pos": "CB",
           "archetype": "Press-Man",
           "priority": "medium",
-          "note": "Need a man-press corner after acquiring Sauce Gardner (scheme fit matters).",
-          "count": 2
+          "note": "Need a man-press corner after acquiring Sauce Gardner (scheme fit matters). Greg Newsome II, Montaric Brown on expiring contracts."
         }
       ],
-      "depthNeeds": []
+      "depthNeeds": [
+        {
+          "pos": "WR",
+          "archetype": "Route Technician",
+          "priority": "low"
+        },
+        {
+          "pos": "EDGE",
+          "archetype": "Long Arm",
+          "priority": "low"
+        },
+        {
+          "pos": "DL",
+          "archetype": "Penetrator",
+          "priority": "low"
+        },
+        {
+          "pos": "LB",
+          "archetype": "Blitzer",
+          "priority": "low"
+        }
+      ]
     },
     "KC": {
       "offNeeds": [
