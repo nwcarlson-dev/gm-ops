@@ -15,6 +15,7 @@ GM Ops is an NFL franchise simulation game aiming to be the leading football GM 
 - Do not touch sections the user didn't ask to change - scope changes strictly to what was requested
 - MANDATORY: When issues or unwanted results occur, fix the root cause — the logic or workflow that produced the problem — not the symptom. No one-off patches. Always treat the cause, not the symptom.
 - MANDATORY: All screens and components must be mobile-friendly. Use responsive CSS with breakpoints for tablet (768px) and phone (480px). Layouts should collapse to single-column, text/elements should scale down, and touch targets should be appropriately sized. Follow the mobile-responsive patterns established in the draft presentation cards and game-setup pages.
+- Mobile priority: Desktop is the primary experience — make it awesome and robust. The Management Panel (depth chart + tools) on mobile can be a simple action button that opens a popover/drawer; it doesn't need to replicate the full desktop experience. Just make sure it looks clean and is functional.
 
 ## System Architecture
 The project uses several HTML pages, with mode routing handled by query parameters. `index.html` serves as the main menu, `game-setup.html` manages team selection for different modes, and `game-shell.html` is the primary interface for both Draft and Offseason modes. All game data is loaded asynchronously from JSON files.
