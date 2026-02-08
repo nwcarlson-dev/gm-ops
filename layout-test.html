@@ -32,7 +32,6 @@
             min-height: 0;
             gap: 0;
             padding: 12px;
-            position: relative;
         }
 
         .left-panel {
@@ -43,38 +42,48 @@
             border-radius: 8px;
             padding: 12px 16px;
             background: var(--card-bg);
-            transition: width 0.25s ease;
+            transition: width 0.25s ease, padding 0.25s ease, border 0.25s ease;
         }
 
         .divider {
-            width: 12px;
+            width: 20px;
             height: 100%;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
-            position: relative;
         }
 
-        .divider-handle {
-            width: 24px;
-            height: 40px;
+        .divider-controls {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+        }
+
+        .divider-chevron {
+            width: 20px;
+            height: 32px;
             border: 1px solid var(--card-border);
-            border-radius: 4px;
-            background: var(--card-bg);
+            border-radius: 3px;
+            background: rgba(255,255,255,0.03);
             color: var(--text-muted);
             cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 12px;
-            z-index: 10;
+            font-size: 11px;
         }
 
-        .divider-handle:hover {
+        .divider-chevron:hover:not(.inactive) {
             color: var(--text-primary);
             border-color: var(--text-muted);
-            background: rgba(255,255,255,0.05);
+            background: rgba(255,255,255,0.06);
+        }
+
+        .divider-chevron.inactive {
+            opacity: 0.25;
+            cursor: default;
         }
 
         .right-panel {
@@ -86,7 +95,7 @@
             background: var(--card-bg);
             display: flex;
             flex-direction: column;
-            transition: width 0.25s ease;
+            transition: width 0.25s ease, padding 0.25s ease, border 0.25s ease;
         }
 
         .panel-tabs {
@@ -192,28 +201,34 @@
             scrollbar-width: none;
         }
 
-        .container.expanded .left-panel {
+        .container.expand-right .left-panel {
             width: 0;
             padding: 0;
-            border: none;
+            border-color: transparent;
             overflow: hidden;
         }
 
-        .container.expanded .right-panel {
+        .container.expand-right .right-panel {
             width: 100%;
         }
 
-        .container.expanded .pills-grid {
+        .container.expand-right .pills-grid {
             min-width: 0;
             width: 100%;
         }
 
-        .container.expanded .pills-area {
+        .container.expand-right .pills-area {
             overflow-x: hidden;
         }
 
-        .container.expanded .divider-handle .chevron {
-            transform: rotate(180deg);
+        .container.expand-left .right-panel {
+            width: 0;
+            border-color: transparent;
+            overflow: hidden;
+        }
+
+        .container.expand-left .left-panel {
+            width: 100%;
         }
     </style>
 </head>
@@ -239,12 +254,13 @@
             </div>
         </header>
 
-        <div class="container">
+        <div class="container" id="mainContainer">
             <div class="left-panel">
             </div>
             <div class="divider">
-                <div class="divider-handle" id="dividerHandle" title="Expand roster">
-                    <span class="chevron">&#x276E;</span>
+                <div class="divider-controls">
+                    <div class="divider-chevron" id="chevronLeft" title="Expand roster panel">&#x276E;</div>
+                    <div class="divider-chevron" id="chevronRight" title="Expand main panel">&#x276F;</div>
                 </div>
             </div>
             <div class="right-panel">
@@ -346,18 +362,36 @@
             });
         });
 
-        document.getElementById('dividerHandle').addEventListener('click', () => {
-            const container = document.querySelector('.container');
-            const chevron = document.querySelector('.chevron');
-            container.classList.toggle('expanded');
-            if (container.classList.contains('expanded')) {
-                chevron.innerHTML = '&#x276F;';
-                document.getElementById('dividerHandle').title = 'Collapse roster';
+        const container = document.getElementById('mainContainer');
+        const chevLeft = document.getElementById('chevronLeft');
+        const chevRight = document.getElementById('chevronRight');
+
+        function updateChevrons() {
+            chevLeft.classList.toggle('inactive', container.classList.contains('expand-right'));
+            chevRight.classList.toggle('inactive', container.classList.contains('expand-left'));
+        }
+
+        chevLeft.addEventListener('click', () => {
+            if (container.classList.contains('expand-right')) return;
+            if (container.classList.contains('expand-left')) {
+                container.classList.remove('expand-left');
             } else {
-                chevron.innerHTML = '&#x276E;';
-                document.getElementById('dividerHandle').title = 'Expand roster';
+                container.classList.add('expand-right');
             }
+            updateChevrons();
         });
+
+        chevRight.addEventListener('click', () => {
+            if (container.classList.contains('expand-left')) return;
+            if (container.classList.contains('expand-right')) {
+                container.classList.remove('expand-right');
+            } else {
+                container.classList.add('expand-left');
+            }
+            updateChevrons();
+        });
+
+        updateChevrons();
     </script>
 </body>
 </html>
