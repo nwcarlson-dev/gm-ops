@@ -1717,6 +1717,189 @@
             .trade-announcement .trade-ann-capital {
                 color: var(--silver);
             }
+
+            .pick-presentation {
+                flex-shrink: 0;
+                overflow: hidden;
+                max-height: 0;
+                transition: max-height 0.3s ease;
+                border-bottom: 1px solid transparent;
+            }
+            .pick-presentation.active {
+                max-height: 300px;
+                border-bottom-color: var(--card-border);
+            }
+            .pick-presentation-inner {
+                padding: 0;
+            }
+
+            .pres-card {
+                display: none;
+                padding: 16px;
+                animation: presReveal 0.35s ease-out;
+            }
+            .pres-card.visible {
+                display: block;
+            }
+            @keyframes presReveal {
+                from { opacity: 0; transform: translateY(-8px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+
+            .pres-trade {
+                background: linear-gradient(135deg, rgba(213, 10, 10, 0.12) 0%, rgba(1, 51, 105, 0.10) 100%);
+            }
+            .pres-trade-label {
+                font-family: 'Teko', sans-serif;
+                font-size: 14px;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.15em;
+                color: var(--nfl-red);
+                margin-bottom: 10px;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+            }
+            .pres-trade-label::before {
+                content: '';
+                width: 3px;
+                height: 14px;
+                background: var(--nfl-red);
+                border-radius: 2px;
+            }
+            .pres-trade-teams {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+            }
+            .pres-trade-side {
+                flex: 1;
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                padding: 8px 10px;
+                background: rgba(0,0,0,0.2);
+                border-radius: 6px;
+            }
+            .pres-trade-team-name {
+                font-family: 'Barlow Condensed', sans-serif;
+                font-size: 13px;
+                font-weight: 600;
+                color: var(--white);
+                line-height: 1.2;
+            }
+            .pres-trade-assets {
+                font-size: 10px;
+                color: var(--silver);
+                margin-top: 2px;
+            }
+            .pres-trade-arrow {
+                color: var(--text-muted);
+                font-size: 16px;
+                flex-shrink: 0;
+            }
+
+            .pres-clock {
+                background: linear-gradient(135deg, rgba(213, 10, 10, 0.10) 0%, rgba(0,0,0,0.1) 100%);
+                display: flex;
+                align-items: center;
+                gap: 14px;
+            }
+            .pres-clock-badge {
+                font-family: 'Teko', sans-serif;
+                font-size: 20px;
+                font-weight: 700;
+                color: var(--white);
+                background: var(--nfl-red);
+                padding: 6px 14px;
+                border-radius: 6px;
+                line-height: 1;
+                letter-spacing: 0.05em;
+                white-space: nowrap;
+            }
+            .pres-clock-team {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                flex: 1;
+            }
+            .pres-clock-name {
+                font-family: 'Teko', sans-serif;
+                font-size: 22px;
+                font-weight: 600;
+                color: var(--white);
+                line-height: 1;
+            }
+            .pres-clock-needs {
+                font-size: 10px;
+                color: var(--text-muted);
+                margin-top: 2px;
+            }
+
+            .pres-pick {
+                background: linear-gradient(135deg, rgba(212, 175, 55, 0.10) 0%, rgba(0,0,0,0.05) 100%);
+                border-left: 3px solid var(--gold);
+            }
+            .pres-pick-label {
+                font-family: 'Barlow Condensed', sans-serif;
+                font-size: 10px;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.15em;
+                color: var(--text-muted);
+                margin-bottom: 6px;
+            }
+            .pres-pick-main {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+            }
+            .pres-pick-player {
+                flex: 1;
+            }
+            .pres-pick-name {
+                font-family: 'Teko', sans-serif;
+                font-size: 26px;
+                font-weight: 700;
+                color: var(--white);
+                line-height: 1;
+            }
+            .pres-pick-meta {
+                font-family: 'Barlow Condensed', sans-serif;
+                font-size: 13px;
+                font-weight: 500;
+                color: var(--silver);
+                margin-top: 2px;
+            }
+            .pres-pick-meta .pos-tag {
+                color: var(--gold);
+                font-weight: 700;
+                margin-right: 4px;
+            }
+            .pres-pick-consensus {
+                font-size: 10px;
+                color: var(--text-muted);
+                margin-top: 4px;
+            }
+            .pres-pick-consensus .steal {
+                color: #28a745;
+                font-weight: 600;
+            }
+            .pres-pick-consensus .reach {
+                color: var(--nfl-red);
+                font-weight: 600;
+            }
+
+            .pres-user-pick {
+                border-left-color: var(--nfl-red);
+                background: linear-gradient(135deg, rgba(213, 10, 10, 0.08) 0%, rgba(212, 175, 55, 0.06) 100%);
+            }
+            .pres-user-pick .pres-pick-label {
+                color: var(--nfl-red);
+                font-size: 11px;
+                letter-spacing: 0.2em;
+            }
             .draft-pick.current .draft-pick-info .draft-pick-team {
                 font-size: 13px;
                 font-weight: 700;
@@ -1986,6 +2169,19 @@
                 }
                 .draft-pick-needs {
                     display: none;
+                }
+                .pres-pick-name {
+                    font-size: 20px;
+                }
+                .pres-clock-name {
+                    font-size: 18px;
+                }
+                .pres-clock-badge {
+                    font-size: 16px;
+                    padding: 4px 10px;
+                }
+                .pres-card {
+                    padding: 12px;
                 }
                 .team-info-header {
                     padding: 10px 12px;
@@ -3156,6 +3352,9 @@
                                 <button class="sim-btn sim-btn-primary" id="simToggleBtn" onclick="toggleSim()">Sim</button>
                                 <a href="draft-results.html" class="sim-btn" id="viewResultsBtn" style="display:none; background: #2d7d46; color: #fff; text-decoration: none; text-align: center;">Results</a>
                             </div>
+                        </div>
+                        <div class="pick-presentation" id="pickPresentation">
+                            <div class="pick-presentation-inner" id="pickPresentationInner"></div>
                         </div>
                         <div class="draft-order-list" id="draftOrderList" style="flex: 1; overflow-y: auto;"></div>
                     </div>
@@ -4497,7 +4696,7 @@
                 return map[pos] || pos;
             }
 
-            function selectPlayer(prospectId) {
+            async function selectPlayer(prospectId) {
                 const prospect = prospects.find((p) => p.id === prospectId);
                 if (!prospect) return;
 
@@ -4505,6 +4704,8 @@
                     (d) => d.overall === currentPick,
                 );
                 if (!pickData || pickData.team !== userTeam.name) return;
+
+                const madePickOverall = currentPick;
 
                 prospect.drafted = true;
                 pickData.drafted = {
@@ -4522,7 +4723,7 @@
                 }
 
                 addTickerEvent('pick', {
-                    overall: currentPick,
+                    overall: madePickOverall,
                     playerName: prospect.name,
                     position: prospect.position,
                     team: userTeam.name
@@ -4535,6 +4736,9 @@
                 renderPickList();
                 renderProspects();
                 renderNeeds();
+
+                await presentUserPick(prospect, madePickOverall);
+
                 checkDraftComplete();
             }
 
@@ -4683,6 +4887,7 @@
                     if (!pickData) break;
 
                     if (pickData.team === userTeam.name) {
+                        hidePresentation();
                         const offer = checkCPUOfferToUser(currentPick);
                         if (offer) {
                             simWasRunning = true;
@@ -4700,13 +4905,16 @@
                         if (cpuTrade) {
                             pickData._tradeChecked = true;
                             executeCPUTrade(cpuTrade.buyerTeam, cpuTrade.sellerTeam, cpuTrade.package);
+                            const tradeAnn = pickData._tradeAnnouncement || null;
 
-                            if (speed >= 1500) {
-                                await new Promise(r => setTimeout(r, 1200));
-                            } else if (speed >= 500) {
-                                await new Promise(r => setTimeout(r, 400));
+                            if (speed > 0 && tradeAnn) {
+                                const dur = getPresDurations(speed);
+                                showPresentation(buildTradePresCard(tradeAnn));
+                                await new Promise(r => setTimeout(r, dur.trade));
+                                if (!simRunning) { hidePresentation(); break; }
                             }
 
+                            renderPickList();
                             continue;
                         }
                     }
@@ -4714,6 +4922,13 @@
                     const pick = getTeamPick(pickData.team);
 
                     if (pick) {
+                        if (speed > 0) {
+                            const dur = getPresDurations(speed);
+                            showPresentation(buildClockPresCard(pickData.team, currentPick));
+                            await new Promise(r => setTimeout(r, dur.clock));
+                            if (!simRunning) break;
+                        }
+
                         pick.drafted = true;
                         pickData.drafted = {
                             name: pick.name,
@@ -4730,40 +4945,44 @@
                             position: pick.position,
                             team: pickData.team
                         });
+
+                        const madePickOverall = currentPick;
+                        currentPick++;
+                        currentRound = Math.ceil(currentPick / 32) || 1;
+                        if (currentRound > 7) currentRound = 7;
+
+                        renderPickList();
+                        renderProspects();
+                        renderNeeds();
+
+                        if (speed > 0) {
+                            const dur = getPresDurations(speed);
+                            showPresentation(buildPickPresCard(pickData.team, pick, madePickOverall, false));
+                            await new Promise(r => setTimeout(r, dur.pick));
+                            if (!simRunning) { hidePresentation(); break; }
+                        }
+
+                        checkDraftComplete();
+                    } else {
+                        currentPick++;
+                        currentRound = Math.ceil(currentPick / 32) || 1;
+                        if (currentRound > 7) currentRound = 7;
+                        renderPickList();
+                        renderProspects();
+                        renderNeeds();
+                        checkDraftComplete();
                     }
 
-                    currentPick++;
-                    currentRound = Math.ceil(currentPick / 32) || 1;
-                    if (currentRound > 7) currentRound = 7;
-
-                    renderPickList();
-                    renderProspects();
-                    renderNeeds();
-                    checkDraftComplete();
-
                     if (currentPick > draftOrder.length) {
+                        hidePresentation();
                         stopSim();
                         return;
                     }
 
-                    const pickEl = document.querySelector(
-                        `.draft-pick[data-overall="${currentPick}"]`,
-                    );
-                    if (pickEl) {
-                        const draftList = document.getElementById("draftOrderList");
-                        if (draftList) {
-                            const listRect = draftList.getBoundingClientRect();
-                            const pickRect = pickEl.getBoundingClientRect();
-                            const scrollTop = draftList.scrollTop + (pickRect.top - listRect.top) - (listRect.height / 2);
-                            draftList.scrollTo({ top: scrollTop, behavior: "smooth" });
-                        }
-                    }
-
-                    if (speed > 0) {
-                        await new Promise((r) => setTimeout(r, speed));
-                    }
+                    scrollToCurrentPick();
                 }
 
+                hidePresentation();
                 stopSim();
             }
 
@@ -5214,6 +5433,135 @@
             function addTickerEvent(type, data) {
                 tickerEvents.unshift({ type, data, time: Date.now() });
                 if (tickerEvents.length > 50) tickerEvents.length = 50;
+            }
+
+            let presentationActive = false;
+
+            function getPresDurations(speed) {
+                if (speed === 0) return { trade: 0, clock: 0, pick: 0 };
+                if (speed <= 500) return { trade: 400, clock: 300, pick: 600 };
+                if (speed <= 1500) return { trade: 800, clock: 500, pick: 1000 };
+                return { trade: 1200, clock: 800, pick: 1500 };
+            }
+
+            function showPresentation(html) {
+                const container = document.getElementById('pickPresentation');
+                const inner = document.getElementById('pickPresentationInner');
+                inner.innerHTML = html;
+                container.classList.add('active');
+                presentationActive = true;
+            }
+
+            function hidePresentation() {
+                const container = document.getElementById('pickPresentation');
+                container.classList.remove('active');
+                presentationActive = false;
+                setTimeout(() => {
+                    document.getElementById('pickPresentationInner').innerHTML = '';
+                }, 300);
+            }
+
+            function buildTradePresCard(tradeAnn) {
+                const buyerData = TEAM_DATA[tradeAnn.buyer];
+                const sellerData = TEAM_DATA[tradeAnn.seller];
+                return `<div class="pres-card pres-trade visible">
+                    <div class="pres-trade-label">Trade Alert</div>
+                    <div class="pres-trade-teams">
+                        <div class="pres-trade-side">
+                            ${getTeamLogo(tradeAnn.buyer, 28)}
+                            <div>
+                                <div class="pres-trade-team-name">${tradeAnn.buyer}</div>
+                                <div class="pres-trade-assets">Acquires pick #${tradeAnn.pickNum}</div>
+                            </div>
+                        </div>
+                        <div class="pres-trade-arrow">⇄</div>
+                        <div class="pres-trade-side">
+                            ${getTeamLogo(tradeAnn.seller, 28)}
+                            <div>
+                                <div class="pres-trade-team-name">${tradeAnn.seller}</div>
+                                <div class="pres-trade-assets">Receives ${tradeAnn.capital}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+            }
+
+            function buildClockPresCard(teamName, pickOverall) {
+                const pickData = draftOrder.find(d => d.overall === pickOverall);
+                const roundNum = pickData ? pickData.round : Math.ceil(pickOverall / 32);
+                const pickInRound = pickData ? pickData.pick : ((pickOverall - 1) % 32) + 1;
+                const needsText = getTeamNeeds(teamName);
+                return `<div class="pres-card pres-clock visible">
+                    <div class="pres-clock-badge">R${roundNum} P${pickInRound}</div>
+                    <div class="pres-clock-team">
+                        ${getTeamLogo(teamName, 36)}
+                        <div>
+                            <div class="pres-clock-name">${teamName}</div>
+                            ${needsText ? `<div class="pres-clock-needs">Needs: ${needsText}</div>` : ''}
+                        </div>
+                    </div>
+                </div>`;
+            }
+
+            function buildPickPresCard(teamName, prospect, pickOverall, isUserPick) {
+                const pickData = draftOrder.find(d => d.overall === pickOverall);
+                const roundNum = pickData ? pickData.round : Math.ceil(pickOverall / 32);
+                const pickInRound = pickData ? pickData.pick : ((pickOverall - 1) % 32) + 1;
+                const consensusRank = prospect.consensus_rank || 300;
+                const diff = pickOverall - consensusRank;
+                let valueLine = '';
+                if (diff > 10) {
+                    valueLine = `<span class="reach">Reach — Consensus #${consensusRank}</span>`;
+                } else if (diff < -10) {
+                    valueLine = `<span class="steal">Steal — Consensus #${consensusRank}</span>`;
+                } else {
+                    valueLine = `Consensus #${consensusRank}`;
+                }
+                const cardClass = isUserPick ? 'pres-card pres-pick pres-user-pick visible' : 'pres-card pres-pick visible';
+                const label = isUserPick
+                    ? `Your Selection — Pick #${pickOverall}`
+                    : `With the #${pickOverall} pick, the ${teamName} select`;
+                const collegeLogo = prospect.school ? getCollegeLogo(prospect.school, 40) : '';
+                return `<div class="${cardClass}">
+                    <div class="pres-pick-label">${label}</div>
+                    <div class="pres-pick-main">
+                        ${collegeLogo}
+                        <div class="pres-pick-player">
+                            <div class="pres-pick-name">${prospect.name}</div>
+                            <div class="pres-pick-meta"><span class="pos-tag">${prospect.position}</span> ${prospect.school || ''}</div>
+                            <div class="pres-pick-consensus">${valueLine}</div>
+                        </div>
+                        ${getTeamLogo(teamName, 36)}
+                    </div>
+                </div>`;
+            }
+
+            async function presentPick(teamName, prospect, pickOverall, tradeAnn, isUserPick) {
+                const speed = parseInt(document.getElementById('simSpeed').value);
+                const dur = getPresDurations(speed);
+
+                if (speed === 0) return;
+
+                if (tradeAnn) {
+                    showPresentation(buildTradePresCard(tradeAnn));
+                    await new Promise(r => setTimeout(r, dur.trade));
+                }
+
+                showPresentation(buildClockPresCard(teamName, pickOverall));
+                await new Promise(r => setTimeout(r, dur.clock));
+
+                showPresentation(buildPickPresCard(teamName, prospect, pickOverall, isUserPick));
+                await new Promise(r => setTimeout(r, dur.pick));
+
+                hidePresentation();
+            }
+
+            async function presentUserPick(prospect, pickOverall) {
+                const pickData = draftOrder.find(d => d.overall === pickOverall);
+                const tradeAnn = pickData?._tradeAnnouncement || null;
+                showPresentation(buildPickPresCard(userTeam.name, prospect, pickOverall, true));
+                await new Promise(r => setTimeout(r, 1800));
+                hidePresentation();
             }
 
             function evaluateTradeMotivation(teamName, pickOverall) {

@@ -1,7 +1,7 @@
 # GM Ops - NFL Franchise Simulation
 
 ## Overview
-GM Ops is an NFL franchise simulation game with the ambition to be the leading football GM sim and mock draft simulator. It offers three tiers: a free Draft mode, an Annual License for Offseason mode (free agency, trades, cap management), and a Full License for a multi-season Franchise mode. The project aims to provide a comprehensive and engaging simulation experience for managing an NFL team.
+GM Ops is an NFL franchise simulation game aiming to be the leading football GM sim and mock draft simulator. It offers a free Draft mode, an Annual License for Offseason mode (free agency, trades, cap management), and a Full License for a multi-season Franchise mode. The project provides a comprehensive and engaging experience for managing an NFL team, focusing on realism and strategic depth in the NFL context.
 
 ## User Preferences
 - Use numbered lists when asking questions
@@ -16,61 +16,51 @@ GM Ops is an NFL franchise simulation game with the ambition to be the leading f
 - MANDATORY: When issues or unwanted results occur, fix the root cause — the logic or workflow that produced the problem — not the symptom. No one-off patches. Always treat the cause, not the symptom.
 
 ## System Architecture
-The project is structured around several HTML pages with mode routing via query parameters. `index.html` is the main menu, `game-setup.html` handles team selection for both Draft and Offseason modes (via `?mode=draft` or `?mode=offseason`), and `game-shell.html` is the primary draft UI. Data is loaded asynchronously from JSON files.
+The project uses several HTML pages, with mode routing handled by query parameters. `index.html` serves as the main menu, `game-setup.html` manages team selection for different modes, and `game-shell.html` is the primary interface for both Draft and Offseason modes. All game data is loaded asynchronously from JSON files.
 
 **Navigation Flow:**
 - `index.html` → `game-setup.html?mode=draft` → `game-shell.html` (Draft mode)
 - `index.html` → `game-setup.html?mode=offseason` → (Offseason phases) (Offseason mode)
-- Old `draft-setup.html` kept for backward compatibility but `game-setup.html` is the canonical file.
 
 **UI/UX Decisions:**
-- **Brand Guidelines:** Uses NFL Red (#D50A0A), NFL Blue (#013369), and Silver (#A5ACAF). Fonts include Teko (headlines), Barlow Condensed (UI), and Inter (body). The logo features a skewed block design with "GM" in red and "OPS" in blue/white border.
-- **Layout:** The primary draft UI (`game-shell.html`) features a 2-column layout (Draft Board | Team Info + Prospects).
-- **Design Elements:** Includes a live activity ticker, draft countdown, collapsible sidebars, and gradient team logos.
-- **Draft Board:** Displays all 257 picks, team needs as placeholders, and dynamic updates as picks are made. Round buttons allow navigation, and trade values are subtly shown.
-- **Prospect Display:** Loads all prospects with college colors, position filters, and a watchlist. Prospect details expand accordion-style.
-- **Team Info Panel:** Features a Depth tab showing a 2-deep roster with expiring contract indicators and scheme-fit information.
+- **Brand Guidelines:** Utilizes NFL Red (#D50A0A), NFL Blue (#013369), and Silver (#A5ACAF). Typography includes Teko (headlines), Barlow Condensed (UI), and Inter (body). The logo features a skewed block design.
+- **Layout:** The primary game UI (`game-shell.html`) uses a 2-column layout (e.g., Draft Board | Team Info + Prospects in Draft mode).
+- **Design Elements:** Incorporates a live activity ticker, countdown timers, collapsible sidebars, and gradient team logos.
+- **Draft Board:** Displays all draft picks, team needs, and dynamically updates. Includes round navigation and subtle trade value indicators.
+- **Prospect Display:** Shows prospects with college colors, position filters, and a watchlist. Prospect details are presented in an expandable accordion format.
+- **Team Info Panel:** Features a Depth tab showing a 2-deep roster with contract and scheme-fit information.
 
 **Technical Implementations & Feature Specifications:**
-- **Data Loading:** All game data (prospects, draft order, team needs) is loaded from JSON files.
-- **Scheme Fit System:** Matches team needs with prospect skills and physical traits, influenced by `scheme_skill_weights.json`.
-- **Draft Logic:** AI draft logic detailed in `DESIGN.md` incorporates board generation, variance tiers, scheme fit, and trade triggers.
-- **Scouting Reports:** "More Info" on player cards opens a modal with scouting reports, rankings, and comparisons.
-- **Draft Flow:** Supports "Sim to Pick" for AI auto-drafting and player selection functionality.
-- **Trade System:** Features a Trade Center modal for proposing value-balanced trades, with CPU-to-CPU and CPU-to-user trade offers. Trade pauses are speed-aware.
-- **Draft Results:** A `draft-results.html` page provides detailed analysis and grades based on value over consensus rank, need fulfillment, trade impact, and development certainty. It includes pick-by-pick narratives and team grades.
-- **Draft Simulation Script:** A Node.js script (`scripts/simulate-draft.js`) mirrors in-game AI logic for testing and generating simulated draft results.
-- **Prospect Data:** 601 prospects with detailed bio (height, weight — 99%+ coverage), consensus rankings from 7+ sources, position-specific skill ratings (0-100 scale, AI-generated from scouting data, 100% coverage), scouting reports (37% coverage from NFLMDD/Jeremiah — higher for top prospects), traits, archetype, projection, and comparisons. `developmentCertainty` is a key field. 337 core prospects from multiple ranking sources + 264 extended prospects scraped from DraftTek big board (ranks 301-500) for realistic UDFA pool (~10.8 UDFAs per team after 257-pick draft).
-- **Data Enrichment Pipeline:** `scripts/enrichment/` contains automated scrapers and AI enrichment tools:
-    - `scrape-rankings.js` — Scrapes 7 ranking sources (PFF, CBS, DraftTek, Jeremiah, FantasyPros, NFLMDD, Tankathon). DraftTek scraper covers pages 1-5 (up to 500 prospects) and captures height/weight/class year. Unmatched DraftTek prospects are auto-added as new entries with full bio data.
-    - `scrape-reports.js` — Scrapes individual scouting reports from NFLMDD player pages.
-    - `enrich-bios.js` — Uses OpenAI to fill missing bio data (height, weight, age, DOB, hometown) in batches of 15.
-    - `generate-skills.js` — Uses OpenAI (gpt-4o-mini) to generate position-specific skill ratings based on scouting reports, rankings, and bio data.
-    - All scripts accessible via `/api/prospects/enrich/*` endpoints. Pipeline runs: rankings → bios → reports → skills.
-- **Needs Intelligence (`validateTeamNeeds`):** Runs at game startup to correct algorithmically-generated team needs using depth chart data. QB rules use an inclusion-based approach: only QBs on the `RECENT_R1_QBS` list (recent 1st-round picks like Sanders, Ward, Dart, Leonard, Ewers) trigger the rookie shield to demote QB from primary. Expiring contracts and aging QBs (37+ via `KNOWN_QB_AGES`) promote QB to primary. All other QBs (journeymen, late-round picks, bridges) are left alone — no exclusion list needed. Also validates premium positions (EDGE, OT, CB, WR) — if 2+ non-expiring starters exist, demotes from primary.
-- **Future Draft Picks:** 2027 and 2028 picks initialized with real-world traded picks applied (sourced from Wikipedia 2027 NFL draft article and Draft Insiders Digest). `REAL_FUTURE_TRADES` array captures 28 known 2027 trades and 5 known 2028 trades. Trade values discounted by year (2027 ≈ 1 round lower, 2028 ≈ 2 rounds lower).
-- **Player Trade Values:** `scripts/build_player_trade_values.js` generates `data/teams/player_trade_values.json` with trade values for rostered players using the same point system as draft picks. Performance tiers: elite/starter/developing/bridge/backup. Age curves per position. Draft-round-aware contract modifiers (1st round: 1.55-1.70x, 2nd: 1.10-1.20x). "Developing" tier added for 2nd-round rookies.
-- **Team Needs Generation Pipeline:** `scripts/build_team_needs.js` generates `data/teams/team_needs_detailed.json` — the single source of truth for positional needs with archetypes and contextual notes. Both `game-setup.html` and `game-shell.html` load from this file. Inputs: baseline needs (`nflmdd_team_needs_2026.json`), team schemes (`team_schemes.json`), depth charts (`depth_charts_2026.json`), contracts (`contracts.csv`), and `team_intel.json` (living intel file with position-specific notes about injuries, FA departures, contract situations, scheme changes). Archetypes are derived from scheme-to-archetype mapping (e.g., Shanahan Wide Zone → "Zone Blocker" at OT). Notes are generated from intel + roster analysis (aging starters, expiring contracts). To regenerate after any input changes: `node scripts/build_team_needs.js`. The `team_intel.json` file is the place to add news, injury updates, and roster moves — the build script weaves them into the generated notes. `validateTeamNeeds()` at runtime adjusts priorities but never touches archetypes or notes.
-- **Starter Needs vs Depth Needs:** Needs are split into two categories. **Starter needs** (`offNeeds`/`defNeeds`) are positions where the team lacks secure (non-expiring, non-aging) starters — these drive early-round picks and aggressive trade-ups (primary: +15 needScore, secondary: +7). **Depth needs** (`depthNeeds`) are positions where starters are secure but backups are expiring — these guide later-round picks with a mild board boost (+2) and reduced trade motivation (+3 needScore). Depth needs are not displayed in the UI — they're CPU-only logic. Depth needs carry scheme-fit archetypes but no notes.
-- **Multi-Opening Count:** Starter needs include a `count` field when multiple starter slots are open (e.g., Bears needing 2 safeties shows as "S (2)"). Count is derived from comparing secure starters against position-specific minimums (MULTI_STARTER: IOL=3, OT/WR/CB/S=2, others=1). Positions with only 1 opening don't show a number. The count displays in the UI's position badge.
-- **Position Key Standardization:** Different data sources use different position granularity. Depth charts use NFL-granular positions (LDE, RDE, LDT, RDT, LCB, RCB, NB, LT, RT, LG, RG, C, FS, SS, QB, WR, TE, RB, LB). Prospects use draft-level positions (EDGE, IDL, OT, OG, C, IOL, CB, S, LB, QB, WR, TE, RB, K, P, LS). Trade values use simplified positions (EDGE, DL, OT, IOL, CB, NB, S, LB, QB, WR, TE, RB). Needs use 11 canonical categories: QB, RB, WR, TE, OT, IOL, EDGE, DL, LB, CB, S. The `mapPositionToNeed()` function (in both `game-shell.html` and `simulate-draft.js`) maps ALL position formats to these 11 categories. The `normalizePos()` function in `build_team_needs.js` does the same for the build pipeline. Key mappings: LDE/RDE/DE/OLB/LOLB/ROLB→EDGE, LDT/RDT/DT/NT/IDL→DL, LCB/RCB/NB→CB, FS/SS→S, LT/RT→OT, LG/RG/C/OG→IOL. `validateTeamNeeds()` posMap uses depth chart positions (LDE/RDE for EDGE, LCB/RCB/NB for CB) when cross-referencing against depth chart data. Team abbreviation standard: JAX (not JAC). All data files and build scripts use JAX as primary key with JAC→JAX fallback mapping for legacy data.
-- **Roster-Based Needs Filtering:** The build script reads depth charts and contracts directly (decoupled from player trade values). `isPositionCovered()` checks if a position has enough secure (non-expiring, non-aging) starters meeting position-specific minimums. Covered positions are removed from needs unless intel notes override (in which case priority is capped at medium). Position-specific aging thresholds: QB=36, RB=29, WR=31, TE=32, OT/IOL=33, EDGE/DL/LB=31, CB=30, S=31.
-- **Cap Summary Data:** `scripts/build_cap_summary.js` generates `data/teams/cap_summary_2026.json` with cap space, dead money, and expiring contracts per team from `data/raw/nflverse/contracts.csv`.
-- **Offseason Phase System:** 7 configurable phases stored as `OFFSEASON_PHASES` array: Franchise Tags → Contract Decisions → Free Agency → Pre-Draft → NFL Draft → UDFA Signing → Roster Finalization. Phase timeline renders as a compact horizontal progress bar. Order is configurable (not hardcoded) to support future user setting to move FA after draft.
-- **Cap Data on Team Cards:** Both Draft and Offseason modes show cap space (green/red), expiring contracts count, and dead money as small badges on team selection cards. Data loaded from `cap_summary_2026.json` with team name-to-abbreviation mapping.
-- **Offseason Mode in game-shell.html:** Same shell file handles both Draft and Offseason modes via `?mode=offseason` query param. Phase progress bar shows at top (below header). Sidebar adapts to show persistent tools (My Roster, Trade Center, Salary Cap, Team Needs, League Activity) instead of draft-specific items. Main content area swaps between `draftContent` and `offseasonContent` divs.
-- **Phase 1 - Franchise Tags:** 2-column layout. Left shows eligible expiring non-rookie players sorted by trade value with tag selection dropdown (No Tag / Franchise / Transition). Right shows cap summary with meter bar and league-wide tag decisions from CPU teams. Tag costs use position-based averages or 120% of current APY (whichever is higher). Transition tags = 80% of franchise cost. Max 1 franchise + 1 transition per team. CPU auto-tags highest-value expiring starters.
-- **Phase 2 - Contract Decisions:** Full-width table of expiring contracts (excluding tagged players). Three actions per player: Let Walk (goes to FA pool), Extend (2yr at 110% APY), Release (cut with dead cap). Running cap total updates live. CPU teams extend elite/starter players (trade value > 300) and let bridge/backup players walk.
-- **Phase 3 - Free Agency:** 2-column layout. Left shows FA market with position filter tabs, player cards with "Make Offer" inline forms (years slider + APY input). Right shows user's cap space, roster composition, pending offers, completed signings. Day-by-day advancement with CPU bidding (30% chance per need match + cap space). Market settles after 3 consecutive days with no signings.
-- **Phase 4 - Pre-Draft:** Simple summary screen showing offseason recap (cap space, FA signings, players lost) with two options: "Explore Trades" or "Enter the Draft". Minimal phase since users have already scouted real prospects.
+- **Data Loading:** All game data, including prospects, draft order, and team needs, is loaded from JSON files.
+- **Scheme Fit System:** Matches team needs with prospect attributes based on `scheme_skill_weights.json`.
+- **Draft Logic:** AI draft logic, detailed in `DESIGN.md`, includes board generation, variance tiers, scheme fit, and trade triggers.
+- **Scouting Reports:** Player cards provide detailed scouting reports, rankings, and comparisons via modals.
+- **Draft Flow:** Supports "Sim to Pick" for AI drafting and manual player selection. Features a dynamic **Pick Presentation System** with trade alerts, on-the-clock displays, and pick reveals, adjusting timing based on speed settings.
+- **Trade System:** A Trade Center modal facilitates value-balanced trades between user and CPU, and CPU-to-CPU.
+- **Draft Results:** `draft-results.html` offers post-draft analysis, grades, and narratives based on various metrics.
+- **Draft Simulation Script:** A Node.js script (`scripts/simulate-draft.js`) mirrors in-game AI for testing and generating simulations.
+- **Prospect Data:** Includes 601 prospects with comprehensive bios, consensus rankings, position-specific skill ratings, scouting reports, traits, archetypes, and development certainty.
+- **Data Enrichment Pipeline:** Automated Node.js scripts in `scripts/enrichment/` scrape ranking sources, scouting reports, and use OpenAI for generating missing bio data and position-specific skill ratings. This pipeline ensures comprehensive and accurate prospect data.
+- **Needs Intelligence (`validateTeamNeeds`):** Dynamically adjusts algorithmically generated team needs at game startup based on depth charts, expiring contracts, aging QBs, and premium position coverage.
+- **Future Draft Picks:** Incorporates real-world traded picks for 2027 and 2028, with value adjusted by year.
+- **Player Trade Values:** `scripts/build_player_trade_values.js` calculates trade values for rostered players based on a point system, performance tiers, age curves, and contract modifiers.
+- **Team Needs Generation Pipeline:** `scripts/build_team_needs.js` creates `data/teams/team_needs_detailed.json`, the authoritative source for positional needs with archetypes and contextual notes, drawing from various inputs like baseline needs, team schemes, depth charts, contracts, and `team_intel.json`.
+- **Starter Needs vs Depth Needs:** Distinguishes between critical starter needs (driving early picks and aggressive trades) and depth needs (guiding later-round selections), with different UI visibility and CPU logic.
+- **Multi-Opening Count:** Starter needs display a count when multiple starting slots are open, derived from comparing secure starters against position-specific minimums.
+- **Position Key Standardization:** Standardizes position formats across different data sources into 11 canonical categories using `mapPositionToNeed()` and `normalizePos()` functions.
+- **Roster-Based Needs Filtering:** Filters needs based on whether a position is covered by secure, non-expiring, and non-aging starters, with age thresholds defined per position.
+- **Cap Summary Data:** `scripts/build_cap_summary.js` generates `data/teams/cap_summary_2026.json` for cap space, dead money, and expiring contracts.
+- **Offseason Phase System:** Structured into 7 configurable phases: Franchise Tags, Contract Decisions, Free Agency, Pre-Draft, NFL Draft, UDFA Signing, and Roster Finalization, displayed via a horizontal progress bar.
+- **Cap Data on Team Cards:** Team selection cards display cap space, expiring contracts, and dead money.
+- **Offseason Mode in game-shell.html:** The `game-shell.html` adapts for Offseason mode, featuring a phase progress bar and persistent tools like My Roster, Trade Center, and Salary Cap in the sidebar.
+- **Phase 1 - Franchise Tags:** Allows users to apply Franchise or Transition tags to expiring players, with CPU teams automatically tagging high-value players.
+- **Phase 2 - Contract Decisions:** Users can extend, let walk, or release players with expiring contracts, affecting the live cap total.
+- **Phase 3 - Free Agency:** Users can make offers to free agents, with CPU teams also participating in daily bidding.
+- **Phase 4 - Pre-Draft:** A summary screen showing offseason recap, offering options to explore trades or proceed to the draft.
 
 ## External Dependencies
-- **NFLMDD:** Source for draft order with trade values.
-- **NFLverse:** Raw data for contracts, rosters, and depth charts.
-- **Third-party Ranking Services (for data enrichment pipeline):**
-    - CBS Sports
-    - DraftTek
-    - Daniel Jeremiah (NFL.com)
-    - FantasyPros
-- **OpenAI Whisper:** Used by the `dev-feedback-tool` for audio transcription.
+- **NFLMDD:** Provides draft order and trade values.
+- **NFLverse:** Source for raw contract, roster, and depth chart data.
+- **Third-party Ranking Services:** CBS Sports, DraftTek, Daniel Jeremiah (NFL.com), FantasyPros for prospect data enrichment.
+- **OpenAI Whisper:** Used for audio transcription in the `dev-feedback-tool`.
 - **GitHub:** Used by the `dev-feedback-tool` for storing planning transcripts.
