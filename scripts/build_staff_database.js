@@ -20,7 +20,7 @@ const staffData = {
     coaching_staff: [
       { name: "Mike LaFleur", title: "Head Coach" },
       { name: "Nathaniel Hackett", title: "Offensive Coordinator" },
-      { name: "Nick Rallis", title: "Defensive Coordinator" },
+      { name: null, title: "Defensive Coordinator" },
       { name: null, title: "Special Teams Coordinator" },
       { name: null, title: "Quarterbacks Coach" },
       { name: null, title: "Running Backs Coach" },
@@ -44,9 +44,9 @@ const staffData = {
   ATL: {
     coaching_staff: [
       { name: "Kevin Stefanski", title: "Head Coach" },
-      { name: "Tommy Rees", title: "Offensive Coordinator" },
-      { name: "Jeff Ulbrich", title: "Defensive Coordinator" },
-      { name: "Craig Aukerman", title: "Special Teams Coordinator" },
+      { name: "Kliff Kingsbury", title: "Offensive Coordinator" },
+      { name: "Nick Perry", title: "Defensive Coordinator" },
+      { name: "Ben Kotwica", title: "Special Teams Coordinator" },
       { name: null, title: "Quarterbacks Coach" },
       { name: null, title: "Running Backs Coach" },
       { name: null, title: "Wide Receivers Coach" },
@@ -122,7 +122,7 @@ const staffData = {
       { name: "Dave Canales", title: "Head Coach" },
       { name: "Brad Idzik", title: "Offensive Coordinator" },
       { name: "Ejiro Evero", title: "Defensive Coordinator" },
-      { name: "Chris Tabor", title: "Special Teams Coordinator" },
+      { name: "Tracy Smith", title: "Special Teams Coordinator" },
       { name: null, title: "Quarterbacks Coach" },
       { name: null, title: "Running Backs Coach" },
       { name: null, title: "Wide Receivers Coach" },
@@ -146,7 +146,7 @@ const staffData = {
     coaching_staff: [
       { name: "Ben Johnson", title: "Head Coach" },
       { name: null, title: "Offensive Coordinator" },
-      { name: "Eric Washington", title: "Defensive Coordinator" },
+      { name: "Dennis Allen", title: "Defensive Coordinator" },
       { name: "Richard Hightower", title: "Special Teams Coordinator" },
       { name: null, title: "Quarterbacks Coach" },
       { name: "Eric Studesville", title: "Running Backs Coach" },
@@ -195,8 +195,8 @@ const staffData = {
   CLE: {
     coaching_staff: [
       { name: "Todd Monken", title: "Head Coach" },
-      { name: "Tommy Rees", title: "Offensive Coordinator" },
-      { name: "Jim Schwartz", title: "Defensive Coordinator" },
+      { name: "Travis Switzer", title: "Offensive Coordinator" },
+      { name: null, title: "Defensive Coordinator" },
       { name: null, title: "Special Teams Coordinator" },
       { name: null, title: "Quarterbacks Coach" },
       { name: null, title: "Running Backs Coach" },
@@ -423,7 +423,7 @@ const staffData = {
   LV: {
     coaching_staff: [
       { name: "Klint Kubiak", title: "Head Coach" },
-      { name: "Greg Olson", title: "Offensive Coordinator" },
+      { name: null, title: "Offensive Coordinator" },
       { name: null, title: "Defensive Coordinator" },
       { name: null, title: "Special Teams Coordinator" },
       { name: null, title: "Quarterbacks Coach" },
@@ -539,7 +539,7 @@ const staffData = {
     front_office: [
       { name: "Zygi Wilf", title: "Owner/Chairman" },
       { name: "Mark Wilf", title: "Owner/President" },
-      { name: "Kwesi Adofo-Mensah", title: "General Manager" },
+      { name: "Rob Brzezinski", title: "Interim General Manager" },
       { name: "Ryan Grigson", title: "VP of Player Personnel" },
       { name: "Jamaal Stephenson", title: "Director of College Scouting" },
       { name: "Ryan Monnens", title: "Director of Pro Scouting" }
@@ -578,7 +578,7 @@ const staffData = {
       { name: "Doug Nussmeier", title: "Offensive Coordinator" },
       { name: "Brandon Staley", title: "Defensive Coordinator" },
       { name: "Phil Galiano", title: "Special Teams Coordinator" },
-      { name: "Alex Van Pelt", title: "Quarterbacks Coach" },
+      { name: "Scott Tolzien", title: "Quarterbacks Coach" },
       { name: null, title: "Running Backs Coach" },
       { name: null, title: "Wide Receivers Coach" },
       { name: null, title: "Tight Ends Coach" },
@@ -652,7 +652,7 @@ const staffData = {
   PHI: {
     coaching_staff: [
       { name: "Nick Sirianni", title: "Head Coach" },
-      { name: "Sean Mannion", title: "Offensive Coordinator" },
+      { name: "Kevin Patullo", title: "Offensive Coordinator" },
       { name: "Vic Fangio", title: "Defensive Coordinator" },
       { name: "Michael Clay", title: "Special Teams Coordinator" },
       { name: null, title: "Quarterbacks Coach" },
@@ -677,7 +677,7 @@ const staffData = {
   PIT: {
     coaching_staff: [
       { name: "Mike McCarthy", title: "Head Coach" },
-      { name: null, title: "Offensive Coordinator" },
+      { name: "Brian Angelichio", title: "Offensive Coordinator" },
       { name: "Patrick Graham", title: "Defensive Coordinator" },
       { name: "Danny Crossman", title: "Special Teams Coordinator" },
       { name: null, title: "Quarterbacks Coach" },
@@ -703,7 +703,7 @@ const staffData = {
     coaching_staff: [
       { name: "Kyle Shanahan", title: "Head Coach" },
       { name: "Klay Kubiak", title: "Offensive Coordinator" },
-      { name: "Raheem Morris", title: "Defensive Coordinator" },
+      { name: null, title: "Defensive Coordinator" },
       { name: "Brant Boyer", title: "Special Teams Coordinator" },
       { name: "Mick Lombardi", title: "Quarterbacks Coach" },
       { name: "Robert Turner Jr.", title: "Running Backs Coach" },
@@ -728,7 +728,7 @@ const staffData = {
   SEA: {
     coaching_staff: [
       { name: "Mike Macdonald", title: "Head Coach" },
-      { name: "Klint Kubiak", title: "Offensive Coordinator" },
+      { name: null, title: "Offensive Coordinator" },
       { name: "Aden Durde", title: "Defensive Coordinator" },
       { name: "Jay Harbaugh", title: "Special Teams Coordinator" },
       { name: null, title: "Quarterbacks Coach" },
@@ -754,7 +754,7 @@ const staffData = {
     coaching_staff: [
       { name: "Todd Bowles", title: "Head Coach" },
       { name: "Zac Robinson", title: "Offensive Coordinator" },
-      { name: "Kacy Rodgers", title: "Defensive Coordinator" },
+      { name: null, title: "Defensive Coordinator" },
       { name: "Danny Smith", title: "Special Teams Coordinator" },
       { name: null, title: "Quarterbacks Coach" },
       { name: null, title: "Running Backs Coach" },
@@ -780,7 +780,7 @@ const staffData = {
       { name: "Robert Saleh", title: "Head Coach" },
       { name: "Brian Daboll", title: "Offensive Coordinator" },
       { name: "Gus Bradley", title: "Defensive Coordinator" },
-      { name: "John Fassel", title: "Special Teams Coordinator" },
+      { name: "Cade Fassel", title: "Special Teams Coordinator" },
       { name: null, title: "Quarterbacks Coach" },
       { name: null, title: "Running Backs Coach" },
       { name: null, title: "Wide Receivers Coach" },
@@ -805,7 +805,7 @@ const staffData = {
       { name: "Dan Quinn", title: "Head Coach" },
       { name: "David Blough", title: "Offensive Coordinator" },
       { name: "Daronte Jones", title: "Defensive Coordinator" },
-      { name: "Nate Kaczor", title: "Special Teams Coordinator" },
+      { name: "Larry Izzo", title: "Special Teams Coordinator" },
       { name: null, title: "Quarterbacks Coach" },
       { name: null, title: "Running Backs Coach" },
       { name: null, title: "Wide Receivers Coach" },
