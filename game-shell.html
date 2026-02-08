@@ -2555,11 +2555,10 @@
 
             .phase-bar {
                 display: none;
-                background: rgba(10, 22, 40, 0.95);
-                border-bottom: 1px solid var(--card-border);
-                padding: 0 32px;
-                height: 48px;
+                flex: 1;
+                padding: 0 20px;
                 align-items: center;
+                min-width: 0;
             }
             .phase-bar.visible { display: flex; }
             .phase-bar-track {
@@ -2646,8 +2645,10 @@
             .os-tags-layout {
                 display: flex;
                 flex-direction: column;
-                gap: 12px;
+                gap: 10px;
                 height: 100%;
+                min-height: 0;
+                overflow: hidden;
             }
             .os-cap-strip {
                 display: flex;
@@ -2699,6 +2700,7 @@
                 border-radius: 6px;
                 align-items: flex-start;
                 flex-wrap: wrap;
+                flex-shrink: 0;
             }
             .os-tag-explainer-item {
                 display: flex;
@@ -2723,7 +2725,7 @@
             .os-main-content {
                 display: flex;
                 flex-direction: column;
-                gap: 12px;
+                gap: 10px;
                 flex: 1;
                 min-height: 0;
                 overflow: hidden;
@@ -2731,10 +2733,14 @@
             .os-main-content > .os-panel:first-child {
                 flex: 1;
                 min-height: 0;
+                display: flex;
+                flex-direction: column;
+                overflow: hidden;
             }
             .os-league-section {
                 flex-shrink: 0;
-                max-height: 200px;
+                max-height: 180px;
+                overflow-y: auto;
             }
             .os-layout-2col-fa {
                 display: grid;
@@ -2945,6 +2951,7 @@
                 align-items: center;
                 justify-content: space-between;
                 background: rgba(10,22,40,0.5);
+                flex-shrink: 0;
             }
             .os-impact-pos { color: var(--success); font-weight: 600; }
             .os-impact-neg { color: var(--danger); font-weight: 600; }
@@ -3126,7 +3133,7 @@
                 display: grid;
                 grid-template-columns: 1fr minmax(380px, 42%);
                 gap: 0;
-                height: calc(100vh - 100px);
+                height: calc(100vh - 56px);
                 overflow: hidden;
             }
             .phase-content-col {
@@ -3662,6 +3669,12 @@
                     </div>
                 </div>
 
+                <div class="phase-bar" id="phaseBar">
+                    <div class="phase-bar-track" id="phaseBarTrack">
+                        <div class="phase-bar-line"></div>
+                    </div>
+                </div>
+
                 <div class="header-nav">
                     <a href="index.html">Home</a>
                     <a href="brand-guidelines.html">Brand</a>
@@ -3671,12 +3684,6 @@
                     </div>
                 </div>
             </header>
-
-            <div class="phase-bar" id="phaseBar">
-                <div class="phase-bar-track" id="phaseBarTrack">
-                    <div class="phase-bar-line"></div>
-                </div>
-            </div>
 
             <div class="sidebar-overlay" onclick="toggleSidebar()"></div>
             <aside class="app-sidebar">
