@@ -535,6 +535,42 @@ All player skill and trait ratings in GM Ops use the **20-80 scouting scale**, t
 - UI: Display current/ceiling as a dual grade (e.g., "52 / 63") on player pills or tooltips.
 - Trade Value: Ceiling factors into player trade value calculations — high-ceiling young players are worth more.
 
+**Compatibility with Generated Players (Franchise Mode):**
+
+The ceiling system must work identically for two categories of players:
+
+1. **Real rostered players (Year 1):** Current ratings derived from PFF data and performance tiers. Ceilings derived from age, trajectory, draft pedigree, and position aging curves. PFF data is the input anchor.
+2. **Generated fictional players (Year 2+ draft classes):** Created by a future player generator for Franchise mode. These players will have no PFF data — their current ratings and ceilings are both outputs of the generator.
+
+To ensure compatibility, the ceiling calculation must be **decoupled from PFF as an input source.** The ceiling logic should operate on these universal inputs only:
+- Current skill ratings (20-80) — regardless of how they were produced
+- Player age
+- Years of experience
+- Position
+- A `developmentTier` field (e.g., "elite", "standard", "late-bloomer", "limited") that encodes upside potential
+
+For real players, `developmentTier` is inferred from PFF trajectory and draft capital. For generated players, the player generator assigns `developmentTier` directly as part of the generation process. Either way, the ceiling function receives the same shaped input and produces the same shaped output.
+
+**Player Generator Requirements (Future):**
+The player generator (not yet built) will need to produce players with this minimum data shape:
+```json
+{
+  "name": "...",
+  "position": "WR",
+  "age": 21,
+  "yearsExp": 0,
+  "college": "...",
+  "ratings": {
+    "overall": 48,
+    "skills": { "separation": 52, "hands": 45, ... },
+    "schemeOveralls": { "West Coast": 50, ... }
+  },
+  "developmentTier": "standard",
+  "archetype": "Deep Threat"
+}
+```
+The ceiling function then takes this player and outputs `ceilingSkills`, `ceilingOverall`, and `ceilingSchemeOveralls` — the same way it does for real players. The generator itself will control the distribution of talent, development tiers, and archetypes to produce realistic draft classes with appropriate variance (a few elite prospects, a solid middle tier, and a long tail of later-round depth players).
+
 ### Physical Attributes (All Players)
 
 | Attribute | Description |
