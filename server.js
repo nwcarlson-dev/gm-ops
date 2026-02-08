@@ -67,6 +67,9 @@ app.use((req, res, next) => {
     }
     next();
 });
+app.get('/offseason', (req, res) => {
+    res.redirect('/game-shell.html?mode=offseason');
+});
 app.use(express.static('.'));
 app.use(express.json());
 
