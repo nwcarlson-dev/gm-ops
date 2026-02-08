@@ -52,7 +52,7 @@ This document describes the data structure for NFL draft prospects.
 ### Grades Object (PFF)
 | Field | Type | Description |
 |-------|------|-------------|
-| `pff_overall` | number | Overall PFF grade (0-100) |
+| `pff_overall` | number | Overall PFF game grade (0-100 PFF scale — this is PFF's own grading system, separate from the 20-80 scouting scale) |
 | Position-specific grades vary by position |
 
 ### Combine Object
@@ -66,7 +66,7 @@ This document describes the data structure for NFL draft prospects.
 | `bench` | number | Bench press reps (225 lbs) |
 
 ### Skills Object
-Skills vary by position. All rated 0-100.
+Skills vary by position. All rated on the **20-80 scouting scale** (20=non-prospect, 50=average NFL starter, 80=franchise elite). See DESIGN.md for full scale breakdown.
 
 **QB Skills:**
 - arm_strength, accuracy_short, accuracy_deep, decision_making

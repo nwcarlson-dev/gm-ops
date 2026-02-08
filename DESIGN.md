@@ -466,6 +466,28 @@ Franchise and transition tags are tools NFL teams use to retain key players whos
 
 ## Player Rating System
 
+### The 20-80 Scouting Scale
+
+All player skill and trait ratings in GM Ops use the **20-80 scouting scale**, the same grading system used by professional NFL and MLB scouts. It is based on a bell curve where 50 represents an average NFL starter, with grades extending by 10 points for each standard deviation.
+
+| Grade | Meaning |
+|-------|---------|
+| **80** | Franchise player, elite talent, perennial All-Pro |
+| **70** | Above-average starter, high-level Pro Bowler |
+| **60** | Solid starter, above-average contributor |
+| **50** | Average NFL starter |
+| **45** | Second-division starter or high-level backup |
+| **40** | Below-average starter, or reliable backup |
+| **30** | Fringe roster player, "up-and-down" between active roster and practice squad |
+| **20** | Non-prospect, organizational depth only |
+
+**Key Concepts:**
+- **Present/Future Grades:** Scouts often use a dual-grade system, such as 40/50, indicating a player is currently a 40 (below average) but projects to be a 50 (average). GM Ops uses this for prospect evaluation and player development tracking.
+- **Position Grading:** Specific traits (e.g., speed, arm strength, technique) are each graded individually on this scale, not just the overall player.
+- **Distinction from PFF Grades:** PFF uses a separate 0-100 scale for play-by-play game grading. PFF grades are observational performance data displayed alongside the 20-80 scouting ratings — they are complementary systems, not interchangeable.
+
+> **Note:** Do not confuse the 20-80 scouting scale with the "80/20 Rule" (Pareto Principle) sometimes referenced in coaching, which states that 80% of a team's success comes from 20% of their efforts or key players.
+
 ### Physical Attributes (All Players)
 
 | Attribute | Description |
@@ -475,10 +497,10 @@ Franchise and transition tags are tools NFL teams use to retain key players whos
 | Arm Length | Measured in inches |
 | Hand Size | Measured in inches |
 | Wingspan | Measured in inches |
-| Speed | 40-yard dash time converted to 0-100 |
-| Agility | 3-cone/shuttle converted to 0-100 |
-| Vertical | Vertical jump converted to 0-100 |
-| Strength | Bench press / functional strength |
+| Speed | 40-yard dash time converted to 20-80 scale |
+| Agility | 3-cone/shuttle converted to 20-80 scale |
+| Vertical | Vertical jump converted to 20-80 scale |
+| Strength | Bench press / functional strength (20-80 scale) |
 
 ### Universal Skills (All Players)
 
@@ -669,7 +691,7 @@ Players have a **Primary Position** and can have **Secondary Positions** they're
   secondaryPositions: [
     {
       position: "WR-Slot",
-      proficiency: 65,  // 0-100, how well they play this position
+      proficiency: 55,  // 20-80 scale, how well they play this position
       skills: { /* WR skills, typically lower */ }
     }
   ]
