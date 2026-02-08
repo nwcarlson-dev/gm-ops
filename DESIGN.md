@@ -593,10 +593,10 @@ These are the logical position changes based on skill overlap:
 | WR-Slot | WR-X, WR-Z, RB | Slot receivers sometimes outside or motion to backfield |
 | TE-Y | TE-U, WR-X | Inline TE can flex out |
 | TE-U | TE-Y, WR-Slot, H-Back | Move TE very versatile |
-| OT-LT | OT-RT, OG | Tackles can kick inside |
-| OT-RT | OT-LT, OG | Tackles can kick inside |
-| OG | OC, OT | Guards can play center or emergency tackle |
-| OC | OG | Centers can play guard |
+| OT-LT | OT-RT, OG, OC | Any OL can play any OL position |
+| OT-RT | OT-LT, OG, OC | Any OL can play any OL position |
+| OG | OT-LT, OT-RT, OC | Any OL can play any OL position |
+| OC | OT-LT, OT-RT, OG | Any OL can play any OL position |
 
 #### Defense
 
