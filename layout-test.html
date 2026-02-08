@@ -191,9 +191,8 @@
         .column-headers {
             display: flex;
             gap: 8px;
-            padding: 4px 2px 0;
+            padding: 8px 2px 0;
             flex-shrink: 0;
-            height: 16px;
         }
 
         .column-headers span {
@@ -205,7 +204,6 @@
             letter-spacing: 0.08em;
             color: var(--text-muted);
             text-align: center;
-            line-height: 1;
         }
 
         .pill-row {
@@ -272,8 +270,8 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding: 3px 6px;
-            gap: 0px;
+            padding: 4px 6px;
+            gap: 1px;
         }
 
         .pill-name {
@@ -282,18 +280,8 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            line-height: 1.1;
+            line-height: 1.2;
             color: #e2e8f0;
-        }
-
-        .pill-stats-label {
-            font-size: 7px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            color: rgba(255,255,255,0.25);
-            line-height: 1;
-            margin-top: 1px;
         }
 
         .pill-stats {
@@ -303,7 +291,7 @@
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            line-height: 1.1;
+            line-height: 1.2;
             letter-spacing: 0.02em;
         }
 
@@ -679,21 +667,19 @@
                         nameEl.textContent = row.players[i];
                         body.appendChild(nameEl);
 
+                        const statsEl = document.createElement('div');
+                        statsEl.className = 'pill-stats';
+                        let statsLine = '';
                         if (pff && pff.grade != null) {
-                            const pffLine = document.createElement('div');
-                            pffLine.className = 'pill-stats';
-                            pffLine.innerHTML = `<span class="pff-label">PFF</span><span class="pff-badge ${getGradeClass(pff.grade)}">${pff.grade.toFixed(1)}</span>`;
-                            body.appendChild(pffLine);
+                            statsLine += `<span class="pff-label">PFF</span><span class="pff-badge ${getGradeClass(pff.grade)}">${pff.grade.toFixed(1)}</span>`;
                         }
                         const posStats = pff ? getStatsHtml(row.pos, pff) : '';
                         if (posStats) {
-                            const statsLabel = document.createElement('div');
-                            statsLabel.className = 'pill-stats-label';
-                            statsLabel.textContent = '2025 Stats';
-                            body.appendChild(statsLabel);
-                            const statsEl = document.createElement('div');
-                            statsEl.className = 'pill-stats';
-                            statsEl.innerHTML = posStats;
+                            if (statsLine) statsLine += '<span class="stat-sep">|</span>';
+                            statsLine += posStats;
+                        }
+                        if (statsLine) {
+                            statsEl.innerHTML = statsLine;
                             body.appendChild(statsEl);
                         }
 
