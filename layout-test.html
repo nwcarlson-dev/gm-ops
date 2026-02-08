@@ -294,6 +294,12 @@
             opacity: 0.7;
         }
 
+        .pos-pill.insert-target {
+            background: rgba(74, 222, 128, 0.1);
+            border-color: rgba(74, 222, 128, 0.35);
+            box-shadow: inset 0 0 0 1px rgba(74, 222, 128, 0.1);
+        }
+
         .pos-pill.starter {
             border-left: 2px solid var(--accent-red);
         }
@@ -673,6 +679,8 @@
                     if (fromIndex < hoverIndex) effectiveInsert--;
                     if (effectiveInsert === fromIndex) return;
 
+                    pills[effectiveInsert].classList.add('insert-target');
+
                     pills.forEach((p, i) => {
                         if (i === fromIndex) return;
                         if (p.classList.contains('empty-slot')) return;
@@ -701,6 +709,7 @@
                     const targetPills = Array.from(targetRow.children);
                     const targetShift = targetPills[0].getBoundingClientRect().width + gap;
                     const clampedIndex = Math.min(hoverIndex, targetPills.length - 1);
+                    targetPills[clampedIndex].classList.add('insert-target');
                     targetPills.forEach((p, i) => {
                         if (i >= clampedIndex && !p.classList.contains('empty-slot')) {
                             p.style.transform = `translateX(${targetShift}px)`;
@@ -713,7 +722,7 @@
             function clearPreview() {
                 rows.forEach(r => {
                     Array.from(r.children).forEach(p => {
-                        p.classList.remove('shift-preview');
+                        p.classList.remove('shift-preview', 'insert-target');
                         p.style.transform = '';
                     });
                 });
