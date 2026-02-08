@@ -565,7 +565,7 @@
                 case 'OL':
                     return [
                         s.pressuresAllowed != null ? { label: 'Pressures', val: Math.round(s.pressuresAllowed) } : null,
-                        s.runBlockGrade != null ? { label: 'Run Blk', val: Math.round(s.runBlockGrade) } : null,
+                        s.runBlockGrade != null ? { label: 'Run Blk Grade', val: s.runBlockGrade.toFixed(1) } : null,
                     ].filter(Boolean);
                 case 'EDGE':
                 case 'DL':
