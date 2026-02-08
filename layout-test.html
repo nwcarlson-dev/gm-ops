@@ -270,28 +270,38 @@
             display: flex;
             flex-direction: column;
             justify-content: center;
-            padding: 4px 6px;
+            padding: 3px 6px;
             gap: 0px;
         }
 
         .pill-name {
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 700;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            line-height: 1.2;
+            line-height: 1.1;
             color: #e2e8f0;
         }
 
+        .pill-stats-label {
+            font-size: 7px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+            color: rgba(255,255,255,0.25);
+            line-height: 1;
+            margin-top: 1px;
+        }
+
         .pill-stats {
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 500;
             color: var(--text-muted);
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            line-height: 1.2;
+            line-height: 1.1;
             letter-spacing: 0.02em;
         }
 
@@ -515,8 +525,7 @@
 
         function formatStat(val) {
             if (val == null) return '—';
-            if (val >= 1000) return (val / 1000).toFixed(1) + 'k';
-            return String(Math.round(val * 10) / 10);
+            return String(Math.round(val)).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
         }
 
         function getStatsHtml(dcPos, pff) {
@@ -527,44 +536,44 @@
             const parts = [];
             switch (statPos) {
                 case 'QB':
-                    if (s.passYards != null) parts.push(`<span class="stat-val">${formatStat(s.passYards)}</span> YD`);
-                    if (s.passTDs != null) parts.push(`<span class="stat-val">${s.passTDs}</span> TD`);
+                    if (s.passYards != null) parts.push(`<span class="stat-val">${formatStat(s.passYards)}</span> Pass Yds`);
+                    if (s.passTDs != null) parts.push(`<span class="stat-val">${Math.round(s.passTDs)}</span> TDs`);
                     break;
                 case 'RB':
-                    if (s.rushYards != null) parts.push(`<span class="stat-val">${formatStat(s.rushYards)}</span> YD`);
-                    if (s.rushTDs != null) parts.push(`<span class="stat-val">${s.rushTDs}</span> TD`);
+                    if (s.rushYards != null) parts.push(`<span class="stat-val">${formatStat(s.rushYards)}</span> Rush Yds`);
+                    if (s.rushTDs != null) parts.push(`<span class="stat-val">${Math.round(s.rushTDs)}</span> TDs`);
                     break;
                 case 'WR':
                 case 'TE':
-                    if (s.recYards != null) parts.push(`<span class="stat-val">${formatStat(s.recYards)}</span> YD`);
-                    if (s.receptions != null) parts.push(`<span class="stat-val">${s.receptions}</span> REC`);
+                    if (s.recYards != null) parts.push(`<span class="stat-val">${formatStat(s.recYards)}</span> Rec Yds`);
+                    if (s.receptions != null) parts.push(`<span class="stat-val">${Math.round(s.receptions)}</span> Rec`);
                     break;
                 case 'OL':
-                    if (s.pressuresAllowed != null) parts.push(`<span class="stat-val">${s.pressuresAllowed}</span> PRES`);
-                    if (s.runBlockGrade != null) parts.push(`<span class="stat-val">${s.runBlockGrade}</span> RBG`);
+                    if (s.pressuresAllowed != null) parts.push(`<span class="stat-val">${Math.round(s.pressuresAllowed)}</span> Pressures`);
+                    if (s.runBlockGrade != null) parts.push(`<span class="stat-val">${Math.round(s.runBlockGrade)}</span> Run Block`);
                     break;
                 case 'EDGE':
                 case 'DL':
-                    if (s.sacks != null) parts.push(`<span class="stat-val">${s.sacks}</span> SK`);
-                    if (s.totalPressures != null) parts.push(`<span class="stat-val">${s.totalPressures}</span> PRES`);
+                    if (s.sacks != null) parts.push(`<span class="stat-val">${Math.round(s.sacks)}</span> Sacks`);
+                    if (s.totalPressures != null) parts.push(`<span class="stat-val">${Math.round(s.totalPressures)}</span> Pressures`);
                     break;
                 case 'LB':
-                    if (s.tackles != null) parts.push(`<span class="stat-val">${s.tackles}</span> TK`);
-                    if (s.sacks != null) parts.push(`<span class="stat-val">${s.sacks}</span> SK`);
+                    if (s.tackles != null) parts.push(`<span class="stat-val">${Math.round(s.tackles)}</span> Tackles`);
+                    if (s.sacks != null) parts.push(`<span class="stat-val">${Math.round(s.sacks)}</span> Sacks`);
                     break;
                 case 'CB':
-                    if (s.interceptions != null) parts.push(`<span class="stat-val">${s.interceptions}</span> INT`);
-                    if (s.passBreakups != null) parts.push(`<span class="stat-val">${s.passBreakups}</span> PBU`);
+                    if (s.interceptions != null) parts.push(`<span class="stat-val">${Math.round(s.interceptions)}</span> INTs`);
+                    if (s.passBreakups != null) parts.push(`<span class="stat-val">${Math.round(s.passBreakups)}</span> Pass Breakups`);
                     break;
                 case 'S':
-                    if (s.interceptions != null) parts.push(`<span class="stat-val">${s.interceptions}</span> INT`);
-                    if (s.tackles != null) parts.push(`<span class="stat-val">${s.tackles}</span> TK`);
+                    if (s.interceptions != null) parts.push(`<span class="stat-val">${Math.round(s.interceptions)}</span> INTs`);
+                    if (s.tackles != null) parts.push(`<span class="stat-val">${Math.round(s.tackles)}</span> Tackles`);
                     break;
                 case 'K':
-                    if (s.fgPct != null) parts.push(`<span class="stat-val">${s.fgPct}%</span> FG`);
+                    if (s.fgPct != null) parts.push(`<span class="stat-val">${Math.round(s.fgPct)}%</span> FG`);
                     break;
                 case 'P':
-                    if (s.avgYards != null) parts.push(`<span class="stat-val">${s.avgYards}</span> AVG`);
+                    if (s.avgYards != null) parts.push(`<span class="stat-val">${Math.round(s.avgYards)}</span> Avg Yds`);
                     break;
             }
             return parts.join('<span class="stat-sep">·</span>');
@@ -668,19 +677,21 @@
                         nameEl.textContent = row.players[i];
                         body.appendChild(nameEl);
 
-                        const statsEl = document.createElement('div');
-                        statsEl.className = 'pill-stats';
-                        let statsLine = '';
                         if (pff && pff.grade != null) {
-                            statsLine += `<span class="pff-label">PFF</span><span class="pff-badge ${getGradeClass(pff.grade)}">${Math.round(pff.grade)}</span>`;
+                            const pffLine = document.createElement('div');
+                            pffLine.className = 'pill-stats';
+                            pffLine.innerHTML = `<span class="pff-label">PFF</span><span class="pff-badge ${getGradeClass(pff.grade)}">${pff.grade.toFixed(1)}</span>`;
+                            body.appendChild(pffLine);
                         }
                         const posStats = pff ? getStatsHtml(row.pos, pff) : '';
                         if (posStats) {
-                            if (statsLine) statsLine += '<span class="stat-sep">·</span>';
-                            statsLine += posStats;
-                        }
-                        if (statsLine) {
-                            statsEl.innerHTML = statsLine;
+                            const statsLabel = document.createElement('div');
+                            statsLabel.className = 'pill-stats-label';
+                            statsLabel.textContent = '2025 Stats';
+                            body.appendChild(statsLabel);
+                            const statsEl = document.createElement('div');
+                            statsEl.className = 'pill-stats';
+                            statsEl.innerHTML = posStats;
                             body.appendChild(statsEl);
                         }
 
