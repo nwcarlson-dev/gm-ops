@@ -1670,8 +1670,21 @@
                 margin-left: 4px;
             }
 
+            .drafted-pill {
+                font-size: 10px;
+                color: var(--text-muted);
+                margin-top: 1px;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+            .drafted-pill .drafted-pill-pos {
+                color: var(--gold);
+                font-weight: 600;
+                margin-right: 3px;
+            }
             .drafted-player-sentence {
-                font-size: 11px;
+                font-size: 12px;
                 color: var(--silver);
                 font-family: 'Barlow Condensed', sans-serif;
                 margin-top: 2px;
@@ -1680,6 +1693,29 @@
             .drafted-player-sentence strong {
                 color: var(--white);
                 font-weight: 600;
+            }
+            .draft-pick.just-picked {
+                opacity: 1;
+                border-color: rgba(212, 175, 55, 0.4);
+                background: rgba(212, 175, 55, 0.06);
+            }
+            .draft-pick.just-picked .drafted-player-sentence {
+                font-size: 12px;
+            }
+            .trade-announcement {
+                font-size: 11px;
+                color: var(--nfl-red);
+                font-family: 'Barlow Condensed', sans-serif;
+                margin-top: 2px;
+                line-height: 1.3;
+                font-weight: 500;
+            }
+            .trade-announcement .trade-ann-teams {
+                font-weight: 700;
+                color: var(--white);
+            }
+            .trade-announcement .trade-ann-capital {
+                color: var(--silver);
             }
             .draft-pick.current .draft-pick-info .draft-pick-team {
                 font-size: 13px;
@@ -5080,11 +5116,21 @@
                     motivation: null
                 });
 
+                const userGiveSummary = buyerGives.map(function(g) { return g.isPlayer ? g.name : (g.isFuture ? g.year + ' R' + g.round : '#' + g.overall); }).join(', ');
+                const partnerGiveSummary = buyerReceives.map(function(g) { return g.isPlayer ? g.name : (g.isFuture ? g.year + ' R' + g.round : '#' + g.overall); }).join(', ');
+
                 selectedYourPicks.forEach((overall) => {
                     const pick = draftOrder.find((d) => d.overall === overall);
                     if (pick) {
                         pick.team = partner;
                         pick.via = userTeam.name;
+                        pick._traded = true;
+                        pick._tradeAnnouncement = {
+                            seller: userTeam.name,
+                            buyer: partner,
+                            pickNum: overall,
+                            capital: userGiveSummary
+                        };
                     }
                 });
 
@@ -5093,6 +5139,13 @@
                     if (pick) {
                         pick.team = userTeam.name;
                         pick.via = partner;
+                        pick._traded = true;
+                        pick._tradeAnnouncement = {
+                            seller: partner,
+                            buyer: userTeam.name,
+                            pickNum: overall,
+                            capital: partnerGiveSummary
+                        };
                     }
                 });
 
@@ -5332,7 +5385,15 @@
                 });
 
                 const targetPickData = draftOrder.find(d => d.overall === tradePackage.receive[0].overall);
-                if (targetPickData) targetPickData._traded = true;
+                if (targetPickData) {
+                    targetPickData._traded = true;
+                    targetPickData._tradeAnnouncement = {
+                        seller: sellerTeam,
+                        buyer: buyerTeam,
+                        pickNum: tradePackage.receive[0].overall,
+                        capital: tradePackage.give.map(p => p.isFuture ? `${p.year} R${p.round}` : `#${p.overall}`).join(', ')
+                    };
+                }
 
                 const logGives = tradePackage.give.map(p => p.isFuture
                     ? { id: p.id, year: p.year, round: p.round, value: p.value, isFuture: true, originalTeam: p.originalTeam }
@@ -5593,15 +5654,19 @@
                 document.getElementById("draftStatus").textContent =
                     `${currentPickData?.team || "TBD"} on the clock`;
 
+                const justPickedOverall = currentPick - 1;
+
                 document.getElementById("draftOrderList").innerHTML = draftOrder
                     .map((d) => {
                         const isMine = d.team === userTeam.name;
                         const isOnClock = d.overall === currentPick;
                         const isPast = d.overall < currentPick;
+                        const isJustPicked = d.overall === justPickedOverall && d.drafted;
                         let classes = "draft-pick";
                         if (isMine) classes += " user-pick";
                         if (isOnClock) classes += " current";
-                        if (isPast) classes += " past";
+                        if (isPast && !isJustPicked) classes += " past";
+                        if (isJustPicked) classes += " just-picked";
                         const tradeInfo = d.via
                             ? `<span class="via-info">via ${d.via}</span>`
                             : "";
@@ -5609,9 +5674,19 @@
                         const needsDisplay = teamNeeds
                             ? `<div class="draft-pick-needs">${teamNeeds}</div>`
                             : "";
-                        const draftedPlayer = d.drafted
-                            ? `<div class="drafted-player-sentence">The ${d.team} select <strong>${d.drafted.position} ${d.drafted.name}</strong></div>`
-                            : needsDisplay;
+
+                        let pickContent = '';
+                        if (d.drafted && isJustPicked) {
+                            pickContent = `<div class="drafted-player-sentence">The ${d.team} select <strong>${d.drafted.position} ${d.drafted.name}</strong></div>`;
+                        } else if (d.drafted) {
+                            pickContent = `<div class="drafted-pill"><span class="drafted-pill-pos">${d.drafted.position}</span>${d.drafted.name}</div>`;
+                        } else if (isOnClock && d._tradeAnnouncement) {
+                            const ta = d._tradeAnnouncement;
+                            pickContent = `<div class="trade-announcement"><span class="trade-ann-teams">${ta.seller}</span> traded #${ta.pickNum} to <span class="trade-ann-teams">${ta.buyer}</span> for <span class="trade-ann-capital">${ta.capital}</span>. ${d.team} are now on the clock.</div>`;
+                        } else {
+                            pickContent = needsDisplay;
+                        }
+
                         const isCurrent = d.overall === currentPick;
                         const simLabel = isCurrent ? 'Sim' : 'Sim to';
                         const tradeHappened = d._traded;
@@ -5630,7 +5705,7 @@
                         ${getTeamLogo(d.team, 24)}
                         <div class="draft-pick-info">
                             <div class="draft-pick-team">${d.team}${tradeInfo}</div>
-                            ${draftedPlayer}
+                            ${pickContent}
                         </div>
                         ${actionButtons}
                     </div>
