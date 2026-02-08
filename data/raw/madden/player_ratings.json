@@ -1,0 +1,452 @@
+{
+  "trey-mcbride": {
+    "name": "Trey McBride",
+    "team": "ARI",
+    "slug": "trey-mcbride",
+    "position": null,
+    "ovr": null,
+    "archetype": null,
+    "jersey": 85,
+    "ratings": {
+      "general": {},
+      "passing": {},
+      "receiving": {},
+      "ballCarrier": {},
+      "defense": {},
+      "blocking": {},
+      "kicking": {}
+    }
+  },
+  "budda-baker": {
+    "name": "Budda Baker",
+    "team": "ARI",
+    "slug": "budda-baker",
+    "position": null,
+    "ovr": null,
+    "archetype": null,
+    "jersey": 3,
+    "ratings": {
+      "general": {},
+      "passing": {},
+      "receiving": {},
+      "ballCarrier": {},
+      "defense": {},
+      "blocking": {},
+      "kicking": {}
+    }
+  },
+  "josh-sweat": {
+    "name": "Josh Sweat",
+    "team": "ARI",
+    "slug": "josh-sweat",
+    "position": null,
+    "ovr": null,
+    "archetype": null,
+    "jersey": 10,
+    "ratings": {
+      "general": {},
+      "passing": {},
+      "receiving": {},
+      "ballCarrier": {},
+      "defense": {},
+      "blocking": {},
+      "kicking": {}
+    }
+  },
+  "paris-johnson-jr": {
+    "name": "Paris Johnson Jr.",
+    "team": "ARI",
+    "slug": "paris-johnson-jr",
+    "position": null,
+    "ovr": null,
+    "archetype": null,
+    "jersey": 70,
+    "ratings": {
+      "general": {},
+      "passing": {},
+      "receiving": {},
+      "ballCarrier": {},
+      "defense": {},
+      "blocking": {},
+      "kicking": {}
+    }
+  },
+  "hjalte-froholdt": {
+    "name": "Hjalte Froholdt",
+    "team": "ARI",
+    "slug": "hjalte-froholdt",
+    "position": null,
+    "ovr": null,
+    "archetype": null,
+    "jersey": 72,
+    "ratings": {
+      "general": {},
+      "passing": {},
+      "receiving": {},
+      "ballCarrier": {},
+      "defense": {},
+      "blocking": {},
+      "kicking": {}
+    }
+  },
+  "jalen-thompson": {
+    "name": "Jalen Thompson",
+    "team": "ARI",
+    "slug": "jalen-thompson",
+    "position": null,
+    "ovr": null,
+    "archetype": null,
+    "jersey": 34,
+    "ratings": {
+      "general": {},
+      "passing": {},
+      "receiving": {},
+      "ballCarrier": {},
+      "defense": {},
+      "blocking": {},
+      "kicking": {}
+    }
+  },
+  "james-conner": {
+    "name": "James Conner",
+    "team": "ARI",
+    "slug": "james-conner",
+    "position": null,
+    "ovr": null,
+    "archetype": null,
+    "jersey": 6,
+    "ratings": {
+      "general": {},
+      "passing": {},
+      "receiving": {},
+      "ballCarrier": {},
+      "defense": {},
+      "blocking": {},
+      "kicking": {}
+    }
+  },
+  "calais-campbell": {
+    "name": "Calais Campbell",
+    "team": "ARI",
+    "slug": "calais-campbell",
+    "position": null,
+    "ovr": null,
+    "archetype": null,
+    "jersey": 93,
+    "ratings": {
+      "general": {},
+      "passing": {},
+      "receiving": {},
+      "ballCarrier": {},
+      "defense": {},
+      "blocking": {},
+      "kicking": {}
+    }
+  },
+  "michael-wilson": {
+    "name": "Michael Wilson",
+    "team": "ARI",
+    "slug": "michael-wilson",
+    "position": null,
+    "ovr": null,
+    "archetype": null,
+    "jersey": 14,
+    "ratings": {
+      "general": {},
+      "passing": {},
+      "receiving": {},
+      "ballCarrier": {},
+      "defense": {},
+      "blocking": {},
+      "kicking": {}
+    }
+  },
+  "marvin-harrison-jr": {
+    "name": "Marvin Harrison Jr.",
+    "team": "ARI",
+    "slug": "marvin-harrison-jr",
+    "position": null,
+    "ovr": null,
+    "archetype": null,
+    "jersey": 18,
+    "ratings": {
+      "general": {},
+      "passing": {},
+      "receiving": {},
+      "ballCarrier": {},
+      "defense": {},
+      "blocking": {},
+      "kicking": {}
+    }
+  },
+  "mack-wilson": {
+    "name": "Mack Wilson",
+    "team": "ARI",
+    "slug": "mack-wilson",
+    "position": null,
+    "ovr": null,
+    "archetype": null,
+    "jersey": 2,
+    "ratings": {
+      "general": {},
+      "passing": {},
+      "receiving": {},
+      "ballCarrier": {},
+      "defense": {},
+      "blocking": {},
+      "kicking": {}
+    }
+  },
+  "garrett-williams": {
+    "name": "Garrett Williams",
+    "team": "ARI",
+    "slug": "garrett-williams",
+    "position": null,
+    "ovr": null,
+    "archetype": null,
+    "jersey": 21,
+    "ratings": {
+      "general": {},
+      "passing": {},
+      "receiving": {},
+      "ballCarrier": {},
+      "defense": {},
+      "blocking": {},
+      "kicking": {}
+    }
+  },
+  "sean-murphy-bunting": {
+    "name": "Sean Murphy-Bunting",
+    "team": "ARI",
+    "slug": "sean-murphy-bunting",
+    "position": null,
+    "ovr": null,
+    "archetype": null,
+    "jersey": 23,
+    "ratings": {
+      "general": {},
+      "passing": {},
+      "receiving": {},
+      "ballCarrier": {},
+      "defense": {},
+      "blocking": {},
+      "kicking": {}
+    }
+  },
+  "walter-nolen": {
+    "name": "Walter Nolen",
+    "team": "ARI",
+    "slug": "walter-nolen",
+    "position": null,
+    "ovr": null,
+    "archetype": null,
+    "jersey": 97,
+    "ratings": {
+      "general": {},
+      "passing": {},
+      "receiving": {},
+      "ballCarrier": {},
+      "defense": {},
+      "blocking": {},
+      "kicking": {}
+    }
+  },
+  "trey-benson": {
+    "name": "Trey Benson",
+    "team": "ARI",
+    "slug": "trey-benson",
+    "position": null,
+    "ovr": null,
+    "archetype": null,
+    "jersey": 33,
+    "ratings": {
+      "general": {},
+      "passing": {},
+      "receiving": {},
+      "ballCarrier": {},
+      "defense": {},
+      "blocking": {},
+      "kicking": {}
+    }
+  },
+  "will-johnson": {
+    "name": "Will Johnson",
+    "team": "ARI",
+    "slug": "will-johnson",
+    "position": null,
+    "ovr": null,
+    "archetype": null,
+    "jersey": 0,
+    "ratings": {
+      "general": {},
+      "passing": {},
+      "receiving": {},
+      "ballCarrier": {},
+      "defense": {},
+      "blocking": {},
+      "kicking": {}
+    }
+  },
+  "zaven-collins": {
+    "name": "Zaven Collins",
+    "team": "ARI",
+    "slug": "zaven-collins",
+    "position": null,
+    "ovr": null,
+    "archetype": null,
+    "jersey": 25,
+    "ratings": {
+      "general": {},
+      "passing": {},
+      "receiving": {},
+      "ballCarrier": {},
+      "defense": {},
+      "blocking": {},
+      "kicking": {}
+    }
+  },
+  "chad-ryland": {
+    "name": "Chad Ryland",
+    "team": "ARI",
+    "slug": "chad-ryland",
+    "position": null,
+    "ovr": null,
+    "archetype": null,
+    "jersey": 38,
+    "ratings": {
+      "general": {},
+      "passing": {},
+      "receiving": {},
+      "ballCarrier": {},
+      "defense": {},
+      "blocking": {},
+      "kicking": {}
+    }
+  },
+  "dalvin-tomlinson": {
+    "name": "Dalvin Tomlinson",
+    "team": "ARI",
+    "slug": "dalvin-tomlinson",
+    "position": null,
+    "ovr": null,
+    "archetype": null,
+    "jersey": 94,
+    "ratings": {
+      "general": {},
+      "passing": {},
+      "receiving": {},
+      "ballCarrier": {},
+      "defense": {},
+      "blocking": {},
+      "kicking": {}
+    }
+  },
+  "jacoby-brissett": {
+    "name": "Jacoby Brissett",
+    "team": "ARI",
+    "slug": "jacoby-brissett",
+    "position": null,
+    "ovr": null,
+    "archetype": null,
+    "jersey": 7,
+    "ratings": {
+      "general": {},
+      "passing": {},
+      "receiving": {},
+      "ballCarrier": {},
+      "defense": {},
+      "blocking": {},
+      "kicking": {}
+    }
+  },
+  "kyler-murray": {
+    "name": "Kyler Murray",
+    "team": "ARI",
+    "slug": "kyler-murray",
+    "position": null,
+    "ovr": null,
+    "archetype": null,
+    "jersey": 1,
+    "ratings": {
+      "general": {},
+      "passing": {},
+      "receiving": {},
+      "ballCarrier": {},
+      "defense": {},
+      "blocking": {},
+      "kicking": {}
+    }
+  },
+  "zay-jones": {
+    "name": "Zay Jones",
+    "team": "ARI",
+    "slug": "zay-jones",
+    "position": null,
+    "ovr": null,
+    "archetype": null,
+    "jersey": 17,
+    "ratings": {
+      "general": {},
+      "passing": {},
+      "receiving": {},
+      "ballCarrier": {},
+      "defense": {},
+      "blocking": {},
+      "kicking": {}
+    }
+  },
+  "baron-browning": {
+    "name": "Baron Browning",
+    "team": "ARI",
+    "slug": "baron-browning",
+    "position": null,
+    "ovr": null,
+    "archetype": null,
+    "jersey": 5,
+    "ratings": {
+      "general": {},
+      "passing": {},
+      "receiving": {},
+      "ballCarrier": {},
+      "defense": {},
+      "blocking": {},
+      "kicking": {}
+    }
+  },
+  "bilal-nichols": {
+    "name": "Bilal Nichols",
+    "team": "ARI",
+    "slug": "bilal-nichols",
+    "position": null,
+    "ovr": null,
+    "archetype": null,
+    "jersey": 92,
+    "ratings": {
+      "general": {},
+      "passing": {},
+      "receiving": {},
+      "ballCarrier": {},
+      "defense": {},
+      "blocking": {},
+      "kicking": {}
+    }
+  },
+  "blake-gillikin": {
+    "name": "Blake Gillikin",
+    "team": "ARI",
+    "slug": "blake-gillikin",
+    "position": null,
+    "ovr": null,
+    "archetype": null,
+    "jersey": 12,
+    "ratings": {
+      "general": {},
+      "passing": {},
+      "receiving": {},
+      "ballCarrier": {},
+      "defense": {},
+      "blocking": {},
+      "kicking": {}
+    }
+  }
+}
