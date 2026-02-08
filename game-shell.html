@@ -3263,7 +3263,7 @@
                 box-sizing: border-box;
                 transition: background 0.15s, box-shadow 0.15s;
                 white-space: nowrap;
-                overflow: hidden;
+                overflow: visible;
             }
             .player-pill:hover {
                 background: rgba(255,255,255,0.10);
@@ -3350,17 +3350,14 @@
             }
 
             .pill-action-menu {
-                position: absolute;
-                top: 100%;
-                right: 0;
-                margin-top: 4px;
-                background: rgba(15, 23, 42, 0.95);
+                position: fixed;
+                background: rgba(15, 23, 42, 0.98);
                 backdrop-filter: blur(12px);
                 border: 1px solid var(--card-border);
                 border-radius: 6px;
                 padding: 4px 0;
-                min-width: 160px;
-                z-index: 500;
+                min-width: 170px;
+                z-index: 9999;
                 box-shadow: 0 8px 24px rgba(0,0,0,0.5);
             }
             .pill-action-item {
@@ -8321,8 +8318,16 @@
                 const menu = document.createElement('div');
                 menu.className = 'pill-action-menu';
                 menu.innerHTML = menuItems;
-                const pill = btn.closest('.player-pill');
-                pill.appendChild(menu);
+                document.body.appendChild(menu);
+                const btnRect = btn.getBoundingClientRect();
+                let top = btnRect.bottom + 4;
+                let left = btnRect.right - menu.offsetWidth;
+                if (left < 8) left = 8;
+                if (top + menu.offsetHeight > window.innerHeight - 8) {
+                    top = btnRect.top - menu.offsetHeight - 4;
+                }
+                menu.style.top = top + 'px';
+                menu.style.left = left + 'px';
                 activePillMenu = menu;
                 setTimeout(() => {
                     document.addEventListener('click', closePillMenuOnOutside, { once: true });
