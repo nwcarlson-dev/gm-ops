@@ -568,15 +568,17 @@ CPU teams evaluate trade-up opportunities before each pick using a **motivation 
 
 | Factor | Points | Description |
 |--------|--------|-------------|
-| **Board Gap** | gap × 0.6 | How much higher the prospect is on team's board vs their pick position |
+| **Board Gap** | gap × 0.6 | How much higher the prospect is on team's board vs their pick position (min gap: 8) |
 | **Primary Need** | +15 | Prospect fills a primary team need |
 | **Secondary Need** | +7 | Prospect fills a secondary need |
 | **Position Premium** | +4 to +12 | QB (12 if top 10), EDGE/OT (6 if top 15), WR (4 if top 12) |
-| **Risk of Loss** | +3 to +14 | Higher when fewer picks separate team from target (14 if ≤5 spots) |
+| **Risk of Loss** | +1 to +8 | Higher when fewer picks separate team from target (8 if ≤5 spots) |
 
-**Trade threshold**: Motivation ≥ 18 triggers trade evaluation
+**Trade threshold**: Motivation ≥ 28 triggers trade evaluation (calibrated Feb 8, 2026 to produce ~5-6 first-round trades matching real NFL data)
 
-**Trade probability**: `min(0.35, (motivation - 18) × 0.03 + 0.08)` — higher motivation = more likely to trade
+**Trade probability (CPU-CPU)**: `min(0.18, (motivation - 28) × 0.02 + 0.05)` — 6 teams evaluated per pick
+
+**Trade probability (CPU-User)**: `min(0.15, (motivation - 28) × 0.018 + 0.04)` — 5 teams evaluated per pick
 
 #### Trade Package Building
 
@@ -588,18 +590,35 @@ CPU teams evaluate trade-up opportunities before each pick using a **motivation 
 
 | Type | Behavior |
 |------|----------|
-| **CPU-to-CPU** | Executes automatically, appears in ticker, brief pause on Normal/Slow |
+| **CPU-to-CPU** | Executes automatically, announced inline on draft board, brief pause on Normal/Slow |
 | **CPU-to-User** | Always pauses the draft regardless of speed. User can Accept, Decline, or Counter |
-| **User-Initiated** | User opens Trade Center modal, selects picks, proposes trade |
+| **User-Initiated** | User opens Trade Center modal, selects picks/players, proposes trade |
+
+#### Player Trading (Added Feb 8, 2026)
+
+The Trade Center supports trading rostered players alongside draft picks:
+- Player trade values loaded from `data/teams/player_trade_values.json`
+- Players displayed by position with trade value, organized in collapsible sections
+- Player values included in trade balance calculations alongside pick values
+- On trade execution, players are transferred between team rosters (spliced from source, pushed to destination)
+- Both user-initiated and CPU trades can include players
+
+#### Draft Board Announcements (Replaced Ticker Feb 8, 2026)
+
+The ticker system was removed. Pick announcements now display inline on the draft board:
+- Past picks show sentence-style: "The [Team] select **[POS] [Name]**"
+- Trade indicators appear on the "Trade for" action button with animation
+- Current pick is prominent with team branding
+- Future picks show team needs subtly as placeholders
 
 #### Speed-Based Trade Behavior
 
-| Speed | CPU-CPU Trade Pause | Ticker Picks | CPU-User Offers |
-|-------|-------------------|--------------|-----------------|
-| Instant | No pause | Skipped | Always pause |
-| Fast | 400ms pause | Shown | Always pause |
-| Normal | 1200ms pause | Shown | Always pause |
-| Slow | 1200ms pause | Shown | Always pause |
+| Speed | CPU-CPU Trade Pause | CPU-User Offers |
+|-------|-------------------|-----------------|
+| Instant | No pause | Always pause |
+| Fast | 400ms pause | Always pause |
+| Normal | 1200ms pause | Always pause |
+| Slow | 1200ms pause | Always pause |
 
 #### CPU-to-User Trade Offers
 
