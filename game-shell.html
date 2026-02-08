@@ -431,6 +431,14 @@
                 background: var(--nfl-red);
             }
 
+            .team-logo-img,
+            .college-logo-img {
+                flex-shrink: 0;
+                object-fit: contain;
+            }
+            .college-logo-img {
+                border-radius: 4px;
+            }
             .team-logo-gradient {
                 border-radius: 50%;
                 display: flex;
@@ -3970,246 +3978,41 @@
             };
 
             const TEAM_DATA = {
-                Raiders: { abbr: "LV", name: "Las Vegas Raiders", color: "#000000", color2: "#A5ACAF" },
-                Jets: { abbr: "NYJ", name: "New York Jets", color: "#125740", color2: "#000000" },
-                Cardinals: { abbr: "ARI", name: "Arizona Cardinals", color: "#97233F", color2: "#000000" },
-                Titans: { abbr: "TEN", name: "Tennessee Titans", color: "#4B92DB", color2: "#0C2340" },
-                Giants: { abbr: "NYG", name: "New York Giants", color: "#0B2265", color2: "#A71930" },
-                Browns: { abbr: "CLE", name: "Cleveland Browns", color: "#311D00", color2: "#FF3C00" },
-                Commanders: { abbr: "WAS", name: "Washington Commanders", color: "#5A1414", color2: "#FFB612" },
-                Saints: { abbr: "NO", name: "New Orleans Saints", color: "#D3BC8D", color2: "#101820" },
-                Chiefs: { abbr: "KC", name: "Kansas City Chiefs", color: "#E31837", color2: "#FFB81C" },
-                Bengals: { abbr: "CIN", name: "Cincinnati Bengals", color: "#FB4F14", color2: "#000000" },
-                Dolphins: { abbr: "MIA", name: "Miami Dolphins", color: "#008E97", color2: "#FC4C02" },
-                Cowboys: { abbr: "DAL", name: "Dallas Cowboys", color: "#003594", color2: "#869397" },
-                Rams: { abbr: "LAR", name: "Los Angeles Rams", color: "#003594", color2: "#FFA300" },
-                Ravens: { abbr: "BAL", name: "Baltimore Ravens", color: "#241773", color2: "#9E7C0C" },
-                Buccaneers: { abbr: "TB", name: "Tampa Bay Buccaneers", color: "#D50A0A", color2: "#34302B" },
-                Falcons: { abbr: "ATL", name: "Atlanta Falcons", color: "#A71930", color2: "#000000" },
-                Lions: { abbr: "DET", name: "Detroit Lions", color: "#0076B6", color2: "#B0B7BC" },
-                Vikings: { abbr: "MIN", name: "Minnesota Vikings", color: "#4F2683", color2: "#FFC62F" },
-                Panthers: { abbr: "CAR", name: "Carolina Panthers", color: "#0085CA", color2: "#101820" },
-                Jaguars: { abbr: "JAX", name: "Jacksonville Jaguars", color: "#006778", color2: "#D7A22A" },
-                Steelers: { abbr: "PIT", name: "Pittsburgh Steelers", color: "#FFB612", color2: "#101820" },
-                Chargers: { abbr: "LAC", name: "Los Angeles Chargers", color: "#0080C6", color2: "#FFC20E" },
-                Eagles: { abbr: "PHI", name: "Philadelphia Eagles", color: "#004C54", color2: "#A5ACAF" },
-                Colts: { abbr: "IND", name: "Indianapolis Colts", color: "#002C5F", color2: "#A2AAAD" },
-                Bears: { abbr: "CHI", name: "Chicago Bears", color: "#0B162A", color2: "#C83803" },
-                Bills: { abbr: "BUF", name: "Buffalo Bills", color: "#00338D", color2: "#C60C30" },
-                "49ers": { abbr: "SF", name: "San Francisco 49ers", color: "#AA0000", color2: "#B3995D" },
-                Texans: { abbr: "HOU", name: "Houston Texans", color: "#03202F", color2: "#A71930" },
-                Packers: { abbr: "GB", name: "Green Bay Packers", color: "#203731", color2: "#FFB612" },
-                Patriots: { abbr: "NE", name: "New England Patriots", color: "#002244", color2: "#C60C30" },
-                Broncos: { abbr: "DEN", name: "Denver Broncos", color: "#FB4F14", color2: "#002244" },
-                Seahawks: { abbr: "SEA", name: "Seattle Seahawks", color: "#002244", color2: "#69BE28" },
+                Raiders: { abbr: "LV", name: "Las Vegas Raiders", color: "#000000", color2: "#A5ACAF", espn: "lv" },
+                Jets: { abbr: "NYJ", name: "New York Jets", color: "#125740", color2: "#000000", espn: "nyj" },
+                Cardinals: { abbr: "ARI", name: "Arizona Cardinals", color: "#97233F", color2: "#000000", espn: "ari" },
+                Titans: { abbr: "TEN", name: "Tennessee Titans", color: "#4B92DB", color2: "#0C2340", espn: "ten" },
+                Giants: { abbr: "NYG", name: "New York Giants", color: "#0B2265", color2: "#A71930", espn: "nyg" },
+                Browns: { abbr: "CLE", name: "Cleveland Browns", color: "#311D00", color2: "#FF3C00", espn: "cle" },
+                Commanders: { abbr: "WAS", name: "Washington Commanders", color: "#5A1414", color2: "#FFB612", espn: "wsh" },
+                Saints: { abbr: "NO", name: "New Orleans Saints", color: "#D3BC8D", color2: "#101820", espn: "no" },
+                Chiefs: { abbr: "KC", name: "Kansas City Chiefs", color: "#E31837", color2: "#FFB81C", espn: "kc" },
+                Bengals: { abbr: "CIN", name: "Cincinnati Bengals", color: "#FB4F14", color2: "#000000", espn: "cin" },
+                Dolphins: { abbr: "MIA", name: "Miami Dolphins", color: "#008E97", color2: "#FC4C02", espn: "mia" },
+                Cowboys: { abbr: "DAL", name: "Dallas Cowboys", color: "#003594", color2: "#869397", espn: "dal" },
+                Rams: { abbr: "LAR", name: "Los Angeles Rams", color: "#003594", color2: "#FFA300", espn: "lar" },
+                Ravens: { abbr: "BAL", name: "Baltimore Ravens", color: "#241773", color2: "#9E7C0C", espn: "bal" },
+                Buccaneers: { abbr: "TB", name: "Tampa Bay Buccaneers", color: "#D50A0A", color2: "#34302B", espn: "tb" },
+                Falcons: { abbr: "ATL", name: "Atlanta Falcons", color: "#A71930", color2: "#000000", espn: "atl" },
+                Lions: { abbr: "DET", name: "Detroit Lions", color: "#0076B6", color2: "#B0B7BC", espn: "det" },
+                Vikings: { abbr: "MIN", name: "Minnesota Vikings", color: "#4F2683", color2: "#FFC62F", espn: "min" },
+                Panthers: { abbr: "CAR", name: "Carolina Panthers", color: "#0085CA", color2: "#101820", espn: "car" },
+                Jaguars: { abbr: "JAX", name: "Jacksonville Jaguars", color: "#006778", color2: "#D7A22A", espn: "jax" },
+                Steelers: { abbr: "PIT", name: "Pittsburgh Steelers", color: "#FFB612", color2: "#101820", espn: "pit" },
+                Chargers: { abbr: "LAC", name: "Los Angeles Chargers", color: "#0080C6", color2: "#FFC20E", espn: "lac" },
+                Eagles: { abbr: "PHI", name: "Philadelphia Eagles", color: "#004C54", color2: "#A5ACAF", espn: "phi" },
+                Colts: { abbr: "IND", name: "Indianapolis Colts", color: "#002C5F", color2: "#A2AAAD", espn: "ind" },
+                Bears: { abbr: "CHI", name: "Chicago Bears", color: "#0B162A", color2: "#C83803", espn: "chi" },
+                Bills: { abbr: "BUF", name: "Buffalo Bills", color: "#00338D", color2: "#C60C30", espn: "buf" },
+                "49ers": { abbr: "SF", name: "San Francisco 49ers", color: "#AA0000", color2: "#B3995D", espn: "sf" },
+                Texans: { abbr: "HOU", name: "Houston Texans", color: "#03202F", color2: "#A71930", espn: "hou" },
+                Packers: { abbr: "GB", name: "Green Bay Packers", color: "#203731", color2: "#FFB612", espn: "gb" },
+                Patriots: { abbr: "NE", name: "New England Patriots", color: "#002244", color2: "#C60C30", espn: "ne" },
+                Broncos: { abbr: "DEN", name: "Denver Broncos", color: "#FB4F14", color2: "#002244", espn: "den" },
+                Seahawks: { abbr: "SEA", name: "Seattle Seahawks", color: "#002244", color2: "#69BE28", espn: "sea" },
             };
 
-            const COLLEGE_DATA = {
-                Alabama: { abbr: "ALA", color: "#9E1B32", color2: "#828A8F" },
-                Arizona: { abbr: "ARIZ", color: "#CC0033", color2: "#003366" },
-                "Arizona State": {
-                    abbr: "ASU",
-                    color: "#8C1D40",
-                    color2: "#FFC627",
-                },
-                Arkansas: { abbr: "ARK", color: "#9D2235", color2: "#000000" },
-                Auburn: { abbr: "AUB", color: "#0C2340", color2: "#E87722" },
-                Baylor: { abbr: "BAY", color: "#154734", color2: "#FFB81C" },
-                "Boise State": {
-                    abbr: "BSU",
-                    color: "#0033A0",
-                    color2: "#D64309",
-                },
-                "Boston College": {
-                    abbr: "BC",
-                    color: "#8C2633",
-                    color2: "#B29D6C",
-                },
-                BYU: { abbr: "BYU", color: "#002E5D", color2: "#FFFFFF" },
-                California: {
-                    abbr: "CAL",
-                    color: "#003262",
-                    color2: "#FDB515",
-                },
-                Cincinnati: {
-                    abbr: "CIN",
-                    color: "#E00122",
-                    color2: "#000000",
-                },
-                Clemson: { abbr: "CLEM", color: "#F56600", color2: "#522D80" },
-                Colorado: { abbr: "COLO", color: "#CFB87C", color2: "#000000" },
-                Duke: { abbr: "DUKE", color: "#003087", color2: "#FFFFFF" },
-                "East Carolina": {
-                    abbr: "ECU",
-                    color: "#592A8A",
-                    color2: "#FFC72C",
-                },
-                Florida: { abbr: "UF", color: "#0021A5", color2: "#FA4616" },
-                "Florida State": {
-                    abbr: "FSU",
-                    color: "#782F40",
-                    color2: "#CEB888",
-                },
-                Georgia: { abbr: "UGA", color: "#BA0C2F", color2: "#000000" },
-                Houston: { abbr: "HOU", color: "#C8102E", color2: "#FFFFFF" },
-                Illinois: { abbr: "ILL", color: "#E84A27", color2: "#13294B" },
-                Indiana: { abbr: "IU", color: "#990000", color2: "#EEEDEB" },
-                Iowa: { abbr: "IOWA", color: "#FFCD00", color2: "#000000" },
-                "Iowa State": {
-                    abbr: "ISU",
-                    color: "#C8102E",
-                    color2: "#F1BE48",
-                },
-                Kansas: { abbr: "KU", color: "#0051BA", color2: "#E8000D" },
-                "Kansas State": {
-                    abbr: "KSU",
-                    color: "#512888",
-                    color2: "#FFFFFF",
-                },
-                Kentucky: { abbr: "UK", color: "#0033A0", color2: "#FFFFFF" },
-                Louisville: {
-                    abbr: "LOU",
-                    color: "#AD0000",
-                    color2: "#000000",
-                },
-                LSU: { abbr: "LSU", color: "#461D7C", color2: "#FDD023" },
-                Maryland: { abbr: "MD", color: "#E03A3E", color2: "#FFD520" },
-                Miami: { abbr: "MIA", color: "#F47321", color2: "#005030" },
-                "Miami (FL)": {
-                    abbr: "MIA",
-                    color: "#F47321",
-                    color2: "#005030",
-                },
-                Michigan: { abbr: "MICH", color: "#00274C", color2: "#FFCB05" },
-                "Michigan State": {
-                    abbr: "MSU",
-                    color: "#18453B",
-                    color2: "#FFFFFF",
-                },
-                Minnesota: {
-                    abbr: "MINN",
-                    color: "#7A0019",
-                    color2: "#FFCC33",
-                },
-                "Mississippi State": {
-                    abbr: "MSST",
-                    color: "#660000",
-                    color2: "#FFFFFF",
-                },
-                Missouri: { abbr: "MIZ", color: "#F1B82D", color2: "#000000" },
-                Nebraska: { abbr: "NEB", color: "#E41C38", color2: "#F5F1E7" },
-                "North Carolina": {
-                    abbr: "UNC",
-                    color: "#7BAFD4",
-                    color2: "#13294B",
-                },
-                "North Dakota State": {
-                    abbr: "NDSU",
-                    color: "#0A5640",
-                    color2: "#FFC72C",
-                },
-                Northwestern: {
-                    abbr: "NW",
-                    color: "#4E2A84",
-                    color2: "#FFFFFF",
-                },
-                "Notre Dame": {
-                    abbr: "ND",
-                    color: "#0C2340",
-                    color2: "#C99700",
-                },
-                "Ohio State": {
-                    abbr: "OSU",
-                    color: "#BB0000",
-                    color2: "#666666",
-                },
-                Oklahoma: { abbr: "OU", color: "#841617", color2: "#FDF9D8" },
-                "Oklahoma State": {
-                    abbr: "OKST",
-                    color: "#FF7300",
-                    color2: "#000000",
-                },
-                "Ole Miss": {
-                    abbr: "MISS",
-                    color: "#CE1126",
-                    color2: "#14213D",
-                },
-                Oregon: { abbr: "ORE", color: "#154733", color2: "#FEE123" },
-                "Oregon State": {
-                    abbr: "ORST",
-                    color: "#DC4405",
-                    color2: "#000000",
-                },
-                "Penn State": {
-                    abbr: "PSU",
-                    color: "#041E42",
-                    color2: "#FFFFFF",
-                },
-                Pittsburgh: {
-                    abbr: "PITT",
-                    color: "#003594",
-                    color2: "#FFB81C",
-                },
-                Purdue: { abbr: "PUR", color: "#CEB888", color2: "#000000" },
-                Rutgers: { abbr: "RUT", color: "#CC0033", color2: "#5F6A72" },
-                SMU: { abbr: "SMU", color: "#0033A0", color2: "#C8102E" },
-                "South Carolina": {
-                    abbr: "SC",
-                    color: "#73000A",
-                    color2: "#000000",
-                },
-                Stanford: { abbr: "STAN", color: "#8C1515", color2: "#FFFFFF" },
-                Syracuse: { abbr: "SYR", color: "#F76900", color2: "#002D72" },
-                TCU: { abbr: "TCU", color: "#4D1979", color2: "#A3A9AC" },
-                Tennessee: {
-                    abbr: "TENN",
-                    color: "#FF8200",
-                    color2: "#FFFFFF",
-                },
-                Texas: { abbr: "TEX", color: "#BF5700", color2: "#FFFFFF" },
-                "Texas A&M": {
-                    abbr: "TAMU",
-                    color: "#500000",
-                    color2: "#FFFFFF",
-                },
-                "Texas Tech": {
-                    abbr: "TTU",
-                    color: "#CC0000",
-                    color2: "#000000",
-                },
-                Tulane: { abbr: "TUL", color: "#006747", color2: "#87CEEB" },
-                UCF: { abbr: "UCF", color: "#BA9B37", color2: "#000000" },
-                UCLA: { abbr: "UCLA", color: "#2D68C4", color2: "#F2A900" },
-                USC: { abbr: "USC", color: "#990000", color2: "#FFC72C" },
-                Utah: { abbr: "UTAH", color: "#CC0000", color2: "#FFFFFF" },
-                Vanderbilt: {
-                    abbr: "VAN",
-                    color: "#866D4B",
-                    color2: "#000000",
-                },
-                Virginia: { abbr: "UVA", color: "#232D4B", color2: "#F84C1E" },
-                "Virginia Tech": {
-                    abbr: "VT",
-                    color: "#630031",
-                    color2: "#CF4420",
-                },
-                "Wake Forest": {
-                    abbr: "WAKE",
-                    color: "#9E7E38",
-                    color2: "#000000",
-                },
-                Washington: {
-                    abbr: "WASH",
-                    color: "#4B2E83",
-                    color2: "#B7A57A",
-                },
-                "West Virginia": {
-                    abbr: "WVU",
-                    color: "#002855",
-                    color2: "#EAAA00",
-                },
-                Wisconsin: { abbr: "WIS", color: "#C5050C", color2: "#FFFFFF" },
-            };
+            let ESPN_COLLEGE_IDS = {};
 
             const urlTeamRaw = urlParams.get('team');
 
@@ -4301,14 +4104,21 @@
                 const team = TEAM_DATA[teamName];
                 if (!team)
                     return `<div class="team-logo-gradient" style="width:${size}px;height:${size}px;background:#333;font-size:${size / 3}px;">?</div>`;
-                return `<div class="team-logo-gradient" style="width:${size}px;height:${size}px;background:linear-gradient(135deg,${team.color} 60%,${team.color2} 100%);font-size:${size / 3.5}px;">${team.abbr}</div>`;
+                const url = `https://a.espncdn.com/i/teamlogos/nfl/500/${team.espn}.png`;
+                const fallback = `this.style.display='none';this.nextElementSibling.style.display='flex'`;
+                return `<img src="${url}" alt="${team.abbr}" width="${size}" height="${size}" class="team-logo-img" onerror="${fallback}"><div class="team-logo-gradient" style="display:none;width:${size}px;height:${size}px;background:linear-gradient(135deg,${team.color} 60%,${team.color2} 100%);font-size:${size / 3.5}px;">${team.abbr}</div>`;
             }
 
             function getCollegeLogo(school, size = 40) {
-                const college = COLLEGE_DATA[school];
-                if (!college)
-                    return `<div class="team-logo-gradient" style="width:${size}px;height:${size}px;background:#333;font-size:${size / 4}px;border-radius:6px;">${school.substring(0, 3).toUpperCase()}</div>`;
-                return `<div class="team-logo-gradient" style="width:${size}px;height:${size}px;background:linear-gradient(135deg,${college.color} 60%,${college.color2} 100%);font-size:${size / 4}px;border-radius:6px;">${college.abbr}</div>`;
+                const espnId = ESPN_COLLEGE_IDS[school];
+                if (!espnId) {
+                    const abbr = (school || '').substring(0, 3).toUpperCase();
+                    return `<div class="team-logo-gradient" style="width:${size}px;height:${size}px;background:#333;font-size:${size / 4}px;border-radius:6px;">${abbr}</div>`;
+                }
+                const url = `https://a.espncdn.com/i/teamlogos/ncaa/500/${espnId}.png`;
+                const abbr = (school || '').substring(0, 4).toUpperCase();
+                const fallback = `this.style.display='none';this.nextElementSibling.style.display='flex'`;
+                return `<img src="${url}" alt="${abbr}" width="${size}" height="${size}" class="college-logo-img" onerror="${fallback}"><div class="team-logo-gradient" style="display:none;width:${size}px;height:${size}px;background:#333;font-size:${size / 4}px;border-radius:6px;">${abbr}</div>`;
             }
 
             function getPositionClass(pos) {
@@ -6340,10 +6150,12 @@
                     teamSchemes = (teamSchemesData && teamSchemesData.teams) || {};
                     allDepthCharts = depthChartsData || {};
 
-                    const [playerTradeData, detailedNeedsData] = await Promise.all([
+                    const [playerTradeData, detailedNeedsData, collegeIdData] = await Promise.all([
                         safeFetch("data/teams/player_trade_values.json"),
-                        safeFetch("data/teams/team_needs_detailed.json")
+                        safeFetch("data/teams/team_needs_detailed.json"),
+                        safeFetch("data/espn_college_ids.json")
                     ]);
+                    ESPN_COLLEGE_IDS = collegeIdData || {};
                     allPlayerTradeValues = playerTradeData ? (playerTradeData.teams || {}) : {};
                     detailedTeamNeeds = detailedNeedsData ? (detailedNeedsData.teams || {}) : {};
 

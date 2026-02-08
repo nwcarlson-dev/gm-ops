@@ -733,6 +733,21 @@
             Bills: "#00338D", Lions: "#0076B6", Broncos: "#FB4F14", Patriots: "#002244"
         };
 
+        const ESPN_TEAM_ABBR = {
+            Raiders:"lv",Jets:"nyj",Cardinals:"ari",Titans:"ten",Giants:"nyg",Browns:"cle",
+            Commanders:"wsh",Saints:"no",Chiefs:"kc",Bengals:"cin",Dolphins:"mia",Cowboys:"dal",
+            Rams:"lar",Ravens:"bal",Buccaneers:"tb",Falcons:"atl",Lions:"det",Vikings:"min",
+            Panthers:"car",Jaguars:"jax",Steelers:"pit",Chargers:"lac",Eagles:"phi",Colts:"ind",
+            Bears:"chi",Bills:"buf","49ers":"sf",Texans:"hou",Packers:"gb",Patriots:"ne",
+            Broncos:"den",Seahawks:"sea"
+        };
+
+        function getTeamLogoHTML(teamName, size = 24) {
+            const abbr = ESPN_TEAM_ABBR[teamName];
+            if (!abbr) return '';
+            return `<img src="https://a.espncdn.com/i/teamlogos/nfl/500/${abbr}.png" alt="${teamName}" style="width:${size}px;height:${size}px;object-fit:contain;flex-shrink:0;" onerror="this.style.display='none'">`;
+        }
+
         async function loadData() {
             try {
                 const liveData = localStorage.getItem('gmops_live_draft_results');
@@ -912,7 +927,7 @@
             else if (valueDiff <= 10) { valueLabel = 'Fair Value'; valueClass = 'fair'; }
             else { valueLabel = `Reach (${valueDiff})`; valueClass = 'reach'; }
 
-            const teamLabel = showTeam ? `${pick.team}${via}` : `${pick.player.school}`;
+            const teamLabel = showTeam ? `<div style="display:flex;align-items:center;gap:6px;">${getTeamLogoHTML(pick.team, 22)}<span>${pick.team}${via}</span></div>` : `${pick.player.school}`;
 
             const needTag = pick.analysis.needLevel === 'primary' ? '<span class="tag tag-primary">Key Need</span>' :
                             pick.analysis.needLevel === 'secondary' ? '<span class="tag tag-secondary">Need</span>' :
@@ -990,7 +1005,10 @@
                 <div class="overview-grid">
                     <div class="grade-card">
                         <div class="grade-circle ${gradeClass(grade)}">${grade}</div>
-                        <div class="grade-label">${teamName} Draft Grade</div>
+                        <div style="display:flex;align-items:center;gap:8px;margin-bottom:4px;justify-content:center;">
+                            ${getTeamLogoHTML(teamName, 28)}
+                            <div class="grade-label">${teamName} Draft Grade</div>
+                        </div>
                         <div class="grade-summary">${gradeSummaryText}</div>
                     </div>
                     <div>
@@ -1101,7 +1119,7 @@
                         <div class="pick-header" style="grid-template-columns: 40px 1fr 120px 60px;">
                             <div class="pick-number" style="font-size:18px;">${rank + 1}</div>
                             <div class="pick-player-info">
-                                <div class="pick-player-name" style="font-size:15px;">${teamName} ${isUser ? '<span class="tag tag-primary">Your Team</span>' : ''}</div>
+                                <div class="pick-player-name" style="font-size:15px;display:flex;align-items:center;gap:6px;">${getTeamLogoHTML(teamName, 20)}${teamName} ${isUser ? '<span class="tag tag-primary">Your Team</span>' : ''}</div>
                                 <div class="pick-player-meta">${teamPicks.length} picks · ${primaryFilled + secondaryFilled} needs filled · ${summary.trades} trades</div>
                             </div>
                             <div class="pick-value-badge fair">${summary.offScheme || ''}</div>
@@ -1146,7 +1164,7 @@
                     <div class="trade-row">
                         <span class="trade-badge up">TRADE</span>
                         <div class="trade-text">
-                            The <strong>${trade.buyer}</strong> trade picks ${gives} to the <strong>${trade.seller}</strong> for pick ${gets}
+                            The <strong style="display:flex;align-items:center;gap:4px;"><span>${getTeamLogoHTML(trade.buyer, 18)}</span><span>${trade.buyer}</span></strong> trade picks ${gives} to the <strong style="display:flex;align-items:center;gap:4px;"><span>${getTeamLogoHTML(trade.seller, 18)}</span><span>${trade.seller}</span></strong> for pick ${gets}
                             ${trade.motivation ? ` — targeting ${trade.motivation.targetPosition} ${trade.motivation.targetPlayer}` : ''}
                         </div>
                         <div class="trade-value-tag ${isOverpay ? 'value-negative' : 'value-positive'}">

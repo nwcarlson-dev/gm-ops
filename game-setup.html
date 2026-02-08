@@ -345,6 +345,13 @@
       flex-shrink: 0;
     }
 
+    .team-card-logo {
+      width: 36px;
+      height: 36px;
+      object-fit: contain;
+      flex-shrink: 0;
+    }
+
     .team-info {
       flex: 1;
       min-width: 0;
@@ -1172,6 +1179,17 @@
       'Colts': 'IND', 'Falcons': 'ATL', 'Packers': 'GB', 'Cardinals': 'ARI',
     };
 
+    const ESPN_TEAM_ABBR = {
+      'Raiders': 'lv', 'Jets': 'nyj', 'Cardinals': 'ari', 'Titans': 'ten',
+      'Giants': 'nyg', 'Browns': 'cle', 'Commanders': 'wsh', 'Saints': 'no',
+      'Chiefs': 'kc', 'Bengals': 'cin', 'Dolphins': 'mia', 'Cowboys': 'dal',
+      'Rams': 'lar', 'Ravens': 'bal', 'Buccaneers': 'tb', 'Falcons': 'atl',
+      'Lions': 'det', 'Vikings': 'min', 'Panthers': 'car', 'Jaguars': 'jax',
+      'Steelers': 'pit', 'Chargers': 'lac', 'Eagles': 'phi', 'Colts': 'ind',
+      'Bears': 'chi', 'Bills': 'buf', '49ers': 'sf', 'Texans': 'hou',
+      'Packers': 'gb', 'Patriots': 'ne', 'Broncos': 'den', 'Seahawks': 'sea'
+    };
+
     function initializeMode() {
       document.getElementById('logoProduct').textContent = gameMode === 'offseason' ? 'Offseason' : 'Draft';
 
@@ -1608,7 +1626,7 @@
         
         card.innerHTML = `
           <div class="team-main">
-            <div class="team-color" style="background: linear-gradient(180deg, ${t.c} 0%, ${adjustColor(t.c, -30)} 100%)"></div>
+            <img src="https://a.espncdn.com/i/teamlogos/nfl/500/${ESPN_TEAM_ABBR[t.n] || 'nfl'}.png" alt="${t.n}" class="team-card-logo" onerror="this.style.display='none';this.nextElementSibling.style.display='block'"><div class="team-color" style="display:none;background: linear-gradient(180deg, ${t.c} 0%, ${adjustColor(t.c, -30)} 100%)"></div>
             <div class="team-info">
               <div class="team-name-row">
                 <span class="pick-number">#${t.p}</span>
