@@ -295,9 +295,24 @@
         }
 
         .pos-pill.insert-target {
-            background: rgba(74, 222, 128, 0.1);
+            background: rgba(74, 222, 128, 0.12);
             border-color: rgba(74, 222, 128, 0.35);
             box-shadow: inset 0 0 0 1px rgba(74, 222, 128, 0.1);
+        }
+
+        .pos-pill.drag-source.insert-target {
+            opacity: 0.35;
+            background: rgba(74, 222, 128, 0.12);
+            border-color: rgba(74, 222, 128, 0.35);
+            box-shadow: inset 0 0 0 1px rgba(74, 222, 128, 0.1);
+        }
+
+        .pos-pill.drop-ghost {
+            opacity: 0.35;
+            background: rgba(74, 222, 128, 0.12);
+            border-color: rgba(74, 222, 128, 0.35);
+            box-shadow: inset 0 0 0 1px rgba(74, 222, 128, 0.1);
+            pointer-events: none;
         }
 
         .pos-pill.starter {
@@ -679,7 +694,8 @@
                     if (fromIndex < hoverIndex) effectiveInsert--;
                     if (effectiveInsert === fromIndex) return;
 
-                    pills[effectiveInsert].classList.add('insert-target');
+                    pill.style.transform = `translateX(${(effectiveInsert - fromIndex) * shift}px)`;
+                    pill.classList.add('insert-target');
 
                     pills.forEach((p, i) => {
                         if (i === fromIndex) return;
@@ -709,9 +725,20 @@
                     const targetPills = Array.from(targetRow.children);
                     const targetShift = targetPills[0].getBoundingClientRect().width + gap;
                     const clampedIndex = Math.min(hoverIndex, targetPills.length - 1);
-                    targetPills[clampedIndex].classList.add('insert-target');
-                    targetPills.forEach((p, i) => {
-                        if (i >= clampedIndex && !p.classList.contains('empty-slot')) {
+                    const ghost = document.createElement('div');
+                    ghost.className = 'pos-pill drop-ghost';
+                    ghost.dataset.ghost = 'true';
+                    const nameEl = document.createElement('span');
+                    nameEl.className = 'pill-name';
+                    nameEl.textContent = pill.querySelector('.pill-name').textContent;
+                    ghost.appendChild(nameEl);
+                    targetRow.insertBefore(ghost, targetPills[clampedIndex]);
+
+                    const updatedPills = Array.from(targetRow.children);
+                    updatedPills.forEach((p, i) => {
+                        if (p.dataset.ghost) return;
+                        if (p.classList.contains('empty-slot')) return;
+                        if (i > clampedIndex) {
                             p.style.transform = `translateX(${targetShift}px)`;
                             p.classList.add('shift-preview');
                         }
@@ -720,6 +747,11 @@
             }
 
             function clearPreview() {
+                if (dragState && dragState.pill) {
+                    dragState.pill.classList.remove('insert-target');
+                    dragState.pill.style.transform = '';
+                }
+                document.querySelectorAll('.drop-ghost').forEach(g => g.remove());
                 rows.forEach(r => {
                     Array.from(r.children).forEach(p => {
                         p.classList.remove('shift-preview', 'insert-target');
