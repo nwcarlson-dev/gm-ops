@@ -222,6 +222,7 @@ app.post('/api/transcript-notification', (req, res) => {
 const { runRankingScrape } = require('./scripts/enrichment/scrape-rankings');
 const { runReportScrape } = require('./scripts/enrichment/scrape-reports');
 const { runSkillGeneration } = require('./scripts/enrichment/generate-skills');
+const { enrichBios } = require('./scripts/enrichment/enrich-bios');
 
 let enrichmentJob = null;
 
@@ -304,6 +305,34 @@ app.post('/api/prospects/enrich/skills', async (req, res) => {
         enrichmentJob.stage = 'error';
         enrichmentJob.error = err.message;
         console.error('[Enrichment] Skills error:', err);
+    }
+});
+
+app.post('/api/prospects/enrich/bios', async (req, res) => {
+    if (enrichmentJob?.running) {
+        return res.status(409).json({ error: 'An enrichment job is already running', stage: enrichmentJob.stage });
+    }
+
+    const limit = parseInt(req.body.limit) || 337;
+    const overwrite = req.body.overwrite || false;
+
+    enrichmentJob = { running: true, stage: 'bios', progress: [], startTime: Date.now() };
+    res.json({ status: 'started', stage: 'bios', limit });
+
+    try {
+        const results = await enrichBios((progress) => {
+            enrichmentJob.progress.push(progress);
+            enrichmentJob.lastUpdate = progress;
+        }, { limit, overwrite });
+        enrichmentJob.results = results;
+        enrichmentJob.running = false;
+        enrichmentJob.stage = 'complete';
+        console.log('[Enrichment] Bio enrichment complete:', JSON.stringify(results, null, 2));
+    } catch (err) {
+        enrichmentJob.running = false;
+        enrichmentJob.stage = 'error';
+        enrichmentJob.error = err.message;
+        console.error('[Enrichment] Bio error:', err);
     }
 });
 

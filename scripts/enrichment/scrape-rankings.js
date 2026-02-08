@@ -1,6 +1,17 @@
 const cheerio = require('cheerio');
 const { matchScrapedToProspects, loadProspects, saveProspects, normalizePosition } = require('./name-matcher');
 
+function sanitizeScrapedText(text) {
+  if (!text) return text;
+  text = text.replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '');
+  text = text.replace(/var\s+(?:googletag|_taboola|adsbygoogle)\s*=[\s\S]*?(?=\b[A-Z][a-z]|\.\s*[A-Z]|$)/g, '');
+  text = text.replace(/googletag\.cmd\.push\([\s\S]*?\);/g, '');
+  text = text.replace(/(?:window|document)\.[a-zA-Z_]+\s*(?:=|\()/g, '');
+  text = text.replace(/<[^>]+>/g, '');
+  text = text.replace(/\s+/g, ' ').trim();
+  return text;
+}
+
 async function fetchWithRetry(url, retries = 3) {
   for (let i = 0; i < retries; i++) {
     try {
@@ -109,7 +120,7 @@ async function scrapeCBSSports() {
 
 async function scrapeDraftTek() {
   const prospects = [];
-  console.log('[DraftTek] Fetching big board (up to 300 prospects)...');
+  console.log('[DraftTek] Fetching big board (up to 300 prospects) with bio data...');
 
   for (let page = 1; page <= 3; page++) {
     try {
@@ -138,14 +149,37 @@ async function scrapeDraftTek() {
           position = normalizePosition(position);
         }
 
+        let height_in = null;
+        let weight_lbs = null;
+        let class_year = null;
+
+        const htRaw = (cells[5] || '').trim();
+        const htMatch = htRaw.match(/(\d+)[''′](\d+)/);
+        if (htMatch) {
+          height_in = parseInt(htMatch[1]) * 12 + parseInt(htMatch[2]);
+        }
+
+        const wtRaw = (cells[6] || '').trim();
+        const wtParsed = parseInt(wtRaw);
+        if (!isNaN(wtParsed) && wtParsed > 100 && wtParsed < 400) {
+          weight_lbs = wtParsed;
+        }
+
+        const clsRaw = (cells[7] || '').trim();
+        if (clsRaw) class_year = clsRaw;
+
         if (name && position) {
-          prospects.push({
+          const entry = {
             rank,
             name,
             position,
             school: school || null,
             source: 'drafttek'
-          });
+          };
+          if (height_in) entry.height_in = height_in;
+          if (weight_lbs) entry.weight_lbs = weight_lbs;
+          if (class_year) entry.class_year = class_year;
+          prospects.push(entry);
         }
       });
 
@@ -155,7 +189,7 @@ async function scrapeDraftTek() {
     }
   }
 
-  console.log(`[DraftTek] Parsed ${prospects.length} prospects`);
+  console.log(`[DraftTek] Parsed ${prospects.length} prospects (with bio data)`);
   return prospects;
 }
 
@@ -478,14 +512,27 @@ async function runRankingScrape(progressCallback) {
         if (scraped.rating) rawData.rating = scraped.rating;
         prospect.source_raw[`${scraper.name}_ranking`] = rawData;
 
+        if (scraped.height_in && (!prospect.bio?.height_in || prospect.bio.height_in === null)) {
+          if (!prospect.bio) prospect.bio = {};
+          prospect.bio.height_in = scraped.height_in;
+        }
+        if (scraped.weight_lbs && (!prospect.bio?.weight_lbs || prospect.bio.weight_lbs === null)) {
+          if (!prospect.bio) prospect.bio = {};
+          prospect.bio.weight_lbs = scraped.weight_lbs;
+        }
+        if (scraped.class_year) {
+          if (!prospect.bio) prospect.bio = {};
+          prospect.bio.class_year = scraped.class_year;
+        }
+
         if (scraped.report && scraped.report.length > 50) {
           if (!prospect.source_raw.scouting_reports) prospect.source_raw.scouting_reports = {};
-          prospect.source_raw.scouting_reports[scraper.name] = scraped.report;
+          prospect.source_raw.scouting_reports[scraper.name] = sanitizeScrapedText(scraped.report);
           results.scoutingReportsAdded++;
         }
         if (scraped.summary && scraped.summary.length > 30) {
           if (!prospect.source_raw.scouting_reports) prospect.source_raw.scouting_reports = {};
-          prospect.source_raw.scouting_reports[scraper.name] = scraped.summary;
+          prospect.source_raw.scouting_reports[scraper.name] = sanitizeScrapedText(scraped.summary);
           results.scoutingReportsAdded++;
         }
         if (scraped.comparison) {
@@ -522,8 +569,9 @@ async function runRankingScrape(progressCallback) {
     const reportTexts = Object.values(allReports).filter(r => r && r.length > 50);
     if (reportTexts.length > 0) {
       const longest = reportTexts.reduce((a, b) => a.length > b.length ? a : b, '');
-      if (!prospect.scouting_report || prospect.scouting_report.length < longest.length) {
-        prospect.scouting_report = longest;
+      const cleanLongest = sanitizeScrapedText(longest);
+      if (!prospect.scouting_report || prospect.scouting_report.length < cleanLongest.length) {
+        prospect.scouting_report = cleanLongest;
       }
     }
 

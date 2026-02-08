@@ -1,6 +1,17 @@
 const cheerio = require('cheerio');
 const { loadProspects, saveProspects, canonicalize, similarity } = require('./name-matcher');
 
+function sanitizeScrapedText(text) {
+  if (!text) return text;
+  text = text.replace(/<script[^>]*>[\s\S]*?<\/script>/gi, '');
+  text = text.replace(/var\s+(?:googletag|_taboola|adsbygoogle)\s*=[\s\S]*?(?=\b[A-Z][a-z]|\.\s*[A-Z]|$)/g, '');
+  text = text.replace(/googletag\.cmd\.push\([\s\S]*?\);/g, '');
+  text = text.replace(/(?:window|document)\.[a-zA-Z_]+\s*(?:=|\()/g, '');
+  text = text.replace(/<[^>]+>/g, '');
+  text = text.replace(/\s+/g, ' ').trim();
+  return text;
+}
+
 async function fetchWithRetry(url, retries = 3) {
   for (let i = 0; i < retries; i++) {
     try {
@@ -194,16 +205,17 @@ async function runReportScrape(progressCallback, options = {}) {
       const report = await scrapeNFLMDDPlayerReport(prospect.name.display);
 
       if (report.report && report.report.length > 50) {
+        const cleanReport = sanitizeScrapedText(report.report);
         if (!originalProspect.source_raw) originalProspect.source_raw = {};
         originalProspect.source_raw.nflmdd_report = {
-          report: report.report.slice(0, 3000),
+          report: cleanReport.slice(0, 3000),
           strengths: report.strengths,
           weaknesses: report.weaknesses,
           scraped_date: new Date().toISOString().split('T')[0]
         };
 
-        if (!originalProspect.scouting_report || originalProspect.scouting_report.length < report.report.length) {
-          originalProspect.scouting_report = report.report.slice(0, 2000);
+        if (!originalProspect.scouting_report || originalProspect.scouting_report.length < cleanReport.length) {
+          originalProspect.scouting_report = cleanReport.slice(0, 2000);
         }
 
         if (report.comparison && !originalProspect.comparison) {
