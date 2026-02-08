@@ -2651,8 +2651,7 @@
             }
 
             .phase-content-area {
-                height: 100%;
-                overflow-y: auto;
+                overflow-y: visible;
             }
 
             .offseason-mode-indicator {
@@ -2667,9 +2666,6 @@
                 display: flex;
                 flex-direction: column;
                 gap: 10px;
-                height: 100%;
-                min-height: 0;
-                overflow: hidden;
             }
             .os-cap-strip {
                 display: flex;
@@ -2747,16 +2743,10 @@
                 display: flex;
                 flex-direction: column;
                 gap: 10px;
-                flex: 1;
-                min-height: 0;
-                overflow: hidden;
             }
             .os-main-content > .os-panel:first-child {
-                flex: 1;
-                min-height: 0;
                 display: flex;
                 flex-direction: column;
-                overflow: hidden;
             }
             .os-league-section {
                 flex-shrink: 0;
@@ -3161,7 +3151,7 @@
                 display: grid;
                 grid-template-columns: 1fr minmax(0, 42%);
                 gap: 0;
-                height: calc(100vh - 56px);
+                height: calc(100vh - var(--header-height, 64px));
                 overflow: hidden;
                 max-width: 100%;
                 width: 100%;
@@ -3169,7 +3159,7 @@
             }
             .universal-layout > * {
                 min-width: 0;
-                overflow: hidden;
+                min-height: 0;
             }
             .phase-content-col {
                 overflow-y: auto;
@@ -3177,6 +3167,8 @@
                 min-height: 0;
                 min-width: 0;
                 padding: 12px 16px;
+                height: 100%;
+                box-sizing: border-box;
             }
             .universal-layout.panel-expanded {
                 grid-template-columns: 1fr 1fr;
@@ -3205,6 +3197,8 @@
                 height: 100%;
                 overflow: hidden;
                 min-width: 0;
+                min-height: 0;
+                box-sizing: border-box;
             }
             .mgmt-panel-tabs {
                 display: flex;
