@@ -279,6 +279,11 @@
             transform: scale(0.95);
         }
 
+        .pos-pill.drag-source.preview-hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+
         .pos-pill.drag-clone {
             position: fixed;
             pointer-events: none;
@@ -665,6 +670,8 @@
                 const sameRow = targetRow === fromRow;
                 const gap = 8;
 
+                pill.classList.add('preview-hidden');
+
                 if (sameRow) {
                     const pills = Array.from(targetRow.children);
                     const pillWidth = pills[0].getBoundingClientRect().width;
@@ -711,6 +718,9 @@
             }
 
             function clearPreview() {
+                if (dragState && dragState.pill) {
+                    dragState.pill.classList.remove('preview-hidden');
+                }
                 rows.forEach(r => {
                     Array.from(r.children).forEach(p => {
                         p.classList.remove('shift-preview');
