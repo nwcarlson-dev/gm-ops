@@ -3436,6 +3436,7 @@
             let prospects = [];
             let draftOrder = [];
             let allTeamNeeds = {};
+            let detailedTeamNeeds = {};
             let teamFilledNeeds = {};
             let currentPick = 1;
             let currentFilter = "All";
@@ -5904,8 +5905,12 @@
                     teamSchemes = (teamSchemesData && teamSchemesData.teams) || {};
                     allDepthCharts = depthChartsData || {};
 
-                    const playerTradeData = await safeFetch("data/teams/player_trade_values.json");
+                    const [playerTradeData, detailedNeedsData] = await Promise.all([
+                        safeFetch("data/teams/player_trade_values.json"),
+                        safeFetch("data/teams/team_needs_detailed.json")
+                    ]);
                     allPlayerTradeValues = playerTradeData ? (playerTradeData.teams || {}) : {};
+                    detailedTeamNeeds = detailedNeedsData ? (detailedNeedsData.teams || {}) : {};
 
                     validateTeamNeeds();
                     initFuturePicks();
@@ -5921,25 +5926,54 @@
                         if (userTeam.scheme.defense === "TBD") userTeam.scheme.defense = jsonScheme.defScheme || "TBD";
                     }
 
+                    const DEFAULT_ARCHETYPES = {
+                        QB: 'Pocket Passer', RB: 'Dynamic Playmaker', WR: 'Contested Catch',
+                        TE: 'Move', OT: 'Technician', IOL: 'Road Grader',
+                        EDGE: 'Speed Rusher', DL: 'Penetrator', LB: 'Sideline-to-Sideline',
+                        CB: 'Press-Man', S: 'Centerfield'
+                    };
+
                     if (userTeam.offNeeds.length === 0 && userTeam.defNeeds.length === 0) {
-                        const jsonNeeds = allTeamNeeds[userTeam.abbr];
-                        if (jsonNeeds) {
-                            const offPositions = ["QB", "RB", "WR", "TE", "OT", "IOL"];
-                            jsonNeeds.primary.forEach((pos, i) => {
-                                const need = { pos, archetype: "", priority: "high", skills: [], note: "" };
-                                if (offPositions.includes(pos)) {
-                                    userTeam.offNeeds.push(need);
-                                } else {
-                                    userTeam.defNeeds.push(need);
+                        const detailed = detailedTeamNeeds[userTeam.abbr];
+                        if (detailed) {
+                            userTeam.offNeeds = (detailed.offNeeds || []).map(n => ({
+                                pos: n.pos, archetype: n.archetype || DEFAULT_ARCHETYPES[n.pos] || 'Versatile',
+                                priority: n.priority || 'medium', skills: n.skills || [], traits: n.traits || [],
+                                note: n.note || ''
+                            }));
+                            userTeam.defNeeds = (detailed.defNeeds || []).map(n => ({
+                                pos: n.pos, archetype: n.archetype || DEFAULT_ARCHETYPES[n.pos] || 'Versatile',
+                                priority: n.priority || 'medium', skills: n.skills || [], traits: n.traits || [],
+                                note: n.note || ''
+                            }));
+                        } else {
+                            const jsonNeeds = allTeamNeeds[userTeam.abbr];
+                            if (jsonNeeds) {
+                                const offPositions = ["QB", "RB", "WR", "TE", "OT", "IOL"];
+                                jsonNeeds.primary.forEach(pos => {
+                                    const need = { pos, archetype: DEFAULT_ARCHETYPES[pos] || 'Versatile', priority: "high", skills: [], note: "" };
+                                    if (offPositions.includes(pos)) userTeam.offNeeds.push(need);
+                                    else userTeam.defNeeds.push(need);
+                                });
+                                jsonNeeds.secondary.slice(0, 3).forEach(pos => {
+                                    const need = { pos, archetype: DEFAULT_ARCHETYPES[pos] || 'Versatile', priority: "medium", skills: [], note: "" };
+                                    if (offPositions.includes(pos)) userTeam.offNeeds.push(need);
+                                    else userTeam.defNeeds.push(need);
+                                });
+                            }
+                        }
+                    } else {
+                        const detailed = detailedTeamNeeds[userTeam.abbr];
+                        if (detailed) {
+                            const detailedMap = {};
+                            [...(detailed.offNeeds || []), ...(detailed.defNeeds || [])].forEach(n => { detailedMap[n.pos] = n; });
+                            [...userTeam.offNeeds, ...userTeam.defNeeds].forEach(n => {
+                                const d = detailedMap[n.pos];
+                                if (d) {
+                                    if (!n.archetype) n.archetype = d.archetype || DEFAULT_ARCHETYPES[n.pos] || 'Versatile';
+                                    if (!n.note) n.note = d.note || '';
                                 }
-                            });
-                            jsonNeeds.secondary.slice(0, 3).forEach(pos => {
-                                const need = { pos, archetype: "", priority: "medium", skills: [], note: "" };
-                                if (offPositions.includes(pos)) {
-                                    userTeam.offNeeds.push(need);
-                                } else {
-                                    userTeam.defNeeds.push(need);
-                                }
+                                if (!n.archetype) n.archetype = DEFAULT_ARCHETYPES[n.pos] || 'Versatile';
                             });
                         }
                     }
@@ -6026,22 +6060,32 @@
                     summaryEl.textContent = `${teamData ? teamData.name : userTeam.name}${recordStr}`;
                 }
 
-                if (userTeam.offNeeds.length === 0 && userTeam.defNeeds.length === 0 && Object.keys(allTeamNeeds).length > 0) {
-                    const jsonNeeds = allTeamNeeds[userTeam.abbr];
-                    if (jsonNeeds) {
-                        const offPositions = ["QB", "RB", "WR", "TE", "OT", "IOL"];
-                        jsonNeeds.primary.forEach(pos => {
-                            const need = { pos, archetype: "", priority: "high", skills: [], note: "" };
-                            if (offPositions.includes(pos)) userTeam.offNeeds.push(need);
-                            else userTeam.defNeeds.push(need);
-                        });
-                        jsonNeeds.secondary.slice(0, 3).forEach(pos => {
-                            const need = { pos, archetype: "", priority: "medium", skills: [], note: "" };
-                            if (offPositions.includes(pos)) userTeam.offNeeds.push(need);
-                            else userTeam.defNeeds.push(need);
-                        });
+                if (userTeam.offNeeds.length === 0 && userTeam.defNeeds.length === 0) {
+                    const detailed = detailedTeamNeeds[userTeam.abbr];
+                    if (detailed) {
+                        userTeam.offNeeds = (detailed.offNeeds || []).map(n => ({
+                            pos: n.pos, archetype: n.archetype || '', priority: n.priority || 'medium',
+                            skills: n.skills || [], traits: n.traits || [], note: n.note || ''
+                        }));
+                        userTeam.defNeeds = (detailed.defNeeds || []).map(n => ({
+                            pos: n.pos, archetype: n.archetype || '', priority: n.priority || 'medium',
+                            skills: n.skills || [], traits: n.traits || [], note: n.note || ''
+                        }));
                     }
                 }
+
+                [...userTeam.offNeeds, ...userTeam.defNeeds].forEach(n => {
+                    if (!n.archetype || !n.note) {
+                        const detailed = detailedTeamNeeds[userTeam.abbr];
+                        if (detailed) {
+                            const match = [...(detailed.offNeeds || []), ...(detailed.defNeeds || [])].find(d => d.pos === n.pos);
+                            if (match) {
+                                if (!n.archetype) n.archetype = match.archetype || '';
+                                if (!n.note) n.note = match.note || '';
+                            }
+                        }
+                    }
+                });
 
                 renderNeeds();
             }

@@ -1703,10 +1703,60 @@
       window.location.href = 'game-shell.html?team=' + encodeURIComponent(teamName) + '&mode=' + gameMode + '&v=' + Date.now();
     }
 
+    let detailedNeedsData = {};
+
+    async function loadDetailedNeeds() {
+      try {
+        const res = await fetch('data/teams/team_needs_detailed.json');
+        if (res.ok) {
+          const data = await res.json();
+          detailedNeedsData = data.teams || {};
+          applyDetailedNeeds();
+        }
+      } catch(e) {
+        console.warn('Failed to load detailed needs', e);
+      }
+    }
+
+    function applyDetailedNeeds() {
+      teams.forEach(t => {
+        const abbr = TEAM_NAME_TO_ABBR[t.n];
+        if (!abbr || !detailedNeedsData[abbr]) return;
+        const detailed = detailedNeedsData[abbr];
+
+        if (detailed.offNeeds) {
+          t.offNeeds = detailed.offNeeds.map(n => [
+            n.priority === 'high',
+            posAbbrToName(n.pos),
+            n.archetype || ''
+          ]);
+        }
+        if (detailed.defNeeds) {
+          t.defNeeds = detailed.defNeeds.map(n => [
+            n.priority === 'high',
+            posAbbrToName(n.pos),
+            n.archetype || ''
+          ]);
+        }
+      });
+      renderTeams();
+    }
+
+    function posAbbrToName(abbr) {
+      const map = {
+        'QB': 'Quarterback', 'RB': 'Running Back', 'WR': 'Wide Receiver',
+        'TE': 'Tight End', 'OT': 'Offensive Tackle', 'IOL': 'Interior O-Line',
+        'EDGE': 'Edge Rusher', 'DL': 'Defensive Line', 'LB': 'Linebacker',
+        'CB': 'Cornerback', 'S': 'Safety'
+      };
+      return map[abbr] || abbr;
+    }
+
     window.onload = function() {
       initializeMode();
       renderTeams();
       loadCapData();
+      loadDetailedNeeds();
     };
   </script>
 </body>

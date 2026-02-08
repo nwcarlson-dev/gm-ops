@@ -1,0 +1,171 @@
+{
+  "meta": {
+    "description": "Position-specific intel for team needs generation. Add entries here when news breaks — injuries, FA departures, trades, scheme changes. The build script uses this to generate contextual notes under each positional need.",
+    "usage": "Each team has an array of intel entries. Each entry has: pos (position abbr), type (injury/free_agency/contract/depth/coaching/trade/news), and note (the context).",
+    "lastUpdated": "2026-02-08"
+  },
+  "LV": [
+    { "pos": "QB", "type": "depth", "note": "No franchise QB since Gannon era. First R1 QB since JaMarcus Russell (2007)." },
+    { "pos": "OT", "type": "depth", "note": "Kolton Miller aging, pass protection struggled all season." },
+    { "pos": "CB", "type": "free_agency", "note": "Nate Hobbs entering contract year. Secondary needs youth." }
+  ],
+  "NYJ": [
+    { "pos": "QB", "type": "depth", "note": "NFL-record 0 interceptions in 2025. Need a true franchise signal-caller." },
+    { "pos": "WR", "type": "depth", "note": "Need a contested-catch alpha WR to complement the passing game." },
+    { "pos": "CB", "type": "free_agency", "note": "D.J. Reed entering final year. Sauce Gardner traded to Jaguars." },
+    { "pos": "EDGE", "type": "depth", "note": "Haason Reddick departed. Pass rush needs rebuilding." }
+  ],
+  "ARI": [
+    { "pos": "OT", "type": "depth", "note": "Allowed 53 sacks in 2025 (6th-most). OL rebuild is top priority." },
+    { "pos": "RB", "type": "free_agency", "note": "James Conner aging. Need a workhorse back for LaFleur's zone scheme." },
+    { "pos": "EDGE", "type": "depth", "note": "Need a bendy rusher off the edge to complement Darius Robinson." }
+  ],
+  "TEN": [
+    { "pos": "WR", "type": "depth", "note": "Building around Cam Ward. Desperately need weapons for young QB." },
+    { "pos": "IOL", "type": "free_agency", "note": "Kevin Zeitler headed to FA. Interior line needs reinforcement." },
+    { "pos": "CB", "type": "coaching", "note": "Saleh's Wide-9 demands press-man corners. Current CBs don't fit." }
+  ],
+  "NYG": [
+    { "pos": "CB", "type": "depth", "note": "Secondary has been a liability. Deonte Banks inconsistent." },
+    { "pos": "EDGE", "type": "depth", "note": "Need explosive pass rusher to pair with Brian Burns." },
+    { "pos": "WR", "type": "free_agency", "note": "Wan'Dale Robinson is a FA. Need playmakers around Malik Nabers." }
+  ],
+  "CLE": [
+    { "pos": "QB", "type": "depth", "note": "QB room unsettled with Gabriel/Sanders. Monken needs a passer." },
+    { "pos": "OT", "type": "depth", "note": "Dawand Jones struggled. Need a mauler to protect the QB." },
+    { "pos": "LB", "type": "depth", "note": "Need sideline-to-sideline LB to replace Schwartz-era scheme losses." }
+  ],
+  "WAS": [
+    { "pos": "OT", "type": "injury", "note": "Must protect Jayden Daniels after injury-plagued season." },
+    { "pos": "CB", "type": "depth", "note": "Secondary burned regularly. Need a technical corner." },
+    { "pos": "EDGE", "type": "depth", "note": "Pass rush disappeared in big games. Need a speed rusher." }
+  ],
+  "NO": [
+    { "pos": "WR", "type": "depth", "note": "Need a field stretcher to take the top off defenses for Shough." },
+    { "pos": "OT", "type": "depth", "note": "Blindside protection a concern. Need a mauler at tackle." },
+    { "pos": "EDGE", "type": "depth", "note": "Cameron Jordan nearing retirement. Need a power rusher to replace him." }
+  ],
+  "KC": [
+    { "pos": "TE", "type": "free_agency", "note": "Travis Kelce era ending (likely retirement). Massive hole at TE." },
+    { "pos": "OT", "type": "depth", "note": "Need an athletic tackle to match Mahomes' extending-play style." },
+    { "pos": "WR", "type": "depth", "note": "Need a YAC monster to complement the short passing game." }
+  ],
+  "CIN": [
+    { "pos": "OT", "type": "depth", "note": "OL remains priority around Burrow. Highest pick since Ja'Marr Chase." },
+    { "pos": "IOL", "type": "depth", "note": "Interior line gave up too much pressure. Road grader needed." },
+    { "pos": "DL", "type": "depth", "note": "Defensive line needs an anchor against the run." }
+  ],
+  "MIA": [
+    { "pos": "QB", "type": "depth", "note": "Tua's future uncertain. Hafley rebuilding from ground up." },
+    { "pos": "OT", "type": "depth", "note": "Shanahan concepts demand athletic tackles. Current OTs don't fit." },
+    { "pos": "DL", "type": "depth", "note": "Need a two-gap nose to anchor Duggan's Cover 3 front." }
+  ],
+  "DAL": [
+    { "pos": "CB", "type": "depth", "note": "Defense allowed most points in franchise history (~30 PPG)." },
+    { "pos": "EDGE", "type": "depth", "note": "Need a technical pass rusher to complement Quinnen Williams trade." },
+    { "pos": "S", "type": "depth", "note": "Box safety needed for Parker's Fangio Two-High scheme." }
+  ],
+  "LAR": [
+    { "pos": "CB", "type": "free_agency", "note": "Cobie Durant and Ahkello Witherspoon headed to FA." },
+    { "pos": "EDGE", "type": "depth", "note": "Need a speed rusher to generate pressure." },
+    { "pos": "QB", "type": "depth", "note": "Stafford returning for 2026 but successor planning needed." }
+  ],
+  "BAL": [
+    { "pos": "WR", "type": "depth", "note": "Need a contested-catch WR to help Lamar in the red zone." },
+    { "pos": "EDGE", "type": "depth", "note": "4th-lowest pressure rate in NFL. Need a power rusher." },
+    { "pos": "CB", "type": "depth", "note": "Man-press corner needed for Weaver's disguised looks." },
+    { "pos": "IOL", "type": "free_agency", "note": "Linderbaum FA bound (no 5th-year option). May lose star center." }
+  ],
+  "TB": [
+    { "pos": "LB", "type": "free_agency", "note": "Lavonte David turns 36, likely last season. 15th year with Bucs if he returns." },
+    { "pos": "EDGE", "type": "depth", "note": "Need a long-arm rusher to generate consistent pressure." },
+    { "pos": "OT", "type": "depth", "note": "Tristan Wirfs moved inside. Tackle spot needs an anchor." }
+  ],
+  "DET": [
+    { "pos": "IOL", "type": "free_agency", "note": "Frank Ragnow retired (failed comeback physical). Center is a crisis." },
+    { "pos": "OT", "type": "free_agency", "note": "Taylor Decker considering retirement. Glasgow struggled at C (56.8 PFF)." },
+    { "pos": "EDGE", "type": "depth", "note": "Need a speed rusher in Sheppard's attacking 4-3." }
+  ],
+  "MIN": [
+    { "pos": "IOL", "type": "free_agency", "note": "Ryan Kelly likely retiring (3 concussions in 2025). Center need is critical." },
+    { "pos": "S", "type": "free_agency", "note": "Harrison Smith retiring at 37. Era-defining safety leaving a void." },
+    { "pos": "CB", "type": "depth", "note": "Need a technical corner to hold up in Flores' exotic pressures." }
+  ],
+  "CAR": [
+    { "pos": "IOL", "type": "depth", "note": "Center position and OL depth are top priorities." },
+    { "pos": "DL", "type": "depth", "note": "Need a 3-tech penetrator. Defensive interior is thin." },
+    { "pos": "CB", "type": "free_agency", "note": "FA holes threaten all three levels of defense." }
+  ],
+  "PIT": [
+    { "pos": "QB", "type": "depth", "note": "Aaron Rodgers not returning. 9th straight year without playoff win." },
+    { "pos": "WR", "type": "depth", "note": "Need a contested-catch WR to be the alpha target." },
+    { "pos": "CB", "type": "depth", "note": "Zone corner needed for Graham's multiple front scheme." }
+  ],
+  "LAC": [
+    { "pos": "IOL", "type": "injury", "note": "Slater and Alt injuries killed OL (47.6 pass-block grade, worst in NFL)." },
+    { "pos": "TE", "type": "depth", "note": "Need an inline blocker for McDaniel's zone scheme." },
+    { "pos": "DL", "type": "depth", "note": "Need a penetrator up front to complement the pass rush." }
+  ],
+  "PHI": [
+    { "pos": "CB", "type": "depth", "note": "Coverage breakdowns plagued secondary all season." },
+    { "pos": "EDGE", "type": "depth", "note": "Need a bendy rusher for Fangio's two-high scheme." },
+    { "pos": "LB", "type": "free_agency", "note": "Coverage LB needed. Goedert, Phillips, Blankenship among FAs." }
+  ],
+  "CHI": [
+    { "pos": "OT", "type": "injury", "note": "Ozzy Trapilo (LT) out 6-12 months with patellar tendon injury." },
+    { "pos": "EDGE", "type": "depth", "note": "29th in pressure rate in 2025. Pass rush is nonexistent." },
+    { "pos": "S", "type": "free_agency", "note": "Brisker and Byard both FAs. Safety room gutted." },
+    { "pos": "IOL", "type": "depth", "note": "Need a zone blocker for Ben Johnson's Erhardt-Perkins system." },
+    { "pos": "DL", "type": "depth", "note": "Need a penetrating 3-tech to collapse the pocket." }
+  ],
+  "BUF": [
+    { "pos": "WR", "type": "depth", "note": "Need contested-catch weapons around Josh Allen." },
+    { "pos": "DL", "type": "depth", "note": "Need a two-gap DL to anchor Leonhard's quarters scheme." },
+    { "pos": "LB", "type": "depth", "note": "Need a sideline-to-sideline LB to cover the middle." }
+  ],
+  "SF": [
+    { "pos": "WR", "type": "free_agency", "note": "Aiyuk being released. Jennings is FA. WR room decimated." },
+    { "pos": "EDGE", "type": "injury", "note": "Bosa and Williams both tore ACLs. Dead last in sacks (20)." },
+    { "pos": "OT", "type": "depth", "note": "Need a zone blocker for Shanahan's outside zone concepts." }
+  ],
+  "HOU": [
+    { "pos": "RB", "type": "injury", "note": "Joe Mixon missed entire 2025 (foot, NFI). Marks/Chubb filled in." },
+    { "pos": "IOL", "type": "depth", "note": "Interior OL remains weak. Need a pivot for Shanahan concepts." },
+    { "pos": "S", "type": "depth", "note": "Need a hybrid safety for Burke's attacking front." }
+  ],
+  "NE": [
+    { "pos": "WR", "type": "depth", "note": "Drake Maye breakout season but needs more weapons around him." },
+    { "pos": "OT", "type": "depth", "note": "Need an athletic tackle to protect the franchise QB." },
+    { "pos": "EDGE", "type": "depth", "note": "Need a power rusher to complement the dominant defense." }
+  ],
+  "DEN": [
+    { "pos": "LB", "type": "depth", "note": "Need a sideline-to-sideline LB in Vance Joseph's 3-4." },
+    { "pos": "DL", "type": "depth", "note": "Need a two-gap DL to hold the point of attack." },
+    { "pos": "TE", "type": "depth", "note": "Need a seam stretcher for Payton's West Coast passing game." }
+  ],
+  "SEA": [
+    { "pos": "IOL", "type": "coaching", "note": "Kubiak leaving for Raiders HC. Interior OL needs a mauler." },
+    { "pos": "OT", "type": "depth", "note": "Need a technician at tackle. Protection broke down in playoffs." },
+    { "pos": "EDGE", "type": "depth", "note": "Need an explosive edge rusher in Durde's 3-4." }
+  ],
+  "IND": [
+    { "pos": "CB", "type": "coaching", "note": "Gus Bradley left for Titans DC. Need press-man corners for replacement scheme." },
+    { "pos": "S", "type": "depth", "note": "Need a centerfield safety to anchor the back end." },
+    { "pos": "EDGE", "type": "depth", "note": "Speed rusher needed to generate pressure off the edge." }
+  ],
+  "ATL": [
+    { "pos": "WR", "type": "depth", "note": "Need a YAC monster for Stefanski's wide zone play-action game." },
+    { "pos": "DL", "type": "depth", "note": "Need a penetrating DT. Ulbrich generated franchise-record 57 sacks but DL aging." },
+    { "pos": "TE", "type": "depth", "note": "Need a move TE for Rees' play-calling concepts." }
+  ],
+  "GB": [
+    { "pos": "DL", "type": "depth", "note": "DT unit ranked 31st in PFF run-defense grade (30.6). Run defense terrible." },
+    { "pos": "LB", "type": "depth", "note": "Need a thumper LB. 4th-most rushing yards allowed between tackles." },
+    { "pos": "S", "type": "depth", "note": "Need a ballhawk safety for Gannon's quarters coverage." }
+  ],
+  "JAX": [
+    { "pos": "CB", "type": "depth", "note": "Need a man-press corner after acquiring Sauce Gardner (scheme fit matters)." },
+    { "pos": "S", "type": "depth", "note": "Need a ballhawk safety to complement the secondary." },
+    { "pos": "OT", "type": "depth", "note": "Looking for depth pieces. Contender filling gaps." }
+  ]
+}
