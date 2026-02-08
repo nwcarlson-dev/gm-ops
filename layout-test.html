@@ -35,7 +35,7 @@
         }
 
         .left-panel {
-            width: 58%;
+            width: 55%;
             height: 100%;
             overflow-y: auto;
             border: 1px solid var(--card-border);
@@ -45,7 +45,7 @@
         }
 
         .right-panel {
-            width: 42%;
+            width: 45%;
             height: 100%;
             border: 1px solid var(--card-border);
             border-radius: 8px;
@@ -64,15 +64,35 @@
         }
 
         .column {
-            width: 50%;
+            flex: 1;
             display: flex;
             flex-direction: column;
             gap: 6px;
         }
 
-        .row {
+        .pos-row {
             flex: 1;
             min-height: 0;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .pos-label {
+            width: 32px;
+            flex-shrink: 0;
+            font-family: 'Barlow Condensed', sans-serif;
+            font-size: 12px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--text-muted);
+            text-align: center;
+        }
+
+        .pos-pill {
+            flex: 1;
+            height: 100%;
             border: 1px solid var(--card-border);
             border-radius: 6px;
             display: flex;
@@ -81,8 +101,6 @@
             font-family: 'Barlow Condensed', sans-serif;
             font-size: 13px;
             font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
             color: var(--text-muted);
             background: rgba(0,0,0,0.15);
         }
@@ -116,30 +134,30 @@
             <div class="right-panel">
                 <div class="right-panel-content">
                     <div class="column">
-                        <div class="row">1</div>
-                        <div class="row">2</div>
-                        <div class="row">3</div>
-                        <div class="row">4</div>
-                        <div class="row">5</div>
-                        <div class="row">6</div>
-                        <div class="row">7</div>
-                        <div class="row">8</div>
-                        <div class="row">9</div>
-                        <div class="row">10</div>
-                        <div class="row">11</div>
+                        <div class="pos-row"><span class="pos-label">QB</span><div class="pos-pill"></div></div>
+                        <div class="pos-row"><span class="pos-label">RB</span><div class="pos-pill"></div></div>
+                        <div class="pos-row"><span class="pos-label">WR</span><div class="pos-pill"></div></div>
+                        <div class="pos-row"><span class="pos-label">WR</span><div class="pos-pill"></div></div>
+                        <div class="pos-row"><span class="pos-label">WR</span><div class="pos-pill"></div></div>
+                        <div class="pos-row"><span class="pos-label">TE</span><div class="pos-pill"></div></div>
+                        <div class="pos-row"><span class="pos-label">LT</span><div class="pos-pill"></div></div>
+                        <div class="pos-row"><span class="pos-label">LG</span><div class="pos-pill"></div></div>
+                        <div class="pos-row"><span class="pos-label">C</span><div class="pos-pill"></div></div>
+                        <div class="pos-row"><span class="pos-label">RG</span><div class="pos-pill"></div></div>
+                        <div class="pos-row"><span class="pos-label">RT</span><div class="pos-pill"></div></div>
                     </div>
                     <div class="column">
-                        <div class="row">1</div>
-                        <div class="row">2</div>
-                        <div class="row">3</div>
-                        <div class="row">4</div>
-                        <div class="row">5</div>
-                        <div class="row">6</div>
-                        <div class="row">7</div>
-                        <div class="row">8</div>
-                        <div class="row">9</div>
-                        <div class="row">10</div>
-                        <div class="row">11</div>
+                        <div class="pos-row"><span class="pos-label">EDGE</span><div class="pos-pill"></div></div>
+                        <div class="pos-row"><span class="pos-label">EDGE</span><div class="pos-pill"></div></div>
+                        <div class="pos-row"><span class="pos-label">DL</span><div class="pos-pill"></div></div>
+                        <div class="pos-row"><span class="pos-label">DL</span><div class="pos-pill"></div></div>
+                        <div class="pos-row"><span class="pos-label">LB</span><div class="pos-pill"></div></div>
+                        <div class="pos-row"><span class="pos-label">LB</span><div class="pos-pill"></div></div>
+                        <div class="pos-row"><span class="pos-label">CB</span><div class="pos-pill"></div></div>
+                        <div class="pos-row"><span class="pos-label">CB</span><div class="pos-pill"></div></div>
+                        <div class="pos-row"><span class="pos-label">S</span><div class="pos-pill"></div></div>
+                        <div class="pos-row"><span class="pos-label">S</span><div class="pos-pill"></div></div>
+                        <div class="pos-row"><span class="pos-label">K/P</span><div class="pos-pill"></div></div>
                     </div>
                 </div>
             </div>
