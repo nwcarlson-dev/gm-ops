@@ -1,14 +1,14 @@
 {
-  "_version": "1.0",
-  "_description": "Maps Madden 26 rating attribute names (camelCase from scraper) to GM Ops canonical skill keys. Position-specific — each position group defines which Madden attributes contribute to which canonical skills.",
+  "_version": "2.0",
+  "_description": "Maps Madden 26 EA API stat keys to GM Ops canonical skill keys (matching POSITION_SKILLS in build_player_ratings.js). Multiple Madden stats mapping to the same canonical skill are averaged.",
 
   "positionMap": {
-    "QB": "QB", "HB": "RB", "FB": "RB", "WR": "WR", "TE": "TE",
-    "LT": "OT", "RT": "OT", "LG": "IOL", "RG": "IOL", "C": "IOL",
+    "QB": "QB", "HB": "RB", "FB": "FB", "WR": "WR", "TE": "TE",
+    "LT": "OT", "RT": "OT", "LG": "OG", "RG": "OG", "C": "OC",
     "LEDG": "EDGE", "REDG": "EDGE", "LE": "EDGE", "RE": "EDGE",
     "DT": "IDL", "NT": "IDL",
     "MIKE": "LB", "WILL": "LB", "SAM": "LB", "MLB": "LB", "LOLB": "LB", "ROLB": "LB",
-    "CB": "CB", "FS": "S", "SS": "S",
+    "CB": "DB", "FS": "DB", "SS": "DB",
     "K": "K", "P": "P", "LS": "LS"
   },
 
@@ -18,29 +18,40 @@
     "throwAccuracyMid": "accuracyMedium",
     "throwAccuracyDeep": "accuracyDeep",
     "throwUnderPressure": "pocketPresence",
+    "breakSack": "pocketPresence",
     "throwOnTheRun": "mobility",
+    "speed": "mobility",
     "playAction": "playAction",
     "awareness": "decisionMaking",
-    "speed": "mobility",
-    "breakSack": "pocketPresence",
-    "bcVision": "decisionMaking",
+    "bCVision": "decisionMaking",
     "toughness": "leadership"
   },
 
   "RB": {
-    "speed": "breakawaySpeed",
-    "acceleration": "breakawaySpeed",
+    "speed": "acceleration",
+    "acceleration": "acceleration",
     "agility": "elusiveness",
-    "bcVision": "vision",
+    "bCVision": "vision",
     "carrying": "ballSecurity",
-    "breakTackle": "contactBalance",
-    "trucking": "contactBalance",
+    "breakTackle": "tackleBreaking",
+    "trucking": "tackleBreaking",
     "jukeMove": "elusiveness",
     "spinMove": "elusiveness",
-    "stiffArm": "contactBalance",
+    "stiffArm": "contactAggression",
     "catching": "passCatching",
     "passBlock": "passProtection",
     "changeOfDirection": "elusiveness"
+  },
+
+  "FB": {
+    "runBlock": "runBlocking",
+    "impactBlocking": "runBlocking",
+    "passBlock": "passProtection",
+    "strength": "shortAreaPower",
+    "breakTackle": "tackleBreaking",
+    "trucking": "contactAggression",
+    "catching": "passCatching",
+    "speed": "speed"
   },
 
   "WR": {
@@ -54,7 +65,7 @@
     "speed": "separation",
     "acceleration": "separation",
     "agility": "separation",
-    "awareness": "routeRunning",
+    "awareness": "decisionMaking",
     "breakTackle": "yacAbility",
     "jukeMove": "yacAbility",
     "changeOfDirection": "separation"
@@ -62,6 +73,7 @@
 
   "TE": {
     "runBlock": "runBlocking",
+    "impactBlocking": "runBlocking",
     "catching": "hands",
     "catchInTraffic": "contestedCatches",
     "spectacularCatch": "contestedCatches",
@@ -70,100 +82,131 @@
     "speed": "seamThreat",
     "release": "seamThreat",
     "breakTackle": "yacAbility",
-    "impactBlocking": "runBlocking",
     "awareness": "routeRunning",
     "strength": "contactAggression"
   },
 
   "OT": {
     "passBlock": "passProtection",
-    "passBlockPower": "anchor",
     "passBlockFinesse": "passProtection",
+    "passBlockPower": "anchor",
     "runBlock": "runBlocking",
     "runBlockPower": "powerAtPOA",
     "runBlockFinesse": "runBlocking",
     "strength": "anchor",
-    "awareness": "passProtection",
+    "awareness": "awareness",
     "impactBlocking": "powerAtPOA",
-    "speed": "athleticism",
-    "agility": "athleticism",
-    "acceleration": "athleticism"
+    "agility": "footwork",
+    "speed": "footwork"
   },
 
-  "IOL": {
+  "OG": {
     "passBlock": "passProtection",
-    "passBlockPower": "anchor",
     "passBlockFinesse": "passProtection",
+    "passBlockPower": "anchor",
     "runBlock": "runBlocking",
-    "runBlockPower": "powerAtPOA",
+    "runBlockPower": "runBlocking",
     "runBlockFinesse": "runBlocking",
     "strength": "anchor",
-    "awareness": "passProtection",
-    "impactBlocking": "powerAtPOA",
-    "speed": "athleticism",
-    "agility": "athleticism"
+    "awareness": "awareness",
+    "impactBlocking": "doubleTeams",
+    "speed": "pullAbility",
+    "agility": "pullAbility"
   },
 
-  "EDGE": {
-    "powerMoves": "passRush",
-    "finesseMoves": "passRush",
-    "blockShedding": "passRush",
-    "speed": "speed",
-    "acceleration": "speed",
-    "strength": "runDefense",
-    "pursuit": "runDefense",
-    "tackle": "tackling",
-    "hitPower": "tackling",
-    "awareness": "runDefense",
-    "agility": "speed",
-    "playRecognition": "runDefense"
+  "OC": {
+    "passBlock": "passProtection",
+    "passBlockFinesse": "passProtection",
+    "passBlockPower": "anchor",
+    "runBlock": "runBlocking",
+    "runBlockPower": "runBlocking",
+    "strength": "anchor",
+    "awareness": "awareness",
+    "impactBlocking": "reachAbility",
+    "toughness": "leadership"
   },
 
   "IDL": {
-    "powerMoves": "passRush",
-    "finesseMoves": "passRush",
-    "blockShedding": "passRush",
-    "strength": "runStuffing",
-    "tackle": "tackling",
-    "pursuit": "runStuffing",
-    "awareness": "runStuffing",
-    "hitPower": "tackling",
+    "powerMoves": "passRushMoves",
+    "finesseMoves": "passRushMoves",
+    "blockShedding": "blockShedding",
+    "strength": "anchor",
+    "tackle": "pursuit",
+    "pursuit": "pursuit",
+    "awareness": "penetration",
+    "hitPower": "contactAggression",
     "playRecognition": "runStuffing",
-    "speed": "athleticism",
-    "agility": "athleticism",
-    "acceleration": "athleticism"
+    "speed": "penetration",
+    "toughness": "doubleTeamResistance"
+  },
+
+  "EDGE": {
+    "powerMoves": "passRushMoves",
+    "finesseMoves": "passRushMoves",
+    "speed": "speedToPower",
+    "acceleration": "speedToPower",
+    "agility": "bendFlexibility",
+    "blockShedding": "blockShedding",
+    "strength": "runDefense",
+    "pursuit": "pursuit",
+    "tackle": "runDefense",
+    "hitPower": "contactAggression",
+    "awareness": "runDefense",
+    "playRecognition": "coverageAbility",
+    "zoneCoverage": "coverageAbility"
   },
 
   "LB": {
     "tackle": "tackling",
-    "pursuit": "runDefense",
+    "pursuit": "pursuit",
     "playRecognition": "instincts",
     "zoneCoverage": "zoneCoverage",
     "manCoverage": "manCoverage",
-    "blockShedding": "runDefense",
-    "hitPower": "tackling",
-    "speed": "athleticism",
+    "blockShedding": "blockShedding",
+    "hitPower": "contactAggression",
+    "speed": "pursuit",
     "awareness": "instincts",
-    "catching": "ballHawking",
     "strength": "runDefense",
-    "acceleration": "athleticism",
-    "agility": "athleticism"
+    "powerMoves": "blitzing",
+    "finesseMoves": "blitzing"
   },
 
   "DB": {
     "manCoverage": "manCoverage",
     "zoneCoverage": "zoneCoverage",
-    "press": "pressCoverage",
-    "playRecognition": "footballIQ",
-    "speed": "speed",
-    "acceleration": "speed",
-    "agility": "agility",
-    "catching": "ballHawking",
+    "press": "pressTechnique",
+    "playRecognition": "instincts",
+    "speed": "range",
+    "acceleration": "range",
+    "agility": "range",
+    "catching": "ballSkills",
+    "jumping": "ballSkills",
     "pursuit": "tackling",
     "tackle": "tackling",
-    "hitPower": "tackling",
-    "awareness": "footballIQ",
-    "changeOfDirection": "agility",
-    "jumping": "ballHawking"
+    "awareness": "instincts",
+    "changeOfDirection": "range",
+    "powerMoves": "blitzing",
+    "hitPower": "contactAggression"
+  },
+
+  "K": {
+    "kickPower": "legStrength",
+    "kickAccuracy": "accuracy",
+    "awareness": "clutch",
+    "stamina": "kickoffDistance",
+    "strength": "kickoffHangtime"
+  },
+
+  "P": {
+    "kickPower": "legStrength",
+    "kickAccuracy": "directional",
+    "stamina": "consistency",
+    "awareness": "hangtime"
+  },
+
+  "LS": {
+    "awareness": "longSnapping",
+    "tackle": "tackling",
+    "stamina": "consistency"
   }
 }
