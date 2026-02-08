@@ -735,6 +735,80 @@ defNeeds: [
 
 ---
 
+## Coaching Staff System
+
+**Added: February 8, 2026**
+
+### Overview
+
+Each NFL team has a coaching staff of up to 12 key positions. In Draft and Offseason modes, staff is **display-only** (real NFL personnel). In Franchise mode (future), staff management becomes interactive with hiring, firing, and a coaching carousel as Phase 0 of the offseason.
+
+### Coaching Positions
+
+| Position | Role in Game | Impact |
+|----------|-------------|--------|
+| **Head Coach** | Sets team culture, scheme identity | Culture system, scheme weights |
+| **Offensive Coordinator** | Calls offensive plays | Offensive scheme effectiveness |
+| **Defensive Coordinator** | Calls defensive plays | Defensive scheme effectiveness |
+| **Special Teams Coordinator** | Manages special teams | ST unit performance |
+| **Quarterbacks Coach** | Develops QBs | QB development rate modifier |
+| **Running Backs Coach** | Develops RBs | RB development rate modifier |
+| **Wide Receivers Coach** | Develops WRs | WR development rate modifier |
+| **Tight Ends Coach** | Develops TEs | TE development rate modifier |
+| **Offensive Line Coach** | Develops OL | OL development rate modifier |
+| **Defensive Line Coach** | Develops DL/EDGE | DL development rate modifier |
+| **Linebackers Coach** | Develops LBs | LB development rate modifier |
+| **Secondary Coach** | Develops CBs/Safeties | DB development rate modifier |
+
+### Mode Behavior
+
+| Mode | Staff Interaction |
+|------|------------------|
+| **Draft** | View-only in Tools panel |
+| **Offseason** | View-only in Tools panel |
+| **Franchise** | Full management — hire, fire, promote. Coaching carousel occurs as Phase 0 before Franchise Tags |
+
+### Data Source
+
+`data/teams/staff_database.json` — compiled from NFL.com, Wikipedia, ESPN, and team websites. Updated seasonally. Position coaches marked as null/TBD are genuinely unfilled (common in early offseason when new head coaches are still building staffs).
+
+---
+
+## Front Office System
+
+**Added: February 8, 2026**
+
+### Overview
+
+Each team has a unique front office structure reflecting real NFL organizational hierarchies. Unlike coaching staff (which follows a standard template), front office roles vary by team — some have a President above the GM, some don't have a traditional GM title at all (e.g., Cowboys' Will McClay as VP of Player Personnel, Bengals' Duke Tobin as Director of Player Personnel, Patriots' Eliot Wolf as EVP of Player Personnel).
+
+### Front Office Positions (6-7 per team, org-specific)
+
+| Level | Examples | Notes |
+|-------|----------|-------|
+| **Owner** | Jerry Jones, Robert Kraft | Every team has one |
+| **President** | Kevin Warren (CHI), Hymie Elhai (NYJ) | Not all teams have this role |
+| **GM / Top Football Exec** | Ryan Poles, Brett Veach | Title varies by organization |
+| **Assistant GM / VP Personnel** | Ray Agnew (DET), Alec Halaby (PHI) | Key decision-making support |
+| **Director of Pro Scouting** | Evaluates current NFL players | Trade and FA intelligence |
+| **Director of College Scouting** | Evaluates draft prospects | Draft board construction |
+
+### Mode Behavior
+
+| Mode | Front Office Interaction |
+|------|------------------------|
+| **Draft** | View-only in Tools panel |
+| **Offseason** | View-only in Tools panel |
+| **Franchise** | Full management — hire/fire GM, scouting directors. Scouting department affects prospect evaluation accuracy |
+
+### Design Notes
+
+- Front office structure is team-specific, not a one-size-fits-all template
+- In Franchise mode, scouting department quality will affect how accurate prospect grades are (better scouts = more reliable ratings)
+- GM hiring/firing affects draft philosophy and free agency strategy AI
+
+---
+
 ## AI Draft Logic System
 
 **Approved: January 25, 2026**

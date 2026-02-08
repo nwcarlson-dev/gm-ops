@@ -3332,6 +3332,117 @@
             .tools-menu-category:first-child {
                 padding-top: 4px;
             }
+            .staff-panel {
+                padding: 8px 12px;
+            }
+            .staff-panel-header {
+                margin-bottom: 16px;
+            }
+            .staff-back-btn {
+                background: none;
+                border: none;
+                color: var(--silver);
+                font-family: 'Barlow Condensed', sans-serif;
+                font-size: 13px;
+                cursor: pointer;
+                padding: 4px 0;
+                margin-bottom: 8px;
+                display: inline-block;
+            }
+            .staff-back-btn:hover { color: var(--white); }
+            .staff-team-info {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+            }
+            .staff-team-logo {
+                width: 36px;
+                height: 36px;
+                object-fit: contain;
+            }
+            .staff-team-name {
+                font-family: 'Teko', sans-serif;
+                font-size: 22px;
+                line-height: 1.1;
+                color: var(--white);
+            }
+            .staff-team-subtitle {
+                font-family: 'Barlow Condensed', sans-serif;
+                font-size: 11px;
+                text-transform: uppercase;
+                letter-spacing: 0.08em;
+                color: var(--text-muted);
+            }
+            .staff-section {
+                margin-bottom: 16px;
+            }
+            .staff-section-title {
+                font-family: 'Teko', sans-serif;
+                font-size: 16px;
+                text-transform: uppercase;
+                color: var(--nfl-red);
+                letter-spacing: 0.05em;
+                padding-bottom: 4px;
+                border-bottom: 1px solid rgba(213,10,10,0.3);
+                margin-bottom: 8px;
+            }
+            .staff-group-label {
+                font-family: 'Barlow Condensed', sans-serif;
+                font-size: 10px;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 0.1em;
+                color: var(--text-muted);
+                padding: 8px 0 4px;
+            }
+            .staff-card {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                padding: 6px 8px;
+                border-radius: 6px;
+                transition: background 0.15s;
+            }
+            .staff-card:hover {
+                background: rgba(255,255,255,0.04);
+            }
+            .staff-card-vacant { opacity: 0.45; }
+            .staff-card-avatar {
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                background: rgba(1,51,105,0.5);
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-family: 'Barlow Condensed', sans-serif;
+                font-size: 12px;
+                font-weight: 700;
+                color: var(--silver);
+                flex-shrink: 0;
+            }
+            .staff-card-avatar.vacant {
+                background: rgba(255,255,255,0.06);
+                color: var(--text-muted);
+            }
+            .staff-card-name {
+                font-family: 'Barlow Condensed', sans-serif;
+                font-size: 14px;
+                font-weight: 600;
+                color: var(--white);
+                line-height: 1.2;
+            }
+            .staff-card-title {
+                font-family: 'Inter', sans-serif;
+                font-size: 11px;
+                color: var(--text-muted);
+                line-height: 1.2;
+            }
+            @media (max-width: 480px) {
+                .staff-card-avatar { width: 28px; height: 28px; font-size: 11px; }
+                .staff-card-name { font-size: 13px; }
+                .staff-card-title { font-size: 10px; }
+            }
             .mgmt-panel-close {
                 display: none;
                 align-items: center;
@@ -4178,6 +4289,7 @@
             let futurePicks = {};
             let allPlayerDatabase = {};
             let allPlayerTradeValues = {};
+            let allStaffDatabase = {};
 
             const REAL_FUTURE_TRADES = [
                 { year: 2027, round: 1, from: 'Packers', to: 'Cowboys' },
@@ -6582,16 +6694,18 @@
                     teamSchemes = (teamSchemesData && teamSchemesData.teams) || {};
                     allDepthCharts = depthChartsData || {};
 
-                    const [playerDbData, playerTradeData, detailedNeedsData, collegeIdData] = await Promise.all([
+                    const [playerDbData, playerTradeData, detailedNeedsData, collegeIdData, staffDbData] = await Promise.all([
                         safeFetch("data/teams/player_database.json"),
                         safeFetch("data/teams/player_trade_values.json"),
                         safeFetch("data/teams/team_needs_detailed.json"),
-                        safeFetch("data/espn_college_ids.json")
+                        safeFetch("data/espn_college_ids.json"),
+                        safeFetch("data/teams/staff_database.json")
                     ]);
                     ESPN_COLLEGE_IDS = collegeIdData || {};
                     allPlayerDatabase = playerDbData ? (playerDbData.teams || {}) : {};
                     allPlayerTradeValues = playerTradeData ? (playerTradeData.teams || {}) : {};
                     detailedTeamNeeds = detailedNeedsData ? (detailedNeedsData.teams || {}) : {};
+                    if (staffDbData) { const { _metadata, ...teams } = staffDbData; allStaffDatabase = teams; }
 
                     validateTeamNeeds();
                     initFuturePicks();
@@ -7741,21 +7855,24 @@
                 phaseContent.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:200px;"><div style="text-align:center;color:var(--text-muted);">Loading offseason data...</div></div>';
 
                 try {
-                    const [playerDbRes, tradeValRes, capRes, depthChartsRes] = await Promise.all([
+                    const [playerDbRes, tradeValRes, capRes, depthChartsRes, staffDbRes] = await Promise.all([
                         fetch('/data/teams/player_database.json'),
                         fetch('/data/teams/player_trade_values.json'),
                         fetch('/data/teams/cap_summary_2026.json'),
                         fetch('/data/teams/depth_charts_2026.json'),
+                        fetch('/data/teams/staff_database.json'),
                     ]);
                     const playerDbData = await playerDbRes.json();
                     const tradeValData = await tradeValRes.json();
                     const capData = await capRes.json();
                     const depthChartsData = await depthChartsRes.json();
+                    const staffDbData = await staffDbRes.json();
                     allPlayerDatabase = playerDbData.teams || {};
                     allPlayerTradeValues = tradeValData.teams || {};
                     offseasonState.rosters = buildOffseasonRosters(allPlayerDatabase, allPlayerTradeValues);
                     offseasonState.capData = capData.teams || {};
                     allDepthCharts = depthChartsData || {};
+                    if (staffDbData) { const { _metadata, ...teams } = staffDbData; allStaffDatabase = teams; }
                 } catch(e) {
                     console.error('Failed to load offseason data:', e);
                     phaseContent.innerHTML = '<div style="padding:40px;text-align:center;color:var(--danger);">Failed to load offseason data. Please refresh.</div>';
@@ -7900,6 +8017,9 @@
                         { id: 'teamneeds', label: 'Team Needs', desc: 'Positional needs with archetypes', icon: '\ud83c\udfaf', width: 'default' },
                         { id: 'draftpicks', label: 'Draft Picks', desc: 'View owned draft picks and trade value', icon: '\ud83c\udfc8', width: 'default' },
                     ]},
+                    { category: 'Organization', items: [
+                        { id: 'staff', label: 'Staff', desc: 'Coaching staff and front office personnel', icon: '\ud83d\udc54', width: 'expanded' },
+                    ]},
                     { category: 'League', items: [
                         { id: 'leagueactivity', label: 'League Activity', desc: 'Recent league-wide transactions', icon: '\ud83d\udcf0', width: 'default' },
                         { id: 'settings', label: 'Settings', desc: 'Game speed, control level, preferences', icon: '\u2699\ufe0f', width: 'default' },
@@ -7923,7 +8043,85 @@
 
             function openTool(toolId, width) {
                 setMgmtPanelWidth(width);
-                console.log('Opening tool:', toolId, 'at width:', width);
+                const toolsContainer = document.getElementById('toolsMenu');
+                if (toolId === 'staff') {
+                    renderStaffPanel(toolsContainer);
+                } else if (toolId === 'transactions') {
+                    openTradeModal();
+                    setMgmtPanelWidth('default');
+                } else {
+                    console.log('Opening tool:', toolId, 'at width:', width);
+                }
+            }
+
+            function renderStaffPanel(container) {
+                const teamAbbr = userTeam.abbr;
+                const staff = allStaffDatabase[teamAbbr];
+                if (!staff) {
+                    container.innerHTML = '<div style="padding:24px;text-align:center;color:var(--text-muted);">Staff data not available for this team.</div>';
+                    return;
+                }
+                const teamName = userTeam.name || teamAbbr;
+                const coaching = staff.coaching_staff || [];
+                const frontOffice = staff.front_office || [];
+
+                const coordinators = coaching.filter(s => ['Head Coach','Offensive Coordinator','Defensive Coordinator','Special Teams Coordinator'].includes(s.title));
+                const positionCoaches = coaching.filter(s => !['Head Coach','Offensive Coordinator','Defensive Coordinator','Special Teams Coordinator'].includes(s.title));
+
+                let html = `<div class="staff-panel">
+                    <div class="staff-panel-header">
+                        <button class="staff-back-btn" onclick="renderToolsMenu()">&larr; Tools</button>
+                        <div class="staff-team-info">
+                            ${getTeamLogo(teamName, 36)}
+                            <div>
+                                <div class="staff-team-name">${teamName}</div>
+                                <div class="staff-team-subtitle">Organization</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="staff-section">
+                        <div class="staff-section-title">Coaching Staff</div>
+                        <div class="staff-group-label">Leadership</div>`;
+
+                coordinators.forEach(person => {
+                    html += renderStaffCard(person);
+                });
+
+                html += `<div class="staff-group-label">Position Coaches</div>`;
+                positionCoaches.forEach(person => {
+                    html += renderStaffCard(person);
+                });
+
+                html += `</div>
+                    <div class="staff-section">
+                        <div class="staff-section-title">Front Office</div>`;
+                frontOffice.forEach(person => {
+                    html += renderStaffCard(person);
+                });
+
+                html += `</div></div>`;
+                container.innerHTML = html;
+            }
+
+            function renderStaffCard(person) {
+                if (!person.name) {
+                    return `<div class="staff-card staff-card-vacant">
+                        <div class="staff-card-avatar vacant">?</div>
+                        <div class="staff-card-info">
+                            <div class="staff-card-name">TBD</div>
+                            <div class="staff-card-title">${person.title}</div>
+                        </div>
+                    </div>`;
+                }
+                const initials = person.name.split(' ').map(n => n[0]).join('').slice(0, 2);
+                return `<div class="staff-card">
+                    <div class="staff-card-avatar">${initials}</div>
+                    <div class="staff-card-info">
+                        <div class="staff-card-name">${person.name}</div>
+                        <div class="staff-card-title">${person.title}</div>
+                    </div>
+                </div>`;
             }
 
             function showPlayerTooltip(encodedName, teamAbbr) {

@@ -1,0 +1,864 @@
+const fs = require('fs');
+const path = require('path');
+
+const TEAM_ABBRS = {
+  'Arizona Cardinals': 'ARI', 'Atlanta Falcons': 'ATL', 'Baltimore Ravens': 'BAL',
+  'Buffalo Bills': 'BUF', 'Carolina Panthers': 'CAR', 'Chicago Bears': 'CHI',
+  'Cincinnati Bengals': 'CIN', 'Cleveland Browns': 'CLE', 'Dallas Cowboys': 'DAL',
+  'Denver Broncos': 'DEN', 'Detroit Lions': 'DET', 'Green Bay Packers': 'GB',
+  'Houston Texans': 'HOU', 'Indianapolis Colts': 'IND', 'Jacksonville Jaguars': 'JAX',
+  'Kansas City Chiefs': 'KC', 'Las Vegas Raiders': 'LV', 'Los Angeles Chargers': 'LAC',
+  'Los Angeles Rams': 'LAR', 'Miami Dolphins': 'MIA', 'Minnesota Vikings': 'MIN',
+  'New England Patriots': 'NE', 'New Orleans Saints': 'NO', 'New York Giants': 'NYG',
+  'New York Jets': 'NYJ', 'Philadelphia Eagles': 'PHI', 'Pittsburgh Steelers': 'PIT',
+  'San Francisco 49ers': 'SF', 'Seattle Seahawks': 'SEA', 'Tampa Bay Buccaneers': 'TB',
+  'Tennessee Titans': 'TEN', 'Washington Commanders': 'WAS'
+};
+
+const staffData = {
+  ARI: {
+    coaching_staff: [
+      { name: "Mike LaFleur", title: "Head Coach" },
+      { name: "Nathaniel Hackett", title: "Offensive Coordinator" },
+      { name: "Nick Rallis", title: "Defensive Coordinator" },
+      { name: null, title: "Special Teams Coordinator" },
+      { name: null, title: "Quarterbacks Coach" },
+      { name: null, title: "Running Backs Coach" },
+      { name: null, title: "Wide Receivers Coach" },
+      { name: null, title: "Tight Ends Coach" },
+      { name: null, title: "Offensive Line Coach" },
+      { name: null, title: "Defensive Line Coach" },
+      { name: null, title: "Linebackers Coach" },
+      { name: null, title: "Secondary Coach" }
+    ],
+    front_office: [
+      { name: "Michael Bidwill", title: "Owner/President" },
+      { name: "Monti Ossenfort", title: "General Manager" },
+      { name: "Quentin Harris", title: "Assistant General Manager" },
+      { name: "Adrian Wilson", title: "VP of Pro Scouting" },
+      { name: "Dru Grigson", title: "Director of College Scouting" },
+      { name: "Tara Battiato", title: "Director of Football Administration" }
+    ]
+  },
+
+  ATL: {
+    coaching_staff: [
+      { name: "Kevin Stefanski", title: "Head Coach" },
+      { name: "Tommy Rees", title: "Offensive Coordinator" },
+      { name: "Jeff Ulbrich", title: "Defensive Coordinator" },
+      { name: "Craig Aukerman", title: "Special Teams Coordinator" },
+      { name: null, title: "Quarterbacks Coach" },
+      { name: null, title: "Running Backs Coach" },
+      { name: null, title: "Wide Receivers Coach" },
+      { name: null, title: "Tight Ends Coach" },
+      { name: null, title: "Offensive Line Coach" },
+      { name: null, title: "Defensive Line Coach" },
+      { name: null, title: "Linebackers Coach" },
+      { name: null, title: "Secondary Coach" }
+    ],
+    front_office: [
+      { name: "Arthur Blank", title: "Owner/Chairman" },
+      { name: "Matt Ryan", title: "President of Football" },
+      { name: "Ian Cunningham", title: "General Manager" },
+      { name: "Kyle Smith", title: "VP of Player Personnel" },
+      { name: "Dwayne Joseph", title: "Director of College Scouting" },
+      { name: "Matt Berry", title: "Director of Pro Scouting" }
+    ]
+  },
+
+  BAL: {
+    coaching_staff: [
+      { name: "Jesse Minter", title: "Head Coach" },
+      { name: "Declan Doyle", title: "Offensive Coordinator" },
+      { name: "Anthony Weaver", title: "Defensive Coordinator" },
+      { name: "Chris Horton", title: "Special Teams Coordinator" },
+      { name: null, title: "Quarterbacks Coach" },
+      { name: null, title: "Running Backs Coach" },
+      { name: null, title: "Wide Receivers Coach" },
+      { name: null, title: "Tight Ends Coach" },
+      { name: null, title: "Offensive Line Coach" },
+      { name: null, title: "Defensive Line Coach" },
+      { name: null, title: "Linebackers Coach" },
+      { name: null, title: "Secondary Coach" }
+    ],
+    front_office: [
+      { name: "Steve Bisciotti", title: "Owner" },
+      { name: "Sashi Brown", title: "President" },
+      { name: "Eric DeCosta", title: "General Manager" },
+      { name: "Joe Hortiz", title: "Assistant General Manager" },
+      { name: "George Kokinis", title: "Director of Pro Personnel" },
+      { name: "David Blackburn", title: "Director of College Scouting" }
+    ]
+  },
+
+  BUF: {
+    coaching_staff: [
+      { name: "Joe Brady", title: "Head Coach" },
+      { name: "Pete Carmichael Jr.", title: "Offensive Coordinator" },
+      { name: "Jim Leonhard", title: "Defensive Coordinator" },
+      { name: "Jeff Rodgers", title: "Special Teams Coordinator" },
+      { name: "Bo Hardegree", title: "Quarterbacks Coach" },
+      { name: "Kelly Skipper", title: "Running Backs Coach" },
+      { name: "Drew Terrell", title: "Wide Receivers Coach" },
+      { name: "Rob Boras", title: "Tight Ends Coach" },
+      { name: "Pat Meyer", title: "Offensive Line Coach" },
+      { name: "Terrance Jamison", title: "Defensive Line Coach" },
+      { name: "John Egorugwu", title: "Linebackers Coach" },
+      { name: "Jay Valai", title: "Secondary Coach" }
+    ],
+    front_office: [
+      { name: "Terry Pegula", title: "Owner/CEO/President" },
+      { name: "Brandon Beane", title: "General Manager" },
+      { name: "Brian Gaine", title: "Assistant General Manager" },
+      { name: "Terrance Gray", title: "Assistant General Manager" },
+      { name: "Matt Bazirgan", title: "Director of College Scouting" },
+      { name: "Chris Marrow", title: "Co-Director of Pro Scouting" },
+      { name: "Curtis Rukavina", title: "Co-Director of Pro Scouting" }
+    ]
+  },
+
+  CAR: {
+    coaching_staff: [
+      { name: "Dave Canales", title: "Head Coach" },
+      { name: "Brad Idzik", title: "Offensive Coordinator" },
+      { name: "Ejiro Evero", title: "Defensive Coordinator" },
+      { name: "Chris Tabor", title: "Special Teams Coordinator" },
+      { name: null, title: "Quarterbacks Coach" },
+      { name: null, title: "Running Backs Coach" },
+      { name: null, title: "Wide Receivers Coach" },
+      { name: null, title: "Tight Ends Coach" },
+      { name: null, title: "Offensive Line Coach" },
+      { name: null, title: "Defensive Line Coach" },
+      { name: null, title: "Linebackers Coach" },
+      { name: null, title: "Secondary Coach" }
+    ],
+    front_office: [
+      { name: "David Tepper", title: "Owner" },
+      { name: "Dan Morgan", title: "General Manager" },
+      { name: "Mike Solari", title: "Assistant General Manager" },
+      { name: "Jeff Morrow", title: "Director of Pro Scouting" },
+      { name: "Don Gregory", title: "Director of College Scouting" },
+      { name: "Samir Suleiman", title: "VP of Football Operations" }
+    ]
+  },
+
+  CHI: {
+    coaching_staff: [
+      { name: "Ben Johnson", title: "Head Coach" },
+      { name: null, title: "Offensive Coordinator" },
+      { name: "Eric Washington", title: "Defensive Coordinator" },
+      { name: "Richard Hightower", title: "Special Teams Coordinator" },
+      { name: null, title: "Quarterbacks Coach" },
+      { name: "Eric Studesville", title: "Running Backs Coach" },
+      { name: null, title: "Wide Receivers Coach" },
+      { name: null, title: "Tight Ends Coach" },
+      { name: null, title: "Offensive Line Coach" },
+      { name: null, title: "Defensive Line Coach" },
+      { name: null, title: "Linebackers Coach" },
+      { name: "Al Harris", title: "Secondary Coach" }
+    ],
+    front_office: [
+      { name: "George McCaskey", title: "Chairman" },
+      { name: "Kevin Warren", title: "President & CEO" },
+      { name: "Ryan Poles", title: "General Manager" },
+      { name: "Jeff King", title: "Director of Pro Scouting" },
+      { name: "Trey Koziol", title: "Co-Director of Player Personnel" },
+      { name: "Mark Sadowski", title: "Director of College Scouting" }
+    ]
+  },
+
+  CIN: {
+    coaching_staff: [
+      { name: "Zac Taylor", title: "Head Coach" },
+      { name: "Dan Pitcher", title: "Offensive Coordinator" },
+      { name: "Al Golden", title: "Defensive Coordinator" },
+      { name: "Darrin Simmons", title: "Special Teams Coordinator" },
+      { name: null, title: "Quarterbacks Coach" },
+      { name: null, title: "Running Backs Coach" },
+      { name: null, title: "Wide Receivers Coach" },
+      { name: null, title: "Tight Ends Coach" },
+      { name: null, title: "Offensive Line Coach" },
+      { name: null, title: "Defensive Line Coach" },
+      { name: null, title: "Linebackers Coach" },
+      { name: null, title: "Secondary Coach" }
+    ],
+    front_office: [
+      { name: "Mike Brown", title: "Owner/President" },
+      { name: "Katie Blackburn", title: "Executive Vice President" },
+      { name: "Duke Tobin", title: "Director of Player Personnel" },
+      { name: "Paul Alexander", title: "Senior Personnel Advisor" },
+      { name: "Eric Brown", title: "Director of Pro Scouting" },
+      { name: "Mike Potts", title: "Director of College Scouting" }
+    ]
+  },
+
+  CLE: {
+    coaching_staff: [
+      { name: "Todd Monken", title: "Head Coach" },
+      { name: "Tommy Rees", title: "Offensive Coordinator" },
+      { name: "Jim Schwartz", title: "Defensive Coordinator" },
+      { name: null, title: "Special Teams Coordinator" },
+      { name: null, title: "Quarterbacks Coach" },
+      { name: null, title: "Running Backs Coach" },
+      { name: null, title: "Wide Receivers Coach" },
+      { name: null, title: "Tight Ends Coach" },
+      { name: null, title: "Offensive Line Coach" },
+      { name: null, title: "Defensive Line Coach" },
+      { name: null, title: "Linebackers Coach" },
+      { name: null, title: "Secondary Coach" }
+    ],
+    front_office: [
+      { name: "Jimmy Haslam", title: "Owner" },
+      { name: "Dee Haslam", title: "Co-Owner" },
+      { name: "Andrew Berry", title: "General Manager/EVP of Football Operations" },
+      { name: "Glenn Cook", title: "VP of Player Personnel" },
+      { name: "Dan Zegers", title: "VP of Football Operations" },
+      { name: "Donte Whitner", title: "Director of Pro Scouting" },
+      { name: "Matt Tomc", title: "Director of College Scouting" }
+    ]
+  },
+
+  DAL: {
+    coaching_staff: [
+      { name: "Brian Schottenheimer", title: "Head Coach" },
+      { name: "Klayton Adams", title: "Offensive Coordinator" },
+      { name: "Christian Parker", title: "Defensive Coordinator" },
+      { name: "Nick Sorensen", title: "Special Teams Coordinator" },
+      { name: "Steve Shimko", title: "Quarterbacks Coach" },
+      { name: "Derrick Foster", title: "Running Backs Coach" },
+      { name: "Junior Adams", title: "Wide Receivers Coach" },
+      { name: "Lunda Wells", title: "Tight Ends Coach" },
+      { name: "Conor Riley", title: "Offensive Line Coach" },
+      { name: "Marcus Dixon", title: "Defensive Line Coach" },
+      { name: null, title: "Linebackers Coach" },
+      { name: "Derrick Ansley", title: "Secondary Coach" }
+    ],
+    front_office: [
+      { name: "Jerry Jones", title: "Owner/President/General Manager" },
+      { name: "Stephen Jones", title: "COO/EVP/Director of Player Personnel" },
+      { name: "Will McClay", title: "VP of Player Personnel" },
+      { name: "Mitch LaPoint", title: "Director of College Scouting" },
+      { name: "Alex Loomis", title: "Director of Pro Scouting" },
+      { name: "Adam Prasifka", title: "Director of Salary Cap" }
+    ]
+  },
+
+  DEN: {
+    coaching_staff: [
+      { name: "Sean Payton", title: "Head Coach" },
+      { name: "Davis Webb", title: "Offensive Coordinator" },
+      { name: "Vance Joseph", title: "Defensive Coordinator" },
+      { name: "Darren Rizzi", title: "Special Teams Coordinator" },
+      { name: null, title: "Quarterbacks Coach" },
+      { name: null, title: "Running Backs Coach" },
+      { name: null, title: "Wide Receivers Coach" },
+      { name: null, title: "Tight Ends Coach" },
+      { name: null, title: "Offensive Line Coach" },
+      { name: null, title: "Defensive Line Coach" },
+      { name: null, title: "Linebackers Coach" },
+      { name: null, title: "Secondary Coach" }
+    ],
+    front_office: [
+      { name: "Greg Penner", title: "CEO/Owner Representative" },
+      { name: "Damani Leech", title: "President/CEO (Business)" },
+      { name: "George Paton", title: "General Manager" },
+      { name: "Brian Stark", title: "Director of Pro Personnel" },
+      { name: "Tyler Shea", title: "Director of College Scouting" },
+      { name: "David Shaw", title: "Senior Personnel Advisor" }
+    ]
+  },
+
+  DET: {
+    coaching_staff: [
+      { name: "Dan Campbell", title: "Head Coach" },
+      { name: "Drew Petzing", title: "Offensive Coordinator" },
+      { name: "Kelvin Sheppard", title: "Defensive Coordinator" },
+      { name: "Dave Fipp", title: "Special Teams Coordinator" },
+      { name: null, title: "Quarterbacks Coach" },
+      { name: null, title: "Running Backs Coach" },
+      { name: null, title: "Wide Receivers Coach" },
+      { name: null, title: "Tight Ends Coach" },
+      { name: null, title: "Offensive Line Coach" },
+      { name: null, title: "Defensive Line Coach" },
+      { name: null, title: "Linebackers Coach" },
+      { name: null, title: "Secondary Coach" }
+    ],
+    front_office: [
+      { name: "Sheila Ford Hamp", title: "Principal Owner/Chairman" },
+      { name: "Rod Wood", title: "President/CEO" },
+      { name: "Brad Holmes", title: "General Manager" },
+      { name: "Ray Agnew", title: "Assistant General Manager" },
+      { name: "John Dorsey", title: "Senior Personnel Executive" },
+      { name: "Kyle O'Brien", title: "Director of College Scouting" },
+      { name: "Rob Lohman", title: "Director of Pro Scouting" }
+    ]
+  },
+
+  GB: {
+    coaching_staff: [
+      { name: "Matt LaFleur", title: "Head Coach" },
+      { name: "Adam Stenavich", title: "Offensive Coordinator" },
+      { name: "Jonathan Gannon", title: "Defensive Coordinator" },
+      { name: "Rich Bisaccia", title: "Special Teams Coordinator" },
+      { name: null, title: "Quarterbacks Coach" },
+      { name: null, title: "Running Backs Coach" },
+      { name: null, title: "Wide Receivers Coach" },
+      { name: null, title: "Tight Ends Coach" },
+      { name: null, title: "Offensive Line Coach" },
+      { name: null, title: "Defensive Line Coach" },
+      { name: null, title: "Linebackers Coach" },
+      { name: null, title: "Secondary Coach" }
+    ],
+    front_office: [
+      { name: "Mark Murphy", title: "President/CEO" },
+      { name: "Brian Gutekunst", title: "General Manager" },
+      { name: "Luke Butkus", title: "VP of Player Personnel" },
+      { name: "Milt Hendrickson", title: "Director of Football Operations" },
+      { name: "John Wojciechowski", title: "Director of College Scouting" },
+      { name: "Alonzo Dotson", title: "Director of Pro Scouting" }
+    ]
+  },
+
+  HOU: {
+    coaching_staff: [
+      { name: "DeMeco Ryans", title: "Head Coach" },
+      { name: "Nick Caley", title: "Offensive Coordinator" },
+      { name: "Matt Burke", title: "Defensive Coordinator" },
+      { name: "Frank Ross", title: "Special Teams Coordinator" },
+      { name: null, title: "Quarterbacks Coach" },
+      { name: null, title: "Running Backs Coach" },
+      { name: null, title: "Wide Receivers Coach" },
+      { name: null, title: "Tight Ends Coach" },
+      { name: null, title: "Offensive Line Coach" },
+      { name: null, title: "Defensive Line Coach" },
+      { name: null, title: "Linebackers Coach" },
+      { name: null, title: "Secondary Coach" }
+    ],
+    front_office: [
+      { name: "Cal McNair", title: "Chairman/CEO" },
+      { name: "Janice McNair", title: "Co-Founder/Senior Chair" },
+      { name: "Nick Caserio", title: "General Manager" },
+      { name: "Matt Bazirgan", title: "VP of Football Operations" },
+      { name: "James Liipfert", title: "Director of Pro Scouting" },
+      { name: "Mozique McCurtis", title: "Director of College Scouting" }
+    ]
+  },
+
+  IND: {
+    coaching_staff: [
+      { name: "Shane Steichen", title: "Head Coach" },
+      { name: "Jim Bob Cooter", title: "Offensive Coordinator" },
+      { name: "Lou Anarumo", title: "Defensive Coordinator" },
+      { name: "Brian Mason", title: "Special Teams Coordinator" },
+      { name: null, title: "Quarterbacks Coach" },
+      { name: null, title: "Running Backs Coach" },
+      { name: null, title: "Wide Receivers Coach" },
+      { name: null, title: "Tight Ends Coach" },
+      { name: null, title: "Offensive Line Coach" },
+      { name: null, title: "Defensive Line Coach" },
+      { name: null, title: "Linebackers Coach" },
+      { name: null, title: "Secondary Coach" }
+    ],
+    front_office: [
+      { name: "Carlie Irsay-Gordon", title: "Owner/CEO" },
+      { name: "Chris Ballard", title: "General Manager" },
+      { name: "Ed Dodds", title: "Assistant General Manager" },
+      { name: "Morocco Brown", title: "VP of Player Personnel" },
+      { name: "Mike Groh", title: "Director of College Scouting" },
+      { name: "Kevin Rogers", title: "Director of Pro Scouting" }
+    ]
+  },
+
+  JAX: {
+    coaching_staff: [
+      { name: "Liam Coen", title: "Head Coach" },
+      { name: "Grant Udinski", title: "Offensive Coordinator" },
+      { name: "Anthony Campanile", title: "Defensive Coordinator" },
+      { name: "Heath Farwell", title: "Special Teams Coordinator" },
+      { name: null, title: "Quarterbacks Coach" },
+      { name: null, title: "Running Backs Coach" },
+      { name: null, title: "Wide Receivers Coach" },
+      { name: null, title: "Tight Ends Coach" },
+      { name: null, title: "Offensive Line Coach" },
+      { name: null, title: "Defensive Line Coach" },
+      { name: null, title: "Linebackers Coach" },
+      { name: null, title: "Secondary Coach" }
+    ],
+    front_office: [
+      { name: "Shahid Khan", title: "Owner" },
+      { name: "James Gladstone", title: "General Manager" },
+      { name: "Ethan Waugh", title: "VP of Player Personnel" },
+      { name: "Todd Vasvari", title: "Director of Pro Scouting" },
+      { name: "Tim Mingey", title: "Director of College Scouting" },
+      { name: "Tony Khan", title: "VP Football Technology & Analytics" }
+    ]
+  },
+
+  KC: {
+    coaching_staff: [
+      { name: "Andy Reid", title: "Head Coach" },
+      { name: "Eric Bieniemy", title: "Offensive Coordinator" },
+      { name: "Steve Spagnuolo", title: "Defensive Coordinator" },
+      { name: "Dave Toub", title: "Special Teams Coordinator" },
+      { name: "David Girardi", title: "Quarterbacks Coach" },
+      { name: null, title: "Running Backs Coach" },
+      { name: "Chad O'Shea", title: "Wide Receivers Coach" },
+      { name: "Tom Melvin", title: "Tight Ends Coach" },
+      { name: "Andy Heck", title: "Offensive Line Coach" },
+      { name: "Joe Cullen", title: "Defensive Line Coach" },
+      { name: "Brendan Daly", title: "Linebackers Coach" },
+      { name: "Dave Merritt", title: "Secondary Coach" }
+    ],
+    front_office: [
+      { name: "Clark Hunt", title: "Chairman/CEO" },
+      { name: "Mark Donovan", title: "President" },
+      { name: "Brett Veach", title: "General Manager" },
+      { name: "Chris Shea", title: "Assistant General Manager" },
+      { name: "Mike Bradway", title: "Assistant General Manager" },
+      { name: "Tim Terry", title: "VP of Player Personnel" },
+      { name: "Pat Sperduto", title: "Co-Director of College Scouting" }
+    ]
+  },
+
+  LV: {
+    coaching_staff: [
+      { name: "Klint Kubiak", title: "Head Coach" },
+      { name: "Greg Olson", title: "Offensive Coordinator" },
+      { name: null, title: "Defensive Coordinator" },
+      { name: null, title: "Special Teams Coordinator" },
+      { name: null, title: "Quarterbacks Coach" },
+      { name: null, title: "Running Backs Coach" },
+      { name: null, title: "Wide Receivers Coach" },
+      { name: null, title: "Tight Ends Coach" },
+      { name: null, title: "Offensive Line Coach" },
+      { name: null, title: "Defensive Line Coach" },
+      { name: null, title: "Linebackers Coach" },
+      { name: null, title: "Secondary Coach" }
+    ],
+    front_office: [
+      { name: "Mark Davis", title: "Owner/Managing General Partner" },
+      { name: "John Spytek", title: "General Manager" },
+      { name: "Champ Kelly", title: "Assistant General Manager" },
+      { name: "DuJuan Daniels", title: "Director of Pro Scouting" },
+      { name: "Matt Groh", title: "Director of College Scouting" },
+      { name: "Sandra Douglass Morgan", title: "President" }
+    ]
+  },
+
+  LAC: {
+    coaching_staff: [
+      { name: "Jim Harbaugh", title: "Head Coach" },
+      { name: "Mike McDaniel", title: "Offensive Coordinator" },
+      { name: "Chris O'Leary", title: "Defensive Coordinator" },
+      { name: "Ryan Ficken", title: "Special Teams Coordinator" },
+      { name: null, title: "Quarterbacks Coach" },
+      { name: null, title: "Running Backs Coach" },
+      { name: null, title: "Wide Receivers Coach" },
+      { name: null, title: "Tight Ends Coach" },
+      { name: null, title: "Offensive Line Coach" },
+      { name: null, title: "Defensive Line Coach" },
+      { name: null, title: "Linebackers Coach" },
+      { name: null, title: "Secondary Coach" }
+    ],
+    front_office: [
+      { name: "Dean Spanos", title: "Owner/Chairman" },
+      { name: "John Spanos", title: "President of Football Operations" },
+      { name: "Joe Hortiz", title: "General Manager" },
+      { name: "Chad Alexander", title: "Assistant General Manager" },
+      { name: "JoJo Wooden", title: "Director of Pro Scouting" },
+      { name: "Kevin Kelly", title: "Director of College Scouting" }
+    ]
+  },
+
+  LAR: {
+    coaching_staff: [
+      { name: "Sean McVay", title: "Head Coach" },
+      { name: null, title: "Offensive Coordinator" },
+      { name: "Chris Shula", title: "Defensive Coordinator" },
+      { name: "Bubba Ventrone", title: "Special Teams Coordinator" },
+      { name: null, title: "Quarterbacks Coach" },
+      { name: null, title: "Running Backs Coach" },
+      { name: null, title: "Wide Receivers Coach" },
+      { name: null, title: "Tight Ends Coach" },
+      { name: null, title: "Offensive Line Coach" },
+      { name: null, title: "Defensive Line Coach" },
+      { name: null, title: "Linebackers Coach" },
+      { name: null, title: "Secondary Coach" }
+    ],
+    front_office: [
+      { name: "Stan Kroenke", title: "Owner/Chairman" },
+      { name: "Les Snead", title: "General Manager" },
+      { name: "John McKay", title: "Assistant General Manager" },
+      { name: "Ray Farmer", title: "Director of Pro Personnel" },
+      { name: "Tony Pastoors", title: "VP of Football Operations" },
+      { name: "Brad McGuire", title: "Director of College Scouting" }
+    ]
+  },
+
+  MIA: {
+    coaching_staff: [
+      { name: "Jeff Hafley", title: "Head Coach" },
+      { name: "Bobby Slowik", title: "Offensive Coordinator" },
+      { name: "Sean Duggan", title: "Defensive Coordinator" },
+      { name: "Chris Tabor", title: "Special Teams Coordinator" },
+      { name: null, title: "Quarterbacks Coach" },
+      { name: "Ladell Betts", title: "Running Backs Coach" },
+      { name: "Tyke Tolbert", title: "Wide Receivers Coach" },
+      { name: null, title: "Tight Ends Coach" },
+      { name: "Zach Yenser", title: "Offensive Line Coach" },
+      { name: "Austin Clark", title: "Defensive Line Coach" },
+      { name: "Joe Barry", title: "Linebackers Coach" },
+      { name: "Ryan Downard", title: "Secondary Coach" }
+    ],
+    front_office: [
+      { name: "Stephen Ross", title: "Chairman/Managing General Partner" },
+      { name: "Tom Garfinkel", title: "Vice Chairman/President/CEO" },
+      { name: "Jon-Eric Sullivan", title: "General Manager" },
+      { name: "Kyle Smith", title: "Assistant General Manager" },
+      { name: "Matt Winston", title: "Director of College Scouting" },
+      { name: "Champ Kelly", title: "Senior Personnel Executive" },
+      { name: "Brandon Shore", title: "SVP Football Administration" }
+    ]
+  },
+
+  MIN: {
+    coaching_staff: [
+      { name: "Kevin O'Connell", title: "Head Coach" },
+      { name: "Wes Phillips", title: "Offensive Coordinator" },
+      { name: "Brian Flores", title: "Defensive Coordinator" },
+      { name: "Matt Daniels", title: "Special Teams Coordinator" },
+      { name: null, title: "Quarterbacks Coach" },
+      { name: null, title: "Running Backs Coach" },
+      { name: null, title: "Wide Receivers Coach" },
+      { name: null, title: "Tight Ends Coach" },
+      { name: null, title: "Offensive Line Coach" },
+      { name: null, title: "Defensive Line Coach" },
+      { name: null, title: "Linebackers Coach" },
+      { name: null, title: "Secondary Coach" }
+    ],
+    front_office: [
+      { name: "Zygi Wilf", title: "Owner/Chairman" },
+      { name: "Mark Wilf", title: "Owner/President" },
+      { name: "Kwesi Adofo-Mensah", title: "General Manager" },
+      { name: "Ryan Grigson", title: "VP of Player Personnel" },
+      { name: "Jamaal Stephenson", title: "Director of College Scouting" },
+      { name: "Ryan Monnens", title: "Director of Pro Scouting" }
+    ]
+  },
+
+  NE: {
+    coaching_staff: [
+      { name: "Mike Vrabel", title: "Head Coach" },
+      { name: "Josh McDaniels", title: "Offensive Coordinator" },
+      { name: "Terrell Williams", title: "Defensive Coordinator" },
+      { name: "Jeremy Springer", title: "Special Teams Coordinator" },
+      { name: "Ashton Grant", title: "Quarterbacks Coach" },
+      { name: "Tony Dews", title: "Running Backs Coach" },
+      { name: "Todd Downing", title: "Wide Receivers Coach" },
+      { name: "Thomas Brown", title: "Tight Ends Coach" },
+      { name: "Doug Marrone", title: "Offensive Line Coach" },
+      { name: "Clint McMillan", title: "Defensive Line Coach" },
+      { name: "Zak Kuhr", title: "Linebackers Coach" },
+      { name: "Justin Hamilton", title: "Secondary Coach" }
+    ],
+    front_office: [
+      { name: "Robert Kraft", title: "Owner/Chairman/CEO" },
+      { name: "Jonathan Kraft", title: "President" },
+      { name: "Eliot Wolf", title: "EVP of Player Personnel" },
+      { name: "Ryan Cowden", title: "VP of Player Personnel" },
+      { name: "Matt Groh", title: "VP of Football Administration" },
+      { name: "AJ Highsmith", title: "Director of Pro Scouting" },
+      { name: "Tony Kinkela", title: "Director of College Scouting" }
+    ]
+  },
+
+  NO: {
+    coaching_staff: [
+      { name: "Kellen Moore", title: "Head Coach" },
+      { name: "Doug Nussmeier", title: "Offensive Coordinator" },
+      { name: "Brandon Staley", title: "Defensive Coordinator" },
+      { name: "Phil Galiano", title: "Special Teams Coordinator" },
+      { name: "Alex Van Pelt", title: "Quarterbacks Coach" },
+      { name: null, title: "Running Backs Coach" },
+      { name: null, title: "Wide Receivers Coach" },
+      { name: null, title: "Tight Ends Coach" },
+      { name: null, title: "Offensive Line Coach" },
+      { name: null, title: "Defensive Line Coach" },
+      { name: null, title: "Linebackers Coach" },
+      { name: null, title: "Secondary Coach" }
+    ],
+    front_office: [
+      { name: "Gayle Benson", title: "Owner" },
+      { name: "Dennis Lauscha", title: "President" },
+      { name: "Mickey Loomis", title: "General Manager/EVP of Football Operations" },
+      { name: "Jeff Ireland", title: "Assistant General Manager" },
+      { name: "Jay Gruden", title: "Senior Football Advisor" },
+      { name: "Khai Harley", title: "Director of Pro Scouting" }
+    ]
+  },
+
+  NYG: {
+    coaching_staff: [
+      { name: "John Harbaugh", title: "Head Coach" },
+      { name: "Matt Nagy", title: "Offensive Coordinator" },
+      { name: "Dennard Wilson", title: "Defensive Coordinator" },
+      { name: "Chris Horton", title: "Special Teams Coordinator" },
+      { name: null, title: "Quarterbacks Coach" },
+      { name: null, title: "Running Backs Coach" },
+      { name: null, title: "Wide Receivers Coach" },
+      { name: null, title: "Tight Ends Coach" },
+      { name: null, title: "Offensive Line Coach" },
+      { name: null, title: "Defensive Line Coach" },
+      { name: null, title: "Linebackers Coach" },
+      { name: null, title: "Secondary Coach" }
+    ],
+    front_office: [
+      { name: "John Mara", title: "Co-Owner/President" },
+      { name: "Steve Tisch", title: "Co-Owner/Chairman" },
+      { name: "Joe Schoen", title: "General Manager" },
+      { name: "Brandon Brown", title: "Assistant General Manager" },
+      { name: "Tim McDonnell", title: "Director of Pro Scouting" },
+      { name: "Dennis Hicken", title: "Director of College Scouting" },
+      { name: "Chris Mara", title: "SVP of Player Personnel" }
+    ]
+  },
+
+  NYJ: {
+    coaching_staff: [
+      { name: "Aaron Glenn", title: "Head Coach" },
+      { name: "Frank Reich", title: "Offensive Coordinator" },
+      { name: "Brian Duker", title: "Defensive Coordinator" },
+      { name: "Chris Banjo", title: "Special Teams Coordinator" },
+      { name: null, title: "Quarterbacks Coach" },
+      { name: null, title: "Running Backs Coach" },
+      { name: null, title: "Wide Receivers Coach" },
+      { name: null, title: "Tight Ends Coach" },
+      { name: null, title: "Offensive Line Coach" },
+      { name: null, title: "Defensive Line Coach" },
+      { name: null, title: "Linebackers Coach" },
+      { name: null, title: "Secondary Coach" }
+    ],
+    front_office: [
+      { name: "Woody Johnson", title: "Owner/Chairman/CEO" },
+      { name: "Christopher Johnson", title: "Vice Chairman" },
+      { name: "Hymie Elhai", title: "President" },
+      { name: "Darren Mougey", title: "General Manager" },
+      { name: "Robbie Paton", title: "Director of Player Personnel" },
+      { name: "Evan Ardoin", title: "Director of Pro Scouting" },
+      { name: "Jay Mandolesi", title: "Director of College Scouting" }
+    ]
+  },
+
+  PHI: {
+    coaching_staff: [
+      { name: "Nick Sirianni", title: "Head Coach" },
+      { name: "Sean Mannion", title: "Offensive Coordinator" },
+      { name: "Vic Fangio", title: "Defensive Coordinator" },
+      { name: "Michael Clay", title: "Special Teams Coordinator" },
+      { name: null, title: "Quarterbacks Coach" },
+      { name: null, title: "Running Backs Coach" },
+      { name: null, title: "Wide Receivers Coach" },
+      { name: null, title: "Tight Ends Coach" },
+      { name: null, title: "Offensive Line Coach" },
+      { name: null, title: "Defensive Line Coach" },
+      { name: null, title: "Linebackers Coach" },
+      { name: null, title: "Secondary Coach" }
+    ],
+    front_office: [
+      { name: "Jeffrey Lurie", title: "Owner/Chairman" },
+      { name: "Howie Roseman", title: "General Manager/EVP of Football Operations" },
+      { name: "Alec Halaby", title: "Assistant General Manager" },
+      { name: "Jon Ferrari", title: "VP of Player Personnel" },
+      { name: "Brandon Hunt", title: "VP of Player Personnel" },
+      { name: "Alonzo Dotson", title: "Director of Pro Scouting" }
+    ]
+  },
+
+  PIT: {
+    coaching_staff: [
+      { name: "Mike McCarthy", title: "Head Coach" },
+      { name: null, title: "Offensive Coordinator" },
+      { name: "Patrick Graham", title: "Defensive Coordinator" },
+      { name: "Danny Crossman", title: "Special Teams Coordinator" },
+      { name: null, title: "Quarterbacks Coach" },
+      { name: null, title: "Running Backs Coach" },
+      { name: null, title: "Wide Receivers Coach" },
+      { name: null, title: "Tight Ends Coach" },
+      { name: null, title: "Offensive Line Coach" },
+      { name: null, title: "Defensive Line Coach" },
+      { name: null, title: "Linebackers Coach" },
+      { name: null, title: "Secondary Coach" }
+    ],
+    front_office: [
+      { name: "Art Rooney II", title: "Owner/President" },
+      { name: "Omar Khan", title: "General Manager" },
+      { name: "Andy Weidl", title: "Assistant General Manager" },
+      { name: "Sheldon White", title: "VP of Football & Business Administration" },
+      { name: "Dan Colbert", title: "Director of College Scouting" },
+      { name: "Mike McCartney", title: "Director of Pro Scouting" }
+    ]
+  },
+
+  SF: {
+    coaching_staff: [
+      { name: "Kyle Shanahan", title: "Head Coach" },
+      { name: "Klay Kubiak", title: "Offensive Coordinator" },
+      { name: "Raheem Morris", title: "Defensive Coordinator" },
+      { name: "Brant Boyer", title: "Special Teams Coordinator" },
+      { name: "Mick Lombardi", title: "Quarterbacks Coach" },
+      { name: "Robert Turner Jr.", title: "Running Backs Coach" },
+      { name: "Leonard Hankerson", title: "Wide Receivers Coach" },
+      { name: "Brian Fleury", title: "Tight Ends Coach" },
+      { name: "Chris Foerster", title: "Offensive Line Coach" },
+      { name: "Kris Kocurek", title: "Defensive Line Coach" },
+      { name: "Johnny Holland", title: "Linebackers Coach" },
+      { name: "Ray Brown", title: "Secondary Coach" }
+    ],
+    front_office: [
+      { name: "Jed York", title: "Owner/CEO" },
+      { name: "John Lynch", title: "General Manager" },
+      { name: "Brian Hampton", title: "Assistant General Manager" },
+      { name: "RJ Gillen", title: "Assistant General Manager" },
+      { name: "Tariq Ahmad", title: "VP of Player Personnel" },
+      { name: "Dominic DeCiccio", title: "Director of College Scouting" },
+      { name: "Fred Gammage III", title: "Director of Pro Scouting" }
+    ]
+  },
+
+  SEA: {
+    coaching_staff: [
+      { name: "Mike Macdonald", title: "Head Coach" },
+      { name: "Klint Kubiak", title: "Offensive Coordinator" },
+      { name: "Aden Durde", title: "Defensive Coordinator" },
+      { name: "Jay Harbaugh", title: "Special Teams Coordinator" },
+      { name: null, title: "Quarterbacks Coach" },
+      { name: null, title: "Running Backs Coach" },
+      { name: null, title: "Wide Receivers Coach" },
+      { name: null, title: "Tight Ends Coach" },
+      { name: null, title: "Offensive Line Coach" },
+      { name: null, title: "Defensive Line Coach" },
+      { name: null, title: "Linebackers Coach" },
+      { name: null, title: "Secondary Coach" }
+    ],
+    front_office: [
+      { name: "Jody Allen", title: "Owner/Chair" },
+      { name: "Chuck Arnold", title: "President" },
+      { name: "John Schneider", title: "General Manager/EVP of Football Operations" },
+      { name: "Alonzo Highsmith", title: "VP of Player Personnel" },
+      { name: "Scott Fitterer", title: "Director of Pro Scouting" },
+      { name: "Trent Kirchner", title: "Director of College Scouting" }
+    ]
+  },
+
+  TB: {
+    coaching_staff: [
+      { name: "Todd Bowles", title: "Head Coach" },
+      { name: "Zac Robinson", title: "Offensive Coordinator" },
+      { name: "Kacy Rodgers", title: "Defensive Coordinator" },
+      { name: "Danny Smith", title: "Special Teams Coordinator" },
+      { name: null, title: "Quarterbacks Coach" },
+      { name: null, title: "Running Backs Coach" },
+      { name: null, title: "Wide Receivers Coach" },
+      { name: null, title: "Tight Ends Coach" },
+      { name: null, title: "Offensive Line Coach" },
+      { name: null, title: "Defensive Line Coach" },
+      { name: null, title: "Linebackers Coach" },
+      { name: null, title: "Secondary Coach" }
+    ],
+    front_office: [
+      { name: "Bryan Glazer", title: "Owner/Co-Chairman" },
+      { name: "Joel Glazer", title: "Owner/Co-Chairman" },
+      { name: "Jason Licht", title: "General Manager" },
+      { name: "Mike Greenberg", title: "VP of Football Administration" },
+      { name: "John Seibel", title: "Director of Pro Scouting" },
+      { name: "Shane Sabo", title: "Director of College Scouting" }
+    ]
+  },
+
+  TEN: {
+    coaching_staff: [
+      { name: "Robert Saleh", title: "Head Coach" },
+      { name: "Brian Daboll", title: "Offensive Coordinator" },
+      { name: "Gus Bradley", title: "Defensive Coordinator" },
+      { name: "John Fassel", title: "Special Teams Coordinator" },
+      { name: null, title: "Quarterbacks Coach" },
+      { name: null, title: "Running Backs Coach" },
+      { name: null, title: "Wide Receivers Coach" },
+      { name: null, title: "Tight Ends Coach" },
+      { name: null, title: "Offensive Line Coach" },
+      { name: null, title: "Defensive Line Coach" },
+      { name: null, title: "Linebackers Coach" },
+      { name: null, title: "Secondary Coach" }
+    ],
+    front_office: [
+      { name: "Amy Adams Strunk", title: "Controlling Owner" },
+      { name: "Burke Nihill", title: "President/CEO" },
+      { name: "Mike Borgonzi", title: "General Manager" },
+      { name: "Ryan Cowden", title: "Former VP of Player Personnel" },
+      { name: "Blake Beddingfield", title: "Director of Pro Scouting" },
+      { name: "Terrence Gray", title: "Director of College Scouting" }
+    ]
+  },
+
+  WAS: {
+    coaching_staff: [
+      { name: "Dan Quinn", title: "Head Coach" },
+      { name: "David Blough", title: "Offensive Coordinator" },
+      { name: "Daronte Jones", title: "Defensive Coordinator" },
+      { name: "Nate Kaczor", title: "Special Teams Coordinator" },
+      { name: null, title: "Quarterbacks Coach" },
+      { name: null, title: "Running Backs Coach" },
+      { name: null, title: "Wide Receivers Coach" },
+      { name: null, title: "Tight Ends Coach" },
+      { name: null, title: "Offensive Line Coach" },
+      { name: null, title: "Defensive Line Coach" },
+      { name: null, title: "Linebackers Coach" },
+      { name: null, title: "Secondary Coach" }
+    ],
+    front_office: [
+      { name: "Josh Harris", title: "Owner/Managing Partner" },
+      { name: "Mitchell Rales", title: "Co-Owner" },
+      { name: "Adam Peters", title: "General Manager" },
+      { name: "Lance Newmark", title: "Assistant General Manager" },
+      { name: "Eric Stokes", title: "Director of Pro Scouting" },
+      { name: "Tim Gribble", title: "Director of College Scouting" }
+    ]
+  }
+};
+
+const metadata = {
+  generated: new Date().toISOString().split('T')[0],
+  source: "Compiled from NFL.com, Wikipedia, ESPN, Fox Sports, team websites (Feb 2026)",
+  notes: "Position coaches marked as null are TBD — many teams with new head coaches are still finalizing staff. Front office reflects post-2025 coaching carousel changes.",
+  total_teams: 32,
+  coaching_positions: ["Head Coach", "Offensive Coordinator", "Defensive Coordinator", "Special Teams Coordinator", "Quarterbacks Coach", "Running Backs Coach", "Wide Receivers Coach", "Tight Ends Coach", "Offensive Line Coach", "Defensive Line Coach", "Linebackers Coach", "Secondary Coach"],
+  front_office_note: "Front office structure varies by team. Each team lists 6-7 key personnel from Owner down to Director of Scouting level."
+};
+
+const output = {
+  _metadata: metadata,
+  ...staffData
+};
+
+const teamCount = Object.keys(staffData).length;
+let filledCoaching = 0;
+let totalCoaching = 0;
+let filledFO = 0;
+let totalFO = 0;
+
+for (const abbr of Object.keys(staffData)) {
+  const team = staffData[abbr];
+  totalCoaching += team.coaching_staff.length;
+  filledCoaching += team.coaching_staff.filter(s => s.name !== null).length;
+  totalFO += team.front_office.length;
+  filledFO += team.front_office.filter(s => s.name !== null).length;
+}
+
+console.log(`\nStaff Database Build Summary:`);
+console.log(`Teams: ${teamCount}`);
+console.log(`Coaching staff positions: ${filledCoaching}/${totalCoaching} filled (${Math.round(filledCoaching/totalCoaching*100)}%)`);
+console.log(`Front office positions: ${filledFO}/${totalFO} filled (${Math.round(filledFO/totalFO*100)}%)`);
+
+const outputPath = path.join(__dirname, '..', 'data', 'teams', 'staff_database.json');
+fs.writeFileSync(outputPath, JSON.stringify(output, null, 2));
+console.log(`\nWritten to: ${outputPath}`);
