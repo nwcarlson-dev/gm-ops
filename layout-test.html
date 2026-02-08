@@ -668,23 +668,23 @@
 
             function showPreview(targetRow, hoverIndex) {
                 clearPreview();
-                const { fromRow, fromIndex } = dragState;
+                const { pill, fromRow, fromIndex } = dragState;
                 const sameRow = targetRow === fromRow;
                 const gap = 8;
-
                 const targetPills = Array.from(targetRow.children);
                 const clampedIndex = Math.min(hoverIndex, targetPills.length - 1);
-                targetPills[clampedIndex].classList.add('insert-target');
 
                 if (sameRow) {
-                    const pills = targetPills;
-                    const pillWidth = pills[0].getBoundingClientRect().width;
+                    const pillWidth = targetPills[0].getBoundingClientRect().width;
                     const shift = pillWidth + gap;
                     let effectiveInsert = hoverIndex;
                     if (fromIndex < hoverIndex) effectiveInsert--;
                     if (effectiveInsert === fromIndex) return;
 
-                    pills.forEach((p, i) => {
+                    pill.style.transform = `translateX(${(effectiveInsert - fromIndex) * shift}px)`;
+                    pill.classList.add('insert-target');
+
+                    targetPills.forEach((p, i) => {
                         if (i === fromIndex) return;
                         if (p.classList.contains('empty-slot')) return;
                         if (effectiveInsert < fromIndex) {
@@ -709,6 +709,7 @@
                         }
                     });
 
+                    targetPills[clampedIndex].classList.add('insert-target');
                     const targetShift = targetPills[0].getBoundingClientRect().width + gap;
                     targetPills.forEach((p, i) => {
                         if (i > clampedIndex && !p.classList.contains('empty-slot')) {
@@ -720,6 +721,10 @@
             }
 
             function clearPreview() {
+                if (dragState && dragState.pill) {
+                    dragState.pill.classList.remove('insert-target');
+                    dragState.pill.style.transform = '';
+                }
                 rows.forEach(r => {
                     Array.from(r.children).forEach(p => {
                         p.classList.remove('shift-preview', 'insert-target');
