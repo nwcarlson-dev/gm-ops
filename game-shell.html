@@ -2644,15 +2644,17 @@
 
             .os-layout-2col {
                 display: grid;
-                grid-template-columns: 60% 40%;
-                gap: 16px;
+                grid-template-columns: 1fr 280px;
+                gap: 12px;
                 height: 100%;
+                min-width: 0;
             }
             .os-layout-2col-fa {
                 display: grid;
-                grid-template-columns: 55% 45%;
-                gap: 16px;
+                grid-template-columns: 1fr 280px;
+                gap: 12px;
                 height: 100%;
+                min-width: 0;
             }
             .os-panel {
                 background: var(--card-bg);
@@ -2683,7 +2685,7 @@
             .os-table {
                 width: 100%;
                 border-collapse: collapse;
-                font-size: 13px;
+                font-size: 12px;
             }
             .os-table th {
                 font-family: 'Barlow Condensed', sans-serif;
@@ -3028,11 +3030,15 @@
             }
             .universal-layout {
                 display: grid;
-                grid-template-columns: 55% 45%;
+                grid-template-columns: 55% 1fr;
                 gap: 8px;
-                height: calc(100vh - 64px);
+                height: calc(100vh - 110px);
                 overflow: hidden;
                 padding: 8px;
+            }
+            .phase-content-col {
+                overflow-y: auto;
+                min-height: 0;
             }
             .universal-layout.panel-expanded {
                 grid-template-columns: 35% 65%;
@@ -3120,8 +3126,12 @@
                 display: flex;
                 gap: 4px;
                 flex: 1;
-                overflow-x: hidden;
+                overflow-x: auto;
                 align-items: center;
+                min-width: 0;
+            }
+            .dc-pills-container::-webkit-scrollbar {
+                height: 0;
             }
             .dc-show-more {
                 font-size: 10px;
@@ -4166,6 +4176,7 @@
             };
 
             let futurePicks = {};
+            let allPlayerDatabase = {};
             let allPlayerTradeValues = {};
 
             const REAL_FUTURE_TRADES = [
@@ -5700,27 +5711,31 @@
                     }
                 });
 
-                yourPlayerDetails.forEach(function(pd) {
-                    const fromPlayers = allPlayerTradeValues[userAbbr];
-                    if (!fromPlayers) return;
-                    const idx = fromPlayers.findIndex(function(p) { return p.name === pd.name; });
+                function movePlayerBetweenTeams(name, fromAbbr, toAbbr, dataStore) {
+                    const fromList = dataStore[fromAbbr];
+                    if (!fromList) return;
+                    const idx = fromList.findIndex(function(p) { return p.name === name; });
                     if (idx > -1) {
-                        const player = fromPlayers.splice(idx, 1)[0];
-                        player.team = partnerAbbr;
-                        if (!allPlayerTradeValues[partnerAbbr]) allPlayerTradeValues[partnerAbbr] = [];
-                        allPlayerTradeValues[partnerAbbr].push(player);
+                        const player = fromList.splice(idx, 1)[0];
+                        player.team = toAbbr;
+                        if (!dataStore[toAbbr]) dataStore[toAbbr] = [];
+                        dataStore[toAbbr].push(player);
+                    }
+                }
+
+                yourPlayerDetails.forEach(function(pd) {
+                    movePlayerBetweenTeams(pd.name, userAbbr, partnerAbbr, allPlayerTradeValues);
+                    movePlayerBetweenTeams(pd.name, userAbbr, partnerAbbr, allPlayerDatabase);
+                    if (offseasonState && offseasonState.rosters) {
+                        movePlayerBetweenTeams(pd.name, userAbbr, partnerAbbr, offseasonState.rosters);
                     }
                 });
 
                 partnerPlayerDetails.forEach(function(pd) {
-                    const fromPlayers = allPlayerTradeValues[partnerAbbr];
-                    if (!fromPlayers) return;
-                    const idx = fromPlayers.findIndex(function(p) { return p.name === pd.name; });
-                    if (idx > -1) {
-                        const player = fromPlayers.splice(idx, 1)[0];
-                        player.team = userAbbr;
-                        if (!allPlayerTradeValues[userAbbr]) allPlayerTradeValues[userAbbr] = [];
-                        allPlayerTradeValues[userAbbr].push(player);
+                    movePlayerBetweenTeams(pd.name, partnerAbbr, userAbbr, allPlayerTradeValues);
+                    movePlayerBetweenTeams(pd.name, partnerAbbr, userAbbr, allPlayerDatabase);
+                    if (offseasonState && offseasonState.rosters) {
+                        movePlayerBetweenTeams(pd.name, partnerAbbr, userAbbr, offseasonState.rosters);
                     }
                 });
 
@@ -6567,12 +6582,14 @@
                     teamSchemes = (teamSchemesData && teamSchemesData.teams) || {};
                     allDepthCharts = depthChartsData || {};
 
-                    const [playerTradeData, detailedNeedsData, collegeIdData] = await Promise.all([
+                    const [playerDbData, playerTradeData, detailedNeedsData, collegeIdData] = await Promise.all([
+                        safeFetch("data/teams/player_database.json"),
                         safeFetch("data/teams/player_trade_values.json"),
                         safeFetch("data/teams/team_needs_detailed.json"),
                         safeFetch("data/espn_college_ids.json")
                     ]);
                     ESPN_COLLEGE_IDS = collegeIdData || {};
+                    allPlayerDatabase = playerDbData ? (playerDbData.teams || {}) : {};
                     allPlayerTradeValues = playerTradeData ? (playerTradeData.teams || {}) : {};
                     detailedTeamNeeds = detailedNeedsData ? (detailedNeedsData.teams || {}) : {};
 
@@ -6986,6 +7003,38 @@
             function tierBadgeHTML(tier) {
                 const cls = 'os-tier-' + (tier || 'backup');
                 return '<span class="os-tier-badge ' + cls + '">' + (tier || 'Unknown') + '</span>';
+            }
+
+            function buildOffseasonRosters(playerDb, tradeVals) {
+                const rosters = {};
+                for (const [team, players] of Object.entries(playerDb)) {
+                    const tvPlayers = tradeVals[team] || [];
+                    const tvMap = {};
+                    tvPlayers.forEach(function(p) { tvMap[p.name] = p; });
+                    rosters[team] = players.map(function(p) {
+                        const tv = tvMap[p.name] || {};
+                        return {
+                            name: p.name,
+                            team: p.team,
+                            position: p.position,
+                            depthChartPos: p.depthChartPos,
+                            role: p.role,
+                            performanceTier: p.performanceTier,
+                            age: p.age,
+                            apy: p.contract.apy || 0,
+                            guaranteed: p.contract.guaranteed || 0,
+                            yearsRemaining: p.contract.yearsRemaining,
+                            isExpiring: p.contract.isExpiring,
+                            isRookieDeal: p.contract.isRookieDeal,
+                            tradeValue: tv.tradeValue || 0,
+                            tradeable: tv.tradeable !== undefined ? tv.tradeable : true,
+                            tradeBlockedReason: tv.tradeBlockedReason || null,
+                            college: p.college,
+                            jerseyNumber: p.jerseyNumber,
+                        };
+                    });
+                }
+                return rosters;
             }
 
             function runCPUFranchiseTags() {
@@ -7692,18 +7741,21 @@
                 phaseContent.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:200px;"><div style="text-align:center;color:var(--text-muted);">Loading offseason data...</div></div>';
 
                 try {
-                    const [rosterRes, capRes, depthChartsRes] = await Promise.all([
+                    const [playerDbRes, tradeValRes, capRes, depthChartsRes] = await Promise.all([
+                        fetch('/data/teams/player_database.json'),
                         fetch('/data/teams/player_trade_values.json'),
                         fetch('/data/teams/cap_summary_2026.json'),
                         fetch('/data/teams/depth_charts_2026.json'),
                     ]);
-                    const rosterData = await rosterRes.json();
+                    const playerDbData = await playerDbRes.json();
+                    const tradeValData = await tradeValRes.json();
                     const capData = await capRes.json();
                     const depthChartsData = await depthChartsRes.json();
-                    offseasonState.rosters = rosterData.teams || {};
+                    allPlayerDatabase = playerDbData.teams || {};
+                    allPlayerTradeValues = tradeValData.teams || {};
+                    offseasonState.rosters = buildOffseasonRosters(allPlayerDatabase, allPlayerTradeValues);
                     offseasonState.capData = capData.teams || {};
                     allDepthCharts = depthChartsData || {};
-                    allPlayerTradeValues = rosterData.teams || {};
                 } catch(e) {
                     console.error('Failed to load offseason data:', e);
                     phaseContent.innerHTML = '<div style="padding:40px;text-align:center;color:var(--danger);">Failed to load offseason data. Please refresh.</div>';
@@ -7739,40 +7791,41 @@
                 if (state === 'fullscreen') layout.classList.add('panel-fullscreen');
             }
 
-            function getPlayerTradeData(teamAbbr, playerName) {
-                const roster = allPlayerTradeValues[teamAbbr];
+            function getPlayerData(teamAbbr, playerName) {
+                const roster = allPlayerDatabase[teamAbbr];
                 if (!roster) return null;
                 return roster.find(p => p.name === playerName) || null;
             }
 
-            function getPlayerStatusClass(player, tradeData) {
-                if (tradeData && tradeData.performanceTier === 'elite') return 'status-performer';
+            function getPlayerStatusClass(player, playerData) {
+                if (playerData && playerData.performanceTier === 'elite') return 'status-performer';
                 if (player && player.expiring) return 'status-expiring';
-                if (tradeData && tradeData.isRookieDeal) return 'status-rookie';
+                if (playerData && playerData.contract && playerData.contract.isRookieDeal) return 'status-rookie';
                 return '';
             }
 
             function formatCapHit(apy) {
-                if (!apy && apy !== 0) return '\u2014';
+                if (!apy && apy !== 0) return '';
                 if (apy >= 1) return '$' + apy.toFixed(1) + 'M';
-                return '$' + (apy * 1000).toFixed(0) + 'K';
+                if (apy > 0) return '$' + (apy * 1000).toFixed(0) + 'K';
+                return '';
             }
 
             function renderPlayerPill(player, teamAbbr, posLabel) {
                 if (!player) return '<div class="pill-empty">\u2014</div>';
-                const tradeData = getPlayerTradeData(teamAbbr, player.name);
-                const statusClass = getPlayerStatusClass(player, tradeData);
-                let stat1 = '\u2014';
-                let stat2 = '\u2014';
-                if (tradeData) {
-                    stat1 = tradeData.performanceTier ? tradeData.performanceTier.charAt(0).toUpperCase() + tradeData.performanceTier.slice(1) : '\u2014';
-                    stat2 = formatCapHit(tradeData.apy);
+                const pData = getPlayerData(teamAbbr, player.name);
+                const statusClass = getPlayerStatusClass(player, pData);
+                let stat1 = '';
+                let stat2 = '';
+                if (pData) {
+                    stat1 = pData.performanceTier ? pData.performanceTier.charAt(0).toUpperCase() + pData.performanceTier.slice(1) : '';
+                    stat2 = formatCapHit(pData.contract ? pData.contract.apy : null);
                 }
                 const pillId = `pill-${teamAbbr}-${(player.name || '').replace(/[^a-zA-Z0-9]/g, '')}`;
+                const statsHtml = [stat1, stat2].filter(s => s).map(s => `<span class="pill-stat">${s}</span>`).join('');
                 return `<div class="player-pill ${statusClass}" id="${pillId}" draggable="true" data-player="${encodeURIComponent(player.name)}" data-team="${teamAbbr}" data-pos="${posLabel}">
                     <span class="pill-name">${player.name}</span>
-                    <span class="pill-stat">${stat1}</span>
-                    <span class="pill-stat">${stat2}</span>
+                    ${statsHtml}
                     <div class="pill-actions">
                         <button class="pill-tooltip-btn" onclick="event.stopPropagation(); showPlayerTooltip('${encodeURIComponent(player.name)}', '${teamAbbr}')" title="Player details">\u24d8</button>
                         <button class="pill-menu-btn" onclick="event.stopPropagation(); togglePillMenu(this, '${encodeURIComponent(player.name)}', '${teamAbbr}')" title="Actions">\u22ee</button>
@@ -7875,25 +7928,40 @@
 
             function showPlayerTooltip(encodedName, teamAbbr) {
                 const playerName = decodeURIComponent(encodedName);
-                const tradeData = getPlayerTradeData(teamAbbr, playerName);
-                let html = `<div class="modal-content" style="max-width: 400px; padding: 24px;">
+                const pData = getPlayerData(teamAbbr, playerName);
+                let html = `<div class="modal-content" style="max-width: 420px; padding: 24px;">
                     <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 16px;">
                         <h3 style="margin:0; font-family: 'Teko', sans-serif; font-size: 24px; color: var(--white);">${playerName}</h3>
                         <button class="modal-close" onclick="closePlayerTooltip()" style="position:static;">&times;</button>
                     </div>`;
-                if (tradeData) {
+                if (pData) {
+                    const c = pData.contract || {};
+                    const statusLabel = c.isExpiring ? 'Expiring' : c.isRookieDeal ? 'Rookie Deal' : c.hasContract ? 'Under Contract' : 'Unknown';
+                    const collegeLine = pData.college ? `<div><span style="color:var(--text-muted)">College:</span> <strong>${pData.college}</strong></div>` : '';
+                    const jerseyLine = pData.jerseyNumber ? `<div><span style="color:var(--text-muted)">Jersey:</span> <strong>#${pData.jerseyNumber}</strong></div>` : '';
+                    const expLine = pData.yearsExp !== null ? `<div><span style="color:var(--text-muted)">Experience:</span> <strong>${pData.yearsExp} yr${pData.yearsExp !== 1 ? 's' : ''}</strong></div>` : '';
                     html += `<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 12px;">
-                        <div><span style="color:var(--text-muted)">Position:</span> <strong>${tradeData.position}</strong></div>
-                        <div><span style="color:var(--text-muted)">Age:</span> <strong>${tradeData.age}</strong></div>
-                        <div><span style="color:var(--text-muted)">APY:</span> <strong>${formatCapHit(tradeData.apy)}</strong></div>
-                        <div><span style="color:var(--text-muted)">Trade Value:</span> <strong>${tradeData.tradeValue}</strong></div>
-                        <div><span style="color:var(--text-muted)">Years Left:</span> <strong>${tradeData.yearsRemaining}</strong></div>
-                        <div><span style="color:var(--text-muted)">Tier:</span> <strong style="text-transform:capitalize">${tradeData.performanceTier}</strong></div>
-                        <div><span style="color:var(--text-muted)">Guaranteed:</span> <strong>${formatCapHit(tradeData.guaranteed)}</strong></div>
-                        <div><span style="color:var(--text-muted)">Contract:</span> <strong>${tradeData.contractYears}yr / ${formatCapHit(tradeData.totalContractValue)}</strong></div>
-                        <div><span style="color:var(--text-muted)">Status:</span> <strong>${tradeData.isExpiring ? 'Expiring' : tradeData.isRookieDeal ? 'Rookie Deal' : 'Under Contract'}</strong></div>
-                        <div><span style="color:var(--text-muted)">Role:</span> <strong style="text-transform:capitalize">${tradeData.role}</strong></div>
+                        <div><span style="color:var(--text-muted)">Position:</span> <strong>${pData.position}</strong></div>
+                        <div><span style="color:var(--text-muted)">Age:</span> <strong>${pData.age || '—'}</strong></div>
+                        <div><span style="color:var(--text-muted)">Tier:</span> <strong style="text-transform:capitalize">${pData.performanceTier}</strong></div>
+                        <div><span style="color:var(--text-muted)">Role:</span> <strong style="text-transform:capitalize">${pData.role}</strong></div>
+                        ${collegeLine}
+                        ${jerseyLine}
+                        ${expLine}
                     </div>`;
+                    if (c.hasContract) {
+                        html += `<div style="margin-top:12px; padding-top:12px; border-top:1px solid var(--card-border);">
+                            <div style="font-family:'Barlow Condensed',sans-serif; font-size:11px; text-transform:uppercase; letter-spacing:0.08em; color:var(--text-muted); margin-bottom:6px;">Contract</div>
+                            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 12px;">
+                                <div><span style="color:var(--text-muted)">APY:</span> <strong>${formatCapHit(c.apy)}</strong></div>
+                                <div><span style="color:var(--text-muted)">Years Left:</span> <strong>${c.yearsRemaining !== null ? c.yearsRemaining : '—'}</strong></div>
+                                <div><span style="color:var(--text-muted)">Guaranteed:</span> <strong>${formatCapHit(c.guaranteed)}</strong></div>
+                                <div><span style="color:var(--text-muted)">Total Value:</span> <strong>${formatCapHit(c.totalValue)}</strong></div>
+                                <div><span style="color:var(--text-muted)">Status:</span> <strong>${statusLabel}</strong></div>
+                                <div><span style="color:var(--text-muted)">Signed:</span> <strong>${c.yearSigned || '—'}</strong></div>
+                            </div>
+                        </div>`;
+                    }
                 } else {
                     html += '<div style="color:var(--text-muted); font-size: 12px;">No detailed data available</div>';
                 }
@@ -7915,8 +7983,8 @@
                     activePillMenu = null;
                 }
                 const playerName = decodeURIComponent(encodedName);
-                const tradeData = getPlayerTradeData(teamAbbr, playerName);
-                const isExpiring = tradeData ? tradeData.isExpiring : false;
+                const pData = getPlayerData(teamAbbr, playerName);
+                const isExpiring = pData ? (pData.contract && pData.contract.isExpiring) : false;
                 const isUserTeam = gameMode === 'offseason' ? (teamAbbr === offseasonState.userTeam) : (TEAM_DATA[userTeam.name] && TEAM_DATA[userTeam.name].abbr === teamAbbr);
                 let menuItems = '';
                 if (isUserTeam) {
