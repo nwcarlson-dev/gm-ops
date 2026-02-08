@@ -269,88 +269,82 @@
             flex: 1;
             min-width: 0;
             display: flex;
+            align-items: center;
+            padding: 3px 0;
+        }
+
+        .pill-name-area {
+            display: flex;
             flex-direction: column;
             justify-content: center;
-            padding: 3px 6px;
-            gap: 1px;
-        }
-
-        .pill-top-row {
-            display: flex;
-            align-items: baseline;
-            gap: 5px;
+            padding: 0 8px;
             min-width: 0;
+            flex: 1;
+            line-height: 1;
         }
 
-        .pill-name {
-            font-size: 13px;
-            font-weight: 700;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            line-height: 1.2;
-            color: #e2e8f0;
-            flex-shrink: 1;
-            min-width: 0;
-        }
-
-        .pill-pff {
-            flex-shrink: 0;
+        .pill-first-name {
             font-size: 10px;
-            font-weight: 500;
-            white-space: nowrap;
-            line-height: 1.2;
-        }
-
-        .pill-stats {
-            font-size: 10.5px;
-            font-weight: 500;
-            color: var(--text-muted);
+            font-weight: 600;
+            color: #94a3b8;
             white-space: nowrap;
             overflow: hidden;
             text-overflow: ellipsis;
-            line-height: 1.2;
-            letter-spacing: 0.02em;
+            line-height: 1.1;
         }
 
-        .pill-stats .pff-badge {
+        .pill-last-name {
+            font-size: 14px;
             font-weight: 700;
-            margin-right: 1px;
+            color: #e2e8f0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            line-height: 1.15;
         }
 
-        .pill-stats .pff-badge.grade-elite { color: #f0d060; }
-        .pill-stats .pff-badge.grade-great { color: #4ade80; }
-        .pill-stats .pff-badge.grade-above { color: #38bdf8; }
-        .pill-stats .pff-badge.grade-avg { color: #94a3b8; }
-        .pill-stats .pff-badge.grade-below { color: #f87171; }
+        .pill-data {
+            flex-shrink: 0;
+            display: flex;
+            align-items: stretch;
+            align-self: stretch;
+            margin-left: auto;
+        }
 
-        .pill-stats .pff-label {
-            font-size: 8px;
-            font-weight: 600;
-            opacity: 0.5;
-            margin-right: 1px;
+        .pill-data-cell {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 0 6px;
+            border-left: 1px solid rgba(255,255,255,0.06);
+            min-width: 34px;
+        }
+
+        .pill-data-label {
+            font-size: 7px;
+            font-weight: 700;
             text-transform: uppercase;
-            letter-spacing: 0.04em;
+            letter-spacing: 0.06em;
+            color: rgba(255,255,255,0.35);
+            line-height: 1;
+            white-space: nowrap;
         }
 
-        .pill-stats .stats-year {
-            font-size: 8px;
-            font-weight: 600;
-            opacity: 0.45;
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
-            margin-right: 3px;
+        .pill-data-val {
+            font-size: 15px;
+            font-weight: 700;
+            line-height: 1.1;
+            font-family: 'Teko', sans-serif;
+            color: #cbd5e1;
+            padding-top: 1px;
         }
 
-        .pill-stats .stat-val {
-            color: #94a3b8;
-            font-weight: 600;
-        }
-
-        .pill-stats .stat-sep {
-            color: rgba(255,255,255,0.15);
-            margin: 0 2px;
-        }
+        .pill-data-val.grade-elite { color: #f0d060; }
+        .pill-data-val.grade-great { color: #4ade80; }
+        .pill-data-val.grade-above { color: #38bdf8; }
+        .pill-data-val.grade-avg { color: #94a3b8; }
+        .pill-data-val.grade-below { color: #f87171; }
 
         .pos-pill.empty-slot {
             border: 1px dashed rgba(255,255,255,0.08);
@@ -371,7 +365,8 @@
         }
 
         .pos-pill.drag-source.insert-target .pill-body,
-        .pos-pill.drag-source.insert-target .pill-number {
+        .pos-pill.drag-source.insert-target .pill-number,
+        .pos-pill.drag-source.insert-target .pill-data {
             visibility: hidden;
         }
 
@@ -545,55 +540,65 @@
             return String(Math.round(val)).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
         }
 
-        function getStatsHtml(dcPos, pff) {
-            if (!pff || !pff.stats) return '';
+        function getStatBlocks(dcPos, pff) {
+            if (!pff || !pff.stats) return [];
             const s = pff.stats;
             const statPos = DC_POS_TO_STAT_POS[dcPos] || dcPos;
 
-            const parts = [];
             switch (statPos) {
                 case 'QB':
-                    if (s.passYards != null) parts.push(`<span class="stat-val">${formatStat(s.passYards)}</span> Pass Yds`);
-                    if (s.passTDs != null) parts.push(`<span class="stat-val">${Math.round(s.passTDs)}</span> TDs`);
-                    break;
+                    return [
+                        s.passYards != null ? { label: 'Pass Yds', val: formatStat(s.passYards) } : null,
+                        s.passTDs != null ? { label: 'TDs', val: Math.round(s.passTDs) } : null,
+                    ].filter(Boolean);
                 case 'RB':
-                    if (s.rushYards != null) parts.push(`<span class="stat-val">${formatStat(s.rushYards)}</span> Rush Yds`);
-                    if (s.rushTDs != null) parts.push(`<span class="stat-val">${Math.round(s.rushTDs)}</span> TDs`);
-                    break;
+                    return [
+                        s.rushYards != null ? { label: 'Rush Yds', val: formatStat(s.rushYards) } : null,
+                        s.rushTDs != null ? { label: 'TDs', val: Math.round(s.rushTDs) } : null,
+                    ].filter(Boolean);
                 case 'WR':
                 case 'TE':
-                    if (s.recYards != null) parts.push(`<span class="stat-val">${formatStat(s.recYards)}</span> Rec Yds`);
-                    if (s.receptions != null) parts.push(`<span class="stat-val">${Math.round(s.receptions)}</span> Rec`);
-                    break;
+                    return [
+                        s.recYards != null ? { label: 'Rec Yds', val: formatStat(s.recYards) } : null,
+                        s.receptions != null ? { label: 'Rec', val: Math.round(s.receptions) } : null,
+                    ].filter(Boolean);
                 case 'OL':
-                    if (s.pressuresAllowed != null) parts.push(`<span class="stat-val">${Math.round(s.pressuresAllowed)}</span> Pressures`);
-                    if (s.runBlockGrade != null) parts.push(`<span class="stat-val">${Math.round(s.runBlockGrade)}</span> Run Block`);
-                    break;
+                    return [
+                        s.pressuresAllowed != null ? { label: 'Pressures', val: Math.round(s.pressuresAllowed) } : null,
+                        s.runBlockGrade != null ? { label: 'Run Blk', val: Math.round(s.runBlockGrade) } : null,
+                    ].filter(Boolean);
                 case 'EDGE':
                 case 'DL':
-                    if (s.sacks != null) parts.push(`<span class="stat-val">${Math.round(s.sacks)}</span> Sacks`);
-                    if (s.totalPressures != null) parts.push(`<span class="stat-val">${Math.round(s.totalPressures)}</span> Pressures`);
-                    break;
+                    return [
+                        s.sacks != null ? { label: 'Sacks', val: Math.round(s.sacks) } : null,
+                        s.totalPressures != null ? { label: 'Pressures', val: Math.round(s.totalPressures) } : null,
+                    ].filter(Boolean);
                 case 'LB':
-                    if (s.tackles != null) parts.push(`<span class="stat-val">${Math.round(s.tackles)}</span> Tackles`);
-                    if (s.sacks != null) parts.push(`<span class="stat-val">${Math.round(s.sacks)}</span> Sacks`);
-                    break;
+                    return [
+                        s.tackles != null ? { label: 'Tackles', val: Math.round(s.tackles) } : null,
+                        s.sacks != null ? { label: 'Sacks', val: Math.round(s.sacks) } : null,
+                    ].filter(Boolean);
                 case 'CB':
-                    if (s.interceptions != null) parts.push(`<span class="stat-val">${Math.round(s.interceptions)}</span> INTs`);
-                    if (s.passBreakups != null) parts.push(`<span class="stat-val">${Math.round(s.passBreakups)}</span> Pass Breakups`);
-                    break;
+                    return [
+                        s.interceptions != null ? { label: 'INTs', val: Math.round(s.interceptions) } : null,
+                        s.passBreakups != null ? { label: 'PBU', val: Math.round(s.passBreakups) } : null,
+                    ].filter(Boolean);
                 case 'S':
-                    if (s.interceptions != null) parts.push(`<span class="stat-val">${Math.round(s.interceptions)}</span> INTs`);
-                    if (s.tackles != null) parts.push(`<span class="stat-val">${Math.round(s.tackles)}</span> Tackles`);
-                    break;
+                    return [
+                        s.interceptions != null ? { label: 'INTs', val: Math.round(s.interceptions) } : null,
+                        s.tackles != null ? { label: 'Tackles', val: Math.round(s.tackles) } : null,
+                    ].filter(Boolean);
                 case 'K':
-                    if (s.fgPct != null) parts.push(`<span class="stat-val">${Math.round(s.fgPct)}%</span> FG`);
-                    break;
+                    return [
+                        s.fgPct != null ? { label: 'FG %', val: Math.round(s.fgPct) + '%' } : null,
+                    ].filter(Boolean);
                 case 'P':
-                    if (s.avgYards != null) parts.push(`<span class="stat-val">${Math.round(s.avgYards)}</span> Avg Yds`);
-                    break;
+                    return [
+                        s.avgYards != null ? { label: 'Avg Yds', val: Math.round(s.avgYards) } : null,
+                    ].filter(Boolean);
+                default:
+                    return [];
             }
-            return parts.join('<span class="stat-sep">·</span>');
         }
 
         const offenseData = [
@@ -689,26 +694,44 @@
                         const body = document.createElement('div');
                         body.className = 'pill-body';
 
-                        const topRow = document.createElement('div');
-                        topRow.className = 'pill-top-row';
-                        const nameEl = document.createElement('span');
-                        nameEl.className = 'pill-name';
-                        nameEl.textContent = row.players[i];
-                        topRow.appendChild(nameEl);
-                        if (pff && pff.grade != null) {
-                            const pffEl = document.createElement('span');
-                            pffEl.className = 'pill-pff';
-                            pffEl.innerHTML = `<span class="pff-label">PFF</span><span class="pff-badge ${getGradeClass(pff.grade)}">${pff.grade.toFixed(1)}</span>`;
-                            topRow.appendChild(pffEl);
+                        const nameArea = document.createElement('div');
+                        nameArea.className = 'pill-name-area';
+                        const fullName = row.players[i];
+                        const spaceIdx = fullName.indexOf(' ');
+                        const firstName = spaceIdx > 0 ? fullName.substring(0, spaceIdx) : '';
+                        const lastName = spaceIdx > 0 ? fullName.substring(spaceIdx + 1) : fullName;
+                        if (firstName) {
+                            const firstEl = document.createElement('div');
+                            firstEl.className = 'pill-first-name';
+                            firstEl.textContent = firstName;
+                            nameArea.appendChild(firstEl);
                         }
-                        body.appendChild(topRow);
+                        const lastEl = document.createElement('div');
+                        lastEl.className = 'pill-last-name';
+                        lastEl.textContent = lastName;
+                        nameArea.appendChild(lastEl);
+                        body.appendChild(nameArea);
 
-                        const posStats = pff ? getStatsHtml(row.pos, pff) : '';
-                        if (posStats) {
-                            const statsEl = document.createElement('div');
-                            statsEl.className = 'pill-stats';
-                            statsEl.innerHTML = '<span class="stats-year">2025 Stats</span> ' + posStats;
-                            body.appendChild(statsEl);
+                        const dataArea = document.createElement('div');
+                        dataArea.className = 'pill-data';
+
+                        if (pff && pff.grade != null) {
+                            const pffCell = document.createElement('div');
+                            pffCell.className = 'pill-data-cell';
+                            pffCell.innerHTML = `<div class="pill-data-label">PFF</div><div class="pill-data-val ${getGradeClass(pff.grade)}">${pff.grade.toFixed(1)}</div>`;
+                            dataArea.appendChild(pffCell);
+                        }
+
+                        const statBlocks = getStatBlocks(row.pos, pff);
+                        statBlocks.forEach(stat => {
+                            const cell = document.createElement('div');
+                            cell.className = 'pill-data-cell';
+                            cell.innerHTML = `<div class="pill-data-label">${stat.label}</div><div class="pill-data-val">${stat.val}</div>`;
+                            dataArea.appendChild(cell);
+                        });
+
+                        if (dataArea.children.length > 0) {
+                            body.appendChild(dataArea);
                         }
 
                         pill.appendChild(body);
