@@ -1239,7 +1239,7 @@
 
     async function loadCapData() {
       try {
-        const res = await fetch('/data/teams/cap_summary_2026.json');
+        const res = await fetch('data/teams/cap_summary_2026.json');
         const data = await res.json();
         capData = data.teams;
         renderTeams();

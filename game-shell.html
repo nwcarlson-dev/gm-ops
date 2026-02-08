@@ -7856,11 +7856,11 @@
 
                 try {
                     const [playerDbRes, tradeValRes, capRes, depthChartsRes, staffDbRes] = await Promise.all([
-                        fetch('/data/teams/player_database.json'),
-                        fetch('/data/teams/player_trade_values.json'),
-                        fetch('/data/teams/cap_summary_2026.json'),
-                        fetch('/data/teams/depth_charts_2026.json'),
-                        fetch('/data/teams/staff_database.json'),
+                        fetch('data/teams/player_database.json'),
+                        fetch('data/teams/player_trade_values.json'),
+                        fetch('data/teams/cap_summary_2026.json'),
+                        fetch('data/teams/depth_charts_2026.json'),
+                        fetch('data/teams/staff_database.json'),
                     ]);
                     const playerDbData = await playerDbRes.json();
                     const tradeValData = await tradeValRes.json();
