@@ -488,6 +488,53 @@ All player skill and trait ratings in GM Ops use the **20-80 scouting scale**, t
 
 > **Note:** Do not confuse the 20-80 scouting scale with the "80/20 Rule" (Pareto Principle) sometimes referenced in coaching, which states that 80% of a team's success comes from 20% of their efforts or key players.
 
+### Projected Ceiling Ratings (Future Implementation)
+
+**Status:** Not yet implemented. Documented here for future build-out.
+
+**Concept:** Every rostered player receives a **projected ceiling** for each individual skill rating, in addition to their current rating. The ceiling represents the highest realistic grade a player could reach with ideal development. From these per-skill ceilings, a **projected ceiling overall** and **projected ceiling scheme overalls** are derived — the same way current overalls are calculated, but using ceiling values instead.
+
+**Why It Matters:**
+- A team may have a current starter graded 45 at a position of need, but if that player's ceiling is 62, the need is less urgent — the talent is there, it just hasn't developed yet.
+- Conversely, a 50-rated starter with a ceiling of 52 is essentially maxed out — that position truly needs an upgrade.
+- CPU draft logic and free agency decisions should factor in ceiling when evaluating positional need urgency.
+- The user sees both current and ceiling ratings, enabling informed roster construction decisions.
+
+**Calculation Approach (Planned):**
+- **Age curve:** Younger players (21-24) get wider ceiling gaps above their current rating. Prime-age players (25-28) get narrower gaps. Veterans (29+) have ceilings near or at their current rating (they are what they are).
+- **Performance trajectory:** Players whose PFF grades improved year-over-year get a ceiling boost. Players on a decline get ceilings pulled closer to current.
+- **Draft capital / pedigree:** Former high draft picks who haven't reached their expected level retain some ceiling premium (the physical tools that got them drafted still exist).
+- **Position-specific aging:** Speed-dependent positions (CB, WR, RB) have ceilings that compress faster with age than technique-dependent positions (OT, IOL, QB).
+- **Ceiling cap:** No individual skill ceiling can exceed 80. Ceiling is always >= current rating.
+
+**Output Format (Planned):**
+```json
+{
+  "ratings": {
+    "overall": 52,
+    "ceilingOverall": 63,
+    "skills": {
+      "armStrength": 58,
+      "accuracyShort": 50,
+      ...
+    },
+    "ceilingSkills": {
+      "armStrength": 65,
+      "accuracyShort": 60,
+      ...
+    },
+    "schemeOveralls": { "West Coast": 54, ... },
+    "ceilingSchemeOveralls": { "West Coast": 65, ... }
+  }
+}
+```
+
+**Integration Points:**
+- `validateTeamNeeds`: Factor ceiling into need urgency — positions with high-ceiling young players are lower priority.
+- CPU Draft Logic: Teams with high-ceiling players at a position may pass on that position earlier in the draft.
+- UI: Display current/ceiling as a dual grade (e.g., "52 / 63") on player pills or tooltips.
+- Trade Value: Ceiling factors into player trade value calculations — high-ceiling young players are worth more.
+
 ### Physical Attributes (All Players)
 
 | Attribute | Description |
