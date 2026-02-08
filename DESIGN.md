@@ -606,12 +606,12 @@ These are the logical position changes based on skill overlap:
 | IDL-NT | IDL-3T | Nose can play 3-tech in sub packages |
 | IDL-3T | IDL-NT, Edge (in 3-4) | 3-tech can play nose or stand up |
 | LB-MIKE | LB-WILL, LB-SAM | Off-ball LBs interchange |
-| LB-WILL | LB-MIKE, S-SS | Coverage LBs can play safety |
-| LB-SAM | LB-MIKE, Edge | Strong-side LB can rush |
-| CB-Outside | CB-Slot, S-FS | Corners can move inside or to safety |
-| CB-Slot | CB-Outside, S-SS | Nickel corners can play outside or safety |
-| S-FS | S-SS, CB, LB-WILL | Free safety very versatile |
-| S-SS | S-FS, LB-WILL, CB-Slot | Strong safety can play multiple spots |
+| LB-WILL | LB-MIKE, S-SS, S-FS | Coverage LBs can play safety |
+| LB-SAM | LB-MIKE, Edge, S-SS, S-FS | Strong-side LB can rush or play safety |
+| CB-Outside | CB-Slot, S-FS, S-SS | Any DB can play any DB position |
+| CB-Slot | CB-Outside, S-SS, S-FS | Any DB can play any DB position |
+| S-FS | S-SS, CB-Outside, CB-Slot, LB | Any safety can play any DB or LB position |
+| S-SS | S-FS, CB-Outside, CB-Slot, LB | Any safety can play any DB or LB position |
 
 ### Scheme-Specific Position Requirements
 
