@@ -488,6 +488,65 @@ All player skill and trait ratings in GM Ops use the **20-80 scouting scale**, t
 
 > **Note:** Do not confuse the 20-80 scouting scale with the "80/20 Rule" (Pareto Principle) sometimes referenced in coaching, which states that 80% of a team's success comes from 20% of their efforts or key players.
 
+### Multi-Source Rating Generation
+
+**Current State:** `build_player_ratings.js` derives ratings primarily from PFF grades (70% weight) and performance tiers (30% weight), with PFF position-specific stats driving individual skill boosts. This is insufficient — players who missed a season, have limited snaps, or are mischaracterized by PFF's system end up with incomplete or inaccurate ratings.
+
+**Target Architecture:** Ratings should be derived from **multiple independent data sources**, each contributing signal. No single source should dominate. When one source is missing for a player (e.g., PFF grade unavailable due to injury), the remaining sources fill the gap with proportionally increased weight.
+
+**Data Sources (by priority for implementation):**
+
+| Source | What It Provides | Availability | Status |
+|--------|-----------------|-------------|--------|
+| **PFF Grades & Stats** | Play-by-play performance grades (0-100), position-specific stats (pressures, separation rate, etc.) | CSV uploads from PFF | Implemented |
+| **Madden Ratings** | EA's per-skill ratings (speed, awareness, throw power, etc.) covering ~3,100 players | madden.tools, maddenratings.com, FormulaBot dataset | Not yet scraped |
+| **NFL Stats (nflverse)** | Traditional box-score stats (yards, TDs, snap counts, targets, pressures) across multiple seasons | nflverse R/CSV data | Partially available (contracts/rosters loaded, stats not yet) |
+| **Contract Value** | APY and guaranteed money as a market-implied talent proxy | Already in player_database.json | Available but not used for ratings |
+| **Draft Capital** | Round and pick number — proxy for physical tools and pre-NFL evaluation | Can be derived from rookie deal data | Available but not used |
+| **Accolades** | Pro Bowl, All-Pro, awards — consensus peer recognition | Would need to be scraped/compiled | Not yet available |
+
+**Blending Logic (Planned):**
+
+For each player, the script should:
+1. Collect all available data signals for that player
+2. Normalize each source's rating to the 20-80 scale
+3. Apply position-specific source weights (e.g., PFF pass-rush grade matters more for EDGE than Madden's "awareness" rating)
+4. Average the available sources with dynamic weight redistribution when a source is missing
+
+**Example Weight Distribution (when all sources available):**
+| Source | Weight | Rationale |
+|--------|--------|-----------|
+| PFF Grade + Stats | 30% | Best play-by-play analysis but single evaluator |
+| Madden Ratings | 25% | Broad skill coverage, curated by position experts |
+| NFL Stats | 20% | Objective production data, multiple seasons |
+| Contract Value | 10% | Market consensus on player worth |
+| Draft Capital / Pedigree | 10% | Physical tools and pre-NFL evaluation |
+| Accolades | 5% | Peer/media consensus recognition |
+
+When a source is missing (e.g., no PFF grade for injured player), its weight redistributes proportionally across remaining sources. A player with no PFF data might be: 35% Madden, 28% NFL Stats, 15% Contract, 14% Draft Capital, 8% Accolades.
+
+**Madden Rating Mapping (Planned):**
+Madden uses 0-99 ratings per attribute. These need to be mapped to our 20-80 scale and then mapped to our canonical skill keys. The mapping table will be position-specific — for example:
+- Madden `throwPowerRating` → GM Ops `armStrength`
+- Madden `shortRouteRunRating` → GM Ops `routeRunning`
+- Madden `blockShedRating` → GM Ops `passRush` (for EDGE/IDL)
+
+This mapping table will be defined in a configuration file (`data/mappings/madden_skill_map.json`) so it can be adjusted without code changes.
+
+**Multi-Season Data (Planned):**
+For stats and PFF data, the system should consider the last 2-3 seasons with recency weighting (most recent season weighted highest). This helps smooth out:
+- One-year outlier performances (good or bad)
+- Players returning from injury who have older data still valid
+- Young players with small sample sizes who benefit from combining multiple years
+
+**Data Enrichment Pipeline Order:**
+1. `build_player_database.js` — base player data from nflverse (contracts, rosters, depth charts)
+2. `enrich_pff_data.js` — add PFF grades and stats
+3. `enrich_madden_data.js` — add Madden ratings (future script)
+4. `enrich_nfl_stats.js` — add multi-season NFL stats (future script)
+5. `enrich_accolades.js` — add Pro Bowl/All-Pro history (future script)
+6. `build_player_ratings.js` — blend all available sources into 20-80 skill ratings
+
 ### Projected Ceiling Ratings (Future Implementation)
 
 **Status:** Not yet implemented. Documented here for future build-out.
