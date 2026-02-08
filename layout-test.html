@@ -82,10 +82,6 @@
 
         .tab-content {
             display: none;
-            flex-direction: column;
-            gap: 10px;
-            padding: 12px;
-            padding-left: 0;
             flex: 1;
             min-height: 0;
         }
@@ -94,16 +90,18 @@
             display: flex;
         }
 
-        .pos-row {
-            flex: 1;
-            min-height: 0;
+        .labels-col {
+            width: 44px;
+            flex-shrink: 0;
             display: flex;
-            align-items: stretch;
+            flex-direction: column;
+            gap: 10px;
+            padding: 12px 0;
         }
 
         .pos-label {
-            width: 44px;
-            flex-shrink: 0;
+            flex: 1;
+            min-height: 0;
             font-family: 'Barlow Condensed', sans-serif;
             font-size: 12px;
             font-weight: 700;
@@ -115,19 +113,27 @@
             justify-content: center;
         }
 
-        .pills-scroll {
+        .pills-area {
             flex: 1;
             overflow-x: auto;
             overflow-y: hidden;
             min-width: 0;
+            padding: 12px 12px 12px 0;
         }
 
-        .pills-track {
+        .pills-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            height: 100%;
+            min-width: calc(300%);
+        }
+
+        .pill-row {
+            flex: 1;
+            min-height: 0;
             display: flex;
             gap: 8px;
-            height: 100%;
-            width: calc(300% - 44px);
-            padding-right: 12px;
         }
 
         .pos-pill {
@@ -144,10 +150,10 @@
             background: rgba(0,0,0,0.15);
         }
 
-        .pills-scroll::-webkit-scrollbar {
+        .pills-area::-webkit-scrollbar {
             display: none;
         }
-        .pills-scroll {
+        .pills-area {
             -ms-overflow-style: none;
             scrollbar-width: none;
         }
@@ -187,36 +193,78 @@
                 </div>
 
                 <div class="tab-content active" id="tab-offense">
-                    <div class="pos-row"><span class="pos-label">QB</span><div class="pills-scroll"><div class="pills-track"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div></div></div>
-                    <div class="pos-row"><span class="pos-label">RB</span><div class="pills-scroll"><div class="pills-track"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div></div></div>
-                    <div class="pos-row"><span class="pos-label">WR</span><div class="pills-scroll"><div class="pills-track"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div></div></div>
-                    <div class="pos-row"><span class="pos-label">WR</span><div class="pills-scroll"><div class="pills-track"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div></div></div>
-                    <div class="pos-row"><span class="pos-label">WR</span><div class="pills-scroll"><div class="pills-track"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div></div></div>
-                    <div class="pos-row"><span class="pos-label">TE</span><div class="pills-scroll"><div class="pills-track"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div></div></div>
-                    <div class="pos-row"><span class="pos-label">LT</span><div class="pills-scroll"><div class="pills-track"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div></div></div>
-                    <div class="pos-row"><span class="pos-label">LG</span><div class="pills-scroll"><div class="pills-track"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div></div></div>
-                    <div class="pos-row"><span class="pos-label">C</span><div class="pills-scroll"><div class="pills-track"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div></div></div>
-                    <div class="pos-row"><span class="pos-label">RG</span><div class="pills-scroll"><div class="pills-track"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div></div></div>
-                    <div class="pos-row"><span class="pos-label">RT</span><div class="pills-scroll"><div class="pills-track"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div></div></div>
+                    <div class="labels-col">
+                        <div class="pos-label">QB</div>
+                        <div class="pos-label">RB</div>
+                        <div class="pos-label">WR</div>
+                        <div class="pos-label">WR</div>
+                        <div class="pos-label">WR</div>
+                        <div class="pos-label">TE</div>
+                        <div class="pos-label">LT</div>
+                        <div class="pos-label">LG</div>
+                        <div class="pos-label">C</div>
+                        <div class="pos-label">RG</div>
+                        <div class="pos-label">RT</div>
+                    </div>
+                    <div class="pills-area">
+                        <div class="pills-grid">
+                            <div class="pill-row"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div>
+                            <div class="pill-row"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div>
+                            <div class="pill-row"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div>
+                            <div class="pill-row"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div>
+                            <div class="pill-row"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div>
+                            <div class="pill-row"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div>
+                            <div class="pill-row"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div>
+                            <div class="pill-row"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div>
+                            <div class="pill-row"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div>
+                            <div class="pill-row"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div>
+                            <div class="pill-row"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="tab-content" id="tab-defense">
-                    <div class="pos-row"><span class="pos-label">DT</span><div class="pills-scroll"><div class="pills-track"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div></div></div>
-                    <div class="pos-row"><span class="pos-label">DT</span><div class="pills-scroll"><div class="pills-track"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div></div></div>
-                    <div class="pos-row"><span class="pos-label">EDGE</span><div class="pills-scroll"><div class="pills-track"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div></div></div>
-                    <div class="pos-row"><span class="pos-label">EDGE</span><div class="pills-scroll"><div class="pills-track"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div></div></div>
-                    <div class="pos-row"><span class="pos-label">LB</span><div class="pills-scroll"><div class="pills-track"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div></div></div>
-                    <div class="pos-row"><span class="pos-label">LB</span><div class="pills-scroll"><div class="pills-track"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div></div></div>
-                    <div class="pos-row"><span class="pos-label">CB</span><div class="pills-scroll"><div class="pills-track"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div></div></div>
-                    <div class="pos-row"><span class="pos-label">CB</span><div class="pills-scroll"><div class="pills-track"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div></div></div>
-                    <div class="pos-row"><span class="pos-label">NCB</span><div class="pills-scroll"><div class="pills-track"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div></div></div>
-                    <div class="pos-row"><span class="pos-label">SS</span><div class="pills-scroll"><div class="pills-track"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div></div></div>
-                    <div class="pos-row"><span class="pos-label">FS</span><div class="pills-scroll"><div class="pills-track"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div></div></div>
+                    <div class="labels-col">
+                        <div class="pos-label">DT</div>
+                        <div class="pos-label">DT</div>
+                        <div class="pos-label">EDGE</div>
+                        <div class="pos-label">EDGE</div>
+                        <div class="pos-label">LB</div>
+                        <div class="pos-label">LB</div>
+                        <div class="pos-label">CB</div>
+                        <div class="pos-label">CB</div>
+                        <div class="pos-label">NCB</div>
+                        <div class="pos-label">SS</div>
+                        <div class="pos-label">FS</div>
+                    </div>
+                    <div class="pills-area">
+                        <div class="pills-grid">
+                            <div class="pill-row"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div>
+                            <div class="pill-row"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div>
+                            <div class="pill-row"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div>
+                            <div class="pill-row"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div>
+                            <div class="pill-row"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div>
+                            <div class="pill-row"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div>
+                            <div class="pill-row"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div>
+                            <div class="pill-row"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div>
+                            <div class="pill-row"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div>
+                            <div class="pill-row"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div>
+                            <div class="pill-row"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="tab-content" id="tab-special">
-                    <div class="pos-row"><span class="pos-label">K</span><div class="pills-scroll"><div class="pills-track"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div></div></div>
-                    <div class="pos-row"><span class="pos-label">P</span><div class="pills-scroll"><div class="pills-track"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div></div></div>
+                    <div class="labels-col">
+                        <div class="pos-label">K</div>
+                        <div class="pos-label">P</div>
+                    </div>
+                    <div class="pills-area">
+                        <div class="pills-grid">
+                            <div class="pill-row"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div>
+                            <div class="pill-row"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="tab-content" id="tab-tools">
