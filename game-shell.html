@@ -3026,6 +3026,392 @@
                 letter-spacing: 0.05em;
                 text-transform: uppercase;
             }
+            .universal-layout {
+                display: grid;
+                grid-template-columns: 55% 45%;
+                gap: 8px;
+                height: calc(100vh - 64px);
+                overflow: hidden;
+                padding: 8px;
+            }
+            .universal-layout.panel-expanded {
+                grid-template-columns: 35% 65%;
+            }
+            .universal-layout.panel-fullscreen {
+                grid-template-columns: 0fr 1fr;
+            }
+            .universal-layout.panel-fullscreen .phase-content-col {
+                display: none;
+            }
+
+            .mgmt-panel {
+                display: flex;
+                flex-direction: column;
+                background: var(--card-bg);
+                border: 1px solid var(--card-border);
+                border-radius: 8px;
+                max-height: calc(100vh - 72px);
+                overflow: hidden;
+            }
+            .mgmt-panel-tabs {
+                display: flex;
+                border-bottom: 1px solid var(--card-border);
+                padding: 0 8px;
+                gap: 0;
+                flex-shrink: 0;
+                background: rgba(0,0,0,0.15);
+            }
+            .mgmt-tab {
+                padding: 10px 16px;
+                font-family: 'Barlow Condensed', sans-serif;
+                font-size: 13px;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+                color: var(--text-muted);
+                background: transparent;
+                border: none;
+                border-bottom: 2px solid transparent;
+                cursor: pointer;
+                transition: color 0.2s, border-color 0.2s;
+            }
+            .mgmt-tab:hover {
+                color: var(--white);
+            }
+            .mgmt-tab.active {
+                color: var(--white);
+                border-bottom-color: var(--nfl-red);
+            }
+            .mgmt-tab-content {
+                display: none;
+                flex: 1;
+                overflow-y: auto;
+                min-height: 0;
+            }
+            .mgmt-tab-content.active {
+                display: flex;
+                flex-direction: column;
+            }
+
+            .dc-positions {
+                padding: 4px 8px;
+            }
+            .dc-pos-row {
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                padding: 4px 0;
+                border-bottom: 1px solid rgba(255,255,255,0.04);
+            }
+            .dc-pos-row:last-child {
+                border-bottom: none;
+            }
+            .dc-pos-label {
+                font-family: 'Barlow Condensed', sans-serif;
+                font-size: 11px;
+                font-weight: 700;
+                color: var(--text-muted);
+                text-transform: uppercase;
+                width: 32px;
+                flex-shrink: 0;
+                text-align: center;
+            }
+            .dc-pills-container {
+                display: flex;
+                gap: 4px;
+                flex: 1;
+                overflow-x: hidden;
+                align-items: center;
+            }
+            .dc-show-more {
+                font-size: 10px;
+                color: var(--text-muted);
+                cursor: pointer;
+                padding: 2px 6px;
+                border-radius: 4px;
+                background: rgba(255,255,255,0.05);
+                flex-shrink: 0;
+                font-family: 'Barlow Condensed', sans-serif;
+            }
+            .dc-show-more:hover {
+                background: rgba(255,255,255,0.1);
+                color: var(--white);
+            }
+
+            .player-pill {
+                display: flex;
+                align-items: center;
+                gap: 6px;
+                padding: 5px 8px;
+                background: rgba(255,255,255,0.06);
+                border: 1px solid rgba(255,255,255,0.08);
+                border-radius: 6px;
+                font-family: 'Inter', sans-serif;
+                font-size: 11px;
+                color: var(--white);
+                cursor: grab;
+                position: relative;
+                min-width: 0;
+                flex-shrink: 0;
+                transition: background 0.15s, box-shadow 0.15s;
+                white-space: nowrap;
+            }
+            .player-pill:hover {
+                background: rgba(255,255,255,0.10);
+                box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+            }
+            .player-pill.dragging {
+                opacity: 0.5;
+                cursor: grabbing;
+            }
+            .pill-name {
+                font-weight: 600;
+                font-size: 11px;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                max-width: 100px;
+            }
+            .pill-stat {
+                font-size: 10px;
+                color: var(--silver);
+                font-family: 'Barlow Condensed', sans-serif;
+                padding: 1px 5px;
+                background: rgba(0,0,0,0.2);
+                border-radius: 3px;
+            }
+            .pill-actions {
+                display: flex;
+                align-items: center;
+                gap: 2px;
+                margin-left: auto;
+            }
+            .pill-tooltip-btn, .pill-menu-btn {
+                width: 18px;
+                height: 18px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: transparent;
+                border: none;
+                color: var(--text-muted);
+                cursor: pointer;
+                border-radius: 3px;
+                font-size: 11px;
+                padding: 0;
+                transition: background 0.15s, color 0.15s;
+            }
+            .pill-tooltip-btn:hover, .pill-menu-btn:hover {
+                background: rgba(255,255,255,0.15);
+                color: var(--white);
+            }
+            .player-pill.status-expiring {
+                border-bottom: 2px solid #f59e0b;
+            }
+            .player-pill.status-injured {
+                border-bottom: 2px solid #ef4444;
+            }
+            .player-pill.status-performer {
+                border-bottom: 2px solid #22c55e;
+            }
+            .player-pill.status-rookie {
+                border-bottom: 2px solid #3b82f6;
+            }
+            .player-pill.status-tagged {
+                border-bottom: 2px solid #eab308;
+            }
+            .player-pill.status-bubble {
+                border-bottom: 2px dashed #f97316;
+            }
+            .pill-empty {
+                color: var(--text-muted);
+                font-size: 10px;
+                font-style: italic;
+                padding: 5px 8px;
+            }
+
+            .pill-action-menu {
+                position: absolute;
+                top: 100%;
+                right: 0;
+                margin-top: 4px;
+                background: rgba(15, 23, 42, 0.95);
+                backdrop-filter: blur(12px);
+                border: 1px solid var(--card-border);
+                border-radius: 6px;
+                padding: 4px 0;
+                min-width: 160px;
+                z-index: 500;
+                box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+            }
+            .pill-action-item {
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                padding: 7px 12px;
+                font-family: 'Inter', sans-serif;
+                font-size: 12px;
+                color: var(--silver);
+                cursor: pointer;
+                transition: background 0.1s;
+                border: none;
+                background: none;
+                width: 100%;
+                text-align: left;
+            }
+            .pill-action-item:hover {
+                background: rgba(255,255,255,0.08);
+                color: var(--white);
+            }
+            .pill-action-divider {
+                height: 1px;
+                background: var(--card-border);
+                margin: 4px 0;
+            }
+
+            .tools-menu {
+                padding: 12px 8px;
+            }
+            .tools-menu-item {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                padding: 12px 16px;
+                border-radius: 6px;
+                cursor: pointer;
+                transition: background 0.15s;
+                border: none;
+                background: none;
+                width: 100%;
+                text-align: left;
+            }
+            .tools-menu-item:hover {
+                background: rgba(255,255,255,0.06);
+            }
+            .tools-menu-item-icon {
+                width: 32px;
+                height: 32px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border-radius: 6px;
+                background: rgba(255,255,255,0.06);
+                color: var(--silver);
+                flex-shrink: 0;
+            }
+            .tools-menu-item-label {
+                font-family: 'Barlow Condensed', sans-serif;
+                font-size: 15px;
+                font-weight: 600;
+                color: var(--white);
+            }
+            .tools-menu-item-desc {
+                font-family: 'Inter', sans-serif;
+                font-size: 11px;
+                color: var(--text-muted);
+                margin-top: 1px;
+            }
+            .tools-menu-category {
+                font-family: 'Barlow Condensed', sans-serif;
+                font-size: 10px;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 0.1em;
+                color: var(--text-muted);
+                padding: 16px 16px 6px;
+            }
+            .tools-menu-category:first-child {
+                padding-top: 4px;
+            }
+            .mgmt-panel-close {
+                display: none;
+                align-items: center;
+                justify-content: center;
+                width: 28px;
+                height: 28px;
+                background: rgba(255,255,255,0.08);
+                border: none;
+                border-radius: 6px;
+                color: var(--text-muted);
+                cursor: pointer;
+                font-size: 18px;
+                margin-left: auto;
+                flex-shrink: 0;
+            }
+            .mgmt-panel-close:hover {
+                background: rgba(255,255,255,0.15);
+                color: var(--white);
+            }
+            .panel-fullscreen .mgmt-panel-close {
+                display: flex;
+            }
+
+            @media (max-width: 768px) {
+                .universal-layout {
+                    grid-template-columns: 1fr;
+                }
+                .mgmt-panel {
+                    display: none;
+                }
+                .mobile-mgmt-btn {
+                    display: flex;
+                }
+                .mobile-mgmt-drawer.open .mgmt-panel {
+                    display: flex;
+                }
+            }
+            .mobile-mgmt-btn {
+                display: none;
+                position: fixed;
+                bottom: 20px;
+                right: 20px;
+                width: 56px;
+                height: 56px;
+                border-radius: 50%;
+                background: var(--nfl-red);
+                color: white;
+                border: none;
+                cursor: pointer;
+                z-index: 300;
+                align-items: center;
+                justify-content: center;
+                box-shadow: 0 4px 16px rgba(213,10,10,0.4);
+                font-size: 20px;
+            }
+            .mobile-mgmt-drawer {
+                display: none;
+            }
+            @media (max-width: 768px) {
+                .mobile-mgmt-drawer {
+                    display: block;
+                    position: fixed;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    top: 56px;
+                    z-index: 400;
+                    pointer-events: none;
+                    transition: background 0.25s;
+                }
+                .mobile-mgmt-drawer.open {
+                    pointer-events: all;
+                    background: rgba(0,0,0,0.5);
+                }
+                .mobile-mgmt-drawer .mgmt-panel {
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    right: 0;
+                    max-height: 80vh;
+                    transform: translateY(100%);
+                    transition: transform 0.3s ease;
+                    border-radius: 16px 16px 0 0;
+                    border-bottom: none;
+                }
+                .mobile-mgmt-drawer.open .mgmt-panel {
+                    display: flex;
+                    transform: translateY(0);
+                }
+            }
         </style>
     </head>
     <body>
@@ -3590,6 +3976,35 @@
                         Phase content loading...
                     </div>
                 </div>
+
+                <!-- Management Panel - Universal Right Side -->
+                <div id="managementPanel" class="mgmt-panel" style="display:none;">
+                    <div class="mgmt-panel-tabs">
+                        <button class="mgmt-tab active" data-mgtab="offense" onclick="switchMgmtTab('offense')">Offense</button>
+                        <button class="mgmt-tab" data-mgtab="defense" onclick="switchMgmtTab('defense')">Defense</button>
+                        <button class="mgmt-tab" data-mgtab="st" onclick="switchMgmtTab('st')">ST</button>
+                        <button class="mgmt-tab" data-mgtab="tools" onclick="switchMgmtTab('tools')">Tools</button>
+                        <button class="mgmt-panel-close" onclick="setMgmtPanelWidth('default')" title="Close">&times;</button>
+                    </div>
+                    <div id="mgmtOffense" class="mgmt-tab-content active">
+                        <div class="dc-positions" id="dcOffense"></div>
+                    </div>
+                    <div id="mgmtDefense" class="mgmt-tab-content">
+                        <div class="dc-positions" id="dcDefense"></div>
+                    </div>
+                    <div id="mgmtST" class="mgmt-tab-content">
+                        <div class="dc-positions" id="dcST"></div>
+                    </div>
+                    <div id="mgmtTools" class="mgmt-tab-content">
+                        <div class="tools-menu" id="toolsMenu"></div>
+                    </div>
+                </div>
+
+                <!-- Mobile Management Panel -->
+                <button class="mobile-mgmt-btn" id="mobileMgmtBtn" onclick="toggleMobileMgmt()" style="display:none;">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1" ry="1"/></svg>
+                </button>
+                <div class="mobile-mgmt-drawer" id="mobileMgmtDrawer"></div>
             </main>
         </div>
 
@@ -3713,6 +4128,8 @@
                 </div>
             </div>
         </div>
+
+        <div class="modal-overlay" id="playerTooltipModal" onclick="if(event.target === this) closePlayerTooltip()"></div>
 
         <script>
             const urlParams = new URLSearchParams(window.location.search);
@@ -7240,6 +7657,23 @@
             async function initOffseasonMode() {
                 document.getElementById('draftContent').style.display = 'none';
                 document.getElementById('offseasonContent').style.display = '';
+
+                const mainEl = document.querySelector('.app-main');
+                if (mainEl && !mainEl.querySelector('.universal-layout')) {
+                    const offContent = document.getElementById('offseasonContent');
+                    const mgmtPanel = document.getElementById('managementPanel');
+                    const wrapper = document.createElement('div');
+                    wrapper.className = 'universal-layout';
+                    wrapper.id = 'universalLayout';
+                    const leftCol = document.createElement('div');
+                    leftCol.className = 'phase-content-col';
+                    offContent.parentNode.insertBefore(wrapper, offContent);
+                    leftCol.appendChild(offContent);
+                    wrapper.appendChild(leftCol);
+                    wrapper.appendChild(mgmtPanel);
+                    document.getElementById('mobileMgmtBtn').style.display = '';
+                }
+
                 document.getElementById('sidebarDraft').style.display = 'none';
                 document.getElementById('sidebarOffseason').style.display = '';
 
@@ -7258,14 +7692,18 @@
                 phaseContent.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:200px;"><div style="text-align:center;color:var(--text-muted);">Loading offseason data...</div></div>';
 
                 try {
-                    const [rosterRes, capRes] = await Promise.all([
+                    const [rosterRes, capRes, depthChartsRes] = await Promise.all([
                         fetch('/data/teams/player_trade_values.json'),
                         fetch('/data/teams/cap_summary_2026.json'),
+                        fetch('/data/teams/depth_charts_2026.json'),
                     ]);
                     const rosterData = await rosterRes.json();
                     const capData = await capRes.json();
+                    const depthChartsData = await depthChartsRes.json();
                     offseasonState.rosters = rosterData.teams || {};
                     offseasonState.capData = capData.teams || {};
+                    allDepthCharts = depthChartsData || {};
+                    allPlayerTradeValues = rosterData.teams || {};
                 } catch(e) {
                     console.error('Failed to load offseason data:', e);
                     phaseContent.innerHTML = '<div style="padding:40px;text-align:center;color:var(--danger);">Failed to load offseason data. Please refresh.</div>';
@@ -7277,6 +7715,260 @@
 
                 renderPhaseBar();
                 loadPhaseContent(currentPhase);
+                initManagementPanel();
+            }
+
+            // === MANAGEMENT PANEL ===
+
+            function switchMgmtTab(tab) {
+                document.querySelectorAll('.mgmt-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.mgmt-tab-content').forEach(t => t.classList.remove('active'));
+                document.querySelector(`.mgmt-tab[data-mgtab="${tab}"]`).classList.add('active');
+                const contentMap = { offense: 'mgmtOffense', defense: 'mgmtDefense', st: 'mgmtST', tools: 'mgmtTools' };
+                document.getElementById(contentMap[tab]).classList.add('active');
+                if (tab === 'tools') {
+                    renderToolsMenu();
+                }
+            }
+
+            function setMgmtPanelWidth(state) {
+                const layout = document.querySelector('.universal-layout');
+                if (!layout) return;
+                layout.classList.remove('panel-expanded', 'panel-fullscreen');
+                if (state === 'expanded') layout.classList.add('panel-expanded');
+                if (state === 'fullscreen') layout.classList.add('panel-fullscreen');
+            }
+
+            function getPlayerTradeData(teamAbbr, playerName) {
+                const roster = allPlayerTradeValues[teamAbbr];
+                if (!roster) return null;
+                return roster.find(p => p.name === playerName) || null;
+            }
+
+            function getPlayerStatusClass(player, tradeData) {
+                if (tradeData && tradeData.performanceTier === 'elite') return 'status-performer';
+                if (player && player.expiring) return 'status-expiring';
+                if (tradeData && tradeData.isRookieDeal) return 'status-rookie';
+                return '';
+            }
+
+            function formatCapHit(apy) {
+                if (!apy && apy !== 0) return '\u2014';
+                if (apy >= 1) return '$' + apy.toFixed(1) + 'M';
+                return '$' + (apy * 1000).toFixed(0) + 'K';
+            }
+
+            function renderPlayerPill(player, teamAbbr, posLabel) {
+                if (!player) return '<div class="pill-empty">\u2014</div>';
+                const tradeData = getPlayerTradeData(teamAbbr, player.name);
+                const statusClass = getPlayerStatusClass(player, tradeData);
+                let stat1 = '\u2014';
+                let stat2 = '\u2014';
+                if (tradeData) {
+                    stat1 = tradeData.performanceTier ? tradeData.performanceTier.charAt(0).toUpperCase() + tradeData.performanceTier.slice(1) : '\u2014';
+                    stat2 = formatCapHit(tradeData.apy);
+                }
+                const pillId = `pill-${teamAbbr}-${(player.name || '').replace(/[^a-zA-Z0-9]/g, '')}`;
+                return `<div class="player-pill ${statusClass}" id="${pillId}" draggable="true" data-player="${encodeURIComponent(player.name)}" data-team="${teamAbbr}" data-pos="${posLabel}">
+                    <span class="pill-name">${player.name}</span>
+                    <span class="pill-stat">${stat1}</span>
+                    <span class="pill-stat">${stat2}</span>
+                    <div class="pill-actions">
+                        <button class="pill-tooltip-btn" onclick="event.stopPropagation(); showPlayerTooltip('${encodeURIComponent(player.name)}', '${teamAbbr}')" title="Player details">\u24d8</button>
+                        <button class="pill-menu-btn" onclick="event.stopPropagation(); togglePillMenu(this, '${encodeURIComponent(player.name)}', '${teamAbbr}')" title="Actions">\u22ee</button>
+                    </div>
+                </div>`;
+            }
+
+            function renderMgmtDepthChart() {
+                const teamAbbr = gameMode === 'offseason' ? offseasonState.userTeam : (TEAM_DATA[userTeam.name] ? TEAM_DATA[userTeam.name].abbr : null);
+                if (!teamAbbr) return;
+                const depthData = allDepthCharts[teamAbbr];
+                if (!depthData) return;
+                const offenseOrder = ['QB', 'RB', 'WR', 'FB', 'TE', 'LT', 'LG', 'C', 'RG', 'RT'];
+                const defenseOrder = ['LDE', 'LDT', 'RDT', 'RDE', 'LB', 'LCB', 'RCB', 'NB', 'FS', 'SS'];
+                const stPositions = ['K', 'P', 'KR', 'PR', 'LS'];
+                function renderSide(positions, containerId, order) {
+                    const container = document.getElementById(containerId);
+                    if (!container) return;
+                    const posMap = {};
+                    positions.forEach(p => {
+                        if (!posMap[p.pos]) posMap[p.pos] = [];
+                        posMap[p.pos].push(p);
+                    });
+                    const sortedPositions = [];
+                    order.forEach(pos => {
+                        if (posMap[pos]) {
+                            posMap[pos].forEach(p => sortedPositions.push(p));
+                            delete posMap[pos];
+                        }
+                    });
+                    Object.values(posMap).forEach(arr => arr.forEach(p => sortedPositions.push(p)));
+                    let html = '';
+                    sortedPositions.forEach(row => {
+                        html += `<div class="dc-pos-row">
+                            <div class="dc-pos-label">${row.pos}</div>
+                            <div class="dc-pills-container">
+                                ${renderPlayerPill(row.starter, teamAbbr, row.pos)}
+                                ${renderPlayerPill(row.backup, teamAbbr, row.pos)}
+                            </div>
+                        </div>`;
+                    });
+                    container.innerHTML = html;
+                }
+                renderSide(depthData.offense || [], 'dcOffense', offenseOrder);
+                renderSide(depthData.defense || [], 'dcDefense', defenseOrder);
+                const stContainer = document.getElementById('dcST');
+                if (stContainer) {
+                    let stHtml = '';
+                    stPositions.forEach(pos => {
+                        stHtml += `<div class="dc-pos-row">
+                            <div class="dc-pos-label">${pos}</div>
+                            <div class="dc-pills-container">
+                                <div class="pill-empty">\u2014</div>
+                            </div>
+                        </div>`;
+                    });
+                    stContainer.innerHTML = stHtml;
+                }
+            }
+
+            function renderToolsMenu() {
+                const toolsContainer = document.getElementById('toolsMenu');
+                if (!toolsContainer) return;
+                const tools = [
+                    { category: 'Roster Management', items: [
+                        { id: 'transactions', label: 'Transactions', desc: 'Trade center for proposing and evaluating trades', icon: '\u21c4', width: 'fullscreen' },
+                        { id: 'freeagents', label: 'Free Agents', desc: 'Browse and sign available free agents', icon: '\ud83d\udccb', width: 'fullscreen' },
+                        { id: 'capmanagement', label: 'Cap Management', desc: 'Salary cap breakdown and restructure options', icon: '\ud83d\udcb0', width: 'expanded' },
+                    ]},
+                    { category: 'Analysis', items: [
+                        { id: 'stats', label: 'Stats', desc: 'Team and player statistics', icon: '\ud83d\udcca', width: 'expanded' },
+                        { id: 'teamneeds', label: 'Team Needs', desc: 'Positional needs with archetypes', icon: '\ud83c\udfaf', width: 'default' },
+                        { id: 'draftpicks', label: 'Draft Picks', desc: 'View owned draft picks and trade value', icon: '\ud83c\udfc8', width: 'default' },
+                    ]},
+                    { category: 'League', items: [
+                        { id: 'leagueactivity', label: 'League Activity', desc: 'Recent league-wide transactions', icon: '\ud83d\udcf0', width: 'default' },
+                        { id: 'settings', label: 'Settings', desc: 'Game speed, control level, preferences', icon: '\u2699\ufe0f', width: 'default' },
+                    ]},
+                ];
+                let html = '';
+                tools.forEach(cat => {
+                    html += `<div class="tools-menu-category">${cat.category}</div>`;
+                    cat.items.forEach(tool => {
+                        html += `<button class="tools-menu-item" onclick="openTool('${tool.id}', '${tool.width}')">
+                            <div class="tools-menu-item-icon">${tool.icon}</div>
+                            <div>
+                                <div class="tools-menu-item-label">${tool.label}</div>
+                                <div class="tools-menu-item-desc">${tool.desc}</div>
+                            </div>
+                        </button>`;
+                    });
+                });
+                toolsContainer.innerHTML = html;
+            }
+
+            function openTool(toolId, width) {
+                setMgmtPanelWidth(width);
+                console.log('Opening tool:', toolId, 'at width:', width);
+            }
+
+            function showPlayerTooltip(encodedName, teamAbbr) {
+                const playerName = decodeURIComponent(encodedName);
+                const tradeData = getPlayerTradeData(teamAbbr, playerName);
+                let html = `<div class="modal-content" style="max-width: 400px; padding: 24px;">
+                    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 16px;">
+                        <h3 style="margin:0; font-family: 'Teko', sans-serif; font-size: 24px; color: var(--white);">${playerName}</h3>
+                        <button class="modal-close" onclick="closePlayerTooltip()" style="position:static;">&times;</button>
+                    </div>`;
+                if (tradeData) {
+                    html += `<div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 12px;">
+                        <div><span style="color:var(--text-muted)">Position:</span> <strong>${tradeData.position}</strong></div>
+                        <div><span style="color:var(--text-muted)">Age:</span> <strong>${tradeData.age}</strong></div>
+                        <div><span style="color:var(--text-muted)">APY:</span> <strong>${formatCapHit(tradeData.apy)}</strong></div>
+                        <div><span style="color:var(--text-muted)">Trade Value:</span> <strong>${tradeData.tradeValue}</strong></div>
+                        <div><span style="color:var(--text-muted)">Years Left:</span> <strong>${tradeData.yearsRemaining}</strong></div>
+                        <div><span style="color:var(--text-muted)">Tier:</span> <strong style="text-transform:capitalize">${tradeData.performanceTier}</strong></div>
+                        <div><span style="color:var(--text-muted)">Guaranteed:</span> <strong>${formatCapHit(tradeData.guaranteed)}</strong></div>
+                        <div><span style="color:var(--text-muted)">Contract:</span> <strong>${tradeData.contractYears}yr / ${formatCapHit(tradeData.totalContractValue)}</strong></div>
+                        <div><span style="color:var(--text-muted)">Status:</span> <strong>${tradeData.isExpiring ? 'Expiring' : tradeData.isRookieDeal ? 'Rookie Deal' : 'Under Contract'}</strong></div>
+                        <div><span style="color:var(--text-muted)">Role:</span> <strong style="text-transform:capitalize">${tradeData.role}</strong></div>
+                    </div>`;
+                } else {
+                    html += '<div style="color:var(--text-muted); font-size: 12px;">No detailed data available</div>';
+                }
+                html += '</div>';
+                const modal = document.getElementById('playerTooltipModal');
+                modal.innerHTML = html;
+                modal.classList.add('active');
+            }
+
+            function closePlayerTooltip() {
+                document.getElementById('playerTooltipModal').classList.remove('active');
+            }
+
+            let activePillMenu = null;
+
+            function togglePillMenu(btn, encodedName, teamAbbr) {
+                if (activePillMenu) {
+                    activePillMenu.remove();
+                    activePillMenu = null;
+                }
+                const playerName = decodeURIComponent(encodedName);
+                const tradeData = getPlayerTradeData(teamAbbr, playerName);
+                const isExpiring = tradeData ? tradeData.isExpiring : false;
+                const isUserTeam = gameMode === 'offseason' ? (teamAbbr === offseasonState.userTeam) : (TEAM_DATA[userTeam.name] && TEAM_DATA[userTeam.name].abbr === teamAbbr);
+                let menuItems = '';
+                if (isUserTeam) {
+                    menuItems += `<button class="pill-action-item" onclick="closePillMenu()">\u21c4 Trade</button>`;
+                    menuItems += `<button class="pill-action-item" onclick="closePillMenu()">\ud83d\udcdd Extend</button>`;
+                    menuItems += `<button class="pill-action-item" onclick="closePillMenu()">\ud83d\udd04 Restructure</button>`;
+                    menuItems += `<button class="pill-action-item" onclick="closePillMenu()">\u2702\ufe0f Release</button>`;
+                    if (isExpiring && gameMode === 'offseason' && currentPhase === 0) {
+                        menuItems += `<div class="pill-action-divider"></div>`;
+                        menuItems += `<button class="pill-action-item" onclick="closePillMenu()">\ud83c\udff7\ufe0f Apply Franchise Tag</button>`;
+                        menuItems += `<button class="pill-action-item" onclick="closePillMenu()">\ud83c\udff7\ufe0f Apply Transition Tag</button>`;
+                    }
+                    menuItems += `<div class="pill-action-divider"></div>`;
+                    menuItems += `<button class="pill-action-item" onclick="showPlayerTooltip('${encodedName}', '${teamAbbr}'); closePillMenu();">\ud83d\udcca View Full Stats</button>`;
+                } else {
+                    menuItems += `<button class="pill-action-item" onclick="showPlayerTooltip('${encodedName}', '${teamAbbr}'); closePillMenu();">\ud83d\udcca View Details</button>`;
+                }
+                const menu = document.createElement('div');
+                menu.className = 'pill-action-menu';
+                menu.innerHTML = menuItems;
+                const pill = btn.closest('.player-pill');
+                pill.appendChild(menu);
+                activePillMenu = menu;
+                setTimeout(() => {
+                    document.addEventListener('click', closePillMenuOnOutside, { once: true });
+                }, 10);
+            }
+
+            function closePillMenu() {
+                if (activePillMenu) {
+                    activePillMenu.remove();
+                    activePillMenu = null;
+                }
+            }
+
+            function closePillMenuOnOutside(e) {
+                if (activePillMenu && !activePillMenu.contains(e.target)) {
+                    closePillMenu();
+                }
+            }
+
+            function toggleMobileMgmt() {
+                const drawer = document.getElementById('mobileMgmtDrawer');
+                drawer.classList.toggle('open');
+            }
+
+            function initManagementPanel() {
+                const panel = document.getElementById('managementPanel');
+                if (!panel) return;
+                panel.style.display = '';
+                renderMgmtDepthChart();
+                renderToolsMenu();
             }
 
             if (gameMode === 'draft') {
