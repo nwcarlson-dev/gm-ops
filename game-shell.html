@@ -5237,6 +5237,8 @@
                 const filled = teamFilledNeeds[teamName] || [];
                 const primaryNeeds = (needs.primary || []).filter(n => !filled.includes(n));
                 const secondaryNeeds = (needs.secondary || []).filter(n => !filled.includes(n));
+                const detailed = detailedTeamNeeds[abbr] || {};
+                const depthNeedPositions = (detailed.depthNeeds || []).map(d => d.pos);
 
                 const teamPicks = draftOrder.filter(d => d.team === teamName && d.overall >= currentPick && !d.drafted);
                 if (teamPicks.length < 2) return null;
@@ -5268,6 +5270,7 @@
                     let needScore = 0;
                     if (primaryNeeds.includes(needCategory)) needScore = 15;
                     else if (secondaryNeeds.includes(needCategory)) needScore = 7;
+                    else if (depthNeedPositions.includes(needCategory)) needScore = 3;
 
                     let positionPremium = 0;
                     if (prospect.position === 'QB' && boardRank <= 10) positionPremium = 12;
@@ -5289,7 +5292,7 @@
                             prospectId,
                             motivation,
                             boardRank,
-                            needLevel: primaryNeeds.includes(needCategory) ? 'primary' : (secondaryNeeds.includes(needCategory) ? 'secondary' : 'none'),
+                            needLevel: primaryNeeds.includes(needCategory) ? 'primary' : (secondaryNeeds.includes(needCategory) ? 'secondary' : (depthNeedPositions.includes(needCategory) ? 'depth' : 'none')),
                             fromPick: nextTeamPick.overall,
                             toPick: pickOverall
                         };
