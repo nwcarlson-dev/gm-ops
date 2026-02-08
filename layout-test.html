@@ -714,18 +714,7 @@
                         }
                     });
 
-                    const targetShift = targetPills[0].getBoundingClientRect().width + gap;
-                    targetPills.forEach((p, i) => {
-                        if (i >= clampedIndex && !p.classList.contains('empty-slot')) {
-                            p.style.transform = `translateX(${targetShift}px)`;
-                            p.classList.add('shift-preview');
-                        }
-                    });
-
-                    const ghost = document.createElement('div');
-                    ghost.className = 'pos-pill insert-target empty-slot';
-                    ghost.dataset.ghost = 'true';
-                    targetRow.insertBefore(ghost, targetPills[clampedIndex]);
+                    targetPills[clampedIndex].classList.add('insert-target');
                 }
             }
 
@@ -734,7 +723,6 @@
                     dragState.pill.classList.remove('insert-target');
                     dragState.pill.style.transform = '';
                 }
-                document.querySelectorAll('[data-ghost]').forEach(g => g.remove());
                 rows.forEach(r => {
                     Array.from(r.children).forEach(p => {
                         p.classList.remove('shift-preview', 'insert-target');
