@@ -7,6 +7,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="shared/styles.css">
+    <script src="/node_modules/sortablejs/Sortable.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -164,6 +165,13 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            border-radius: 4px;
+            transition: color 0.2s ease, background 0.2s ease;
+        }
+
+        .pos-label.drop-target {
+            color: #4ade80;
+            background: rgba(74, 222, 128, 0.08);
         }
 
         .pills-area {
@@ -187,6 +195,14 @@
             min-height: 0;
             display: flex;
             gap: 8px;
+            border-radius: 6px;
+            padding: 2px;
+            transition: background 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .pill-row.drop-highlight {
+            background: rgba(74, 222, 128, 0.06);
+            box-shadow: inset 0 0 0 1px rgba(74, 222, 128, 0.25);
         }
 
         .pos-pill {
@@ -194,13 +210,95 @@
             border: 1px solid var(--card-border);
             border-radius: 6px;
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             font-family: 'Barlow Condensed', sans-serif;
-            font-size: 13px;
+            font-size: 12px;
             font-weight: 600;
-            color: var(--text-muted);
+            color: var(--text-secondary);
             background: rgba(0,0,0,0.15);
+            cursor: grab;
+            user-select: none;
+            transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease, opacity 0.15s ease;
+            padding: 2px 4px;
+            overflow: hidden;
+            min-width: 0;
+        }
+
+        .pos-pill:active {
+            cursor: grabbing;
+        }
+
+        .pos-pill:hover {
+            border-color: rgba(255,255,255,0.2);
+            transform: translateY(-1px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+        }
+
+        .pos-pill .pill-name {
+            font-size: 11px;
+            font-weight: 600;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            max-width: 100%;
+            line-height: 1.2;
+        }
+
+        .pos-pill .pill-depth {
+            font-size: 9px;
+            font-weight: 500;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            line-height: 1;
+        }
+
+        .pos-pill.empty-slot {
+            border-style: dashed;
+            border-color: rgba(255,255,255,0.06);
+            background: transparent;
+            cursor: default;
+            color: var(--text-muted);
+            opacity: 0.4;
+        }
+
+        .pos-pill.empty-slot:hover {
+            transform: none;
+            box-shadow: none;
+            border-color: rgba(255,255,255,0.06);
+        }
+
+        .pos-pill.sortable-ghost {
+            opacity: 0.3;
+            transform: scale(0.95);
+        }
+
+        .pos-pill.sortable-drag {
+            opacity: 1;
+            transform: scale(1.05);
+            box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+            border-color: rgba(74, 222, 128, 0.5);
+            z-index: 1000;
+        }
+
+        .pos-pill.sortable-chosen {
+            border-color: rgba(255,255,255,0.3);
+        }
+
+        .pos-pill.starter {
+            border-left: 2px solid var(--accent-red);
+        }
+
+        .pos-pill.cross-move {
+            animation: crossMoveFlash 0.5s ease;
+        }
+
+        @keyframes crossMoveFlash {
+            0% { box-shadow: 0 0 0 0 rgba(74, 222, 128, 0.4); }
+            50% { box-shadow: 0 0 12px 2px rgba(74, 222, 128, 0.3); }
+            100% { box-shadow: none; }
         }
 
         .pills-area::-webkit-scrollbar {
@@ -282,88 +380,253 @@
                     <div class="panel-tab" data-tab="tools">Tools</div>
                 </div>
 
-                <div class="tab-content active" id="tab-offense">
-                    <div class="labels-col">
-                        <div class="pos-label">QB</div>
-                        <div class="pos-label">RB</div>
-                        <div class="pos-label">WR</div>
-                        <div class="pos-label">WR</div>
-                        <div class="pos-label">WR</div>
-                        <div class="pos-label">TE</div>
-                        <div class="pos-label">LT</div>
-                        <div class="pos-label">LG</div>
-                        <div class="pos-label">C</div>
-                        <div class="pos-label">RG</div>
-                        <div class="pos-label">RT</div>
-                    </div>
-                    <div class="pills-area">
-                        <div class="pills-grid">
-                            <div class="pill-row"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div>
-                            <div class="pill-row"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div>
-                            <div class="pill-row"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div>
-                            <div class="pill-row"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div>
-                            <div class="pill-row"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div>
-                            <div class="pill-row"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div>
-                            <div class="pill-row"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div>
-                            <div class="pill-row"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div>
-                            <div class="pill-row"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div>
-                            <div class="pill-row"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div>
-                            <div class="pill-row"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="tab-content" id="tab-defense">
-                    <div class="labels-col">
-                        <div class="pos-label">DT</div>
-                        <div class="pos-label">DT</div>
-                        <div class="pos-label">EDGE</div>
-                        <div class="pos-label">EDGE</div>
-                        <div class="pos-label">LB</div>
-                        <div class="pos-label">LB</div>
-                        <div class="pos-label">CB</div>
-                        <div class="pos-label">CB</div>
-                        <div class="pos-label">NCB</div>
-                        <div class="pos-label">SS</div>
-                        <div class="pos-label">FS</div>
-                    </div>
-                    <div class="pills-area">
-                        <div class="pills-grid">
-                            <div class="pill-row"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div>
-                            <div class="pill-row"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div>
-                            <div class="pill-row"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div>
-                            <div class="pill-row"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div>
-                            <div class="pill-row"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div>
-                            <div class="pill-row"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div>
-                            <div class="pill-row"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div>
-                            <div class="pill-row"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div>
-                            <div class="pill-row"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div>
-                            <div class="pill-row"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div>
-                            <div class="pill-row"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="tab-content" id="tab-special">
-                    <div class="labels-col">
-                        <div class="pos-label">K</div>
-                        <div class="pos-label">P</div>
-                    </div>
-                    <div class="pills-area">
-                        <div class="pills-grid">
-                            <div class="pill-row"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div>
-                            <div class="pill-row"><div class="pos-pill">1</div><div class="pos-pill">2</div><div class="pos-pill">3</div><div class="pos-pill">4</div><div class="pos-pill">5</div><div class="pos-pill">6</div></div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="tab-content" id="tab-tools">
-                </div>
+                <div class="tab-content active" id="tab-offense"></div>
+                <div class="tab-content" id="tab-defense"></div>
+                <div class="tab-content" id="tab-special"></div>
+                <div class="tab-content" id="tab-tools"></div>
             </div>
         </div>
     </div>
 
     <script>
+        const DEPTH_SLOTS = 6;
+
+        const POSITION_COMPAT = {
+            'QB':   [],
+            'RB':   ['WR'],
+            'WR':   ['RB'],
+            'TE':   ['WR'],
+            'LT':   ['RT', 'LG', 'RG'],
+            'LG':   ['RG', 'C', 'LT', 'RT'],
+            'C':    ['LG', 'RG'],
+            'RG':   ['LG', 'C', 'LT', 'RT'],
+            'RT':   ['LT', 'LG', 'RG'],
+            'DT':   ['EDGE'],
+            'EDGE': ['DT', 'LB'],
+            'LB':   ['EDGE', 'SS'],
+            'CB':   ['NCB', 'FS'],
+            'NCB':  ['CB', 'SS'],
+            'SS':   ['FS', 'LB', 'NCB'],
+            'FS':   ['SS', 'CB', 'LB'],
+            'K':    [],
+            'P':    [],
+        };
+
+        const offenseData = [
+            { pos: 'QB', players: ['Jacoby Brissett', 'Kedon Slovis'] },
+            { pos: 'RB', players: ['Michael Carter', 'Emari Demercado'] },
+            { pos: 'WR', players: ['Michael Wilson', 'Tejhaun Palmer'] },
+            { pos: 'WR', players: ['Xavier Weaver', 'Bryson Green'] },
+            { pos: 'WR', players: ['Jalen Brooks', 'Ihmir Smith-Marsette'] },
+            { pos: 'TE', players: ['Trey McBride', 'Elijah Higgins'] },
+            { pos: 'LT', players: ['Josh Fryar', 'Paris Johnson Jr.'] },
+            { pos: 'LG', players: ['Evan Brown', 'Jon Gaines II'] },
+            { pos: 'C',  players: ['Hjalte Froholdt', 'Jon Gaines II'] },
+            { pos: 'RG', players: ['Isaiah Adams', 'Will Hernandez'] },
+            { pos: 'RT', players: ['Kelvin Beachum', 'Christian Jones'] },
+        ];
+
+        const defenseData = [
+            { pos: 'DT',   players: ['Calais Campbell', 'PJ Mustipher'] },
+            { pos: 'DT',   players: ['Dalvin Tomlinson', 'L.J. Collier'] },
+            { pos: 'EDGE', players: ['Josh Sweat', 'Jordan Burch'] },
+            { pos: 'EDGE', players: ['Darius Robinson', 'Dante Stills'] },
+            { pos: 'LB',   players: ['Akeem Davis-Gaither', 'Zaven Collins'] },
+            { pos: 'LB',   players: ['Cody Simon', 'Owen Pappoe'] },
+            { pos: 'CB',   players: ['Will Johnson', 'Elijah Jones'] },
+            { pos: 'CB',   players: ['Denzel Burke', 'Max Melton'] },
+            { pos: 'NCB',  players: ['Darren Hall', 'Jaden Davis'] },
+            { pos: 'SS',   players: ['Jalen Thompson', 'Kitan Crawford'] },
+            { pos: 'FS',   players: ['Budda Baker', 'Dadrion Taylor-Demerson'] },
+        ];
+
+        const specialData = [
+            { pos: 'K', players: ['Chad Ryland'] },
+            { pos: 'P', players: ['Blake Hayes'] },
+        ];
+
+        const depthLabels = ['1ST', '2ND', '3RD', '4TH', '5TH', '6TH'];
+
+        function getCompatiblePositions(pos) {
+            const compat = new Set(POSITION_COMPAT[pos] || []);
+            compat.add(pos);
+            return compat;
+        }
+
+        function buildTab(tabEl, data, groupName) {
+            const labelsCol = document.createElement('div');
+            labelsCol.className = 'labels-col';
+
+            const pillsArea = document.createElement('div');
+            pillsArea.className = 'pills-area';
+            const pillsGrid = document.createElement('div');
+            pillsGrid.className = 'pills-grid';
+
+            data.forEach((row, rowIndex) => {
+                const label = document.createElement('div');
+                label.className = 'pos-label';
+                label.textContent = row.pos;
+                label.dataset.pos = row.pos;
+                label.dataset.rowIndex = rowIndex;
+                labelsCol.appendChild(label);
+
+                const pillRow = document.createElement('div');
+                pillRow.className = 'pill-row';
+                pillRow.dataset.pos = row.pos;
+                pillRow.dataset.rowIndex = rowIndex;
+
+                for (let i = 0; i < DEPTH_SLOTS; i++) {
+                    const pill = document.createElement('div');
+                    pill.className = 'pos-pill';
+                    pill.dataset.pos = row.pos;
+
+                    if (row.players[i]) {
+                        pill.dataset.player = row.players[i];
+                        if (i === 0) pill.classList.add('starter');
+
+                        const nameEl = document.createElement('span');
+                        nameEl.className = 'pill-name';
+                        nameEl.textContent = row.players[i];
+                        pill.appendChild(nameEl);
+
+                        const depthEl = document.createElement('span');
+                        depthEl.className = 'pill-depth';
+                        depthEl.textContent = depthLabels[i];
+                        pill.appendChild(depthEl);
+                    } else {
+                        pill.classList.add('empty-slot');
+                        pill.innerHTML = '<span class="pill-depth">' + depthLabels[i] + '</span>';
+                    }
+
+                    pillRow.appendChild(pill);
+                }
+
+                pillsGrid.appendChild(pillRow);
+            });
+
+            pillsArea.appendChild(pillsGrid);
+            tabEl.appendChild(labelsCol);
+            tabEl.appendChild(pillsArea);
+
+            initSortable(tabEl, data, groupName);
+        }
+
+        function updateDepthLabels(row) {
+            const pills = row.querySelectorAll('.pos-pill');
+            pills.forEach((pill, i) => {
+                const depthEl = pill.querySelector('.pill-depth');
+                if (depthEl) depthEl.textContent = depthLabels[i];
+
+                pill.classList.toggle('starter', i === 0 && !pill.classList.contains('empty-slot'));
+            });
+        }
+
+        function normalizeRow(row) {
+            const pills = Array.from(row.querySelectorAll('.pos-pill'));
+            const filled = pills.filter(p => !p.classList.contains('empty-slot'));
+            const empties = pills.filter(p => p.classList.contains('empty-slot'));
+
+            while (filled.length + empties.length < DEPTH_SLOTS) {
+                const empty = createEmptyPill(row.dataset.pos, filled.length + empties.length);
+                empties.push(empty);
+            }
+
+            while (filled.length + empties.length > DEPTH_SLOTS) {
+                if (empties.length > 0) {
+                    const last = empties.pop();
+                    if (last.parentNode) last.parentNode.removeChild(last);
+                }
+            }
+
+            row.innerHTML = '';
+            filled.forEach(p => row.appendChild(p));
+            const neededEmpties = DEPTH_SLOTS - filled.length;
+            for (let i = 0; i < neededEmpties; i++) {
+                if (empties[i]) {
+                    row.appendChild(empties[i]);
+                } else {
+                    row.appendChild(createEmptyPill(row.dataset.pos, filled.length + i));
+                }
+            }
+        }
+
+        function createEmptyPill(pos, index) {
+            const pill = document.createElement('div');
+            pill.className = 'pos-pill empty-slot';
+            pill.dataset.pos = pos;
+            pill.innerHTML = '<span class="pill-depth">' + depthLabels[index] + '</span>';
+            return pill;
+        }
+
+        let currentDragPos = null;
+
+        function initSortable(tabEl, data, groupName) {
+            const rows = tabEl.querySelectorAll('.pill-row');
+            const labels = tabEl.querySelectorAll('.pos-label');
+
+            rows.forEach((row) => {
+                Sortable.create(row, {
+                    group: {
+                        name: groupName,
+                        pull: true,
+                        put: function(to) {
+                            const toPos = to.el.dataset.pos;
+                            const fromPos = currentDragPos;
+                            if (!fromPos) return true;
+                            const compat = getCompatiblePositions(fromPos);
+                            return compat.has(toPos);
+                        }
+                    },
+                    animation: 200,
+                    ghostClass: 'sortable-ghost',
+                    dragClass: 'sortable-drag',
+                    chosenClass: 'sortable-chosen',
+                    swapThreshold: 0.5,
+                    fallbackOnBody: true,
+                    filter: '.empty-slot',
+                    onStart: function(evt) {
+                        const draggedPill = evt.item;
+                        currentDragPos = draggedPill.dataset.pos;
+                        const compat = getCompatiblePositions(currentDragPos);
+
+                        rows.forEach((r, i) => {
+                            const rPos = r.dataset.pos;
+                            if (compat.has(rPos) && r !== row) {
+                                r.classList.add('drop-highlight');
+                                labels[i].classList.add('drop-target');
+                            }
+                        });
+                    },
+                    onEnd: function(evt) {
+                        currentDragPos = null;
+
+                        rows.forEach((r, i) => {
+                            r.classList.remove('drop-highlight');
+                            labels[i].classList.remove('drop-target');
+                        });
+
+                        const fromRow = evt.from;
+                        const toRow = evt.to;
+
+                        if (fromRow !== toRow) {
+                            evt.item.dataset.pos = toRow.dataset.pos;
+                            evt.item.classList.add('cross-move');
+                            setTimeout(() => evt.item.classList.remove('cross-move'), 500);
+                        }
+
+                        normalizeRow(fromRow);
+                        normalizeRow(toRow);
+                        updateDepthLabels(fromRow);
+                        updateDepthLabels(toRow);
+                    }
+                });
+            });
+        }
+
+        buildTab(document.getElementById('tab-offense'), offenseData, 'depth-offense');
+        buildTab(document.getElementById('tab-defense'), defenseData, 'depth-defense');
+        buildTab(document.getElementById('tab-special'), specialData, 'depth-special');
+
         document.querySelectorAll('.panel-tab').forEach(tab => {
             tab.addEventListener('click', () => {
                 document.querySelectorAll('.panel-tab').forEach(t => t.classList.remove('active'));
