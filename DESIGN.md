@@ -293,9 +293,108 @@ Clicking the action menu icon opens a contextual dropdown of available actions f
 
 Only contextually relevant actions appear — for example, "Apply Franchise Tag" only shows on expiring-contract players during the Franchise Tag phase.
 
-#### Drag-and-Drop Reordering
+#### Drag-and-Drop Depth Chart System
 
-Player pills within a position row are draggable. Users can reorder depth by dragging a pill left (promote) or right (demote) within its row. Visual feedback (drop zone highlight, pill shadow) indicates valid drop targets during drag.
+The depth chart uses a custom drag-and-drop system (no library) for reordering players within and across position rows. This is a core interactive feature — the spec below should be sufficient to rebuild it from scratch.
+
+##### Layout Structure
+
+- **Two-column layout**: Left column is `.labels-col` (44px wide, position abbreviations like QB, RB, WR). Right column is `.pills-area` (scrollable horizontally).
+- **Pills grid**: `.pills-grid` is a flex-column container set to `min-width: calc(300%)` of the pills-area, creating 6 equal-width columns for depth slots (1ST STRING through 6TH STRING).
+- **Column headers**: A `.column-headers` row at the top with 6 `flex: 1` spans showing "1ST STRING", "2ND STRING", etc.
+- **Position rows**: Each `.pill-row` is a flex row with `gap: 8px` containing exactly 6 `.pos-pill` elements (filled or `.empty-slot`).
+- **Labels alignment**: `.labels-col` has `padding: 34px 0 12px 0` to vertically align position labels with pill rows below the header row. Both use `gap: 10px` to stay in sync.
+- **Horizontal scroll**: Only ~2 columns visible at default panel width. User scrolls to see deeper depth. When panel is fully expanded (`expand-right` state), `pills-grid` resets to `min-width: 0; width: 100%` and all 6 columns are visible.
+
+##### Pill Elements
+
+- **Filled pill**: Has `dataset.pos` (position) and `dataset.player` (name). Contains a `.pill-name` span. First pill in row gets `.starter` class (red left border via `border-left: 2px solid var(--accent-red)`).
+- **Empty pill**: `.pos-pill.empty-slot` — dashed border, no player data, `cursor: default`, not draggable.
+- **Pill styling**: `flex: 1`, dark background `rgba(0,0,0,0.15)`, rounded `border-radius: 6px`, `cursor: grab`, `font-family: 'Barlow Condensed'`, `font-size: 13px` for name text. Hover lifts pill slightly (`translateY(-1px)`) with shadow.
+
+##### Tab Isolation
+
+Each tab (Offense, Defense, Special Teams) is built independently via `buildTab()`. Drag context is scoped to one tab — you cannot drag between tabs. Each tab's `initDragDrop()` captures its own `rows` and `labels` NodeLists.
+
+##### Drag Lifecycle
+
+1. **mousedown/touchstart** on a filled pill → `startDrag(pill, x, y)`
+2. **startDrag**: Records `fromRow`, `fromIndex`, creates a floating clone (`.drag-clone`), marks original as `.drag-source` (faded to 0.25 opacity, scaled to 0.95). Calculates compatible positions via `getCompatiblePositions()`. Marks ineligible rows/labels with `.drop-ineligible` (opacity 0.3).
+3. **mousemove/touchmove** → `handleMove(x, y)`: Moves clone to cursor. Hit-tests against compatible rows. Determines `hoverIndex` by checking if cursor X is left of each pill's midpoint. Calls `showPreview()` when hover target changes.
+4. **mouseup/touchend** → `finishDrag()`: Removes clone, clears all preview/eligibility classes, performs the actual DOM rearrangement if a valid drop target exists.
+
+##### Position Compatibility Rules (`POSITION_COMPAT`)
+
+Determines which rows a player can be dragged to. The dragged pill's original position is always compatible with itself. Additional compatibility:
+
+| Position | Can Move To | Rationale |
+|----------|-------------|-----------|
+| QB | (none) | QBs stay at QB |
+| RB | WR | Versatile backs can play receiver |
+| WR | RB | Reverse flex |
+| TE | WR | Move TE flex |
+| LT, LG, C, RG, RT | All other OL | Any OL can play any OL position |
+| DT | EDGE | Interior linemen can rush outside |
+| EDGE | DT, LB | Edge can move inside or drop back |
+| LB | EDGE, SS, FS | Linebackers can rush or play safety |
+| CB | NCB, SS, FS | Any DB can play any DB position |
+| NCB | CB, SS, FS | Any DB can play any DB position |
+| SS | FS, CB, NCB, LB | Safeties can play any DB or LB |
+| FS | SS, CB, NCB, LB | Safeties can play any DB or LB |
+| K, P | (none) | Specialists stay put |
+
+##### Visual Feedback During Drag
+
+- **Ineligible rows fade**: Rows and labels where the player cannot be dropped get `.drop-ineligible` (opacity 0.3). Eligible rows remain full opacity. This is an inverted approach — highlight by dimming what's invalid rather than highlighting what's valid.
+- **Floating clone**: `.drag-clone` follows cursor with `position: fixed`, `z-index: 1000`, slightly enlarged (`scale(1.05)`), green border (`rgba(74, 222, 128, 0.5)`), heavy shadow. `pointer-events: none` so it doesn't interfere with hit detection.
+- **Source pill ghost**: Original pill stays in place but faded (`.drag-source`: opacity 0.25, scale 0.95).
+- **Hover target highlight**: The pill slot under the cursor gets `.insert-target` — subtle green background (`rgba(74, 222, 128, 0.12)`), green border (`rgba(74, 222, 128, 0.35)`), and inner glow. Applied to ALL slots (filled or empty).
+- **Shift preview (same-row)**: When hovering at a new position within the same row, pills between the source and target positions get `translateX(±shift)` transforms to slide toward their new positions. Shift amount = `pillWidth + gap(8px)`. Direction depends on whether dragging left or right. Uses `effectiveInsert` (accounts for off-by-one when dragging rightward: `if (fromIndex < hoverIndex) effectiveInsert--`).
+- **Shift preview (cross-row)**: Source row pills after the dragged pill shift left (closing the gap). Target row pills after the insertion point shift right (making room). The insert-target pill itself does NOT shift — it stays in place as the landing zone indicator.
+- **Transitions**: All pills have `transition: transform 0.15s ease` (via `transition: all 0.2s ease` on `.pos-pill`), so shift previews animate smoothly.
+
+##### Drop Behavior (Insert, Not Swap)
+
+On drop, the system uses **insert** behavior, not swap:
+
+1. **Same-row**: Remove pill from original index. Calculate `targetIndex` (with off-by-one correction: `if (fromIndex < targetIndex) targetIndex--`). Extract all filled pills, splice dragged pill into `targetIndex`, rebuild row with filled pills followed by empty slots up to `DEPTH_SLOTS` (6).
+2. **Cross-row**: Remove pill from source row, `rebuildRow(sourceRow)` to compact it. Update pill's `dataset.pos` to the target row's position. Insert pill into target row at the target index using the same splice-and-rebuild logic. Apply `.cross-move` class (green flash animation, 0.5s) for visual confirmation.
+3. **Starter update**: After any drop, `updateDepthLabels()` recalculates which pill is index 0 (starter) and applies/removes the `.starter` class (red left border).
+
+##### Key Helper Functions
+
+- `getCompatiblePositions(pos)` → Returns a Set of all positions the given position can move to (including itself).
+- `buildTab(tabEl, data)` → Creates the full depth chart DOM for one tab from data array of `{pos, players[]}` objects.
+- `updateDepthLabels(row)` → Toggles `.starter` class on first filled pill in a row.
+- `createEmptyPill(pos)` → Creates a new `.pos-pill.empty-slot` element.
+- `rebuildRow(row)` → Compacts a row: moves all filled pills to the front, pads with empty slots to 6 total.
+- `initDragDrop(tabEl)` → Sets up all drag event listeners scoped to one tab.
+
+##### Constants
+
+- `DEPTH_SLOTS = 6` — Maximum players per position row.
+- `gap = 8` (px) — CSS gap between pills in a row, used in shift calculations.
+- `depthLabels = ['1ST STRING', '2ND STRING', '3RD STRING', '4TH STRING', '5TH STRING', '6TH STRING']`
+
+##### Known Behaviors & Edge Cases
+
+- Hovering outside all rows clears preview (no target).
+- `hoverIndex` can equal `pillEls.length` if cursor is past all pills — clamped to `pills.length - 1` for safety.
+- Cross-row moves update the pill's `dataset.pos` to match the destination row.
+- Same-row no-op: If `effectiveInsert === fromIndex`, no preview is shown (pill would return to its original spot).
+- The pills-area scrollbar is hidden (`scrollbar-width: none`, `::-webkit-scrollbar { display: none }`).
+
+##### Data Structure (Hardcoded in Prototype, Will Come from JSON)
+
+Each tab receives an array of row objects. In production, this data will load from `data/teams/depth_charts_2026.json`:
+```
+[
+  { pos: 'QB', players: ['Jacoby Brissett', 'Kedon Slovis'] },
+  { pos: 'RB', players: ['Michael Carter', 'Emari Demercado'] },
+  ...
+]
+```
+Players array is ordered by depth (index 0 = starter). Empty slots are auto-generated up to DEPTH_SLOTS.
 
 #### Subtle Status Indicators
 
