@@ -249,38 +249,20 @@
             box-shadow: 0 2px 8px rgba(0,0,0,0.3);
         }
 
-        .pill-grade {
+        .pill-number {
             display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
-            width: 34px;
+            width: 30px;
             flex-shrink: 0;
             font-family: 'Teko', sans-serif;
-            line-height: 1;
-            color: #fff;
-            border-right: 1px solid rgba(255,255,255,0.06);
-            gap: 1px;
-        }
-
-        .pill-grade-label {
-            font-size: 7px;
-            font-weight: 600;
-            letter-spacing: 0.08em;
-            opacity: 0.7;
-            text-transform: uppercase;
-        }
-
-        .pill-grade-num {
             font-size: 18px;
             font-weight: 600;
+            line-height: 1;
+            color: #94a3b8;
+            background: rgba(255,255,255,0.04);
+            border-right: 1px solid rgba(255,255,255,0.06);
         }
-
-        .pill-grade.grade-elite { background: rgba(212, 175, 55, 0.3); color: #f0d060; }
-        .pill-grade.grade-great { background: rgba(74, 222, 128, 0.2); color: #4ade80; }
-        .pill-grade.grade-above { background: rgba(56, 189, 248, 0.18); color: #38bdf8; }
-        .pill-grade.grade-avg { background: rgba(255,255,255,0.06); color: #94a3b8; }
-        .pill-grade.grade-below { background: rgba(248, 113, 113, 0.15); color: #f87171; }
 
         .pill-body {
             flex: 1;
@@ -302,15 +284,6 @@
             color: #e2e8f0;
         }
 
-        .pill-stats-label {
-            font-size: 8px;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.06em;
-            color: rgba(255,255,255,0.25);
-            line-height: 1;
-        }
-
         .pill-stats {
             font-size: 11px;
             font-weight: 500;
@@ -320,6 +293,26 @@
             text-overflow: ellipsis;
             line-height: 1.2;
             letter-spacing: 0.02em;
+        }
+
+        .pill-stats .pff-badge {
+            font-weight: 700;
+            margin-right: 1px;
+        }
+
+        .pill-stats .pff-badge.grade-elite { color: #f0d060; }
+        .pill-stats .pff-badge.grade-great { color: #4ade80; }
+        .pill-stats .pff-badge.grade-above { color: #38bdf8; }
+        .pill-stats .pff-badge.grade-avg { color: #94a3b8; }
+        .pill-stats .pff-badge.grade-below { color: #f87171; }
+
+        .pill-stats .pff-label {
+            font-size: 8px;
+            font-weight: 600;
+            opacity: 0.5;
+            margin-right: 1px;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
         }
 
         .pill-stats .stat-val {
@@ -351,7 +344,7 @@
         }
 
         .pos-pill.drag-source.insert-target .pill-body,
-        .pos-pill.drag-source.insert-target .pill-grade {
+        .pos-pill.drag-source.insert-target .pill-number {
             visibility: hidden;
         }
 
@@ -658,20 +651,14 @@
                         pill.dataset.player = row.players[i];
                         if (i === 0) pill.classList.add('starter');
 
-                        const pff = playerLookup[row.players[i]];
-                        if (pff && pff.grade != null) {
-                            const gradeEl = document.createElement('div');
-                            gradeEl.className = 'pill-grade ' + getGradeClass(pff.grade);
-                            const labelEl = document.createElement('span');
-                            labelEl.className = 'pill-grade-label';
-                            labelEl.textContent = 'PFF';
-                            gradeEl.appendChild(labelEl);
-                            const numEl = document.createElement('span');
-                            numEl.className = 'pill-grade-num';
-                            numEl.textContent = Math.round(pff.grade);
-                            gradeEl.appendChild(numEl);
-                            pill.appendChild(gradeEl);
-                        }
+                        const playerData = playerLookup[row.players[i]];
+                        const jersey = playerData ? playerData.jerseyNumber : null;
+                        const pff = playerData ? playerData.pff : null;
+
+                        const numberEl = document.createElement('div');
+                        numberEl.className = 'pill-number';
+                        numberEl.textContent = jersey != null ? jersey : '';
+                        pill.appendChild(numberEl);
 
                         const body = document.createElement('div');
                         body.className = 'pill-body';
@@ -681,18 +668,20 @@
                         nameEl.textContent = row.players[i];
                         body.appendChild(nameEl);
 
-                        if (pff) {
-                            const statsHtml = getStatsHtml(row.pos, pff);
-                            if (statsHtml) {
-                                const statsLabelEl = document.createElement('div');
-                                statsLabelEl.className = 'pill-stats-label';
-                                statsLabelEl.textContent = '2025 Stats';
-                                body.appendChild(statsLabelEl);
-                                const statsEl = document.createElement('div');
-                                statsEl.className = 'pill-stats';
-                                statsEl.innerHTML = statsHtml;
-                                body.appendChild(statsEl);
-                            }
+                        const statsEl = document.createElement('div');
+                        statsEl.className = 'pill-stats';
+                        let statsLine = '';
+                        if (pff && pff.grade != null) {
+                            statsLine += `<span class="pff-label">PFF</span><span class="pff-badge ${getGradeClass(pff.grade)}">${Math.round(pff.grade)}</span>`;
+                        }
+                        const posStats = pff ? getStatsHtml(row.pos, pff) : '';
+                        if (posStats) {
+                            if (statsLine) statsLine += '<span class="stat-sep">·</span>';
+                            statsLine += posStats;
+                        }
+                        if (statsLine) {
+                            statsEl.innerHTML = statsLine;
+                            body.appendChild(statsEl);
                         }
 
                         pill.appendChild(body);
@@ -990,9 +979,9 @@
                 const db = await resp.json();
                 const roster = db.teams[TEAM] || [];
                 roster.forEach(p => {
-                    if (p.pff) playerLookup[p.name] = p.pff;
+                    playerLookup[p.name] = { jerseyNumber: p.jerseyNumber, pff: p.pff || null };
                 });
-                console.log(`Loaded PFF data for ${Object.keys(playerLookup).length} players`);
+                console.log(`Loaded player data for ${Object.keys(playerLookup).length} players`);
             } catch (e) {
                 console.warn('Could not load PFF data:', e);
             }
