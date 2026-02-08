@@ -2690,6 +2690,36 @@
                 background: var(--card-border);
                 flex-shrink: 0;
             }
+            .os-tag-explainer {
+                display: flex;
+                gap: 16px;
+                padding: 10px 14px;
+                background: rgba(255,255,255,0.03);
+                border: 1px solid var(--card-border);
+                border-radius: 6px;
+                align-items: flex-start;
+                flex-wrap: wrap;
+            }
+            .os-tag-explainer-item {
+                display: flex;
+                align-items: baseline;
+                gap: 8px;
+                font-size: 12px;
+                color: var(--text-secondary);
+                line-height: 1.4;
+            }
+            .os-tag-explainer-badge {
+                font-family: 'Barlow Condensed', sans-serif;
+                font-size: 11px;
+                font-weight: 600;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                padding: 2px 8px;
+                border-radius: 3px;
+                color: #fff;
+                white-space: nowrap;
+                flex-shrink: 0;
+            }
             .os-main-content {
                 display: flex;
                 flex-direction: column;
@@ -7232,9 +7262,8 @@
                     const tagState = { franchise: null, transition: null };
                     if (eligible.length > 0 && eligible[0].tradeValue > 200) {
                         tagState.franchise = eligible[0].name;
-                    }
-                    if (eligible.length > 1 && eligible[1].tradeValue > 150) {
-                        tagState.transition = eligible[1].name;
+                    } else if (eligible.length > 0 && eligible[0].tradeValue > 100) {
+                        tagState.transition = eligible[0].name;
                     }
                     offseasonState.franchiseTags[teamAbbr] = tagState;
                 });
@@ -7281,8 +7310,7 @@
                     const tCost = getTransitionTagCost(p);
                     const isFranchised = tags.franchise === p.name;
                     const isTransitioned = tags.transition === p.name;
-                    const franchiseUsed = tags.franchise && tags.franchise !== p.name;
-                    const transitionUsed = tags.transition && tags.transition !== p.name;
+                    const tagUsed = (tags.franchise || tags.transition) && !isFranchised && !isTransitioned;
                     let selected = 'none';
                     if (isFranchised) selected = 'franchise';
                     if (isTransitioned) selected = 'transition';
@@ -7299,8 +7327,8 @@
                         '<td>' +
                             '<select class="os-select" onchange="handleTagChange(\'' + p.name.replace(/'/g, "\\'") + '\', this.value)">' +
                                 '<option value="none"' + (selected === 'none' ? ' selected' : '') + '>No Tag</option>' +
-                                '<option value="franchise"' + (selected === 'franchise' ? ' selected' : '') + (franchiseUsed ? ' disabled' : '') + '>Franchise Tag</option>' +
-                                '<option value="transition"' + (selected === 'transition' ? ' selected' : '') + (transitionUsed ? ' disabled' : '') + '>Transition Tag</option>' +
+                                '<option value="franchise"' + (selected === 'franchise' ? ' selected' : '') + (tagUsed ? ' disabled' : '') + '>Franchise Tag</option>' +
+                                '<option value="transition"' + (selected === 'transition' ? ' selected' : '') + (tagUsed ? ' disabled' : '') + '>Transition Tag</option>' +
                             '</select>' +
                         '</td>' +
                     '</tr>';
@@ -7337,6 +7365,17 @@
                             '<div class="os-cap-strip-divider"></div>' +
                             '<div class="os-cap-strip-item"><span class="os-cap-strip-label">After Tags</span><span class="os-cap-strip-value" style="color:' + capColor + '">' + formatMoney(capAfter) + '</span></div>' +
                         '</div>' +
+                        '<div class="os-tag-explainer">' +
+                            '<div class="os-tag-explainer-item">' +
+                                '<span class="os-tag-explainer-badge" style="background:var(--nfl-blue);">Franchise Tag</span>' +
+                                '<span>Guarantees a one-year deal at the average of the top 5 salaries at the player\'s position. The player cannot negotiate with other teams.</span>' +
+                            '</div>' +
+                            '<div class="os-tag-explainer-item">' +
+                                '<span class="os-tag-explainer-badge" style="background:var(--text-muted);">Transition Tag</span>' +
+                                '<span>Guarantees a one-year deal at the average of the top 10 salaries at the position. Other teams can make offers, but you have the right to match.</span>' +
+                            '</div>' +
+                            '<div style="font-size:11px;color:var(--warning);margin-top:2px;">Each team may use only one tag — either Franchise or Transition, not both.</div>' +
+                        '</div>' +
                         '<div class="os-main-content">' +
                             '<div class="os-panel">' +
                                 '<div class="os-panel-header">' +
@@ -7351,7 +7390,7 @@
                                     '</table>') +
                                 '</div>' +
                                 '<div class="os-advance-bar">' +
-                                    '<div style="font-size:12px;color:var(--text-muted);">Tags: ' + (tags.franchise ? 1 : 0) + ' Franchise, ' + (tags.transition ? 1 : 0) + ' Transition</div>' +
+                                    '<div style="font-size:12px;color:var(--text-muted);">' + (tags.franchise ? 'Franchise Tag applied' : tags.transition ? 'Transition Tag applied' : 'No tag applied') + '</div>' +
                                     '<button class="btn btn-primary" onclick="confirmFranchiseTags()">Confirm Tags &amp; Continue</button>' +
                                 '</div>' +
                             '</div>' +
@@ -7368,8 +7407,8 @@
             function handleTagChange(playerName, value) {
                 const abbr = offseasonState.userTeam;
                 const tags = offseasonState.franchiseTags[abbr];
-                if (tags.franchise === playerName) tags.franchise = null;
-                if (tags.transition === playerName) tags.transition = null;
+                tags.franchise = null;
+                tags.transition = null;
                 if (value === 'franchise') tags.franchise = playerName;
                 else if (value === 'transition') tags.transition = playerName;
                 renderFranchiseTagsPhase();
