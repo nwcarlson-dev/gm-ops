@@ -1,42 +1,16 @@
-# Python
-__pycache__/
-*.py[cod]
-*$py.class
-*.so
-.Python
-build/
-develop-eggs/
-dist/
-downloads/
-eggs/
-.eggs/
-lib/
-lib64/
-parts/
-sdist/
-var/
-wheels/
-*.egg-info/
-.installed.cfg
-*.egg
+# Replit-specific files
+.replit
+replit.md
+.replit_integration_files/
 
-# Virtual environments
-.env
-.venv
-env/
-venv/
-ENV/
+# Dependencies
+node_modules/
 
-# IDE
-.idea/
-.vscode/
-*.swp
-*.swo
-
-# OS
+# OS files
 .DS_Store
-Thumbs.db
 
-# Replit
-.cache/
-.local/
+# Attached assets from Replit (screenshots, recordings)
+attached_assets/
+
+# Uploads
+uploads/
