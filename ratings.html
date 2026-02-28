@@ -1,0 +1,558 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GM Ops – Player Ratings</title>
+  <link href="https://fonts.googleapis.com/css2?family=Teko:wght@400;500;600;700&family=Barlow+Condensed:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --nfl-red:   #D50A0A;
+      --nfl-blue:  #013369;
+      --white:     #FFFFFF;
+      --silver:    #A5ACAF;
+      --dark-navy: #0A1628;
+      --card-bg:   rgba(1,51,105,0.3);
+      --card-border: rgba(165,172,175,0.2);
+      --bg-dark:   #0d1e33;
+      --bg-row:    rgba(1,51,105,0.12);
+      --bg-row-alt: rgba(1,51,105,0.06);
+      --bg-hover:  rgba(213,10,10,0.08);
+      --text-muted: #8a9bae;
+      --success:   #10B981;
+      --gold:      #D4AF37;
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--dark-navy);
+      color: var(--white);
+      min-height: 100vh;
+    }
+
+    /* ── Header ── */
+    header {
+      background: var(--nfl-blue);
+      padding: 14px 32px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 3px solid var(--nfl-red);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      transform: skewX(-12deg);
+      font-family: 'Teko', sans-serif;
+      cursor: pointer;
+      text-decoration: none;
+    }
+    .logo .gm {
+      font-size: 36px; font-weight: 700; color: var(--white);
+      background: var(--nfl-red); padding: 4px 5px 0 8px; line-height: 1;
+    }
+    .logo .ops {
+      font-size: 36px; font-weight: 700; color: var(--white);
+      background: var(--nfl-blue); padding: 4px 8px 0 5px; line-height: 1;
+      border: 2px solid var(--white); border-left: none;
+    }
+    .header-nav { display: flex; align-items: center; gap: 20px; }
+    .header-nav a {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 600; font-size: 13px;
+      letter-spacing: 0.15em; text-transform: uppercase;
+      color: var(--silver); text-decoration: none; transition: color 0.2s;
+    }
+    .header-nav a:hover, .header-nav a.active { color: var(--white); }
+    .header-title {
+      font-family: 'Teko', sans-serif;
+      font-size: 22px; font-weight: 600; letter-spacing: 2px;
+      text-transform: uppercase; color: var(--silver);
+    }
+
+    /* ── Layout ── */
+    .page { max-width: 1400px; margin: 0 auto; padding: 24px 24px 48px; }
+
+    /* ── Controls ── */
+    .controls {
+      display: flex; flex-wrap: wrap; gap: 12px;
+      align-items: center; margin-bottom: 20px;
+    }
+    .controls input, .controls select {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 6px; color: var(--white);
+      font-family: 'Inter', sans-serif; font-size: 13px;
+      padding: 8px 12px; outline: none; transition: border-color 0.2s;
+    }
+    .controls input { min-width: 220px; }
+    .controls input::placeholder { color: var(--text-muted); }
+    .controls input:focus, .controls select:focus {
+      border-color: var(--nfl-red);
+    }
+    .controls select option { background: var(--dark-navy); }
+    .controls .count-badge {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 13px; letter-spacing: 0.05em;
+      color: var(--text-muted); margin-left: auto;
+    }
+    .controls .count-badge span { color: var(--white); font-weight: 600; }
+
+    /* ── Table ── */
+    .table-wrap {
+      overflow-x: auto;
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+    }
+    table {
+      width: 100%; border-collapse: collapse;
+      font-size: 13px;
+    }
+    thead tr {
+      background: rgba(1,51,105,0.6);
+      border-bottom: 2px solid var(--nfl-red);
+    }
+    th {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: 11px;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--silver); padding: 10px 12px;
+      white-space: nowrap; cursor: pointer; user-select: none;
+      transition: color 0.15s;
+    }
+    th:hover { color: var(--white); }
+    th.sorted-asc::after  { content: ' ▲'; color: var(--nfl-red); font-size: 9px; }
+    th.sorted-desc::after { content: ' ▼'; color: var(--nfl-red); font-size: 9px; }
+    tbody tr {
+      border-bottom: 1px solid rgba(165,172,175,0.08);
+      transition: background 0.12s;
+    }
+    tbody tr:nth-child(even) { background: var(--bg-row-alt); }
+    tbody tr:hover { background: var(--bg-hover); }
+    td { padding: 8px 12px; vertical-align: middle; white-space: nowrap; }
+
+    .td-name { min-width: 160px; }
+    .player-name-cell { display: flex; flex-direction: column; gap: 2px; }
+    .player-name {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: 15px; color: var(--white);
+    }
+    .player-meta { font-size: 11px; color: var(--text-muted); }
+
+    .team-badge {
+      display: inline-block;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: 12px;
+      letter-spacing: 0.05em;
+      background: rgba(1,51,105,0.5);
+      border: 1px solid rgba(165,172,175,0.2);
+      border-radius: 4px; padding: 2px 6px; color: var(--silver);
+    }
+
+    .pos-badge {
+      display: inline-block;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-weight: 700; font-size: 11px;
+      letter-spacing: 0.1em; text-transform: uppercase;
+      border-radius: 4px; padding: 2px 7px;
+      background: rgba(213,10,10,0.15);
+      border: 1px solid rgba(213,10,10,0.3);
+      color: #e05555;
+    }
+
+    .role-badge {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px; letter-spacing: 0.05em;
+      color: var(--text-muted);
+    }
+    .role-badge.starter { color: var(--success); }
+    .role-badge.backup  { color: var(--silver); }
+    .role-badge.depth   { color: var(--text-muted); }
+
+    /* ── OVR chip ── */
+    .ovr {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 38px; height: 38px; border-radius: 6px;
+      font-family: 'Teko', sans-serif; font-weight: 700; font-size: 20px;
+      line-height: 1;
+    }
+    .ovr.g80  { background: rgba(212,175,55,0.25); color: var(--gold);    border: 1px solid rgba(212,175,55,0.5); }
+    .ovr.g70  { background: rgba(16,185,129,0.2);  color: var(--success); border: 1px solid rgba(16,185,129,0.4); }
+    .ovr.g60  { background: rgba(59,130,246,0.2);  color: #60a5fa;        border: 1px solid rgba(59,130,246,0.35); }
+    .ovr.g50  { background: rgba(165,172,175,0.15);color: var(--silver);  border: 1px solid rgba(165,172,175,0.3); }
+    .ovr.g40  { background: rgba(245,158,11,0.12); color: #fbbf24;        border: 1px solid rgba(245,158,11,0.25); }
+    .ovr.g30  { background: rgba(239,68,68,0.12);  color: #f87171;        border: 1px solid rgba(239,68,68,0.25); }
+    .ovr.g20  { background: rgba(107,114,128,0.12);color: #9ca3af;        border: 1px solid rgba(107,114,128,0.2); }
+
+    /* ── Skill bar ── */
+    .skill-cell { min-width: 90px; }
+    .skill-bar-wrap { display: flex; align-items: center; gap: 6px; }
+    .skill-bar-bg {
+      flex: 1; height: 5px; border-radius: 3px;
+      background: rgba(165,172,175,0.12); overflow: hidden;
+    }
+    .skill-bar-fill { height: 100%; border-radius: 3px; transition: width 0.3s; }
+    .skill-val { font-size: 11px; color: var(--text-muted); width: 22px; text-align: right; }
+
+    /* ── Grade legend ── */
+    .legend {
+      display: flex; flex-wrap: wrap; gap: 10px;
+      margin-bottom: 16px; align-items: center;
+    }
+    .legend-label {
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 11px; letter-spacing: 0.15em;
+      text-transform: uppercase; color: var(--text-muted);
+      margin-right: 4px;
+    }
+    .legend-item {
+      display: flex; align-items: center; gap: 5px;
+      font-family: 'Barlow Condensed', sans-serif;
+      font-size: 12px; color: var(--silver);
+    }
+    .legend-dot {
+      width: 12px; height: 12px; border-radius: 3px;
+    }
+
+    /* ── Empty state ── */
+    .empty-row td {
+      text-align: center; padding: 40px;
+      color: var(--text-muted); font-style: italic;
+    }
+
+    @media (max-width: 768px) {
+      header { padding: 12px 16px; }
+      .header-title { display: none; }
+      .page { padding: 16px; }
+      .controls input { min-width: 160px; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <a href="index.html" class="logo">
+    <span class="gm">GM</span>
+    <span class="ops">OPS</span>
+  </a>
+  <span class="header-title">Player Ratings</span>
+  <nav class="header-nav">
+    <a href="index.html">Home</a>
+    <a href="ratings.html" class="active">Ratings</a>
+    <a href="game-shell.html">Shell</a>
+    <a href="dev-guide.html">Docs</a>
+  </nav>
+</header>
+
+<div class="page">
+
+  <!-- Legend -->
+  <div class="legend">
+    <span class="legend-label">Grade scale:</span>
+    <span class="legend-item"><span class="legend-dot" style="background:rgba(212,175,55,0.5)"></span>80 Elite</span>
+    <span class="legend-item"><span class="legend-dot" style="background:rgba(16,185,129,0.4)"></span>70+ Pro Bowl</span>
+    <span class="legend-item"><span class="legend-dot" style="background:rgba(59,130,246,0.4)"></span>60–69 Starter+</span>
+    <span class="legend-item"><span class="legend-dot" style="background:rgba(165,172,175,0.3)"></span>50–59 Avg Starter</span>
+    <span class="legend-item"><span class="legend-dot" style="background:rgba(245,158,11,0.3)"></span>40–49 Backup</span>
+    <span class="legend-item"><span class="legend-dot" style="background:rgba(239,68,68,0.3)"></span>30–39 Depth</span>
+    <span class="legend-item"><span class="legend-dot" style="background:rgba(107,114,128,0.25)"></span>20–29 Practice</span>
+  </div>
+
+  <!-- Controls -->
+  <div class="controls">
+    <input id="search" type="text" placeholder="Search by name…" oninput="applyFilters()">
+    <select id="posFilter" onchange="applyFilters()">
+      <option value="">All positions</option>
+    </select>
+    <select id="teamFilter" onchange="applyFilters()">
+      <option value="">All teams</option>
+    </select>
+    <select id="roleFilter" onchange="applyFilters()">
+      <option value="">All roles</option>
+      <option value="starter">Starters</option>
+      <option value="backup">Backups</option>
+      <option value="depth">Depth</option>
+    </select>
+    <span class="count-badge">Showing <span id="visibleCount">–</span> of <span id="totalCount">–</span> players</span>
+  </div>
+
+  <!-- Table -->
+  <div class="table-wrap">
+    <table id="ratingsTable">
+      <thead>
+        <tr>
+          <th data-col="name"     class="td-name">Player</th>
+          <th data-col="team">Team</th>
+          <th data-col="position">Pos</th>
+          <th data-col="role">Role</th>
+          <th data-col="overall" class="sorted-desc">OVR</th>
+          <th data-col="skill0"  class="skill-cell" id="skillHead0"></th>
+          <th data-col="skill1"  class="skill-cell" id="skillHead1"></th>
+          <th data-col="skill2"  class="skill-cell" id="skillHead2"></th>
+        </tr>
+      </thead>
+      <tbody id="tbody">
+        <tr class="empty-row"><td colspan="8">Loading…</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<script>
+// ──────────────────────────────────────────────────────────────
+//  Data loading + state
+// ──────────────────────────────────────────────────────────────
+let allPlayers = [];
+let sortCol    = 'overall';
+let sortDir    = 'desc';   // 'asc' | 'desc'
+
+const DB_PATH = 'data/teams/player_database.json';
+
+async function loadData() {
+  const res = await fetch(DB_PATH);
+  const db  = await res.json();
+
+  for (const [team, players] of Object.entries(db.teams || {})) {
+    for (const p of players) {
+      if (!p.ratings) continue;
+      allPlayers.push({
+        name:     p.name     || '—',
+        team:     p.team     || team,
+        position: p.position || '—',
+        role:     p.role     || '—',
+        overall:  p.ratings.overall  ?? null,
+        skills:   p.ratings.skills   || {},
+        sources:  p.ratings.sourcesUsed || [],
+        age:      p.age      || null,
+      });
+    }
+  }
+
+  populateFilters();
+  applyFilters();
+  document.getElementById('totalCount').textContent = allPlayers.length;
+}
+
+// ──────────────────────────────────────────────────────────────
+//  Filter dropdowns
+// ──────────────────────────────────────────────────────────────
+function populateFilters() {
+  const positions = [...new Set(allPlayers.map(p => p.position))].sort();
+  const teams     = [...new Set(allPlayers.map(p => p.team))].sort();
+
+  const posEl = document.getElementById('posFilter');
+  positions.forEach(pos => {
+    const opt = document.createElement('option');
+    opt.value = pos; opt.textContent = pos;
+    posEl.appendChild(opt);
+  });
+
+  const teamEl = document.getElementById('teamFilter');
+  teams.forEach(t => {
+    const opt = document.createElement('option');
+    opt.value = t; opt.textContent = t;
+    teamEl.appendChild(opt);
+  });
+}
+
+// ──────────────────────────────────────────────────────────────
+//  Filtering + sorting
+// ──────────────────────────────────────────────────────────────
+function applyFilters() {
+  const q    = document.getElementById('search').value.trim().toLowerCase();
+  const pos  = document.getElementById('posFilter').value;
+  const team = document.getElementById('teamFilter').value;
+  const role = document.getElementById('roleFilter').value;
+
+  let filtered = allPlayers.filter(p => {
+    if (q    && !p.name.toLowerCase().includes(q)) return false;
+    if (pos  && p.position !== pos)                return false;
+    if (team && p.team     !== team)               return false;
+    if (role && p.role     !== role)               return false;
+    return true;
+  });
+
+  // Sort
+  filtered.sort((a, b) => {
+    let va = a[sortCol] ?? '';
+    let vb = b[sortCol] ?? '';
+    if (sortCol.startsWith('skill')) {
+      const idx  = parseInt(sortCol.replace('skill',''));
+      const keys = topSkillKeys(filtered);
+      const key  = keys[idx];
+      va = key ? (a.skills[key] ?? 0) : 0;
+      vb = key ? (b.skills[key] ?? 0) : 0;
+    }
+    if (typeof va === 'string') va = va.toLowerCase();
+    if (typeof vb === 'string') vb = vb.toLowerCase();
+    if (va < vb) return sortDir === 'asc' ? -1 : 1;
+    if (va > vb) return sortDir === 'asc' ?  1 : -1;
+    return 0;
+  });
+
+  updateSkillHeaders(filtered);
+  renderTable(filtered);
+  document.getElementById('visibleCount').textContent = filtered.length;
+}
+
+// ──────────────────────────────────────────────────────────────
+//  Skills: pick the 3 most common skill keys in the filtered set
+// ──────────────────────────────────────────────────────────────
+function topSkillKeys(players) {
+  const freq = {};
+  for (const p of players) {
+    for (const k of Object.keys(p.skills)) {
+      freq[k] = (freq[k] || 0) + 1;
+    }
+  }
+  return Object.entries(freq)
+    .sort((a,b) => b[1]-a[1])
+    .slice(0,3)
+    .map(e => e[0]);
+}
+
+function updateSkillHeaders(filtered) {
+  const keys = topSkillKeys(filtered);
+  for (let i = 0; i < 3; i++) {
+    const el = document.getElementById('skillHead' + i);
+    el.textContent = keys[i] ? formatSkillName(keys[i]) : '';
+  }
+}
+
+function formatSkillName(key) {
+  // camelCase → Title Case words, shortened
+  return key
+    .replace(/([A-Z])/g, ' $1')
+    .replace(/^./, s => s.toUpperCase())
+    .replace('Flexibility', 'Flex')
+    .replace('Aggression', 'Aggr')
+    .replace('Ability', 'Abil')
+    .replace('Mechanics', 'Mech')
+    .replace('Accuracy', 'Acc')
+    .replace('Defense', 'Def')
+    .replace('Shedding', 'Shed')
+    .replace('Coverage', 'Cov')
+    .replace('Contact', 'Ctct')
+    .replace('Awareness', 'Awar')
+    .replace('Protection', 'Prot')
+    .trim();
+}
+
+// ──────────────────────────────────────────────────────────────
+//  Render
+// ──────────────────────────────────────────────────────────────
+function renderTable(players) {
+  const tbody = document.getElementById('tbody');
+  if (players.length === 0) {
+    tbody.innerHTML = '<tr class="empty-row"><td colspan="8">No players match your filters.</td></tr>';
+    return;
+  }
+
+  const skillKeys = topSkillKeys(players);
+
+  tbody.innerHTML = players.map(p => {
+    const ovr     = p.overall ?? '—';
+    const ovrCls  = ovrClass(ovr);
+    const roleCls = roleClass(p.role);
+
+    const skillCells = skillKeys.map(k => {
+      const val = p.skills[k] ?? null;
+      return skillCell(val);
+    });
+    // pad to 3 columns
+    while (skillCells.length < 3) skillCells.push('<td></td>');
+
+    return `
+      <tr>
+        <td class="td-name">
+          <div class="player-name-cell">
+            <span class="player-name">${esc(p.name)}</span>
+            ${p.age ? `<span class="player-meta">Age ${p.age}</span>` : ''}
+          </div>
+        </td>
+        <td><span class="team-badge">${esc(p.team)}</span></td>
+        <td><span class="pos-badge">${esc(p.position)}</span></td>
+        <td><span class="role-badge ${roleCls}">${esc(p.role)}</span></td>
+        <td><span class="ovr ${ovrCls}">${ovr}</span></td>
+        ${skillCells.join('')}
+      </tr>`;
+  }).join('');
+}
+
+function skillCell(val) {
+  if (val == null) return '<td class="skill-cell"></td>';
+  const pct  = Math.round(((val - 20) / 60) * 100);
+  const col  = skillColor(val);
+  return `<td class="skill-cell">
+    <div class="skill-bar-wrap">
+      <div class="skill-bar-bg"><div class="skill-bar-fill" style="width:${pct}%;background:${col}"></div></div>
+      <span class="skill-val">${val}</span>
+    </div>
+  </td>`;
+}
+
+function skillColor(v) {
+  if (v >= 75) return 'var(--gold)';
+  if (v >= 65) return 'var(--success)';
+  if (v >= 55) return '#60a5fa';
+  if (v >= 45) return 'var(--silver)';
+  if (v >= 35) return '#fbbf24';
+  return '#f87171';
+}
+
+function ovrClass(v) {
+  if (v >= 80) return 'g80';
+  if (v >= 70) return 'g70';
+  if (v >= 60) return 'g60';
+  if (v >= 50) return 'g50';
+  if (v >= 40) return 'g40';
+  if (v >= 30) return 'g30';
+  return 'g20';
+}
+
+function roleClass(r) {
+  if (!r) return '';
+  const l = r.toLowerCase();
+  if (l.includes('start')) return 'starter';
+  if (l.includes('back'))  return 'backup';
+  return 'depth';
+}
+
+function esc(s) {
+  return String(s ?? '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+}
+
+// ──────────────────────────────────────────────────────────────
+//  Sortable headers
+// ──────────────────────────────────────────────────────────────
+document.querySelectorAll('th[data-col]').forEach(th => {
+  th.addEventListener('click', () => {
+    const col = th.dataset.col;
+    if (sortCol === col) {
+      sortDir = sortDir === 'asc' ? 'desc' : 'asc';
+    } else {
+      sortCol = col;
+      sortDir = col === 'overall' || col.startsWith('skill') ? 'desc' : 'asc';
+    }
+    document.querySelectorAll('th[data-col]').forEach(t => {
+      t.classList.remove('sorted-asc','sorted-desc');
+    });
+    th.classList.add(sortDir === 'asc' ? 'sorted-asc' : 'sorted-desc');
+    applyFilters();
+  });
+});
+
+// ──────────────────────────────────────────────────────────────
+//  Boot
+// ──────────────────────────────────────────────────────────────
+loadData().catch(err => {
+  document.getElementById('tbody').innerHTML =
+    `<tr class="empty-row"><td colspan="8">Failed to load player data: ${esc(String(err))}</td></tr>`;
+});
+</script>
+</body>
+</html>
