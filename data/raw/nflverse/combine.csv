@@ -965,7 +965,7 @@ season,draft_year,draft_team,draft_round,draft_ovr,pfr_id,cfb_id,player_name,pos
 2022,,,,,KnigZo00,zonovan-knight-1,Zonovan Knight,RB,North Carolina St.,5-11,209.0,4.58,,31.0,114.0,,
 2022,2022.0,Baltimore Ravens,4.0,128.0,KolaCh00,charlie-kolar-1,Charlie Kolar,TE,Iowa St.,6-7,252.0,,,,,,
 2022,2022.0,Los Angeles Rams,6.0,211.0,LakeQu00,quentin-lake-1,Quentin Lake,S,UCLA,6-1,201.0,4.59,,,,,
-2022,,,,,LandNa00,nate-landman-1,Nate Landman,LB,Colorado,6-3,238.0,4.86,,36.5,119.0,,
+2022,,,,,LandNa01,nate-landman-1,Nate Landman,LB,Colorado,6-3,238.0,4.86,,36.5,119.0,,
 2022,2022.0,Pittsburgh Steelers,3.0,84.0,LealDe00,demarvin-leal-1,DeMarvin Leal,DT,Texas A&M,6-4,283.0,5.0,,27.5,106.0,,4.49
 2022,2022.0,Baltimore Ravens,4.0,139.0,LikeIs00,isaiah-likely-1,Isaiah Likely,TE,Coastal Carolina,6-5,245.0,,,36.0,,,4.57
 2022,2022.0,Baltimore Ravens,1.0,25.0,LindTy00,tyler-linderbaum-1,Tyler Linderbaum,C,Iowa,6-2,296.0,,,,,,
@@ -1130,7 +1130,7 @@ season,draft_year,draft_team,draft_round,draft_ovr,pfr_id,cfb_id,player_name,pos
 2023,2023.0,Minnesota Vikings,1.0,23.0,AddiJo00,jordan-addison-1,Jordan Addison,WR,USC,5-11,173.0,4.49,,34.0,122.0,,
 2023,2023.0,Indianapolis Colts,4.0,110.0,AdebAd00,adetomiwa-adebawore-1,Adetomiwa Adebawore,DE,Northwestern,6-2,282.0,4.49,27.0,37.5,125.0,,
 2023,,,,,,alan-ali-1,Alan Ali,C,TCU,6-4,301.0,,,26.5,,,
-2023,2023.0,Los Angeles Rams,5.0,175.0,AlleDa02,davis-allen-1,Davis Allen,TE,Clemson,6-6,245.0,,,38.5,125.0,,
+2023,2023.0,Los Angeles Rams,5.0,175.0,AlleDa02,davis-allen-1,Davis Allen,TE,Clemson,6-6,245.0,4.84,,38.5,125.0,,
 2023,,,,,AndeMJ00,mj-anderson-1,MJ Anderson,DE,Iowa St.,6-3,269.0,,,33.0,,,
 2023,2023.0,New England Patriots,4.0,107.0,AndrJa00,jake-andrews-1,Jake Andrews,C,Troy,6-3,305.0,5.15,,26.0,102.0,,4.73
 2023,2023.0,Kansas City Chiefs,1.0,31.0,AnudFe00,felix-anudike-uzomah-1,Felix Anudike-Uzomah,EDGE,Kansas St.,6-3,255.0,,,,,,
@@ -1196,7 +1196,7 @@ season,draft_year,draft_team,draft_round,draft_ovr,pfr_id,cfb_id,player_name,pos
 2023,2023.0,Los Angeles Chargers,7.0,239.0,DuggMa00,max-duggan-1,Max Duggan,QB,TCU,6-2,207.0,4.52,,30.5,116.0,7.26,4.45
 2023,,,,,,,Jaelyn Duncan,OT,Maryland,6-6,306.0,5.1,,31.5,113.0,,
 2023,,,,,,christopher-dunn-1,Christopher Dunn,K,North Carolina St.,5-8,175.0,,,,,,
-2023,2023.0,Tampa Bay Buccaneers,5.0,171.0,DurhPa00,payne-durham-1,Payne Durham,TE,Purdue,6-6,253.0,,,34.5,117.0,,
+2023,2023.0,Tampa Bay Buccaneers,5.0,171.0,DurhPa00,payne-durham-1,Payne Durham,TE,Purdue,6-6,253.0,4.87,,34.5,117.0,,
 2023,,,,,DyexTr01,travis-dye-1,Travis Dye,RB,USC,5-10,201.0,,,,,,
 2023,,,,,EnecIk00,ikenna-enechukwu-1,Ikenna Enechukwu,DE,Rice,6-4,264.0,4.7,,31.5,120.0,,
 2023,,,,,EvanTi00,tiyon-evans-2,Tiyon Evans,RB,Louisville,5-10,225.0,4.52,,30.5,,,
@@ -1290,23 +1290,23 @@ season,draft_year,draft_team,draft_round,draft_ovr,pfr_id,cfb_id,player_name,pos
 2023,,,,,KirkJa03,jaxson-kirkland-1,Jaxson Kirkland,OG,Washington,6-7,321.0,,,,,,
 2023,,,,,KnowMa00,malik-knowles-1,Malik Knowles,WR,Kansas St.,6-2,196.0,,,,,,
 2023,,,,,KorsAd00,adam-korsak-1,Adam Korsak,P,Rutgers,6-1,187.0,,,,,,
-2023,,,,,,,Tucker Kraft,TE,South Dakota St.,6-5,254.0,,23.0,34.0,122.0,7.08,4.29
-2023,,,,,,,Zack Kuntz,TE,Old Dominion,6-7,255.0,,23.0,40.0,128.0,6.87,4.12
+2023,2023.0,Green Bay Packers,3.0,78.0,KrafTu00,,Tucker Kraft,TE,South Dakota St.,6-5,254.0,4.69,23.0,34.0,122.0,7.08,4.29
+2023,2023.0,New York Jets,7.0,220.0,KuntZa00,,Zack Kuntz,TE,Old Dominion,6-7,255.0,4.55,23.0,40.0,128.0,6.87,4.12
 2023,2023.0,Jacksonville Jaguars,4.0,130.0,LacyTy00,tyler-lacy-1,Tyler Lacy,DE,Oklahoma St.,6-4,279.0,5.11,30.0,28.5,116.0,7.6,
 2023,,,,,,,Brent Laing,OG,Duluth/University of Minnesota,6-4,304.0,,,,,,
 2023,,,,,,,Isaiah Land,EDGE,Florida A&M,6-4,236.0,4.62,21.0,34.5,126.0,7.2,4.56
 2023,,,,,,matt-landers-1,Matt Landers,WR,Arkansas,6-4,200.0,4.37,,37.0,130.0,,
-2023,2023.0,Detroit Lions,2.0,34.0,LaPoSa01,sam-laporta-1,Sam LaPorta,TE,Iowa,6-3,245.0,,,35.0,123.0,6.91,4.25
+2023,2023.0,Detroit Lions,2.0,34.0,LaPoSa01,sam-laporta-1,Sam LaPorta,TE,Iowa,6-3,245.0,4.59,,35.0,123.0,6.91,4.25
 2023,2023.0,San Francisco 49ers,3.0,101.0,LatuCa01,cameron-latu-1,Cameron Latu,TE,Alabama,6-4,242.0,,,,,,
 2023,,,,,,,Eku Leota,EDGE,Auburn,6-3,252.0,,,,,,
 2023,2023.0,Tennessee Titans,2.0,33.0,LeviWi00,will-levis-1,Will Levis,QB,Kentucky,6-4,229.0,,,34.0,124.0,,
 2023,,,,,,,Hunter Luepke,FB,North Dakota St.,6-1,230.0,,,,,,
-2023,2023.0,Indianapolis Colts,5.0,162.0,MallWi00,will-mallory-1,Will Mallory,TE,Miami,6-5,239.0,,20.0,36.5,121.0,,
+2023,2023.0,Indianapolis Colts,5.0,162.0,MallWi00,will-mallory-1,Will Mallory,TE,Miami,6-5,239.0,4.54,20.0,36.5,121.0,,
 2023,,,,,,tashawn-manning-1,Tashawn Manning,OG,Kentucky,6-3,327.0,5.34,,27.5,102.0,7.9,4.8
 2023,2023.0,Washington Commanders,2.0,47.0,MartJa04,jartavius-martin-1,Jartavius Martin,DB,Illinois,5-11,194.0,4.46,15.0,44.0,133.0,,
 2023,2023.0,Los Angeles Rams,6.0,189.0,MathOc00,ochaun-mathis-1,Ochaun Mathis,EDGE,Nebraska,6-5,250.0,4.74,21.0,33.5,118.0,,4.38
 2023,,,,,,,Cody Mauch,OT,North Dakota St.,6-5,302.0,5.08,,29.0,108.0,7.33,4.55
-2023,2023.0,Las Vegas Raiders,2.0,35.0,MayeMi00,michael-mayer-1,Michael Mayer,TE,Notre Dame,6-5,249.0,,,32.5,118.0,,
+2023,2023.0,Las Vegas Raiders,2.0,35.0,MayeMi00,michael-mayer-1,Michael Mayer,TE,Notre Dame,6-5,249.0,4.7,,32.5,118.0,,
 2023,,,,,,,DeWayne McBride,RB,Alabama-Birmingham,5-10,209.0,,,,,,
 2023,2023.0,Los Angeles Rams,5.0,174.0,McClWa00,warren-mcclendon-1,Warren McClendon,OT,Georgia,6-4,306.0,,,,,,
 2023,2023.0,Los Angeles Chargers,5.0,156.0,McFaJo00,jordan-mcfadden-1,Jordan McFadden,OG,Clemson,6-2,303.0,4.99,,28.5,,7.7,4.81
@@ -1328,7 +1328,7 @@ season,draft_year,draft_team,draft_round,draft_ovr,pfr_id,cfb_id,player_name,pos
 2023,2023.0,Denver Broncos,3.0,83.0,MossRi00,riley-moss-1,Riley Moss,CB,Iowa,6-1,193.0,4.45,,39.0,127.0,,
 2023,,,,,,,Caleb Murphy,EDGE,Ferris St.,6-3,254.0,4.81,,28.5,119.0,7.28,4.45
 2023,2023.0,Cincinnati Bengals,1.0,28.0,MurpMy00,myles-murphy-1,Myles Murphy,EDGE,Clemson,6-5,268.0,,25.0,,,,
-2023,2023.0,Green Bay Packers,2.0,42.0,MusgLu00,luke-musgrave-1,Luke Musgrave,TE,Oregon St.,6-6,253.0,,,36.0,125.0,,
+2023,2023.0,Green Bay Packers,2.0,42.0,MusgLu00,luke-musgrave-1,Luke Musgrave,TE,Oregon St.,6-6,253.0,4.61,,36.0,125.0,,
 2023,,,,,MustPJ00,pj-mustipher-1,PJ Mustipher,DT,Penn St.,6-4,320.0,5.41,19.0,27.5,96.0,8.01,5.03
 2023,2023.0,Los Angeles Rams,5.0,177.0,NacuPu00,puka-nacua-1,Puka Nacua,WR,BYU,6-2,201.0,,,,,,
 2023,,,,,,lukas-van-ness-1,Lukas Van Ness,EDGE,Iowa,6-5,272.0,4.58,17.0,31.0,118.0,7.02,4.32
@@ -1370,7 +1370,7 @@ season,draft_year,draft_team,draft_round,draft_ovr,pfr_id,cfb_id,player_name,pos
 2023,,,,,,,Nick Saldiveri,OG,Old Dominion,6-6,318.0,5.21,,31.0,111.0,,4.69
 2023,2023.0,Denver Broncos,3.0,67.0,SandDr00,drew-sanders-1,Drew Sanders,LB,Arkansas,6-4,235.0,,,,,,
 2023,,,,,,john-michael-schmitz-1,John Michael Schmitz,C,Minnesota,6-4,301.0,5.35,,29.5,104.0,,4.56
-2023,2023.0,Dallas Cowboys,2.0,58.0,SchoLu00,luke-schoonmaker-1,Luke Schoonmaker,TE,Michigan,6-5,251.0,,,33.5,127.0,,4.27
+2023,2023.0,Dallas Cowboys,2.0,58.0,SchoLu00,luke-schoonmaker-1,Luke Schoonmaker,TE,Michigan,6-5,251.0,4.63,,33.5,127.0,,4.27
 2023,2023.0,Indianapolis Colts,5.0,158.0,ScotDa03,daniel-scott-1,Daniel Scott,DB,California,6-1,208.0,4.45,22.0,39.5,128.0,6.75,4.17
 2023,2023.0,Chicago Bears,4.0,133.0,ScotTy00,tyler-scott-3,Tyler Scott,WR,Cincinnati,5-10,177.0,4.44,,39.5,133.0,,
 2023,2023.0,Houston Texans,2.0,62.0,ScruJu00,juice-scruggs-1,Juice Scruggs,C,Penn St.,6-3,301.0,5.22,,32.0,102.0,7.75,4.82
@@ -1391,7 +1391,7 @@ season,draft_year,draft_team,draft_round,draft_ovr,pfr_id,cfb_id,player_name,pos
 2023,2023.0,Philadelphia Eagles,3.0,65.0,SteeTy00,tyler-steen-1,Tyler Steen,OT,Alabama,6-6,321.0,,,29.5,109.0,,4.59
 2023,2023.0,Chicago Bears,2.0,56.0,StevTy01,tyrique-stevenson-1,Tyrique Stevenson,CB,Miami,6-0,198.0,4.45,,38.5,125.0,7.09,4.41
 2023,2023.0,Arizona Cardinals,6.0,213.0,StilDa01,dante-stills-1,Dante Stills,DT,West Virginia,6-4,286.0,4.85,20.0,28.5,113.0,7.38,4.61
-2023,2023.0,Jacksonville Jaguars,2.0,61.0,StraBr00,brenton-strange-1,Brenton Strange,TE,Penn St.,6-4,253.0,,23.0,36.0,124.0,7.25,4.46
+2023,2023.0,Jacksonville Jaguars,2.0,61.0,StraBr00,brenton-strange-1,Brenton Strange,TE,Penn St.,6-4,253.0,4.7,23.0,36.0,124.0,7.25,4.46
 2023,2023.0,Washington Commanders,3.0,97.0,StroRi01,ricky-stromberg-1,Ricky Stromberg,C,Arkansas,6-3,306.0,5.26,,32.5,111.0,,
 2023,2023.0,Houston Texans,1.0,2.0,StroCJ00,cj-stroud-1,C.J. Stroud,QB,Ohio St.,6-3,214.0,,,,,,
 2023,,,,,,leonard-taylor-2,Leonard Taylor,TE,Cincinnati,6-5,250.0,,,,,,
@@ -1420,13 +1420,13 @@ season,draft_year,draft_team,draft_round,draft_ovr,pfr_id,cfb_id,player_name,pos
 2023,,,,,WardAl00,alex-ward-1,Alex Ward,LS,Central Florida,6-4,240.0,5.06,12.0,30.0,114.0,,4.46
 2023,2023.0,Minnesota Vikings,4.0,134.0,WardJa00,jay-ward-2,Jay Ward,CB,LSU,6-1,188.0,4.55,16.0,34.5,132.0,,
 2023,2023.0,New York Jets,4.0,120.0,WarrCa00,carter-warren-1,Carter Warren,OT,Pittsburgh,6-6,311.0,,,,,,
-2023,2023.0,Pittsburgh Steelers,3.0,93.0,WashDa03,darnell-washington-1,Darnell Washington,TE,Georgia,6-7,264.0,,21.0,31.0,122.0,,4.08
+2023,2023.0,Pittsburgh Steelers,3.0,93.0,WashDa03,darnell-washington-1,Darnell Washington,TE,Georgia,6-7,264.0,4.64,21.0,31.0,122.0,,4.08
 2023,2023.0,Jacksonville Jaguars,6.0,185.0,WashPa01,parker-washington-1,Parker Washington,WR,Penn St.,5-10,204.0,,16.0,,,,
 2023,,,,,WaynJa00,jalen-wayne-1,Jalen Wayne,WR,South Alabama,6-2,210.0,4.51,,34.5,124.0,,
 2023,,,,,WheaTy02,tyrus-wheat-1,Tyrus Wheat,EDGE,Mississippi St.,6-2,263.0,4.65,,28.5,113.0,,4.54
 2023,2023.0,New England Patriots,2.0,46.0,WhitKe03,keion-white-1,Keion White,EDGE,Georgia Tech,6-5,285.0,,30.0,34.0,117.0,,
-2023,,,,,WhitBl01,blake-whiteheart-1,Blake Whiteheart,TE,Wake Forest,6-4,247.0,,20.0,35.5,115.0,,
-2023,2023.0,Tennessee Titans,5.0,147.0,WhylJo01,josh-whyle-1,Josh Whyle,TE,Cincinnati,6-7,248.0,,,33.5,115.0,,
+2023,,,,,WhitBl01,blake-whiteheart-1,Blake Whiteheart,TE,Wake Forest,6-4,247.0,4.7,20.0,35.5,115.0,,
+2023,2023.0,Tennessee Titans,5.0,147.0,WhylJo01,josh-whyle-1,Josh Whyle,TE,Cincinnati,6-7,248.0,4.69,,33.5,115.0,,
 2023,2023.0,Green Bay Packers,5.0,159.0,WickDo00,dontayvion-wicks-1,Dontayvion Wicks,WR,Virginia,6-1,206.0,4.62,,39.0,130.0,,
 2023,2023.0,Buffalo Bills,3.0,91.0,WillDo04,dorian-williams-2,Dorian Williams,LB,Tulane,6-1,228.0,4.49,,33.5,120.0,,
 2023,2023.0,Arizona Cardinals,3.0,72.0,WillGa00,garrett-williams-2,Garrett Williams,CB,Syracuse,5-10,192.0,,,,,,
