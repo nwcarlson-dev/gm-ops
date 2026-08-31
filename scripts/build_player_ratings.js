@@ -668,7 +668,7 @@ function getStatBoosts(canonicalPos, actualPos, stats) {
 
 // Scaling factor: amplifies distance from 50 so well-rounded elite players
 // rate higher. avg 70 → 76, avg 60 → 63, avg 50 → 50. Keeps 20-80 range.
-const OVERALL_SCALING_FACTOR = 0.3;
+const OVERALL_SCALING_FACTOR = 0.15;
 
 function applyOverallScaling(avg) {
   return avg + (avg - 50) * OVERALL_SCALING_FACTOR;
@@ -938,9 +938,8 @@ function generatePlayerRatings(player, skillMap) {
   const sentimentScore = player.sentiment ? player.sentiment.score : null;
   const sentimentFallback = sentimentScore != null ? 30 + (sentimentScore - 1) * 3.5 : null;
 
-  // Roster floor: no rostered NFL player should have a 20 ("non-prospect")
-  // in any skill. 30 = "well below average pro" which is the realistic minimum.
-  const ROSTER_SKILL_FLOOR = 30;
+  // Roster floor: allow bad players to have bad skills. 20 = non-prospect minimum.
+  const ROSTER_SKILL_FLOOR = 20;
 
   for (const skill of skills) {
     // ── Step 5a: Compute Madden base for this skill ──
@@ -1180,51 +1179,101 @@ function applySentimentPostNorm(db) {
 }
 
 // =========================================================================
-// RARITY ENFORCEMENT (new in v4.1)
+// GAUSSIAN DISTRIBUTION ENFORCEMENT (replaces hard-cap rarity system)
 // =========================================================================
 
-// Rules defining how many players of a given position may exceed a rating
-// threshold.  Entries are checked in descending order so that higher bars are
-// enforced first.  Specialist positions also cap how many players may sit at or
-// above the `average starter` mark (50).
-const RARITY_RULES = {
-  QB:  [{threshold:80, max:3}, {threshold:75, max:8}, {threshold:70, max:32}],
-  RB:  [{threshold:80, max:3}, {threshold:75, max:10}, {threshold:70, max:32}],
-  WR:  [{threshold:80, max:3}, {threshold:75, max:10}, {threshold:70, max:32}],
-  TE:  [{threshold:80, max:3}, {threshold:75, max:8}, {threshold:70, max:32}],
-  OT:  [{threshold:80, max:3}, {threshold:75, max:8}],
-  OG:  [{threshold:80, max:3}, {threshold:75, max:8}],
-  OC:  [{threshold:80, max:2}, {threshold:75, max:6}],
-  EDGE:[{threshold:80, max:3}, {threshold:75, max:8}],
-  IDL: [{threshold:80, max:3}, {threshold:75, max:8}],
-  LB:  [{threshold:80, max:3}, {threshold:75, max:8}],
-  DB:  [{threshold:80, max:3}, {threshold:75, max:8}],
-  K:   [{threshold:50, max:32}],
-  P:   [{threshold:50, max:32}],
-  LS:  [{threshold:50, max:32}],
+// Pool mean for the Gaussian mapping per position.
+// Single-starter positions use a lower mean (~41) since most of the pool is
+// backups.  Multi-starter positions use a slightly higher mean (~43-44).
+const GAUSSIAN_POOL_MEAN = {
+  QB: 41, RB: 41, WR: 44, TE: 41,
+  OT: 43, OG: 43, OC: 42,
+  EDGE: 43, IDL: 43, LB: 43, DB: 44,
+  K: 41, P: 41, LS: 40,
 };
 
-function applyRarityNormalization(db) {
+// Standard deviation on the 20-80 scouting scale (10 pts = 1 SD).
+const GAUSSIAN_SD = 10;
+
+// Blend ratio: fraction of the final rating taken from the Gaussian mapping.
+// 0.7 = 70% Gaussian shape, 30% raw ordering preserved.
+const GAUSSIAN_BLEND = 0.7;
+
+/**
+ * Approximate inverse normal CDF (probit) using Beasley-Springer-Moro
+ * rational approximation.  Returns z-score for a given percentile p ∈ (0,1).
+ */
+function probit(p) {
+  // Coefficients for the central region rational approximation
+  const a = [0, -3.969683028665376e1, 2.209460984245205e2,
+    -2.759285104469687e2, 1.383577518672690e2,
+    -3.066479806614716e1, 2.506628277459239];
+  const b = [0, -5.447609879822406e1, 1.615858368580409e2,
+    -1.556989798598866e2, 6.680131188771972e1, -1.328068155288572e1];
+  // Coefficients for the lower/upper tail regions
+  const c = [-7.784894002430293e-3, -3.223964580411365e-1,
+    -2.400758277161838, -2.549732539343734,
+    4.374664141464968, 2.938163982698783];
+  const d = [7.784695709041462e-3, 3.224671290700398e-1,
+    2.445134137142996, 3.754408661907416];
+  const pLow = 0.02425;
+  const pHigh = 1 - pLow;
+
+  if (p < pLow) {
+    const q = Math.sqrt(-2 * Math.log(p));
+    return (((((c[0]*q+c[1])*q+c[2])*q+c[3])*q+c[4])*q+c[5]) /
+           ((((d[0]*q+d[1])*q+d[2])*q+d[3])*q+1);
+  }
+  if (p <= pHigh) {
+    const q = p - 0.5;
+    const r = q * q;
+    return (((((a[1]*r+a[2])*r+a[3])*r+a[4])*r+a[5])*r+a[6])*q /
+           (((((b[1]*r+b[2])*r+b[3])*r+b[4])*r+b[5])*r+1);
+  }
+  const q = Math.sqrt(-2 * Math.log(1 - p));
+  return -(((((c[0]*q+c[1])*q+c[2])*q+c[3])*q+c[4])*q+c[5]) /
+          ((((d[0]*q+d[1])*q+d[2])*q+d[3])*q+1);
+}
+
+/**
+ * Enforce a proper normal distribution per position group by mapping each
+ * player's percentile rank onto a Gaussian, then blending with the raw rating.
+ * This replaces the hard-cap rarity system and produces a statistically correct
+ * bell curve on the 20-80 scouting scale (each 10 pts = 1 standard deviation).
+ */
+function applyGaussianNormalization(db) {
+  const positions = Object.keys(GAUSSIAN_POOL_MEAN);
   let adjusted = 0;
-  for (const [pos, rules] of Object.entries(RARITY_RULES)) {
-    // collect all players at exactly this roster position
+
+  for (const pos of positions) {
     const players = Object.values(db.teams)
       .flat()
       .filter(p => p.position === pos && p.ratings && typeof p.ratings.overall === 'number');
     if (players.length === 0) continue;
 
-    players.sort((a, b) => b.ratings.overall - a.ratings.overall);
+    // Sort ascending so index 0 = worst
+    players.sort((a, b) => a.ratings.overall - b.ratings.overall);
+    const n = players.length;
+    const poolMean = GAUSSIAN_POOL_MEAN[pos];
 
-    for (const rule of rules) {
-      let above = players.filter(p => p.ratings.overall >= rule.threshold);
-      while (above.length > rule.max) {
-        const pl = above.pop(); // lowest player still above threshold
-        pl.ratings.overall = rule.threshold - 1;
-        adjusted++;
-      }
+    let above50 = 0;
+    for (let i = 0; i < n; i++) {
+      // Midpoint percentile: (i+0.5)/n avoids boundary values 0 and 1 which cause probit singularities
+      const p = (i + 0.5) / n;
+      const z = probit(p);
+      const gaussianRating = clamp(Math.round(poolMean + z * GAUSSIAN_SD), 20, 80);
+      const raw = players[i].ratings.overall;
+      const blended = clamp(Math.round(GAUSSIAN_BLEND * gaussianRating + (1 - GAUSSIAN_BLEND) * raw), 20, 80);
+      players[i].ratings.overall = blended;
+      if (blended >= 50) above50++;
+      adjusted++;
     }
+
+    const ovrMean = players.reduce((s, p) => s + p.ratings.overall, 0) / n;
+    console.log(`  ${pos.padEnd(5)} | ${n.toString().padStart(4)} pl | OvrMean: ${ovrMean.toFixed(1)} | 50+: ${above50}`);
   }
-  console.log(`Rarity normalization adjusted ${adjusted} players`);
+
+  console.log(`Gaussian normalization applied to ${adjusted} players`);
   return adjusted;
 }
 
@@ -1517,11 +1566,9 @@ function main() {
   console.log('\nApplying post-normalization sentiment adjustment...');
   applySentimentPostNorm(db);
 
-  // ── Rarity enforcement to rein in the tails of the distribution ──
-  if (typeof applyRarityNormalization === 'function') {
-    console.log('Applying rarity normalization...');
-    applyRarityNormalization(db);
-  }
+  // ── Gaussian distribution enforcement (replaces hard-cap rarity system) ──
+  console.log('\nApplying Gaussian distribution normalization...');
+  applyGaussianNormalization(db);
 
   // ── Recalculate scheme overalls after normalization + sentiment ──
   console.log('Recalculating scheme overalls after normalization...');
