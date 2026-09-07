@@ -419,7 +419,7 @@ season,round,pick,team,gsis_id,pfr_player_id,cfb_player_id,pfr_player_name,hof,p
 2016,5,162,KAN,00-0032784,HogaKe00,kevin-hogan-2,Kevin Hogan,False,QB,QB,O,Stanford,23.0,2021.0,0,0,0,2.0,,,9.0,60.0,101.0,621.0,4.0,7.0,18.0,176.0,1.0,0.0,0.0,0.0,,,
 2016,5,163,GNB,00-0032423,DaviTr03,trevor-davis-1,Trevor Davis,False,WR,WR,O,California,23.0,2019.0,0,0,0,2.0,,1.0,43.0,0.0,0.0,0.0,0.0,0.0,6.0,86.0,1.0,16.0,205.0,1.0,7.0,,
 2016,5,164,PHI,00-0032785,VaitHa00,halapoulivaati-vaitai-1,Halapoulivaati Vaitai,False,T,OL,O,TCU,23.0,2023.0,0,0,3,25.0,,12.0,86.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,,,
-2016,5,165,KAN,00-0033040,HillTy00,,Tyreek Hill,False,WR,WR,O,West Alabama,22.0,2025.0,5,8,8,98.0,,61.0,145.0,0.0,1.0,0.0,0.0,1.0,114.0,819.0,7.0,819.0,11363.0,83.0,10.0,,
+2016,5,165,KAN,00-0033040,HillTy00,tyreek-hill-1,Tyreek Hill,False,WR,WR,O,West Alabama,22.0,2025.0,5,8,8,98.0,,61.0,145.0,0.0,1.0,0.0,0.0,1.0,114.0,819.0,7.0,819.0,11363.0,83.0,10.0,,
 2016,5,166,HOU,00-0032424,ReadD.00,dj-reader-1,D.J. Reader,False,NT,DL,D,Clemson,22.0,2025.0,0,0,7,47.0,,20.0,137.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,171.0,,12.5
 2016,5,167,ARI,00-0032786,ChriMa00,,Marqui Christian,False,S,DB,D,Midwestern St.,21.0,2021.0,0,0,0,6.0,,,73.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,68.0,,
 2016,5,168,CLE,00-0032976,DranSp00,spencer-drango-1,Spencer Drango,False,G,OL,O,Baylor,23.0,2017.0,0,0,2,8.0,,8.0,32.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,,,
@@ -1027,7 +1027,7 @@ season,round,pick,team,gsis_id,pfr_player_id,cfb_player_id,pfr_player_name,hof,p
 2019,1,8,DET,00-0035229,HockTJ00,tj-hockenson-1,T.J. Hockenson,False,TE,TE,O,Iowa,22.0,2025.0,0,2,4,33.0,,16.0,97.0,0.0,0.0,0.0,0.0,0.0,2.0,0.0,0.0,433.0,4440.0,26.0,2.0,,
 2019,1,9,BUF,00-0035230,OlivEd00,ed-oliver-2,Ed Oliver,False,DT,DL,D,Houston,21.0,2025.0,0,0,5,43.0,,43.0,95.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,154.0,1.0,30.0
 2019,1,10,PIT,00-0035525,BushDe01,devin-bush-2,Devin Bush Jr.,False,LB,LB,D,Michigan,21.0,2025.0,0,0,4,37.0,,21.0,98.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,299.0,5.0,7.0
-2019,1,11,CIN,00-0035944,WillJo10,jonah-williams-1,Jonah Williams,False,G,OL,O,Alabama,21.0,2025.0,0,0,5,37.0,,31.0,74.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,,,
+2019,1,11,CIN,00-0035629,WillJo10,jonah-williams-1,Jonah Williams,False,G,OL,O,Alabama,21.0,2025.0,0,0,5,37.0,,31.0,74.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,,,
 2019,1,12,GNB,00-0034967,GaryRa00,rashan-gary-1,Rashan Gary,False,LB,LB,D,Michigan,21.0,2025.0,0,1,5,36.0,,36.0,106.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,154.0,,46.5
 2019,1,13,MIA,00-0035231,WilkCh00,christian-wilkins-1,Christian Wilkins,False,DT,DL,D,Clemson,23.0,2024.0,0,0,5,35.0,,34.0,86.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.0,2.0,2.0,215.0,1.0,22.5
 2019,1,14,ATL,00-0035630,LindCh00,chris-lindstrom-1,Chris Lindstrom,False,G,OL,O,Boston Col.,22.0,2025.0,0,4,6,49.0,,49.0,105.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.0,,
@@ -1224,7 +1224,7 @@ season,round,pick,team,gsis_id,pfr_player_id,cfb_player_id,pfr_player_name,hof,p
 2019,6,205,CHI,00-0035696,ShelDu00,duke-shelley-1,Duke Shelley,False,CB,DB,D,Kansas St.,22.0,2024.0,0,0,0,6.0,,3.0,53.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,70.0,1.0,
 2019,6,206,WAS,00-0035297,HarmKe00,kelvin-harmon-1,Kelvin Harmon,False,WR,WR,O,North Carolina St.,22.0,2019.0,0,0,1,3.0,,3.0,16.0,1.0,1.0,11.0,0.0,0.0,0.0,0.0,0.0,30.0,365.0,0.0,2.0,,
 2019,6,207,PIT,00-0035223,GilbUl00,ulysees-gilbert-iii-1,Ulysees Gilbert,False,LB,LB,D,Akron,22.0,2022.0,0,0,0,2.0,,2.0,31.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,20.0,,
-2019,6,208,TAM,00-0035298,MillSc01,scott-miller-3,Scott Miller,False,WR,WR,O,Bowling Green,22.0,2025.0,0,0,1,11.0,,9.0,93.0,0.0,0.0,0.0,0.0,0.0,8.0,81.0,1.0,99.0,1216.0,6.0,5.0,,
+2019,6,208,TAM,00-0035298,MillSc01,scott-miller-3,Scotty Miller,False,WR,WR,O,Bowling Green,22.0,2025.0,0,0,1,11.0,,9.0,93.0,0.0,0.0,0.0,0.0,0.0,8.0,81.0,1.0,99.0,1216.0,6.0,5.0,,
 2019,6,209,SEA,00-0035595,ChriDe01,demarcus-christmas-1,Demarcus Christmas,False,DT,DL,D,Florida St.,24.0,,0,0,0,,,,,,,,,,,,,,,,,,
 2019,6,210,CIN,00-0035626,DaviDe01,deshaun-davis-1,Deshaun Davis,False,LB,LB,D,Auburn,23.0,,0,0,0,,,,,,,,,,,,,,,,,,
 2019,6,211,CIN,00-0035299,AndeRo02,rodney-anderson-1,Rodney Anderson,False,RB,RB,O,Oklahoma,22.0,,0,0,0,,,,,,,,,,,,,,,,,,
@@ -1788,7 +1788,7 @@ season,round,pick,team,gsis_id,pfr_player_id,cfb_player_id,pfr_player_name,hof,p
 2022,1,1,JAX,00-0037235,WalkTr03,travon-walker-1,Travon Walker,False,DE,DL,D,Georgia,21.0,2025.0,0,0,4,26.0,,26.0,63.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,101.0,1.0,27.5
 2022,1,2,DET,00-0037236,HutcAi00,aidan-hutchinson-1,Aidan Hutchinson,False,DE,DL,D,Michigan,22.0,2025.0,0,2,3,31.0,,31.0,56.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,118.0,5.0,43.0
 2022,1,3,HOU,00-0037237,StinDe00,derek-stingley-jr-1,Derek Stingley Jr.,False,CB,DB,D,LSU,21.0,2025.0,2,2,4,36.0,,36.0,54.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,126.0,15.0,1.0
-2022,1,4,NYJ,00-0037190,GardSa00,ahmad-gardner-1,Sauce Gardner,False,CB,DB,D,Cincinnati,22.0,2025.0,2,2,3,33.0,,32.0,59.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,156.0,3.0,1.0
+2022,1,4,NYJ,00-0037190,GardSa00,ahmad-gardner-1,Sauce Gardner,False,CB,DB,D,Cincinnati,21.0,2025.0,2,2,3,33.0,,32.0,59.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,156.0,3.0,1.0
 2022,1,5,NYG,00-0037611,ThibKa00,kayvon-thibodeaux-1,Kayvon Thibodeaux,False,DE,DL,D,Oregon,21.0,2025.0,0,0,3,24.0,,24.0,53.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,86.0,,23.5
 2022,1,6,CAR,00-0037229,EkwoIk00,ikem-ekwonu-1,Ikem Ekwonu,False,T,OL,O,North Carolina St.,21.0,2025.0,0,0,4,25.0,,25.0,64.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,,,
 2022,1,7,NYG,00-0037612,NealEv00,evan-neal-1,Evan Neal,False,OL,OL,O,Alabama,21.0,2024.0,0,0,1,11.0,,11.0,29.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,,
@@ -1924,7 +1924,7 @@ season,round,pick,team,gsis_id,pfr_player_id,cfb_player_id,pfr_player_name,hof,p
 2022,4,137,NWE,00-0038108,ZappBa00,bailey-zappe-1,Bailey Zappe,False,QB,QB,O,Western Kentucky,23.0,2024.0,0,0,0,2.0,,2.0,15.0,208.0,335.0,2223.0,12.0,14.0,29.0,85.0,1.0,1.0,-6.0,0.0,,,
 2022,4,138,PIT,00-0037837,AustCa00,calvin-austin-iii-1,Calvin Austin III,False,WR,WR,O,Memphis,23.0,2025.0,0,0,0,12.0,,12.0,48.0,0.0,0.0,0.0,0.0,0.0,11.0,57.0,1.0,84.0,1100.0,8.0,,,
 2022,4,139,BAL,00-0037838,LikeIs00,isaiah-likely-1,Isaiah Likely,False,TE,TE,O,Coastal Carolina,22.0,2025.0,0,0,1,15.0,,15.0,63.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,135.0,1568.0,15.0,4.0,,
-2022,4,140,GNB,00-0037817,TomxZa00,zach-tom-1,Zach Tom,False,OL,OL,O,Wake Forest,23.0,2025.0,0,0,3,26.0,,26.0,55.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,,
+2022,4,140,GNB,00-0037817,TomxZa00,zach-tom-1,Zach Bako-Bewele,False,OL,OL,O,Wake Forest,23.0,2025.0,0,0,3,26.0,,26.0,55.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,,
 2022,4,141,BAL,00-0037984,WillDa15,damarion-williams-1,Damarion Williams,False,CB,DB,D,Houston,24.0,2023.0,0,0,0,1.0,,1.0,15.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,15.0,,
 2022,4,142,LAR,00-0037839,DuraDe01,,Cobie Durant,False,DB,DB,D,South Carolina St.,24.0,2025.0,0,0,3,16.0,,16.0,61.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,96.0,7.0,2.0
 2022,4,143,TEN,00-0037809,OkonCh00,chigoziem-okonkwo-1,Chig Okonkwo,False,TE,TE,O,Maryland,22.0,2025.0,0,0,2,16.0,,16.0,68.0,0.0,0.0,0.0,0.0,0.0,6.0,25.0,0.0,194.0,2017.0,8.0,8.0,,
@@ -2001,7 +2001,7 @@ season,round,pick,team,gsis_id,pfr_player_id,cfb_player_id,pfr_player_name,hof,p
 2022,6,214,LAC,00-0037307,TaylJa04,jasir-taylor-1,Ja'Sir Taylor,False,DB,DB,D,Wake Forest,23.0,2025.0,0,0,0,8.0,,7.0,65.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,62.0,1.0,
 2022,6,215,ARI,00-0037308,SmitLe01,lecitus-smith-1,Lecitus Smith,False,OL,OL,O,Virginia Tech,24.0,2025.0,0,0,0,2.0,,1.0,19.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,,,
 2022,6,216,IND,00-0037309,BrooCu00,curtis-brooks-1,Curtis Brooks,False,DT,DL,D,Cincinnati,24.0,,0,0,0,,,,,,,,,,,,,,,,,,
-2022,6,217,DET,00-0037310,HousJa01,,James Houston,False,LB,LB,D,Jackson St.,23.0,2025.0,0,0,0,4.0,,3.0,37.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,35.0,,14.5
+2022,6,217,DET,00-0037310,HousJa01,james-houston-iv-1,James Houston,False,LB,LB,D,Jackson St.,23.0,2025.0,0,0,0,4.0,,3.0,37.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,35.0,,14.5
 2022,6,218,TAM,00-0037311,KiefKo00,ko-kieft-1,Ko Kieft,False,TE,TE,O,Minnesota,24.0,2025.0,0,0,1,1.0,,1.0,53.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,8.0,82.0,2.0,15.0,,
 2022,6,219,TEN,00-0037312,CampCh02,chance-campbell-1,Chance Campbell,False,LB,LB,D,Mississippi,22.0,2023.0,0,0,0,0.0,,0.0,4.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,1.0,,
 2022,6,220,SFO,00-0037832,DaviKa01,kalia-davis-1,Kalia Davis,False,DT,DL,D,Central Florida,23.0,2025.0,0,0,1,9.0,,9.0,33.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,17.0,1.0,1.5
@@ -2025,7 +2025,7 @@ season,round,pick,team,gsis_id,pfr_player_id,cfb_player_id,pfr_player_name,hof,p
 2022,7,238,LVR,00-0037322,MunfTh00,thayer-munford-1,Thayer Munford,False,OL,OL,O,Ohio St.,22.0,2025.0,0,0,1,11.0,,10.0,51.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,,,
 2022,7,239,IND,00-0037323,ThomRo07,,Rodney Thomas II,False,LB,LB,D,Yale,24.0,2025.0,0,0,2,11.0,,11.0,68.0,0.0,0.0,0.0,0.0,0.0,1.0,3.0,0.0,0.0,0.0,0.0,83.0,6.0,
 2022,7,240,WAS,00-0037095,HolmCh00,christian-holmes-2,Christian Holmes,False,CB,DB,D,Oklahoma St.,24.0,2023.0,0,0,0,3.0,,3.0,30.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,11.0,,
-2022,7,241,PIT,00-0037324,OladCh00,,Chris Oladokun,False,QB,QB,O,South Dakota St.,25.0,2025.0,0,0,0,1.0,,,4.0,35.0,55.0,235.0,1.0,0.0,6.0,23.0,0.0,0.0,0.0,0.0,,,
+2022,7,241,PIT,00-0037324,OladCh00,chris-oladokun-1,Chris Oladokun,False,QB,QB,O,South Dakota St.,25.0,2025.0,0,0,0,1.0,,,4.0,35.0,55.0,235.0,1.0,0.0,6.0,23.0,0.0,0.0,0.0,0.0,,,
 2022,7,242,CAR,00-0037325,BarnKa00,kalon-barnes-1,Kalon Barnes,False,CB,DB,D,Baylor,23.0,2022.0,0,0,0,0.0,,,2.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,,,
 2022,7,243,KAN,00-0037195,WatsJa02,jaylen-watson-2,Jaylen Watson,False,DB,DB,D,Washington St.,23.0,2025.0,0,0,2,13.0,,13.0,53.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,128.0,3.0,4.0
 2022,7,244,ARI,00-0037747,MattCh01,,Christian Matthew,False,DB,DB,D,Valdosta St.,25.0,2023.0,0,0,0,2.0,,2.0,20.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,13.0,,
@@ -2316,7 +2316,7 @@ season,round,pick,team,gsis_id,pfr_player_id,cfb_player_id,pfr_player_name,hof,p
 2024,1,8,ATL,00-0039917,PeniMi00,michael-penix-jr-1,Michael Penix,False,QB,QB,O,Washington,24.0,2025.0,0,0,1,8.0,,8.0,14.0,227.0,381.0,2757.0,12.0,6.0,28.0,81.0,2.0,0.0,0.0,0.0,,,
 2024,1,9,CHI,00-0039919,OdunRo00,rome-odunze-1,Rome Odunze,False,WR,WR,O,Washington,22.0,2025.0,0,0,2,12.0,,12.0,29.0,0.0,0.0,0.0,0.0,0.0,3.0,15.0,0.0,98.0,1395.0,9.0,,,
 2024,1,10,MIN,00-0039923,McCaJJ00,jj-mccarthy-1,J.J. McCarthy,False,QB,QB,O,Michigan,21.0,2025.0,0,0,1,4.0,,4.0,10.0,140.0,243.0,1632.0,11.0,12.0,37.0,181.0,4.0,0.0,0.0,0.0,,,
-2024,1,11,NYJ,00-0039790,FashOl00,olu-fashanu-1,Olumuyiwa Fashanu,False,OL,OL,O,Penn St.,21.0,2025.0,0,0,1,10.0,,10.0,32.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,,,
+2024,1,11,NYJ,00-0039790,FashOl00,olu-fashanu-1,Olu Fashanu,False,OL,OL,O,Penn St.,21.0,2025.0,0,0,1,10.0,,10.0,32.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,,,
 2024,1,12,DEN,00-0039732,NixxBo00,bo-nix-1,Bo Nix,False,QB,QB,O,Oregon,24.0,2025.0,0,0,2,25.0,,25.0,34.0,764.0,1179.0,7706.0,54.0,23.0,175.0,786.0,9.0,1.0,2.0,1.0,,,
 2024,1,13,LVR,00-0039338,BoweBr01,brock-bowers-1,Brock Bowers,False,TE,TE,O,Georgia,21.0,2025.0,1,2,1,14.0,,14.0,29.0,0.0,0.0,0.0,0.0,0.0,7.0,15.0,0.0,176.0,1874.0,12.0,,,
 2024,1,14,NOR,00-0039339,FuagTa00,taliese-fuaga-1,Taliese Fuaga,False,OL,OL,O,Oregon St.,22.0,2025.0,0,0,2,13.0,,13.0,30.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,,,
@@ -2537,7 +2537,7 @@ season,round,pick,team,gsis_id,pfr_player_id,cfb_player_id,pfr_player_name,hof,p
 2024,7,229,LVR,00-0039418,DevoMJ00,marlin-devonshire-1,M.J. Devonshire,False,DB,DB,D,Pittsburgh,23.0,,0,0,0,,,,,,,,,,,,,,,,,,
 2024,7,230,MIN,00-0039419,JurgMi02,michael-jurgens-1,Michael Jurgens,False,OL,OL,O,Wake Forest,24.0,2025.0,0,0,0,2.0,,2.0,18.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,,,
 2024,7,231,NWE,00-0039420,BellJa00,jaheim-bell-1,Jaheim Bell,False,TE,TE,O,Florida St.,23.0,2024.0,0,0,0,0.0,,0.0,15.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,2.0,20.0,0.0,1.0,,
-2024,7,232,MIN,00-0039421,RodrLe00,,Levi Drake Rodriguez,False,DT,DL,D,Texas A&M-Commerce,24.0,2025.0,0,0,0,3.0,,3.0,18.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,20.0,,2.0
+2024,7,232,MIN,00-0039421,RodrLe00,,Levi Drake Rodriguez,False,DT,DL,D,East Texas A&M,24.0,2025.0,0,0,0,3.0,,3.0,18.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,20.0,,2.0
 2024,7,233,DAL,00-0039422,ThomNa01,nathan-thomas-1,Nathan Thomas,False,OL,OL,O,Louisiana,23.0,2025.0,0,0,0,3.0,,3.0,17.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,,,
 2024,7,234,IND,00-0039423,LaulJo00,jonah-laulu-2,Jonah Laulu,False,DL,DL,D,Oklahoma,24.0,2025.0,0,0,1,10.0,,,34.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,39.0,,5.0
 2024,7,235,DEN,00-0039424,VeleDe00,devaughn-vele-1,Devaughn Vele,False,WR,WR,O,Utah,26.0,2025.0,0,0,0,6.0,,4.0,26.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,0.0,66.0,768.0,5.0,,,
